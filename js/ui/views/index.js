@@ -9,8 +9,8 @@ import { renderExam } from './exam.js';
 import { renderFlashcards } from './flashcards.js';
 import { renderProfile } from './profile.js';
 import { renderCertificate } from './certificate.js';
+import { renderSettings } from './settings.js';
 
-// Cada tarefa seguinte registra suas telas aqui.
 export const VIEWS = {
   home: renderHome,
   notFound: renderNotFound,
@@ -23,4 +23,5 @@ export const VIEWS = {
   flashcards: renderFlashcards,
   perfil: renderProfile,
   certificate: renderCertificate,
+  config: renderSettings,
 };
