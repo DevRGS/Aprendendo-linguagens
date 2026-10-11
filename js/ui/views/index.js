@@ -7,6 +7,8 @@ import { renderPractice } from './practice.js';
 import { renderQuizBuilder } from './quiz-builder.js';
 import { renderExam } from './exam.js';
 import { renderFlashcards } from './flashcards.js';
+import { renderProfile } from './profile.js';
+import { renderCertificate } from './certificate.js';
 
 // Cada tarefa seguinte registra suas telas aqui.
 export const VIEWS = {
@@ -19,4 +21,6 @@ export const VIEWS = {
   quiz: renderQuizBuilder,
   exam: renderExam,
   flashcards: renderFlashcards,
+  perfil: renderProfile,
+  certificate: renderCertificate,
 };

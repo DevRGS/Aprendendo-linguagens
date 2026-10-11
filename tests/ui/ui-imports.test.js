@@ -22,5 +22,5 @@ for (const file of listJs(JS)) {
 
 test('existem as telas obrigatórias', async () => {
   const { VIEWS } = await import(pathToFileURL(join(JS, 'ui/views/index.js')).href);
-  for (const name of ['home', 'notFound', 'language', 'lesson', 'reference', 'practice', 'quiz', 'exam', 'flashcards']) assert.equal(typeof VIEWS[name], 'function', name);
+  for (const name of ['home', 'notFound', 'language', 'lesson', 'reference', 'practice', 'quiz', 'exam', 'flashcards', 'perfil', 'certificate']) assert.equal(typeof VIEWS[name], 'function', name);
 });
