@@ -4,6 +4,8 @@ import { renderLanguage } from './language.js';
 import { renderLesson } from './lesson.js';
 import { renderReference } from './reference.js';
 import { renderPractice } from './practice.js';
+import { renderQuizBuilder } from './quiz-builder.js';
+import { renderExam } from './exam.js';
 
 // Cada tarefa seguinte registra suas telas aqui.
 export const VIEWS = {
@@ -13,4 +15,6 @@ export const VIEWS = {
   lesson: renderLesson,
   reference: renderReference,
   practice: renderPractice,
+  quiz: renderQuizBuilder,
+  exam: renderExam,
 };
