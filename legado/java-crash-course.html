@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Java Crash Course</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700;900&display=swap');
+:root{--bg:#0d1117;--sf:#161b22;--sf2:#21262d;--sf3:#2d333b;--bd:#30363d;--bd2:#444c56;--or:#f89820;--bl:#5b9bd5;--gn:#3fb950;--rd:#f85149;--pu:#bc8cff;--cy:#79c0ff;--tx:#e6edf3;--mt:#8b949e;--mt2:#6e7681;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;}
+header{border-bottom:1px solid var(--bd);padding:14px 0;position:sticky;top:0;z-index:200;background:rgba(13,17,23,.96);backdrop-filter:blur(10px);}
+.hdr{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.logo{display:flex;align-items:center;gap:10px;}.logo-icon{width:32px;height:32px;background:var(--or);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#000;flex-shrink:0;}
+.logo h1{font-size:16px;font-weight:700;}.logo span{color:var(--or);}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.score-pill{display:flex;align-items:center;gap:8px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:5px 14px;font-size:12px;}
+.score-pill .sp-val{font-weight:700;color:var(--or);font-size:15px;}
+.prog-wrap{width:180px;}.prog-lbl{font-size:10px;color:var(--mt);display:flex;justify-content:space-between;margin-bottom:3px;}
+.prog-track{height:5px;background:var(--sf2);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--or),var(--bl));border-radius:99px;transition:width .4s;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:220px 1fr;gap:28px;padding-top:28px;padding-bottom:80px;}
+.sidebar{position:sticky;top:76px;height:fit-content;}
+.sb-sec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--mt2);margin:16px 0 6px;padding-left:4px;}
+.sb-sec:first-child{margin-top:0;}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:12.5px;color:var(--mt);transition:all .15s;border:1px solid transparent;margin-bottom:1px;user-select:none;}
+.nav-item:hover{background:var(--sf);color:var(--tx);}.nav-item.active{background:var(--sf2);color:var(--tx);border-color:var(--bd);}
+.nav-item.done{color:var(--gn);}.nav-item.done .nav-dot{background:var(--gn);}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--bd2);flex-shrink:0;transition:background .2s;}
+.nav-item.active .nav-dot{background:var(--or);}
+.nav-time{font-size:10px;margin-left:auto;background:var(--sf2);border-radius:4px;padding:1px 5px;color:var(--mt2);}
+.nsb{font-size:10px;margin-left:auto;border-radius:10px;padding:1px 7px;}.nsb.g{background:rgba(63,185,80,.15);color:var(--gn);}.nsb.m{background:rgba(248,152,32,.15);color:var(--or);}.nsb.r{background:rgba(248,81,73,.15);color:var(--rd);}
+.content{min-width:0;}.module{display:none;}.module.active{display:block;animation:fu .2s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.mod-eye{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--or);margin-bottom:6px;}
+.mod-title{font-size:26px;font-weight:900;line-height:1.2;margin-bottom:8px;}
+.mod-desc{color:var(--mt);font-size:13px;line-height:1.6;max-width:580px;margin-bottom:10px;}
+.mod-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid var(--bd);color:var(--mt);}
+.badge.o{border-color:rgba(248,152,32,.4);background:rgba(248,152,32,.08);color:var(--or);}
+.badge.b{border-color:rgba(91,155,213,.4);background:rgba(91,155,213,.08);color:var(--bl);}
+.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--or);margin:28px 0 10px;display:flex;align-items:center;gap:8px;}
+.sec::after{content:'';flex:1;height:1px;background:var(--bd);}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:14px;}
+.card-title{font-size:14px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tag{font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--or);color:#000;}
+.tag.b{background:var(--bl);color:#000;}.tag.g{background:var(--gn);color:#000;}.tag.r{background:var(--rd);color:#fff;}.tag.p{background:var(--pu);color:#000;}
+pre{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:14px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.65;margin:10px 0;position:relative;}
+.cpb{position:absolute;top:6px;right:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:4px;color:var(--mt);padding:3px 8px;font-size:10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.cpb:hover{color:var(--tx);border-color:var(--or);}
+.kw{color:#ff7b72;}.tp{color:#79c0ff;}.st{color:#a5d6ff;}.nm{color:#f2cc60;}.cm{color:#8b949e;font-style:italic;}.fn{color:#d2a8ff;}.an{color:#ffa657;}
+.tip{border-left:3px solid var(--or);background:rgba(248,152,32,.06);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.5px;line-height:1.6;margin:10px 0;}
+.tip.b{border-color:var(--bl);background:rgba(91,155,213,.06);}.tip.g{border-color:var(--gn);background:rgba(63,185,80,.06);}.tip.r{border-color:var(--rd);background:rgba(248,81,73,.06);}.tip.p{border-color:var(--pu);background:rgba(188,140,255,.06);}
+.tip strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;color:var(--or);}
+.tip.b strong{color:var(--bl);}.tip.g strong{color:var(--gn);}.tip.r strong{color:var(--rd);}.tip.p strong{color:var(--pu);}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0;}
+th{background:var(--sf2);text-align:left;padding:7px 11px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mt);border:1px solid var(--bd);}
+td{padding:7px 11px;border:1px solid var(--bd);vertical-align:top;line-height:1.5;}tr:nth-child(even) td{background:rgba(255,255,255,.015);}
+code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(255,255,255,.07);padding:1px 5px;border-radius:3px;}
+.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.two-cols{grid-template-columns:1fr;}}
+/* ── MINI QUIZ ── */
+.mq{background:linear-gradient(135deg,rgba(248,152,32,.05),rgba(91,155,213,.05));border:1px solid rgba(248,152,32,.2);border-radius:10px;padding:20px;margin-top:24px;}
+.mq-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.mq-icon{font-size:20px;}.mq-title{font-size:14px;font-weight:700;}.mq-sub{font-size:11px;color:var(--mt);margin-top:1px;}.mq-prg{font-size:11px;color:var(--mt);margin-left:auto;}
+.mq-q{display:none;}.mq-q.active{display:block;animation:fu .2s ease;}
+.mq-qt{font-size:13px;font-weight:500;line-height:1.6;margin-bottom:4px;}
+.mq-qc{background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.5;margin:8px 0 12px;overflow-x:auto;}
+.mq-opts{display:flex;flex-direction:column;gap:6px;}
+.mq-opt{padding:9px 13px;background:var(--sf2);border:1px solid var(--bd);border-radius:7px;cursor:pointer;font-size:12.5px;transition:all .15s;text-align:left;width:100%;color:var(--tx);}
+.mq-opt:hover:not(:disabled){border-color:var(--bl);background:rgba(91,155,213,.08);}
+.mq-opt.ok{border-color:var(--gn)!important;background:rgba(63,185,80,.1)!important;color:var(--gn);}
+.mq-opt.err{border-color:var(--rd)!important;background:rgba(248,81,73,.1)!important;color:var(--rd);}
+.mq-fb{margin-top:10px;padding:9px 13px;border-radius:7px;font-size:12.5px;line-height:1.5;display:none;}
+.mq-fb.show{display:block;}.mq-fb.ok{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.3);color:#7ee787;}
+.mq-fb.err{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.3);color:#ff9999;}
+.mq-nav{display:flex;align-items:center;gap:10px;margin-top:14px;}
+.mq-res{display:none;text-align:center;padding:16px 0;}.mq-res.show{display:block;}
+.mq-res-score{font-size:36px;font-weight:900;color:var(--or);}
+.mq-res-lbl{font-size:12px;color:var(--mt);margin-top:2px;}.mq-res-msg{font-size:13px;margin-top:10px;}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif;}
+.btn-p{background:var(--or);color:#000;}.btn-p:hover{background:#ffab33;}
+.btn-s{background:var(--sf2);color:var(--tx);border:1px solid var(--bd);}.btn-s:hover{border-color:var(--or);}
+.btn-sm{padding:5px 12px;font-size:11.5px;}
+.mod-foot{margin-top:28px;padding-top:20px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+/* ── FINAL QUIZ ── */
+.fq-hero{background:linear-gradient(135deg,rgba(248,152,32,.1),rgba(91,155,213,.1));border:1px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;}
+.fq-hero-t{font-size:22px;font-weight:900;margin-bottom:6px;}.fq-hero-s{font-size:13px;color:var(--mt);margin-bottom:16px;}
+.fq-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}.fq-stat{text-align:center;}
+.fq-stat-n{font-size:22px;font-weight:700;color:var(--or);}.fq-stat-l{font-size:11px;color:var(--mt);}
+.fq-box{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:24px;}
+.fq-qn{font-size:10px;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.fq-bar{height:3px;background:var(--sf2);border-radius:99px;width:200px;overflow:hidden;}
+.fq-bar-f{height:100%;background:var(--or);border-radius:99px;transition:width .3s;}
+.fq-qt{font-size:14px;font-weight:600;line-height:1.6;margin-bottom:14px;}
+.fq-opts{display:flex;flex-direction:column;gap:7px;}
+.fq-opt{padding:10px 14px;background:var(--sf2);border:1px solid var(--bd);border-radius:7px;cursor:pointer;font-size:13px;transition:all .15s;text-align:left;display:flex;align-items:center;gap:10px;width:100%;}
+.fq-opt:hover:not(:disabled){border-color:var(--bl);background:rgba(91,155,213,.08);}
+.fq-opt.ok{border-color:var(--gn)!important;background:rgba(63,185,80,.1)!important;}
+.fq-opt.ok .ol{background:var(--gn);color:#000;}
+.fq-opt.err{border-color:var(--rd)!important;background:rgba(248,81,73,.1)!important;}
+.fq-opt.err .ol{background:var(--rd);color:#fff;}
+.ol{width:22px;height:22px;border-radius:50%;background:var(--sf3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .2s;}
+.fq-fb{margin-top:14px;padding:10px 14px;border-radius:7px;font-size:12.5px;line-height:1.6;display:none;}
+.fq-fb.show{display:block;}.fq-fb.ok{background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.3);}
+.fq-fb.err{background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.3);}
+.fq-nav{display:flex;align-items:center;justify-content:space-between;margin-top:18px;flex-wrap:wrap;gap:10px;}
+/* ── SCOREBOARD ── */
+.sb{display:none;}.sb.show{display:block;animation:fu .3s ease;}
+.sb-card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:32px;text-align:center;margin-bottom:20px;}
+.sb-ring{width:110px;height:110px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:4px solid var(--or);background:rgba(248,152,32,.06);}
+.sb-big{font-size:32px;font-weight:900;color:var(--or);}.sb-tot{font-size:12px;color:var(--mt);}
+.sb-grade{font-size:22px;font-weight:900;margin:8px 0;}.sb-msg{font-size:13px;color:var(--mt);max-width:400px;margin:0 auto;}
+.sb-bk{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px;}
+.sb-mc{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;}
+.sb-mn{font-size:12px;font-weight:600;margin-bottom:8px;}
+.sb-mb{height:6px;background:var(--sf2);border-radius:99px;overflow:hidden;margin-bottom:4px;}
+.sb-mbf{height:100%;border-radius:99px;transition:width .6s;}.sb-ms{font-size:11px;color:var(--mt);}
+.rv-item{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;margin-bottom:10px;}
+.rv-badge{display:inline-flex;font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:8px;background:rgba(248,81,73,.15);color:var(--rd);}
+.rv-q{font-size:13px;font-weight:500;margin-bottom:6px;}.rv-a{font-size:12px;color:var(--mt);}.rv-a strong{color:var(--tx);}
+/* ── CHEAT SHEET ── */
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+.cs-card{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:14px;}
+.cs-title{font-size:12px;font-weight:700;color:var(--or);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.cs-item{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;line-height:1.5;}
+.cs-item:last-child{border-bottom:none;}.cs-item code{color:var(--cy);flex-shrink:0;}
+/* ── FLASHCARDS ── */
+.fc-intro{background:linear-gradient(135deg,rgba(188,140,255,.1),rgba(91,155,213,.1));border:1px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:20px;}
+.fc-intro-t{font-size:18px;font-weight:900;margin-bottom:6px;}
+.fc-intro-s{font-size:12.5px;color:var(--mt);line-height:1.6;}
+.fc-stats{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0;}
+.fc-stat{flex:1;min-width:90px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px;text-align:center;}
+.fc-stat-n{font-size:24px;font-weight:900;}.fc-stat-l{font-size:10px;color:var(--mt);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+.fc-topics{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.fc-chip{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid var(--bd);background:var(--sf2);color:var(--mt);cursor:pointer;transition:all .15s;user-select:none;}
+.fc-chip:hover{border-color:var(--pu);color:var(--tx);}
+.fc-chip.on{background:rgba(188,140,255,.15);border-color:var(--pu);color:var(--pu);}
+.fc-wrap{max-width:580px;margin:0 auto;}
+.fc-counter{text-align:center;font-size:11px;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.fc-card{perspective:1400px;height:300px;margin-bottom:16px;cursor:pointer;}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+.fc-card.flip .fc-inner{transform:rotateY(180deg);}
+.fc-face{position:absolute;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:14px;border:1px solid var(--bd);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;overflow:auto;}
+.fc-front{background:linear-gradient(135deg,var(--sf),var(--sf2));}
+.fc-back{background:linear-gradient(135deg,rgba(248,152,32,.08),rgba(91,155,213,.08));transform:rotateY(180deg);}
+.fc-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--pu);margin-bottom:14px;}
+.fc-q{font-size:18px;font-weight:700;line-height:1.5;}
+.fc-q code{font-size:15px;}
+.fc-a{font-size:14.5px;line-height:1.65;color:var(--tx);}
+.fc-a code{font-size:12.5px;color:var(--cy);}
+.fc-hint{position:absolute;bottom:12px;left:0;right:0;font-size:10px;color:var(--mt2);text-transform:uppercase;letter-spacing:.06em;}
+.fc-box-badge{position:absolute;top:12px;right:14px;font-size:10px;color:var(--mt2);}
+.fc-rate{display:none;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.fc-rate.show{display:grid;animation:fu .25s ease;}
+.fc-rb{padding:12px 8px;border-radius:9px;border:1px solid var(--bd);cursor:pointer;font-size:12px;font-weight:700;font-family:'Inter',sans-serif;transition:all .15s;text-align:center;}
+.fc-rb small{display:block;font-size:9px;font-weight:500;opacity:.7;margin-top:2px;}
+.fc-rb.bad{background:rgba(248,81,73,.1);border-color:rgba(248,81,73,.4);color:var(--rd);}
+.fc-rb.bad:hover{background:rgba(248,81,73,.2);}
+.fc-rb.mid{background:rgba(248,152,32,.1);border-color:rgba(248,152,32,.4);color:var(--or);}
+.fc-rb.mid:hover{background:rgba(248,152,32,.2);}
+.fc-rb.good{background:rgba(63,185,80,.1);border-color:rgba(63,185,80,.4);color:var(--gn);}
+.fc-rb.good:hover{background:rgba(63,185,80,.2);}
+.fc-done{text-align:center;padding:30px 0;}
+.fc-done-ico{font-size:44px;}.fc-done-t{font-size:18px;font-weight:900;margin:8px 0;}
+.fc-done-s{font-size:13px;color:var(--mt);max-width:380px;margin:0 auto 16px;}
+.fc-flip-btn{display:block;margin:0 auto;}
+/* ── STREAK / RESET ── */
+.streak-pill{display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:12px;}
+.streak-pill b{color:var(--or);}
+.reset-btn{background:none;border:1px solid var(--bd);color:var(--mt2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.reset-btn:hover{border-color:var(--rd);color:var(--rd);}
+@media(max-width:800px){.wrap{grid-template-columns:1fr;}.sidebar{position:static;display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px;}.sb-sec{width:100%;}.mod-title{font-size:20px;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr">
+    <div class="logo"><div class="logo-icon">&#9749;</div><h1>Java <span>Crash Course</span></h1></div>
+    <div class="hdr-right">
+      <div class="streak-pill">&#128293; <b id="streak-val">0</b> dias</div>
+      <div class="score-pill">&#127942; Score: <span class="sp-val" id="total-score">0</span> pts</div>
+      <div class="prog-wrap">
+        <div class="prog-lbl"><span>Progresso</span><span id="prog-text">0/8</span></div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+<nav class="sidebar">
+  <div class="sb-sec">Teoria + Prática</div>
+  <div class="nav-item active" onclick="goMod(0)" id="nav-0"><span class="nav-dot"></span>Fundamentos<span class="nav-time">35min</span></div>
+  <div class="nav-item" onclick="goMod(1)" id="nav-1"><span class="nav-dot"></span>POO Essencial<span class="nav-time">45min</span></div>
+  <div class="nav-item" onclick="goMod(2)" id="nav-2"><span class="nav-dot"></span>Coleções<span class="nav-time">30min</span></div>
+  <div class="nav-item" onclick="goMod(3)" id="nav-3"><span class="nav-dot"></span>Exceções<span class="nav-time">20min</span></div>
+  <div class="nav-item" onclick="goMod(4)" id="nav-4"><span class="nav-dot"></span>Strings &amp; I/O<span class="nav-time">25min</span></div>
+  <div class="nav-item" onclick="goMod(5)" id="nav-5"><span class="nav-dot"></span>Java 8+ Moderno<span class="nav-time">30min</span></div>
+  <div class="sb-sec">Avaliação</div>
+  <div class="nav-item" onclick="goMod(6)" id="nav-6"><span class="nav-dot"></span>&#127919; Quiz Final 50q<span class="nav-time">30min</span></div>
+  <div class="sb-sec">Memorização</div>
+  <div class="nav-item" onclick="goMod(8)" id="nav-8"><span class="nav-dot"></span>&#129504; Flashcards <span class="nsb" id="fc-due-badge" style="background:rgba(188,140,255,.15);color:var(--pu)">0</span></div>
+  <div class="sb-sec">Referência</div>
+  <div class="nav-item" onclick="goMod(7)" id="nav-7"><span class="nav-dot"></span>&#128203; Cheat Sheet</div>
+  <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--bd)"><button class="reset-btn" onclick="resetProgress()">&#8635; Resetar progresso</button></div>
+</nav>
+<main class="content">
+
+<!-- ████ MOD 0 — FUNDAMENTOS ████ -->
+<div class="module active" id="mod-0">
+<div class="mod-eye">Módulo 1 de 6</div>
+<div class="mod-title">Fundamentos da Linguagem</div>
+<div class="mod-desc">Tipos, variáveis, operadores, controle de fluxo, loops e arrays. A base de 100% do código Java.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~35 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">Estrutura mínima</div>
+<div class="card"><div class="card-title">O esqueleto que todo programa Java precisa <span class="tag">Sempre igual</span></div>
+<pre><span class="cm">// Arquivo: MeuPrograma.java (nome DEVE ser igual à classe pública)</span>
+<span class="kw">public class</span> <span class="tp">MeuPrograma</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
+        <span class="tp">System</span>.out.<span class="fn">println</span>(<span class="st">"Olá!"</span>);   <span class="cm">// imprime + quebra de linha</span>
+        <span class="tp">System</span>.out.<span class="fn">print</span>(<span class="st">"sem \n"</span>);  <span class="cm">// sem quebra</span>
+        <span class="tp">System</span>.out.<span class="fn">printf</span>(<span class="st">"%s tem %d anos\n"</span>, <span class="st">"Ana"</span>, <span class="nm">25</span>);
+    }
+}<button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; Regra crítica</strong>Nome do arquivo .java DEVE ser idêntico ao nome da classe pública, incluindo maiúsculas.</div></div>
+
+<div class="sec">Tipos de dados</div>
+<div class="card"><div class="card-title">8 tipos primitivos</div>
+<table><tr><th>Tipo</th><th>Bits</th><th>Faixa / Uso</th><th>Exemplo</th></tr>
+<tr><td><code>int</code></td><td>32</td><td>-2B a +2B (uso geral)</td><td><code>int x = 42;</code></td></tr>
+<tr><td><code>long</code></td><td>64</td><td>CPF, timestamps</td><td><code>long n = 10L;</code></td></tr>
+<tr><td><code>double</code></td><td>64</td><td>Decimais (padrão)</td><td><code>double d = 3.14;</code></td></tr>
+<tr><td><code>float</code></td><td>32</td><td>Decimais (menos preciso)</td><td><code>float f = 1.5f;</code></td></tr>
+<tr><td><code>boolean</code></td><td>1</td><td>true / false</td><td><code>boolean ok = true;</code></td></tr>
+<tr><td><code>char</code></td><td>16</td><td>Um caractere Unicode</td><td><code>char c = 'A';</code></td></tr>
+<tr><td><code>byte</code></td><td>8</td><td>-128 a 127</td><td><code>byte b = 100;</code></td></tr>
+<tr><td><code>short</code></td><td>16</td><td>-32768 a 32767</td><td><code>short s = 200;</code></td></tr></table>
+<div class="tip"><strong>&#128161; String não é primitivo!</strong>String é uma classe. Sempre use <code>.equals()</code> para comparar, nunca <code>==</code>.</div></div>
+
+<div class="card"><div class="card-title">Casting e conversões</div>
+<pre><span class="cm">// Widening (automático — sem perda)</span>
+<span class="kw">int</span> i = <span class="nm">42</span>;  <span class="kw">double</span> d = i;   <span class="cm">// 42.0</span>
+
+<span class="cm">// Narrowing (manual — pode perder dados)</span>
+<span class="kw">double</span> x = <span class="nm">9.99</span>;  <span class="kw">int</span> n = (<span class="kw">int</span>) x;  <span class="cm">// 9 — TRUNCA, não arredonda!</span>
+
+<span class="cm">// String ↔ número</span>
+<span class="kw">int</span>    v1 = <span class="tp">Integer</span>.<span class="fn">parseInt</span>(<span class="st">"42"</span>);
+<span class="kw">double</span> v2 = <span class="tp">Double</span>.<span class="fn">parseDouble</span>(<span class="st">"3.14"</span>);
+<span class="tp">String</span> s  = <span class="tp">String</span>.<span class="fn">valueOf</span>(<span class="nm">42</span>);  <span class="cm">// "42"</span>
+
+<span class="cm">// Autoboxing — int ↔ Integer (automático)</span>
+<span class="tp">Integer</span> boxed = <span class="nm">10</span>;  <span class="kw">int</span> unboxed = boxed;<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Operadores</div>
+<div class="card"><div class="card-title">Todos que caem em prova</div>
+<div class="two-cols"><div>
+<pre><span class="cm">// ARITMÉTICOS</span>
+<span class="nm">10</span> / <span class="nm">3</span>   <span class="cm">// 3 (int/int = int!)</span>
+<span class="nm">10.0</span>/<span class="nm">3</span>  <span class="cm">// 3.333...</span>
+<span class="nm">10</span> % <span class="nm">3</span>   <span class="cm">// 1 (resto)</span>
+i++  <span class="cm">// usa i, depois incrementa</span>
+++i  <span class="cm">// incrementa, depois usa</span></pre></div>
+<div><pre><span class="cm">// LÓGICOS (short-circuit)</span>
+&amp;&amp;  <span class="cm">// AND — para se esquerdo = false</span>
+||  <span class="cm">// OR  — para se esquerdo = true</span>
+!   <span class="cm">// NOT</span>
+<span class="cm">// TERNÁRIO</span>
+(n &gt;= <span class="nm">60</span>) ? <span class="st">"OK"</span> : <span class="st">"NOK"</span>
+<span class="cm">// COMPOSTO: += -= *= /= %=</span></pre></div></div></div>
+
+<div class="sec">Controle de Fluxo</div>
+<div class="card"><div class="card-title">if / else if / else + switch</div>
+<pre><span class="cm">// IF-ELSE</span>
+<span class="kw">if</span> (nota &gt;= <span class="nm">90</span>)      { ... }
+<span class="kw">else if</span> (nota &gt;= <span class="nm">70</span>) { ... }
+<span class="kw">else</span>                  { ... }
+
+<span class="cm">// SWITCH — cuidado com fall-through sem break!</span>
+<span class="kw">switch</span> (dia) {
+    <span class="kw">case</span> <span class="st">"SEG"</span>: <span class="tp">System</span>.out.<span class="fn">println</span>(<span class="st">"Segunda"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>:  <span class="tp">System</span>.out.<span class="fn">println</span>(<span class="st">"Outro"</span>);
+}
+
+<span class="cm">// SWITCH EXPRESSION (Java 14+) — sem fall-through</span>
+<span class="tp">String</span> nome = <span class="kw">switch</span> (dia) {
+    <span class="kw">case</span> <span class="st">"SEG"</span> -&gt; <span class="st">"Segunda"</span>;
+    <span class="kw">default</span>  -&gt; <span class="st">"Outro"</span>;
+};<button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; Fall-through</strong>Sem <code>break</code>, a execução continua para o próximo case. Pegadinha clássica de prova!</div></div>
+
+<div class="card"><div class="card-title">Loops</div>
+<pre><span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">5</span>; i++) { ... }  <span class="cm">// for clássico</span>
+<span class="kw">while</span> (i &lt; <span class="nm">5</span>) { ... }              <span class="cm">// verifica antes</span>
+<span class="kw">do</span> { ... } <span class="kw">while</span> (cond);            <span class="cm">// executa ao menos 1x</span>
+<span class="kw">for</span> (<span class="kw">int</span> n : array) { ... }         <span class="cm">// enhanced-for</span>
+
+<span class="cm">// break sai do loop; continue pula para a próxima iteração</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Arrays</div>
+<div class="card"><div class="card-title">Arrays — tamanho fixo, índice base 0</div>
+<pre><span class="kw">int</span>[] a = <span class="kw">new</span> <span class="kw">int</span>[<span class="nm">5</span>];          <span class="cm">// [0,0,0,0,0]</span>
+<span class="kw">int</span>[] b = {<span class="nm">1</span>,<span class="nm">2</span>,<span class="nm">3</span>,<span class="nm">4</span>,<span class="nm">5</span>};
+b[<span class="nm">0</span>];           <span class="cm">// 1 (primeiro)</span>
+b[b.length-<span class="nm">1</span>];  <span class="cm">// 5 (último)</span>
+b.length;        <span class="cm">// 5</span>
+
+<span class="cm">// Array 2D</span>
+<span class="kw">int</span>[][] m = {{<span class="nm">1</span>,<span class="nm">2</span>},{<span class="nm">3</span>,<span class="nm">4</span>}};  m[<span class="nm">1</span>][<span class="nm">0</span>]; <span class="cm">// 3</span>
+
+<span class="cm">// Utilitários (import java.util.Arrays)</span>
+<span class="tp">Arrays</span>.<span class="fn">sort</span>(b);           <span class="cm">// ordena in-place</span>
+<span class="tp">Arrays</span>.<span class="fn">toString</span>(b);       <span class="cm">// "[1, 2, 3, 4, 5]"</span>
+<span class="tp">Arrays</span>.<span class="fn">copyOf</span>(b, <span class="nm">3</span>);     <span class="cm">// [1, 2, 3]</span>
+<span class="tp">Arrays</span>.<span class="fn">fill</span>(a, <span class="nm">7</span>);       <span class="cm">// [7,7,7,7,7]</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; ArrayIndexOutOfBoundsException</strong>Array tamanho 5: índices válidos são 0–4. Acessar índice 5 lança exceção em runtime.</div></div>
+
+<!-- MINI QUIZ MOD 0 -->
+<div class="mq" id="mq-0">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — Fundamentos</div><div class="mq-sub">5 questões • +10 pts cada acerto</div></div><span class="mq-prg" id="mq0-prg">1 / 5</span></div>
+  <div id="mq0-body"></div>
+  <div class="mq-nav" id="mq0-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(0)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq0-res"></div>
+</div>
+<div class="mod-foot"><span style="font-size:11px;color:var(--mt)">Conclua os exercícios antes de avançar</span><button class="btn btn-p" onclick="goMod(1)">Próximo: POO &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 1 — POO ████ -->
+<div class="module" id="mod-1">
+<div class="mod-eye">Módulo 2 de 6</div>
+<div class="mod-title">Orientação a Objetos</div>
+<div class="mod-desc">Classes, herança, polimorfismo, interfaces e encapsulamento.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~45 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">Classes e Objetos</div>
+<div class="card"><div class="card-title">Anatomia de uma classe bem escrita</div>
+<pre><span class="kw">public class</span> <span class="tp">ContaBancaria</span> {
+    <span class="kw">private</span> <span class="tp">String</span> titular;      <span class="cm">// private = encapsulamento</span>
+    <span class="kw">private double</span> saldo;
+    <span class="kw">private static int</span> total = <span class="nm">0</span>; <span class="cm">// estático: compartilhado pela classe</span>
+
+    <span class="kw">public</span> <span class="fn">ContaBancaria</span>(<span class="tp">String</span> t, <span class="kw">double</span> s) {
+        <span class="kw">this</span>.titular = t;  <span class="kw">this</span>.saldo = s;  total++;
+    }
+    <span class="kw">public</span> <span class="fn">ContaBancaria</span>() { <span class="kw">this</span>(<span class="st">"Sem nome"</span>, <span class="nm">0</span>); } <span class="cm">// delega</span>
+
+    <span class="kw">public</span> <span class="tp">String</span>  <span class="fn">getTitular</span>()  { <span class="kw">return</span> titular; }
+    <span class="kw">public double</span>  <span class="fn">getSaldo</span>()    { <span class="kw">return</span> saldo; }
+    <span class="kw">public static int</span> <span class="fn">getTotal</span>() { <span class="kw">return</span> total; }
+
+    <span class="kw">public void</span>   <span class="fn">depositar</span>(<span class="kw">double</span> v) { <span class="kw">if</span>(v&gt;<span class="nm">0</span>) saldo+=v; }
+    <span class="kw">public boolean</span> <span class="fn">sacar</span>(<span class="kw">double</span> v) {
+        <span class="kw">if</span>(v&gt;<span class="nm">0</span> &amp;&amp; saldo&gt;=v) { saldo-=v; <span class="kw">return true</span>; }
+        <span class="kw">return false</span>;
+    }
+    <span class="an">@Override</span> <span class="kw">public</span> <span class="tp">String</span> <span class="fn">toString</span>() {
+        <span class="kw">return</span> <span class="st">"Conta{"</span>+titular+<span class="st">", R$"</span>+saldo+<span class="st">"}"</span>;
+    }
+}
+<span class="tp">ContaBancaria</span> c = <span class="kw">new</span> <span class="tp">ContaBancaria</span>(<span class="st">"Rafael"</span>, <span class="nm">1000</span>);
+c.<span class="fn">depositar</span>(<span class="nm">500</span>);  <span class="tp">System</span>.out.<span class="fn">println</span>(c); <span class="cm">// chama toString()</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Modificadores de Acesso</div>
+<div class="card"><div class="card-title">Quem pode acessar o quê</div>
+<table><tr><th>Modificador</th><th>Mesma classe</th><th>Mesmo pacote</th><th>Subclasse</th><th>Fora</th></tr>
+<tr><td><code>public</code></td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+<tr><td><code>protected</code></td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td><em>default</em></td><td>&#10003;</td><td>&#10003;</td><td>&#10007;</td><td>&#10007;</td></tr>
+<tr><td><code>private</code></td><td>&#10003;</td><td>&#10007;</td><td>&#10007;</td><td>&#10007;</td></tr></table></div>
+
+<div class="sec">Herança e Polimorfismo</div>
+<div class="card"><div class="card-title">extends + @Override + super</div>
+<pre><span class="kw">public class</span> <span class="tp">Veiculo</span> {
+    <span class="kw">protected</span> <span class="tp">String</span> marca;
+    <span class="kw">public</span> <span class="fn">Veiculo</span>(<span class="tp">String</span> m) { marca = m; }
+    <span class="kw">public</span> <span class="tp">String</span> <span class="fn">desc</span>() { <span class="kw">return</span> <span class="st">"Veículo: "</span>+marca; }
+}
+<span class="kw">public class</span> <span class="tp">Carro</span> <span class="kw">extends</span> <span class="tp">Veiculo</span> {
+    <span class="kw">private int</span> portas;
+    <span class="kw">public</span> <span class="fn">Carro</span>(<span class="tp">String</span> m, <span class="kw">int</span> p) { <span class="kw">super</span>(m); portas=p; } <span class="cm">// super() primeiro!</span>
+    <span class="an">@Override</span> <span class="kw">public</span> <span class="tp">String</span> <span class="fn">desc</span>() {
+        <span class="kw">return</span> <span class="kw">super</span>.<span class="fn">desc</span>()+<span class="st">" | Portas: "</span>+portas;
+    }
+}
+<span class="cm">// Polimorfismo: referência pai, objeto filho</span>
+<span class="tp">Veiculo</span> v = <span class="kw">new</span> <span class="tp">Carro</span>(<span class="st">"Toyota"</span>, <span class="nm">4</span>);
+v.<span class="fn">desc</span>(); <span class="cm">// chama método do Carro (binding dinâmico)</span>
+
+<span class="cm">// instanceof + pattern matching (Java 16+)</span>
+<span class="kw">if</span> (v <span class="kw">instanceof</span> <span class="tp">Carro</span> c) { System.out.println(c.portas); }<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Abstract e Interface</div>
+<div class="card"><div class="card-title">abstract class vs interface</div>
+<pre><span class="kw">public abstract class</span> <span class="tp">Forma</span> {
+    <span class="kw">protected</span> <span class="tp">String</span> cor = <span class="st">"preto"</span>;             <span class="cm">// tem atributo</span>
+    <span class="kw">public abstract double</span> <span class="fn">area</span>();               <span class="cm">// força implementação</span>
+    <span class="kw">public void</span> <span class="fn">exibir</span>() { System.out.println(area()); }
+}
+<span class="kw">public interface</span> <span class="tp">Desenhavel</span> {
+    <span class="kw">void</span> <span class="fn">desenhar</span>();                              <span class="cm">// implicitamente public abstract</span>
+    <span class="kw">default void</span> <span class="fn">zoom</span>(<span class="kw">double</span> f) { System.out.println("x"+f); } <span class="cm">// Java 8+</span>
+    <span class="kw">static</span> <span class="tp">String</span> <span class="fn">versao</span>() { <span class="kw">return</span> <span class="st">"1.0"</span>; }
+}
+<span class="cm">// extends UMA class + implements VÁRIAS interfaces</span>
+<span class="kw">public class</span> <span class="tp">Circulo</span> <span class="kw">extends</span> <span class="tp">Forma</span> <span class="kw">implements</span> <span class="tp">Desenhavel</span> {
+    <span class="kw">private double</span> r;
+    <span class="kw">public</span> <span class="fn">Circulo</span>(<span class="kw">double</span> r) { <span class="kw">this</span>.r=r; }
+    <span class="an">@Override</span> <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> Math.PI*r*r; }
+    <span class="an">@Override</span> <span class="kw">public void</span>   <span class="fn">desenhar</span>() { System.out.println("O"); }
+}<button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<table style="margin-top:10px"><tr><th>Aspecto</th><th>abstract class</th><th>interface</th></tr>
+<tr><td>Instanciável</td><td>&#10007;</td><td>&#10007;</td></tr>
+<tr><td>Atributos instância</td><td>&#10003;</td><td>&#10007; (só constantes)</td></tr>
+<tr><td>Construtores</td><td>&#10003;</td><td>&#10007;</td></tr>
+<tr><td>Herança/impl.</td><td>extends (1)</td><td>implements (N)</td></tr></table></div>
+
+<div class="card"><div class="card-title">final, static, this, super — resumo rápido</div>
+<pre><span class="kw">final int</span> MAX = <span class="nm">100</span>;           <span class="cm">// constante</span>
+<span class="kw">final class</span> <span class="tp">Imutavel</span> {}        <span class="cm">// não pode ser herdada</span>
+<span class="kw">final void</span> <span class="fn">metodo</span>() {}         <span class="cm">// não pode ser sobrescrito</span>
+<span class="kw">static</span> <span class="kw">double</span> PI = <span class="nm">3.14</span>;      <span class="cm">// da classe, não do objeto</span>
+<span class="kw">this</span>.nome = nome;              <span class="cm">// diferencia atributo de parâmetro</span>
+<span class="kw">this</span>(<span class="st">"outro"</span>);               <span class="cm">// delega construtor</span>
+<span class="kw">super</span>(args);                  <span class="cm">// construtor do pai (1ª linha!)</span>
+<span class="kw">super</span>.<span class="fn">metodo</span>();               <span class="cm">// método sobrescrito do pai</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<!-- MINI QUIZ MOD 1 -->
+<div class="mq" id="mq-1">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — POO</div><div class="mq-sub">5 questões • +10 pts cada</div></div><span class="mq-prg" id="mq1-prg">1 / 5</span></div>
+  <div id="mq1-body"></div>
+  <div class="mq-nav" id="mq1-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(1)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq1-res"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(0)">&#8592; Fundamentos</button><button class="btn btn-p" onclick="goMod(2)">Próximo: Coleções &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 2 — COLEÇÕES ████ -->
+<div class="module" id="mod-2">
+<div class="mod-eye">Módulo 3 de 6</div>
+<div class="mod-title">Estruturas de Dados (Collections)</div>
+<div class="mod-desc">ArrayList, HashMap, HashSet, TreeMap — quando usar cada um e as operações essenciais.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~30 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">List — ordenada com duplicatas</div>
+<div class="card"><div class="card-title">ArrayList — operações completas</div>
+<pre><span class="tp">List</span>&lt;<span class="tp">String</span>&gt; l = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+l.<span class="fn">add</span>(<span class="st">"Ana"</span>);          l.<span class="fn">add</span>(<span class="nm">0</span>, <span class="st">"Bob"</span>);   <span class="cm">// inserir na posição</span>
+l.<span class="fn">get</span>(<span class="nm">0</span>);             l.<span class="fn">set</span>(<span class="nm">0</span>, <span class="st">"Carlos"</span>); <span class="cm">// ler / substituir</span>
+l.<span class="fn">remove</span>(<span class="st">"Ana"</span>);      l.<span class="fn">remove</span>(<span class="nm">0</span>);        <span class="cm">// por valor / índice</span>
+l.<span class="fn">size</span>();             l.<span class="fn">isEmpty</span>();        l.<span class="fn">clear</span>();
+l.<span class="fn">contains</span>(<span class="st">"Bob"</span>);   l.<span class="fn">indexOf</span>(<span class="st">"Bob"</span>);
+l.<span class="fn">subList</span>(<span class="nm">0</span>, <span class="nm">2</span>);     <span class="cm">// sub-lista [0,2)</span>
+<span class="tp">Collections</span>.<span class="fn">sort</span>(l); l.<span class="fn">sort</span>(<span class="tp">Comparator</span>.<span class="fn">reverseOrder</span>());
+l.<span class="fn">forEach</span>(<span class="tp">System</span>.out::<span class="fn">println</span>); <span class="cm">// Java 8+</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; fixo = <span class="tp">List</span>.<span class="fn">of</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>); <span class="cm">// imutável (Java 9+)</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Map — pares chave → valor</div>
+<div class="card"><div class="card-title">HashMap — operações completas</div>
+<pre><span class="tp">Map</span>&lt;<span class="tp">String</span>,<span class="tp">Integer</span>&gt; m = <span class="kw">new</span> <span class="tp">HashMap</span>&lt;&gt;();
+m.<span class="fn">put</span>(<span class="st">"java"</span>, <span class="nm">95</span>);          <span class="cm">// insere/sobrescreve; retorna valor antigo</span>
+m.<span class="fn">get</span>(<span class="st">"java"</span>);              <span class="cm">// 95</span>
+m.<span class="fn">get</span>(<span class="st">"rust"</span>);              <span class="cm">// null!</span>
+m.<span class="fn">getOrDefault</span>(<span class="st">"rust"</span>, <span class="nm">0</span>);  <span class="cm">// seguro</span>
+m.<span class="fn">containsKey</span>(<span class="st">"java"</span>);
+m.<span class="fn">remove</span>(<span class="st">"java"</span>);
+m.<span class="fn">putIfAbsent</span>(<span class="st">"go"</span>, <span class="nm">70</span>);    <span class="cm">// só insere se ausente</span>
+m.<span class="fn">merge</span>(<span class="st">"java"</span>, <span class="nm">1</span>, <span class="tp">Integer</span>::sum); <span class="cm">// incrementa valor</span>
+<span class="cm">// Iterar — entrySet() é o correto para pegar chave+valor</span>
+<span class="kw">for</span> (<span class="tp">Map</span>.<span class="tp">Entry</span>&lt;<span class="tp">String</span>,<span class="tp">Integer</span>&gt; e : m.<span class="fn">entrySet</span>())
+    System.out.println(e.getKey() + "=" + e.getValue());
+m.<span class="fn">forEach</span>((k,v) -&gt; System.out.println(k+"="+v));<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Set e escolha de coleção</div>
+<div class="card"><div class="card-title">HashSet + guia de escolha</div>
+<pre><span class="tp">Set</span>&lt;<span class="tp">String</span>&gt; s = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;();
+s.<span class="fn">add</span>(<span class="st">"banana"</span>); s.<span class="fn">add</span>(<span class="st">"banana"</span>); <span class="cm">// ignorado silenciosamente</span>
+s.<span class="fn">size</span>(); <span class="cm">// 1</span>
+
+<span class="cm">// Remover duplicatas de lista</span>
+<span class="tp">Set</span>&lt;<span class="tp">Integer</span>&gt; semDup = <span class="kw">new</span> <span class="tp">HashSet</span>&lt;&gt;(lista);
+
+<span class="cm">// TreeSet — Set com ordem natural</span>
+<span class="tp">Set</span>&lt;<span class="tp">Integer</span>&gt; ord = <span class="kw">new</span> <span class="tp">TreeSet</span>&lt;&gt;(<span class="tp">Set</span>.<span class="fn">of</span>(<span class="nm">5</span>,<span class="nm">1</span>,<span class="nm">3</span>)); <span class="cm">// [1,3,5]</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<table style="margin-top:10px"><tr><th>Coleção</th><th>Ordenada?</th><th>Duplicatas?</th><th>Use quando</th></tr>
+<tr><td>ArrayList</td><td>Inserção</td><td>Sim</td><td>Lista geral, acesso por índice</td></tr>
+<tr><td>LinkedList</td><td>Inserção</td><td>Sim</td><td>Muitas inserções no início</td></tr>
+<tr><td>HashSet</td><td>Não</td><td>Não</td><td>Unicidade, busca O(1)</td></tr>
+<tr><td>TreeSet</td><td>Natural</td><td>Não</td><td>Set ordenado</td></tr>
+<tr><td>HashMap</td><td>Não</td><td>Não (chaves)</td><td>Busca por chave O(1)</td></tr>
+<tr><td>TreeMap</td><td>Chaves</td><td>Não (chaves)</td><td>Map com chaves ordenadas</td></tr></table></div>
+
+<!-- MINI QUIZ MOD 2 -->
+<div class="mq" id="mq-2">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — Coleções</div><div class="mq-sub">5 questões • +10 pts cada</div></div><span class="mq-prg" id="mq2-prg">1 / 5</span></div>
+  <div id="mq2-body"></div>
+  <div class="mq-nav" id="mq2-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(2)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq2-res"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(1)">&#8592; POO</button><button class="btn btn-p" onclick="goMod(3)">Próximo: Exceções &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 3 — EXCEÇÕES ████ -->
+<div class="module" id="mod-3">
+<div class="mod-eye">Módulo 4 de 6</div>
+<div class="mod-title">Tratamento de Exceções</div>
+<div class="mod-desc">try-catch-finally, hierarquia, checked vs unchecked, throws, throw e exceções customizadas.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~20 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">Hierarquia de exceções</div>
+<div class="card"><div class="card-title">Mapa da herança</div>
+<pre><span class="cm">               Throwable
+              /          \
+           Error        Exception
+            |           /        \
+     OutOfMemory    Checked   RuntimeException (Unchecked)
+     StackOverflow  IOException   +-- NullPointerException
+                    SQLException  +-- ArrayIndexOutOfBounds
+                    ...           +-- ArithmeticException
+                                  +-- ClassCastException
+                                  +-- NumberFormatException</span></pre>
+<table style="margin-top:10px"><tr><th>Tipo</th><th>Herda de</th><th>Compilador exige?</th><th>Exemplos</th></tr>
+<tr><td><strong>Checked</strong></td><td>Exception</td><td>Sim</td><td>IOException, SQLException</td></tr>
+<tr><td><strong>Unchecked</strong></td><td>RuntimeException</td><td>Não</td><td>NPE, ArrayIndexOOB</td></tr>
+<tr><td><strong>Error</strong></td><td>Error</td><td>Não trate</td><td>OutOfMemoryError</td></tr></table></div>
+
+<div class="sec">try / catch / finally</div>
+<div class="card"><div class="card-title">Sintaxe completa</div>
+<pre><span class="kw">try</span> {
+    <span class="kw">int</span> r = <span class="nm">10</span> / <span class="nm">0</span>;
+
+} <span class="kw">catch</span> (<span class="tp">ArithmeticException</span> e) {        <span class="cm">// específico PRIMEIRO</span>
+    System.out.println("Divisão por zero: " + e.getMessage());
+
+} <span class="kw">catch</span> (<span class="tp">NullPointerException</span> | <span class="tp">ArrayIndexOutOfBoundsException</span> e) {
+    e.printStackTrace();                   <span class="cm">// multi-catch (Java 7+)</span>
+
+} <span class="kw">catch</span> (<span class="tp">Exception</span> e) {                  <span class="cm">// genérico por ÚLTIMO</span>
+    System.out.println("Erro: " + e.getMessage());
+
+} <span class="kw">finally</span> {
+    System.out.println("SEMPRE executa"); <span class="cm">// use para fechar recursos</span>
+}
+
+<span class="cm">// try-with-resources (Java 7+) — fecha automaticamente</span>
+<span class="kw">try</span> (<span class="tp">Scanner</span> sc = <span class="kw">new</span> <span class="tp">Scanner</span>(<span class="kw">new</span> <span class="tp">File</span>(<span class="st">"arq.txt"</span>))) {
+    <span class="kw">while</span> (sc.<span class="fn">hasNextLine</span>()) System.out.println(sc.nextLine());
+} <span class="cm">// sc.close() chamado automaticamente!</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; Ordem dos catches importa!</strong>Sempre coloque catches específicos ANTES dos genéricos. Exception antes de IOException = erro de compilação.</div></div>
+
+<div class="card"><div class="card-title">throw, throws e exceção customizada</div>
+<pre><span class="cm">// throws — declara que PODE lançar checked exception</span>
+<span class="kw">public void</span> <span class="fn">ler</span>() <span class="kw">throws</span> <span class="tp">IOException</span> { ... }
+
+<span class="cm">// throw — lança explicitamente</span>
+<span class="kw">public void</span> <span class="fn">setIdade</span>(<span class="kw">int</span> i) {
+    <span class="kw">if</span> (i &lt; <span class="nm">0</span>) <span class="kw">throw new</span> <span class="tp">IllegalArgumentException</span>(<span class="st">"Negativo: "</span>+i);
+    <span class="kw">this</span>.idade = i;
+}
+
+<span class="cm">// Exceção customizada</span>
+<span class="kw">public class</span> <span class="tp">SaldoInsuficienteException</span> <span class="kw">extends</span> <span class="tp">RuntimeException</span> {
+    <span class="kw">private final double</span> saldo;
+    <span class="kw">public</span> <span class="fn">SaldoInsuficienteException</span>(<span class="kw">double</span> s) {
+        <span class="kw">super</span>(<span class="st">"Saldo insuficiente: R$"</span>+s);
+        <span class="kw">this</span>.saldo = s;
+    }
+    <span class="kw">public double</span> <span class="fn">getSaldo</span>() { <span class="kw">return</span> saldo; }
+}<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<!-- MINI QUIZ MOD 3 -->
+<div class="mq" id="mq-3">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — Exceções</div><div class="mq-sub">5 questões • +10 pts cada</div></div><span class="mq-prg" id="mq3-prg">1 / 5</span></div>
+  <div id="mq3-body"></div>
+  <div class="mq-nav" id="mq3-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(3)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq3-res"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(2)">&#8592; Coleções</button><button class="btn btn-p" onclick="goMod(4)">Próximo: Strings &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 4 — STRINGS ████ -->
+<div class="module" id="mod-4">
+<div class="mod-eye">Módulo 5 de 6</div>
+<div class="mod-title">Strings, I/O e Utilitários</div>
+<div class="mod-desc">Manipulação de String, StringBuilder, Scanner e Math. Aparecem em quase toda prova.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~25 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">String — imutável</div>
+<div class="card"><div class="card-title">Todos os métodos que caem em prova</div>
+<pre><span class="tp">String</span> s = <span class="st">"  Hello, World!  "</span>;
+
+s.<span class="fn">length</span>();                    <span class="cm">// 17</span>
+s.<span class="fn">charAt</span>(<span class="nm">2</span>);                   <span class="cm">// 'H'</span>
+s.<span class="fn">indexOf</span>(<span class="st">"o"</span>);               <span class="cm">// primeira ocorrência</span>
+s.<span class="fn">lastIndexOf</span>(<span class="st">"o"</span>);           <span class="cm">// última</span>
+s.<span class="fn">trim</span>();                      <span class="cm">// remove espaços início/fim</span>
+s.<span class="fn">strip</span>();                     <span class="cm">// como trim, Unicode-aware (Java11)</span>
+s.<span class="fn">toLowerCase</span>();               <span class="cm">// tudo minúsculo</span>
+s.<span class="fn">toUpperCase</span>();               <span class="cm">// tudo maiúsculo</span>
+s.<span class="fn">replace</span>(<span class="st">"World"</span>,<span class="st">"Java"</span>);   <span class="cm">// substitui todas ocorrências</span>
+s.<span class="fn">replaceAll</span>(<span class="st">"\\s+"</span>,<span class="st">"-"</span>);   <span class="cm">// com regex</span>
+s.<span class="fn">substring</span>(<span class="nm">2</span>, <span class="nm">7</span>);           <span class="cm">// índices [2,7) — fim exclusivo</span>
+s.<span class="fn">split</span>(<span class="st">","</span>);                  <span class="cm">// String[]</span>
+s.<span class="fn">contains</span>(<span class="st">"World"</span>);          <span class="cm">// true</span>
+s.<span class="fn">startsWith</span>(<span class="st">"  H"</span>);         <span class="cm">// true</span>
+s.<span class="fn">endsWith</span>(<span class="st">"  "</span>);            <span class="cm">// true</span>
+s.<span class="fn">isEmpty</span>();                   <span class="cm">// false</span>
+s.<span class="fn">isBlank</span>();                   <span class="cm">// false (Java 11)</span>
+s.<span class="fn">equals</span>(<span class="st">"outro"</span>);           <span class="cm">// false</span>
+s.<span class="fn">equalsIgnoreCase</span>(<span class="st">"hello"</span>); <span class="cm">// ignora case</span>
+<span class="tp">String</span>.<span class="fn">valueOf</span>(<span class="nm">42</span>);            <span class="cm">// "42"</span>
+<span class="tp">String</span>.<span class="fn">format</span>(<span class="st">"%s=%d"</span>,<span class="st">"n"</span>,<span class="nm">5</span>); <span class="cm">// "n=5"</span>
+<span class="tp">String</span>.<span class="fn">join</span>(<span class="st">"-"</span>,<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>);<span class="cm">// "a-b-c"</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; String é imutável!</strong>Qualquer operação retorna um NOVO objeto. Você DEVE atribuir: <code>s = s.trim();</code>. <br>E sempre use <code>.equals()</code>, nunca <code>==</code>.</div></div>
+
+<div class="card"><div class="card-title">StringBuilder — eficiente para concatenações em loop</div>
+<pre><span class="tp">StringBuilder</span> sb = <span class="kw">new</span> <span class="tp">StringBuilder</span>();
+sb.<span class="fn">append</span>(<span class="st">"Java"</span>).<span class="fn">append</span>(<span class="st">" 21"</span>); <span class="cm">// chaining</span>
+sb.<span class="fn">insert</span>(<span class="nm">0</span>, <span class="st">"&gt;&gt; "</span>);              <span class="cm">// insere no início</span>
+sb.<span class="fn">delete</span>(<span class="nm">0</span>, <span class="nm">3</span>);                  <span class="cm">// remove [0,3)</span>
+sb.<span class="fn">replace</span>(<span class="nm">0</span>, <span class="nm">4</span>, <span class="st">"xxx"</span>);         <span class="cm">// substitui por índice</span>
+sb.<span class="fn">reverse</span>();                      <span class="cm">// inverte</span>
+sb.<span class="fn">length</span>();                        <span class="cm">// tamanho atual</span>
+sb.<span class="fn">toString</span>();                      <span class="cm">// converte para String</span>
+
+<span class="cm">// Em loops: use StringBuilder, não + (cria objeto a cada iteração)</span>
+<span class="tp">StringBuilder</span> r = <span class="kw">new</span> <span class="tp">StringBuilder</span>();
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">10000</span>; i++) r.<span class="fn">append</span>(i);<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Scanner e Math</div>
+<div class="card"><div class="card-title">Scanner — leitura do console</div>
+<pre><span class="tp">Scanner</span> sc = <span class="kw">new</span> <span class="tp">Scanner</span>(<span class="tp">System</span>.in);
+<span class="tp">String</span>  nome  = sc.<span class="fn">nextLine</span>();   <span class="cm">// linha inteira</span>
+<span class="kw">int</span>     idade = sc.<span class="fn">nextInt</span>();    <span class="cm">// lê int</span>
+sc.<span class="fn">nextLine</span>();                    <span class="cm">// ← LIMPA o \n residual!</span>
+<span class="kw">double</span>  preco = sc.<span class="fn">nextDouble</span>(); <span class="cm">// lê double</span>
+<span class="kw">if</span> (sc.<span class="fn">hasNextInt</span>()) { ... }      <span class="cm">// verifica antes de ler</span>
+sc.<span class="fn">close</span>();                       <span class="cm">// fechar ao terminar</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip r"><strong>&#9888; Buffer residual</strong>Após nextInt(), sempre chame nextLine() extra para consumir o \n. Senão o próximo nextLine() lê string vazia.</div></div>
+<div class="card"><div class="card-title">Math — métodos estáticos</div>
+<pre><span class="tp">Math</span>.<span class="fn">abs</span>(-<span class="nm">7</span>)           <span class="cm">// 7</span>
+<span class="tp">Math</span>.<span class="fn">max</span>(<span class="nm">3</span>, <span class="nm">8</span>)         <span class="cm">// 8</span>
+<span class="tp">Math</span>.<span class="fn">min</span>(<span class="nm">3</span>, <span class="nm">8</span>)         <span class="cm">// 3</span>
+<span class="tp">Math</span>.<span class="fn">pow</span>(<span class="nm">2</span>, <span class="nm">10</span>)        <span class="cm">// 1024.0</span>
+<span class="tp">Math</span>.<span class="fn">sqrt</span>(<span class="nm">25</span>)          <span class="cm">// 5.0</span>
+<span class="tp">Math</span>.<span class="fn">round</span>(<span class="nm">3.7</span>)        <span class="cm">// 4</span>
+<span class="tp">Math</span>.<span class="fn">floor</span>(<span class="nm">3.9</span>)        <span class="cm">// 3.0</span>
+<span class="tp">Math</span>.<span class="fn">ceil</span>(<span class="nm">3.1</span>)         <span class="cm">// 4.0</span>
+<span class="tp">Math</span>.<span class="fn">random</span>()          <span class="cm">// 0.0 &lt;= x &lt; 1.0</span>
+(<span class="kw">int</span>)(<span class="tp">Math</span>.<span class="fn">random</span>()*<span class="nm">6</span>)+<span class="nm">1</span> <span class="cm">// dado 1-6</span>
+<span class="tp">Math</span>.PI                <span class="cm">// 3.141592653589793</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<!-- MINI QUIZ MOD 4 -->
+<div class="mq" id="mq-4">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — Strings</div><div class="mq-sub">5 questões • +10 pts cada</div></div><span class="mq-prg" id="mq4-prg">1 / 5</span></div>
+  <div id="mq4-body"></div>
+  <div class="mq-nav" id="mq4-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(4)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq4-res"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(3)">&#8592; Exceções</button><button class="btn btn-p" onclick="goMod(5)">Próximo: Java 8+ &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 5 — JAVA MODERNO ████ -->
+<div class="module" id="mod-5">
+<div class="mod-eye">Módulo 6 de 6</div>
+<div class="mod-title">Java 8+ — Recursos Modernos</div>
+<div class="mod-desc">Generics, Lambdas, interfaces funcionais, Stream API e Optional.</div>
+<div class="mod-tags"><span class="badge o">&#9201; ~30 min</span><span class="badge b">&#127919; 5 exercícios</span></div>
+
+<div class="sec">Generics</div>
+<div class="card"><div class="card-title">Reutilize código com segurança de tipo</div>
+<pre><span class="cm">// Classe genérica</span>
+<span class="kw">public class</span> <span class="tp">Par</span>&lt;<span class="tp">A</span>, <span class="tp">B</span>&gt; {
+    <span class="kw">private final</span> <span class="tp">A</span> p; <span class="kw">private final</span> <span class="tp">B</span> s;
+    <span class="kw">public</span> <span class="fn">Par</span>(<span class="tp">A</span> a, <span class="tp">B</span> b) { p=a; s=b; }
+    <span class="kw">public</span> <span class="tp">A</span> <span class="fn">getPrimeiro</span>() { <span class="kw">return</span> p; }
+    <span class="kw">public</span> <span class="tp">B</span> <span class="fn">getSegundo</span>()  { <span class="kw">return</span> s; }
+}
+<span class="tp">Par</span>&lt;<span class="tp">String</span>,<span class="tp">Integer</span>&gt; par = <span class="kw">new</span> <span class="tp">Par</span>&lt;&gt;(<span class="st">"Java"</span>, <span class="nm">21</span>);
+
+<span class="cm">// Método genérico com bound</span>
+<span class="kw">public static</span> &lt;<span class="tp">T</span> <span class="kw">extends</span> <span class="tp">Comparable</span>&lt;<span class="tp">T</span>&gt;&gt; <span class="tp">T</span> <span class="fn">max</span>(<span class="tp">T</span> a, <span class="tp">T</span> b) {
+    <span class="kw">return</span> a.<span class="fn">compareTo</span>(b) &gt; <span class="nm">0</span> ? a : b;
+}
+
+<span class="cm">// Wildcards</span>
+<span class="kw">void</span> <span class="fn">printAll</span>(<span class="tp">List</span>&lt;?&gt; l)                  <span class="cm">// qualquer tipo</span>
+<span class="kw">void</span> <span class="fn">addNums</span>(<span class="tp">List</span>&lt;? <span class="kw">super</span> <span class="tp">Integer</span>&gt; l)    <span class="cm">// Integer ou superclasse</span>
+<span class="kw">void</span> <span class="fn">readNums</span>(<span class="tp">List</span>&lt;? <span class="kw">extends</span> <span class="tp">Number</span>&gt; l)  <span class="cm">// Number ou subclasse</span><button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Lambdas e Interfaces Funcionais</div>
+<div class="card"><div class="card-title">As 4 interfaces core do java.util.function</div>
+<pre><span class="cm">// Lambda: (params) -> expressão  ou  (params) -> { bloco }</span>
+
+<span class="cm">// Predicate&lt;T&gt;  — T -> boolean</span>
+<span class="tp">Predicate</span>&lt;<span class="tp">Integer</span>&gt; ehPar = n -&gt; n % <span class="nm">2</span> == <span class="nm">0</span>;
+ehPar.<span class="fn">test</span>(<span class="nm">4</span>);    <span class="cm">// true</span>
+ehPar.<span class="fn">and</span>(n -&gt; n &gt; <span class="nm">0</span>); <span class="cm">// encadeamento</span>
+
+<span class="cm">// Function&lt;T,R&gt; — T -> R</span>
+<span class="tp">Function</span>&lt;<span class="tp">String</span>,<span class="tp">Integer</span>&gt; tam = <span class="tp">String</span>::<span class="fn">length</span>; <span class="cm">// method ref</span>
+tam.<span class="fn">apply</span>(<span class="st">"Java"</span>);  <span class="cm">// 4</span>
+tam.<span class="fn">andThen</span>(n -&gt; n * <span class="nm">2</span>).<span class="fn">apply</span>(<span class="st">"Java"</span>); <span class="cm">// 8</span>
+
+<span class="cm">// Consumer&lt;T&gt;  — T -> void</span>
+<span class="tp">Consumer</span>&lt;<span class="tp">String</span>&gt; log = s -&gt; System.out.println("[LOG] "+s);
+log.<span class="fn">accept</span>(<span class="st">"ok"</span>);
+
+<span class="cm">// Supplier&lt;T&gt;  — () -> T</span>
+<span class="tp">Supplier</span>&lt;<span class="tp">String</span>&gt; saud = () -&gt; <span class="st">"Olá!"</span>;
+saud.<span class="fn">get</span>();
+
+<span class="cm">// Method references: Classe::método ou obj::método</span>
+List.of("a","b").forEach(System.out::println);<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<div class="sec">Stream API</div>
+<div class="card"><div class="card-title">Pipeline funcional sobre coleções</div>
+<pre><span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; nums = <span class="tp">List</span>.<span class="fn">of</span>(<span class="nm">3</span>,<span class="nm">1</span>,<span class="nm">4</span>,<span class="nm">1</span>,<span class="nm">5</span>,<span class="nm">9</span>,<span class="nm">2</span>,<span class="nm">6</span>);
+
+<span class="cm">// filter + map + collect</span>
+<span class="tp">List</span>&lt;<span class="tp">String</span>&gt; r = nums.<span class="fn">stream</span>()
+    .<span class="fn">filter</span>(n -&gt; n &gt; <span class="nm">3</span>)
+    .<span class="fn">map</span>(n -&gt; <span class="st">"#"</span>+n)
+    .<span class="fn">sorted</span>()
+    .<span class="fn">collect</span>(<span class="tp">Collectors</span>.<span class="fn">toList</span>());
+
+<span class="cm">// Terminais úteis</span>
+<span class="kw">long</span>    qtd  = nums.<span class="fn">stream</span>().<span class="fn">filter</span>(n-&gt;n%<span class="nm">2</span>==<span class="nm">0</span>).<span class="fn">count</span>();
+<span class="kw">int</span>     soma = nums.<span class="fn">stream</span>().<span class="fn">mapToInt</span>(<span class="tp">Integer</span>::<span class="fn">intValue</span>).<span class="fn">sum</span>();
+<span class="kw">boolean</span> algum = nums.<span class="fn">stream</span>().<span class="fn">anyMatch</span>(n-&gt;n%<span class="nm">2</span>==<span class="nm">0</span>);
+<span class="kw">boolean</span> todos = nums.<span class="fn">stream</span>().<span class="fn">allMatch</span>(n-&gt;n&gt;<span class="nm">0</span>);
+<span class="kw">boolean</span> nenhum= nums.<span class="fn">stream</span>().<span class="fn">noneMatch</span>(n-&gt;n&lt;<span class="nm">0</span>);
+<span class="tp">Optional</span>&lt;<span class="tp">Integer</span>&gt; max = nums.<span class="fn">stream</span>().<span class="fn">max</span>(<span class="tp">Integer</span>::<span class="fn">compareTo</span>);
+
+<span class="cm">// distinct, limit, skip</span>
+nums.<span class="fn">stream</span>().<span class="fn">distinct</span>().<span class="fn">limit</span>(<span class="nm">3</span>).<span class="fn">skip</span>(<span class="nm">1</span>).<span class="fn">toList</span>();
+
+<span class="cm">// Collectors</span>
+<span class="tp">String</span> joined = nums.<span class="fn">stream</span>().<span class="fn">map</span>(<span class="tp">Object</span>::<span class="fn">toString</span>)
+    .<span class="fn">collect</span>(<span class="tp">Collectors</span>.<span class="fn">joining</span>(<span class="st">", "</span>));<button class="cpb" onclick="cpCode(this)">copiar</button></pre>
+<div class="tip p"><strong>&#128161; Streams são lazy e não modificam a coleção original!</strong>Operações intermediárias (filter, map) só executam quando o terminal (collect, count, forEach) é chamado.</div></div>
+
+<div class="card"><div class="card-title">Optional — evita NullPointerException</div>
+<pre><span class="tp">Optional</span>&lt;<span class="tp">String</span>&gt; p = <span class="tp">Optional</span>.<span class="fn">of</span>(<span class="st">"valor"</span>);      <span class="cm">// NPE se null</span>
+<span class="tp">Optional</span>&lt;<span class="tp">String</span>&gt; v = <span class="tp">Optional</span>.<span class="fn">empty</span>();
+<span class="tp">Optional</span>&lt;<span class="tp">String</span>&gt; s = <span class="tp">Optional</span>.<span class="fn">ofNullable</span>(x);  <span class="cm">// seguro</span>
+
+p.<span class="fn">isPresent</span>();                  <span class="cm">// true</span>
+p.<span class="fn">isEmpty</span>();                    <span class="cm">// false (Java 11)</span>
+p.<span class="fn">get</span>();                         <span class="cm">// "valor" — lança se vazio!</span>
+p.<span class="fn">orElse</span>(<span class="st">"padrão"</span>);            <span class="cm">// valor ou "padrão"</span>
+p.<span class="fn">orElseGet</span>(() -&gt; calc());      <span class="cm">// lazy</span>
+p.<span class="fn">orElseThrow</span>();                 <span class="cm">// NoSuchElementException</span>
+p.<span class="fn">map</span>(<span class="tp">String</span>::<span class="fn">toUpperCase</span>);    <span class="cm">// transforma sem desempacotar</span>
+p.<span class="fn">filter</span>(x -&gt; x.<span class="fn">length</span>()&gt;<span class="nm">3</span>); <span class="cm">// filtra</span>
+p.<span class="fn">ifPresent</span>(System.out::<span class="fn">println</span>);<button class="cpb" onclick="cpCode(this)">copiar</button></pre></div>
+
+<!-- MINI QUIZ MOD 5 -->
+<div class="mq" id="mq-5">
+  <div class="mq-hdr"><span class="mq-icon">&#129299;</span><div><div class="mq-title">Prática — Java 8+</div><div class="mq-sub">5 questões • +10 pts cada</div></div><span class="mq-prg" id="mq5-prg">1 / 5</span></div>
+  <div id="mq5-body"></div>
+  <div class="mq-nav" id="mq5-nav" style="display:none"><button class="btn btn-p btn-sm" onclick="mqNext(5)">Próxima &#8594;</button></div>
+  <div class="mq-res" id="mq5-res"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(4)">&#8592; Strings</button><button class="btn btn-p" onclick="goMod(6)">&#127919; Quiz Final &#8594;</button></div>
+</div>
+
+<!-- ████ MOD 6 — QUIZ FINAL ████ -->
+<div class="module" id="mod-6">
+<div class="fq-hero">
+  <div class="fq-hero-t">&#127919; Quiz Final — 50 Questões</div>
+  <div class="fq-hero-s">Estilo de exame real. Cronometre-se: ~30 minutos.</div>
+  <div class="fq-stats">
+    <div class="fq-stat"><div class="fq-stat-n">50</div><div class="fq-stat-l">Questões</div></div>
+    <div class="fq-stat"><div class="fq-stat-n">6</div><div class="fq-stat-l">Módulos</div></div>
+    <div class="fq-stat"><div class="fq-stat-n" id="fq-live-score">—</div><div class="fq-stat-l">Acertos</div></div>
+  </div>
+</div>
+<div id="fq-area">
+  <div class="fq-box" id="fq-box"></div>
+  <div id="fq-nav-area" style="display:none">
+    <div class="fq-nav">
+      <span id="fq-prg-txt" style="font-size:12px;color:var(--mt)"></span>
+      <button class="btn btn-p" id="fq-next-btn" onclick="fqNext()">Próxima &#8594;</button>
+    </div>
+  </div>
+</div>
+<div class="sb" id="sb">
+  <div class="sb-card">
+    <div class="sb-ring"><div class="sb-big" id="sb-score"></div><div class="sb-tot">de 50</div></div>
+    <div class="sb-grade" id="sb-grade"></div>
+    <div class="sb-msg" id="sb-msg"></div>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-p" onclick="fqRestart()">Refazer Quiz</button>
+      <button class="btn btn-s" onclick="goMod(7)">Ver Cheat Sheet</button>
+    </div>
+  </div>
+  <div style="margin-bottom:12px;font-size:13px;font-weight:700">Desempenho por módulo</div>
+  <div class="sb-bk" id="sb-bk"></div>
+  <div style="margin:16px 0 8px;font-size:13px;font-weight:700">Revisão das questões erradas</div>
+  <div id="sb-rv"></div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(5)">&#8592; Java 8+</button><button class="btn btn-s" onclick="goMod(7)">&#128203; Cheat Sheet</button></div>
+</div>
+
+<!-- ████ MOD 7 — CHEAT SHEET ████ -->
+<div class="module" id="mod-7">
+<div class="mod-eye">Referência Rápida</div>
+<div class="mod-title">&#128203; Cheat Sheet — Para Revisar Antes da Prova</div>
+<div class="mod-desc">Resumo ultra-compacto de tudo que você precisa saber.</div>
+<div class="cs-grid">
+  <div class="cs-card"><div class="cs-title">Tipos Primitivos</div>
+    <div class="cs-item"><code>int</code><span>32 bits, -2B a +2B</span></div>
+    <div class="cs-item"><code>long</code><span>64 bits, sufixo L</span></div>
+    <div class="cs-item"><code>double</code><span>64 bits, decimal padrão</span></div>
+    <div class="cs-item"><code>float</code><span>32 bits, sufixo f</span></div>
+    <div class="cs-item"><code>boolean</code><span>true / false</span></div>
+    <div class="cs-item"><code>char</code><span>16 bits, aspas simples</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Modificadores de Acesso</div>
+    <div class="cs-item"><code>public</code><span>Todos acessam</span></div>
+    <div class="cs-item"><code>protected</code><span>Pacote + subclasses</span></div>
+    <div class="cs-item"><em>default</em><span>Só mesmo pacote</span></div>
+    <div class="cs-item"><code>private</code><span>Só a própria classe</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Palavras-chave POO</div>
+    <div class="cs-item"><code>extends</code><span>Herda de 1 classe</span></div>
+    <div class="cs-item"><code>implements</code><span>Implementa N interfaces</span></div>
+    <div class="cs-item"><code>abstract</code><span>Classe/método abstrato</span></div>
+    <div class="cs-item"><code>final</code><span>Constante/sem herança/sem override</span></div>
+    <div class="cs-item"><code>static</code><span>Da classe, não do objeto</span></div>
+    <div class="cs-item"><code>this</code><span>Ref ao objeto atual</span></div>
+    <div class="cs-item"><code>super</code><span>Ref à superclasse</span></div>
+    <div class="cs-item"><code>instanceof</code><span>Testa tipo do objeto</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Exceções</div>
+    <div class="cs-item"><code>Throwable</code><span>Raiz de tudo</span></div>
+    <div class="cs-item"><code>Error</code><span>JVM, não trate</span></div>
+    <div class="cs-item"><code>Exception</code><span>Checked — compilador exige</span></div>
+    <div class="cs-item"><code>RuntimeException</code><span>Unchecked — opcional</span></div>
+    <div class="cs-item"><code>throw</code><span>Lança exceção</span></div>
+    <div class="cs-item"><code>throws</code><span>Declara na assinatura</span></div>
+    <div class="cs-item"><code>finally</code><span>Sempre executa</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Coleções — Quando Usar</div>
+    <div class="cs-item"><code>ArrayList</code><span>Lista geral, get O(1)</span></div>
+    <div class="cs-item"><code>LinkedList</code><span>Add/remove início O(1)</span></div>
+    <div class="cs-item"><code>HashSet</code><span>Sem duplicatas, O(1)</span></div>
+    <div class="cs-item"><code>TreeSet</code><span>Set ordenado, O(log n)</span></div>
+    <div class="cs-item"><code>HashMap</code><span>Chave-valor, O(1)</span></div>
+    <div class="cs-item"><code>TreeMap</code><span>Map ordenado por chave</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Interfaces Funcionais</div>
+    <div class="cs-item"><code>Predicate&lt;T&gt;</code><span>T → boolean</span></div>
+    <div class="cs-item"><code>Function&lt;T,R&gt;</code><span>T → R</span></div>
+    <div class="cs-item"><code>Consumer&lt;T&gt;</code><span>T → void</span></div>
+    <div class="cs-item"><code>Supplier&lt;T&gt;</code><span>() → T</span></div>
+    <div class="cs-item"><code>BiFunction&lt;A,B,R&gt;</code><span>A,B → R</span></div>
+    <div class="cs-item"><code>Comparator&lt;T&gt;</code><span>T,T → int</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">Stream — Operações</div>
+    <div class="cs-item"><code>filter(pred)</code><span>Filtra elementos</span></div>
+    <div class="cs-item"><code>map(func)</code><span>Transforma elementos</span></div>
+    <div class="cs-item"><code>sorted()</code><span>Ordena</span></div>
+    <div class="cs-item"><code>distinct()</code><span>Remove duplicatas</span></div>
+    <div class="cs-item"><code>limit(n)/skip(n)</code><span>Limita / pula</span></div>
+    <div class="cs-item"><code>count()/sum()</code><span>Terminais numéricos</span></div>
+    <div class="cs-item"><code>collect()</code><span>Coleta em coleção</span></div>
+    <div class="cs-item"><code>anyMatch/allMatch</code><span>Verifica condição</span></div>
+  </div>
+  <div class="cs-card"><div class="cs-title">&#9888; Pegadinhas de Prova</div>
+    <div class="cs-item"><code>10/3 == 3</code><span>Não 3.33 (int/int)</span></div>
+    <div class="cs-item"><code>== em String</code><span>Use .equals()!</span></div>
+    <div class="cs-item"><code>sem break</code><span>Fall-through no switch</span></div>
+    <div class="cs-item"><code>arr.length</code><span>Sem () — não é método</span></div>
+    <div class="cs-item"><code>s.toUpper()</code><span>s não muda (imutável)</span></div>
+    <div class="cs-item"><code>i++</code><span>Pós: usa valor, depois incrementa</span></div>
+    <div class="cs-item"><code>finally</code><span>Sempre executa</span></div>
+    <div class="cs-item"><code>Optional.get()</code><span>Lança se vazio</span></div>
+  </div>
+</div>
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(6)">&#8592; Quiz Final</button><span style="font-size:11px;color:var(--mt)">Boa sorte no exame! &#9749;</span></div>
+</div>
+
+<!-- ████ MOD 8 — FLASHCARDS ████ -->
+<div class="module" id="mod-8">
+<div class="mod-eye">Memorização Ativa</div>
+<div class="mod-title">&#129504; Flashcards com Repetição Espaçada</div>
+<div class="mod-desc">As duas técnicas mais eficazes da ciência cognitiva, juntas: <b>recuperação ativa</b> (você tenta lembrar antes de ver a resposta) e <b>repetição espaçada</b> (cada carta volta a aparecer no intervalo ideal pelo sistema Leitner). Seu progresso é salvo automaticamente neste navegador.</div>
+
+<div id="fc-home">
+  <div class="fc-stats">
+    <div class="fc-stat"><div class="fc-stat-n" id="fc-s-due" style="color:var(--pu)">0</div><div class="fc-stat-l">Para revisar hoje</div></div>
+    <div class="fc-stat"><div class="fc-stat-n" id="fc-s-learn" style="color:var(--or)">0</div><div class="fc-stat-l">Aprendendo</div></div>
+    <div class="fc-stat"><div class="fc-stat-n" id="fc-s-master" style="color:var(--gn)">0</div><div class="fc-stat-l">Dominadas</div></div>
+    <div class="fc-stat"><div class="fc-stat-n" id="fc-s-total">0</div><div class="fc-stat-l">Total</div></div>
+  </div>
+  <div style="font-size:11px;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Filtrar por tópico</div>
+  <div class="fc-topics" id="fc-topics"></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+    <button class="btn btn-p" onclick="fcStart('due')">Revisar pendentes &#8594;</button>
+    <button class="btn btn-s" onclick="fcStart('all')">Estudar todas</button>
+    <button class="btn btn-s" id="fc-err-btn" onclick="fcStart('errors')">Treinar meus erros (<span id="fc-err-n">0</span>)</button>
+  </div>
+  <div class="tip p" style="margin-top:18px"><strong>&#128161; Como funciona o Leitner</strong>Ao revelar a resposta, avalie honestamente: <b>Errei</b> devolve a carta para o início, <b>Difícil</b> a mostra de novo em breve, <b>Fácil</b> a empurra para um intervalo maior (1 → 3 → 7 → 16 dias). O segredo é a honestidade: errar faz parte do processo.</div>
+</div>
+
+<div id="fc-session" style="display:none">
+  <div class="fc-wrap">
+    <div class="fc-counter" id="fc-counter">Carta 1 de 10</div>
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <span class="fc-box-badge" id="fc-box-badge"></span>
+          <div class="fc-tag" id="fc-front-tag">Pergunta</div>
+          <div class="fc-q" id="fc-front-q"></div>
+          <div class="fc-hint">&#128072; Toque para revelar a resposta</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">Resposta</div>
+          <div class="fc-a" id="fc-back-a"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-rate" id="fc-rate">
+      <button class="fc-rb bad" onclick="fcRate(0)">&#128308; Errei<small>recomeça</small></button>
+      <button class="fc-rb mid" onclick="fcRate(1)">&#128993; Difícil<small>em breve</small></button>
+      <button class="fc-rb good" onclick="fcRate(2)">&#128994; Fácil<small>intervalo maior</small></button>
+    </div>
+    <div style="text-align:center;margin-top:14px"><button class="btn btn-s btn-sm" onclick="fcQuit()">Encerrar sessão</button></div>
+  </div>
+</div>
+
+<div id="fc-finished" style="display:none">
+  <div class="fc-done">
+    <div class="fc-done-ico">&#127881;</div>
+    <div class="fc-done-t" id="fc-done-t">Sessão concluída!</div>
+    <div class="fc-done-s" id="fc-done-s"></div>
+    <button class="btn btn-p" onclick="fcGoHome()">Voltar ao painel</button>
+  </div>
+</div>
+
+<div class="mod-foot"><button class="btn btn-s" onclick="goMod(5)">&#8592; Java 8+</button><button class="btn btn-s" onclick="goMod(7)">&#128203; Cheat Sheet &#8594;</button></div>
+</div>
+</main>
+</div>
+
+<script>
+// ── STATE ──
+let totalScore = 0;
+let completedMods = new Set();
+const mqSt = {};
+
+// ── MINI QUIZ QUESTION BANK ──
+// Each module has 10 questions; 5 are randomly picked each attempt.
+// Each question: {q, o:[opt0..opt3], a:correctIndex, e:explanation}
+const MQ_BANK = {
+  0: [ // Fundamentos
+    {q:'Qual é a saída de <code>System.out.println(7 / 2);</code>?',o:['3.5','3','4','Erro de compilação'],a:1,e:'Divisão int/int trunca a parte decimal. 7/2 = 3 (não 3.5).'},
+    {q:'Qual tipo primitivo tem maior precisão decimal?',o:['float','double','int','long'],a:1,e:'double (64 bits) é o padrão para decimais. float tem 32 bits e menor precisão.'},
+    {q:'O que é impresso? <code>int i = 5; System.out.println(i++);</code>',o:['4','5','6','Erro de compilação'],a:1,e:'i++ é pós-incremento: usa o valor atual (5) na expressão e depois incrementa.'},
+    {q:'Sem <code>break</code> em um case do switch, o que acontece?',o:['Erro de compilação','Switch encerra','Fall-through: executa o próximo case','NullPointerException'],a:2,e:'Fall-through: sem break a execução continua para os próximos cases.'},
+    {q:'Qual é o resultado de <code>15 % 4</code>?',o:['3','3.75','0','2'],a:0,e:'% retorna o resto da divisão inteira. 15 / 4 = 3, resto 3.'},
+    {q:'Dado <code>int[] arr = {10,20,30,40};</code>, qual é <code>arr.length</code>?',o:['3','4','40','Erro'],a:1,e:'length retorna o número de elementos (4). Índices válidos: 0 a 3.'},
+    {q:'Qual loop garante executar o corpo ao menos uma vez?',o:['for','while','do-while','enhanced-for'],a:2,e:'do-while verifica a condição APÓS a primeira execução.'},
+    {q:'O que o operador <code>&&</code> tem de diferente do <code>&</code>?',o:['Nenhuma diferença','&& avalia o direito mesmo se esquerdo for false','&& faz curto-circuito: pula o direito se esquerdo for false','&& é apenas para primitivos'],a:2,e:'&& usa short-circuit: se o esquerdo for false, o direito não é avaliado. & avalia sempre ambos.'},
+    {q:'Qual é o resultado de <code>(int)(9.99)</code>?',o:['9.99','10','9','Erro'],a:2,e:'Cast para int TRUNCA (não arredonda). 9.99 → 9.'},
+    {q:'Qual declaração está INCORRETA?',o:['long x = 10L;','float f = 3.14f;','double d = 3.14;','int i = 3.14;'],a:3,e:'int não aceita decimais. Erro de compilação: lossy conversion from double to int.'},
+  ],
+  1: [ // POO
+    {q:'Qual modificador permite acesso a subclasses em outros pacotes, mas não a não-relacionadas?',o:['public','protected','private','default'],a:1,e:'protected = mesma classe + mesmo pacote + subclasses (inclusive em outros pacotes).'},
+    {q:'Uma classe pode estender quantas classes em Java?',o:['Ilimitadas','Até 3','Exatamente 1','Depende do modificador'],a:2,e:'Java tem herança simples. Uma classe só pode extends UMA classe.'},
+    {q:'Ao chamar método @Override via referência pai, qual método executa?',o:['O da superclasse','O da subclasse (polimorfismo)','Lança exceção','Ambiguidade de compilação'],a:1,e:'Em runtime, a JVM usa o tipo real do objeto (filho) para decidir qual método executar.'},
+    {q:'Qual é a diferença entre abstract class e interface?',o:['Sem diferença','Interface pode ter atributos de instância','Abstract class: herança simples; interface: múltipla implementação','Abstract class pode ser instanciada'],a:2,e:'Abstract class: extends apenas 1. Interface: implements múltiplas.'},
+    {q:'<code>final</code> aplicado a uma <b>classe</b> significa:',o:['Atributos constantes','Métodos não sobrescritíveis','A classe não pode ser herdada','A classe não pode ser instanciada'],a:2,e:'Uma classe final não pode ser estendida. Exemplo: String é final em Java.'},
+    {q:'Uma classe abstrata pode ser instanciada diretamente?',o:['Sim','Não','Só se todos métodos forem concretos','Só com new'],a:1,e:'Não é possível instanciar classe abstrata. É necessária uma subclasse concreta.'},
+    {q:'Qual palavra-chave chama o construtor da superclasse?',o:['this()','parent()','base()','super()'],a:3,e:'super() chama o construtor do pai e DEVE ser a primeira instrução do construtor filho.'},
+    {q:'O que é encapsulamento?',o:['Herdar de outra classe','Esconder estado interno e expor via métodos públicos','Implementar múltiplas interfaces','Criar objetos'],a:1,e:'Encapsulamento: atributos private + métodos public (getters/setters).'},
+    {q:'Uma variável final de instância deve ser inicializada:',o:['Só na declaração','Só no construtor','Na declaração ou no construtor','Em qualquer método'],a:2,e:'final de instância: na declaração ou no construtor. Nunca pode ficar sem valor.'},
+    {q:'Uma classe que não implementa todos os métodos de uma interface deve ser:',o:['final','static','abstract','protected'],a:2,e:'Classes concretas devem implementar todos os métodos. Senão devem ser abstract.'},
+  ],
+  2: [ // Coleções
+    {q:'Você precisa armazenar CPFs únicos e verificar existência em O(1). Qual coleção?',o:['ArrayList','HashSet','HashMap','LinkedList'],a:1,e:'HashSet garante unicidade e contains() é O(1) em média.'},
+    {q:'O que retorna <code>mapa.put("chave", 99)</code> quando "chave" já existe com valor 50?',o:['Lança exceção','null','O valor anterior: 50','O novo valor: 99'],a:2,e:'put retorna o valor anterior (50) e substitui pelo novo (99).'},
+    {q:'Qual coleção mantém os elementos sempre em ordem natural crescente?',o:['ArrayList','HashMap','TreeSet','HashSet'],a:2,e:'TreeSet implementa SortedSet e mantém elementos em ordem natural automaticamente.'},
+    {q:'Como iterar corretamente sobre chave+valor de um HashMap?',o:['for (String s : mapa)','for (Map.Entry<K,V> e : mapa.entrySet())','for (V v : mapa.values())','mapa.iterator()'],a:1,e:'entrySet() retorna Set<Map.Entry<K,V>>. Cada entry tem getKey() e getValue().'},
+    {q:'Você adiciona "banana" duas vezes em um HashSet. Qual é o tamanho?',o:['1','2','Lança exceção','0'],a:0,e:'Set não permite duplicatas. A segunda inserção é ignorada silenciosamente.'},
+    {q:'ArrayList usa internamente qual estrutura?',o:['Lista encadeada','Árvore binária','Array redimensionável','Tabela hash'],a:2,e:'ArrayList é um wrapper sobre um array dinâmico que cresce automaticamente.'},
+    {q:'<code>mapa.get("inexistente")</code> em HashMap retorna:',o:['Lança exceção','0','false','null'],a:3,e:'get() retorna null se a chave não existir. Use getOrDefault() para evitar NPE.'},
+    {q:'Como criar uma lista imutável em Java 9+?',o:['new ArrayList<>()','Arrays.asList()','List.of()','Collections.unmodifiableList()'],a:2,e:'List.of() cria lista verdadeiramente imutável.'},
+    {q:'Principal vantagem de LinkedList sobre ArrayList:',o:['Acesso por índice mais rápido','Inserção/remoção no início em O(1)','Menos memória','Ordenação automática'],a:1,e:'LinkedList: add/remove no início é O(1). ArrayList: O(n).'},
+    {q:'Diferença entre HashMap e TreeMap:',o:['Nenhuma','TreeMap mantém chaves em ordem natural; HashMap não','HashMap é thread-safe','TreeMap é mais rápido'],a:1,e:'TreeMap = SortedMap, chaves em ordem natural. HashMap = sem ordem, mas O(1).'},
+  ],
+  3: [ // Exceções
+    {q:'O bloco <code>finally</code> é executado:',o:['Apenas sem exceção','Apenas com exceção','Sempre, com ou sem exceção','Só se o catch não tratar'],a:2,e:'finally sempre executa, com ou sem exceção. Exceção: System.exit() ou crash da JVM.'},
+    {q:'<code>NullPointerException</code> é:',o:['Checked','Unchecked (RuntimeException)','Error da JVM','Exceção personalizada'],a:1,e:'NPE estende RuntimeException = unchecked. O compilador não exige try-catch.'},
+    {q:'Diferença entre <code>throw</code> e <code>throws</code>:',o:['throw declara; throws lança','throw lança; throws declara na assinatura','São sinônimos','throw para unchecked; throws para checked'],a:1,e:'throw (sem s) lança a exceção. throws (com s) declara na assinatura do método.'},
+    {q:'Qual é o problema em colocar <code>catch (Exception e)</code> ANTES de <code>catch (IOException e)</code>?',o:['Falta o finally','Exception genérica deve vir DEPOIS de IOException','Deveria usar multi-catch','Não há problema'],a:1,e:'Exception captura tudo, tornando catch de IOException inacessível. Erro de compilação.'},
+    {q:'Para criar exceção personalizada <b>checked</b>, você estende:',o:['RuntimeException','Error','Exception (não RuntimeException)','Throwable'],a:2,e:'Para checked: estenda Exception. Para unchecked: RuntimeException.'},
+    {q:'Qual exceção é lançada ao acessar índice inválido de array?',o:['NullPointerException','ArrayIndexOutOfBoundsException','ClassCastException','StackOverflowError'],a:1,e:'ArrayIndexOutOfBoundsException ao acessar índice negativo ou >= length.'},
+    {q:'O que é try-with-resources?',o:['Try que executa N vezes','Fecha automaticamente recursos AutoCloseable','Try com múltiplos catches','Try sem finally'],a:1,e:'try-with-resources (Java 7+): fecha close() automaticamente ao sair do bloco.'},
+    {q:'IOException é checked ou unchecked?',o:['Unchecked','Checked','Depende','É um Error'],a:1,e:'IOException estende Exception diretamente = checked. Compilador exige tratamento.'},
+    {q:'Qual método da exceção retorna a mensagem de erro?',o:['toString()','getException()','getMessage()','getCause()'],a:2,e:'e.getMessage() retorna a String passada ao construtor da exceção.'},
+    {q:'O que <code>e.printStackTrace()</code> faz?',o:['Lança novamente a exceção','Imprime o stack trace no console','Retorna a causa raiz','Suprime a exceção'],a:1,e:'printStackTrace() imprime a hierarquia de chamadas que levou à exceção no System.err.'},
+  ],
+  4: [ // Strings
+    {q:'<code>"Java".substring(1, 3)</code> retorna:',o:['Jav','av','ava','va'],a:1,e:'substring(inicio inclusivo, fim exclusivo). Índices 1=a, 2=v. Resultado: "av".'},
+    {q:'Por que usar <code>.equals()</code> em vez de <code>==</code> para Strings?',o:['equals() é mais rápido','== compara referências; equals() compara conteúdo','== não funciona com objetos','== causa erro de compilação'],a:1,e:'== compara endereços de memória. .equals() compara o conteúdo das Strings.'},
+    {q:'Após <code>String s = "oi"; s.toUpperCase();</code>, qual é o valor de <code>s</code>?',o:['"OI"','"oi" (imutável — resultado descartado)','Lança exceção','null'],a:1,e:'String é imutável. toUpperCase() retorna NOVO objeto. Como não foi reatribuído, s ainda é "oi".'},
+    {q:'Por que usar <code>StringBuilder</code> em vez de <code>+</code> em loops?',o:['É mais legível','Cada + cria novo objeto; StringBuilder muta o mesmo buffer','Só funciona em loops','Retorna resultado diferente'],a:1,e:'Em loops, String + String cria novo objeto a cada iteração. StringBuilder usa buffer mutável.'},
+    {q:'Ao usar <code>nextInt()</code> seguido de <code>nextLine()</code>, o que é necessário?',o:['Não é possível misturar','Chamar nextLine() extra para limpar o \\n residual','Fechar e reabrir Scanner','Fazer cast'],a:1,e:'nextInt() deixa o \\n no buffer. O nextLine() seguinte consome esse \\n vazio.'},
+    {q:'<code>"Java".substring(0, 2)</code> retorna:',o:['Ja','av','Jav','Java'],a:0,e:'substring(0,2): índices 0 e 1. Resultado: "Ja".'},
+    {q:'String em Java é:',o:['Tipo primitivo','Classe imutável','Classe mutável','Array de char primitivo'],a:1,e:'String é uma classe final e imutável. Operações retornam novo objeto.'},
+    {q:'Qual método divide uma String em array pelo delimitador?',o:['split()','divide()','cut()','tokenize()'],a:0,e:'split(regex) retorna String[]. "a,b,c".split(",") = ["a","b","c"].'},
+    {q:'O que faz <code>String.trim()</code>?',o:['Remove todos os espaços','Remove espaços do início e do fim','Converte para minúsculo','Remove caracteres especiais'],a:1,e:'trim() remove espaços (e outros whitespace ASCII) do início e fim da String.'},
+    {q:'<code>String.valueOf(42)</code> retorna:',o:['42 (int)','42L (long)','"42" (String)','Erro de compilação'],a:2,e:'valueOf(42) converte o int para String: "42".'},
+  ],
+  5: [ // Java 8+
+    {q:'<code>List.of(1,2,3,4,5).stream().filter(n -> n % 2 == 0).count()</code> retorna:',o:['6','2','[ 2, 4 ]','5'],a:1,e:'filter mantém 2 e 4. count() conta: 2.'},
+    {q:'Qual interface funcional representa <code>T -> void</code>?',o:['Supplier<T>','Function<T,R>','Consumer<T>','Predicate<T>'],a:2,e:'Consumer<T> recebe T e retorna void. Método: accept(T t).'},
+    {q:'O que acontece ao chamar <code>optional.get()</code> em um Optional vazio?',o:['Retorna null','Lança NoSuchElementException','Lança NullPointerException','Retorna 0'],a:1,e:'Optional.get() em vazio lança NoSuchElementException. Use orElse() ou isPresent() antes.'},
+    {q:'Streams modificam a coleção original?',o:['Sim, sempre','Só com sorted()','Não — criam pipeline sem alterar a fonte','Só com collect()'],a:2,e:'Streams são não-destrutivos. A coleção original permanece intacta.'},
+    {q:'O que é uma method reference (<code>Classe::metodo</code>)?',o:['Usa reflexão','Declaração de interface funcional','Atalho de lambda que referencia método existente com ::','Ponteiro de memória'],a:2,e:'Method reference é açúcar sintático. System.out::println == s -> System.out.println(s).'},
+    {q:'O que é uma lambda em Java?',o:['Uma classe anônima','Implementação inline de interface funcional','Um método estático','Array especial'],a:1,e:'Lambda implementa o único método abstrato de uma interface funcional.'},
+    {q:'Qual interface representa <code>T -> boolean</code>?',o:['Function<T,Boolean>','Consumer<T>','Predicate<T>','Supplier<T>'],a:2,e:'Predicate<T> tem test(T t) que retorna boolean.'},
+    {q:'O que faz <code>stream().map(f)</code>?',o:['Filtra elementos','Transforma cada elemento aplicando f','Coleta em Map','Conta elementos'],a:1,e:'map() aplica uma função a cada elemento e retorna Stream do resultado.'},
+    {q:'<code>Optional.orElse(x)</code> retorna:',o:['Sempre x','O valor se presente, senão x','null','Lança exceção se vazio'],a:1,e:'orElse(x) retorna o valor presente ou x se vazio.'},
+    {q:'O que significa "Streams são lazy"?',o:['São mais lentos','Ops intermediárias só executam quando um terminal é chamado','Não suportam parallel','São thread-unsafe'],a:1,e:'filter(), map() formam pipeline que só processa dados quando o terminal (collect, count) é chamado.'},
+  ],
+};
+
+// ── MINI QUIZ ENGINE (dynamic rendering) ──
+function mqInitMod(mod) {
+  // Pick 5 random questions from the bank (no repeats within same attempt)
+  const bank = MQ_BANK[mod];
+  const indices = [...Array(bank.length).keys()];
+  // Fisher-Yates shuffle
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+  const picked = indices.slice(0, 5).map(i => bank[i]);
+  mqSt[mod] = {cur:0, score:0, done:Array(5).fill(false), questions: picked};
+  mqRenderQuestion(mod, 0);
+  document.getElementById('mq'+mod+'-prg').textContent = '1 / 5';
+  document.getElementById('mq'+mod+'-nav').style.display = 'none';
+}
+
+function mqRenderQuestion(mod, qi) {
+  const st = mqSt[mod];
+  const q = st.questions[qi];
+  const body = document.getElementById('mq'+mod+'-body');
+
+  // Shuffle answer options, track correct index after shuffle
+  const optIndices = [0,1,2,3];
+  for (let i = optIndices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [optIndices[i], optIndices[j]] = [optIndices[j], optIndices[i]];
+  }
+  const shuffledOpts = optIndices.map(i => q.o[i]);
+  // Store correct shuffled index in state so onclick doesn't carry any strings
+  st.correctIdx = optIndices.indexOf(q.a);
+
+  body.innerHTML = `
+    <div class="mq-q active" data-qi="${qi}">
+      <div class="mq-qt">${q.q}</div>
+      <div class="mq-opts">
+        ${shuffledOpts.map((opt, i) => `<button class="mq-opt" onclick="mqa(${mod},${qi},${i})">${opt}</button>`).join('')}
+      </div>
+      <div class="mq-fb" id="mq${mod}-fb-${qi}"></div>
+    </div>`;
+}
+
+function mqa(mod, qi, chosenIdx) {
+  if (!mqSt[mod]) return;
+  const st = mqSt[mod];
+  if (st.done[qi]) return;
+  st.done[qi] = true;
+
+  const correct = chosenIdx === st.correctIdx;
+  const exp = st.questions[qi].e;
+
+  const q = document.querySelector('#mq-'+mod+' [data-qi="'+qi+'"]');
+  const opts = q.querySelectorAll('.mq-opt');
+  opts.forEach(o => o.disabled = true);
+
+  const fb = document.getElementById('mq'+mod+'-fb-'+qi);
+
+  if (correct) {
+    opts[chosenIdx].classList.add('ok');
+    fb.textContent = '✅ ' + exp;
+    fb.className = 'mq-fb show ok';
+    st.score++;
+    addScore(10);
+  } else {
+    opts[chosenIdx].classList.add('err');
+    opts[st.correctIdx].classList.add('ok');
+    fb.textContent = '❌ ' + exp;
+    fb.className = 'mq-fb show err';
+    const mods=['Fundamentos','POO','Coleções','Exceções','Strings','Java 8+'];
+    addMistake(st.questions[qi], mods[mod]);
+  }
+
+  const nav = document.getElementById('mq'+mod+'-nav');
+  nav.style.display = 'flex';
+  nav.querySelector('button').textContent = qi === 4 ? 'Ver resultado →' : 'Próxima →';
+}
+
+function mqNext(mod) {
+  const st = mqSt[mod];
+  if (!st) return;
+  st.cur++;
+  if (st.cur >= 5) { mqResult(mod); return; }
+  mqRenderQuestion(mod, st.cur);
+  document.getElementById('mq'+mod+'-nav').style.display = 'none';
+  document.getElementById('mq'+mod+'-prg').textContent = (st.cur+1)+' / 5';
+}
+
+function mqResult(mod) {
+  const st = mqSt[mod];
+  document.getElementById('mq'+mod+'-body').innerHTML = '';
+  document.getElementById('mq'+mod+'-nav').style.display = 'none';
+  const res = document.getElementById('mq'+mod+'-res');
+  res.className = 'mq-res show';
+  const pct = Math.round((st.score/5)*100);
+  const ico = pct===100?'🏆':pct>=60?'✅':'📚';
+  const msg = pct===100?'Perfeito! Avance para o próximo módulo.':pct>=60?'Bom! Revise o que errou.':'Revise o módulo antes de continuar.';
+  res.innerHTML = `<div class="mq-res-score">${ico} ${st.score}/5</div><div class="mq-res-lbl">${pct}% de acerto</div><div class="mq-res-msg">${msg}</div><button class="btn btn-s btn-sm" style="margin-top:12px" onclick="mqRetry(${mod})">Refazer (novas questões) 🔀</button>`;
+  completedMods.add(mod);
+  document.getElementById('nav-'+mod).classList.add('done');
+  updateProg();
+  const ni = document.getElementById('nav-'+mod);
+  const old = ni.querySelector('.nsb');
+  if (old) old.remove();
+  const sp = document.createElement('span');
+  sp.className = 'nsb '+(pct>=80?'g':pct>=60?'m':'r');
+  sp.textContent = st.score+'/5';
+  ni.appendChild(sp);
+}
+
+function mqRetry(mod) {
+  // Re-pick 5 random questions from the bank (new shuffle!)
+  const res = document.getElementById('mq'+mod+'-res');
+  res.className = 'mq-res';
+  res.innerHTML = '';
+  mqInitMod(mod); // picks new random 5 + renders first
+}
+
+// ── NAVIGATION ──
+function goMod(i) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('mod-'+i).classList.add('active');
+  document.getElementById('nav-'+i).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if (i===6 && !fqStarted) fqInit();
+  if (i===8) fcGoHome();
+}
+
+// ── FINAL QUIZ DATA ──
+const FQ = [
+  // Fundamentos (0-9)
+  {m:'Fundamentos',q:'Qual é a saída de <code>System.out.println(7 / 2);</code>?',o:['3.5','3','4','Erro de compilação'],a:1,e:'Divisão int/int trunca a parte decimal. 7/2 = 3 (não 3.5).'},
+  {m:'Fundamentos',q:'Qual tipo primitivo tem maior precisão decimal?',o:['float','double','int','long'],a:1,e:'double (64 bits) é o padrão para decimais. float tem 32 bits e menor precisão.'},
+  {m:'Fundamentos',q:'Qual é o resultado de <code>15 % 4</code>?',o:['3','3.75','0','2'],a:0,e:'% retorna o resto da divisão inteira. 15 / 4 = 3, resto 3.'},
+  {m:'Fundamentos',q:'Sem <code>break</code> em um case do switch, o que acontece?',o:['Erro de compilação','Switch encerra automaticamente','Fall-through: executa o próximo case','NullPointerException'],a:2,e:'Fall-through: sem break a execução continua para os próximos cases.'},
+  {m:'Fundamentos',q:'<code>int[] arr = new int[5];</code> — qual é o valor de arr[2]?',o:['null','1','-1','0'],a:3,e:'Arrays de int são inicializados com 0. Para boolean = false, para referências = null.'},
+  {m:'Fundamentos',q:'Qual loop garante executar o corpo ao menos uma vez?',o:['for','while','do-while','enhanced-for'],a:2,e:'do-while verifica a condição APÓS a primeira execução.'},
+  {m:'Fundamentos',q:'O que o operador <code>&&</code> faz de diferente do <code>&</code>?',o:['Nenhuma diferença','&& avalia o direito mesmo se esquerdo for false','&& faz curto-circuito: pula o direito se esquerdo for false','&& é apenas para primitivos'],a:2,e:'&& usa short-circuit: se o esquerdo for false, o direito não é avaliado. & avalia sempre ambos.'},
+  {m:'Fundamentos',q:'Como imprimir texto SEM quebra de linha?',o:['System.out.println()','System.out.print()','System.out.printf()','System.out.write()'],a:1,e:'print() não adiciona \\n. println() adiciona \\n. printf() formata sem \\n por padrão.'},
+  {m:'Fundamentos',q:'Qual é o resultado de <code>(int)(9.99)</code>?',o:['9.99','10','9','Erro'],a:2,e:'Cast para int TRUNCA (não arredonda). 9.99 → 9.'},
+  {m:'Fundamentos',q:'Qual declaração está INCORRETA?',o:['long x = 10L;','float f = 3.14f;','double d = 3.14;','int i = 3.14;'],a:3,e:'int não aceita decimais. Erro: "incompatible types: possible lossy conversion from double to int".'},
+  // POO (10-19)
+  {m:'POO',q:'Uma classe pode estender quantas classes em Java?',o:['Ilimitadas','Até 3','Exatamente 1','Depende do modificador'],a:2,e:'Java tem herança simples. Uma classe só pode extends UMA classe.'},
+  {m:'POO',q:'Qual palavra-chave chama o construtor da superclasse?',o:['this()','parent()','base()','super()'],a:3,e:'super() chama o construtor do pai e DEVE ser a primeira instrução do construtor filho.'},
+  {m:'POO',q:'O que @Override faz?',o:['Cria novo método','Torna o método estático','Informa ao compilador que você sobrescreve um método pai','É obrigatório para sobrescrever'],a:2,e:'@Override é opcional mas recomendado: se o método pai não existir, o compilador emite erro.'},
+  {m:'POO',q:'Uma interface Java pode ter atributos de instância?',o:['Sim, qualquer tipo','Só primitivos','Não — apenas constantes (public static final)','Sim, se declarar com public'],a:2,e:'Interfaces só têm constantes (implicitamente public static final). Para atributos de instância, use abstract class.'},
+  {m:'POO',q:'Polimorfismo dinâmico: qual método é chamado quando referência é pai mas objeto é filho?',o:['O da superclasse','O da subclasse','Depende do compilador','Lança exceção'],a:1,e:'Em runtime, a JVM usa o tipo real do objeto (filho) para decidir qual método executar.'},
+  {m:'POO',q:'O que é encapsulamento?',o:['Herdar de outra classe','Esconder estado interno e expor via métodos públicos','Implementar múltiplas interfaces','Criar objetos'],a:1,e:'Encapsulamento: atributos private + métodos public (getters/setters).'},
+  {m:'POO',q:'Uma classe abstrata pode ser instanciada diretamente?',o:['Sim','Não','Só se todos os métodos forem concretos','Só com new'],a:1,e:'Não é possível instanciar classe abstrata. É necessária uma subclasse concreta.'},
+  {m:'POO',q:'Uma variável final de instância deve ser inicializada:',o:['Só na declaração','Só no construtor','Na declaração ou no construtor','Em qualquer método'],a:2,e:'final de instância deve ser inicializada na declaração ou no construtor. Não pode ficar sem valor.'},
+  {m:'POO',q:'Uma classe que não implementa todos os métodos de uma interface deve ser declarada:',o:['final','static','abstract','protected'],a:2,e:'Classes concretas devem implementar todos os métodos de interfaces. Senão devem ser abstract.'},
+  {m:'POO',q:'Qual modificador permite acesso a subclasses em outros pacotes, mas não a não-relacionadas?',o:['public','protected','private','default'],a:1,e:'protected = mesma classe + mesmo pacote + subclasses (inclusive em outros pacotes).'},
+  // Coleções (20-29)
+  {m:'Coleções',q:'ArrayList usa internamente qual estrutura?',o:['Lista encadeada','Árvore binária','Array redimensionável','Tabela hash'],a:2,e:'ArrayList é um wrapper sobre um array dinâmico que cresce automaticamente.'},
+  {m:'Coleções',q:'Qual coleção garante que não haja elementos duplicados?',o:['ArrayList','LinkedList','Set (HashSet/TreeSet)','Queue'],a:2,e:'Set não permite duplicatas. add() retorna false silenciosamente se o elemento já existe.'},
+  {m:'Coleções',q:'Qual é a complexidade de busca por chave no HashMap?',o:['O(n)','O(log n)','O(1) amortizado','O(n log n)'],a:2,e:'HashMap usa tabela hash: busca O(1) em média.'},
+  {m:'Coleções',q:'<code>mapa.get("inexistente")</code> em HashMap retorna:',o:['Lança exceção','0','false','null'],a:3,e:'get() retorna null se a chave não existir. Use getOrDefault() para evitar NPE.'},
+  {m:'Coleções',q:'Qual coleção mantém ordem de inserção E garante unicidade?',o:['HashSet','LinkedHashSet','TreeSet','ArrayList'],a:1,e:'LinkedHashSet mantém ordem de inserção (ao contrário de HashSet) e garante unicidade.'},
+  {m:'Coleções',q:'Como criar uma lista imutável em Java 9+?',o:['new ArrayList<>()','Arrays.asList()','List.of()','Collections.unmodifiableList()'],a:2,e:'List.of() cria lista verdadeiramente imutável (lança UnsupportedOperationException em modificações).'},
+  {m:'Coleções',q:'Para percorrer chave+valor de um Map, usa-se:',o:['map.keySet()','map.values()','map.entrySet()','map.pairs()'],a:2,e:'entrySet() retorna Set<Map.Entry<K,V>>. Cada Entry tem getKey() e getValue().'},
+  {m:'Coleções',q:'Principal vantagem de LinkedList sobre ArrayList:',o:['Acesso por índice mais rápido','Inserção/remoção no início em O(1)','Menos memória','Ordenação automática'],a:1,e:'LinkedList: add/remove no início é O(1). ArrayList: add/remove no início é O(n).'},
+  {m:'Coleções',q:'Collections.sort() exige que os elementos implementem:',o:['Serializable','Comparable','Cloneable','Iterable'],a:1,e:'sort() exige Comparable<T> (método compareTo()). Para lógica customizada, passe um Comparator.'},
+  {m:'Coleções',q:'Diferença entre HashMap e TreeMap:',o:['Nenhuma','TreeMap mantém chaves em ordem natural; HashMap não garante ordem','HashMap é thread-safe','TreeMap é mais rápido'],a:1,e:'TreeMap = SortedMap, chaves em ordem natural. HashMap = sem ordem garantida, mas O(1).'},
+  // Exceções (30-34)
+  {m:'Exceções',q:'Qual exceção é lançada ao acessar índice inválido de array?',o:['NullPointerException','ArrayIndexOutOfBoundsException','ClassCastException','StackOverflowError'],a:1,e:'ArrayIndexOutOfBoundsException ao acessar índice negativo ou >= length.'},
+  {m:'Exceções',q:'IOException é checked ou unchecked?',o:['Unchecked','Checked','Depende do contexto','É um Error'],a:1,e:'IOException estende Exception diretamente = checked. Compilador exige tratamento.'},
+  {m:'Exceções',q:'O que é try-with-resources?',o:['Try que executa N vezes','Fecha automaticamente recursos AutoCloseable','Try com múltiplos catches','Try sem finally'],a:1,e:'try-with-resources (Java 7+): fecha close() automaticamente ao sair do bloco.'},
+  {m:'Exceções',q:'Para criar exceção personalizada checked, você estende:',o:['RuntimeException','Error','Exception (não RuntimeException)','Throwable'],a:2,e:'Para checked: estenda Exception. Para unchecked: RuntimeException.'},
+  {m:'Exceções',q:'Ordem dos catches deve ser:',o:['Qualquer ordem','Mais genérico primeiro','Mais específico primeiro','Alfabética'],a:2,e:'Catches específicos ANTES dos genéricos. Exception antes de IOException = erro de compilação.'},
+  // Strings (35-39)
+  {m:'Strings',q:'<code>"Java".substring(0, 2)</code> retorna:',o:['Ja','av','Jav','Java'],a:0,e:'substring(início inclusivo, fim exclusivo). Índices 0 e 1 = "Ja".'},
+  {m:'Strings',q:'Por que usar .equals() e não == para Strings?',o:['equals() é mais rápido','== compara referências, não conteúdo','== não funciona com objetos','== é mais lento'],a:1,e:'== compara endereços de memória. .equals() compara conteúdo.'},
+  {m:'Strings',q:'String em Java é:',o:['Tipo primitivo','Classe imutável','Classe mutável','Array de char'],a:1,e:'String é uma classe final e imutável. Operações retornam novo objeto.'},
+  {m:'Strings',q:'Qual método divide uma String em array usando delimitador?',o:['split()','divide()','cut()','tokenize()'],a:0,e:'split(regex) retorna String[]. "a,b,c".split(",") = ["a","b","c"].'},
+  {m:'Strings',q:'Quando usar StringBuilder em vez de String?',o:['Sempre','Nunca','Em concatenações repetitivas (especialmente loops)','Só para Strings longas'],a:2,e:'Em loops, String + String cria novo objeto a cada iteração. StringBuilder muta o mesmo buffer.'},
+  // Java 8+ (40-49)
+  {m:'Java 8+',q:'O que é uma lambda em Java?',o:['Uma classe anônima','Implementação inline de interface funcional','Um método estático','Um tipo especial de array'],a:1,e:'Lambda implementa o único método abstrato de uma interface funcional. Sintaxe: (params) -> expr.'},
+  {m:'Java 8+',q:'Qual interface representa <code>T -> boolean</code>?',o:['Function<T,Boolean>','Consumer<T>','Predicate<T>','Supplier<T>'],a:2,e:'Predicate<T> tem o método test(T t) que retorna boolean.'},
+  {m:'Java 8+',q:'O que faz <code>stream().map(f)</code>?',o:['Filtra elementos','Transforma cada elemento aplicando f','Coleta em um Map','Conta elementos'],a:1,e:'map() aplica uma função a cada elemento e retorna Stream do resultado.'},
+  {m:'Java 8+',q:'O que significa "Streams são lazy"?',o:['São mais lentos','Operações intermediárias só executam quando um terminal é chamado','Não suportam parallel','São thread-unsafe'],a:1,e:'Lazy evaluation: filter(), map() formam um pipeline que só processa dados quando o terminal (collect, count) é chamado.'},
+  {m:'Java 8+',q:'<code>Optional.orElse(x)</code> retorna:',o:['Sempre x','O valor se presente, senão x','null','Lança exceção se vazio'],a:1,e:'orElse(x) retorna o valor presente ou x se vazio. Forma segura de acessar Optional.'},
+  {m:'Java 8+',q:'O que é uma method reference (<code>Classe::metodo</code>)?',o:['Usa reflexão','Atalho de lambda que delega para método existente','Declaração de interface funcional','Ponteiro de memória'],a:1,e:'Method reference é açúcar sintático. System.out::println == s -> System.out.println(s).'},
+  {m:'Java 8+',q:'Como coletar stream em uma List?',o:['toList() ou collect(Collectors.toList())','gather()','accumulate()','finalize()'],a:0,e:'collect(Collectors.toList()) (Java 8+) ou .toList() (Java 16+).'},
+  {m:'Java 8+',q:'O que <code>Collectors.joining(", ")</code> faz?',o:['Une listas','Concatena Strings do stream com o separador','Cria Set de Strings','Cria Map'],a:1,e:'joining(sep) concatena elementos do stream em uma String com separador.'},
+  {m:'Java 8+',q:'Para efeito colateral em cada elemento do stream, usa-se:',o:['map()','filter()','forEach()','peek()'],a:2,e:'forEach() é o terminal que executa uma Consumer para cada elemento.'},
+  {m:'Java 8+',q:'Forma correta de criar Optional com valor que pode ser null:',o:['Optional.of(valor)','Optional.empty()','Optional.ofNullable(valor)','new Optional(valor)'],a:2,e:'ofNullable(valor) cria empty() se null, ou of(valor) se não null. Optional.of(null) lança NPE.'},
+];
+
+// ── FINAL QUIZ ENGINE ──
+let fqStarted=false, fqCur=0, fqScore=0, fqAnswered=[], fqUserAns=[];
+
+function fqInit() {
+  fqStarted=true; fqCur=0; fqScore=0;
+  fqAnswered=Array(50).fill(false);
+  fqUserAns=Array(50).fill(null);
+  document.getElementById('fq-nav-area').style.display='none';
+  document.getElementById('fq-live-score').textContent='—';
+  fqRender(0);
+}
+
+function fqRender(idx) {
+  const q=FQ[idx], L=['A','B','C','D'];
+  const pct=Math.round((idx/50)*100);
+  document.getElementById('fq-box').innerHTML=`
+    <div class="fq-qn">
+      <span>Q${idx+1}/50 — ${q.m}</span>
+      <div class="fq-bar"><div class="fq-bar-f" style="width:${pct}%"></div></div>
+    </div>
+    <div class="fq-qt">${q.q}</div>
+    <div class="fq-opts">${q.o.map((o,i)=>`<button class="fq-opt" onclick="fqAns(${i})" id="fqo${i}"><span class="ol">${L[i]}</span><span>${o}</span></button>`).join('')}</div>
+    <div class="fq-fb" id="fq-fb"></div>`;
+  document.getElementById('fq-prg-txt').textContent=`${idx+1} / 50`;
+}
+
+function fqAns(opt) {
+  if (fqAnswered[fqCur]) return;
+  fqAnswered[fqCur]=true; fqUserAns[fqCur]=opt;
+  const q=FQ[fqCur];
+  document.querySelectorAll('.fq-opt').forEach(o=>o.disabled=true);
+  const fb=document.getElementById('fq-fb');
+  if (opt===q.a) {
+    document.getElementById('fqo'+opt).classList.add('ok');
+    fb.innerHTML='✅ <strong>Correto!</strong> '+q.e; fb.className='fq-fb show ok';
+    fqScore++; addScore(5);
+    document.getElementById('fq-live-score').textContent=fqScore+'/'+(fqCur+1);
+  } else {
+    document.getElementById('fqo'+opt).classList.add('err');
+    document.getElementById('fqo'+q.a).classList.add('ok');
+    fb.innerHTML='❌ <strong>Incorreto.</strong> '+q.e; fb.className='fq-fb show err';
+    addMistake({q:q.q, o:q.o, a:q.a, e:q.e}, q.m);
+  }
+  document.getElementById('fq-nav-area').style.display='block';
+  document.getElementById('fq-next-btn').textContent=fqCur>=49?'Ver resultado 🏆':'Próxima →';
+}
+
+function fqNext() {
+  fqCur++;
+  if (fqCur>=50) { fqShowResult(); return; }
+  document.getElementById('fq-nav-area').style.display='none';
+  fqRender(fqCur);
+}
+
+function fqShowResult() {
+  document.getElementById('fq-area').style.display='none';
+  const sb=document.getElementById('sb'); sb.className='sb show';
+  const pct=Math.round((fqScore/50)*100);
+  document.getElementById('sb-score').textContent=fqScore;
+  document.getElementById('sb-grade').textContent=pct>=90?'🏆 Excelente':pct>=75?'✅ Bom':pct>=60?'⚠️ Regular':'📚 Precisa estudar mais';
+  document.getElementById('sb-msg').textContent=pct>=90?'Você está muito bem preparado!':pct>=75?'Bom resultado! Revise os erros.':pct>=60?'Razoável. Revise os módulos com mais erros.':'Recomendo reler os módulos antes do exame.';
+
+  const mods=[{n:'Fundamentos',r:[0,9]},{n:'POO',r:[10,19]},{n:'Coleções',r:[20,29]},{n:'Exceções',r:[30,34]},{n:'Strings',r:[35,39]},{n:'Java 8+',r:[40,49]}];
+  let bk='';
+  mods.forEach(({n,r})=>{
+    let ok=0,tot=0;
+    for(let i=r[0];i<=r[1];i++){tot++;if(fqUserAns[i]===FQ[i].a)ok++;}
+    const mp=Math.round((ok/tot)*100);
+    const c=mp>=80?'var(--gn)':mp>=60?'var(--or)':'var(--rd)';
+    bk+=`<div class="sb-mc"><div class="sb-mn">${n}</div><div class="sb-mb"><div class="sb-mbf" style="width:${mp}%;background:${c}"></div></div><div class="sb-ms">${ok}/${tot} (${mp}%)</div></div>`;
+  });
+  document.getElementById('sb-bk').innerHTML=bk;
+
+  let rv='';
+  FQ.forEach((q,i)=>{
+    if(fqUserAns[i]!==q.a){
+      rv+=`<div class="rv-item"><span class="rv-badge">Q${i+1} — ${q.m}</span><div class="rv-q">${q.q}</div><div class="rv-a">Sua resposta: <strong>${fqUserAns[i]!=null?q.o[fqUserAns[i]]:'—'}</strong> | Correta: <strong style="color:var(--gn)">${q.o[q.a]}</strong></div><div style="margin-top:5px;font-size:12px;color:var(--mt)">${q.e}</div></div>`;
+    }
+  });
+  document.getElementById('sb-rv').innerHTML=rv||'<div style="color:var(--gn);padding:16px;text-align:center;font-weight:700">🏆 Nenhum erro!</div>';
+  completedMods.add(6); document.getElementById('nav-6').classList.add('done'); updateProg();
+}
+
+function fqRestart() {
+  document.getElementById('fq-area').style.display='block';
+  document.getElementById('sb').className='sb';
+  fqStarted=false; fqInit();
+}
+
+// ── SCORE & PROGRESS (with persistence) ──
+function addScore(pts) {
+  totalScore+=pts;
+  document.getElementById('total-score').textContent=totalScore;
+  saveState();
+}
+function updateProg() {
+  const pct=Math.round((completedMods.size/8)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=completedMods.size+'/8';
+  saveState();
+}
+
+// ── COPY CODE ──
+function cpCode(btn) {
+  const pre=btn.parentElement;
+  const txt=pre.innerText.replace(/copiar|copiado!/g,'').trim();
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='copiado!';
+    setTimeout(()=>btn.textContent='copiar',1500);
+  }).catch(()=>{});
+}
+
+// ═══════════════════════════════════════════════
+//  FLASHCARDS — Active Recall + Spaced Repetition (Leitner)
+// ═══════════════════════════════════════════════
+const FC_CARDS = [
+  // Fundamentos
+  {t:'Fundamentos',q:'Quantos tipos primitivos o Java tem e quais são?',a:'8: <code>byte, short, int, long, float, double, char, boolean</code>.'},
+  {t:'Fundamentos',q:'Qual é o resultado de <code>10 / 3</code> com dois ints?',a:'<b>3</b> — divisão int/int trunca a parte decimal. Para 3.33, use ao menos um double: <code>10.0/3</code>.'},
+  {t:'Fundamentos',q:'Qual a diferença entre <code>i++</code> e <code>++i</code>?',a:'<code>i++</code> (pós): usa o valor atual e depois incrementa. <code>++i</code> (pré): incrementa antes de usar.'},
+  {t:'Fundamentos',q:'O que é o "fall-through" no switch?',a:'Sem <code>break</code>, a execução continua para os cases seguintes até encontrar um break ou o fim do switch.'},
+  {t:'Fundamentos',q:'Qual loop garante executar o corpo ao menos uma vez?',a:'<code>do-while</code> — verifica a condição APÓS a primeira execução.'},
+  {t:'Fundamentos',q:'Qual a diferença entre widening e narrowing casting?',a:'Widening (ex: int→double) é automático e sem perda. Narrowing (ex: double→int) é manual e TRUNCA a decimal.'},
+  {t:'Fundamentos',q:'O que é short-circuit em <code>&&</code> e <code>||</code>?',a:'<code>&&</code> para se o esquerdo for false; <code>||</code> para se o esquerdo for true — o lado direito nem é avaliado.'},
+  {t:'Fundamentos',q:'Como obter o tamanho de um array chamado <code>arr</code>?',a:'<code>arr.length</code> — é uma propriedade, SEM parênteses (não é método como em String).'},
+  // POO
+  {t:'POO',q:'Quantas classes uma classe Java pode estender (extends)?',a:'Apenas <b>uma</b> — Java tem herança simples. Para múltiplos contratos, use <code>implements</code> com várias interfaces.'},
+  {t:'POO',q:'Para que serve <code>super()</code>?',a:'Chama o construtor da superclasse. DEVE ser a primeira instrução do construtor da subclasse.'},
+  {t:'POO',q:'Qual a diferença entre classe abstrata e interface?',a:'Abstract class: herança simples, pode ter estado e construtores. Interface: implementação múltipla, só constantes + métodos default/static.'},
+  {t:'POO',q:'O que significa <code>final</code> em uma classe, método e variável?',a:'Classe: não pode ser herdada. Método: não pode ser sobrescrito. Variável: constante (não muda após inicializada).'},
+  {t:'POO',q:'O que é polimorfismo dinâmico?',a:'Em runtime, a JVM decide qual método executar com base no <b>tipo real do objeto</b>, não no tipo da variável.'},
+  {t:'POO',q:'Ordem de acesso: public, protected, default, private — do mais ao menos permissivo?',a:'<code>public</code> (todos) → <code>protected</code> (pacote+subclasses) → <em>default</em> (só pacote) → <code>private</code> (só a classe).'},
+  {t:'POO',q:'O que é encapsulamento?',a:'Esconder o estado interno (atributos <code>private</code>) e expô-lo controladamente via métodos públicos (getters/setters).'},
+  {t:'POO',q:'Para que serve a anotação <code>@Override</code>?',a:'Avisa o compilador que o método sobrescreve um do pai. Se a assinatura não bater, gera erro — proteção contra erros sutis.'},
+  // Coleções
+  {t:'Coleções',q:'Qual coleção usar para valores únicos com busca O(1)?',a:'<code>HashSet</code> — não permite duplicatas e <code>contains()</code> é O(1) em média.'},
+  {t:'Coleções',q:'O que <code>map.get(chave)</code> retorna se a chave não existe?',a:'<code>null</code>. Use <code>getOrDefault(chave, padrão)</code> para evitar NullPointerException.'},
+  {t:'Coleções',q:'Como iterar chave+valor de um HashMap?',a:'<code>for (Map.Entry&lt;K,V&gt; e : map.entrySet())</code> e use <code>e.getKey()</code> / <code>e.getValue()</code>.'},
+  {t:'Coleções',q:'Diferença entre HashMap e TreeMap?',a:'HashMap: sem ordem, O(1). TreeMap: chaves em ordem natural (SortedMap), O(log n).'},
+  {t:'Coleções',q:'ArrayList vs LinkedList — quando usar cada?',a:'ArrayList: acesso por índice O(1), uso geral. LinkedList: inserção/remoção no início O(1).'},
+  {t:'Coleções',q:'Como criar uma lista imutável (Java 9+)?',a:'<code>List.of("a","b","c")</code> — lança exceção em qualquer tentativa de modificação.'},
+  {t:'Coleções',q:'O que acontece ao adicionar elemento duplicado a um Set?',a:'É ignorado silenciosamente (<code>add()</code> retorna false). O tamanho não muda.'},
+  // Exceções
+  {t:'Exceções',q:'Quando o bloco <code>finally</code> é executado?',a:'<b>Sempre</b> — com ou sem exceção. Exceções: <code>System.exit()</code> ou crash da JVM. Usado para liberar recursos.'},
+  {t:'Exceções',q:'Diferença entre checked e unchecked exceptions?',a:'Checked (estendem Exception): o compilador exige tratamento. Unchecked (estendem RuntimeException): tratamento opcional.'},
+  {t:'Exceções',q:'Diferença entre <code>throw</code> e <code>throws</code>?',a:'<code>throw</code> lança a exceção em runtime. <code>throws</code> declara na assinatura do método que ele pode propagá-la.'},
+  {t:'Exceções',q:'Em que ordem devem vir os blocos catch?',a:'Do mais específico para o mais genérico. Colocar <code>Exception</code> antes de uma subclasse = erro de compilação (unreachable).'},
+  {t:'Exceções',q:'O que é try-with-resources?',a:'<code>try (Recurso r = ...) { }</code> — fecha automaticamente recursos AutoCloseable ao sair do bloco, mesmo com exceção.'},
+  {t:'Exceções',q:'NullPointerException é checked ou unchecked?',a:'Unchecked — estende RuntimeException. O compilador não obriga try-catch.'},
+  // Strings
+  {t:'Strings',q:'Por que comparar Strings com <code>.equals()</code> e não <code>==</code>?',a:'<code>==</code> compara referências (endereços de memória). <code>.equals()</code> compara o conteúdo.'},
+  {t:'Strings',q:'String é mutável ou imutável?',a:'<b>Imutável</b>. Toda operação retorna um NOVO objeto. Você precisa reatribuir: <code>s = s.trim();</code>.'},
+  {t:'Strings',q:'O que <code>"Java".substring(1, 3)</code> retorna?',a:'<code>"av"</code> — início inclusivo (1), fim exclusivo (3). Índices 1 e 2.'},
+  {t:'Strings',q:'Quando usar StringBuilder em vez de <code>+</code>?',a:'Em concatenações repetidas (loops). Cada <code>+</code> cria novo objeto; StringBuilder muta o mesmo buffer interno.'},
+  {t:'Strings',q:'Qual cuidado ao usar <code>nextInt()</code> seguido de <code>nextLine()</code>?',a:'Chamar um <code>nextLine()</code> extra após o nextInt() para consumir o <code>\\n</code> residual deixado no buffer.'},
+  {t:'Strings',q:'Como dividir uma String por um delimitador?',a:'<code>split(regex)</code> retorna um <code>String[]</code>. Ex: <code>"a,b,c".split(",")</code> → ["a","b","c"].'},
+  // Java 8+
+  {t:'Java 8+',q:'O que é uma lambda?',a:'Implementação inline e compacta do único método abstrato de uma interface funcional. Sintaxe: <code>(params) -> corpo</code>.'},
+  {t:'Java 8+',q:'Quais as 4 interfaces funcionais principais?',a:'<code>Predicate&lt;T&gt;</code> (T→boolean), <code>Function&lt;T,R&gt;</code> (T→R), <code>Consumer&lt;T&gt;</code> (T→void), <code>Supplier&lt;T&gt;</code> (()→T).'},
+  {t:'Java 8+',q:'O que significa dizer que Streams são "lazy"?',a:'Operações intermediárias (filter, map) só executam quando uma operação terminal (collect, count, forEach) é chamada.'},
+  {t:'Java 8+',q:'Streams modificam a coleção original?',a:'<b>Não</b> — são não-destrutivos. Criam um pipeline que retorna novos valores sem alterar a fonte.'},
+  {t:'Java 8+',q:'O que faz <code>Optional.orElse(x)</code>?',a:'Retorna o valor se presente; senão retorna <code>x</code>. Forma segura de acessar Optional sem risco de exceção.'},
+  {t:'Java 8+',q:'O que acontece em <code>optional.get()</code> com Optional vazio?',a:'Lança <code>NoSuchElementException</code>. Prefira <code>orElse()</code> ou cheque com <code>isPresent()</code> antes.'},
+  {t:'Java 8+',q:'O que é uma method reference?',a:'Atalho de lambda que delega para um método existente. Ex: <code>System.out::println</code> = <code>s -> System.out.println(s)</code>.'},
+];
+
+const LEITNER_DAYS = [0, 1, 3, 7, 16]; // intervalo por nível de box (0..4)
+let fcState = {}; // { cardId: {box, due} }
+let fcQueue = [], fcPos = 0, fcMode = 'due', fcSessionStats = {good:0,mid:0,bad:0};
+let mistakePool = [];
+const DAY_MS = 86400000;
+function todayNum(){ return Math.floor(Date.now()/DAY_MS); }
+
+let activeTopics = new Set(); // empty = all
+
+function fcInitCards() {
+  FC_CARDS.forEach((c,i)=>{ if(fcState[i]===undefined) fcState[i]={box:0, due:0}; });
+}
+
+function fcDueCount(){
+  const t=todayNum();
+  return FC_CARDS.filter((c,i)=>fcState[i] && fcState[i].due<=t && topicMatch(c)).length;
+}
+function topicMatch(c){ return activeTopics.size===0 || activeTopics.has(c.t); }
+
+function fcRenderHome() {
+  fcInitCards();
+  const t=todayNum();
+  let due=0, learn=0, master=0, tot=0;
+  FC_CARDS.forEach((c,i)=>{
+    if(!topicMatch(c)) return;
+    tot++;
+    const s=fcState[i];
+    if(s.box>=4) master++; else learn++;
+    if(s.due<=t) due++;
+  });
+  document.getElementById('fc-s-due').textContent=due;
+  document.getElementById('fc-s-learn').textContent=learn;
+  document.getElementById('fc-s-master').textContent=master;
+  document.getElementById('fc-s-total').textContent=tot;
+  document.getElementById('fc-due-badge').textContent=fcDueCount();
+  document.getElementById('fc-err-n').textContent=mistakePool.length;
+  document.getElementById('fc-err-btn').style.opacity = mistakePool.length? '1':'.5';
+  // topic chips
+  const topics=[...new Set(FC_CARDS.map(c=>c.t))];
+  document.getElementById('fc-topics').innerHTML=topics.map(tp=>
+    `<span class="fc-chip ${activeTopics.has(tp)?'on':''}" onclick="fcToggleTopic('${tp}')">${tp}</span>`).join('');
+}
+
+function fcToggleTopic(tp){
+  if(activeTopics.has(tp)) activeTopics.delete(tp); else activeTopics.add(tp);
+  fcRenderHome();
+}
+
+function fcGoHome(){
+  document.getElementById('fc-home').style.display='block';
+  document.getElementById('fc-session').style.display='none';
+  document.getElementById('fc-finished').style.display='none';
+  fcRenderHome();
+}
+
+function fcStart(mode){
+  fcMode=mode;
+  fcSessionStats={good:0,mid:0,bad:0};
+  const t=todayNum();
+  if(mode==='errors'){
+    if(mistakePool.length===0){ return; }
+    fcQueue = mistakePool.map((m,i)=>({err:true, data:m}));
+  } else {
+    let ids=FC_CARDS.map((c,i)=>i).filter(i=>topicMatch(FC_CARDS[i]));
+    if(mode==='due') ids=ids.filter(i=>fcState[i].due<=t);
+    if(ids.length===0){ ids=FC_CARDS.map((c,i)=>i).filter(i=>topicMatch(FC_CARDS[i])); } // nothing due → study all filtered
+    // shuffle
+    for(let i=ids.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ids[i],ids[j]]=[ids[j],ids[i]];}
+    fcQueue=ids.map(i=>({id:i}));
+  }
+  fcPos=0;
+  document.getElementById('fc-home').style.display='none';
+  document.getElementById('fc-finished').style.display='none';
+  document.getElementById('fc-session').style.display='block';
+  fcShowCard();
+}
+
+function fcShowCard(){
+  const card=document.getElementById('fc-card');
+  card.classList.remove('flip');
+  document.getElementById('fc-rate').classList.remove('show');
+  const item=fcQueue[fcPos];
+  document.getElementById('fc-counter').textContent=`Carta ${fcPos+1} de ${fcQueue.length}`;
+  if(item.err){
+    const m=item.data;
+    document.getElementById('fc-front-tag').textContent=m.topic+' • seu erro';
+    document.getElementById('fc-front-q').innerHTML=m.q;
+    document.getElementById('fc-back-a').innerHTML='<b style="color:var(--gn)">'+m.o[m.a]+'</b><div style="margin-top:10px;font-size:13px;color:var(--mt)">'+m.e+'</div>';
+    document.getElementById('fc-box-badge').textContent='';
+  } else {
+    const c=FC_CARDS[item.id], s=fcState[item.id];
+    document.getElementById('fc-front-tag').textContent=c.t;
+    document.getElementById('fc-front-q').innerHTML=c.q;
+    document.getElementById('fc-back-a').innerHTML=c.a;
+    document.getElementById('fc-box-badge').textContent='Nível '+(s.box+1)+'/5';
+  }
+}
+
+function fcFlip(){
+  const card=document.getElementById('fc-card');
+  if(card.classList.contains('flip')) return;
+  card.classList.add('flip');
+  setTimeout(()=>document.getElementById('fc-rate').classList.add('show'), 280);
+}
+
+function fcRate(rating){ // 0=errei,1=dificil,2=facil
+  const item=fcQueue[fcPos];
+  if(rating===2) fcSessionStats.good++; else if(rating===1) fcSessionStats.mid++; else fcSessionStats.bad++;
+  if(!item.err){
+    const s=fcState[item.id];
+    if(rating===0) s.box=0;
+    else if(rating===1) s.box=Math.max(0, s.box); // stays, short interval
+    else s.box=Math.min(4, s.box+1);
+    const interval = rating===1 ? 1 : LEITNER_DAYS[s.box];
+    s.due=todayNum()+interval;
+    if(rating===2) addScore(2);
+    saveState();
+  } else {
+    // remove from mistake pool if rated fácil
+    if(rating===2){ mistakePool.splice(fcPos,1); fcQueue.splice(fcPos,1); fcPos--; saveState(); }
+  }
+  fcPos++;
+  if(fcPos>=fcQueue.length){ fcFinish(); return; }
+  fcShowCard();
+}
+
+function fcFinish(){
+  document.getElementById('fc-session').style.display='none';
+  document.getElementById('fc-finished').style.display='block';
+  const s=fcSessionStats;
+  const total=s.good+s.mid+s.bad;
+  document.getElementById('fc-done-t').textContent = fcMode==='errors'?'Treino de erros concluído!':'Sessão concluída!';
+  document.getElementById('fc-done-s').innerHTML=`Você revisou <b>${total}</b> cartas — 🟢 ${s.good} fáceis, 🟠 ${s.mid} difíceis, 🔴 ${s.bad} erradas.<br>As cartas voltarão a aparecer no intervalo ideal. Volte amanhã para manter sua sequência!`;
+  fcRenderHome();
+}
+
+function fcQuit(){ fcGoHome(); }
+
+// ── MISTAKE POOL ──
+function addMistake(qObj, topic){
+  // qObj: {q, o, a, e}; avoid duplicates by question text
+  if(mistakePool.some(m=>m.q===qObj.q)) return;
+  mistakePool.push({q:qObj.q, o:qObj.o, a:qObj.a, e:qObj.e, topic:topic});
+  saveState();
+  const errN=document.getElementById('fc-err-n'); if(errN) errN.textContent=mistakePool.length;
+}
+
+// ── STREAK ──
+function updateStreak(){
+  const t=todayNum();
+  let last=state_last, streak=state_streak;
+  if(last===t){ /* already counted today */ }
+  else if(last===t-1){ streak++; last=t; }
+  else { streak=1; last=t; }
+  state_last=last; state_streak=streak;
+  document.getElementById('streak-val').textContent=streak;
+}
+
+// ── PERSISTENCE (localStorage) ──
+const LS_KEY='javaCrashCourse_v1';
+let state_streak=0, state_last=-1;
+function saveState(){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      totalScore, completed:[...completedMods], fcState, mistakePool,
+      streak:state_streak, last:state_last
+    }));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(!raw) return false;
+    const d=JSON.parse(raw);
+    totalScore=d.totalScore||0;
+    completedMods=new Set(d.completed||[]);
+    fcState=d.fcState||{};
+    mistakePool=d.mistakePool||[];
+    state_streak=d.streak||0;
+    state_last=(d.last!==undefined)?d.last:-1;
+    return true;
+  }catch(e){ return false; }
+}
+function resetProgress(){
+  if(!confirm('Isso vai apagar seu score, progresso, flashcards e sequência. Continuar?')) return;
+  try{ localStorage.removeItem(LS_KEY); }catch(e){}
+  totalScore=0; completedMods=new Set(); fcState={}; mistakePool=[]; state_streak=0; state_last=-1;
+  location.reload();
+}
+
+// ── INIT ──
+function restoreUI(){
+  document.getElementById('total-score').textContent=totalScore;
+  completedMods.forEach(m=>{
+    const nav=document.getElementById('nav-'+m);
+    if(nav && m<=6) nav.classList.add('done');
+  });
+  const pct=Math.round((completedMods.size/8)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=completedMods.size+'/8';
+}
+
+loadState();
+fcInitCards();
+updateStreak();
+restoreUI();
+fcRenderHome();
+saveState();
+for(let i=0;i<6;i++) mqInitMod(i);
+</script>
+</body>
+</html>
