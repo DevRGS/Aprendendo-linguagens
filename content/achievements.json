@@ -1,0 +1,23 @@
+[
+  { "id": "primeiros-passos", "name": "Primeiros passos", "icon": "👣", "description": "Concluiu a primeira aula.", "hint": "Conclua qualquer aula." },
+  { "id": "modulo-na-conta", "name": "Módulo na conta", "icon": "📦", "description": "Concluiu o primeiro módulo.", "hint": "Termine todas as aulas de um módulo e tire 60% ou mais na prática." },
+  { "id": "formatura", "name": "Formatura", "icon": "🎓", "description": "Concluiu uma linguagem inteira.", "hint": "Conclua todos os módulos de uma linguagem e passe na prova." },
+  { "id": "gabaritou", "name": "Gabaritou", "icon": "💯", "description": "Acertou 100% de um quiz ou prova com 10 perguntas ou mais.", "hint": "Acerte tudo num quiz de pelo menos 10 perguntas." },
+  { "id": "centena", "name": "Centena", "icon": "📈", "description": "Respondeu 100 perguntas.", "hint": "Responda 100 perguntas." },
+  { "id": "mil-respostas", "name": "Mil respostas", "icon": "🏔️", "description": "Respondeu 1.000 perguntas.", "hint": "Responda 1.000 perguntas." },
+  { "id": "sequencia-7", "name": "Uma semana firme", "icon": "🔥", "description": "Estudou 7 dias seguidos.", "hint": "Estude 7 dias seguidos." },
+  { "id": "sequencia-30", "name": "Um mês firme", "icon": "📅", "description": "Estudou 30 dias seguidos.", "hint": "Estude 30 dias seguidos." },
+  { "id": "sequencia-100", "name": "Cem dias", "icon": "💎", "description": "Estudou 100 dias seguidos.", "hint": "Estude 100 dias seguidos." },
+  { "id": "meta-7", "name": "Meta cumprida", "icon": "🎯", "description": "Bateu a meta diária em 7 dias.", "hint": "Bata sua meta diária de XP em 7 dias (não precisam ser seguidos)." },
+  { "id": "poliglota", "name": "Poliglota", "icon": "🌎", "description": "Concluiu aulas de 3 linguagens diferentes.", "hint": "Conclua aulas em 3 linguagens." },
+  { "id": "na-ponta-da-lingua", "name": "Na ponta da língua", "icon": "👅", "description": "Dominou a primeira carta.", "hint": "Leve uma carta ao nível 6 respondendo \"Fácil\" nas revisões." },
+  { "id": "memoria-de-elefante", "name": "Memória de elefante", "icon": "🐘", "description": "Dominou 100 cartas.", "hint": "Domine 100 cartas." },
+  { "id": "revisor", "name": "Revisor", "icon": "🔁", "description": "Fez 500 revisões de cartas.", "hint": "Revise 500 cartas." },
+  { "id": "persistente", "name": "Persistente", "icon": "💪", "description": "Corrigiu 20 perguntas que tinha errado.", "hint": "Acerte 20 perguntas que estavam em \"Meus erros\"." },
+  { "id": "simulado-de-respeito", "name": "Simulado de respeito", "icon": "📝", "description": "Fez 80% ou mais num simulado de 20 perguntas ou mais.", "hint": "Tire 80% num simulado com pelo menos 20 perguntas." },
+  { "id": "coruja", "name": "Coruja", "icon": "🦉", "description": "Estudou de madrugada (entre 0h e 4h59).", "hint": "Estude entre meia-noite e 4h59." },
+  { "id": "madrugador", "name": "Madrugador", "icon": "🌅", "description": "Estudou bem cedo (entre 5h e 6h59).", "hint": "Estude entre 5h e 6h59." },
+  { "id": "seguro-morreu-de-velho", "name": "Seguro morreu de velho", "icon": "🛟", "description": "Fez o primeiro backup do progresso.", "hint": "Exporte um backup ou ative o backup automático." },
+  { "id": "subindo-de-nivel", "name": "Subindo de nível", "icon": "⬆️", "description": "Chegou ao nível 5.", "hint": "Acumule 1.000 XP." },
+  { "id": "dois-digitos", "name": "Dois dígitos", "icon": "🔟", "description": "Chegou ao nível 10.", "hint": "Acumule 4.500 XP." }
+]
