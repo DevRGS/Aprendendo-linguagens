@@ -3,6 +3,7 @@ import { renderNotFound } from './not-found.js';
 import { renderLanguage } from './language.js';
 import { renderLesson } from './lesson.js';
 import { renderReference } from './reference.js';
+import { renderPractice } from './practice.js';
 
 // Cada tarefa seguinte registra suas telas aqui.
 export const VIEWS = {
@@ -11,4 +12,5 @@ export const VIEWS = {
   language: renderLanguage,
   lesson: renderLesson,
   reference: renderReference,
+  practice: renderPractice,
 };
