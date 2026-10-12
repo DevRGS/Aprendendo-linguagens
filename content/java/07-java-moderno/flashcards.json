@@ -1,0 +1,20 @@
+{
+  "cards": [
+    { "id": "java.java-moderno.f01", "lesson": "lambdas", "front": "O que é uma lambda?", "back": "Uma função curta, sem nome, que pode ser passada como valor: `(parâmetros) -> expressão` ou `(parâmetros) -> { instruções }`." },
+    { "id": "java.java-moderno.f02", "lesson": "lambdas", "front": "O que é uma interface funcional?", "back": "Uma interface com exatamente um método abstrato, como `Predicate`, `Function`, `Consumer`, `Supplier` e `Comparator`. Toda lambda implementa uma." },
+    { "id": "java.java-moderno.f03", "lesson": "lambdas", "front": "O que fazem `Predicate`, `Function`, `Consumer` e `Supplier`?", "back": "`Predicate<T>`: recebe T e devolve boolean. `Function<T, R>`: recebe T e devolve R. `Consumer<T>`: recebe T e não devolve nada. `Supplier<T>`: não recebe nada e devolve T." },
+    { "id": "java.java-moderno.f04", "lesson": "lambdas", "front": "O que é uma referência de método?", "back": "Um atalho para uma lambda que só chama um método: `String::toUpperCase` equivale a `s -> s.toUpperCase()`, e `System.out::println` a `x -> System.out.println(x)`." },
+    { "id": "java.java-moderno.f05", "lesson": "lambdas", "front": "Que variáveis locais uma lambda pode usar?", "back": "Só as `final` ou efetivamente finais, isto é, que nunca são reatribuídas." },
+    { "id": "java.java-moderno.f06", "lesson": "streams", "front": "Quais são as partes de um stream?", "back": "Origem (`lista.stream()`), operações intermediárias (`filter`, `map`, `sorted`...) e uma operação terminal (`toList`, `count`, `forEach`, `collect`...)." },
+    { "id": "java.java-moderno.f07", "lesson": "streams", "front": "Por que nada acontece num stream sem operação terminal?", "back": "As operações intermediárias são preguiçosas: só rodam quando uma operação terminal pede o resultado." },
+    { "id": "java.java-moderno.f08", "lesson": "streams", "front": "Um stream pode ser usado duas vezes?", "back": "Não. Depois da operação terminal ele está consumido, e usá-lo de novo lança `IllegalStateException`." },
+    { "id": "java.java-moderno.f09", "lesson": "optional", "front": "Para que serve o `Optional`?", "back": "Para representar um valor que pode estar ausente sem usar `null`. Use `orElse`, `orElseThrow`, `ifPresent` e `map` para lidar com ele." },
+    { "id": "java.java-moderno.f10", "lesson": "optional", "front": "Qual a diferença entre `Optional.of` e `Optional.ofNullable`?", "back": "`of(x)` exige `x` não nulo e lança `NullPointerException` com `null`. `ofNullable(x)` aceita `null` e devolve um `Optional` vazio." },
+    { "id": "java.java-moderno.f11", "lesson": "var-e-text-blocks", "front": "Onde `var` pode ser usado?", "back": "Em variáveis locais com valor inicial (Java 10+). Não vale para atributos, parâmetros de método nem `var x = null;`." },
+    { "id": "java.java-moderno.f12", "lesson": "var-e-text-blocks", "front": "O que é um text block?", "back": "Um texto de várias linhas entre `\"\"\"` (Java 15+). O recuo comum é removido, e as aspas comuns não precisam de escape." },
+    { "id": "java.java-moderno.f13", "lesson": "records", "front": "O que um `record` gera automaticamente?", "back": "Construtor, um método de acesso com o nome de cada componente (`p.x()`), `equals`, `hashCode` e `toString`. Os componentes são `private final` (Java 16+)." },
+    { "id": "java.java-moderno.f14", "lesson": "switch-e-pattern-matching", "front": "O que faz `obj instanceof String s`?", "back": "Testa o tipo e, se der certo, já cria a variável `s` do tipo `String` (Java 16+), sem cast manual." },
+    { "id": "java.java-moderno.f15", "lesson": "switch-e-pattern-matching", "front": "O que é uma interface `sealed`?", "back": "Uma interface que lista quem pode implementá-la (`permits`, Java 17+). Um `switch` que cobre todos os tipos permitidos não precisa de `default`." },
+    { "id": "java.java-moderno.f16", "lesson": "switch-e-pattern-matching", "front": "Para que serve o `yield`?", "back": "Para devolver o valor de um bloco `{ }` dentro de um `switch` usado como expressão." }
+  ]
+}

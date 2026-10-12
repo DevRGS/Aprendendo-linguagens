@@ -83,6 +83,20 @@
         { "id": "stringbuilder", "file": "03-stringbuilder.md", "title": "StringBuilder", "minutes": 7 },
         { "id": "entrada-com-scanner", "file": "04-entrada-com-scanner.md", "title": "Lendo o teclado com Scanner", "minutes": 10 }
       ]
+    },
+    {
+      "id": "java-moderno",
+      "dir": "07-java-moderno",
+      "title": "Java Moderno (8 a 21)",
+      "description": "Recursos do Java 8 ao 21: lambdas, interfaces funcionais, streams, Optional, var, text blocks, records, switch moderno e pattern matching.",
+      "lessons": [
+        { "id": "lambdas", "file": "01-lambdas.md", "title": "Lambdas e interfaces funcionais", "minutes": 10 },
+        { "id": "streams", "file": "02-streams.md", "title": "Streams", "minutes": 12 },
+        { "id": "optional", "file": "03-optional.md", "title": "Optional", "minutes": 7 },
+        { "id": "var-e-text-blocks", "file": "04-var-e-text-blocks.md", "title": "var e text blocks", "minutes": 7 },
+        { "id": "records", "file": "05-records.md", "title": "Records", "minutes": 8 },
+        { "id": "switch-e-pattern-matching", "file": "06-switch-e-pattern-matching.md", "title": "switch moderno e pattern matching", "minutes": 11 }
+      ]
     }
   ]
 }
