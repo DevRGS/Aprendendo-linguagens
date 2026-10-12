@@ -2,7 +2,7 @@
 
 ## Ordem natural
 
-`Collections.sort(lista)` ordena pela **ordem natural**: números em ordem crescente e textos em ordem alfabética (com as maiúsculas antes das minúsculas).
+`Collections.sort(lista)` ordena pela **ordem natural**: números em ordem crescente e textos pela ordem dos códigos dos caracteres, que só coincide com a alfabética em palavras sem acento escritas todas em minúsculas (ou todas em maiúsculas).
 
 ```java
 List<Integer> numeros = new ArrayList<>(List.of(5, 2, 9, 1));
@@ -11,6 +11,15 @@ System.out.println(numeros);   // [1, 2, 5, 9]
 ```
 
 Para arrays, use `Arrays.sort(array)`.
+
+> [!TIP]
+> Para a ordem alfabética do português, que trata igual maiúsculas, minúsculas e letras acentuadas, ordene com um `Collator` (do pacote `java.text`), como no exemplo abaixo.
+
+```java
+List<String> nomes = new ArrayList<>(List.of("ética", "faca", "zebra", "Érica", "Ana", "bruno"));
+nomes.sort(Collator.getInstance(Locale.forLanguageTag("pt-BR")));
+System.out.println(nomes);   // [Ana, bruno, Érica, ética, faca, zebra]
+```
 
 > [!NOTE]
 > `Collections.sort` altera a própria lista. Com uma lista imutável, como a de `List.of`, ele lança `UnsupportedOperationException`; copie antes para um `ArrayList`.

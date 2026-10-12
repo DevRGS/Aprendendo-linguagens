@@ -54,3 +54,46 @@ test('regras de construtor que mudaram depois do Java 21 são ditas como "no Jav
 test('a referência rápida trata Error como unchecked, como o módulo Exceções', () => {
   assert.match(read('referencia.md'), /\*\*Unchecked:\*\* `RuntimeException`, `Error` e as subclasses deles/);
 });
+
+test('a ordem natural de textos não é vendida como alfabética (acentos vão depois do z)', () => {
+  const conjuntos = read('04-colecoes/02-conjuntos.md');
+  const ordenacao = read('04-colecoes/05-ordenacao.md');
+  for (const aula of [conjuntos, ordenacao]) assert.doesNotMatch(aula, /textos em ordem alfabética/);
+  assert.match(conjuntos, /letras acentuadas/);
+  assert.match(ordenacao, /Collator/);
+  assert.doesNotMatch(question('04-colecoes', 'java.colecoes.q09').explanation, /as maiúsculas vêm antes de todas as minúsculas/);
+  const q14 = question('04-colecoes', 'java.colecoes.q14');
+  assert.doesNotMatch(`${q14.prompt} ${q14.explanation}`, /alfabética/);
+});
+
+test('a assinatura do main não é apresentada como a única possível', () => {
+  const aula = read('01-introducao/04-primeiro-programa.md');
+  assert.doesNotMatch(aula, /precisa ser exatamente essa/);
+  assert.match(aula, /No Java 21, é assim que se escreve o `main`/);
+});
+
+test('comandos copiáveis da primeira aula não trazem anotações entre parênteses', () => {
+  const comandos = read('01-introducao/04-primeiro-programa.md').split('\n').filter((l) => /^(javac|java) /.test(l));
+  assert.ok(comandos.length >= 3);
+  for (const c of comandos) assert.doesNotMatch(c, /\(/, c);
+});
+
+test('herança não diz que construtores são herdados', () => {
+  const aula = read('03-poo/04-heranca-e-polimorfismo.md');
+  assert.doesNotMatch(aula, /herdam tudo o que não é/);
+  assert.match(aula, /construtores não são herdados/i);
+});
+
+test('a q06 de Exceções declara a variável que usa', () => {
+  assert.match(question('05-excecoes', 'java.excecoes.q06').prompt, /int zero = 0;/);
+});
+
+test('a q15 de Exceções só afirma o getMessage de quem repassa a mensagem', () => {
+  assert.match(question('05-excecoes', 'java.excecoes.q15').prompt, /super\(mensagem\)/);
+});
+
+test('o groupingBy da aula imprime um mapa com ordem garantida', () => {
+  const aula = read('07-java-moderno/02-streams.md');
+  assert.match(aula, /TreeMap::new/);
+  assert.doesNotMatch(aula, /O mapa é um `HashMap`/);
+});

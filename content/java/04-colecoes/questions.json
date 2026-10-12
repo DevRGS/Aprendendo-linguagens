@@ -54,7 +54,7 @@
       "id": "java.colecoes.q09", "type": "multiple", "difficulty": 2, "lesson": "conjuntos",
       "prompt": "O que `System.out.println(new TreeSet<>(List.of(\"ana\", \"Bia\", \"Caio\")));` imprime?",
       "options": ["[Bia, Caio, ana]", "[ana, Bia, Caio]", "[Caio, Bia, ana]", "[ana, Caio, Bia]"], "answer": 0,
-      "explanation": "O `TreeSet` usa a ordem natural, que compara os códigos dos caracteres: as maiúsculas vêm antes de todas as minúsculas. Por isso `ana` fica no fim."
+      "explanation": "O `TreeSet` usa a ordem natural, que compara os códigos dos caracteres (Unicode): as maiúsculas sem acento vêm antes de todas as minúsculas. Por isso `ana` fica no fim."
     },
     {
       "id": "java.colecoes.q10", "type": "truefalse", "difficulty": 2, "lesson": "conjuntos",
@@ -83,9 +83,9 @@
     },
     {
       "id": "java.colecoes.q14", "type": "truefalse", "difficulty": 2, "lesson": "mapas",
-      "prompt": "Num `TreeMap<String, Integer>`, as chaves são percorridas em ordem alfabética.",
+      "prompt": "Num `TreeMap<String, Integer>`, as chaves são percorridas na ordem natural delas, e não na ordem em que foram inseridas.",
       "answer": true,
-      "explanation": "`TreeMap` mantém as chaves na ordem natural, que para textos é a alfabética (com maiúsculas antes das minúsculas)."
+      "explanation": "`TreeMap` mantém as chaves ordenadas pela ordem natural (para textos, a ordem dos códigos dos caracteres). Quem guarda a ordem de inserção é o `LinkedHashMap`."
     },
     {
       "id": "java.colecoes.q15", "type": "multiple", "difficulty": 2, "lesson": "iteracao",

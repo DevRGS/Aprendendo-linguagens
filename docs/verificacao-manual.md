@@ -42,4 +42,4 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] Lembrete: com progresso e sem backup há 7 dias (simule mudando `lastExportAt` e `createdAt` no Local Storage), a faixa aparece; "Depois" some por 3 dias.
 
 ## Conteúdo
-- [ ] `node tools/verify-java.mjs` com o JDK 21: 230/230.
+- [ ] `node tools/verify-java.mjs` com o JDK 21: 234/234.

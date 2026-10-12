@@ -19,7 +19,7 @@ System.out.println(tags.contains("sql"));  // true
 |---|---|
 | `HashSet` | nenhuma ordem garantida (a mais rápida) |
 | `LinkedHashSet` | a ordem de inserção |
-| `TreeSet` | a ordem natural (números crescentes, textos em ordem alfabética) |
+| `TreeSet` | a ordem natural (números crescentes; textos pela ordem dos códigos dos caracteres) |
 
 ```java
 List<String> entrada = List.of("uva", "maçã", "banana", "uva");
@@ -32,7 +32,7 @@ System.out.println(new TreeSet<>(entrada));        // [banana, maçã, uva]
 > Não conte com a ordem de um `HashSet`: ela depende dos itens e pode mudar entre versões do Java. Se a ordem importa, use `LinkedHashSet` ou `TreeSet`.
 
 > [!NOTE]
-> A ordem natural de textos compara os códigos dos caracteres, e todas as letras **maiúsculas vêm antes** das minúsculas. Por isso, um `TreeSet` com `"ana"`, `"Bia"` e `"Caio"` fica `[Bia, Caio, ana]`.
+> A ordem natural de textos **não é a alfabética**: ela compara os códigos dos caracteres (Unicode). As letras maiúsculas sem acento vêm antes de todas as minúsculas, e as letras acentuadas vêm depois do `z`. Por isso, um `TreeSet` com `"ana"`, `"Bia"` e `"Caio"` fica `[Bia, Caio, ana]`, e um com `"ética"`, `"faca"` e `"zebra"` fica `[faca, zebra, ética]`. A aula de ordenação mostra como ordenar em ordem alfabética de verdade.
 
 ## Tirando os repetidos de uma lista
 

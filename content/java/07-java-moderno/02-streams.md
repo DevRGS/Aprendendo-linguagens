@@ -63,11 +63,11 @@ String juntos = nomes.stream().collect(Collectors.joining(", "));
 System.out.println(juntos);       // Ana, Bia, Caio, Davi, Eva
 
 Map<Integer, List<String>> porTamanho = nomes.stream()
-    .collect(Collectors.groupingBy(String::length));
+    .collect(Collectors.groupingBy(String::length, TreeMap::new, Collectors.toList()));
 System.out.println(porTamanho);   // {3=[Ana, Bia, Eva], 4=[Caio, Davi]}
 ```
 
-`groupingBy` monta um mapa: a chave é o resultado da função (aqui, o tamanho do nome) e o valor é a lista dos elementos com aquela chave. O mapa é um `HashMap`, então a ordem das chaves não é garantida.
+`groupingBy` monta um mapa: a chave é o resultado da função (aqui, o tamanho do nome) e o valor é a lista dos elementos com aquela chave. Só com a função, como em `groupingBy(String::length)`, o Java não garante o tipo do mapa nem a ordem das chaves; o `TreeMap::new` pede um mapa ordenado pela chave.
 
 ## Dois cuidados
 

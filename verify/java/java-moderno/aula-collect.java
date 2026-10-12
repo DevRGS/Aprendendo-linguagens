@@ -1,4 +1,4 @@
-// verifica: a aula streams (joining e groupingBy; o mapa é impresso em ordem com TreeMap)
+// verifica: a aula streams (joining; groupingBy com TreeMap::new, mapa ordenado pela chave)
 // saida:
 // Ana, Bia, Caio, Davi, Eva
 // {3=[Ana, Bia, Eva], 4=[Caio, Davi]}
@@ -13,7 +13,7 @@ class Main {
         String juntos = nomes.stream().collect(Collectors.joining(", "));
         System.out.println(juntos);
         Map<Integer, List<String>> porTamanho = nomes.stream()
-            .collect(Collectors.groupingBy(String::length));
-        System.out.println(new TreeMap<>(porTamanho));
+            .collect(Collectors.groupingBy(String::length, TreeMap::new, Collectors.toList()));
+        System.out.println(porTamanho);
     }
 }

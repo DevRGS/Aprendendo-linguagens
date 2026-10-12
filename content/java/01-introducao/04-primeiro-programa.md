@@ -13,7 +13,7 @@ public class Ola {
 ```
 
 - `public class Ola`: declara uma classe pública chamada `Ola`. Em Java, todo código fica dentro de classes.
-- `public static void main(String[] args)`: o método por onde o programa começa. A assinatura precisa ser exatamente essa.
+- `public static void main(String[] args)`: o método por onde o programa começa. No Java 21, é assim que se escreve o `main`: só o nome do parâmetro (`args`) costuma variar. Versões mais novas do Java aceitam formas mais curtas.
 - `System.out.println("Olá!");`: imprime o texto e pula uma linha. Toda instrução termina com `;`.
 
 > [!IMPORTANT]
@@ -24,9 +24,11 @@ public class Ola {
 No terminal, dentro da pasta do arquivo:
 
 ```text
-javac Ola.java     (gera Ola.class)
-java Ola           (executa, sem a extensão)
+javac Ola.java
+java Ola
 ```
+
+O `javac` compila e gera o arquivo `Ola.class`. O `java` executa a classe, por isso vai sem a extensão.
 
 Desde o Java 11, para programas de um arquivo só, dá para pular o `javac`:
 

@@ -2,7 +2,7 @@
 
 ## Herança com `extends`
 
-Quando várias classes têm dados e comportamentos em comum, a parte comum pode ficar numa **superclasse**. As **subclasses** herdam tudo o que não é `private` e acrescentam o que é delas.
+Quando várias classes têm dados e comportamentos em comum, a parte comum pode ficar numa **superclasse**. As **subclasses** herdam os atributos e os métodos que não são `private` e acrescentam o que é delas. Construtores não são herdados: cada subclasse declara os seus.
 
 ```java
 class Animal {

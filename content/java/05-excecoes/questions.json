@@ -32,7 +32,7 @@
     },
     {
       "id": "java.excecoes.q06", "type": "multiple", "difficulty": 3, "lesson": "try-catch-finally",
-      "prompt": "O que acontece ao compilar este trecho?\n\n```java\ntry {\n    System.out.println(10 / zero);\n} catch (Exception e) {\n    System.out.println(\"geral\");\n} catch (ArithmeticException e) {\n    System.out.println(\"divisão\");\n}\n```",
+      "prompt": "O que acontece ao compilar este trecho?\n\n```java\nint zero = 0;\ntry {\n    System.out.println(10 / zero);\n} catch (Exception e) {\n    System.out.println(\"geral\");\n} catch (ArithmeticException e) {\n    System.out.println(\"divisão\");\n}\n```",
       "options": ["Erro de compilação: o segundo `catch` nunca seria alcançado", "Compila, e o segundo `catch` trata as `ArithmeticException`", "Compila, e o primeiro `catch` é ignorado", "Compila, mas lança exceção ao executar"], "answer": 0,
       "explanation": "`ArithmeticException` é uma `Exception`, então o primeiro `catch` já pegaria tudo. O `javac` acusa *exception ArithmeticException has already been caught*. O certo é colocar o `catch` mais específico primeiro."
     },
@@ -88,9 +88,9 @@
     },
     {
       "id": "java.excecoes.q15", "type": "truefalse", "difficulty": 1, "lesson": "excecoes-personalizadas",
-      "prompt": "`e.getMessage()` devolve a mensagem que foi passada ao construtor da exceção.",
+      "prompt": "Numa exceção cujo construtor repassa a mensagem com `super(mensagem)`, `e.getMessage()` devolve essa mensagem.",
       "answer": true,
-      "explanation": "O construtor da exceção repassa a mensagem com `super(mensagem)`, e `getMessage()` a devolve depois."
+      "explanation": "`super(mensagem)` guarda a mensagem na superclasse, e `getMessage()` a devolve depois. Se o construtor não repassar a mensagem, `getMessage()` devolve `null`."
     },
     {
       "id": "java.excecoes.q16", "type": "multiple", "difficulty": 3, "lesson": "try-with-resources",
