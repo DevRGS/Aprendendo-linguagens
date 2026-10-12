@@ -7,6 +7,18 @@
   "reference": "referencia.md",
   "modules": [
     {
+      "id": "introducao",
+      "dir": "01-introducao",
+      "title": "Introdução",
+      "description": "O que é Java, como ele roda, a instalação do JDK e o seu primeiro programa.",
+      "lessons": [
+        { "id": "o-que-e-java", "file": "01-o-que-e-java.md", "title": "O que é Java", "minutes": 7 },
+        { "id": "jdk-jre-jvm", "file": "02-jdk-jre-jvm.md", "title": "JDK, JRE e JVM", "minutes": 7 },
+        { "id": "instalacao", "file": "03-instalacao.md", "title": "Instalando o JDK e escolhendo um editor", "minutes": 10 },
+        { "id": "primeiro-programa", "file": "04-primeiro-programa.md", "title": "Seu primeiro programa", "minutes": 10 }
+      ]
+    },
+    {
       "id": "fundamentos",
       "dir": "02-fundamentos",
       "title": "Fundamentos",

@@ -1,0 +1,14 @@
+{
+  "cards": [
+    { "id": "java.introducao.f01", "lesson": "o-que-e-java", "front": "O que significa \"escreva uma vez, rode em qualquer lugar\"?", "back": "O código vira bytecode, que roda em qualquer sistema com uma JVM, sem precisar recompilar." },
+    { "id": "java.introducao.f02", "lesson": "o-que-e-java", "front": "O que é bytecode?", "back": "O código intermediário (arquivos `.class`) gerado pelo `javac` e executado pela JVM." },
+    { "id": "java.introducao.f03", "lesson": "jdk-jre-jvm", "front": "Qual a diferença entre JDK, JRE e JVM?", "back": "JVM executa o bytecode. JRE = JVM + bibliotecas para rodar programas. JDK = JRE + ferramentas de desenvolvimento, como `javac`, `jar` e `jshell`." },
+    { "id": "java.introducao.f04", "lesson": "jdk-jre-jvm", "front": "O que faz o garbage collector?", "back": "Libera automaticamente a memória de objetos que não têm mais nenhuma referência." },
+    { "id": "java.introducao.f05", "lesson": "instalacao", "front": "Como conferir se o JDK está instalado?", "back": "Com `java -version` e `javac -version` no terminal. Se o `javac` não for encontrado, falta o JDK ou ele não está no PATH." },
+    { "id": "java.introducao.f06", "lesson": "instalacao", "front": "Para que serve o `jshell`?", "back": "É um terminal interativo (Java 9+) para testar trechos de código sem criar classe nem compilar." },
+    { "id": "java.introducao.f07", "lesson": "primeiro-programa", "front": "Qual é a assinatura do método `main`?", "back": "`public static void main(String[] args)`" },
+    { "id": "java.introducao.f08", "lesson": "primeiro-programa", "front": "Que regra liga o nome do arquivo à classe?", "back": "Uma classe `public` precisa estar num arquivo com o mesmo nome, inclusive nas maiúsculas: `public class Ola` vai em `Ola.java`." },
+    { "id": "java.introducao.f09", "lesson": "primeiro-programa", "front": "Quais são os dois passos clássicos para rodar um programa?", "back": "Compilar com `javac Ola.java` (gera `Ola.class`) e executar com `java Ola`, sem a extensão." },
+    { "id": "java.introducao.f10", "lesson": "primeiro-programa", "front": "Qual a diferença entre `print` e `println`?", "back": "`println` pula uma linha depois do texto; `print` não pula." }
+  ]
+}
