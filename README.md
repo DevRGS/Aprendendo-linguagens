@@ -21,6 +21,8 @@ npm test
 
 Toda função do site tem teste automático: as regras (`tests/core`), a camada de dados (`tests/data`), as telas e componentes (`tests/ui`, com o navegador simulado pelo jsdom) e o validador de conteúdo (`tests/content.test.js`). O teste `tests/meta/exports-covered.test.js` falha se alguém criar uma função exportada sem teste.
 
+Os testes de telas e da camada de dados leem um manifesto de Java congelado, `tests/fixtures/content/java/language.json` (só o módulo Fundamentos), para não quebrarem quando o curso ganha módulos. O conteúdo real é conferido pelo validador (`tests/content.test.js`).
+
 O site em si não tem dependências nem etapa de build: o `npm install` só serve para os testes.
 
 ## Conferir os códigos Java

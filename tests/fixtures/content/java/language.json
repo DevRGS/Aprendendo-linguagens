@@ -1,0 +1,24 @@
+{
+  "id": "java",
+  "name": "Java",
+  "color": "#f89820",
+  "icon": "☕",
+  "highlight": "java",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "fundamentos",
+      "dir": "02-fundamentos",
+      "title": "Fundamentos",
+      "description": "Tipos, variáveis, conversões, operadores, condicionais, laços e arrays: a base de todo programa Java.",
+      "lessons": [
+        { "id": "variaveis-e-tipos", "file": "01-variaveis-e-tipos.md", "title": "Variáveis e tipos primitivos", "minutes": 10 },
+        { "id": "conversoes", "file": "02-conversoes.md", "title": "Conversões entre tipos", "minutes": 8 },
+        { "id": "operadores", "file": "03-operadores.md", "title": "Operadores", "minutes": 10 },
+        { "id": "condicionais", "file": "04-condicionais.md", "title": "Condicionais: if e switch", "minutes": 9 },
+        { "id": "lacos", "file": "05-lacos.md", "title": "Laços de repetição", "minutes": 8 },
+        { "id": "arrays", "file": "06-arrays.md", "title": "Arrays", "minutes": 9 }
+      ]
+    }
+  ]
+}
