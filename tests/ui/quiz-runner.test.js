@@ -127,3 +127,30 @@ test('o guarda de saída só pergunta depois da primeira resposta', async () => 
   window.confirm = () => true;
   el.remove();
 });
+
+test('resultado mostra desempenho por linguagem quando o quiz mistura linguagens', async () => {
+  const { app, byId, el } = await setup([]);
+  const sql = { id: 'sql.basico.q01', lang: 'sql', module: 'sql.basico', type: 'truefalse', difficulty: 1, lesson: 'x', prompt: 'SQL é uma linguagem de consulta.', answer: true, explanation: 'Sim.' };
+  byId.set(sql.id, sql);
+  const java = byId.get('java.fundamentos.q02');
+  runQuiz(el, app, { questions: [prepareQuestion(java), prepareQuestion(sql)], mode: 'estudo', kind: 'quiz', title: 'Misto' });
+  for (let i = 0; i < 2; i++) {
+    answerCurrent(el, byId, { correct: el.querySelector('.question').dataset.qid === 'sql.basico.q01' });
+    nextButton(el).click();
+  }
+  const headings = texts(el, 'h2');
+  assert.ok(headings.includes('Desempenho por linguagem'));
+  const labels = texts(el, '.module-bar-label span:first-child');
+  assert.ok(labels.includes('Java'));
+  assert.ok(labels.includes('sql'));
+  el.remove();
+});
+
+test('com uma linguagem só, o resultado não repete a barra por linguagem', async () => {
+  const { app, byId, questions, el } = await setup(['java.fundamentos.q03']);
+  runQuiz(el, app, { questions, mode: 'estudo', kind: 'quiz', title: 'Q' });
+  answerCurrent(el, byId, { correct: true });
+  nextButton(el).click();
+  assert.ok(!texts(el, 'h2').includes('Desempenho por linguagem'));
+  el.remove();
+});

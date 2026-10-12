@@ -112,15 +112,25 @@ export function runQuiz(container, app, opts) {
       lessonLink(q));
   }
 
-  function renderResult({ total, correct, durationSec, wrongIdx }) {
-    const rate = correct / total;
-    const byModule = new Map();
+  function tally(keyOf) {
+    const map = new Map();
     questions.forEach((q, i) => {
-      const entry = byModule.get(q.module) ?? { ok: 0, total: 0 };
+      const entry = map.get(keyOf(q)) ?? { ok: 0, total: 0 };
       entry.total += 1;
       if (answers[i].correct) entry.ok += 1;
-      byModule.set(q.module, entry);
+      map.set(keyOf(q), entry);
     });
+    return map;
+  }
+
+  const barRow = (label, e) => h('div', { class: 'module-bar' },
+    h('div', { class: 'module-bar-label' }, h('span', { text: label }), h('span', { class: 'muted', text: `${e.ok}/${e.total} (${pct(e.ok / e.total)})` })),
+    bar(e.ok / e.total, { tone: toneFor(e.ok / e.total), label }));
+
+  function renderResult({ total, correct, durationSec, wrongIdx }) {
+    const rate = correct / total;
+    const byLang = tally((q) => q.lang);
+    const byModule = tally((q) => q.module);
     const retryWrong = () => runQuiz(container, app, {
       ...opts,
       questions: wrongIdx.map((i) => prepareQuestion(questions[i])),
@@ -132,13 +142,14 @@ export function runQuiz(container, app, opts) {
         h('div', { class: 'big-score', text: `${correct}/${total}` }),
         h('p', { text: `${pct(rate)} de acerto · ${formatDuration(durationSec)}` }),
         headline ? h('p', { class: 'headline', text: headline(rate) }) : null),
+      byLang.size > 1 ? [
+        h('h2', { text: 'Desempenho por linguagem' }),
+        h('div', { class: 'panel' }, [...byLang].map(([lang, e]) => barRow(app.getLanguage(lang)?.name ?? lang, e))),
+      ] : null,
       h('h2', { text: 'Desempenho por módulo' }),
       h('div', { class: 'panel' }, [...byModule].map(([key, e]) => {
         const found = findModule(app, key);
-        const label = found ? `${found.language.name} › ${found.module.title}` : key;
-        return h('div', { class: 'module-bar' },
-          h('div', { class: 'module-bar-label' }, h('span', { text: label }), h('span', { class: 'muted', text: `${e.ok}/${e.total} (${pct(e.ok / e.total)})` })),
-          bar(e.ok / e.total, { tone: toneFor(e.ok / e.total), label }));
+        return barRow(found ? `${found.language.name} › ${found.module.title}` : key, e);
       })),
       wrongIdx.length ? h('h2', { text: 'Revise o que você errou' }) : h('p', { class: 'panel center', text: '🏆 Nenhum erro. Mandou bem!' }),
       wrongIdx.map(reviewItem),
