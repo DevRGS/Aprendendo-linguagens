@@ -1,13 +1,38 @@
 // Executa os trechos de verify/java com o JDK 21+ e compara com o cabeçalho de cada arquivo.
 // Uso: node tools/verify-java.mjs  (usa JAVA_HOME se definido; senão, o "java" do PATH)
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { parseExpectation, parseJavaMajor, judge, listJavaFiles } from './verify-format.mjs';
 
 const ROOT = fileURLToPath(new URL('../verify/java/', import.meta.url));
-const java = process.env.JAVA_HOME ? join(process.env.JAVA_HOME, 'bin', 'java') : 'java';
+const bin = (name) => (process.env.JAVA_HOME ? join(process.env.JAVA_HOME, 'bin', name) : name);
+const java = bin('java');
+const javac = bin('javac');
+const ENGLISH = ['-Duser.language=en', '-Duser.country=US'];
+const UTF8 = ['-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8'];
+const OPTS = { encoding: 'utf8', timeout: 60000 };
+
+const toResult = (r) => ({ code: r.status, stdout: r.stdout ?? '', stderr: r.stderr ?? '' });
+
+function runSource(file) {
+  return toResult(spawnSync(java, [...ENGLISH, ...UTF8, file], OPTS));
+}
+
+// Compila de verdade (o nome do arquivo passa a importar) e executa a classe indicada.
+function runJavac(file, exp) {
+  const out = mkdtempSync(join(tmpdir(), 'verify-java-'));
+  try {
+    const compiled = spawnSync(javac, ['-J-Duser.language=en', '-J-Duser.country=US', '-encoding', 'UTF-8', '-d', out, file], OPTS);
+    if (compiled.status !== 0) return { code: compiled.status, stdout: '', stderr: `${compiled.stderr ?? ''}\nerror: compilation failed` };
+    if (exp.kind === 'compile-error') return { code: 0, stdout: '', stderr: '' };
+    return toResult(spawnSync(java, [...ENGLISH, ...UTF8, '-cp', out, exp.mainClass], OPTS));
+  } finally {
+    rmSync(out, { recursive: true, force: true });
+  }
+}
 
 const version = spawnSync(java, ['-version'], { encoding: 'utf8' });
 const major = parseJavaMajor(`${version.stderr ?? ''}${version.stdout ?? ''}`);
@@ -23,8 +48,7 @@ for (const file of files) {
   let problem;
   try {
     const exp = parseExpectation(readFileSync(file, 'utf8'));
-    const r = spawnSync(java, ['-Dstdout.encoding=UTF-8', '-Dstderr.encoding=UTF-8', file], { encoding: 'utf8', timeout: 60000 });
-    problem = judge(exp, { code: r.status, stdout: r.stdout, stderr: r.stderr });
+    problem = judge(exp, exp.mode === 'javac' ? runJavac(file, exp) : runSource(file));
   } catch (e) {
     problem = e.message;
   }

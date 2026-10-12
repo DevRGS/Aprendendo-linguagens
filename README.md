@@ -32,6 +32,21 @@ $env:JAVA_HOME = "C:\caminho\para\jdk-21"
 node tools/verify-java.mjs
 ```
 
+Cada trecho começa com um cabeçalho de comentários:
+
+```java
+// verifica: o que este trecho prova (ids de perguntas, cartas ou aulas)
+// modo: javac                 (opcional: compila de verdade; o nome do arquivo importa)
+// classe: Ola                 (obrigatório no modo javac quando o trecho executa)
+// erro-contem: texto          (opcional: trecho que a mensagem de erro precisa ter)
+// espera: erro-de-compilacao  (ou: // espera: excecao NomeDaExcecao)
+// saida:                      (alternativa ao "espera"; sempre a última diretiva)
+// linha 1 esperada
+// linha 2 esperada
+```
+
+No modo padrão (`java Arquivo.java`), o Java executa a **primeira** classe do arquivo, então `class Main` vem primeiro.
+
 ## Como o conteúdo é organizado
 
 ```
