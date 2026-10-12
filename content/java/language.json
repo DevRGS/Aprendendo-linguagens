@@ -45,6 +45,19 @@
         { "id": "abstratas-e-interfaces", "file": "05-abstratas-e-interfaces.md", "title": "Classes abstratas e interfaces", "minutes": 11 },
         { "id": "static-e-final", "file": "06-static-e-final.md", "title": "static e final", "minutes": 8 }
       ]
+    },
+    {
+      "id": "colecoes",
+      "dir": "04-colecoes",
+      "title": "Coleções",
+      "description": "Listas, conjuntos e mapas para guardar dados que crescem, e como percorrer e ordenar cada um.",
+      "lessons": [
+        { "id": "listas", "file": "01-listas.md", "title": "Listas", "minutes": 10 },
+        { "id": "conjuntos", "file": "02-conjuntos.md", "title": "Conjuntos", "minutes": 8 },
+        { "id": "mapas", "file": "03-mapas.md", "title": "Mapas", "minutes": 9 },
+        { "id": "iteracao", "file": "04-iteracao.md", "title": "Percorrendo coleções", "minutes": 8 },
+        { "id": "ordenacao", "file": "05-ordenacao.md", "title": "Ordenação", "minutes": 10 }
+      ]
     }
   ]
 }
