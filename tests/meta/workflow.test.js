@@ -15,3 +15,13 @@ test('o site publicado leva tudo o que o index.html usa, e só isso', () => {
   assert.deepEqual(copy.sort(), ['.nojekyll', 'content', 'css', 'index.html', 'js'].sort());
   for (const item of copy) assert.ok(existsSync(new URL(`../../${item}`, import.meta.url)), `${item} não existe`);
 });
+
+test('só o job de publicação recebe permissão para publicar (o de testes roda npm ci)', () => {
+  const top = /^permissions:\n((?: {2}.+\n)+)/m.exec(yml)[1];
+  assert.match(top, /contents: read/);
+  assert.doesNotMatch(top, /pages: write|id-token: write/);
+  const testes = yml.slice(yml.indexOf('  testes:'), yml.indexOf('  publicar:'));
+  assert.doesNotMatch(testes, /pages: write|id-token: write/);
+  const publicar = yml.slice(yml.indexOf('  publicar:'));
+  assert.match(publicar, /permissions:\n\s+contents: read\n\s+pages: write\n\s+id-token: write/);
+});
