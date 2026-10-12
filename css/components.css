@@ -181,6 +181,7 @@ input[type="text"] { width: 100%; padding: 10px 12px; border-radius: var(--radiu
 .fc-tag { margin-bottom: 12px; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--purple); }
 .fc-level { position: absolute; top: 12px; right: 14px; font-size: .7rem; color: var(--mt2); }
 .fc-hint { position: absolute; bottom: 12px; left: 0; right: 0; font-size: .7rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--mt2); }
+.fc-flip { display: flex; margin: 0 auto 12px; }
 .rate { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .rate-btn { padding: 12px 8px; border: 1px solid var(--bd); border-radius: var(--radius-sm); background: var(--sf2); color: var(--tx); font: inherit; font-weight: 700; cursor: pointer; }
 .rate-btn small { display: block; font-size: .7rem; font-weight: 400; opacity: .75; }

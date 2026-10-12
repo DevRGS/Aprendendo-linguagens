@@ -65,6 +65,7 @@ export async function renderFlashcards(container, app, route) {
     let flipped = false;
     let cardEl = null;
     let rateEl = null;
+    let flipBtn = null;
 
     function show() {
       flipped = false;
@@ -72,17 +73,19 @@ export async function renderFlashcards(container, app, route) {
       const found = findModule(app, card.module);
       const hl = found?.language.highlight;
       const st = app.store.get().cards[card.id];
-      cardEl = h('div', { class: 'flashcard', role: 'button', tabindex: 0, 'aria-label': 'Carta. Aperte Espaço ou Enter para virar.', onClick: flip },
+      // A carta não é um botão: assim os leitores de tela leem a pergunta. Quem vira é o botão "Virar carta".
+      cardEl = h('div', { class: 'flashcard', onClick: flip },
         h('div', { class: 'flashcard-inner' },
-          h('div', { class: 'flashcard-face front' },
+          h('div', { class: 'flashcard-face front', 'aria-hidden': 'false' },
             h('span', { class: 'fc-tag', text: found ? `${found.language.name} › ${found.module.title}` : '' }),
             st ? h('span', { class: 'fc-level', text: `Nível ${st.box + 1}/7` }) : null,
             md(card.front, { lang: hl }),
             h('span', { class: 'fc-hint', text: 'Toque ou aperte Espaço para virar' })),
-          h('div', { class: 'flashcard-face back' },
+          h('div', { class: 'flashcard-face back', 'aria-hidden': 'true' },
             h('span', { class: 'fc-tag', text: 'Resposta' }),
             md(card.back, { lang: hl }))));
       const rateBtn = (value, label, hint, tone) => h('button', { type: 'button', class: `rate-btn ${tone}`, onClick: () => answer(value) }, label, h('small', { text: hint }));
+      flipBtn = h('button', { type: 'button', class: 'btn btn-primary fc-flip', onClick: flip, text: 'Virar carta' });
       rateEl = h('div', { class: 'rate', hidden: true },
         rateBtn(RATING.AGAIN, '🔴 Errei', 'recomeça', 'bad'),
         rateBtn(RATING.HARD, '🟡 Difícil', 'volta antes', 'mid'),
@@ -90,16 +93,20 @@ export async function renderFlashcards(container, app, route) {
       mount(container, h('section', { class: 'fc-session' },
         h('p', { class: 'muted center', text: `Carta ${pos + 1} de ${queue.length}${scheduled ? '' : ' · estudo livre'}` }),
         cardEl,
+        flipBtn,
         rateEl,
         h('p', { class: 'muted center small', text: 'Teclas: Espaço vira · 1 Errei · 2 Difícil · 3 Fácil' }),
         h('div', { class: 'center' }, h('button', { type: 'button', class: 'btn btn-ghost btn-sm', onClick: done, text: 'Encerrar sessão' }))));
-      requestAnimationFrame(() => cardEl.focus());
+      requestAnimationFrame(() => flipBtn.focus());
     }
 
     function flip() {
       if (flipped) return;
       flipped = true;
       cardEl.classList.add('flipped');
+      cardEl.querySelector('.front').setAttribute('aria-hidden', 'true');
+      cardEl.querySelector('.back').setAttribute('aria-hidden', 'false');
+      flipBtn.hidden = true;
       rateEl.hidden = false;
       app.layout.announce('Resposta revelada. Avalie: Errei, Difícil ou Fácil.');
       rateEl.querySelector('button').focus();
@@ -136,7 +143,7 @@ export async function renderFlashcards(container, app, route) {
         stopKeys();
         return;
       }
-      if (!flipped && (event.key === ' ' || (event.key === 'Enter' && event.target === cardEl))) {
+      if (!flipped && event.key === ' ') {
         event.preventDefault();
         flip();
         return;

@@ -75,12 +75,12 @@ test('"Errei" repete a carta no máximo duas vezes na mesma sessão', async () =
   el.remove();
 });
 
-test('estudo livre não muda o agendamento; Enter na carta também vira', async () => {
+test('estudo livre não muda o agendamento; o botão "Virar carta" também vira', async () => {
   const cards = { 'java.fundamentos.f04': card({ due: '2999-01-01', box: 3 }) };
   const { app, el, cleanup } = await open(profileState({ cards }));
   button(el, 'Estudo livre').click();
   assert.match(el.querySelector('.fc-session p').textContent, /estudo livre/);
-  key('Enter', el.querySelector('.flashcard'));
+  button(el, 'Virar carta').click();
   assert.equal(el.querySelector('.flashcard').classList.contains('flipped'), true);
   key('2');
   assert.match(el.textContent, /No estudo livre, o agendamento das cartas não muda\./);
@@ -140,4 +140,24 @@ test('depois da limpeza (troca de tela), as teclas não fazem mais nada', async 
   assert.equal(el.querySelector('.flashcard').classList.contains('flipped'), false);
   el.remove();
   await tick();
+});
+
+test('leitores de tela leem a pergunta da carta e só recebem a resposta depois de virar', async () => {
+  const { el, cleanup } = await open(profileState({ cards: { 'java.fundamentos.f04': card() } }));
+  button(el, 'Revisar pendentes').click();
+  const cardEl = el.querySelector('.flashcard');
+  const front = cardEl.querySelector('.front');
+  const back = cardEl.querySelector('.back');
+  assert.equal(cardEl.getAttribute('role'), null);
+  assert.equal(cardEl.getAttribute('aria-label'), null);
+  assert.equal(front.getAttribute('aria-hidden'), 'false');
+  assert.equal(back.getAttribute('aria-hidden'), 'true');
+  assert.match(front.textContent, /10 \/ 3/);
+  const flipBtn = button(el, 'Virar carta');
+  flipBtn.click();
+  assert.equal(front.getAttribute('aria-hidden'), 'true');
+  assert.equal(back.getAttribute('aria-hidden'), 'false');
+  assert.equal(flipBtn.hidden, true);
+  cleanup();
+  el.remove();
 });
