@@ -153,6 +153,17 @@ export function updateBackupMeta(state, patch, ctx) {
   return finalize(state, s, { ...ctx, event: { type: 'backup' } });
 }
 
+// Cartas e erros cujo conteúdo foi removido não podem ficar contando como pendentes para sempre.
+export function pruneOrphans(state, { cardIds, questionIds }) {
+  const staleCards = Object.keys(state.cards).filter((id) => !cardIds.has(id));
+  const staleMistakes = state.mistakes.filter((id) => !questionIds.has(id));
+  if (!staleCards.length && !staleMistakes.length) return { state, events: noEvents() };
+  const s = structuredClone(state);
+  for (const id of staleCards) delete s.cards[id];
+  s.mistakes = s.mistakes.filter((id) => questionIds.has(id));
+  return { state: s, events: noEvents() };
+}
+
 export function replaceState(_state, { state }) {
   return { state, events: noEvents() };
 }

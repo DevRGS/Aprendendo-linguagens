@@ -56,3 +56,22 @@ test('start: com a pausa gravada de uma visita anterior, o backup automático n�
   assert.equal(app.loadStatus, 'ok');
   assert.equal(reads, 0);
 });
+
+test('start: depois de carregar o conteúdo, cartas que sumiram deixam de contar como pendentes', async () => {
+  installFetchFromDisk();
+  await initTestMarkdown();
+  const [languages, achievementTexts] = await Promise.all([loadLanguages(), loadAchievementTexts()]);
+  localStorage.clear();
+  const today = new Date();
+  const day = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const card = { box: 0, due: day, reviews: 0, lapses: 0, xpDay: null };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    ...createInitialState(),
+    profile: { name: 'Rafa', avatar: '🦊', dailyGoal: 50, createdAt: '2026-10-01T12:00:00.000Z' },
+    cards: { 'java.fundamentos.f01': card, 'java.fundamentos.f99': card },
+  }));
+  const app = start(languages, achievementTexts, { autoBackupOptions: { store: memoryStore() } });
+  await tick(50);
+  assert.deepEqual(Object.keys(app.store.get().cards), ['java.fundamentos.f01']);
+  assert.equal(document.querySelector('#sidebar .nav-badge').textContent, '1');
+});

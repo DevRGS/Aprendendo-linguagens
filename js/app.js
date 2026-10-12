@@ -4,11 +4,11 @@ import { createInitialState } from './core/state.js';
 import { toDayKey, addDays } from './core/dates.js';
 import { needsBackupReminder, hasProgress } from './core/backup-format.js';
 import { levelInfo } from './core/gamification.js';
-import { updateBackupMeta } from './core/actions.js';
+import { updateBackupMeta, pruneOrphans } from './core/actions.js';
 import { createStore } from './ui/store.js';
 import { createStorage } from './data/storage.js';
 import { createAutoBackup } from './data/backup.js';
-import { loadLanguages, loadAchievementTexts } from './data/content.js';
+import { loadLanguages, loadAchievementTexts, loadBanks } from './data/content.js';
 import { initMarkdown } from './ui/markdown.js';
 import { createLayout } from './ui/layout.js';
 import { h, mount } from './ui/dom.js';
@@ -202,6 +202,13 @@ export function start(languages, achievementTexts, options = {}) {
   app.updateBanners(app.store.get());
   if (!app.isAutoBackupPaused()) app.autoBackup.init().catch(() => {}).finally(() => app.updateBanners(app.store.get()));
   startRouter(onRoute);
+  // Só com o conteúdo inteiro carregado dá para saber o que sumiu; se algo falhar, não se apaga nada.
+  loadBanks(languages)
+    .then((bank) => app.dispatch(pruneOrphans, {
+      cardIds: new Set(bank.cards.map((c) => c.id)),
+      questionIds: new Set(bank.questions.map((q) => q.id)),
+    }))
+    .catch(() => {});
   return app;
 }
 

@@ -184,3 +184,15 @@ test('ações não alteram o estado recebido', () => {
   A.finishQuiz(s, quiz({ kind: 'practice', total: 5, correct: 5, language, moduleId: 'fund' }), ctxAt());
   assert.equal(JSON.stringify(s), snapshot);
 });
+
+test('pruneOrphans tira cartas e erros que não existem mais no conteúdo', () => {
+  const s = withProfile();
+  s.cards = { 'java.fund.f01': { box: 1, due: '2026-10-12' }, 'java.fund.f99': { box: 0, due: '2026-10-11' } };
+  s.mistakes = ['java.fund.q01', 'java.fund.q99'];
+  const ids = { cardIds: new Set(['java.fund.f01']), questionIds: new Set(['java.fund.q01']) };
+  const r = A.pruneOrphans(s, ids);
+  assert.deepEqual(Object.keys(r.state.cards), ['java.fund.f01']);
+  assert.deepEqual(r.state.mistakes, ['java.fund.q01']);
+  assert.deepEqual(Object.keys(s.cards).length, 2);
+  assert.equal(A.pruneOrphans(r.state, ids).state, r.state);
+});
