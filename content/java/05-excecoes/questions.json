@@ -1,0 +1,115 @@
+{
+  "questions": [
+    {
+      "id": "java.excecoes.q01", "type": "multiple", "difficulty": 2, "lesson": "o-que-sao",
+      "prompt": "Para que um objeto possa ser lançado com `throw`, a classe dele precisa estender (direta ou indiretamente) qual classe?",
+      "options": ["`Throwable`", "`Exception`", "`RuntimeException`", "`Object`"], "answer": 0,
+      "explanation": "Tudo o que é lançado é um `Throwable`. `Exception` e `RuntimeException` são subclasses dele, mas não são obrigatórias, porque um `Error` também pode ser lançado. Estender só `Object` não basta: `throw \"erro\";` dá *incompatible types: String cannot be converted to Throwable*."
+    },
+    {
+      "id": "java.excecoes.q02", "type": "truefalse", "difficulty": 1, "lesson": "o-que-sao",
+      "prompt": "`Error` representa problemas graves do ambiente, como falta de memória, que em geral o programa não tenta tratar.",
+      "answer": true,
+      "explanation": "Subclasses de `Error`, como `OutOfMemoryError` e `StackOverflowError`, indicam falhas da JVM ou do ambiente. O programa costuma tratar só as `Exception`."
+    },
+    {
+      "id": "java.excecoes.q03", "type": "multiple", "difficulty": 1, "lesson": "o-que-sao",
+      "prompt": "O que acontece ao executar este trecho?\n\n```java\nint zero = 0;\nSystem.out.println(10 / zero);\n```",
+      "options": ["Lança `ArithmeticException`", "Lança `NumberFormatException`", "Lança `IllegalStateException`", "Imprime `Infinity`"], "answer": 0,
+      "explanation": "Divisão **inteira** por zero lança `ArithmeticException: / by zero`. Só com `double` (por exemplo, `10.0 / 0`) o resultado seria `Infinity`."
+    },
+    {
+      "id": "java.excecoes.q04", "type": "multiple", "difficulty": 2, "lesson": "try-catch-finally",
+      "prompt": "O que este trecho imprime?\n\n```java\nint zero = 0;\ntry {\n    System.out.print(\"A\");\n    int x = 10 / zero;\n    System.out.print(\"B\");\n} catch (ArithmeticException e) {\n    System.out.print(\"C\");\n} finally {\n    System.out.print(\"D\");\n}\n```",
+      "options": ["ACD", "ABCD", "AD", "ACBD"], "answer": 0,
+      "explanation": "Imprime `A`; a divisão lança a exceção, então o resto do `try` (o `B`) é pulado. O `catch` imprime `C`, e o `finally`, que roda sempre, imprime `D`."
+    },
+    {
+      "id": "java.excecoes.q05", "type": "truefalse", "difficulty": 1, "lesson": "try-catch-finally",
+      "prompt": "O bloco `finally` é executado mesmo quando nenhuma exceção acontece no `try`.",
+      "answer": true,
+      "explanation": "O `finally` roda sempre: com exceção, sem exceção e até depois de um `return` dentro do `try`."
+    },
+    {
+      "id": "java.excecoes.q06", "type": "multiple", "difficulty": 3, "lesson": "try-catch-finally",
+      "prompt": "O que acontece ao compilar este trecho?\n\n```java\ntry {\n    System.out.println(10 / zero);\n} catch (Exception e) {\n    System.out.println(\"geral\");\n} catch (ArithmeticException e) {\n    System.out.println(\"divisão\");\n}\n```",
+      "options": ["Erro de compilação: o segundo `catch` nunca seria alcançado", "Compila, e o segundo `catch` trata as `ArithmeticException`", "Compila, e o primeiro `catch` é ignorado", "Compila, mas lança exceção ao executar"], "answer": 0,
+      "explanation": "`ArithmeticException` é uma `Exception`, então o primeiro `catch` já pegaria tudo. O `javac` acusa *exception ArithmeticException has already been caught*. O certo é colocar o `catch` mais específico primeiro."
+    },
+    {
+      "id": "java.excecoes.q07", "type": "multiple", "difficulty": 3, "lesson": "try-catch-finally",
+      "prompt": "O que `System.out.print(teste());` imprime?\n\n```java\nstatic int teste() {\n    try {\n        return 1;\n    } finally {\n        System.out.print(\"F\");\n    }\n}\n```",
+      "options": ["F1", "1F", "1", "F"], "answer": 0,
+      "explanation": "O `return 1` calcula o valor, mas antes de o método terminar o `finally` roda e imprime `F`. Só então o 1 chega ao `print` de fora."
+    },
+    {
+      "id": "java.excecoes.q08", "type": "fill", "difficulty": 2, "lesson": "try-catch-finally",
+      "prompt": "Complete para tratar as duas exceções no mesmo `catch` (Java 7+):",
+      "code": "} catch (NumberFormatException ___ ArithmeticException e) {",
+      "blanks": [["|"]],
+      "explanation": "O multi-catch separa os tipos com `|`. Os tipos não podem ser parentes (um subclasse do outro)."
+    },
+    {
+      "id": "java.excecoes.q09", "type": "multiple", "difficulty": 2, "lesson": "checked-e-unchecked",
+      "prompt": "Qual destas exceções é **checked**, ou seja, o compilador obriga a tratar ou declarar?",
+      "options": ["`IOException`", "`NullPointerException`", "`ArithmeticException`", "`IllegalArgumentException`"], "answer": 0,
+      "explanation": "`IOException` estende `Exception` sem passar por `RuntimeException`, então é checked. As outras três são subclasses de `RuntimeException` (unchecked)."
+    },
+    {
+      "id": "java.excecoes.q10", "type": "truefalse", "difficulty": 2, "lesson": "checked-e-unchecked",
+      "prompt": "Um método que pode lançar uma `IllegalArgumentException` precisa declará-la com `throws`.",
+      "answer": false,
+      "explanation": "`IllegalArgumentException` é uma `RuntimeException`, portanto unchecked: declarar com `throws` é opcional. Só as exceções checked precisam ser tratadas ou declaradas."
+    },
+    {
+      "id": "java.excecoes.q11", "type": "fill", "difficulty": 1, "lesson": "checked-e-unchecked",
+      "prompt": "Complete para lançar a exceção quando o valor for negativo:",
+      "code": "if (valor < 0) {\n    ___ new IllegalArgumentException(\"valor negativo\");\n}",
+      "blanks": [["throw"]],
+      "explanation": "`throw` lança a exceção. Não confunda com `throws`, que vai na assinatura do método para declarar o que ele pode lançar."
+    },
+    {
+      "id": "java.excecoes.q12", "type": "multiple", "difficulty": 2, "lesson": "checked-e-unchecked",
+      "prompt": "`Files.readString` declara `throws IOException`. O que acontece ao compilar este método?\n\n```java\nstatic String ler(Path caminho) {\n    return Files.readString(caminho);\n}\n```",
+      "options": ["Erro: a `IOException` precisa ser tratada ou declarada com `throws`", "Compila; a exceção só é verificada ao executar", "Compila, desde que o arquivo exista", "Compila, mas com um aviso que pode ser ignorado"], "answer": 0,
+      "explanation": "`IOException` é checked. O `javac` acusa *unreported exception IOException; must be caught or declared to be thrown*. Resolva com `throws IOException` na assinatura ou com um `try/catch`."
+    },
+    {
+      "id": "java.excecoes.q13", "type": "multiple", "difficulty": 2, "lesson": "excecoes-personalizadas",
+      "prompt": "Para criar uma exceção personalizada **unchecked**, a classe deve estender:",
+      "options": ["`RuntimeException`", "`Exception`", "`Object`", "`Throwable`"], "answer": 0,
+      "explanation": "Estender `RuntimeException` gera uma exceção unchecked. Estender `Exception` ou o próprio `Throwable` gera uma checked, e uma classe que só estende `Object` nem pode ser lançada. (`Error` também é unchecked, mas é reservado para falhas graves da JVM.)"
+    },
+    {
+      "id": "java.excecoes.q14", "type": "order", "difficulty": 2, "lesson": "excecoes-personalizadas",
+      "prompt": "Monte uma exceção checked chamada `SaldoInsuficienteException`, com um construtor que recebe a mensagem:",
+      "lines": ["class SaldoInsuficienteException extends Exception {", "    SaldoInsuficienteException(String mensagem) {", "        super(mensagem);", "    }", "}"],
+      "explanation": "A classe estende `Exception` (por isso é checked), e o construtor repassa a mensagem para a superclasse com `super(mensagem)`."
+    },
+    {
+      "id": "java.excecoes.q15", "type": "truefalse", "difficulty": 1, "lesson": "excecoes-personalizadas",
+      "prompt": "`e.getMessage()` devolve a mensagem que foi passada ao construtor da exceção.",
+      "answer": true,
+      "explanation": "O construtor da exceção repassa a mensagem com `super(mensagem)`, e `getMessage()` a devolve depois."
+    },
+    {
+      "id": "java.excecoes.q16", "type": "multiple", "difficulty": 3, "lesson": "try-with-resources",
+      "prompt": "`Recurso` implementa `AutoCloseable`, e o `close()` dele imprime o nome do recurso. O que este trecho imprime?\n\n```java\ntry (Recurso a = new Recurso(\"A\"); Recurso b = new Recurso(\"B\")) {\n    System.out.print(\"1\");\n}\n```",
+      "options": ["1BA", "1AB", "AB1", "BA1"], "answer": 0,
+      "explanation": "O bloco roda primeiro (`1`). Ao sair, os recursos são fechados na ordem inversa da abertura: primeiro `B`, depois `A`."
+    },
+    {
+      "id": "java.excecoes.q17", "type": "truefalse", "difficulty": 2, "lesson": "try-with-resources",
+      "prompt": "No try-with-resources, o recurso é fechado mesmo se uma exceção for lançada dentro do bloco.",
+      "answer": true,
+      "explanation": "O `close()` é chamado em qualquer caso. Se houver `catch` ou `finally`, eles rodam depois do fechamento."
+    },
+    {
+      "id": "java.excecoes.q18", "type": "fill", "difficulty": 2, "lesson": "try-with-resources",
+      "prompt": "Complete para que a classe `Conexao` possa ser usada num try-with-resources:",
+      "code": "class Conexao implements ___ {",
+      "blanks": [["AutoCloseable", "Closeable", "java.lang.AutoCloseable", "java.io.Closeable"]],
+      "explanation": "O try-with-resources aceita qualquer `AutoCloseable`. `Closeable` (do pacote `java.io`) também serve, porque estende `AutoCloseable`."
+    }
+  ]
+}

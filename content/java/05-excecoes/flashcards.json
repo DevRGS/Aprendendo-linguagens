@@ -1,0 +1,16 @@
+{
+  "cards": [
+    { "id": "java.excecoes.f01", "lesson": "o-que-sao", "front": "O que é uma exceção?", "back": "Um objeto que sinaliza um problema durante a execução. Se ninguém tratar, o programa para e mostra o stack trace." },
+    { "id": "java.excecoes.f02", "lesson": "o-que-sao", "front": "Como é a hierarquia das exceções?", "back": "`Throwable` no topo; abaixo dele, `Error` (problemas graves da JVM) e `Exception`. `RuntimeException` é uma subclasse de `Exception`." },
+    { "id": "java.excecoes.f03", "lesson": "o-que-sao", "front": "Como ler um stack trace?", "back": "A primeira linha diz a exceção e a mensagem. As linhas `at` mostram onde ela aconteceu, da chamada mais recente para a mais antiga." },
+    { "id": "java.excecoes.f04", "lesson": "try-catch-finally", "front": "Para que serve o `finally`?", "back": "Para código que precisa rodar sempre, com exceção ou sem, mesmo depois de um `return`. É o lugar de liberar recursos." },
+    { "id": "java.excecoes.f05", "lesson": "try-catch-finally", "front": "Em que ordem os `catch` devem ficar?", "back": "Do mais específico para o mais genérico. Um `catch (Exception e)` antes de `catch (ArithmeticException e)` nem compila." },
+    { "id": "java.excecoes.f06", "lesson": "try-catch-finally", "front": "Como tratar dois tipos de exceção no mesmo `catch`?", "back": "Com o multi-catch (Java 7+): `catch (NumberFormatException | ArithmeticException e)`." },
+    { "id": "java.excecoes.f07", "lesson": "checked-e-unchecked", "front": "Qual a diferença entre checked e unchecked?", "back": "Checked (como `IOException`): o compilador obriga a tratar ou declarar. Unchecked (`RuntimeException`, `Error` e as subclasses deles): não obriga." },
+    { "id": "java.excecoes.f08", "lesson": "checked-e-unchecked", "front": "Qual a diferença entre `throw` e `throws`?", "back": "`throw` lança uma exceção agora. `throws` declara, na assinatura do método, que ele pode lançar aquela exceção." },
+    { "id": "java.excecoes.f09", "lesson": "excecoes-personalizadas", "front": "Como criar uma exceção personalizada checked?", "back": "Estenda `Exception` e repasse a mensagem no construtor com `super(mensagem)`." },
+    { "id": "java.excecoes.f10", "lesson": "excecoes-personalizadas", "front": "Como criar uma exceção personalizada unchecked?", "back": "Estenda `RuntimeException`." },
+    { "id": "java.excecoes.f11", "lesson": "try-with-resources", "front": "O que o try-with-resources faz?", "back": "Fecha automaticamente (chama `close()`) os recursos declarados entre parênteses, mesmo se houver exceção (Java 7+)." },
+    { "id": "java.excecoes.f12", "lesson": "try-with-resources", "front": "Em que ordem os recursos do try-with-resources são fechados?", "back": "Na ordem inversa da abertura: o último aberto é o primeiro fechado." }
+  ]
+}

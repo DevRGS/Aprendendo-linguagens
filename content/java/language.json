@@ -58,6 +58,19 @@
         { "id": "iteracao", "file": "04-iteracao.md", "title": "Percorrendo coleções", "minutes": 8 },
         { "id": "ordenacao", "file": "05-ordenacao.md", "title": "Ordenação", "minutes": 10 }
       ]
+    },
+    {
+      "id": "excecoes",
+      "dir": "05-excecoes",
+      "title": "Exceções",
+      "description": "Como o Java sinaliza erros, como tratá-los com try/catch/finally e como criar suas próprias exceções.",
+      "lessons": [
+        { "id": "o-que-sao", "file": "01-o-que-sao.md", "title": "O que são exceções", "minutes": 8 },
+        { "id": "try-catch-finally", "file": "02-try-catch-finally.md", "title": "try, catch e finally", "minutes": 10 },
+        { "id": "checked-e-unchecked", "file": "03-checked-e-unchecked.md", "title": "Checked, unchecked, throw e throws", "minutes": 9 },
+        { "id": "excecoes-personalizadas", "file": "04-excecoes-personalizadas.md", "title": "Exceções personalizadas", "minutes": 8 },
+        { "id": "try-with-resources", "file": "05-try-with-resources.md", "title": "try-with-resources", "minutes": 8 }
+      ]
     }
   ]
 }
