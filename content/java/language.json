@@ -31,6 +31,20 @@
         { "id": "lacos", "file": "05-lacos.md", "title": "Laços de repetição", "minutes": 8 },
         { "id": "arrays", "file": "06-arrays.md", "title": "Arrays", "minutes": 9 }
       ]
+    },
+    {
+      "id": "poo",
+      "dir": "03-poo",
+      "title": "Orientação a Objetos",
+      "description": "Classes, objetos, construtores, encapsulamento, herança, polimorfismo, classes abstratas, interfaces, static e final.",
+      "lessons": [
+        { "id": "classes-e-objetos", "file": "01-classes-e-objetos.md", "title": "Classes e objetos", "minutes": 10 },
+        { "id": "construtores", "file": "02-construtores.md", "title": "Construtores", "minutes": 9 },
+        { "id": "encapsulamento", "file": "03-encapsulamento.md", "title": "Encapsulamento", "minutes": 9 },
+        { "id": "heranca-e-polimorfismo", "file": "04-heranca-e-polimorfismo.md", "title": "Herança e polimorfismo", "minutes": 12 },
+        { "id": "abstratas-e-interfaces", "file": "05-abstratas-e-interfaces.md", "title": "Classes abstratas e interfaces", "minutes": 11 },
+        { "id": "static-e-final", "file": "06-static-e-final.md", "title": "static e final", "minutes": 8 }
+      ]
     }
   ]
 }

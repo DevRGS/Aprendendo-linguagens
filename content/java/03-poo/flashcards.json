@@ -1,0 +1,18 @@
+{
+  "cards": [
+    { "id": "java.poo.f01", "lesson": "classes-e-objetos", "front": "Qual a diferença entre classe e objeto?", "back": "Classe é o molde (atributos e métodos). Objeto é uma instância concreta, criada a partir da classe com `new`." },
+    { "id": "java.poo.f02", "lesson": "classes-e-objetos", "front": "O que acontece em `Pessoa b = a;`?", "back": "Copia a referência: `a` e `b` passam a apontar para o mesmo objeto. Mudar o objeto por uma muda o que se vê pela outra." },
+    { "id": "java.poo.f03", "lesson": "classes-e-objetos", "front": "Quais valores padrão os atributos recebem?", "back": "`0` para números, `false` para `boolean`, o caractere nulo para `char` e `null` para objetos. Variáveis locais não recebem valor padrão." },
+    { "id": "java.poo.f04", "lesson": "construtores", "front": "Quando o compilador cria o construtor padrão (sem parâmetros)?", "back": "Só quando a classe não declara nenhum construtor." },
+    { "id": "java.poo.f05", "lesson": "construtores", "front": "Para que serve `this`?", "back": "É a referência ao próprio objeto. `this.nome = nome` separa o atributo do parâmetro de mesmo nome; `this(...)` chama outro construtor da mesma classe." },
+    { "id": "java.poo.f06", "lesson": "encapsulamento", "front": "Quais são os níveis de acesso, do mais fechado ao mais aberto?", "back": "`private` (só a classe), sem modificador (o pacote), `protected` (pacote e subclasses) e `public` (todos)." },
+    { "id": "java.poo.f07", "lesson": "encapsulamento", "front": "O que é encapsulamento?", "back": "Esconder os atributos (`private`) e expor métodos que controlam o acesso, como getters e setters com validação." },
+    { "id": "java.poo.f08", "lesson": "heranca-e-polimorfismo", "front": "O que é polimorfismo?", "back": "Uma variável do tipo da superclasse pode guardar um objeto de uma subclasse, e o método sobrescrito executado é o do objeto real." },
+    { "id": "java.poo.f09", "lesson": "heranca-e-polimorfismo", "front": "Qual a diferença entre sobrecarga e sobrescrita?", "back": "Sobrecarga (*overload*): mesmo nome, parâmetros diferentes. Sobrescrita (*override*): a subclasse redefine um método herdado, com o mesmo nome e os mesmos parâmetros." },
+    { "id": "java.poo.f10", "lesson": "heranca-e-polimorfismo", "front": "Para que serve `super`?", "back": "`super(...)` chama o construtor da superclasse (no Java 21, como primeira instrução). `super.metodo()` chama a versão da superclasse de um método sobrescrito." },
+    { "id": "java.poo.f11", "lesson": "abstratas-e-interfaces", "front": "O que é uma classe abstrata?", "back": "Uma classe que não pode ser instanciada. Pode ter métodos abstratos (sem corpo), que as subclasses concretas precisam implementar, e também atributos, construtores e métodos com corpo." },
+    { "id": "java.poo.f12", "lesson": "abstratas-e-interfaces", "front": "O que uma interface pode ter?", "back": "Métodos abstratos (o contrato), métodos `default` e `static` (Java 8+), métodos `private` (Java 9+) e constantes. Uma classe pode implementar várias interfaces." },
+    { "id": "java.poo.f13", "lesson": "static-e-final", "front": "O que significa `static`?", "back": "O membro pertence à classe, não a cada objeto: é compartilhado e acessado pelo nome da classe, como em `Contador.total`." },
+    { "id": "java.poo.f14", "lesson": "static-e-final", "front": "O que `final` impede numa variável, num método e numa classe?", "back": "Variável: receber outro valor. Método: ser sobrescrito. Classe: ser estendida." }
+  ]
+}
