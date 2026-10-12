@@ -28,8 +28,8 @@
       "id": "java.fundamentos.q05", "type": "fill", "difficulty": 1, "lesson": "conversoes",
       "prompt": "Complete para converter o texto `\"42\"` em um `int`:",
       "code": "int idade = Integer.___(\"42\");",
-      "blanks": [["parseInt", "valueOf"]],
-      "explanation": "`Integer.parseInt(\"42\")` devolve diretamente um `int`. `Integer.valueOf(\"42\")` também funciona aqui: devolve um `Integer`, que é convertido para `int` automaticamente (unboxing)."
+      "blanks": [["parseInt", "valueOf", "decode", "parseUnsignedInt"]],
+      "explanation": "O jeito mais comum é `Integer.parseInt(\"42\")`, que devolve diretamente um `int`. `Integer.valueOf(\"42\")` também funciona: devolve um `Integer`, convertido para `int` automaticamente (unboxing). `Integer.decode` e `Integer.parseUnsignedInt` também compilam e dão 42, mas são para casos especiais (números em hexadecimal e números sem sinal)."
     },
     {
       "id": "java.fundamentos.q06", "type": "multiple", "difficulty": 3, "lesson": "operadores",

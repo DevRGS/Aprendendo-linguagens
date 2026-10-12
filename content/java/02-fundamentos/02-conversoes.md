@@ -2,7 +2,7 @@
 
 ## Conversão automática (widening)
 
-Quando o tipo de destino comporta o valor de origem, o Java converte sozinho:
+Quando o tipo de destino é "maior" que o de origem, o Java converte sozinho, sem cast:
 
 ```java
 int inteiro = 42;
@@ -11,6 +11,9 @@ double decimal = inteiro; // int → double: vale 42.0
 ```
 
 A ordem é `byte → short → int → long → float → double`. Um `char` também vira `int` automaticamente.
+
+> [!NOTE]
+> A conversão automática nunca dá erro, mas nem sempre é exata: `int` → `float`, `long` → `float` e `long` → `double` podem perder precisão em números muito grandes. Por exemplo, `float f = 16777217;` guarda `1.6777216E7` (16.777.216): o valor fica perto, mas o último dígito se perde.
 
 ## Conversão manual (cast, ou narrowing)
 

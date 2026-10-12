@@ -63,4 +63,7 @@ String nome = switch (dia) {
 System.out.println(nome); // Domingo
 ```
 
-O `switch` aceita `int` e os inteiros menores (`byte`, `short`), `char`, `String`, enums e as classes empacotadoras desses tipos. Ele **não** aceita `long`, `float`, `double` nem `boolean`.
+O `switch` aceita `int` e os inteiros menores (`byte`, `short`), `char`, `String`, enums e as classes empacotadoras desses tipos. Ele **não** aceita os primitivos `long`, `float`, `double` nem `boolean`.
+
+> [!NOTE]
+> No Java 21, com *pattern matching* (assunto do módulo Java Moderno), o `switch` também aceita qualquer objeto, como `Object` ou `Long`, desde que os `case` usem padrões de tipo, como `case Long l ->`.
