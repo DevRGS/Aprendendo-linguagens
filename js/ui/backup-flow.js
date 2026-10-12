@@ -43,6 +43,7 @@ export async function importFromFile(app, file) {
   if (!saved && !confirm('Não foi possível guardar uma cópia para desfazer a importação. Continuar mesmo assim?')) return false;
   app.dispatch(replaceState, { state: s });
   app.storage.flush();
+  if (app.isAutoBackupPaused?.()) await app.resumeAutoBackup();
   return true;
 }
 

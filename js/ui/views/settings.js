@@ -29,7 +29,19 @@ function autoBackupSection(app) {
   });
 
   let body;
-  if (status === 'unsupported') {
+  if (app.isAutoBackupPaused?.()) {
+    body = [
+      h('p', { class: 'field-error', text: 'O backup automático está pausado porque o progresso salvo neste navegador não pôde ser lido. O arquivo de backup não será alterado enquanto a pausa durar.' }),
+      h('p', { class: 'muted', text: 'Se o arquivo de backup tem o seu progresso bom, importe-o acima: a pausa termina sozinha. Se preferir continuar do progresso atual, retome o backup automático.' }),
+      h('button', {
+        type: 'button', class: 'btn', text: 'Retomar backup automático',
+        onClick: run(async () => {
+          if (!confirm('Retomar vai permitir que o arquivo de backup automático seja substituído pelo progresso atual. Se o arquivo tem um progresso melhor, importe-o antes. Retomar mesmo assim?')) return;
+          await app.resumeAutoBackup();
+        }),
+      }),
+    ];
+  } else if (status === 'unsupported') {
     body = [h('p', { class: 'muted', text: 'Disponível no Chrome e no Edge para computador. Neste navegador, use o backup manual acima.' })];
   } else if (status === 'off') {
     body = [

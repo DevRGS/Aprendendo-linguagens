@@ -5,6 +5,7 @@ export const STORAGE_KEY = 'central-linguagens:state';
 export const CORRUPT_KEY_PREFIX = 'central-linguagens:corrupt:';
 export const PRE_IMPORT_KEY = 'central-linguagens:pre-import';
 export const REMINDER_DISMISS_KEY = 'central-linguagens:reminder-dismissed-until';
+export const AUTO_BACKUP_PAUSE_KEY = 'central-linguagens:auto-backup-paused';
 export const IDB_NAME = 'central-linguagens';
 export const IDB_STORE = 'handles';
 

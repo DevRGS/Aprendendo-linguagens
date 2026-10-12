@@ -4,7 +4,7 @@ import { setupDom, tick } from '../helpers/dom.js';
 import { makeTestApp, profileState, route, container, texts } from '../helpers/app.js';
 import { renderSettings } from '../../js/ui/views/settings.js';
 import { makeEnvelope } from '../../js/core/backup-format.js';
-import { PRE_IMPORT_KEY } from '../../js/config.js';
+import { PRE_IMPORT_KEY, AUTO_BACKUP_PAUSE_KEY } from '../../js/config.js';
 
 setupDom();
 window.HTMLAnchorElement.prototype.click = function click() {};
@@ -144,5 +144,27 @@ test('zerar progresso: oferece exportar antes e só apaga com confirmação', as
   assert.equal(localStorage.getItem(PRE_IMPORT_KEY), null);
   assert.equal(location.hash, '#/');
   assert.match(el.textContent, /nenhum dado sai do seu aparelho\. A Central de Linguagens não usa rastreamento/);
+  el.remove();
+});
+
+test('backup automático pausado: explica e só retoma com confirmação', async () => {
+  localStorage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
+  const { app, el } = await open(profileState(), 'off');
+  localStorage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
+  el.replaceChildren();
+  renderSettings(el, app, route('config'));
+  assert.match(el.textContent, /O backup automático está pausado/);
+  assert.equal(button(el, 'Ativar backup automático'), undefined);
+  let resumed = 0;
+  app.resumeAutoBackup = async () => { resumed += 1; };
+  window.confirm = () => false;
+  button(el, 'Retomar backup automático').click();
+  await tick(20);
+  assert.equal(resumed, 0);
+  window.confirm = () => true;
+  button(el, 'Retomar backup automático').click();
+  await tick(20);
+  assert.equal(resumed, 1);
+  localStorage.removeItem(AUTO_BACKUP_PAUSE_KEY);
   el.remove();
 });

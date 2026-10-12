@@ -17,7 +17,7 @@ import { exportNow } from './ui/backup-flow.js';
 import { VIEWS } from './ui/views/index.js';
 import { renderOnboarding } from './ui/views/onboarding.js';
 import { startRouter, navigate, refresh, setLeaveGuard, hasLeaveGuard } from './router.js';
-import { APP_NAME, REMINDER_DISMISS_KEY, REMINDER_SNOOZE_DAYS } from './config.js';
+import { APP_NAME, REMINDER_DISMISS_KEY, REMINDER_SNOOZE_DAYS, AUTO_BACKUP_PAUSE_KEY } from './config.js';
 
 const loading = () => h('p', { class: 'loading', text: 'Carregando…' });
 
@@ -42,6 +42,9 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
   store = createStore(loaded.status === 'ok' ? loaded.state : createInitialState());
 
   if (loaded.status === 'unavailable') noStorage();
+  // Com dados danificados ou de versão mais nova, o backup automático fica pausado (também nas próximas visitas)
+  // até a pessoa importar um backup ou retomar de propósito: o arquivo em disco pode ser justamente a cópia boa.
+  if (loaded.status === 'corrupt' || loaded.status === 'newer') storage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
   if (loaded.status === 'corrupt') {
     storage.keepCorrupt(loaded.raw);
     layout.setBanner('corrupt', {
@@ -84,7 +87,24 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
     onError: (message) => dispatch(updateBackupMeta, { autoFileError: message }, { backupMeta: true }),
   });
 
+  const isAutoBackupPaused = () => Boolean(storage.getItem(AUTO_BACKUP_PAUSE_KEY));
+
+  async function resumeAutoBackup() {
+    storage.removeItem(AUTO_BACKUP_PAUSE_KEY);
+    await autoBackup.init().catch(() => {});
+    updateBanners(store.get());
+  }
+
   function updateBanners(state) {
+    if (isAutoBackupPaused()) {
+      layout.setBanner('paused', {
+        tone: 'warning',
+        text: 'O backup automático está pausado porque o progresso salvo neste navegador não pôde ser lido. O arquivo de backup não será alterado até você importar um backup ou retomar em Configurações.',
+        actions: [{ label: 'Abrir Configurações', onClick: () => navigate('#/config') }],
+      });
+    } else {
+      layout.clearBanner('paused');
+    }
     const status = autoBackup.status();
     if (status === 'needs-permission') {
       layout.setBanner('reconnect', {
@@ -128,6 +148,7 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
 
   Object.assign(app, {
     store, storage, layout, autoBackup, dispatch, ctx, navigate, refresh, setLeaveGuard, updateBanners,
+    isAutoBackupPaused, resumeAutoBackup,
     loadStatus: loaded.status,
     go: (hash) => (location.hash === hash ? app.refresh() : navigate(hash)),
   });
@@ -135,7 +156,7 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
   store.subscribe((state, meta) => {
     if (!meta.external) storage.save(state);
     // Um estado sem progresso (recém-zerado ou recomeçado após dados danificados) nunca sobrescreve o arquivo de backup.
-    if (!meta.external && !meta.backupMeta && hasProgress(state)) autoBackup.schedule(state);
+    if (!meta.external && !meta.backupMeta && hasProgress(state) && !isAutoBackupPaused()) autoBackup.schedule(state);
     layout.render(state, app.currentRoute?.name);
     updateBanners(state);
   });
@@ -179,10 +200,7 @@ export function start(languages, achievementTexts, options = {}) {
   window.addEventListener('error', oops);
   window.addEventListener('unhandledrejection', oops);
   app.updateBanners(app.store.get());
-  // Com dados danificados ou de versão mais nova, o backup automático fica pausado até a próxima carga:
-  // o arquivo em disco pode ser justamente a cópia boa que a pessoa vai querer importar.
-  const pauseAutoBackup = app.loadStatus === 'corrupt' || app.loadStatus === 'newer';
-  if (!pauseAutoBackup) app.autoBackup.init().catch(() => {}).finally(() => app.updateBanners(app.store.get()));
+  if (!app.isAutoBackupPaused()) app.autoBackup.init().catch(() => {}).finally(() => app.updateBanners(app.store.get()));
   startRouter(onRoute);
   return app;
 }

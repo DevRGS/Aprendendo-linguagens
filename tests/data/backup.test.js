@@ -9,6 +9,7 @@ import { exportBackup, readBackupFile, createAutoBackup } from '../../js/data/ba
 
 setupDom();
 const state = () => ({ ...createInitialState(), profile: { name: 'Rafa Gonçalves', avatar: '🦊', dailyGoal: 50, createdAt: '2026-10-01T12:00:00.000Z' } });
+const studied = (extra = {}) => ({ ...state(), lessons: { 'java.fundamentos.arrays': { doneAt: '2026-10-01' } }, ...extra });
 
 const clicked = [];
 window.HTMLAnchorElement.prototype.click = function click() {
@@ -92,7 +93,7 @@ test('ativar escolhe o arquivo, guarda o atalho e grava na hora', async () => {
   const writes = [];
   const auto = createAutoBackup({ onWrite: (at) => writes.push(at), onError() {}, store });
   assert.equal(await auto.init(), 'off');
-  assert.equal(await auto.enable(state()), 'on');
+  assert.equal(await auto.enable(studied()), 'on');
   assert.equal(store.map.size, 1);
   assert.equal(fs.written.length, 1);
   assert.equal(JSON.parse(fs.written[0]).app, APP_ID);
@@ -103,9 +104,9 @@ test('schedule agrupa mudanças próximas numa gravação só', async () => {
   const fs = fakeFileSystem();
   window.showSaveFilePicker = async () => fs.handle;
   const auto = createAutoBackup({ onWrite() {}, onError() {}, store: memoryStore(), debounceMs: 20 });
-  await auto.enable(state());
-  auto.schedule({ ...state(), lastLesson: 'a' });
-  auto.schedule({ ...state(), lastLesson: 'b' });
+  await auto.enable(studied());
+  auto.schedule(studied({ lastLesson: 'a' }));
+  auto.schedule(studied({ lastLesson: 'b' }));
   await tick(60);
   assert.equal(fs.written.length, 2);
   assert.equal(JSON.parse(fs.written[1]).data.lastLesson, 'b');
@@ -122,10 +123,10 @@ test('ao abrir de novo: permissão concedida fica "on"; pendente pede reconexão
   store.map.set('auto-backup-file', prompt.handle);
   const auto = createAutoBackup({ onWrite() {}, onError() {}, store });
   assert.equal(await auto.init(), 'needs-permission');
-  auto.schedule(state());
+  auto.schedule(studied());
   await tick(10);
   assert.equal(prompt.written.length, 0);
-  assert.equal(await auto.reconnect(state()), 'on');
+  assert.equal(await auto.reconnect(studied()), 'on');
   assert.equal(prompt.written.length, 1);
 });
 
@@ -134,7 +135,7 @@ test('falha ao gravar chega por onError', async () => {
   window.showSaveFilePicker = async () => fs.handle;
   const errors = [];
   const auto = createAutoBackup({ onWrite() {}, onError: (m) => errors.push(m), store: memoryStore() });
-  await auto.enable(state());
+  await auto.enable(studied());
   assert.deepEqual(errors, ['disco cheio']);
 });
 
@@ -143,10 +144,27 @@ test('desativar apaga o atalho e para de gravar', async () => {
   window.showSaveFilePicker = async () => fs.handle;
   const store = memoryStore();
   const auto = createAutoBackup({ onWrite() {}, onError() {}, store, debounceMs: 5 });
-  await auto.enable(state());
+  await auto.enable(studied());
   assert.equal(await auto.disable(), 'off');
   assert.equal(store.map.size, 0);
+  auto.schedule(studied());
+  await tick(20);
+  assert.equal(fs.written.length, 1);
+});
+
+test('nunca grava um estado sem progresso, nem ao ativar, reconectar ou agendar', async () => {
+  const fs = fakeFileSystem({ permission: 'prompt' });
+  window.showSaveFilePicker = async () => fs.handle;
+  const store = memoryStore();
+  store.map.set('auto-backup-file', fs.handle);
+  const auto = createAutoBackup({ onWrite() {}, onError() {}, store, debounceMs: 5 });
+  assert.equal(await auto.init(), 'needs-permission');
+  assert.equal(await auto.reconnect(state()), 'on');
   auto.schedule(state());
+  await tick(20);
+  assert.equal(await auto.enable(state()), 'on');
+  assert.equal(fs.written.length, 0);
+  auto.schedule(studied());
   await tick(20);
   assert.equal(fs.written.length, 1);
 });

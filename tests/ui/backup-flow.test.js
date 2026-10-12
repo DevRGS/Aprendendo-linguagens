@@ -4,7 +4,7 @@ import { setupDom, tick } from '../helpers/dom.js';
 import { makeTestApp, profileState } from '../helpers/app.js';
 import { BACKUP_ERRORS, exportNow, importFromFile, canUndoImport, undoImport } from '../../js/ui/backup-flow.js';
 import { makeEnvelope } from '../../js/core/backup-format.js';
-import { PRE_IMPORT_KEY } from '../../js/config.js';
+import { PRE_IMPORT_KEY, AUTO_BACKUP_PAUSE_KEY } from '../../js/config.js';
 
 setupDom();
 window.HTMLAnchorElement.prototype.click = function click() {};
@@ -87,4 +87,16 @@ test('desfazer com cópia danificada avisa e mantém o estado', async () => {
   assert.equal(undoImport(app), false);
   assert.match(alerts[0], /danificada/);
   await tick();
+});
+
+test('importar um backup bom tira a pausa do backup automático', async () => {
+  const app = await makeTestApp({ state: profileState() });
+  window.confirm = () => true;
+  localStorage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
+  let resumed = 0;
+  app.resumeAutoBackup = async () => { resumed += 1; localStorage.removeItem(AUTO_BACKUP_PAUSE_KEY); };
+  assert.equal(await importFromFile(app, fileOf(makeEnvelope(profileState()))), true);
+  assert.equal(resumed, 1);
+  assert.equal(await importFromFile(app, fileOf(makeEnvelope(profileState()))), true);
+  assert.equal(resumed, 1);
 });

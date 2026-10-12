@@ -1,4 +1,4 @@
-import { makeEnvelope, parseEnvelope, backupFileName } from '../core/backup-format.js';
+import { makeEnvelope, parseEnvelope, backupFileName, hasProgress } from '../core/backup-format.js';
 import { toDayKey } from '../core/dates.js';
 import { idbGet, idbSet, idbDelete } from './idb.js';
 import { APP_NAME, AUTO_BACKUP_DEBOUNCE_MS, AUTO_BACKUP_FILE_NAME } from '../config.js';
@@ -42,8 +42,9 @@ export function createAutoBackup({ onWrite, onError, store = IDB_STORE_API, debo
   let granted = false;
   let timer = null;
 
+  // Um estado sem progresso nunca substitui o arquivo: ele pode ser justamente a cópia boa.
   async function write(state) {
-    if (!handle || !granted) return;
+    if (!handle || !granted || !hasProgress(state)) return;
     try {
       const writable = await handle.createWritable();
       await writable.write(envelopeBlob(state));

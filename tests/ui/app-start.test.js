@@ -6,7 +6,8 @@ import { initTestMarkdown } from '../helpers/markdown.js';
 import { memoryStore } from '../helpers/app.js';
 import { loadLanguages, loadAchievementTexts } from '../../js/data/content.js';
 import { createApp, start } from '../../js/app.js';
-import { STORAGE_KEY } from '../../js/config.js';
+import { STORAGE_KEY, AUTO_BACKUP_PAUSE_KEY } from '../../js/config.js';
+import { createInitialState } from '../../js/core/state.js';
 
 setupDom();
 
@@ -38,4 +39,20 @@ test('start: dados danificados pausam o backup automático; erros inesperados vi
   assert.match(document.getElementById('main').textContent, /Boas-vindas/);
   window.dispatchEvent(new window.Event('error'));
   assert.ok([...document.querySelectorAll('#toasts .toast')].some((t) => t.textContent.startsWith('Algo deu errado')));
+});
+
+test('start: com a pausa gravada de uma visita anterior, o backup automático não é iniciado', async () => {
+  installFetchFromDisk();
+  const [languages, achievementTexts] = await Promise.all([loadLanguages(), loadAchievementTexts()]);
+  localStorage.clear();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...createInitialState(), profile: { name: 'Rafa', avatar: '🦊', dailyGoal: 50, createdAt: '2026-10-01T12:00:00.000Z' } }));
+  localStorage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
+  window.showSaveFilePicker = async () => ({});
+  const store = memoryStore();
+  let reads = 0;
+  const spyStore = { ...store, get: async (k) => { reads += 1; return store.get(k); } };
+  const app = start(languages, achievementTexts, { autoBackupOptions: { store: spyStore } });
+  await tick(20);
+  assert.equal(app.loadStatus, 'ok');
+  assert.equal(reads, 0);
 });

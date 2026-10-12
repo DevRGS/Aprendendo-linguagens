@@ -4,7 +4,7 @@ import { setupDom, tick } from '../helpers/dom.js';
 import { makeTestApp, profileState, route, texts } from '../helpers/app.js';
 import { createRouteHandler } from '../../js/app.js';
 import { completeLesson } from '../../js/core/actions.js';
-import { STORAGE_KEY, CORRUPT_KEY_PREFIX, REMINDER_DISMISS_KEY } from '../../js/config.js';
+import { STORAGE_KEY, CORRUPT_KEY_PREFIX, REMINDER_DISMISS_KEY, AUTO_BACKUP_PAUSE_KEY } from '../../js/config.js';
 import { CURRENT_SCHEMA } from '../../js/core/state.js';
 import { toDayKey, addDays } from '../../js/core/dates.js';
 
@@ -150,4 +150,34 @@ test('rotas: a limpeza da tela anterior roda ao trocar de tela, e respostas atra
   await slow;
   assert.equal(main.textContent, 'home');
   assert.equal(cleaned, 11);
+});
+
+test('dados danificados pausam o backup automático também nas próximas visitas', async () => {
+  clearBanners();
+  const app = await makeTestApp({ raw: '{ quebrado' });
+  assert.equal(localStorage.getItem(AUTO_BACKUP_PAUSE_KEY), '1');
+  assert.equal(app.isAutoBackupPaused(), true);
+  const scheduled = [];
+  app.autoBackup.schedule = (s) => scheduled.push(s);
+  app.store.set(profileState());
+  app.dispatch(completeLesson, { language: app.getLanguage('java'), moduleId: 'fundamentos', lessonId: 'arrays', cards: [] });
+  assert.equal(scheduled.length, 0);
+  app.updateBanners(app.store.get());
+  assert.ok(banners().some((b) => b.startsWith('O backup automático está pausado')));
+});
+
+test('retomar o backup automático tira a pausa e volta a agendar', async () => {
+  clearBanners();
+  const app = await makeTestApp({ state: profileState() });
+  localStorage.setItem(AUTO_BACKUP_PAUSE_KEY, '1');
+  let inits = 0;
+  app.autoBackup.init = async () => { inits += 1; return 'off'; };
+  const scheduled = [];
+  app.autoBackup.schedule = (s) => scheduled.push(s);
+  await app.resumeAutoBackup();
+  assert.equal(app.isAutoBackupPaused(), false);
+  assert.equal(inits, 1);
+  assert.ok(!banners().some((b) => b.startsWith('O backup automático está pausado')));
+  app.dispatch(completeLesson, { language: app.getLanguage('java'), moduleId: 'fundamentos', lessonId: 'arrays', cards: [] });
+  assert.equal(scheduled.length, 1);
 });
