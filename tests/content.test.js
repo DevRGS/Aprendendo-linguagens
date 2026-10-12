@@ -58,6 +58,11 @@ export function validateCard(c, ctx, errors) {
   if (!nonEmpty(c.front) || !nonEmpty(c.back)) err('front/back vazios');
 }
 
+export function lessonsWithoutQuestions(lessonIds, questions) {
+  const used = new Set(questions.map((q) => q.lesson));
+  return lessonIds.filter((id) => !used.has(id));
+}
+
 function validateLanguage(entry, ids, errors) {
   const base = `${entry.dir}/`;
   if (!exists(`${base}language.json`)) {
@@ -107,6 +112,7 @@ function validateLanguage(entry, ids, errors) {
     if (questions.length < MIN_QUESTIONS) errors.push(`${qFile}: precisa de pelo menos ${MIN_QUESTIONS} perguntas (tem ${questions.length})`);
     if (new Set(questions.map((q) => q.type)).size < MIN_TYPES) errors.push(`${qFile}: precisa cobrir pelo menos ${MIN_TYPES} tipos de pergunta`);
     if (cards.length < MIN_CARDS) errors.push(`${cFile}: precisa de pelo menos ${MIN_CARDS} cartas (tem ${cards.length})`);
+    for (const id of lessonsWithoutQuestions([...lessons], questions)) errors.push(`${qFile}: a aula ${id} não tem nenhuma pergunta`);
   }
 }
 
@@ -121,6 +127,11 @@ test('o validador encontra problemas de propósito', () => {
   for (const trecho of ['opção proibida', 'id repetido', 'difficulty', 'aula inexistente', 'número de ___', 'Fase 2', 'fNN', 'front/back']) {
     assert.ok(text.includes(trecho), `deveria acusar: ${trecho}`);
   }
+});
+
+test('o validador aponta aulas sem nenhuma pergunta', () => {
+  assert.deepEqual(lessonsWithoutQuestions(['a', 'b', 'c'], [{ lesson: 'a' }, { lesson: 'c' }, { lesson: 'a' }]), ['b']);
+  assert.deepEqual(lessonsWithoutQuestions(['a'], [{ lesson: 'a' }]), []);
 });
 
 test('conteúdo de todas as linguagens é válido', () => {

@@ -37,10 +37,11 @@ Resumo para consultar durante os estudos. Os detalhes de cada assunto estão nas
 ## Exceções
 
 - `Throwable` é a raiz. Abaixo dela ficam `Error` (problemas graves, em geral da JVM, que não se costuma tratar) e `Exception`.
-- **Checked:** subclasses de `Exception` que não são `RuntimeException`. O compilador exige tratar (`try`/`catch`) ou declarar (`throws`).
-- **Unchecked:** subclasses de `RuntimeException`. O tratamento é opcional.
+- **Unchecked:** `RuntimeException`, `Error` e as subclasses deles. O tratamento é opcional.
+- **Checked:** todas as outras, como `Exception` e `IOException`. O compilador exige tratar (`try`/`catch`) ou declarar (`throws`).
 - `throw` lança uma exceção; `throws` declara na assinatura do método que ela pode ser lançada.
 - `finally` executa com ou sem exceção.
+- O try-with-resources (Java 7+) fecha sozinho, na ordem inversa, os recursos `AutoCloseable` declarados entre parênteses.
 
 ## Coleções: quando usar
 
@@ -49,8 +50,10 @@ Resumo para consultar durante os estudos. Os detalhes de cada assunto estão nas
 | `ArrayList` | lista de uso geral; acesso rápido por índice |
 | `LinkedList` | muitas inserções e remoções nas pontas |
 | `HashSet` | valores únicos, sem ordem garantida |
+| `LinkedHashSet` | valores únicos, na ordem de inserção |
 | `TreeSet` | valores únicos, em ordem crescente |
 | `HashMap` | pares chave → valor, sem ordem garantida |
+| `LinkedHashMap` | pares chave → valor, na ordem de inserção |
 | `TreeMap` | pares chave → valor, ordenados pela chave |
 
 ## Interfaces funcionais (Java 8+)
@@ -79,3 +82,7 @@ Resumo para consultar durante os estudos. Os detalhes de cada assunto estão nas
 - `s.toUpperCase()` não altera `s`: `String` é imutável, então reatribua (`s = s.toUpperCase();`).
 - `i++` usa o valor atual e só depois incrementa.
 - `Optional.get()` lança `NoSuchElementException` se estiver vazio; prefira `orElse`.
+- Em `List<Integer>`, `remove(1)` remove a **posição** 1; para remover o valor, use `remove(Integer.valueOf(1))`.
+- Remover itens de uma lista dentro do for-each quebra o laço: use `Iterator.remove()` ou `removeIf`.
+- `nextInt()` seguido de `nextLine()` devolve uma linha vazia: descarte a quebra de linha com um `nextLine()` extra.
+- `split` recebe expressão regular: `"a.b.c".split(".")` dá um array vazio; use `split("\\.")`.

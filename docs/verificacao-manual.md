@@ -12,7 +12,8 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] `#/qualquer-coisa` mostra "Página não encontrada".
 
 ## Aulas, prática, quiz e prova
-- [ ] As 6 aulas de Fundamentos aparecem com tabelas, código colorido, botão "copiar" e quadros de destaque coloridos.
+- [ ] A página de Java lista os 7 módulos, nesta ordem: Introdução, Fundamentos, Orientação a Objetos, Coleções, Exceções, Strings e Entrada, Java Moderno (8 a 21).
+- [ ] As aulas dos 7 módulos aparecem com tabelas, código colorido, botão "copiar" e quadros de destaque coloridos (confira pelo menos uma aula de cada módulo).
 - [ ] Concluir uma aula dá XP, libera as cartas da aula e atualiza o anel da meta e a sequência.
 - [ ] A prática do módulo mostra os 4 tipos de pergunta ao longo de algumas tentativas; sair no meio pede confirmação.
 - [ ] Em "Ordenar linhas", arrastar com o mouse funciona no computador.
@@ -41,4 +42,4 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] Lembrete: com progresso e sem backup há 7 dias (simule mudando `lastExportAt` e `createdAt` no Local Storage), a faixa aparece; "Depois" some por 3 dias.
 
 ## Conteúdo
-- [ ] `node tools/verify-java.mjs` com o JDK 21: 32/32.
+- [ ] `node tools/verify-java.mjs` com o JDK 21: 230/230.
