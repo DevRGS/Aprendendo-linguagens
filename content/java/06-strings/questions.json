@@ -1,0 +1,115 @@
+{
+  "questions": [
+    {
+      "id": "java.strings.q01", "type": "multiple", "difficulty": 1, "lesson": "string-imutavel",
+      "prompt": "Qual é a forma correta de comparar o **conteúdo** de duas Strings `a` e `b`?",
+      "options": ["`a.equals(b)`", "`a == b`", "`a = b`", "`a.compare(b)`"], "answer": 0,
+      "explanation": "`equals` compara o conteúdo. `==` compara se são o mesmo objeto, `=` é atribuição, e `String` não tem método `compare` (o método de ordem é `compareTo`)."
+    },
+    {
+      "id": "java.strings.q02", "type": "multiple", "difficulty": 2, "lesson": "string-imutavel",
+      "prompt": "O que este código imprime?\n\n```java\nString a = \"java\";\nString b = new String(\"java\");\nSystem.out.println(a == b);\nSystem.out.println(a.equals(b));\n```",
+      "options": ["`false` e depois `true`", "`true` e depois `true`", "`true` e depois `false`", "`false` e depois `false`"], "answer": 0,
+      "explanation": "`new String(...)` cria um objeto novo, então `a == b` é `false`. O conteúdo é o mesmo, então `equals` dá `true`."
+    },
+    {
+      "id": "java.strings.q03", "type": "multiple", "difficulty": 2, "lesson": "string-imutavel",
+      "prompt": "O que este código imprime?\n\n```java\nString s = \"java\";\ns.toUpperCase();\nSystem.out.println(s);\n```",
+      "options": ["java", "JAVA", "Java", "Erro de compilação"], "answer": 0,
+      "explanation": "Strings são imutáveis: `toUpperCase()` devolve uma String nova, que aqui foi descartada. Para guardar, seria `s = s.toUpperCase();`."
+    },
+    {
+      "id": "java.strings.q04", "type": "truefalse", "difficulty": 1, "lesson": "string-imutavel",
+      "prompt": "`\"Java\".equalsIgnoreCase(\"JAVA\")` devolve `true`.",
+      "answer": true,
+      "explanation": "`equalsIgnoreCase` compara o conteúdo sem diferenciar maiúsculas de minúsculas."
+    },
+    {
+      "id": "java.strings.q05", "type": "multiple", "difficulty": 1, "lesson": "metodos-de-string",
+      "prompt": "Qual é o resultado de `\"Programar\".substring(0, 3)`?",
+      "options": ["Pro", "Prog", "rog", "ogr"], "answer": 0,
+      "explanation": "`substring(inicio, fim)` vai da posição `inicio` até `fim - 1`: posições 0, 1 e 2, ou seja, `Pro`."
+    },
+    {
+      "id": "java.strings.q06", "type": "multiple", "difficulty": 2, "lesson": "metodos-de-string",
+      "prompt": "Qual é o resultado de `\"banana\".indexOf(\"na\")`?",
+      "options": ["2", "4", "1", "-1"], "answer": 0,
+      "explanation": "`indexOf` devolve a posição da **primeira** ocorrência: `b`(0) `a`(1) `n`(2). A segunda ocorrência, na posição 4, é o que `lastIndexOf` devolveria."
+    },
+    {
+      "id": "java.strings.q07", "type": "fill", "difficulty": 1, "lesson": "metodos-de-string",
+      "prompt": "Complete para guardar em `n` o número de caracteres de `nome`:",
+      "code": "int n = nome.___();",
+      "blanks": [["length"]],
+      "explanation": "Em `String`, `length()` é um método, com parênteses. Em arrays, `length` é um atributo, sem parênteses."
+    },
+    {
+      "id": "java.strings.q08", "type": "multiple", "difficulty": 3, "lesson": "metodos-de-string",
+      "prompt": "Qual é o valor de `\"a.b.c\".split(\".\").length`?",
+      "options": ["0", "3", "5", "1"], "answer": 0,
+      "explanation": "`split` recebe uma expressão regular, e `.` significa \"qualquer caractere\". Todo caractere vira separador, sobram só pedaços vazios, e o `split` descarta os vazios do fim: o array fica com tamanho 0. Para dividir no ponto, use `split(\"\\\\.\")`, que dá 3."
+    },
+    {
+      "id": "java.strings.q09", "type": "truefalse", "difficulty": 2, "lesson": "metodos-de-string",
+      "prompt": "`\"   \".isBlank()` devolve `true` (Java 11+).",
+      "answer": true,
+      "explanation": "`isBlank()` é `true` para Strings vazias ou só com espaços. Já `\"   \".isEmpty()` é `false`, porque o tamanho é 3."
+    },
+    {
+      "id": "java.strings.q10", "type": "multiple", "difficulty": 2, "lesson": "metodos-de-string",
+      "prompt": "Qual é o resultado de `\" Oi \".trim().length()`?",
+      "options": ["2", "4", "3", "0"], "answer": 0,
+      "explanation": "`trim()` remove os espaços das duas pontas, sobrando `\"Oi\"`, que tem 2 caracteres."
+    },
+    {
+      "id": "java.strings.q11", "type": "fill", "difficulty": 2, "lesson": "metodos-de-string",
+      "prompt": "Complete para que `texto` fique `\"Ana, Bia, Caio\"`:",
+      "code": "String texto = String.___(\", \", List.of(\"Ana\", \"Bia\", \"Caio\"));",
+      "blanks": [["join"]],
+      "explanation": "`String.join(separador, itens)` junta os itens com o separador entre eles. Aceita uma lista ou vários textos."
+    },
+    {
+      "id": "java.strings.q12", "type": "multiple", "difficulty": 2, "lesson": "stringbuilder",
+      "prompt": "Por que usar `StringBuilder` para montar um texto dentro de um laço?",
+      "options": ["Porque ele altera o próprio objeto, sem criar uma String nova a cada concatenação", "Porque `String` não pode ser usada dentro de laços", "Porque o `+` entre Strings não compila dentro de laços", "Porque o `StringBuilder` remove espaços sozinho"], "answer": 0,
+      "explanation": "Como `String` é imutável, cada `+` cria um objeto novo. O `StringBuilder` é mutável e vai acrescentando no mesmo objeto."
+    },
+    {
+      "id": "java.strings.q13", "type": "order", "difficulty": 2, "lesson": "stringbuilder",
+      "prompt": "Monte o trecho que imprime `1 2 3` usando um `StringBuilder`:",
+      "lines": ["StringBuilder sb = new StringBuilder();", "for (int i = 1; i <= 3; i++) {", "    sb.append(i).append(\" \");", "}", "System.out.println(sb.toString().trim());"],
+      "explanation": "Cria o builder, acrescenta cada número com um espaço dentro do laço e, depois do laço, imprime uma vez só, tirando o espaço do fim com `trim()`."
+    },
+    {
+      "id": "java.strings.q14", "type": "multiple", "difficulty": 2, "lesson": "stringbuilder",
+      "prompt": "O que `System.out.println(new StringBuilder(\"abc\").reverse().append(\"!\"));` imprime?",
+      "options": ["cba!", "!cba", "abc!", "!abc"], "answer": 0,
+      "explanation": "`reverse()` transforma `abc` em `cba`, e `append(\"!\")` acrescenta no fim: `cba!`."
+    },
+    {
+      "id": "java.strings.q15", "type": "multiple", "difficulty": 3, "lesson": "entrada-com-scanner",
+      "prompt": "A pessoa digita `25`, Enter, `Recife`, Enter. O que fica em `cidade`?\n\n```java\nScanner sc = new Scanner(System.in);\nint idade = sc.nextInt();\nString cidade = sc.nextLine();\n```",
+      "options": ["Uma String vazia", "Recife", "25", "O programa lança exceção"], "answer": 0,
+      "explanation": "O `nextInt()` lê o 25 e deixa a quebra de linha na entrada. O `nextLine()` seguinte devolve o que havia antes dessa quebra: nada. Descarte a quebra com um `sc.nextLine()` extra antes de ler a cidade."
+    },
+    {
+      "id": "java.strings.q16", "type": "multiple", "difficulty": 3, "lesson": "entrada-com-scanner",
+      "prompt": "Num computador configurado em português do Brasil, a pessoa digita `7.5` para `sc.nextDouble()`, sem nenhum `useLocale`. O que acontece?",
+      "options": ["Lança `InputMismatchException`, porque o Scanner espera `7,5`", "Lê 7.5 normalmente", "Lê 75", "Lê 7 e ignora o resto"], "answer": 0,
+      "explanation": "O `Scanner` usa o idioma do sistema, e em português do Brasil o separador decimal é a vírgula. Para aceitar `7.5`, use `sc.useLocale(Locale.US)`."
+    },
+    {
+      "id": "java.strings.q17", "type": "fill", "difficulty": 2, "lesson": "entrada-com-scanner",
+      "prompt": "Complete para que o Scanner leia números com ponto decimal (`7.5`) em qualquer computador:",
+      "code": "sc.___(Locale.US);",
+      "blanks": [["useLocale"]],
+      "explanation": "`useLocale(Locale.US)` faz o Scanner seguir as regras do inglês dos Estados Unidos, em que o separador decimal é o ponto."
+    },
+    {
+      "id": "java.strings.q18", "type": "truefalse", "difficulty": 1, "lesson": "entrada-com-scanner",
+      "prompt": "`sc.nextLine()` lê a linha inteira, inclusive os espaços.",
+      "answer": true,
+      "explanation": "Com a entrada `Maria Silva`, `nextLine()` devolve `Maria Silva`. Já `next()` devolveria só `Maria`."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "cards": [
+    { "id": "java.strings.f01", "lesson": "string-imutavel", "front": "O que significa dizer que `String` é imutável?", "back": "Um objeto `String` nunca muda. Métodos como `toUpperCase()` devolvem uma String nova; para guardá-la, reatribua: `s = s.toUpperCase();`." },
+    { "id": "java.strings.f02", "lesson": "string-imutavel", "front": "`==` ou `equals` para comparar Strings?", "back": "`equals`, que compara o conteúdo. `==` compara se são o mesmo objeto e pode dar `false` para textos iguais." },
+    { "id": "java.strings.f03", "lesson": "string-imutavel", "front": "Como comparar Strings ignorando maiúsculas e minúsculas?", "back": "Com `a.equalsIgnoreCase(b)`." },
+    { "id": "java.strings.f04", "lesson": "metodos-de-string", "front": "O que `substring(inicio, fim)` devolve?", "back": "Os caracteres da posição `inicio` até `fim - 1`: o fim não entra. `\"Programar\".substring(0, 3)` é `\"Pro\"`." },
+    { "id": "java.strings.f05", "lesson": "metodos-de-string", "front": "Por que `\"a.b.c\".split(\".\")` devolve um array vazio?", "back": "`split` recebe uma expressão regular, e `.` significa \"qualquer caractere\". Para dividir no ponto, use `split(\"\\\\.\")`." },
+    { "id": "java.strings.f06", "lesson": "metodos-de-string", "front": "Qual a diferença entre `isEmpty()` e `isBlank()`?", "back": "`isEmpty()`: tamanho zero. `isBlank()` (Java 11+): vazia ou só com espaços." },
+    { "id": "java.strings.f07", "lesson": "metodos-de-string", "front": "Como juntar vários textos com um separador?", "back": "Com `String.join(\", \", lista)`, que aceita uma lista ou vários textos." },
+    { "id": "java.strings.f08", "lesson": "stringbuilder", "front": "Quando usar `StringBuilder`?", "back": "Para montar um texto aos poucos, principalmente em laços: ele altera o próprio objeto em vez de criar uma String nova a cada `+`." },
+    { "id": "java.strings.f09", "lesson": "stringbuilder", "front": "Quais são os principais métodos do `StringBuilder`?", "back": "`append` (acrescenta no fim), `insert` (insere numa posição), `reverse` (inverte) e `toString` (gera a String)." },
+    { "id": "java.strings.f10", "lesson": "entrada-com-scanner", "front": "Como criar um `Scanner` para ler o teclado?", "back": "`Scanner sc = new Scanner(System.in);`, com `import java.util.Scanner;` no topo do arquivo." },
+    { "id": "java.strings.f11", "lesson": "entrada-com-scanner", "front": "Qual é a armadilha de `nextInt()` seguido de `nextLine()`?", "back": "O `nextInt()` deixa a quebra de linha na entrada, e o `nextLine()` seguinte devolve uma String vazia. Chame um `nextLine()` extra para descartar a quebra." },
+    { "id": "java.strings.f12", "lesson": "entrada-com-scanner", "front": "Por que o Scanner recusa `7.5` em alguns computadores?", "back": "Ele segue o idioma do sistema: em português do Brasil, espera `7,5`. Para aceitar o ponto, use `sc.useLocale(Locale.US)`." }
+  ]
+}

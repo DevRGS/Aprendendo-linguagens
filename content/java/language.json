@@ -71,6 +71,18 @@
         { "id": "excecoes-personalizadas", "file": "04-excecoes-personalizadas.md", "title": "Exceções personalizadas", "minutes": 8 },
         { "id": "try-with-resources", "file": "05-try-with-resources.md", "title": "try-with-resources", "minutes": 8 }
       ]
+    },
+    {
+      "id": "strings",
+      "dir": "06-strings",
+      "title": "Strings e Entrada",
+      "description": "Trabalhar com texto: imutabilidade, comparação, métodos úteis, StringBuilder e leitura do teclado com Scanner.",
+      "lessons": [
+        { "id": "string-imutavel", "file": "01-string-imutavel.md", "title": "Strings são imutáveis", "minutes": 8 },
+        { "id": "metodos-de-string", "file": "02-metodos-de-string.md", "title": "Métodos de String", "minutes": 11 },
+        { "id": "stringbuilder", "file": "03-stringbuilder.md", "title": "StringBuilder", "minutes": 7 },
+        { "id": "entrada-com-scanner", "file": "04-entrada-com-scanner.md", "title": "Lendo o teclado com Scanner", "minutes": 10 }
+      ]
     }
   ]
 }
