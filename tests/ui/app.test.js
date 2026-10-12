@@ -126,7 +126,7 @@ test('rotas: erro ao montar a tela mostra aviso com "Tentar de novo"', async () 
   } finally {
     console.error = original;
   }
-  assert.match(main.textContent, /Não foi possível carregar esta página/);
+  assert.match(main.textContent, /Não foi possível abrir esta página/);
   main.querySelector('button').click();
   await tick(10);
   assert.equal(attempts, 2);
@@ -180,4 +180,31 @@ test('retomar o backup automático tira a pausa e volta a agendar', async () => 
   assert.ok(!banners().some((b) => b.startsWith('O backup automático está pausado')));
   app.dispatch(completeLesson, { language: app.getLanguage('java'), moduleId: 'fundamentos', lessonId: 'arrays', cards: [] });
   assert.equal(scheduled.length, 1);
+});
+
+test('progresso com dados internos estranhos é consertado e a tela abre normalmente', async () => {
+  const raw = JSON.stringify({ ...profileState(), cards: { x: null, ok: { box: 1, due: '2026-10-01' } }, streak: { current: 2, best: 2, lastDay: 20261011 } });
+  const app = await makeTestApp({ raw });
+  assert.equal(app.loadStatus, 'ok');
+  assert.deepEqual(Object.keys(app.store.get().cards), ['ok']);
+  const main = document.getElementById('main');
+  const onRoute = createRouteHandler(app, main, { home: (el) => { el.textContent = 'tela inicial'; }, notFound: () => {} });
+  await onRoute(route('home'));
+  assert.equal(main.textContent, 'tela inicial');
+});
+
+test('se até o topo falhar ao desenhar, a tela mostra o erro com "Tentar de novo" em vez de travar', async () => {
+  const app = await makeTestApp({ state: profileState() });
+  const main = document.getElementById('main');
+  app.layout.render = () => { throw new Error('quebrou'); };
+  const onRoute = createRouteHandler(app, main, { home: (el) => { el.textContent = 'ok'; }, notFound: () => {} });
+  const original = console.error;
+  console.error = () => {};
+  try {
+    await onRoute(route('home'));
+  } finally {
+    console.error = original;
+  }
+  assert.match(main.textContent, /Não foi possível abrir esta página/);
+  assert.ok(main.querySelector('button'));
 });

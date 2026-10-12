@@ -172,10 +172,10 @@ export function createRouteHandler(app, main, views = VIEWS) {
     const token = ++renderToken;
     cleanup?.();
     cleanup = null;
-    app.layout.render(app.store.get(), route.name);
     mount(main, loading());
     const target = h('div', { class: 'view' });
     try {
+      app.layout.render(app.store.get(), route.name);
       const view = app.store.get().profile ? (views[route.name] ?? views.notFound) : renderOnboarding;
       const result = await view(target, app, route);
       if (token !== renderToken) {
@@ -186,7 +186,7 @@ export function createRouteHandler(app, main, views = VIEWS) {
       mount(main, target);
     } catch (err) {
       console.error(err);
-      if (token === renderToken) mount(main, errorPanel('Não foi possível carregar esta página. Confira sua conexão.', () => onRoute(route)));
+      if (token === renderToken) mount(main, errorPanel('Não foi possível abrir esta página. Tente de novo; se o problema continuar, confira sua conexão.', () => onRoute(route)));
     }
     main.focus({ preventScroll: true });
     window.scrollTo(0, 0);
