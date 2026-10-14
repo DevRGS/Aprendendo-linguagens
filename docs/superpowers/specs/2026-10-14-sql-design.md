@@ -34,7 +34,7 @@ Esta especificação cobre, para o SQL, a Fase 2 (execução de código) e a Fas
 | Conteúdo | Currículo próprio no formato da Central (módulos, aulas, perguntas e flashcards), com a ordem de assuntos do SQL Teaching como base da parte de consultas, mais o que ele não tem (criar tabelas, `INSERT`, `UPDATE`, `DELETE`, chaves, índices). Texto e dados nossos, em português. |
 | Onde ficam os exercícios | Nos dois lugares: **desafios** no fim das aulas (praticar à vontade, sem XP) e **perguntas `sql`** nos bancos de perguntas (prática, quiz e prova, com XP). |
 | Correção | Pelo resultado, com **teste escondido**: a consulta também precisa acertar numa segunda versão dos dados, que a pessoa não vê. |
-| Motor | **sql.js 1.14.2** (SQLite em WebAssembly, MIT), carregado do cdnjs só quando a página tem um exercício. Nos testes, a mesma versão vem do npm. |
+| Motor | **sql.js 1.14.2** (SQLite em WebAssembly, MIT), carregado do jsdelivr (o mesmo CDN do marked e do highlight.js, que serve cópia exata do pacote do npm) só quando a página tem um exercício. Nos testes, a mesma versão vem do npm. |
 | Editor | Caixa de texto simples (`textarea`) com fonte de código. Sem editor com cores nem autocompletar. |
 | Dialeto | O do SQLite 3.49.1, que vem no sql.js 1.14.2 (conferido com `sqlite_version()`). Quando algo muda em MySQL ou PostgreSQL, a aula avisa. |
 | Divisão | Uma especificação e duas etapas: **SQL-A** (plataforma de exercícios e módulos 1 e 2) e **SQL-B** (módulos 3 a 6). Cada etapa tem seu plano e vai ao ar sozinha. |
@@ -73,7 +73,7 @@ tests/                         testes novos das seções 8.1 a 8.5
 ```
 
 ### 3.2 Regras de dependência
-Valem as da especificação da Fase 1 (seção 3.3). `core/sql-grading.js` não conhece o sql.js nem o DOM: recebe uma função `run(datasetSql, sql)` que devolve os resultados. Assim, os testes passam o sql.js do npm e o site passa o do cdnjs.
+Valem as da especificação da Fase 1 (seção 3.3). `core/sql-grading.js` não conhece o sql.js nem o DOM: recebe uma função `run(datasetSql, sql)` que devolve os resultados. Assim, os testes passam o sql.js do npm e o site passa o do jsdelivr.
 
 ---
 
@@ -146,7 +146,7 @@ Numa linguagem sem `engine`, perguntas `sql` e `challenges.json` são recusados.
 ## 5. Execução no navegador
 
 ### 5.1 Motor (`js/data/sql-engine.js`)
-- Carrega o `sql-wasm.js` do cdnjs na primeira vez que um exercício precisa dele, com o `.wasm` da mesma versão (`locateFile`). Uma única carga por página; falhas não ficam guardadas, e a próxima tentativa tenta de novo.
+- Carrega o `sql-wasm.js` do jsdelivr (`https://cdn.jsdelivr.net/npm/sql.js@1.14.2/dist/`), com uma tag `<script>`, porque o pacote não traz módulo ES, na primeira vez que um exercício precisa dele, com o `.wasm` da mesma versão (`locateFile`). Uma única carga por página; falhas não ficam guardadas, e a próxima tentativa tenta de novo.
 - Cada execução cria um **banco novo** a partir do texto do conjunto (esquema + dados), roda o SQL instrução por instrução com `db.iterateStatements` e fecha o banco. Nada passa de uma execução para a outra.
 - O resultado é uma lista `[{ columns, values }]` com **toda instrução que tem colunas, mesmo sem linhas**. O `db.exec` não serve: ele omite as consultas que não devolvem nenhuma linha (conferido no sql.js 1.14.2), e aí uma consulta certa com resultado vazio pareceria "sem resultado".
 - Os arquivos dos conjuntos são lidos como o resto do conteúdo (fetch com cache em memória).
@@ -245,7 +245,7 @@ Tudo roda no `npm test`, localmente e no GitHub antes de publicar, sem nenhum pr
 
 ### 8.1 Versão do motor
 - `sql.js` **1.14.2** entra em `devDependencies` com a versão exata.
-- Um teste garante que a versão em `js/config.js` (`SQLJS_VERSION`) é a mesma do `package.json`, e que as URLs do cdnjs usam essa versão.
+- Um teste garante que a versão em `js/config.js` (`SQLJS_VERSION`) é a mesma do `package.json`, e que as URLs do jsdelivr usam essa versão.
 
 ### 8.2 Validador de conteúdo (`tests/content.test.js`)
 Além das regras atuais:
