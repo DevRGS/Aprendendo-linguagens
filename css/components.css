@@ -244,6 +244,8 @@ input[type="text"] { width: 100%; padding: 10px 12px; border-radius: var(--radiu
 .sql-title { margin: 0; font-size: 1rem; }
 .sql-tables summary { cursor: pointer; color: var(--blue); font-size: .9rem; }
 .sql-tables-body { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+/* Sem min-width: 0, o item de flex fica da largura da tabela e empurra a página no celular. */
+.sql-tables-body > .sql-result { min-width: 0; max-width: 100%; }
 .sql-input { width: 100%; min-height: 110px; padding: 12px 14px; border: 1px solid var(--bd); border-radius: var(--radius-sm); background: var(--bg); color: var(--tx); font-family: var(--mono); font-size: .9rem; line-height: 1.5; resize: vertical; tab-size: 2; }
 .sql-input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
 .sql-input[readonly] { opacity: .8; }

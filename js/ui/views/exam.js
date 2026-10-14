@@ -15,8 +15,14 @@ export async function renderExam(container, app, route) {
   const moduleKeys = language.modules.map((m) => m.key);
 
   const start = async () => {
-    // Sem o banco de SQL, as vagas das perguntas sql vão para outros tipos (a prova mantém o tamanho).
-    const pool = hasSqlQuestions(bank.questions) ? await usableQuestions(app, bank.questions) : bank.questions;
+    let pool = bank.questions;
+    if (hasSqlQuestions(pool)) {
+      // O primeiro carregamento do banco leva alguns segundos: o botão avisa e não aceita outro clique.
+      startBtn.disabled = true;
+      startBtn.textContent = 'Preparando o banco de dados…';
+      // Sem o banco de SQL, as vagas das perguntas sql vão para outros tipos (a prova mantém o tamanho).
+      pool = await usableQuestions(app, pool);
+    }
     // Sem histórico nem "último quiz": a prova sorteia todas as perguntas com o mesmo peso.
     const { questions } = selectQuestions({ pool, count: EXAM_QUESTIONS, filters: { moduleKeys }, today: app.ctx().today });
     runQuiz(container, app, {
@@ -35,6 +41,7 @@ export async function renderExam(container, app, route) {
     });
   };
 
+  const startBtn = h('button', { type: 'button', class: 'btn btn-primary', onClick: start, text: 'Começar a prova' });
   mount(container, h('section', { class: 'panel exam-intro', style: { '--accent': language.color } },
     h('h1', { text: `🎯 Prova de ${language.name}` }),
     h('ul', {},
@@ -43,5 +50,5 @@ export async function renderExam(container, app, route) {
       h('li', { text: `Aprovação com ${pct(EXAM_PASS)} ou mais` }),
       h('li', { text: 'O tempo aparece na tela, mas não há limite' })),
     best ? h('p', { text: `Sua melhor nota: ${pct(best.best)}${best.passedAt ? ` · prova aprovada em ${formatDay(best.passedAt)}` : ''}` }) : null,
-    h('button', { type: 'button', class: 'btn btn-primary', onClick: start, text: 'Começar a prova' })));
+    startBtn));
 }

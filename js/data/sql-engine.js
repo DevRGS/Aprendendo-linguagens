@@ -49,7 +49,14 @@ export function loadScript(src, doc = document) {
 export async function loadSqlJsFromCdn({ inject = loadScript, scope = globalThis } = {}) {
   if (typeof scope.initSqlJs !== 'function') await inject(SQLJS_URL);
   if (typeof scope.initSqlJs !== 'function') throw new Error('O sql.js não ficou disponível.');
-  return scope.initSqlJs({ locateFile: () => SQLJS_WASM_URL });
+  try {
+    return await scope.initSqlJs({ locateFile: () => SQLJS_WASM_URL });
+  } catch (err) {
+    // O initSqlJs guarda a promessa, mesmo rejeitada. Sem ele, a próxima tentativa roda o script de novo,
+    // e o script recomeça do zero.
+    scope.initSqlJs = undefined;
+    throw err;
+  }
 }
 
 export function createSqlEngine({ load = () => loadSqlJsFromCdn() } = {}) {

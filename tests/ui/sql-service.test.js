@@ -76,3 +76,9 @@ test('hasSqlQuestions diz se há alguma pergunta sql na lista', () => {
   assert.equal(hasSqlQuestions([{ type: 'fill' }]), false);
   assert.equal(hasSqlQuestions([]), false);
 });
+
+test('execute dá a dica das aspas curvas olhando também o SQL digitado', async () => {
+  const { app, byId } = await setup();
+  const out = await app.sql.execute(byId.get('sql.teste.q01'), 'SELECT nome AS “Nome da pessoa” FROM pessoas');
+  assert.match(out.hint, /aspas retas/);
+});

@@ -103,10 +103,22 @@ export async function renderQuizBuilder(container, app, route) {
     available,
     startBtn);
 
+  let preparing = false;
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (preparing) return;
     const eligible = filterPool(bank.questions, filters());
-    const pool = hasSqlQuestions(eligible) ? await usableQuestions(app, eligible) : eligible;
+    let pool = eligible;
+    if (hasSqlQuestions(eligible)) {
+      // O primeiro carregamento do banco leva alguns segundos: o botão avisa e não aceita outro envio.
+      preparing = true;
+      startBtn.disabled = true;
+      startBtn.textContent = 'Preparando o banco de dados…';
+      pool = await usableQuestions(app, eligible);
+      preparing = false;
+      startBtn.textContent = 'Começar quiz';
+      updateAvailable();
+    }
     const s = app.store.get();
     const { questions, available: n } = selectQuestions({
       pool,

@@ -34,3 +34,9 @@ test('o CSS esconde de verdade qualquer elemento com o atributo hidden', () => {
   const base = readFileSync(new URL('../../css/base.css', import.meta.url), 'utf8');
   assert.match(base, /\[hidden\]\s*\{\s*display:\s*none\s*!important;?\s*\}/);
 });
+
+test('as tabelas abertas de um exercício de SQL encolhem e rolam dentro do bloco, sem alargar a página', () => {
+  const css = readFileSync(new URL('../../css/components.css', import.meta.url), 'utf8');
+  // Item de flex em linha não encolhe abaixo do conteúdo sem min-width: 0; aí a tabela larga empurra a página.
+  assert.match(css, /\.sql-tables-body\s*>\s*\.sql-result\s*\{[^}]*min-width:\s*0[^}]*\}/);
+});

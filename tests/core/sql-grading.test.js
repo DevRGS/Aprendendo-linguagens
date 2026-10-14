@@ -113,3 +113,31 @@ test('gradeSql avisa quando a própria resposta de referência falha', async () 
   assert.throws(() => gradeSql({ id: 'teste.q03', answer: 'SELECT x FROM nada' }, 'SELECT 1', { run, dataset }),
     /A resposta de referência de teste\.q03 falhou: no such table: nada/);
 });
+
+test('gradeSql: quem esquece o ORDER BY e acerta por coincidência ouve falar da ordem, não do filtro', async () => {
+  const run = await nodeRun();
+  const emOrdem = {
+    schema: 'CREATE TABLE alunos (id INTEGER PRIMARY KEY, nome TEXT);',
+    data: "INSERT INTO alunos VALUES (1, 'Ana'), (2, 'Bia'), (3, 'Caio');",
+    hidden: "INSERT INTO alunos VALUES (1, 'Gil'), (2, 'Eva'), (3, 'Hana');",
+  };
+  const alfabetica = { id: 'teste.q04', answer: 'SELECT nome FROM alunos ORDER BY nome;', ordered: true };
+  const v = gradeSql(alfabetica, 'SELECT nome FROM alunos', { run, dataset: emOrdem });
+  assert.equal(v.ok, false);
+  assert.equal(v.reason, 'coincidencia');
+  assert.match(v.message, /ORDER BY/);
+  assert.doesNotMatch(v.message, /filtro/);
+  assert.match(gradeSql(notaAlta, 'SELECT nome FROM alunos WHERE id IN (1, 3)', { run, dataset }).message, /Confira o filtro/);
+});
+
+test('sqlErrorHint: aspa aberta e aspas curvas do celular (que às vezes só aparecem no SQL, não na mensagem)', async () => {
+  assert.match(sqlErrorHint(`unrecognized token: "'Recife"`), /aspa simples ficou aberta/);
+  assert.match(sqlErrorHint('unrecognized token: ""Nome FROM alunos"'), /aspas duplas ficaram abertas/);
+  const curvas = /aspas retas/;
+  assert.match(sqlErrorHint('no such column: ‘Recife’'), curvas);
+  assert.match(sqlErrorHint('near "do": syntax error', 'SELECT nome AS “Nome do aluno” FROM alunos'), curvas);
+  assert.match(sqlErrorHint('near "do": syntax error', 'SELECT nome AS "Nome" do FROM alunos'), /Erro de sintaxe perto de do/);
+  const run = await nodeRun();
+  const v = gradeSql(notaAlta, 'SELECT nome FROM alunos WHERE cidade = ‘Recife’', { run, dataset });
+  assert.match(v.hint, curvas);
+});

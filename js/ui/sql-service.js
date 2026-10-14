@@ -29,7 +29,7 @@ export function createSqlService({ engine, getLanguage }) {
     // Só executa nos dados visíveis (o botão "Executar" das perguntas), sem dizer se está certo.
     async execute(ex, sql) {
       const out = runQuery(run, visibleSetup(await prepared(ex)), sql, ex.check ?? null);
-      return out.error ? { ...out, hint: sqlErrorHint(out.error) } : out;
+      return out.error ? { ...out, hint: sqlErrorHint(out.error, sql) } : out;
     },
     async grade(ex, sql) {
       return gradeSql(ex, sql, { run, dataset: await prepared(ex) });

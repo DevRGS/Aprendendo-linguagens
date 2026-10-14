@@ -52,10 +52,19 @@ const HINTS = [
   [/^no such column: (.+)$/, (m) => `A coluna ${m[1]} não existe nessas tabelas. Confira o nome e de qual tabela ela é.`],
   [/^near "(.+)": syntax error$/, (m) => `Erro de sintaxe perto de ${m[1]}. Confira vírgulas, aspas e a ordem das cláusulas.`],
   [/^incomplete input$/, () => 'A consulta terminou antes da hora. Falta fechar parênteses ou aspas?'],
+  [/^unrecognized token: "'/, () => "Uma aspa simples ficou aberta: feche o texto com outra ', como em 'Recife'."],
+  [/^unrecognized token: ""/, () => 'Umas aspas duplas ficaram abertas: feche o nome com outras ".'],
   [/^ambiguous column name: (.+)$/, (m) => `A coluna ${m[1]} existe em mais de uma tabela. Diga de qual: tabela.${m[1]}.`],
 ];
 
-export function sqlErrorHint(message) {
+// Aspas curvas (o celular costuma trocar ' e " por elas): o SQLite as trata como letras de um nome.
+const CURLY_QUOTES = /[‘’“”]/;
+
+// sql é o texto digitado: com aspas curvas, a mensagem do SQLite nem sempre as mostra.
+export function sqlErrorHint(message, sql = '') {
+  if (CURLY_QUOTES.test(String(message ?? '')) || CURLY_QUOTES.test(String(sql ?? ''))) {
+    return 'Use aspas retas: \' para textos e " para nomes. As aspas curvas (‘ ’ “ ”), que o celular costuma colocar, o SQL não entende.';
+  }
   for (const [re, hint] of HINTS) {
     const m = re.exec(String(message ?? ''));
     if (m) return hint(m);
@@ -79,6 +88,9 @@ export function verdictMessage(reason, detail = {}) {
     case 'conteudo': return 'Algumas linhas não são as esperadas.';
     case 'ordem': return 'As linhas estão certas, mas a ordem não: o enunciado pede ordenação.';
     case 'coincidencia':
+      if (detail.order) {
+        return 'Seu resultado bate nestas tabelas, mas com outros dados a ordem sairia errada. Confira o ORDER BY: sem ele, o banco não garante a ordem das linhas.';
+      }
       return 'Seu resultado bate nestas tabelas, mas a consulta não funcionaria com outros dados. Confira o filtro.';
     default: return '';
   }
@@ -105,11 +117,14 @@ export function gradeSql(exercise, sql, { run, dataset }) {
       if (diff) ({ reason, ...detail } = diff);
     }
     if (reason) {
-      if (hidden) reason = 'coincidencia';
+      if (hidden) {
+        detail = { order: reason === 'ordem' };
+        reason = 'coincidencia';
+      }
       const error = hidden ? null : mine.error ?? null;
       return {
         ok: false, reason, message: verdictMessage(reason, detail), ...shown,
-        error, hint: error ? sqlErrorHint(error) : null,
+        error, hint: error ? sqlErrorHint(error, sql) : null,
       };
     }
   }

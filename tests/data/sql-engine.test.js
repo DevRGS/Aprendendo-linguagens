@@ -74,3 +74,24 @@ test('loadSqlJsFromCdn injeta o script da versão certa e aponta o .wasm para o 
   assert.equal(injected.length, 1);
   await assert.rejects(loadSqlJsFromCdn({ inject: async () => {}, scope: {} }), /não ficou disponível/);
 });
+
+test('loadSqlJsFromCdn: se o .wasm falha, a próxima tentativa recarrega o script (o sql.js guarda a promessa rejeitada)', async () => {
+  const scope = {};
+  let wasmOk = false;
+  let injections = 0;
+  // Como o sql-wasm.js de verdade: cada execução do script cria um initSqlJs que guarda a primeira promessa.
+  const inject = async () => {
+    injections += 1;
+    let cached;
+    scope.initSqlJs = () => {
+      cached ??= wasmOk ? Promise.resolve({ ok: true }) : Promise.reject(new Error('wasm falhou'));
+      return cached;
+    };
+  };
+  await assert.rejects(loadSqlJsFromCdn({ inject, scope }), /wasm falhou/);
+  wasmOk = true;
+  assert.deepEqual(await loadSqlJsFromCdn({ inject, scope }), { ok: true });
+  assert.equal(injections, 2);
+  assert.deepEqual(await loadSqlJsFromCdn({ inject, scope }), { ok: true });
+  assert.equal(injections, 2);
+});

@@ -11,6 +11,7 @@ import { renderLesson } from '../../js/ui/views/lesson.js';
 import { loadBanks } from '../../js/data/content.js';
 import { prepareQuestion } from '../../js/core/quiz.js';
 import { createSqlEngine } from '../../js/data/sql-engine.js';
+import { loadNodeSqlJs } from '../helpers/sql.js';
 
 setupDom();
 
@@ -141,5 +142,66 @@ test('aula de SQL termina com "Experimente" e os desafios dela', async () => {
   assert.match(section.textContent, /Liste o nome das pessoas com mais de 30 anos\./);
   assert.ok(section.compareDocumentPosition(el.querySelector('.lesson-foot')) & window.Node.DOCUMENT_POSITION_FOLLOWING);
   await waitFor(() => texts(section, '.sql-expected td').length === 2);
+  el.remove();
+});
+
+// Motor que só termina de carregar (ou falha) quando o teste manda.
+function gatedEngine({ fail = false } = {}) {
+  let open;
+  const gate = new Promise((resolve) => { open = resolve; });
+  const engine = createSqlEngine({ load: async () => { await gate; if (fail) throw new Error('rede'); return loadNodeSqlJs(); } });
+  return { engine, open };
+}
+const leftOutToasts = () => texts(document, '#toasts .toast').filter((t) => /ficaram de fora/.test(t)).length;
+
+test('prova: enquanto o banco carrega, o botão avisa e não começa a prova duas vezes', async () => {
+  const { engine, open } = gatedEngine({ fail: true });
+  const { app, el } = await setup({ sqlEngine: engine });
+  await renderExam(el, app, route('exam', { lang: 'sql' }));
+  const before = leftOutToasts();
+  const btn = buttonIn(el, 'Começar a prova');
+  btn.click();
+  assert.equal(btn.disabled, true);
+  assert.equal(btn.textContent, 'Preparando o banco de dados…');
+  btn.click();
+  open();
+  await waitFor(() => /Pergunta 1 de 1 · Simulado/.test(el.textContent));
+  assert.equal(leftOutToasts() - before, 1);
+  el.remove();
+});
+
+test('montar quiz: enquanto o banco carrega, o botão avisa; um segundo envio não monta outro quiz', async () => {
+  const { engine, open } = gatedEngine({ fail: true });
+  const { app, el } = await setup({ sqlEngine: engine });
+  await renderQuizBuilder(el, app, route('quiz'));
+  const before = leftOutToasts();
+  const form = el.querySelector('form');
+  const btn = form.querySelector('button[type="submit"]');
+  form.dispatchEvent(new window.Event('submit', { cancelable: true }));
+  assert.equal(btn.disabled, true);
+  assert.equal(btn.textContent, 'Preparando o banco de dados…');
+  form.dispatchEvent(new window.Event('submit', { cancelable: true }));
+  open();
+  await waitFor(() => /Pergunta 1 de 1/.test(el.textContent));
+  assert.equal(leftOutToasts() - before, 1);
+  el.remove();
+});
+
+test('montar quiz: se o banco falha e não sobra pergunta, o botão volta ao normal', async () => {
+  const { app, el } = await setup({ sqlEngine: failingEngine() });
+  await renderQuizBuilder(el, app, route('quiz'));
+  for (const label of el.querySelectorAll('label.check')) {
+    const type = label.dataset.type;
+    if (type && type !== 'sql') {
+      const input = label.querySelector('input');
+      input.checked = false;
+      input.dispatchEvent(new window.Event('change'));
+    }
+  }
+  const btn = el.querySelector('form button[type="submit"]');
+  el.querySelector('form').dispatchEvent(new window.Event('submit', { cancelable: true }));
+  await waitFor(() => btn.textContent === 'Começar quiz');
+  assert.equal(btn.disabled, false);
+  assert.ok(el.querySelector('form.quiz-builder'));
   el.remove();
 });
