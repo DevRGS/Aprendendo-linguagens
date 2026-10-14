@@ -1,6 +1,7 @@
 // Substitui fetch() nos testes: 'content/...' é lido do disco, a partir da raiz do projeto.
-// Com overlay (o padrão), um arquivo que existe em tests/fixtures/ tem prioridade. Assim o manifesto
-// de Java fica congelado em Fundamentos, e os testes de tela não quebram quando o curso ganha módulos.
+// Com overlay (o padrão), um arquivo que existe em tests/fixtures/ tem prioridade. Assim o catálogo e o
+// manifesto de Java ficam congelados (só Java › Fundamentos), e os testes de tela não quebram quando o curso cresce.
+// overlay: '<nome>' usa outro conjunto, tests/fixtures/<nome>/ (por exemplo, o mini-curso de SQL das telas).
 import { readFile } from 'node:fs/promises';
 
 const ROOT = new URL('../../', import.meta.url);
@@ -19,11 +20,12 @@ async function readFirst(urls) {
 
 export function installFetchFromDisk({ fail = () => false, overlay = true } = {}) {
   const calls = [];
+  const fixtures = typeof overlay === 'string' ? new URL(`${overlay}/`, FIXTURES) : FIXTURES;
   globalThis.fetch = async (path, init) => {
     calls.push({ path: String(path), init });
     if (fail(String(path))) return new Response('erro simulado', { status: 500 });
     const real = new URL(String(path), ROOT);
-    const body = await readFirst(overlay ? [new URL(String(path), FIXTURES), real] : [real]);
+    const body = await readFirst(overlay ? [new URL(String(path), fixtures), real] : [real]);
     return body === null ? new Response('não encontrado', { status: 404 }) : new Response(body, { status: 200 });
   };
   return calls;

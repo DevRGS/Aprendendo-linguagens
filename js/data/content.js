@@ -44,3 +44,19 @@ export async function loadBanks(languages, moduleKeys = null) {
 export const loadLesson = (language, module, lesson) => get(`content/${language.dir}/${module.dir}/${lesson.file}`, 'text');
 export const loadReference = (language) => get(`content/${language.dir}/${language.reference}`, 'text');
 export const loadAchievementTexts = () => get('content/achievements.json', 'json');
+
+// Desafios "Experimente" do fim das aulas. Só existem em linguagens com banco (engine).
+export async function loadChallenges(language, module) {
+  if (!language.engine) return [];
+  const data = await get(`content/${language.dir}/${module.dir}/challenges.json`, 'json');
+  return data.challenges.map((item) => ({ ...item, lang: language.id, module: module.key }));
+}
+
+// Um conjunto de tabelas: o esquema, os dados visíveis e os ocultos (textos SQL).
+export async function loadDataset(language, id) {
+  const base = `content/${language.dir}/datasets/${id}`;
+  const [schema, data, hidden] = await Promise.all(
+    ['schema.sql', 'data.sql', 'hidden-data.sql'].map((file) => get(`${base}/${file}`, 'text')),
+  );
+  return { schema, data, hidden };
+}

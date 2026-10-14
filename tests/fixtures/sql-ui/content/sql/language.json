@@ -1,0 +1,21 @@
+{
+  "id": "sql",
+  "name": "SQL",
+  "color": "#336791",
+  "icon": "🗄️",
+  "highlight": "sql",
+  "reference": "referencia.md",
+  "engine": "sqlite",
+  "modules": [
+    {
+      "id": "teste",
+      "dir": "01-teste",
+      "title": "Teste",
+      "description": "Mini-curso congelado para os testes de tela.",
+      "lessons": [
+        { "id": "selecionar", "file": "01-selecionar.md", "title": "Selecionando", "minutes": 5 },
+        { "id": "filtrar", "file": "02-filtrar.md", "title": "Filtrando", "minutes": 5 }
+      ]
+    }
+  ]
+}

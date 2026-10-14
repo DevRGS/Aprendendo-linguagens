@@ -1,0 +1,20 @@
+{
+  "challenges": [
+    {
+      "id": "sql.teste.d01", "lesson": "selecionar",
+      "dataset": "pessoas",
+      "prompt": "Mostre todas as colunas da tabela `pessoas`.",
+      "answer": "SELECT * FROM pessoas;",
+      "rejected": ["SELECT nome FROM pessoas;"],
+      "explanation": "O `*` traz todas as colunas."
+    },
+    {
+      "id": "sql.teste.d02", "lesson": "filtrar",
+      "dataset": "pessoas",
+      "prompt": "Liste o nome das pessoas com mais de 30 anos.",
+      "answer": "SELECT nome FROM pessoas WHERE idade > 30;",
+      "rejected": ["SELECT nome FROM pessoas WHERE id IN (1, 3);"],
+      "explanation": "`WHERE idade > 30` fica só com quem passou dos 30."
+    }
+  ]
+}
