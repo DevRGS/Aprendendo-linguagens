@@ -1,4 +1,5 @@
 import { isDayKey } from './dates.js';
+import { AVATARS } from '../config.js';
 
 export const CURRENT_SCHEMA = 1;
 export const HISTORY_LIMIT = 200;
@@ -43,7 +44,7 @@ export function validateState(s) {
 
 // Conserta ou descarta entradas internas inválidas (backup editado à mão, armazenamento danificado):
 // o que não dá para aproveitar some, para nenhuma tela travar com um valor de tipo inesperado.
-const DEFAULT_AVATAR = '🧑‍💻';
+const DEFAULT_AVATAR = AVATARS[0];
 const GOALS = [20, 50, 100];
 const isCount = (v) => Number.isInteger(v) && v >= 0;
 const isRate = (v) => typeof v === 'number' && v >= 0 && v <= 1;
@@ -68,7 +69,7 @@ function withOptional(base, entries) {
 const cleanProfile = (p) => (isObj(p) && typeof p.name === 'string'
   ? {
     name: p.name,
-    avatar: typeof p.avatar === 'string' && p.avatar ? p.avatar : DEFAULT_AVATAR,
+    avatar: AVATARS.includes(p.avatar) ? p.avatar : DEFAULT_AVATAR,
     dailyGoal: GOALS.includes(p.dailyGoal) ? p.dailyGoal : 50,
     createdAt: strOrNull(p.createdAt),
   }

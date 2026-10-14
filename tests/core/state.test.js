@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { CURRENT_SCHEMA, createInitialState, validateState, normalizeState, runMigrations, migrate } from '../../js/core/state.js';
+import { AVATARS } from '../../js/config.js';
+
+test('avatar fora da lista (como os antigos de duas partes) volta para o primeiro da lista', () => {
+  const avatarDe = (avatar) => normalizeState({ ...createInitialState(), profile: { name: 'Rafa', avatar, dailyGoal: 50 } }).profile.avatar;
+  assert.equal(avatarDe('🦊'), '🦊');
+  for (const antigo of ['🧑‍💻', '👩‍💻', '👨‍💻', 'qualquer coisa']) assert.equal(avatarDe(antigo), AVATARS[0], antigo);
+});
 
 test('estado inicial é válido e passa pela migração', () => {
   const s = createInitialState();
@@ -92,7 +99,7 @@ test('normalizeState conserta ou descarta entradas internas inválidas', () => {
     lastQuizIds: ['a', 7],
     backup: { lastExportAt: 3, autoFileEnabled: 'sim', lastAutoWriteAt: null, autoFileError: 9 },
   });
-  assert.deepEqual(s.profile, { name: 'Rafa', avatar: '🧑‍💻', dailyGoal: 50, createdAt: null });
+  assert.deepEqual(s.profile, { name: 'Rafa', avatar: AVATARS[0], dailyGoal: 50, createdAt: null });
   assert.deepEqual(Object.keys(s.lessons), ['java.a.x']);
   assert.deepEqual(s.modules, { 'java.a': { bestPractice: 0.8 } });
   assert.deepEqual(s.exams, { java: { best: 0.9, passedAt: '2026-10-01' } });

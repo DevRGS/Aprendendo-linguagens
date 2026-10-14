@@ -14,7 +14,8 @@ export const AUTO_BACKUP_DEBOUNCE_MS = 5000;
 export const AUTO_BACKUP_FILE_NAME = 'central-linguagens-backup.json';
 export const REMINDER_SNOOZE_DAYS = 3;
 
-export const AVATARS = ['🧑‍💻', '👩‍💻', '👨‍💻', '🦊', '🐱', '🐼', '🦉', '🐙', '🚀', '⭐', '🌱', '🎧'];
+// Um código Unicode por avatar: sequências com U+200D (como 🧑‍💻) viram dois desenhos no Windows 10.
+export const AVATARS = ['💻', '🤖', '☕', '🦊', '🐱', '🐼', '🦉', '🐙', '🚀', '⭐', '🌱', '🎧'];
 export const GOAL_OPTIONS = [
   { xp: 20, label: 'Leve', hint: '20 XP por dia' },
   { xp: 50, label: 'Normal', hint: '50 XP por dia' },
