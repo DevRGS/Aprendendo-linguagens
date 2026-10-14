@@ -24,3 +24,8 @@ export const GOAL_OPTIONS = [
 
 export const MARKED_URL = 'https://cdn.jsdelivr.net/npm/marked@12.0.2/lib/marked.esm.js';
 export const HLJS_URL = 'https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/es/highlight.min.js';
+
+// SQLite no navegador. A versão precisa ser a mesma do package.json (os testes usam o pacote do npm).
+export const SQLJS_VERSION = '1.14.2';
+export const SQLJS_URL = `https://cdn.jsdelivr.net/npm/sql.js@${SQLJS_VERSION}/dist/sql-wasm.js`;
+export const SQLJS_WASM_URL = `https://cdn.jsdelivr.net/npm/sql.js@${SQLJS_VERSION}/dist/sql-wasm.wasm`;

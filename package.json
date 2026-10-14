@@ -9,6 +9,7 @@
     "fake-indexeddb": "6.0.0",
     "highlight.js": "11.9.0",
     "jsdom": "25.0.1",
-    "marked": "12.0.2"
+    "marked": "12.0.2",
+    "sql.js": "1.14.2"
   }
 }
