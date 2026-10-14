@@ -44,3 +44,12 @@ export function setupDom({ url = 'http://localhost/', body = SHELL_BODY } = {}) 
 
 // Espera as tarefas pendentes (eventos hashchange, setTimeout curtos etc.).
 export const tick = (ms = 0) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Espera até check() ser verdadeiro (telas que dependem do sql.js ou de arquivos lidos do disco).
+export async function waitFor(check, { timeout = 3000 } = {}) {
+  const start = Date.now();
+  while (!check()) {
+    if (Date.now() - start > timeout) throw new Error('waitFor: a condição não ficou verdadeira a tempo');
+    await tick(5);
+  }
+}

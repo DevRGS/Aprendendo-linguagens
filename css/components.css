@@ -236,3 +236,28 @@ input[type="text"] { width: 100%; padding: 10px 12px; border-radius: var(--radiu
   .certificate { max-width: none; }
   @page { size: A4 landscape; margin: 12mm; }
 }
+
+/* Exercícios de SQL (desafios das aulas e perguntas "sql") */
+.challenges { margin-top: 28px; }
+.sql-exercise { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; padding: 16px; border: 1px solid var(--bd); border-radius: var(--radius); background: var(--sf); }
+.sql-question { margin: 12px 0 0; padding: 0; border: 0; background: none; }
+.sql-title { margin: 0; font-size: 1rem; }
+.sql-tables summary { cursor: pointer; color: var(--blue); font-size: .9rem; }
+.sql-tables-body { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.sql-input { width: 100%; min-height: 110px; padding: 12px 14px; border: 1px solid var(--bd); border-radius: var(--radius-sm); background: var(--bg); color: var(--tx); font-family: var(--mono); font-size: .9rem; line-height: 1.5; resize: vertical; tab-size: 2; }
+.sql-input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.sql-input[readonly] { opacity: .8; }
+.sql-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.sql-label { margin: 0 0 4px; color: var(--mt); font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.sql-output, .sql-expected { display: flex; flex-direction: column; gap: 10px; }
+.sql-table-wrap { max-width: 100%; max-height: 360px; overflow: auto; border: 1px solid var(--bd); border-radius: var(--radius-sm); }
+.sql-table { border-collapse: collapse; font-family: var(--mono); font-size: .82rem; }
+.sql-table th, .sql-table td { padding: 5px 10px; border-bottom: 1px solid var(--bd); text-align: left; white-space: nowrap; }
+.sql-table th { position: sticky; top: 0; background: var(--sf2); color: var(--mt); }
+.sql-null { color: var(--mt); font-style: italic; }
+.sql-status { margin: 0; padding: 10px 12px; border-radius: var(--radius-sm); }
+.sql-status.ok { background: rgba(63, 185, 80, .08); border: 1px solid rgba(63, 185, 80, .3); }
+.sql-status.err { background: rgba(248, 81, 73, .08); border: 1px solid rgba(248, 81, 73, .3); }
+.sql-error, .sql-unavailable { margin: 0; padding: 10px 12px; border: 1px solid rgba(248, 81, 73, .4); border-radius: var(--radius-sm); }
+.sql-error p { margin: 0 0 4px; }
+.sql-error code { font-family: var(--mono); font-size: .85rem; }
