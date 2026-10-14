@@ -9,4 +9,4 @@ INSERT INTO alunos (id, nome, idade, cidade, turma, nota, email) VALUES
   (8, 'Sofia', 18, 'Recife', '3A', 10.0, NULL),
   (9, 'Tiago', 17, 'Fortaleza', '2A', 9.2, 'tiago@escola.br'),
   (10, 'Úrsula', 16, 'Natal', '1B', 7.5, 'ursula@escola.br'),
-  (11, 'Vitor', 17, 'Recife', '2A', 6.0, 'vitor@escola.br');
+  (11, 'Vitor', 17, 'Recife', '2A', 7.8, 'vitor@escola.br');

@@ -81,7 +81,7 @@
       "answer": "SELECT nome, nota FROM alunos ORDER BY nome;",
       "ordered": true,
       "accepted": ["SELECT nome, nota FROM alunos ORDER BY nome ASC;"],
-      "rejected": ["SELECT nome, nota FROM alunos ORDER BY nome DESC;", "SELECT nome, nota FROM alunos ORDER BY nota;"],
+      "rejected": ["SELECT nome, nota FROM alunos;", "SELECT nome, nota FROM alunos ORDER BY nome DESC;", "SELECT nome, nota FROM alunos ORDER BY nota;"],
       "explanation": "`ORDER BY nome` ordena pelo nome, em ordem crescente (o `ASC` é o padrão)."
     },
     {

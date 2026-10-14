@@ -38,10 +38,10 @@
     },
     {
       "id": "sql.introducao.q07", "type": "fill", "difficulty": 1, "lesson": "primeira-consulta",
-      "prompt": "Complete para listar **todas** as colunas da tabela `alunos`:",
+      "prompt": "Complete com o símbolo que lista **todas** as colunas da tabela `alunos`:",
       "code": "SELECT ___ FROM alunos;",
-      "blanks": [["*", "id, nome, idade, cidade, turma, nota, email"]],
-      "explanation": "O `*` significa \"todas as colunas\". Escrever os nomes de todas as colunas, na ordem da tabela, também funciona, mas dá mais trabalho."
+      "blanks": [["*"]],
+      "explanation": "O `*` significa \"todas as colunas\". Escrever os nomes de todas as colunas, na ordem da tabela, dá o mesmo resultado, mas dá mais trabalho."
     },
     {
       "id": "sql.introducao.q08", "type": "fill", "difficulty": 1, "lesson": "primeira-consulta",
@@ -74,7 +74,7 @@
       "explanation": "As colunas vão no `SELECT`, separadas por vírgula, e a tabela no `FROM`."
     },
     {
-      "id": "sql.introducao.q12", "type": "sql", "difficulty": 1, "lesson": "banco-de-dados",
+      "id": "sql.introducao.q12", "type": "sql", "difficulty": 1, "lesson": "primeira-consulta",
       "dataset": "escola",
       "prompt": "Mostre a tabela `alunos` inteira, com todas as colunas.",
       "answer": "SELECT * FROM alunos;",

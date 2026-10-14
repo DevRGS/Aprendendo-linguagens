@@ -41,7 +41,7 @@
       "prompt": "Liste o nome e a nota dos alunos com nota maior ou igual a 8.",
       "answer": "SELECT nome, nota FROM alunos WHERE nota >= 8;",
       "accepted": ["SELECT nome, nota FROM alunos WHERE NOT nota < 8;", "SELECT nome, nota FROM alunos WHERE 8 <= nota;"],
-      "rejected": ["SELECT nome, nota FROM alunos WHERE nota > 8;"],
+      "rejected": ["SELECT nome, nota FROM alunos WHERE nota > 8;", "SELECT nome, nota FROM alunos WHERE nota > 7.5;"],
       "explanation": "`>=` inclui o próprio 8: com `>`, a Carla, que tem nota 8, ficaria de fora."
     },
     {
@@ -116,7 +116,7 @@
       "prompt": "Liste o nome dos 3 alunos com as maiores notas, da maior para a menor.",
       "answer": "SELECT nome FROM alunos ORDER BY nota DESC LIMIT 3;",
       "ordered": true,
-      "rejected": ["SELECT nome FROM alunos ORDER BY nota LIMIT 3;", "SELECT nome FROM alunos WHERE nota >= 9 ORDER BY nota DESC;"],
+      "rejected": ["SELECT nome FROM alunos LIMIT 3;", "SELECT nome FROM alunos ORDER BY nota LIMIT 3;", "SELECT nome FROM alunos WHERE nota >= 9 ORDER BY nota DESC;"],
       "explanation": "Primeiro ordene pela nota em ordem decrescente e depois pegue as 3 primeiras linhas com `LIMIT 3`. Filtrar por `nota >= 9` só dá certo se, por acaso, houver exatamente 3 notas assim."
     },
     {
@@ -177,9 +177,9 @@
     },
     {
       "id": "sql.consultas.q25", "type": "truefalse", "difficulty": 2, "lesson": "apelidos",
-      "prompt": "Um apelido com espaço, como `Nome do aluno`, precisa ficar entre aspas duplas.",
+      "prompt": "Sem aspas, um apelido com espaço dá erro: `SELECT nome AS Nome do aluno FROM alunos` não roda.",
       "answer": true,
-      "explanation": "`SELECT nome AS \"Nome do aluno\" FROM alunos` funciona. Sem as aspas, o banco entende só `Nome` como apelido e acusa erro de sintaxe no `do`."
+      "explanation": "Sem as aspas, o banco entende só `Nome` como apelido e acusa erro de sintaxe no `do`. Com aspas, funciona: `SELECT nome AS \"Nome do aluno\" FROM alunos` (as aspas duplas são o padrão do SQL para nomes)."
     }
   ]
 }

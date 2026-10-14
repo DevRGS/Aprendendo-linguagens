@@ -35,6 +35,10 @@ export function validateSqlFields(item, ctx, err) {
   if (!Array.isArray(item.rejected) || item.rejected.length === 0 || !item.rejected.every(nonEmpty)) {
     err('rejected precisa de pelo menos uma consulta errada');
   }
+  // Sem esta forma em rejected, nada garante que esquecer o ORDER BY dá errado: os dados podem já estar na ordem.
+  if (item.ordered === true && Array.isArray(item.rejected) && !item.rejected.some((s) => !/\border\s+by\b/i.test(String(s)))) {
+    err('ordered precisa, em rejected, de uma consulta sem ORDER BY');
+  }
 }
 
 export function validateQuestion(q, ctx, errors) {
@@ -265,4 +269,18 @@ test('toda conquista tem texto e todo texto tem regra', () => {
   }
   assert.deepEqual(errors, []);
   assert.deepEqual(texts.map((a) => a.id).sort(), [...ACHIEVEMENT_IDS].sort());
+});
+
+test('exercício ordenado precisa recusar a forma sem ORDER BY (os dados podem já estar na ordem pedida)', () => {
+  const ordered = {
+    id: 'sql.cons.d01', lesson: 'a', prompt: 'p', explanation: 'e', dataset: 'escola', ordered: true,
+    answer: 'SELECT nome FROM t ORDER BY nome', rejected: ['SELECT nome FROM t ORDER BY nome DESC'],
+  };
+  const ctx = { lang: 'sql', module: 'cons', lessons: new Set(['a']), file: 'x.json', datasets: new Set(['escola']), ids: new Set() };
+  const errors = [];
+  validateChallenge(ordered, ctx, errors);
+  assert.deepEqual(errors, ['x.json → sql.cons.d01: ordered precisa, em rejected, de uma consulta sem ORDER BY']);
+  const fixed = [];
+  validateChallenge({ ...ordered, rejected: [...ordered.rejected, 'SELECT nome FROM t'] }, { ...ctx, ids: new Set() }, fixed);
+  assert.deepEqual(fixed, []);
 });

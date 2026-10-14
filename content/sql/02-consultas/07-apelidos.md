@@ -16,7 +16,7 @@ As primeiras linhas do resultado:
 
 - O apelido muda só o **resultado**; na tabela, a coluna continua se chamando `nome`.
 - O `AS` é opcional: `SELECT nome aluno FROM alunos` também funciona. Com `AS`, fica mais fácil de ler.
-- Apelido com espaço precisa de **aspas duplas**: `SELECT nome AS "Nome do aluno" FROM alunos`. Sem as aspas, dá erro de sintaxe.
+- Apelido com espaço precisa de aspas: `SELECT nome AS "Nome do aluno" FROM alunos`. Sem as aspas, dá erro de sintaxe. Prefira as **aspas duplas**, que são o padrão do SQL para nomes: o SQLite também aceita aspas simples num apelido, mas nem todo banco aceita.
 
 > [!NOTE]
 > Aqui as aspas duplas estão no papel certo: elas marcam um **nome** (de coluna), e não um texto.
