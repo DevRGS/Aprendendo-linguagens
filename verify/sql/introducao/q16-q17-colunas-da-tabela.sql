@@ -1,0 +1,12 @@
+-- verifica: sql.introducao.q16 e q17 (o id é a chave primária; idade é inteiro, nome é texto)
+-- banco: escola
+-- saida:
+-- name | type | pk
+-- id | INTEGER | 1
+-- nome | TEXT | 0
+-- idade | INTEGER | 0
+-- cidade | TEXT | 0
+-- turma | TEXT | 0
+-- nota | REAL | 0
+-- email | TEXT | 0
+SELECT name, type, pk FROM pragma_table_info('alunos');

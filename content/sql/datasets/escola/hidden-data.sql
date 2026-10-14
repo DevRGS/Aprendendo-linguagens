@@ -1,5 +1,5 @@
 INSERT INTO alunos (id, nome, idade, cidade, turma, nota, email) VALUES
-  (1, 'Lucas', 16, 'Recife', '1B', 5.0, NULL),
+  (1, 'Lucas', 16, 'Recife', '1B', 5.0, ''),
   (2, 'Marina', 18, 'Natal', '3A', 9.5, 'marina@escola.br'),
   (3, 'Nicolas', 17, 'Salvador', '2A', 6.5, 'nicolas@escola.br'),
   (4, 'Olívia', 16, 'Recife', '1B', 8.5, NULL),

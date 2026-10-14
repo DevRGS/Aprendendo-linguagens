@@ -29,6 +29,7 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] A prática de um módulo de SQL mistura "Escreva a consulta" com os outros tipos; no modo estudo, depois de responder, aparecem o resultado esperado e uma resposta certa.
 - [ ] Banco de dados fora do ar: no DevTools, bloqueie `*sql-wasm*` (Network → botão direito numa requisição → Block request URL, ou a aba Network request blocking) e recarregue. A aula avisa que o banco de dados não carregou, e a prática começa sem as perguntas de escrever SQL, com um aviso. (O modo Offline do DevTools não serve: sem rede, nem o conteúdo do site carrega.)
 - [ ] Ainda na mesma página, desbloqueie `*sql-wasm*` e abra outra aula de SQL: o desafio volta a funcionar, sem recarregar.
+- [ ] Com `*sql-wasm*` bloqueado, a prova de SQL continua com 40 perguntas (só de outros tipos), e "Começar a prova" mostra "Preparando o banco de dados…" enquanto tenta carregar.
 - [ ] No celular (390 px), a caixa de texto cabe na tela e as tabelas rolam para o lado, sem rolar a página inteira.
 
 ## Flashcards

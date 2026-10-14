@@ -21,7 +21,7 @@ Nos bancos **relacionais**, os mais usados, os dados ficam em **tabelas**, parec
 A coluna `id` tem um papel especial: ela é a **chave primária**. Cada linha tem um valor diferente nela, então o `id` identifica um aluno sem confusão, mesmo que existam dois alunos com o mesmo nome.
 
 > [!NOTE]
-> Um banco costuma ter várias tabelas ligadas entre si, como `alunos`, `turmas` e `notas`. É daí que vem o nome "relacional". O módulo de junções mostra como juntar tabelas numa consulta.
+> Um banco costuma ter várias tabelas ligadas entre si, como `alunos`, `turmas` e `notas`. É daí que vem o nome "relacional". Nestes primeiros módulos, cada consulta usa uma tabela só.
 
 ## As tabelas deste curso
 

@@ -22,7 +22,7 @@ Essa consulta pede "o nome de todos os alunos". Você não escreve o laço que p
 | `DELETE` | apagar linhas |
 | `CREATE TABLE` | criar uma tabela |
 
-Os módulos 1 a 5 tratam do `SELECT`, o comando mais usado. O módulo 6 trata dos outros.
+O `SELECT` é o comando mais usado, e é por ele que este curso começa.
 
 ## O SQLite
 

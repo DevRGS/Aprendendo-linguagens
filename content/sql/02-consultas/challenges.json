@@ -11,7 +11,7 @@
     {
       "id": "sql.consultas.d02", "lesson": "colunas",
       "dataset": "escola",
-      "prompt": "Mostre o nome de cada aluno e a idade que ele terá no ano que vem (a idade mais 1).",
+      "prompt": "Mostre o nome de cada aluno e a idade no ano que vem (a idade mais 1).",
       "answer": "SELECT nome, idade + 1 FROM alunos;",
       "accepted": ["SELECT nome, 1 + idade FROM alunos;"],
       "rejected": ["SELECT nome, idade FROM alunos;"],
@@ -96,10 +96,10 @@
     {
       "id": "sql.consultas.d12", "lesson": "null",
       "dataset": "escola",
-      "prompt": "Liste o nome e o e-mail dos alunos que têm e-mail cadastrado.",
+      "prompt": "Liste o nome e o e-mail dos alunos cujo e-mail não está faltando (não é `NULL`).",
       "answer": "SELECT nome, email FROM alunos WHERE email IS NOT NULL;",
-      "rejected": ["SELECT nome, email FROM alunos;", "SELECT nome, email FROM alunos WHERE email != NULL;"],
-      "explanation": "`IS NOT NULL` fica com quem tem valor. Comparar com `!= NULL` não funciona: não devolve nenhuma linha."
+      "rejected": ["SELECT nome, email FROM alunos;", "SELECT nome, email FROM alunos WHERE email != NULL;", "SELECT nome, email FROM alunos WHERE email <> '';"],
+      "explanation": "`IS NOT NULL` fica com quem tem valor. Comparar com `!= NULL` não funciona: não devolve nenhuma linha. E `email <> ''` não é a mesma coisa: um texto vazio é um valor, e essa condição o deixaria de fora."
     },
     {
       "id": "sql.consultas.d13", "lesson": "apelidos",

@@ -99,6 +99,36 @@
       "prompt": "Qual comando SQL serve para **ler** dados de uma tabela?",
       "options": ["`SELECT`", "`INSERT`", "`UPDATE`", "`DELETE`"], "answer": 0,
       "explanation": "`SELECT` consulta. `INSERT` insere, `UPDATE` altera e `DELETE` apaga linhas."
+    },
+    {
+      "id": "sql.introducao.q16", "type": "multiple", "difficulty": 1, "lesson": "banco-de-dados",
+      "prompt": "Na tabela `alunos`, qual coluna é a chave primária?",
+      "options": ["`id`", "`nome`", "`cidade`", "`turma`"], "answer": 0,
+      "explanation": "O `id` tem um valor diferente em cada linha e identifica o aluno sem confusão. O `nome` não serviria: dois alunos podem ter o mesmo nome."
+    },
+    {
+      "id": "sql.introducao.q17", "type": "truefalse", "difficulty": 1, "lesson": "banco-de-dados",
+      "prompt": "Na tabela `alunos`, a coluna `idade` guarda números inteiros, e a coluna `nome` guarda textos.",
+      "answer": true,
+      "explanation": "Toda coluna tem um tipo. Na tabela `alunos`, `idade` é de números inteiros, e `nome` e `cidade` são de texto."
+    },
+    {
+      "id": "sql.introducao.q18", "type": "multiple", "difficulty": 1, "lesson": "sql-e-sqlite",
+      "prompt": "Qual comando SQL serve para **apagar** linhas de uma tabela?",
+      "options": ["`DELETE`", "`SELECT`", "`INSERT`", "`UPDATE`"], "answer": 0,
+      "explanation": "`DELETE` apaga linhas. `SELECT` consulta, `INSERT` insere e `UPDATE` altera."
+    },
+    {
+      "id": "sql.introducao.q19", "type": "truefalse", "difficulty": 2, "lesson": "sql-e-sqlite",
+      "prompt": "Aqui no site, as suas consultas são enviadas para um servidor, que roda o SQLite e devolve o resultado.",
+      "answer": false,
+      "explanation": "O SQLite roda dentro do seu navegador: as suas consultas não são enviadas para nenhum servidor."
+    },
+    {
+      "id": "sql.introducao.q20", "type": "multiple", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "O que `SELECT nome, cidade FROM alunos;` mostra?",
+      "options": ["O nome e a cidade de todos os alunos", "Só o nome dos alunos, separados por cidade", "Todas as colunas da tabela `alunos`", "Quantos alunos há em cada cidade"], "answer": 0,
+      "explanation": "O `SELECT` diz quais colunas aparecem (`nome` e `cidade`, nessa ordem), e o `FROM` diz de qual tabela. Como não há filtro, vêm todas as linhas."
     }
   ]
 }

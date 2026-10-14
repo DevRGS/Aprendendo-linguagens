@@ -11,8 +11,8 @@
     {
       "id": "sql.consultas.q02", "type": "multiple", "difficulty": 2, "lesson": "colunas",
       "prompt": "O que `SELECT nome, idade + 1 FROM alunos;` faz?",
-      "options": ["Mostra o nome e a idade somada de 1, sem mudar a tabela", "Soma 1 à idade guardada na tabela", "Dá erro: não dá para fazer contas no SELECT", "Mostra só os alunos com 1 ano"], "answer": 0,
-      "explanation": "A conta acontece só no resultado, linha a linha. Para mudar os dados guardados, seria preciso um `UPDATE`, assunto do módulo 6."
+      "options": ["Mostra o nome e a idade mais 1, sem mudar a tabela", "Soma 1 à idade guardada na tabela", "Dá erro: não dá para fazer contas no SELECT", "Mostra só os alunos com 1 ano"], "answer": 0,
+      "explanation": "A conta acontece só no resultado, linha a linha. Para mudar os dados guardados, é preciso outro comando, o `UPDATE`."
     },
     {
       "id": "sql.consultas.q03", "type": "sql", "difficulty": 1, "lesson": "where",
@@ -130,7 +130,7 @@
       "id": "sql.consultas.q18", "type": "multiple", "difficulty": 2, "lesson": "ordenar",
       "prompt": "No SQLite, qual cláusula limita a quantidade de linhas do resultado?",
       "options": ["`LIMIT`", "`TOP`", "`MAX`", "`COUNT`"], "answer": 0,
-      "explanation": "`LIMIT` vale no SQLite, no MySQL e no PostgreSQL. `TOP` é do SQL Server e dá erro no SQLite; `MAX` e `COUNT` são funções de agrupamento, do módulo 3."
+      "explanation": "`LIMIT` vale no SQLite, no MySQL e no PostgreSQL. `TOP` é do SQL Server e dá erro no SQLite; `MAX` e `COUNT` são funções que calculam um valor a partir de várias linhas; não limitam o resultado."
     },
     {
       "id": "sql.consultas.q19", "type": "order", "difficulty": 2, "lesson": "ordenar",
@@ -141,7 +141,7 @@
     {
       "id": "sql.consultas.q20", "type": "sql", "difficulty": 2, "lesson": "null",
       "dataset": "escola",
-      "prompt": "Liste o nome dos alunos que não têm e-mail cadastrado.",
+      "prompt": "Liste o nome dos alunos cujo e-mail está faltando (é `NULL`).",
       "answer": "SELECT nome FROM alunos WHERE email IS NULL;",
       "rejected": ["SELECT nome FROM alunos WHERE email = NULL;", "SELECT nome FROM alunos WHERE id IN (2, 5, 8);"],
       "explanation": "Para achar valores ausentes, use `IS NULL`. Com `= NULL`, a consulta não devolve nenhuma linha."
@@ -180,6 +180,67 @@
       "prompt": "Sem aspas, um apelido com espaço dá erro: `SELECT nome AS Nome do aluno FROM alunos` não roda.",
       "answer": true,
       "explanation": "Sem as aspas, o banco entende só `Nome` como apelido e acusa erro de sintaxe no `do`. Com aspas, funciona: `SELECT nome AS \"Nome do aluno\" FROM alunos` (as aspas duplas são o padrão do SQL para nomes)."
+    },
+    {
+      "id": "sql.consultas.q26", "type": "multiple", "difficulty": 2, "lesson": "colunas",
+      "prompt": "No SQLite, quanto dá `SELECT 7 / 2;`?",
+      "options": ["`3`", "`3.5`", "`4`", "Dá erro"], "answer": 0,
+      "explanation": "Divisão entre dois inteiros descarta a parte decimal. Para obter `3.5`, use um número com ponto: `7 / 2.0`."
+    },
+    {
+      "id": "sql.consultas.q27", "type": "truefalse", "difficulty": 1, "lesson": "colunas",
+      "prompt": "`SELECT turma, nome FROM alunos;` mostra a turma na primeira coluna e o nome na segunda.",
+      "answer": true,
+      "explanation": "As colunas aparecem na ordem em que são escritas no `SELECT`."
+    },
+    {
+      "id": "sql.consultas.q28", "type": "order", "difficulty": 1, "lesson": "where",
+      "prompt": "Monte a consulta que lista o nome e a idade dos alunos com 17 anos:",
+      "lines": ["SELECT nome, idade", "FROM alunos", "WHERE idade = 17;"],
+      "explanation": "O `WHERE` vem depois do `FROM`. Como a idade é um número, o 17 vai sem aspas."
+    },
+    {
+      "id": "sql.consultas.q29", "type": "multiple", "difficulty": 2, "lesson": "e-ou",
+      "prompt": "Qual condição equivale a `nota BETWEEN 7 AND 8`?",
+      "options": ["`nota >= 7 AND nota <= 8`", "`nota > 7 AND nota < 8`", "`nota >= 7 OR nota <= 8`", "`nota > 7 OR nota < 8`"], "answer": 0,
+      "explanation": "O `BETWEEN` inclui as pontas, então usa `>=` e `<=`, ligados por `AND`. Com `OR`, toda nota passaria."
+    },
+    {
+      "id": "sql.consultas.q30", "type": "fill", "difficulty": 2, "lesson": "like",
+      "prompt": "Complete o padrão para listar os produtos cujo nome termina com \"a\":",
+      "code": "SELECT nome FROM produtos WHERE nome LIKE '___';",
+      "blanks": [["%a"]], "caseInsensitive": true,
+      "explanation": "O `%` representa qualquer quantidade de caracteres, então `'%a'` encontra os nomes que terminam com \"a\": na loja, Mochila e Garrafa térmica."
+    },
+    {
+      "id": "sql.consultas.q31", "type": "multiple", "difficulty": 2, "lesson": "ordenar",
+      "prompt": "O que `SELECT DISTINCT cidade, turma FROM alunos;` faz?",
+      "options": ["Tira as linhas em que a cidade e a turma se repetem juntas", "Tira as cidades repetidas, mesmo que a turma seja outra", "Mostra só as cidades que têm uma única turma", "Ordena o resultado por cidade e por turma"], "answer": 0,
+      "explanation": "Com várias colunas, o `DISTINCT` olha a combinação. Recife aparece com a turma 2A e com a 3A, então fica duas vezes no resultado."
+    },
+    {
+      "id": "sql.consultas.q32", "type": "truefalse", "difficulty": 2, "lesson": "ordenar",
+      "prompt": "`LIMIT 3 OFFSET 3` pula as 3 primeiras linhas e pega as 3 seguintes.",
+      "answer": true,
+      "explanation": "O `OFFSET` diz quantas linhas pular, e o `LIMIT`, quantas pegar. É útil para mostrar resultados em páginas."
+    },
+    {
+      "id": "sql.consultas.q33", "type": "truefalse", "difficulty": 2, "lesson": "null",
+      "prompt": "Em SQL, `NULL` e o texto vazio `''` são a mesma coisa.",
+      "answer": false,
+      "explanation": "`NULL` é a ausência de valor; `''` é um texto, só que sem nenhum caractere. Tanto que `'' IS NULL` é falso."
+    },
+    {
+      "id": "sql.consultas.q34", "type": "order", "difficulty": 2, "lesson": "null",
+      "prompt": "Monte a consulta que lista o nome e o e-mail dos alunos que têm e-mail (não `NULL`), em ordem alfabética de e-mail:",
+      "lines": ["SELECT nome, email", "FROM alunos", "WHERE email IS NOT NULL", "ORDER BY email;"],
+      "explanation": "O `WHERE` vem antes do `ORDER BY`: primeiro se escolhem as linhas, depois elas são ordenadas. Para ficar com quem tem e-mail, use `IS NOT NULL`."
+    },
+    {
+      "id": "sql.consultas.q35", "type": "multiple", "difficulty": 1, "lesson": "apelidos",
+      "prompt": "Em `SELECT nome AS aluno FROM alunos;`, o que o `AS aluno` muda?",
+      "options": ["Só o título da coluna no resultado", "O nome da coluna na tabela, que passa a ser `aluno`", "O nome da tabela, que passa a ser `aluno`", "Nada: dá erro, porque não existe a coluna `aluno`"], "answer": 0,
+      "explanation": "O apelido vale só para o resultado. Na tabela, a coluna continua se chamando `nome`: `SELECT aluno FROM alunos` dá erro."
     }
   ]
 }

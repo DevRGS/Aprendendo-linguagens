@@ -1,0 +1,15 @@
+-- verifica: sql.introducao.q20 (nome e cidade de todos os alunos)
+-- banco: escola
+-- saida:
+-- nome | cidade
+-- Ana | Recife
+-- Bruno | Natal
+-- Carla | Recife
+-- Diego | Fortaleza
+-- Elisa | Natal
+-- Fábio | Salvador
+-- Gabriela | Recife
+-- Heitor | Fortaleza
+-- Isadora | Salvador
+-- João | Natal
+SELECT nome, cidade FROM alunos;

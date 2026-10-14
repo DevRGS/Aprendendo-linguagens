@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { installFetchFromDisk } from '../helpers/fetch-from-disk.js';
 import { loadLanguages, loadModuleBank, loadLesson, loadChallenges, loadDataset } from '../../js/data/content.js';
+import { EXAM_QUESTIONS } from '../../js/core/progress.js';
 
 installFetchFromDisk({ overlay: false });
 
@@ -38,4 +39,13 @@ test('SQL tem os módulos da etapa SQL-A; toda aula carrega e tem desafio; os de
     }
     for (const c of challenges) assert.match((await loadDataset(sql, c.dataset)).schema, /CREATE TABLE/, c.id);
   }
+});
+
+test('a prova de SQL tem as perguntas prometidas mesmo sem o banco, e não sai sempre igual', async () => {
+  const sql = (await loadLanguages()).find((l) => l.id === 'sql');
+  const banks = await Promise.all(sql.modules.map((m) => loadModuleBank(sql, m)));
+  const questions = banks.flatMap((b) => b.questions);
+  // Sem o banco, as perguntas "sql" saem e as vagas vão para os outros tipos: eles sozinhos precisam encher a prova.
+  assert.ok(questions.filter((q) => q.type !== 'sql').length >= EXAM_QUESTIONS);
+  assert.ok(questions.length > EXAM_QUESTIONS);
 });

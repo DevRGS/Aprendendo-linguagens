@@ -1,0 +1,12 @@
+-- verifica: sql.consultas.q31 (DISTINCT olha a combinação: Recife aparece com 2A e com 3A)
+-- banco: escola
+-- saida:
+-- cidade | turma
+-- Recife | 2A
+-- Natal | 1B
+-- Recife | 3A
+-- Fortaleza | 2A
+-- Salvador | 3A
+-- Fortaleza | 1B
+-- Natal | 2A
+SELECT DISTINCT cidade, turma FROM alunos;
