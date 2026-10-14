@@ -1,0 +1,71 @@
+# Central de Linguagens
+
+Central gratuita e didática para aprender programação: aulas curtas, quizzes com perguntas aleatórias, flashcards com repetição espaçada, perfil com progresso, conquistas e certificado. Tudo roda no navegador; o progresso fica salvo no aparelho de cada pessoa, com backup manual e automático.
+
+Inspirada no trabalho de Gustavo Guanabara de abrir portas para quem está começando. Sem fins comerciais.
+
+## Rodar no seu computador
+
+```bash
+python -m http.server 8000
+```
+
+Abra `http://localhost:8000/`. Abrir o `index.html` com dois cliques não funciona: o navegador bloqueia o carregamento do conteúdo fora de um servidor.
+
+## Testes
+
+```bash
+npm install   # só na primeira vez: instala as ferramentas de teste
+npm test
+```
+
+Toda função do site tem teste automático: as regras (`tests/core`), a camada de dados (`tests/data`), as telas e componentes (`tests/ui`, com o navegador simulado pelo jsdom) e o validador de conteúdo (`tests/content.test.js`). O teste `tests/meta/exports-covered.test.js` falha se alguém criar uma função exportada sem teste.
+
+Os testes de telas e da camada de dados leem um manifesto de Java congelado, `tests/fixtures/content/java/language.json` (só o módulo Fundamentos), para não quebrarem quando o curso ganha módulos. O conteúdo real é conferido pelo validador (`tests/content.test.js`) e por um teste de fumaça que carrega todos os módulos de verdade (`tests/data/content-real.test.js`).
+
+O site em si não tem dependências nem etapa de build: o `npm install` só serve para os testes.
+
+## Conferir os códigos Java
+
+Todo trecho Java citado nas aulas e perguntas (saídas, erros de compilação, exceções) tem uma cópia executável em `verify/java/`. Para conferir, é preciso o JDK 21:
+
+```powershell
+$env:JAVA_HOME = "C:\caminho\para\jdk-21"
+node tools/verify-java.mjs
+```
+
+Cada trecho começa com um cabeçalho de comentários:
+
+```java
+// verifica: o que este trecho prova (ids de perguntas, cartas ou aulas)
+// modo: javac                 (opcional: compila de verdade; o nome do arquivo importa)
+// classe: Ola                 (obrigatório no modo javac quando o trecho executa)
+// erro-contem: texto          (opcional: trecho que a mensagem de erro precisa ter)
+// espera: erro-de-compilacao  (ou: // espera: excecao NomeDaExcecao)
+// saida:                      (alternativa ao "espera"; sempre a última diretiva)
+// linha 1 esperada
+// linha 2 esperada
+```
+
+No modo padrão (`java Arquivo.java`), o Java executa a **primeira** classe do arquivo, então `class Main` vem primeiro.
+
+## Como o conteúdo é organizado
+
+```
+content/
+  catalog.json                 lista de linguagens
+  achievements.json            textos das conquistas
+  <linguagem>/
+    language.json              nome, cor, ícone e módulos (com as aulas de cada um)
+    referencia.md              referência rápida
+    <NN-modulo>/
+      <NN-aula>.md             aulas em Markdown (alertas: > [!TIP], > [!WARNING]...)
+      questions.json           perguntas: multiple, truefalse, fill, order
+      flashcards.json          cartas: front, back, lesson
+```
+
+O formato completo está em `docs/superpowers/specs/2026-10-11-central-linguagens-design.md`, seção 4. O validador recusa conteúdo fora do padrão.
+
+## Publicar
+
+No GitHub: **Settings → Pages → Source: GitHub Actions**. A cada `push` na `main`, o workflow instala as ferramentas de teste, roda os testes e a conferência Java e só publica se tudo passar.

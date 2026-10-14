@@ -1,0 +1,96 @@
+{
+  "questions": [
+    {
+      "id": "java.introducao.q01", "type": "multiple", "difficulty": 1, "lesson": "o-que-e-java",
+      "prompt": "O compilador `javac` transforma o código-fonte Java em quê?",
+      "options": ["Bytecode, guardado em arquivos `.class`", "Código de máquina de um processador específico", "Código JavaScript", "Um arquivo `.exe` do Windows"], "answer": 0,
+      "explanation": "O `javac` gera **bytecode** (arquivos `.class`). Quem executa esse bytecode é a JVM, que durante a execução ainda traduz as partes mais usadas para código de máquina."
+    },
+    {
+      "id": "java.introducao.q02", "type": "truefalse", "difficulty": 1, "lesson": "o-que-e-java",
+      "prompt": "O mesmo arquivo `.class` pode rodar no Windows, no Linux e no macOS, desde que haja uma JVM instalada.",
+      "answer": true,
+      "explanation": "É o lema *escreva uma vez, rode em qualquer lugar*: o bytecode não depende do sistema operacional, e cada sistema tem a sua JVM."
+    },
+    {
+      "id": "java.introducao.q03", "type": "multiple", "difficulty": 1, "lesson": "jdk-jre-jvm",
+      "prompt": "Qual é o papel da JVM?",
+      "options": ["Executar o bytecode", "Compilar arquivos `.java`", "Editar o código-fonte", "Controlar as versões do código"], "answer": 0,
+      "explanation": "A JVM (Java Virtual Machine) executa o bytecode. Quem compila é o `javac`, que vem no JDK."
+    },
+    {
+      "id": "java.introducao.q04", "type": "multiple", "difficulty": 1, "lesson": "jdk-jre-jvm",
+      "prompt": "Para **compilar** programas Java, o que você precisa instalar?",
+      "options": ["O JDK", "Só a JRE", "Só um editor de texto", "O Node.js"], "answer": 0,
+      "explanation": "O JDK traz o compilador `javac`. A JRE serve só para rodar programas, e um editor de texto não compila nada sozinho."
+    },
+    {
+      "id": "java.introducao.q05", "type": "truefalse", "difficulty": 2, "lesson": "jdk-jre-jvm",
+      "prompt": "O `javac` faz parte do JDK, mas não faz parte da JRE.",
+      "answer": true,
+      "explanation": "A JRE tem a JVM e as bibliotecas para executar programas. As ferramentas de desenvolvimento, como o `javac`, só vêm no JDK."
+    },
+    {
+      "id": "java.introducao.q06", "type": "multiple", "difficulty": 1, "lesson": "instalacao",
+      "prompt": "Qual comando mostra a versão do compilador Java instalado?",
+      "options": ["`javac -version`", "`java --compile`", "`jdk -v`", "`javac --start`"], "answer": 0,
+      "explanation": "`javac -version` mostra a versão do compilador. Se o comando não for encontrado, o JDK não está instalado ou não está no PATH."
+    },
+    {
+      "id": "java.introducao.q07", "type": "fill", "difficulty": 1, "lesson": "primeiro-programa",
+      "prompt": "Complete a assinatura do método por onde todo programa Java começa:",
+      "code": "public static ___ main(String[] args) {",
+      "blanks": [["void"]],
+      "explanation": "O `main` não devolve nada, por isso o tipo de retorno é `void`. A assinatura completa é `public static void main(String[] args)`."
+    },
+    {
+      "id": "java.introducao.q08", "type": "order", "difficulty": 1, "lesson": "primeiro-programa",
+      "prompt": "Coloque as linhas na ordem certa para formar o primeiro programa:",
+      "lines": ["public class Ola {", "    public static void main(String[] args) {", "        System.out.println(\"Olá!\");", "    }", "}"],
+      "explanation": "A classe envolve o método `main`, que envolve a instrução. Cada `{` aberto é fechado na ordem inversa."
+    },
+    {
+      "id": "java.introducao.q09", "type": "multiple", "difficulty": 2, "lesson": "primeiro-programa",
+      "prompt": "O arquivo se chama `Programa.java` e contém `public class Ola { ... }`. O que acontece ao rodar `javac Programa.java`?",
+      "options": ["Erro de compilação: a classe pública `Ola` precisa estar em `Ola.java`", "Compila e gera `Programa.class`", "Compila e gera `Ola.class` sem nenhum aviso", "Compila, mas dá erro ao executar"], "answer": 0,
+      "explanation": "Uma classe `public` precisa estar num arquivo com o mesmo nome. O `javac` acusa: *class Ola is public, should be declared in a file named Ola.java*."
+    },
+    {
+      "id": "java.introducao.q10", "type": "truefalse", "difficulty": 1, "lesson": "primeiro-programa",
+      "prompt": "Java diferencia maiúsculas de minúsculas: `System` e `system` são nomes diferentes.",
+      "answer": true,
+      "explanation": "Java é *case sensitive*. `system.out.println(...)` não compila, porque não existe nada chamado `system`."
+    },
+    {
+      "id": "java.introducao.q11", "type": "multiple", "difficulty": 2, "lesson": "primeiro-programa",
+      "prompt": "Desde o Java 11, qual comando roda um programa de um único arquivo `Ola.java` sem chamar o `javac` antes?",
+      "options": ["`java Ola.java`", "`javac Ola`", "`java -compile Ola`", "`run Ola.java`"], "answer": 0,
+      "explanation": "Desde o Java 11, `java Ola.java` compila o arquivo na memória e executa na hora. Em projetos com vários arquivos, continua valendo compilar com `javac` e executar com `java`."
+    },
+    {
+      "id": "java.introducao.q12", "type": "multiple", "difficulty": 1, "lesson": "o-que-e-java",
+      "prompt": "Qual destas versões do Java é LTS (suporte de longo prazo)?",
+      "options": ["21", "19", "20", "22"], "answer": 0,
+      "explanation": "As versões LTS recentes são 8, 11, 17, 21 e 25. As versões 19, 20 e 22 tiveram suporte só até a versão seguinte sair."
+    },
+    {
+      "id": "java.introducao.q13", "type": "fill", "difficulty": 1, "lesson": "primeiro-programa",
+      "prompt": "Complete para imprimir o texto e pular uma linha depois dele:",
+      "code": "System.out.___(\"Olá, mundo!\");",
+      "blanks": [["println"]],
+      "explanation": "`println` imprime e pula linha; `print` imprime sem pular."
+    },
+    {
+      "id": "java.introducao.q14", "type": "truefalse", "difficulty": 2, "lesson": "jdk-jre-jvm",
+      "prompt": "O *garbage collector* da JVM libera automaticamente a memória de objetos que o programa não usa mais.",
+      "answer": true,
+      "explanation": "Em Java, você não libera memória manualmente: o coletor de lixo encontra objetos sem referências e recupera a memória."
+    },
+    {
+      "id": "java.introducao.q15", "type": "multiple", "difficulty": 2, "lesson": "primeiro-programa",
+      "prompt": "Que tipo de comentário é `/** ... */`?",
+      "options": ["Comentário de documentação (Javadoc)", "Comentário de uma linha", "Um erro de sintaxe", "Um comentário que é executado"], "answer": 0,
+      "explanation": "`//` comenta uma linha, `/* ... */` comenta várias, e `/** ... */` é o comentário de documentação usado pela ferramenta `javadoc`."
+    }
+  ]
+}

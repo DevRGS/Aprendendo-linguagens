@@ -1,0 +1,16 @@
+{
+  "cards": [
+    { "id": "java.colecoes.f01", "lesson": "listas", "front": "Qual a diferença entre `List` e `ArrayList`?", "back": "`List` é a interface (o contrato); `ArrayList` é a implementação mais usada. Declare a variável como `List` e crie o objeto com `new ArrayList<>()`." },
+    { "id": "java.colecoes.f02", "lesson": "listas", "front": "Por que `List<int>` não compila?", "back": "Genéricos só aceitam objetos. Use a classe wrapper, `List<Integer>`; a conversão entre `int` e `Integer` é automática (autoboxing)." },
+    { "id": "java.colecoes.f03", "lesson": "listas", "front": "Em `List<Integer>`, o que faz `remove(1)`?", "back": "Remove o item da posição 1. Para remover o valor 1, use `remove(Integer.valueOf(1))`." },
+    { "id": "java.colecoes.f04", "lesson": "listas", "front": "O que `List.of(...)` cria?", "back": "Uma lista imutável (Java 9+): `add`, `remove` e `set` lançam `UnsupportedOperationException`. Ela também não aceita `null`." },
+    { "id": "java.colecoes.f05", "lesson": "conjuntos", "front": "O que caracteriza um `Set`?", "back": "Não guarda repetidos. `add` devolve `false` quando o item já estava lá." },
+    { "id": "java.colecoes.f06", "lesson": "conjuntos", "front": "Que ordem seguem `HashSet`, `LinkedHashSet` e `TreeSet`?", "back": "`HashSet`: nenhuma garantida. `LinkedHashSet`: a ordem de inserção. `TreeSet`: a ordem natural." },
+    { "id": "java.colecoes.f07", "lesson": "mapas", "front": "O que acontece ao fazer `put` com uma chave que já existe?", "back": "O valor antigo é substituído; o mapa continua com um só par para aquela chave." },
+    { "id": "java.colecoes.f08", "lesson": "mapas", "front": "Para que serve `getOrDefault`?", "back": "Devolve o valor da chave ou, se ela não existir, o valor padrão informado. Ótimo para contar ocorrências." },
+    { "id": "java.colecoes.f09", "lesson": "mapas", "front": "Como percorrer as chaves e os valores de um mapa?", "back": "`for (Map.Entry<K, V> par : mapa.entrySet())`, usando `par.getKey()` e `par.getValue()`." },
+    { "id": "java.colecoes.f10", "lesson": "iteracao", "front": "Como remover itens enquanto percorre uma lista?", "back": "Com um `Iterator` e `it.remove()`, ou com `lista.removeIf(...)`. Remover dentro do for-each costuma lançar `ConcurrentModificationException`." },
+    { "id": "java.colecoes.f11", "lesson": "ordenacao", "front": "Qual a diferença entre `Comparable` e `Comparator`?", "back": "`Comparable` define a ordem natural dentro da própria classe (`compareTo`). `Comparator` é uma ordem externa, que você passa para o `sort`." },
+    { "id": "java.colecoes.f12", "lesson": "ordenacao", "front": "Como ordenar pessoas por idade, da maior para a menor?", "back": "`pessoas.sort(Comparator.comparingInt(Pessoa::getIdade).reversed());`" }
+  ]
+}

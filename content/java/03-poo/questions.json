@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "id": "java.poo.q01", "type": "multiple", "difficulty": 1, "lesson": "classes-e-objetos",
+      "prompt": "Qual palavra-chave cria um objeto a partir de uma classe?",
+      "options": ["`class`", "`new`", "`this`", "`object`"], "answer": 1,
+      "explanation": "`new` cria o objeto na memória, executa o construtor e devolve uma referência para ele, como em `Pessoa ana = new Pessoa();`."
+    },
+    {
+      "id": "java.poo.q02", "type": "multiple", "difficulty": 2, "lesson": "classes-e-objetos",
+      "prompt": "Com `class Pessoa { String nome; }`, o que este código imprime?\n\n```java\nPessoa a = new Pessoa();\na.nome = \"Ana\";\nPessoa b = a;\nb.nome = \"Bia\";\nSystem.out.println(a.nome);\n```",
+      "options": ["Ana", "Bia", "null", "Erro de compilação"], "answer": 1,
+      "explanation": "`Pessoa b = a;` copia a **referência**, não o objeto. `a` e `b` apontam para o mesmo objeto, então mudar o nome por `b` muda o que se vê por `a`."
+    },
+    {
+      "id": "java.poo.q03", "type": "truefalse", "difficulty": 1, "lesson": "classes-e-objetos",
+      "prompt": "Um atributo `int` que não recebe valor começa valendo `0`.",
+      "answer": true,
+      "explanation": "Atributos recebem valor padrão: `0` para números, `false` para `boolean` e `null` para objetos. Já as variáveis locais, declaradas dentro de métodos, precisam receber um valor antes de serem usadas."
+    },
+    {
+      "id": "java.poo.q04", "type": "multiple", "difficulty": 2, "lesson": "classes-e-objetos",
+      "prompt": "O que acontece ao executar este trecho?\n\n```java\nPessoa p = null;\np.apresentar();\n```",
+      "options": ["Lança `NullPointerException`", "Imprime `null`", "Erro de compilação", "Não acontece nada"], "answer": 0,
+      "explanation": "O código compila, mas `p` não aponta para objeto nenhum. Chamar um método por uma referência `null` lança `NullPointerException` durante a execução."
+    },
+    {
+      "id": "java.poo.q05", "type": "truefalse", "difficulty": 2, "lesson": "construtores",
+      "prompt": "Se uma classe declara só o construtor `Pessoa(String nome)`, ainda dá para criar um objeto com `new Pessoa()`.",
+      "answer": false,
+      "explanation": "O compilador só cria o construtor padrão (sem parâmetros) quando a classe não declara **nenhum** construtor. Aqui, `new Pessoa()` dá o erro *constructor Pessoa in class Pessoa cannot be applied to given types*."
+    },
+    {
+      "id": "java.poo.q06", "type": "multiple", "difficulty": 2, "lesson": "construtores",
+      "prompt": "O que este código imprime?\n\n```java\nclass Pessoa {\n    String nome;\n\n    Pessoa(String nome) {\n        nome = nome;\n    }\n}\n\n// no main:\nSystem.out.println(new Pessoa(\"Ana\").nome);\n```",
+      "options": ["Ana", "null", "Erro de compilação", "Uma linha vazia"], "answer": 1,
+      "explanation": "Sem `this.`, `nome = nome` atribui o parâmetro a ele mesmo, e o atributo continua com o valor padrão `null`. O certo é `this.nome = nome;`."
+    },
+    {
+      "id": "java.poo.q07", "type": "truefalse", "difficulty": 3, "lesson": "construtores",
+      "prompt": "No Java 21, a chamada `this(...)` para outro construtor pode aparecer depois de outras instruções do construtor.",
+      "answer": false,
+      "explanation": "No Java 21, `this(...)` (e também `super(...)`) precisa ser a primeira instrução do construtor; senão, o `javac` acusa *call to this must be first statement in constructor*. Versões mais novas do Java passaram a permitir algumas instruções antes dessa chamada."
+    },
+    {
+      "id": "java.poo.q08", "type": "fill", "difficulty": 1, "lesson": "construtores",
+      "prompt": "Complete para guardar o parâmetro no atributo de mesmo nome:",
+      "code": "Pessoa(String nome) {\n    ___.nome = nome;\n}",
+      "blanks": [["this"]],
+      "explanation": "`this` é a referência ao próprio objeto: `this.nome` é o atributo, e `nome` sozinho é o parâmetro."
+    },
+    {
+      "id": "java.poo.q09", "type": "multiple", "difficulty": 1, "lesson": "encapsulamento",
+      "prompt": "Qual modificador deixa um atributo acessível **somente** dentro da própria classe?",
+      "options": ["`public`", "`protected`", "`private`", "Nenhum modificador (acesso de pacote)"], "answer": 2,
+      "explanation": "`private` restringe à própria classe. Sem modificador, o acesso vale para o pacote inteiro; `protected` libera também para subclasses; `public` libera para todos."
+    },
+    {
+      "id": "java.poo.q10", "type": "multiple", "difficulty": 2, "lesson": "encapsulamento",
+      "prompt": "A classe `Conta` declara `private double saldo;`. O que acontece quando outra classe faz isto?\n\n```java\nConta c = new Conta();\nc.saldo = 1000;\n```",
+      "options": ["Erro de compilação: `saldo` é privado", "Funciona, e o saldo passa a ser 1000", "Compila, mas lança exceção ao executar", "Compila, mas a atribuição é ignorada"], "answer": 0,
+      "explanation": "Atributos `private` só podem ser acessados dentro da própria classe. O `javac` acusa *saldo has private access in Conta*. De fora, use os métodos públicos, como `depositar`."
+    },
+    {
+      "id": "java.poo.q11", "type": "truefalse", "difficulty": 2, "lesson": "encapsulamento",
+      "prompt": "Um atributo `protected` pode ser acessado por outras classes do mesmo pacote, mesmo que elas não sejam subclasses.",
+      "answer": true,
+      "explanation": "`protected` inclui tudo o que o acesso de pacote permite e ainda libera para subclasses em outros pacotes."
+    },
+    {
+      "id": "java.poo.q12", "type": "fill", "difficulty": 1, "lesson": "encapsulamento",
+      "prompt": "Complete o *getter* do atributo `saldo`, seguindo a convenção de nomes do Java:",
+      "code": "public double ___() {\n    return saldo;\n}",
+      "blanks": [["getSaldo"]],
+      "explanation": "Pela convenção JavaBeans, o método que lê um atributo se chama `get` mais o nome do atributo com inicial maiúscula: `getSaldo()`. Para `boolean`, usa-se `is`, como em `isAtivo()`."
+    },
+    {
+      "id": "java.poo.q13", "type": "multiple", "difficulty": 1, "lesson": "heranca-e-polimorfismo",
+      "prompt": "Qual palavra-chave faz uma classe herdar de outra classe?",
+      "options": ["`implements`", "`extends`", "`inherits`", "`super`"], "answer": 1,
+      "explanation": "`class Cachorro extends Animal` faz `Cachorro` herdar de `Animal`. `implements` é usado com interfaces."
+    },
+    {
+      "id": "java.poo.q14", "type": "multiple", "difficulty": 2, "lesson": "heranca-e-polimorfismo",
+      "prompt": "O que este código imprime?\n\n```java\nclass Animal {\n    String som() { return \"...\"; }\n}\n\nclass Cachorro extends Animal {\n    @Override\n    String som() { return \"Au\"; }\n}\n\n// no main:\nAnimal a = new Cachorro();\nSystem.out.println(a.som());\n```",
+      "options": ["...", "Au", "Erro de compilação", "Au..."], "answer": 1,
+      "explanation": "É o polimorfismo: o método executado é escolhido pelo **objeto real** (`Cachorro`), não pelo tipo da variável (`Animal`)."
+    },
+    {
+      "id": "java.poo.q15", "type": "truefalse", "difficulty": 1, "lesson": "heranca-e-polimorfismo",
+      "prompt": "Uma classe Java pode estender duas classes ao mesmo tempo, como em `class C extends A, B`.",
+      "answer": false,
+      "explanation": "Em Java, uma classe estende uma única classe. Para assumir vários contratos, ela pode implementar várias interfaces."
+    },
+    {
+      "id": "java.poo.q16", "type": "multiple", "difficulty": 2, "lesson": "heranca-e-polimorfismo",
+      "prompt": "Para que serve marcar um método com `@Override`?",
+      "options": ["Para o compilador acusar erro se o método não sobrescrever nenhum método herdado", "Para o método rodar mais rápido", "Para impedir que subclasses sobrescrevam o método", "Sem `@Override`, a sobrescrita não acontece"], "answer": 0,
+      "explanation": "A sobrescrita acontece com ou sem a anotação, mas `@Override` pede ao compilador que confira. Um nome digitado errado, como `Som()` no lugar de `som()`, vira o erro *method does not override or implement a method from a supertype*, em vez de um método novo que ninguém chama. Quem impede a sobrescrita é `final`."
+    },
+    {
+      "id": "java.poo.q17", "type": "multiple", "difficulty": 3, "lesson": "heranca-e-polimorfismo",
+      "prompt": "O que `new Cachorro();` imprime?\n\n```java\nclass Animal {\n    Animal() { System.out.print(\"A\"); }\n}\n\nclass Cachorro extends Animal {\n    Cachorro() { System.out.print(\"C\"); }\n}\n```",
+      "options": ["C", "CA", "AC", "A"], "answer": 2,
+      "explanation": "O compilador coloca `super()` como primeira instrução do construtor de `Cachorro`. Então o construtor de `Animal` roda antes e imprime `A`; só depois vem o `C`."
+    },
+    {
+      "id": "java.poo.q18", "type": "order", "difficulty": 2, "lesson": "heranca-e-polimorfismo",
+      "prompt": "No Java 21, monte o construtor de `Cachorro`, que repassa o nome ao construtor de `Animal` e depois guarda a raça:",
+      "lines": ["Cachorro(String nome, String raca) {", "    super(nome);", "    this.raca = raca;", "}"],
+      "explanation": "No Java 21, `super(...)` precisa ser a primeira instrução do construtor; só depois vêm as linhas da própria subclasse."
+    },
+    {
+      "id": "java.poo.q19", "type": "truefalse", "difficulty": 1, "lesson": "abstratas-e-interfaces",
+      "prompt": "Dá para criar um objeto de uma classe abstrata diretamente com `new`.",
+      "answer": false,
+      "explanation": "Classe abstrata serve de base: `new Forma(\"?\")` dá *Forma is abstract; cannot be instantiated*. O que se cria são objetos das subclasses concretas, como `new Retangulo(3, 4)`."
+    },
+    {
+      "id": "java.poo.q20", "type": "multiple", "difficulty": 2, "lesson": "abstratas-e-interfaces",
+      "prompt": "Uma classe **não abstrata** implementa uma interface, mas não implementa um dos métodos dela. O que acontece?",
+      "options": ["Erro de compilação", "Compila, e o método devolve `null`", "Compila, e o erro só aparece quando o método é chamado", "Compila, e o método fica sem fazer nada"], "answer": 0,
+      "explanation": "Uma classe concreta precisa implementar todos os métodos abstratos que recebeu. O `javac` acusa algo como *Pato is not abstract and does not override abstract method nadar() in Nadador*."
+    },
+    {
+      "id": "java.poo.q21", "type": "fill", "difficulty": 1, "lesson": "abstratas-e-interfaces",
+      "prompt": "`Voador` e `Nadador` são interfaces. Complete para que `Pato` assuma os dois contratos:",
+      "code": "class Pato ___ Voador, Nadador {",
+      "blanks": [["implements"]],
+      "explanation": "Classes usam `implements` com interfaces e podem implementar várias, separadas por vírgula. `extends` serve para estender uma classe (só uma)."
+    },
+    {
+      "id": "java.poo.q22", "type": "multiple", "difficulty": 2, "lesson": "abstratas-e-interfaces",
+      "prompt": "Desde o Java 8, que tipo de método de interface tem corpo e é herdado pelas classes que implementam a interface, sem obrigá-las a sobrescrevê-lo?",
+      "options": ["`abstract`", "`default`", "`final`", "`protected`"], "answer": 1,
+      "explanation": "Métodos `default` têm implementação e são herdados. Métodos `abstract` não têm corpo, e os modificadores `final` e `protected` nem são permitidos em métodos de interface."
+    },
+    {
+      "id": "java.poo.q23", "type": "multiple", "difficulty": 2, "lesson": "static-e-final",
+      "prompt": "O que este código imprime?\n\n```java\nclass Contador {\n    static int total = 0;\n\n    Contador() {\n        total++;\n    }\n}\n\n// no main:\nnew Contador();\nnew Contador();\nnew Contador();\nSystem.out.println(Contador.total);\n```",
+      "options": ["0", "1", "3", "Erro de compilação"], "answer": 2,
+      "explanation": "`total` é `static`: existe uma vez só, compartilhado por todos os objetos. Cada construtor soma 1 ao mesmo contador, então o total é 3."
+    },
+    {
+      "id": "java.poo.q24", "type": "truefalse", "difficulty": 2, "lesson": "static-e-final",
+      "prompt": "Um método `static` pode usar diretamente um atributo de instância (não `static`) da mesma classe.",
+      "answer": false,
+      "explanation": "Um método `static` pertence à classe e não tem `this`, então não há objeto de onde ler o atributo. O `javac` acusa *non-static variable ... cannot be referenced from a static context*."
+    },
+    {
+      "id": "java.poo.q25", "type": "multiple", "difficulty": 3, "lesson": "static-e-final",
+      "prompt": "O que este código faz?\n\n```java\nfinal int[] numeros = {1, 2, 3};\nnumeros[0] = 10;\nSystem.out.println(numeros[0]);\n```",
+      "options": ["Imprime 10", "Imprime 1", "Erro de compilação, porque `numeros` é `final`", "Lança exceção ao executar"], "answer": 0,
+      "explanation": "`final` impede trocar a referência (`numeros = new int[3]` não compila), mas o conteúdo do array ainda pode mudar."
+    },
+    {
+      "id": "java.poo.q26", "type": "fill", "difficulty": 2, "lesson": "static-e-final",
+      "prompt": "Complete para que nenhuma outra classe possa estender `Moeda`:",
+      "code": "public ___ class Moeda {",
+      "blanks": [["final"]],
+      "explanation": "Uma classe `final` não pode ser estendida: `class Real extends Moeda` daria *cannot inherit from final Moeda*. `String` é um exemplo de classe `final` da biblioteca padrão."
+    }
+  ]
+}

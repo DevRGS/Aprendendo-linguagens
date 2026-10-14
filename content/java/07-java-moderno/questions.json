@@ -1,0 +1,158 @@
+{
+  "questions": [
+    {
+      "id": "java.java-moderno.q01", "type": "multiple", "difficulty": 1, "lesson": "lambdas",
+      "prompt": "Qual destas é uma lambda Java válida que recebe um número e devolve o dobro?",
+      "options": ["`x -> x * 2`", "`x => x * 2`", "`x : x * 2`", "`lambda x: x * 2`"], "answer": 0,
+      "explanation": "Em Java, a seta da lambda é `->`. A forma `=>` é de JavaScript e C#, e `lambda x:` é de Python."
+    },
+    {
+      "id": "java.java-moderno.q02", "type": "truefalse", "difficulty": 2, "lesson": "lambdas",
+      "prompt": "Uma interface funcional tem exatamente um método abstrato.",
+      "answer": true,
+      "explanation": "É isso que permite usar uma lambda no lugar dela: a lambda vira a implementação desse único método. Métodos `default` e `static` não contam."
+    },
+    {
+      "id": "java.java-moderno.q03", "type": "multiple", "difficulty": 3, "lesson": "lambdas",
+      "prompt": "O que acontece ao compilar este trecho?\n\n```java\nint total = 0;\nList.of(1, 2, 3).forEach(n -> total += n);\n```",
+      "options": ["Erro de compilação: a lambda não pode alterar `total`", "Compila, e `total` termina valendo 6", "Compila, e `total` continua valendo 0", "Compila, mas lança exceção ao executar"], "answer": 0,
+      "explanation": "Variáveis locais usadas numa lambda precisam ser `final` ou efetivamente finais. O `javac` acusa *local variables referenced from a lambda expression must be final or effectively final*. Para somar, use `stream().mapToInt(n -> n).sum()`."
+    },
+    {
+      "id": "java.java-moderno.q04", "type": "fill", "difficulty": 2, "lesson": "lambdas",
+      "prompt": "Complete com a referência de método equivalente a `s -> s.toUpperCase()`:",
+      "code": "List<String> grandes = nomes.stream().map(String::___).toList();",
+      "blanks": [["toUpperCase"]],
+      "explanation": "`String::toUpperCase` chama `toUpperCase()` em cada elemento, como a lambda `s -> s.toUpperCase()`."
+    },
+    {
+      "id": "java.java-moderno.q05", "type": "multiple", "difficulty": 1, "lesson": "lambdas",
+      "prompt": "Qual interface funcional representa uma função que recebe um valor e devolve `true` ou `false`?",
+      "options": ["`Predicate<T>`", "`Supplier<T>`", "`Consumer<T>`", "`Runnable`"], "answer": 0,
+      "explanation": "`Predicate<T>` tem o método `boolean test(T t)`. `Supplier` não recebe nada e devolve um valor, `Consumer` recebe e não devolve nada, e `Runnable` não recebe nem devolve."
+    },
+    {
+      "id": "java.java-moderno.q06", "type": "multiple", "difficulty": 2, "lesson": "streams",
+      "prompt": "O que este código imprime?\n\n```java\nList<Integer> numeros = List.of(5, 2, 8, 1, 9);\nList<Integer> r = numeros.stream()\n    .filter(n -> n > 3)\n    .map(n -> n * 10)\n    .sorted()\n    .toList();\nSystem.out.println(r);\n```",
+      "options": ["[50, 80, 90]", "[5, 8, 9]", "[90, 80, 50]", "[10, 20, 50, 80, 90]"], "answer": 0,
+      "explanation": "`filter` fica com 5, 8 e 9; `map` multiplica cada um por 10; `sorted` ordena; `toList` gera a lista."
+    },
+    {
+      "id": "java.java-moderno.q07", "type": "truefalse", "difficulty": 2, "lesson": "streams",
+      "prompt": "Um mesmo stream pode ser usado duas vezes, por exemplo, chamando `count()` e depois `toList()` nele.",
+      "answer": false,
+      "explanation": "Depois da operação terminal, o stream está consumido. Usá-lo de novo lança `IllegalStateException: stream has already been operated upon or closed`. Crie outro com `lista.stream()`."
+    },
+    {
+      "id": "java.java-moderno.q08", "type": "fill", "difficulty": 2, "lesson": "streams",
+      "prompt": "Complete para somar os números de `numeros`, uma `List<Integer>`:",
+      "code": "int soma = numeros.stream().mapToInt(Integer::intValue).___();",
+      "blanks": [["sum"]],
+      "explanation": "`mapToInt` gera um `IntStream`, que tem `sum()`. `count()` devolveria quantos elementos há, e não a soma."
+    },
+    {
+      "id": "java.java-moderno.q09", "type": "multiple", "difficulty": 3, "lesson": "streams",
+      "prompt": "O que este trecho imprime?\n\n```java\nStream.of(\"a\", \"b\", \"c\")\n    .peek(s -> System.out.print(s))\n    .filter(s -> !s.equals(\"b\"));\n```",
+      "options": ["Nada", "abc", "ac", "Erro de compilação"], "answer": 0,
+      "explanation": "Operações intermediárias, como `peek` e `filter`, são preguiçosas: só rodam quando aparece uma operação terminal (`toList`, `count`, `forEach`...). Sem ela, nada acontece."
+    },
+    {
+      "id": "java.java-moderno.q10", "type": "multiple", "difficulty": 2, "lesson": "streams",
+      "prompt": "O que `Stream.of(\"a\", \"b\", \"c\").collect(Collectors.joining(\", \"))` devolve?",
+      "options": ["a, b, c", "[a, b, c]", "abc", "a, b, c, "], "answer": 0,
+      "explanation": "`joining(\", \")` junta os textos e coloca o separador só **entre** eles."
+    },
+    {
+      "id": "java.java-moderno.q11", "type": "order", "difficulty": 2, "lesson": "streams",
+      "prompt": "Monte o pipeline que, **nesta ordem**: cria o stream de `numeros`, fica com os maiores que 3, multiplica cada um por 10, ordena, pega os 2 primeiros e gera a lista.",
+      "lines": ["List<Integer> r = numeros.stream()", "    .filter(n -> n > 3)", "    .map(n -> n * 10)", "    .sorted()", "    .limit(2)", "    .toList();"],
+      "explanation": "Cada etapa é uma operação intermediária encadeada com `.`; a última, `toList()`, é a terminal. Com `numeros = List.of(5, 2, 8, 1, 9)`, o resultado é `[50, 80]`."
+    },
+    {
+      "id": "java.java-moderno.q12", "type": "multiple", "difficulty": 1, "lesson": "optional",
+      "prompt": "O que este trecho imprime?\n\n```java\nOptional<String> vazio = Optional.empty();\nSystem.out.println(vazio.orElse(\"padrão\"));\n```",
+      "options": ["padrão", "null", "Optional.empty", "Lança `NoSuchElementException`"], "answer": 0,
+      "explanation": "`orElse` devolve o valor guardado ou, se o `Optional` estiver vazio, o padrão informado."
+    },
+    {
+      "id": "java.java-moderno.q13", "type": "truefalse", "difficulty": 2, "lesson": "optional",
+      "prompt": "`Optional.of(null)` cria um `Optional` vazio.",
+      "answer": false,
+      "explanation": "`Optional.of` exige um valor não nulo e lança `NullPointerException` com `null`. Para um valor que pode ser `null`, use `Optional.ofNullable`."
+    },
+    {
+      "id": "java.java-moderno.q14", "type": "fill", "difficulty": 2, "lesson": "optional",
+      "prompt": "Complete para criar um `Optional` a partir de um valor que **pode** ser `null`:",
+      "code": "Optional<String> apelido = Optional.___(talvezNulo);",
+      "blanks": [["ofNullable"]],
+      "explanation": "`ofNullable` devolve um `Optional` vazio quando recebe `null`, e um `Optional` com o valor nos outros casos."
+    },
+    {
+      "id": "java.java-moderno.q15", "type": "multiple", "difficulty": 2, "lesson": "var-e-text-blocks",
+      "prompt": "Qual destas declarações **não** compila?",
+      "options": ["`var x = null;`", "`var nomes = new ArrayList<String>();`", "`var total = 0;`", "`var texto = \"oi\";`"], "answer": 0,
+      "explanation": "Com `var`, o tipo vem do valor inicial, e `null` não diz qual é o tipo: *cannot infer type for local variable x*."
+    },
+    {
+      "id": "java.java-moderno.q16", "type": "truefalse", "difficulty": 1, "lesson": "var-e-text-blocks",
+      "prompt": "`var` pode ser usado para declarar atributos de uma classe.",
+      "answer": false,
+      "explanation": "`var` só vale para variáveis locais (dentro de métodos, inclusive no `for`). Num atributo, o `javac` acusa *'var' is not allowed here*."
+    },
+    {
+      "id": "java.java-moderno.q17", "type": "multiple", "difficulty": 2, "lesson": "var-e-text-blocks",
+      "prompt": "Qual é a primeira linha do texto guardado em `json`?\n\n```java\nString json = \"\"\"\n    {\n      \"nome\": \"Ana\"\n    }\n    \"\"\";\n```",
+      "options": ["`{`, sem espaços antes", "Uma linha vazia", "`{`, com quatro espaços antes", "`\"\"\"`"], "answer": 0,
+      "explanation": "O texto começa na linha seguinte às aspas de abertura, e o recuo comum a todas as linhas (contando a linha das aspas de fechamento) é removido. Por isso a primeira linha é só `{`."
+    },
+    {
+      "id": "java.java-moderno.q18", "type": "multiple", "difficulty": 1, "lesson": "records",
+      "prompt": "Com `record Ponto(int x, int y) {}` e um `Ponto p`, como se lê o valor de `x` fora do record?",
+      "options": ["`p.x()`", "`p.getX()`", "`p.x`", "`Ponto.x`"], "answer": 0,
+      "explanation": "O record gera um método de acesso com o mesmo nome do componente: `x()`. Não existe `getX()`, e o atributo `x` é `private`, então `p.x` não compila fora do record."
+    },
+    {
+      "id": "java.java-moderno.q19", "type": "truefalse", "difficulty": 2, "lesson": "records",
+      "prompt": "Dois records criados com os mesmos valores são iguais para o `equals`.",
+      "answer": true,
+      "explanation": "O record gera `equals` e `hashCode` que comparam os valores dos componentes: `new Ponto(3, 4).equals(new Ponto(3, 4))` é `true`."
+    },
+    {
+      "id": "java.java-moderno.q20", "type": "multiple", "difficulty": 3, "lesson": "records",
+      "prompt": "O que acontece em `new Idade(-1);`?\n\n```java\nrecord Idade(int valor) {\n    Idade {\n        if (valor < 0) {\n            throw new IllegalArgumentException(\"idade negativa\");\n        }\n    }\n}\n```",
+      "options": ["Lança `IllegalArgumentException`", "Cria o record com valor -1", "Cria o record com valor 0", "Erro de compilação"], "answer": 0,
+      "explanation": "O construtor compacto roda a cada `new`, antes de os valores serem guardados. A validação lança a exceção, e o objeto nem chega a ser criado."
+    },
+    {
+      "id": "java.java-moderno.q21", "type": "multiple", "difficulty": 2, "lesson": "switch-e-pattern-matching",
+      "prompt": "O que este trecho imprime?\n\n```java\nObject obj = \"Java\";\nif (obj instanceof String s && s.length() > 3) {\n    System.out.println(s.toUpperCase());\n}\n```",
+      "options": ["JAVA", "Java", "Nada é impresso", "Erro de compilação"], "answer": 0,
+      "explanation": "`obj instanceof String s` testa o tipo e já cria a variável `s` (Java 16+). Ela pode ser usada depois do `&&`, que só é avaliado se o teste der certo."
+    },
+    {
+      "id": "java.java-moderno.q22", "type": "fill", "difficulty": 2, "lesson": "switch-e-pattern-matching",
+      "prompt": "Complete para devolver o valor do bloco dentro do `switch` (Java 14+):",
+      "code": "String tipo = switch (dia) {\n    case 1, 7 -> \"fim de semana\";\n    default -> {\n        String t = \"dia útil\";\n        ___ t;\n    }\n};",
+      "blanks": [["yield"]],
+      "explanation": "Num bloco `{ }` dentro de um `switch` usado como expressão, quem devolve o valor é o `yield`. Um `return` ali não compila: *attempt to return out of a switch expression*."
+    },
+    {
+      "id": "java.java-moderno.q23", "type": "multiple", "difficulty": 3, "lesson": "switch-e-pattern-matching",
+      "prompt": "Este `switch` não tem `default`. O que acontece ao compilar?\n\n```java\nsealed interface Forma permits Circulo, Quadrado {}\nrecord Circulo(double raio) implements Forma {}\nrecord Quadrado(double lado) implements Forma {}\n\nstatic String nome(Forma f) {\n    return switch (f) {\n        case Circulo c -> \"círculo\";\n        case Quadrado q -> \"quadrado\";\n    };\n}\n```",
+      "options": ["Compila: como `Forma` é `sealed`, os dois `case` cobrem todos os casos", "Não compila: todo `switch` que devolve valor precisa de `default`", "Compila, mas lança exceção quando `f` é um `Circulo`", "Não compila: o `switch` não aceita interfaces"], "answer": 0,
+      "explanation": "Uma interface `sealed` lista todas as implementações possíveis. O compilador confere que `Circulo` e `Quadrado` cobrem todas, então o `default` é dispensável."
+    },
+    {
+      "id": "java.java-moderno.q24", "type": "multiple", "difficulty": 3, "lesson": "switch-e-pattern-matching",
+      "prompt": "O que acontece ao compilar este método?\n\n```java\nstatic String descrever(Object o) {\n    return switch (o) {\n        case CharSequence cs -> \"texto\";\n        case String s -> \"string\";\n        default -> \"outro\";\n    };\n}\n```",
+      "options": ["Erro de compilação: o `case String` nunca seria alcançado", "Compila, e devolve \"string\" para qualquer `String`", "Compila, e devolve \"texto\" para qualquer `String`", "Compila, mas lança exceção ao executar"], "answer": 0,
+      "explanation": "`String` é uma `CharSequence`, então o primeiro `case` já pegaria todas as Strings. O `javac` acusa *this case label is dominated by a preceding case label*. Coloque o `case` mais específico primeiro."
+    },
+    {
+      "id": "java.java-moderno.q25", "type": "truefalse", "difficulty": 2, "lesson": "switch-e-pattern-matching",
+      "prompt": "No Java 21, um `case` de `switch` pode ter uma condição extra com `when`, como em `case Integer i when i > 0 ->`.",
+      "answer": true,
+      "explanation": "A guarda `when` só deixa o `case` valer se a condição for verdadeira; senão, o `switch` continua tentando os `case` seguintes."
+    }
+  ]
+}

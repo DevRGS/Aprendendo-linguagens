@@ -1,0 +1,102 @@
+{
+  "id": "java",
+  "name": "Java",
+  "color": "#f89820",
+  "icon": "☕",
+  "highlight": "java",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "introducao",
+      "dir": "01-introducao",
+      "title": "Introdução",
+      "description": "O que é Java, como ele roda, a instalação do JDK e o seu primeiro programa.",
+      "lessons": [
+        { "id": "o-que-e-java", "file": "01-o-que-e-java.md", "title": "O que é Java", "minutes": 7 },
+        { "id": "jdk-jre-jvm", "file": "02-jdk-jre-jvm.md", "title": "JDK, JRE e JVM", "minutes": 7 },
+        { "id": "instalacao", "file": "03-instalacao.md", "title": "Instalando o JDK e escolhendo um editor", "minutes": 10 },
+        { "id": "primeiro-programa", "file": "04-primeiro-programa.md", "title": "Seu primeiro programa", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "fundamentos",
+      "dir": "02-fundamentos",
+      "title": "Fundamentos",
+      "description": "Tipos, variáveis, conversões, operadores, condicionais, laços e arrays: a base de todo programa Java.",
+      "lessons": [
+        { "id": "variaveis-e-tipos", "file": "01-variaveis-e-tipos.md", "title": "Variáveis e tipos primitivos", "minutes": 10 },
+        { "id": "conversoes", "file": "02-conversoes.md", "title": "Conversões entre tipos", "minutes": 8 },
+        { "id": "operadores", "file": "03-operadores.md", "title": "Operadores", "minutes": 10 },
+        { "id": "condicionais", "file": "04-condicionais.md", "title": "Condicionais: if e switch", "minutes": 9 },
+        { "id": "lacos", "file": "05-lacos.md", "title": "Laços de repetição", "minutes": 8 },
+        { "id": "arrays", "file": "06-arrays.md", "title": "Arrays", "minutes": 9 }
+      ]
+    },
+    {
+      "id": "poo",
+      "dir": "03-poo",
+      "title": "Orientação a Objetos",
+      "description": "Classes, objetos, construtores, encapsulamento, herança, polimorfismo, classes abstratas, interfaces, static e final.",
+      "lessons": [
+        { "id": "classes-e-objetos", "file": "01-classes-e-objetos.md", "title": "Classes e objetos", "minutes": 10 },
+        { "id": "construtores", "file": "02-construtores.md", "title": "Construtores", "minutes": 9 },
+        { "id": "encapsulamento", "file": "03-encapsulamento.md", "title": "Encapsulamento", "minutes": 9 },
+        { "id": "heranca-e-polimorfismo", "file": "04-heranca-e-polimorfismo.md", "title": "Herança e polimorfismo", "minutes": 12 },
+        { "id": "abstratas-e-interfaces", "file": "05-abstratas-e-interfaces.md", "title": "Classes abstratas e interfaces", "minutes": 11 },
+        { "id": "static-e-final", "file": "06-static-e-final.md", "title": "static e final", "minutes": 8 }
+      ]
+    },
+    {
+      "id": "colecoes",
+      "dir": "04-colecoes",
+      "title": "Coleções",
+      "description": "Listas, conjuntos e mapas para guardar dados que crescem, e como percorrer e ordenar cada um.",
+      "lessons": [
+        { "id": "listas", "file": "01-listas.md", "title": "Listas", "minutes": 10 },
+        { "id": "conjuntos", "file": "02-conjuntos.md", "title": "Conjuntos", "minutes": 8 },
+        { "id": "mapas", "file": "03-mapas.md", "title": "Mapas", "minutes": 9 },
+        { "id": "iteracao", "file": "04-iteracao.md", "title": "Percorrendo coleções", "minutes": 8 },
+        { "id": "ordenacao", "file": "05-ordenacao.md", "title": "Ordenação", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "excecoes",
+      "dir": "05-excecoes",
+      "title": "Exceções",
+      "description": "Como o Java sinaliza erros, como tratá-los com try/catch/finally e como criar suas próprias exceções.",
+      "lessons": [
+        { "id": "o-que-sao", "file": "01-o-que-sao.md", "title": "O que são exceções", "minutes": 8 },
+        { "id": "try-catch-finally", "file": "02-try-catch-finally.md", "title": "try, catch e finally", "minutes": 10 },
+        { "id": "checked-e-unchecked", "file": "03-checked-e-unchecked.md", "title": "Checked, unchecked, throw e throws", "minutes": 9 },
+        { "id": "excecoes-personalizadas", "file": "04-excecoes-personalizadas.md", "title": "Exceções personalizadas", "minutes": 8 },
+        { "id": "try-with-resources", "file": "05-try-with-resources.md", "title": "try-with-resources", "minutes": 8 }
+      ]
+    },
+    {
+      "id": "strings",
+      "dir": "06-strings",
+      "title": "Strings e Entrada",
+      "description": "Trabalhar com texto: imutabilidade, comparação, métodos úteis, StringBuilder e leitura do teclado com Scanner.",
+      "lessons": [
+        { "id": "string-imutavel", "file": "01-string-imutavel.md", "title": "Strings são imutáveis", "minutes": 8 },
+        { "id": "metodos-de-string", "file": "02-metodos-de-string.md", "title": "Métodos de String", "minutes": 11 },
+        { "id": "stringbuilder", "file": "03-stringbuilder.md", "title": "StringBuilder", "minutes": 7 },
+        { "id": "entrada-com-scanner", "file": "04-entrada-com-scanner.md", "title": "Lendo o teclado com Scanner", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "java-moderno",
+      "dir": "07-java-moderno",
+      "title": "Java Moderno (8 a 21)",
+      "description": "Recursos do Java 8 ao 21: lambdas, interfaces funcionais, streams, Optional, var, text blocks, records, switch moderno e pattern matching.",
+      "lessons": [
+        { "id": "lambdas", "file": "01-lambdas.md", "title": "Lambdas e interfaces funcionais", "minutes": 10 },
+        { "id": "streams", "file": "02-streams.md", "title": "Streams", "minutes": 12 },
+        { "id": "optional", "file": "03-optional.md", "title": "Optional", "minutes": 7 },
+        { "id": "var-e-text-blocks", "file": "04-var-e-text-blocks.md", "title": "var e text blocks", "minutes": 7 },
+        { "id": "records", "file": "05-records.md", "title": "Records", "minutes": 8 },
+        { "id": "switch-e-pattern-matching", "file": "06-switch-e-pattern-matching.md", "title": "switch moderno e pattern matching", "minutes": 11 }
+      ]
+    }
+  ]
+}

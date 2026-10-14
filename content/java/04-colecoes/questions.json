@@ -1,0 +1,141 @@
+{
+  "questions": [
+    {
+      "id": "java.colecoes.q01", "type": "multiple", "difficulty": 1, "lesson": "listas",
+      "prompt": "Qual é a principal vantagem de um `ArrayList` sobre um array?",
+      "options": ["O tamanho cresce conforme você adiciona itens", "Aceita tipos primitivos, como `int`, diretamente", "Dispensa o `import`", "Guarda os itens já ordenados"], "answer": 0,
+      "explanation": "Um array tem tamanho fixo; um `ArrayList` cresce sozinho a cada `add`. Ele só aceita objetos (`List<Integer>`, não `List<int>`), precisa de `import java.util.ArrayList;` e guarda os itens na ordem em que entraram."
+    },
+    {
+      "id": "java.colecoes.q02", "type": "multiple", "difficulty": 2, "lesson": "listas",
+      "prompt": "O que este código imprime?\n\n```java\nList<Integer> numeros = new ArrayList<>(List.of(5, 7, 1));\nnumeros.remove(1);\nSystem.out.println(numeros);\n```",
+      "options": ["[5, 1]", "[5, 7]", "[7, 1]", "Erro de compilação"], "answer": 0,
+      "explanation": "Com um `int`, `remove(1)` remove a **posição** 1 (o 7). Para remover o valor 1, seria `remove(Integer.valueOf(1))`, que deixaria `[5, 7]`."
+    },
+    {
+      "id": "java.colecoes.q03", "type": "truefalse", "difficulty": 1, "lesson": "listas",
+      "prompt": "`List<int> notas = new ArrayList<>();` é uma declaração válida.",
+      "answer": false,
+      "explanation": "Genéricos só aceitam objetos: o `javac` acusa *unexpected type*. Use a classe wrapper: `List<Integer>`."
+    },
+    {
+      "id": "java.colecoes.q04", "type": "fill", "difficulty": 1, "lesson": "listas",
+      "prompt": "Complete para criar uma lista imutável (Java 9+) com três cores:",
+      "code": "List<String> cores = ___(\"azul\", \"verde\", \"roxo\");",
+      "blanks": [["List.of", "java.util.List.of"]],
+      "explanation": "`List.of(...)` cria uma lista que não pode ser alterada: `add`, `remove` e `set` lançam `UnsupportedOperationException`."
+    },
+    {
+      "id": "java.colecoes.q05", "type": "multiple", "difficulty": 2, "lesson": "listas",
+      "prompt": "O que acontece ao executar este trecho?\n\n```java\nList<String> cores = List.of(\"azul\", \"verde\");\ncores.add(\"roxo\");\n```",
+      "options": ["Lança `UnsupportedOperationException`", "A lista passa a ter três cores", "Erro de compilação", "O `add` é ignorado, sem erro"], "answer": 0,
+      "explanation": "Listas criadas com `List.of` são imutáveis. O código compila, porque `add` existe na interface `List`, mas lança `UnsupportedOperationException` ao executar."
+    },
+    {
+      "id": "java.colecoes.q06", "type": "fill", "difficulty": 1, "lesson": "listas",
+      "prompt": "Complete para guardar em `total` quantos itens a lista `nomes` tem:",
+      "code": "int total = nomes.___();",
+      "blanks": [["size"]],
+      "explanation": "Coleções usam `size()`. Arrays usam o atributo `length`, e Strings, o método `length()`."
+    },
+    {
+      "id": "java.colecoes.q07", "type": "multiple", "difficulty": 1, "lesson": "conjuntos",
+      "prompt": "Qual destas coleções **não** guarda elementos repetidos?",
+      "options": ["`HashSet`", "`ArrayList`", "Uma lista criada com `List.of`", "Um array `String[]`"], "answer": 0,
+      "explanation": "`Set` (como `HashSet`) não aceita repetidos. Listas e arrays guardam quantas cópias você colocar."
+    },
+    {
+      "id": "java.colecoes.q08", "type": "multiple", "difficulty": 2, "lesson": "conjuntos",
+      "prompt": "O que este código imprime?\n\n```java\nSet<String> tags = new HashSet<>();\ntags.add(\"java\");\ntags.add(\"sql\");\nSystem.out.println(tags.add(\"java\"));\n```",
+      "options": ["false", "true", "java", "Lança exceção"], "answer": 0,
+      "explanation": "`add` devolve `false` quando o item já estava no conjunto, que continua com dois itens."
+    },
+    {
+      "id": "java.colecoes.q09", "type": "multiple", "difficulty": 2, "lesson": "conjuntos",
+      "prompt": "O que `System.out.println(new TreeSet<>(List.of(\"ana\", \"Bia\", \"Caio\")));` imprime?",
+      "options": ["[Bia, Caio, ana]", "[ana, Bia, Caio]", "[Caio, Bia, ana]", "[ana, Caio, Bia]"], "answer": 0,
+      "explanation": "O `TreeSet` usa a ordem natural, que compara os códigos dos caracteres (Unicode): as maiúsculas sem acento vêm antes de todas as minúsculas. Por isso `ana` fica no fim."
+    },
+    {
+      "id": "java.colecoes.q10", "type": "truefalse", "difficulty": 2, "lesson": "conjuntos",
+      "prompt": "Um `LinkedHashSet` percorre os elementos na ordem em que eles foram inseridos.",
+      "answer": true,
+      "explanation": "`LinkedHashSet` mantém a ordem de inserção; `TreeSet` usa a ordem natural; `HashSet` não garante ordem nenhuma."
+    },
+    {
+      "id": "java.colecoes.q11", "type": "multiple", "difficulty": 1, "lesson": "mapas",
+      "prompt": "O que este código imprime?\n\n```java\nMap<String, Integer> m = new HashMap<>();\nm.put(\"a\", 1);\nm.put(\"a\", 2);\nSystem.out.println(m.get(\"a\") + \" \" + m.size());\n```",
+      "options": ["2 1", "1 1", "1 2", "2 2"], "answer": 0,
+      "explanation": "As chaves não se repetem: o segundo `put` troca o valor da chave `\"a\"`. O mapa continua com um par só, que agora vale 2."
+    },
+    {
+      "id": "java.colecoes.q12", "type": "multiple", "difficulty": 1, "lesson": "mapas",
+      "prompt": "Num `Map<String, Integer>`, o que `get` devolve para uma chave que não existe?",
+      "options": ["`null`", "`0`", "Lança exceção", "Uma String vazia"], "answer": 0,
+      "explanation": "`get` devolve `null` quando a chave não existe. Para receber um valor padrão, use `getOrDefault(chave, padrao)`."
+    },
+    {
+      "id": "java.colecoes.q13", "type": "fill", "difficulty": 2, "lesson": "mapas",
+      "prompt": "Complete a contagem de palavras para funcionar também na primeira vez que a palavra aparece:",
+      "code": "contagem.put(p, contagem.___(p, 0) + 1);",
+      "blanks": [["getOrDefault"]],
+      "explanation": "`getOrDefault(p, 0)` devolve a contagem atual ou `0`, se a palavra ainda não está no mapa. Com `get`, a primeira vez daria `null + 1`, que lança `NullPointerException`."
+    },
+    {
+      "id": "java.colecoes.q14", "type": "truefalse", "difficulty": 2, "lesson": "mapas",
+      "prompt": "Num `TreeMap<String, Integer>`, as chaves são percorridas na ordem natural delas, e não na ordem em que foram inseridas.",
+      "answer": true,
+      "explanation": "`TreeMap` mantém as chaves ordenadas pela ordem natural (para textos, a ordem dos códigos dos caracteres). Quem guarda a ordem de inserção é o `LinkedHashMap`."
+    },
+    {
+      "id": "java.colecoes.q15", "type": "multiple", "difficulty": 2, "lesson": "iteracao",
+      "prompt": "O que acontece ao executar este trecho?\n\n```java\nList<String> nomes = new ArrayList<>(List.of(\"\", \"Ana\", \"\", \"Bia\"));\nfor (String n : nomes) {\n    if (n.isEmpty()) {\n        nomes.remove(n);\n    }\n}\n```",
+      "options": ["Lança `ConcurrentModificationException`", "Remove os dois nomes vazios", "Erro de compilação", "Remove só o primeiro nome vazio e termina normalmente"], "answer": 0,
+      "explanation": "Alterar a lista enquanto o for-each a percorre quebra o laço: logo depois da primeira remoção, o Java lança `ConcurrentModificationException`. Use um `Iterator` com `it.remove()` ou `removeIf`."
+    },
+    {
+      "id": "java.colecoes.q16", "type": "order", "difficulty": 2, "lesson": "iteracao",
+      "prompt": "Monte o trecho que remove da lista `nomes` **só** os nomes vazios, usando um `Iterator`:",
+      "lines": ["Iterator<String> it = nomes.iterator();", "while (it.hasNext()) {", "    String n = it.next();", "    if (n.isEmpty()) {", "        it.remove();", "    }", "}"],
+      "explanation": "O `Iterator` avança com `next()` e remove o item atual com `remove()`, sem quebrar o laço. O `if` garante que só os vazios saem."
+    },
+    {
+      "id": "java.colecoes.q17", "type": "fill", "difficulty": 2, "lesson": "iteracao",
+      "prompt": "Complete para remover da lista todos os nomes vazios (Java 8+):",
+      "code": "nomes.___(n -> n.isEmpty());",
+      "blanks": [["removeIf"]],
+      "explanation": "`removeIf` remove todos os itens para os quais a condição é verdadeira, sem o risco de `ConcurrentModificationException`."
+    },
+    {
+      "id": "java.colecoes.q18", "type": "fill", "difficulty": 2, "lesson": "ordenacao",
+      "prompt": "`getIdade()` devolve um `int`. Complete para ordenar as pessoas da menor idade para a maior:",
+      "code": "pessoas.sort(Comparator.___(Pessoa::getIdade));",
+      "blanks": [["comparingInt", "comparing", "comparingLong", "comparingDouble"]],
+      "explanation": "`comparingInt` é o mais indicado para um `int`, porque compara sem converter em objeto. `comparing` também funciona (converte para `Integer`), assim como `comparingLong` e `comparingDouble`, que aceitam o `int` alargado."
+    },
+    {
+      "id": "java.colecoes.q19", "type": "multiple", "difficulty": 2, "lesson": "ordenacao",
+      "prompt": "A classe `Pessoa` não implementa `Comparable`. O que acontece com `Collections.sort(pessoas)`, sendo `pessoas` uma `List<Pessoa>`?",
+      "options": ["Erro de compilação", "Ordena pelo primeiro atributo da classe", "Ordena pela ordem em que os objetos foram criados", "Compila, mas lança exceção ao executar"], "answer": 0,
+      "explanation": "`Collections.sort(lista)` só aceita listas de elementos `Comparable`. O `javac` acusa *no suitable method found for sort*. Use `pessoas.sort(Comparator.comparing(...))`."
+    },
+    {
+      "id": "java.colecoes.q20", "type": "multiple", "difficulty": 1, "lesson": "ordenacao",
+      "prompt": "O que este código imprime?\n\n```java\nList<Integer> n = new ArrayList<>(List.of(5, 2, 9, 1));\nCollections.sort(n);\nSystem.out.println(n);\n```",
+      "options": ["[1, 2, 5, 9]", "[9, 5, 2, 1]", "[5, 2, 9, 1]", "[1, 5, 2, 9]"], "answer": 0,
+      "explanation": "`Collections.sort` ordena a própria lista pela ordem natural: números em ordem crescente."
+    },
+    {
+      "id": "java.colecoes.q21", "type": "truefalse", "difficulty": 2, "lesson": "ordenacao",
+      "prompt": "`lista.sort(Comparator.comparingInt(Pessoa::getIdade).reversed())` ordena da maior idade para a menor.",
+      "answer": true,
+      "explanation": "`comparingInt` ordena da menor para a maior idade, e `.reversed()` inverte essa ordem."
+    },
+    {
+      "id": "java.colecoes.q22", "type": "multiple", "difficulty": 2, "lesson": "ordenacao",
+      "prompt": "Para dar uma **ordem natural** à sua própria classe, de modo que `Collections.sort(lista)` funcione sem argumentos extras, a classe deve implementar qual interface?",
+      "options": ["`Comparable`", "`Comparator`", "`Iterable`", "`Sortable`"], "answer": 0,
+      "explanation": "`Comparable` define a ordem natural dentro da própria classe, no método `compareTo`. `Comparator` é uma ordem externa, passada para o `sort`; `Sortable` não existe na biblioteca padrão."
+    }
+  ]
+}

@@ -36,6 +36,18 @@
 4. **Ordenar linhas com linhas idênticas e com recuo:** a correção compara o texto sem recuo, e linhas iguais são intercambiáveis. Teste na Tarefa 3; o embaralhamento com linhas todas iguais não pode travar (Tarefa 4).
 5. **Progresso salvo corrompido, de outro app ou de versão mais nova:** nada é apagado; o arquivo é recusado com o motivo certo; e o arquivo do backup automático **não** é sobrescrito pelo estado recomeçado (o backup automático fica pausado nessa carga e nunca grava um estado sem progresso). Testes em `state.test.js` e `backup-format.test.js` (Tarefa 5, incluindo `hasProgress`) e roteiro manual (Tarefa 22).
 
+## Emenda 1: testes automatizados para todas as funções (pedido em 2026-10-11)
+
+A pessoa pediu que **todas as funções tenham testes automatizados**, para que mexer em uma não quebre outras em cadeia. Isso vale também para `js/data/` e `js/ui/`, que na versão original do plano só tinham teste de importação e verificação manual.
+
+1. **Nova regra global:** toda função exportada de qualquer arquivo em `js/` tem teste de comportamento. As funções internas (não exportadas) são cobertas pelos testes das exportadas que as usam. O teste `tests/meta/exports-covered.test.js` garante isso: ele importa cada módulo, lista as funções exportadas e falha se algum nome não aparecer em nenhum arquivo de teste. Uma função nova sem teste quebra a suíte.
+2. **Dependências só de teste** (`devDependencies`; o site continua sem build e sem dependências em produção): `jsdom` (simula o navegador no Node), `marked@12.0.2` e `highlight.js@11.9.0` (as mesmas versões da CDN, injetadas nos testes). O `package-lock.json` vai para o git; quem for rodar os testes executa `npm install` uma vez. O workflow da Tarefa 22 ganha um passo `npm ci` antes de `npm test`.
+3. **Mudanças por tarefa:**
+   - **Tarefa 14:** cria `tests/helpers/dom.js` (monta o DOM do `index.html` com jsdom e registra `window`, `document`, `localStorage` etc. como globais), `tests/helpers/fetch-from-disk.js` (responde `fetch('content/...')` lendo do disco), testes de `content.js`, `storage.js`, `idb.js` (com IndexedDB falso em memória) e `backup.js` (com `showSaveFilePicker` e `navigator.share` falsos), e o teste `exports-covered`.
+   - **Tarefa 15:** `markdown.js` passa a aceitar bibliotecas injetadas (`initMarkdown({ marked, hljs })`, usado nos testes; sem argumento, carrega da CDN). A lógica do `main.js` vai para `js/app.js` (`boot()` e `start()`, testáveis com jsdom); `main.js` vira só o ponto de entrada que chama `boot()`. Ganham testes `dom.js`, `store.js`, `markdown.js`, `layout.js`, `backup-flow.js`, os componentes, as telas da tarefa e o `app.js` (fluxo de primeira visita, dados corrompidos, versão mais nova e pausa do backup automático).
+   - **Tarefas 16 a 21:** cada tela e componente novo nasce com o seu arquivo de teste em `tests/ui/`, escrito antes do código (TDD), cobrindo o comportamento descrito no passo "Conferir no navegador" da própria tarefa.
+4. **O roteiro manual continua** (aparência, celular de verdade, impressão e permissões reais do navegador), mas deixa de ser a única proteção da interface.
+
 ---
 
 ## Estrutura de arquivos

@@ -1,0 +1,127 @@
+{
+  "questions": [
+    {
+      "id": "java.fundamentos.q01", "type": "multiple", "difficulty": 1, "lesson": "operadores",
+      "prompt": "Qual é a saída de `System.out.println(7 / 2);`?",
+      "options": ["3.5", "3", "4", "Erro de compilação"], "answer": 1,
+      "explanation": "Divisão entre dois `int` descarta a parte decimal: `7 / 2` é `3`. Para obter `3.5`, pelo menos um lado precisa ser decimal, como em `7.0 / 2`."
+    },
+    {
+      "id": "java.fundamentos.q02", "type": "truefalse", "difficulty": 1, "lesson": "variaveis-e-tipos",
+      "prompt": "`String` é um dos tipos primitivos do Java.",
+      "answer": false,
+      "explanation": "`String` é uma classe (`java.lang.String`). Os 8 primitivos são `byte`, `short`, `int`, `long`, `float`, `double`, `char` e `boolean`."
+    },
+    {
+      "id": "java.fundamentos.q03", "type": "multiple", "difficulty": 1, "lesson": "variaveis-e-tipos",
+      "prompt": "Quantos tipos primitivos existem em Java?",
+      "options": ["4", "6", "8", "10"], "answer": 2,
+      "explanation": "São 8: `byte`, `short`, `int`, `long`, `float`, `double`, `char` e `boolean`."
+    },
+    {
+      "id": "java.fundamentos.q04", "type": "multiple", "difficulty": 1, "lesson": "conversoes",
+      "prompt": "O que este código imprime?\n\n```java\ndouble x = 9.99;\nint n = (int) x;\nSystem.out.println(n);\n```",
+      "options": ["9.99", "10", "9", "Erro de compilação"], "answer": 2,
+      "explanation": "O cast para `int` **trunca**: descarta a parte decimal sem arredondar. Para arredondar, use `Math.round(x)`."
+    },
+    {
+      "id": "java.fundamentos.q05", "type": "fill", "difficulty": 1, "lesson": "conversoes",
+      "prompt": "Complete para converter o texto `\"42\"` em um `int`:",
+      "code": "int idade = Integer.___(\"42\");",
+      "blanks": [["parseInt", "valueOf", "decode", "parseUnsignedInt"]],
+      "explanation": "O jeito mais comum é `Integer.parseInt(\"42\")`, que devolve diretamente um `int`. `Integer.valueOf(\"42\")` também funciona: devolve um `Integer`, convertido para `int` automaticamente (unboxing). `Integer.decode` e `Integer.parseUnsignedInt` também compilam e dão 42, mas são para casos especiais (números em hexadecimal e números sem sinal)."
+    },
+    {
+      "id": "java.fundamentos.q06", "type": "multiple", "difficulty": 3, "lesson": "operadores",
+      "prompt": "O que este código imprime?\n\n```java\nint i = 5;\nSystem.out.println(i++ + ++i);\n```",
+      "options": ["10", "11", "12", "13"], "answer": 2,
+      "explanation": "`i++` vale 5 (e `i` passa a 6); depois `++i` faz `i` virar 7 e vale 7. A soma é 5 + 7 = 12."
+    },
+    {
+      "id": "java.fundamentos.q07", "type": "truefalse", "difficulty": 2, "lesson": "operadores",
+      "prompt": "Em `a && b`, se `a` for `false`, a expressão `b` nem chega a ser avaliada.",
+      "answer": true,
+      "explanation": "É o curto-circuito: com `&&`, se o lado esquerdo é `false`, o resultado já é `false`, então o direito é ignorado. O operador `&` avalia os dois lados sempre."
+    },
+    {
+      "id": "java.fundamentos.q08", "type": "multiple", "difficulty": 2, "lesson": "operadores",
+      "prompt": "Qual é a saída de `System.out.println(1 + 2 + \"3\");`?",
+      "options": ["6", "123", "33", "Erro de compilação"], "answer": 2,
+      "explanation": "A avaliação é da esquerda para a direita: `1 + 2` dá `3` (soma de números) e depois `3 + \"3\"` vira o texto `\"33\"`."
+    },
+    {
+      "id": "java.fundamentos.q09", "type": "multiple", "difficulty": 2, "lesson": "condicionais",
+      "prompt": "O que este código imprime?\n\n```java\nint x = 2;\nswitch (x) {\n    case 1: System.out.print(\"A\");\n    case 2: System.out.print(\"B\");\n    case 3: System.out.print(\"C\");\n        break;\n    default: System.out.print(\"D\");\n}\n```",
+      "options": ["B", "BC", "BCD", "ABC"], "answer": 1,
+      "explanation": "Sem `break` no `case 2`, a execução continua no `case 3` (fall-through) e imprime `C`. O `break` do `case 3` encerra o `switch` antes do `default`."
+    },
+    {
+      "id": "java.fundamentos.q10", "type": "fill", "difficulty": 2, "lesson": "condicionais",
+      "prompt": "Com `x` valendo 2, complete para que a saída seja `B!`:",
+      "code": "switch (x) {\n    case 1: System.out.print(\"A\"); break;\n    case 2: System.out.print(\"B\"); ___;\n    case 3: System.out.print(\"C\"); break;\n}\nSystem.out.print(\"!\");",
+      "blanks": [["break"]],
+      "explanation": "`break` encerra o `switch` e a execução segue para a linha seguinte, que imprime `!`. Sem ele, o `case 3` também rodaria (fall-through) e a saída seria `BC!`."
+    },
+    {
+      "id": "java.fundamentos.q11", "type": "order", "difficulty": 1, "lesson": "lacos",
+      "prompt": "Ordene as linhas para que o programa imprima **apenas a soma final** de 1 + 2 + 3 (ou seja, `6`):",
+      "lines": ["int soma = 0;", "for (int i = 1; i <= 3; i++) {", "    soma += i;", "}", "System.out.println(soma);"],
+      "explanation": "A variável é criada antes do laço, o laço acumula os valores e só depois de fechar a chave o total é impresso. Se o `println` ficasse dentro do laço, imprimiria 1, 3 e 6."
+    },
+    {
+      "id": "java.fundamentos.q12", "type": "multiple", "difficulty": 1, "lesson": "lacos",
+      "prompt": "Qual laço garante que o corpo seja executado pelo menos uma vez?",
+      "options": ["for", "while", "do-while", "for-each"], "answer": 2,
+      "explanation": "O `do-while` testa a condição só **depois** de cada volta, então o corpo roda pelo menos uma vez. O `for` e o `while` testam antes."
+    },
+    {
+      "id": "java.fundamentos.q13", "type": "multiple", "difficulty": 2, "lesson": "lacos",
+      "prompt": "O que este código imprime?\n\n```java\nfor (int i = 0; i < 5; i++) {\n    if (i == 3) break;\n    System.out.print(i);\n}\n```",
+      "options": ["012", "0123", "01234", "0124"], "answer": 0,
+      "explanation": "Quando `i` chega a 3, o `break` encerra o laço antes do `print`. Por isso só 0, 1 e 2 são impressos."
+    },
+    {
+      "id": "java.fundamentos.q14", "type": "truefalse", "difficulty": 1, "lesson": "arrays",
+      "prompt": "Em um array de tamanho 5, o último índice válido é 5.",
+      "answer": false,
+      "explanation": "Os índices começam em 0 e vão até 4. O último é sempre `length - 1`; acessar o índice 5 lança `ArrayIndexOutOfBoundsException`."
+    },
+    {
+      "id": "java.fundamentos.q15", "type": "multiple", "difficulty": 1, "lesson": "arrays",
+      "prompt": "O que este código imprime?\n\n```java\nint[] arr = new int[5];\nSystem.out.println(arr[2]);\n```",
+      "options": ["null", "0", "-1", "Erro de compilação"], "answer": 1,
+      "explanation": "Arrays criados com `new` já vêm preenchidos com o valor padrão do tipo: `0` para números, `false` para `boolean` e `null` para objetos."
+    },
+    {
+      "id": "java.fundamentos.q16", "type": "fill", "difficulty": 1, "lesson": "arrays",
+      "prompt": "Complete para imprimir quantos elementos o array tem:",
+      "code": "int[] numeros = {4, 8, 15};\nSystem.out.println(numeros.___);",
+      "blanks": [["length"]],
+      "explanation": "Em arrays, `length` é um atributo, sem parênteses. O `length()` com parênteses é método de `String`."
+    },
+    {
+      "id": "java.fundamentos.q17", "type": "multiple", "difficulty": 2, "lesson": "arrays",
+      "prompt": "Considerando `import java.util.Arrays;` no topo do arquivo, o que este código imprime?\n\n```java\nint[] a = {3, 1, 2};\nArrays.sort(a);\nSystem.out.println(Arrays.toString(a));\n```",
+      "options": ["[3, 1, 2]", "[1, 2, 3]", "123", "Um código como `[I@1b6d3586`"], "answer": 1,
+      "explanation": "`Arrays.sort` ordena o próprio array e `Arrays.toString` monta o texto `[1, 2, 3]`. Imprimir o array direto, sem `Arrays.toString`, é que mostraria algo como `[I@1b6d3586`."
+    },
+    {
+      "id": "java.fundamentos.q18", "type": "order", "difficulty": 2, "lesson": "condicionais",
+      "prompt": "Ordene as linhas para que notas a partir de 90 imprimam `A`, notas a partir de 70 imprimam `B` e as demais imprimam `C`:",
+      "lines": ["if (nota >= 90) {", "    System.out.println(\"A\");", "} else if (nota >= 70) {", "    System.out.println(\"B\");", "} else {", "    System.out.println(\"C\");", "}"],
+      "explanation": "O `if` testa primeiro a condição mais exigente. Se `>= 70` viesse antes de `>= 90`, uma nota 95 cairia no `B`."
+    },
+    {
+      "id": "java.fundamentos.q19", "type": "multiple", "difficulty": 3, "lesson": "conversoes",
+      "prompt": "Qual é a saída de `System.out.println((byte) 130);`?",
+      "options": ["130", "127", "-126", "Erro de compilação"], "answer": 2,
+      "explanation": "`byte` vai de −128 a 127. O cast força o valor a caber em 8 bits: 130 − 256 = −126. O cast explícito compila, mas perde informação."
+    },
+    {
+      "id": "java.fundamentos.q20", "type": "truefalse", "difficulty": 2, "lesson": "variaveis-e-tipos",
+      "prompt": "Este trecho compila sem erros:\n\n```java\nint total;\nSystem.out.println(total);\n```",
+      "answer": false,
+      "explanation": "Variáveis locais não recebem valor padrão. Ler `total` antes de dar um valor a ela gera o erro de compilação *variable total might not have been initialized*."
+    }
+  ]
+}
