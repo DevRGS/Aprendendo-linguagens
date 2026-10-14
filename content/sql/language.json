@@ -17,6 +17,21 @@
         { "id": "sql-e-sqlite", "file": "02-sql-e-sqlite.md", "title": "SQL e o SQLite", "minutes": 7 },
         { "id": "primeira-consulta", "file": "03-primeira-consulta.md", "title": "Sua primeira consulta", "minutes": 9 }
       ]
+    },
+    {
+      "id": "consultas",
+      "dir": "02-consultas",
+      "title": "Consultas básicas",
+      "description": "Escolher colunas, filtrar linhas, buscar partes de texto, ordenar, limitar, lidar com NULL e dar apelidos às colunas.",
+      "lessons": [
+        { "id": "colunas", "file": "01-colunas.md", "title": "Escolhendo colunas e fazendo contas", "minutes": 7 },
+        { "id": "where", "file": "02-where.md", "title": "Filtrando linhas com WHERE", "minutes": 9 },
+        { "id": "e-ou", "file": "03-e-ou.md", "title": "Combinando condições", "minutes": 10 },
+        { "id": "like", "file": "04-like.md", "title": "Buscando partes do texto com LIKE", "minutes": 7 },
+        { "id": "ordenar", "file": "05-ordenar.md", "title": "Sem repetir, ordenando e limitando", "minutes": 9 },
+        { "id": "null", "file": "06-null.md", "title": "NULL: quando falta o valor", "minutes": 8 },
+        { "id": "apelidos", "file": "07-apelidos.md", "title": "Apelidos de coluna com AS", "minutes": 6 }
+      ]
     }
   ]
 }

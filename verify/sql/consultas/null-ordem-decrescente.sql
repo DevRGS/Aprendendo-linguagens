@@ -1,0 +1,15 @@
+-- verifica: a aula null (NULL por último na ordem decrescente)
+-- banco: escola
+-- saida:
+-- email
+-- joao@escola.br
+-- isa@escola.br
+-- gabi@escola.br
+-- fabio@escola.br
+-- diego@escola.br
+-- carla@escola.br
+-- ana@escola.br
+-- NULL
+-- NULL
+-- NULL
+SELECT email FROM alunos ORDER BY email DESC;

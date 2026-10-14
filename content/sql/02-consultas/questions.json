@@ -1,0 +1,185 @@
+{
+  "questions": [
+    {
+      "id": "sql.consultas.q01", "type": "sql", "difficulty": 1, "lesson": "colunas",
+      "dataset": "escola",
+      "prompt": "Liste o nome e a turma de cada aluno.",
+      "answer": "SELECT nome, turma FROM alunos;",
+      "rejected": ["SELECT turma FROM alunos;", "SELECT nome, cidade FROM alunos;"],
+      "explanation": "As colunas pedidas vão no `SELECT`, na ordem do enunciado: primeiro `nome`, depois `turma`."
+    },
+    {
+      "id": "sql.consultas.q02", "type": "multiple", "difficulty": 2, "lesson": "colunas",
+      "prompt": "O que `SELECT nome, idade + 1 FROM alunos;` faz?",
+      "options": ["Mostra o nome e a idade somada de 1, sem mudar a tabela", "Soma 1 à idade guardada na tabela", "Dá erro: não dá para fazer contas no SELECT", "Mostra só os alunos com 1 ano"], "answer": 0,
+      "explanation": "A conta acontece só no resultado, linha a linha. Para mudar os dados guardados, seria preciso um `UPDATE`, assunto do módulo 6."
+    },
+    {
+      "id": "sql.consultas.q03", "type": "sql", "difficulty": 1, "lesson": "where",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos de Recife.",
+      "answer": "SELECT nome FROM alunos WHERE cidade = 'Recife';",
+      "accepted": ["SELECT nome FROM alunos WHERE 'Recife' = cidade;"],
+      "rejected": ["SELECT nome FROM alunos WHERE id IN (1, 3, 7);", "SELECT nome FROM alunos WHERE cidade = 'recife';"],
+      "explanation": "O texto vai entre aspas simples e com as maiúsculas certas: no SQLite, `'recife'` não encontra `Recife`."
+    },
+    {
+      "id": "sql.consultas.q04", "type": "truefalse", "difficulty": 2, "lesson": "where",
+      "prompt": "No SQLite, `WHERE cidade = 'recife'` encontra as linhas em que a cidade é `Recife`.",
+      "answer": false,
+      "explanation": "O `=` entre textos diferencia maiúsculas de minúsculas no SQLite: `'recife'` e `'Recife'` são textos diferentes, e a consulta não devolve nenhuma linha."
+    },
+    {
+      "id": "sql.consultas.q05", "type": "multiple", "difficulty": 1, "lesson": "where",
+      "prompt": "Qual destes operadores significa \"diferente de\" em SQL?",
+      "options": ["`<>`", "`=!`", "`><`", "`=<>`"], "answer": 0,
+      "explanation": "`<>` é o operador de diferente do padrão SQL. O SQLite também aceita `!=`."
+    },
+    {
+      "id": "sql.consultas.q06", "type": "sql", "difficulty": 2, "lesson": "where",
+      "dataset": "escola",
+      "prompt": "Liste o nome e a nota dos alunos com nota maior ou igual a 8.",
+      "answer": "SELECT nome, nota FROM alunos WHERE nota >= 8;",
+      "accepted": ["SELECT nome, nota FROM alunos WHERE NOT nota < 8;", "SELECT nome, nota FROM alunos WHERE 8 <= nota;"],
+      "rejected": ["SELECT nome, nota FROM alunos WHERE nota > 8;"],
+      "explanation": "`>=` inclui o próprio 8: com `>`, a Carla, que tem nota 8, ficaria de fora."
+    },
+    {
+      "id": "sql.consultas.q07", "type": "sql", "difficulty": 2, "lesson": "e-ou",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos de Natal que têm nota maior que 6.",
+      "answer": "SELECT nome FROM alunos WHERE cidade = 'Natal' AND nota > 6;",
+      "rejected": ["SELECT nome FROM alunos WHERE cidade = 'Natal' OR nota > 6;", "SELECT nome FROM alunos WHERE cidade = 'Natal';"],
+      "explanation": "As duas condições precisam valer ao mesmo tempo, então é `AND`. Com `OR`, entrariam todos de Natal e todos com nota acima de 6."
+    },
+    {
+      "id": "sql.consultas.q08", "type": "multiple", "difficulty": 3, "lesson": "e-ou",
+      "prompt": "Numa condição com `AND` e `OR` e sem parênteses, o que o SQL avalia primeiro?",
+      "options": ["O `AND`", "O `OR`", "O que aparece primeiro na linha", "O que estiver mais à direita"], "answer": 0,
+      "explanation": "O `AND` tem precedência sobre o `OR`, como a multiplicação sobre a soma. Para mudar a ordem, use parênteses."
+    },
+    {
+      "id": "sql.consultas.q09", "type": "fill", "difficulty": 1, "lesson": "e-ou",
+      "prompt": "Complete para listar os alunos de Recife ou de Natal:",
+      "code": "SELECT nome FROM alunos WHERE cidade ___ ('Recife', 'Natal');",
+      "blanks": [["IN"]], "caseInsensitive": true,
+      "explanation": "`IN` testa se o valor está na lista. Equivale a `cidade = 'Recife' OR cidade = 'Natal'`."
+    },
+    {
+      "id": "sql.consultas.q10", "type": "truefalse", "difficulty": 2, "lesson": "e-ou",
+      "prompt": "`WHERE nota BETWEEN 7 AND 9` inclui as notas 7 e 9.",
+      "answer": true,
+      "explanation": "`BETWEEN` inclui as pontas: é o mesmo que `nota >= 7 AND nota <= 9`."
+    },
+    {
+      "id": "sql.consultas.q11", "type": "sql", "difficulty": 3, "lesson": "e-ou",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos de Natal ou de Fortaleza que têm nota maior que 7.",
+      "answer": "SELECT nome FROM alunos WHERE (cidade = 'Natal' OR cidade = 'Fortaleza') AND nota > 7;",
+      "accepted": ["SELECT nome FROM alunos WHERE cidade IN ('Natal', 'Fortaleza') AND nota > 7;"],
+      "rejected": ["SELECT nome FROM alunos WHERE cidade = 'Natal' OR cidade = 'Fortaleza' AND nota > 7;"],
+      "explanation": "Sem parênteses, o `AND` vale antes do `OR`, e entrariam todos os alunos de Natal. Os parênteses (ou o `IN`) agrupam as cidades."
+    },
+    {
+      "id": "sql.consultas.q12", "type": "sql", "difficulty": 2, "lesson": "like",
+      "dataset": "loja",
+      "prompt": "Liste o nome dos produtos cujo nome começa com \"Ca\".",
+      "answer": "SELECT nome FROM produtos WHERE nome LIKE 'Ca%';",
+      "accepted": ["SELECT nome FROM produtos WHERE nome LIKE 'ca%';"],
+      "rejected": ["SELECT nome FROM produtos WHERE nome LIKE '%Ca%';", "SELECT nome FROM produtos WHERE nome LIKE 'Ca';"],
+      "explanation": "`'Ca%'` exige o \"Ca\" no começo e aceita qualquer coisa depois. Com `'%Ca%'`, entraria também um nome com \"ca\" no meio, como Garrafa térmica."
+    },
+    {
+      "id": "sql.consultas.q13", "type": "multiple", "difficulty": 2, "lesson": "like",
+      "prompt": "Num padrão de `LIKE`, o que o `_` significa?",
+      "options": ["Exatamente um caractere qualquer", "Qualquer quantidade de caracteres", "Um espaço em branco", "O fim do texto"], "answer": 0,
+      "explanation": "`_` vale um caractere; `%` vale qualquer quantidade, inclusive nenhum."
+    },
+    {
+      "id": "sql.consultas.q14", "type": "truefalse", "difficulty": 3, "lesson": "like",
+      "prompt": "No SQLite, `WHERE nome LIKE 'ana%'` também encontra o nome `Ana`.",
+      "answer": true,
+      "explanation": "No SQLite, o `LIKE` não diferencia maiúsculas de minúsculas nas letras sem acento. Já no PostgreSQL, diferencia (lá existe o `ILIKE` para ignorar)."
+    },
+    {
+      "id": "sql.consultas.q15", "type": "sql", "difficulty": 2, "lesson": "ordenar",
+      "dataset": "loja",
+      "prompt": "Liste o nome e o preço dos produtos, do mais caro para o mais barato.",
+      "answer": "SELECT nome, preco FROM produtos ORDER BY preco DESC;",
+      "ordered": true,
+      "rejected": ["SELECT nome, preco FROM produtos ORDER BY preco;", "SELECT nome, preco FROM produtos;"],
+      "explanation": "`ORDER BY preco DESC` ordena do maior para o menor. Sem `DESC`, a ordem seria crescente."
+    },
+    {
+      "id": "sql.consultas.q16", "type": "sql", "difficulty": 3, "lesson": "ordenar",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos 3 alunos com as maiores notas, da maior para a menor.",
+      "answer": "SELECT nome FROM alunos ORDER BY nota DESC LIMIT 3;",
+      "ordered": true,
+      "rejected": ["SELECT nome FROM alunos ORDER BY nota LIMIT 3;", "SELECT nome FROM alunos WHERE nota >= 9 ORDER BY nota DESC;"],
+      "explanation": "Primeiro ordene pela nota em ordem decrescente e depois pegue as 3 primeiras linhas com `LIMIT 3`. Filtrar por `nota >= 9` só dá certo se, por acaso, houver exatamente 3 notas assim."
+    },
+    {
+      "id": "sql.consultas.q17", "type": "fill", "difficulty": 1, "lesson": "ordenar",
+      "prompt": "Complete para listar as cidades dos alunos sem repetir nenhuma:",
+      "code": "SELECT ___ cidade FROM alunos;",
+      "blanks": [["DISTINCT"]], "caseInsensitive": true,
+      "explanation": "`DISTINCT` tira as linhas repetidas do resultado."
+    },
+    {
+      "id": "sql.consultas.q18", "type": "multiple", "difficulty": 2, "lesson": "ordenar",
+      "prompt": "No SQLite, qual cláusula limita a quantidade de linhas do resultado?",
+      "options": ["`LIMIT`", "`TOP`", "`MAX`", "`COUNT`"], "answer": 0,
+      "explanation": "`LIMIT` vale no SQLite, no MySQL e no PostgreSQL. `TOP` é do SQL Server e dá erro no SQLite; `MAX` e `COUNT` são funções de agrupamento, do módulo 3."
+    },
+    {
+      "id": "sql.consultas.q19", "type": "order", "difficulty": 2, "lesson": "ordenar",
+      "prompt": "Monte a consulta que lista nome e nota dos 2 alunos com as maiores notas da turma 2A:",
+      "lines": ["SELECT nome, nota", "FROM alunos", "WHERE turma = '2A'", "ORDER BY nota DESC", "LIMIT 2;"],
+      "explanation": "As cláusulas têm ordem fixa: `SELECT`, `FROM`, `WHERE`, `ORDER BY` e `LIMIT`."
+    },
+    {
+      "id": "sql.consultas.q20", "type": "sql", "difficulty": 2, "lesson": "null",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos que não têm e-mail cadastrado.",
+      "answer": "SELECT nome FROM alunos WHERE email IS NULL;",
+      "rejected": ["SELECT nome FROM alunos WHERE email = NULL;", "SELECT nome FROM alunos WHERE id IN (2, 5, 8);"],
+      "explanation": "Para achar valores ausentes, use `IS NULL`. Com `= NULL`, a consulta não devolve nenhuma linha."
+    },
+    {
+      "id": "sql.consultas.q21", "type": "truefalse", "difficulty": 2, "lesson": "null",
+      "prompt": "`WHERE email = NULL` encontra as linhas em que o e-mail é NULL.",
+      "answer": false,
+      "explanation": "Comparar com `NULL` usando `=` nunca dá verdadeiro, então a consulta não devolve linhas. O certo é `WHERE email IS NULL`."
+    },
+    {
+      "id": "sql.consultas.q22", "type": "multiple", "difficulty": 3, "lesson": "null",
+      "prompt": "No SQLite, com `ORDER BY email` (ordem crescente), onde ficam as linhas com e-mail NULL?",
+      "options": ["No começo", "No fim", "Somem do resultado", "A consulta dá erro"], "answer": 0,
+      "explanation": "O SQLite põe os `NULL` primeiro na ordem crescente. O PostgreSQL faz o contrário. Para escolher, use `NULLS FIRST` ou `NULLS LAST`."
+    },
+    {
+      "id": "sql.consultas.q23", "type": "sql", "difficulty": 2, "lesson": "apelidos",
+      "dataset": "loja",
+      "prompt": "Liste os produtos com duas colunas: o nome, com o título `produto`, e o preço, com o título `valor`.",
+      "answer": "SELECT nome AS produto, preco AS valor FROM produtos;",
+      "columnNames": true,
+      "accepted": ["SELECT nome produto, preco valor FROM produtos;"],
+      "rejected": ["SELECT nome, preco FROM produtos;"],
+      "explanation": "`AS` dá o apelido à coluna do resultado. O `AS` é opcional, mas deixa a consulta mais clara."
+    },
+    {
+      "id": "sql.consultas.q24", "type": "fill", "difficulty": 1, "lesson": "apelidos",
+      "prompt": "Complete para que a coluna calculada se chame `idade_ano_que_vem`:",
+      "code": "SELECT nome, idade + 1 ___ idade_ano_que_vem FROM alunos;",
+      "blanks": [["AS"]], "caseInsensitive": true,
+      "explanation": "`AS` dá um apelido à coluna. Sem ele, a coluna se chamaria `idade + 1`."
+    },
+    {
+      "id": "sql.consultas.q25", "type": "truefalse", "difficulty": 2, "lesson": "apelidos",
+      "prompt": "Um apelido com espaço, como `Nome do aluno`, precisa ficar entre aspas duplas.",
+      "answer": true,
+      "explanation": "`SELECT nome AS \"Nome do aluno\" FROM alunos` funciona. Sem as aspas, o banco entende só `Nome` como apelido e acusa erro de sintaxe no `do`."
+    }
+  ]
+}

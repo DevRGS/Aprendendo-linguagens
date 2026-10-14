@@ -1,0 +1,15 @@
+-- verifica: a aula ordenar (ordenar por duas colunas)
+-- banco: escola
+-- saida:
+-- cidade | nome
+-- Fortaleza | Diego
+-- Fortaleza | Heitor
+-- Natal | Bruno
+-- Natal | Elisa
+-- Natal | João
+-- Recife | Ana
+-- Recife | Carla
+-- Recife | Gabriela
+-- Salvador | Fábio
+-- Salvador | Isadora
+SELECT cidade, nome FROM alunos ORDER BY cidade, nome;

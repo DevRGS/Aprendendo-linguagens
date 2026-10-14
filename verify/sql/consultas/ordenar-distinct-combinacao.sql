@@ -1,0 +1,12 @@
+-- verifica: a aula ordenar (DISTINCT com duas colunas olha a combinação)
+-- banco: escola
+-- saida:
+-- cidade | turma
+-- Recife | 2A
+-- Natal | 1B
+-- Recife | 3A
+-- Fortaleza | 2A
+-- Salvador | 3A
+-- Fortaleza | 1B
+-- Natal | 2A
+SELECT DISTINCT cidade, turma FROM alunos;

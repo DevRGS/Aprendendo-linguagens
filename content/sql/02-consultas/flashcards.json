@@ -1,0 +1,17 @@
+{
+  "cards": [
+    { "id": "sql.consultas.f01", "lesson": "colunas", "front": "Em que ordem as colunas aparecem no resultado?", "back": "Na ordem em que você as escreve no `SELECT`." },
+    { "id": "sql.consultas.f02", "lesson": "colunas", "front": "Uma conta no SELECT, como `idade + 1`, muda a tabela?", "back": "Não. A conta acontece só no resultado, linha a linha." },
+    { "id": "sql.consultas.f03", "lesson": "colunas", "front": "Quanto dá `7 / 2` no SQLite?", "back": "`3`: divisão entre inteiros descarta a parte decimal. Para `3.5`, use `7 / 2.0`." },
+    { "id": "sql.consultas.f04", "lesson": "where", "front": "Para que serve o `WHERE`?", "back": "Para escolher quais linhas entram no resultado: só as que satisfazem a condição." },
+    { "id": "sql.consultas.f05", "lesson": "where", "front": "Como escrever textos numa condição?", "back": "Entre aspas simples: `WHERE cidade = 'Recife'`. Aspas duplas são para nomes de colunas." },
+    { "id": "sql.consultas.f06", "lesson": "e-ou", "front": "Com `AND` e `OR` sem parênteses, qual vale primeiro?", "back": "O `AND`. Use parênteses para deixar a intenção clara." },
+    { "id": "sql.consultas.f07", "lesson": "e-ou", "front": "O que fazem `IN` e `BETWEEN`?", "back": "`IN (a, b)` testa se o valor está na lista. `BETWEEN x AND y` testa uma faixa, incluindo as pontas." },
+    { "id": "sql.consultas.f08", "lesson": "like", "front": "O que significam `%` e `_` no `LIKE`?", "back": "`%`: qualquer quantidade de caracteres, inclusive nenhum. `_`: exatamente um caractere." },
+    { "id": "sql.consultas.f09", "lesson": "ordenar", "front": "O que o `DISTINCT` faz?", "back": "Tira do resultado as linhas repetidas." },
+    { "id": "sql.consultas.f10", "lesson": "ordenar", "front": "Como ordenar do maior para o menor?", "back": "`ORDER BY coluna DESC`. Sem `DESC` (ou com `ASC`), a ordem é crescente." },
+    { "id": "sql.consultas.f11", "lesson": "ordenar", "front": "Como pegar só as primeiras linhas do resultado?", "back": "`LIMIT n` (com `OFFSET` para pular linhas). Ordene antes com `ORDER BY`. No SQL Server, usa-se `TOP`." },
+    { "id": "sql.consultas.f12", "lesson": "null", "front": "Como encontrar valores ausentes (NULL)?", "back": "Com `IS NULL` (ou `IS NOT NULL`). `= NULL` nunca dá verdadeiro." },
+    { "id": "sql.consultas.f13", "lesson": "apelidos", "front": "Para que serve o `AS`?", "back": "Para dar um apelido a uma coluna do resultado: `SELECT nome AS aluno`. Com espaço, use aspas duplas." }
+  ]
+}

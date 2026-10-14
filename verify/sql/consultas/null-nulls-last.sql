@@ -1,0 +1,15 @@
+-- verifica: a aula null (NULLS LAST)
+-- banco: escola
+-- saida:
+-- nome | email
+-- Ana | ana@escola.br
+-- Carla | carla@escola.br
+-- Diego | diego@escola.br
+-- Fábio | fabio@escola.br
+-- Gabriela | gabi@escola.br
+-- Isadora | isa@escola.br
+-- João | joao@escola.br
+-- Bruno | NULL
+-- Elisa | NULL
+-- Heitor | NULL
+SELECT nome, email FROM alunos ORDER BY email NULLS LAST;

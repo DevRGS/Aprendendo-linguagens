@@ -1,0 +1,12 @@
+-- verifica: a aula e-ou (NOT: todos menos os de Natal)
+-- banco: escola
+-- saida:
+-- nome
+-- Ana
+-- Carla
+-- Diego
+-- Fábio
+-- Gabriela
+-- Heitor
+-- Isadora
+SELECT nome FROM alunos WHERE NOT cidade = 'Natal';

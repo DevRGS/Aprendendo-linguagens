@@ -1,0 +1,115 @@
+{
+  "challenges": [
+    {
+      "id": "sql.consultas.d01", "lesson": "colunas",
+      "dataset": "escola",
+      "prompt": "Liste o nome e a idade de todos os alunos.",
+      "answer": "SELECT nome, idade FROM alunos;",
+      "rejected": ["SELECT idade, nome FROM alunos;", "SELECT nome FROM alunos;"],
+      "explanation": "As colunas vão na ordem do enunciado: primeiro `nome`, depois `idade`."
+    },
+    {
+      "id": "sql.consultas.d02", "lesson": "colunas",
+      "dataset": "escola",
+      "prompt": "Mostre o nome de cada aluno e a idade que ele terá no ano que vem (a idade mais 1).",
+      "answer": "SELECT nome, idade + 1 FROM alunos;",
+      "accepted": ["SELECT nome, 1 + idade FROM alunos;"],
+      "rejected": ["SELECT nome, idade FROM alunos;"],
+      "explanation": "A conta `idade + 1` vai direto no `SELECT` e vale para cada linha."
+    },
+    {
+      "id": "sql.consultas.d03", "lesson": "where",
+      "dataset": "loja",
+      "prompt": "Mostre todas as colunas dos produtos da categoria Papelaria.",
+      "answer": "SELECT * FROM produtos WHERE categoria = 'Papelaria';",
+      "rejected": ["SELECT * FROM produtos WHERE id IN (1, 2, 5, 8);", "SELECT * FROM produtos;"],
+      "explanation": "Filtre pela regra pedida, a categoria, e não pelos `id` que aparecem na tabela: com outros dados, os `id` mudam."
+    },
+    {
+      "id": "sql.consultas.d04", "lesson": "where",
+      "dataset": "loja",
+      "prompt": "Liste o nome dos produtos sem estoque (estoque igual a 0).",
+      "answer": "SELECT nome FROM produtos WHERE estoque = 0;",
+      "rejected": ["SELECT nome FROM produtos WHERE estoque < 10;"],
+      "explanation": "`WHERE estoque = 0` fica só com o que zerou. `estoque < 10` traria também a Mochila, que ainda tem 8."
+    },
+    {
+      "id": "sql.consultas.d05", "lesson": "e-ou",
+      "dataset": "loja",
+      "prompt": "Liste o nome e o preço dos produtos da categoria Eletrônicos que custam menos de 60.",
+      "answer": "SELECT nome, preco FROM produtos WHERE categoria = 'Eletrônicos' AND preco < 60;",
+      "rejected": ["SELECT nome, preco FROM produtos WHERE preco < 60;", "SELECT nome, preco FROM produtos WHERE categoria = 'Eletrônicos';"],
+      "explanation": "As duas condições precisam valer juntas: `AND`."
+    },
+    {
+      "id": "sql.consultas.d06", "lesson": "e-ou",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos que têm entre 16 e 17 anos (incluindo os de 16 e os de 17).",
+      "answer": "SELECT nome FROM alunos WHERE idade BETWEEN 16 AND 17;",
+      "accepted": ["SELECT nome FROM alunos WHERE idade >= 16 AND idade <= 17;", "SELECT nome FROM alunos WHERE idade IN (16, 17);"],
+      "rejected": ["SELECT nome FROM alunos WHERE idade > 16 AND idade < 17;", "SELECT nome FROM alunos WHERE idade = 17;"],
+      "explanation": "`BETWEEN 16 AND 17` inclui as pontas. Com `>` e `<`, nenhuma idade inteira caberia."
+    },
+    {
+      "id": "sql.consultas.d07", "lesson": "like",
+      "dataset": "escola",
+      "prompt": "Liste o nome dos alunos cujo nome termina com a letra \"a\".",
+      "answer": "SELECT nome FROM alunos WHERE nome LIKE '%a';",
+      "rejected": ["SELECT nome FROM alunos WHERE nome LIKE 'a%';"],
+      "explanation": "O `%` antes do \"a\" aceita qualquer começo; o \"a\" no fim do padrão exige que o nome termine assim."
+    },
+    {
+      "id": "sql.consultas.d08", "lesson": "like",
+      "dataset": "loja",
+      "prompt": "Liste o nome dos produtos cujo nome tem exatamente 5 caracteres.",
+      "answer": "SELECT nome FROM produtos WHERE nome LIKE '_____';",
+      "rejected": ["SELECT nome FROM produtos WHERE nome LIKE '%s';", "SELECT nome FROM produtos WHERE nome LIKE '%_____%';"],
+      "explanation": "Cada `_` vale exatamente um caractere, então cinco `_` exigem um nome de cinco caracteres."
+    },
+    {
+      "id": "sql.consultas.d09", "lesson": "ordenar",
+      "dataset": "escola",
+      "prompt": "Liste as turmas que existem, sem repetir nenhuma.",
+      "answer": "SELECT DISTINCT turma FROM alunos;",
+      "rejected": ["SELECT turma FROM alunos;"],
+      "explanation": "`DISTINCT` tira as repetições."
+    },
+    {
+      "id": "sql.consultas.d10", "lesson": "ordenar",
+      "dataset": "escola",
+      "prompt": "Liste o nome e a nota dos alunos, em ordem alfabética de nome.",
+      "answer": "SELECT nome, nota FROM alunos ORDER BY nome;",
+      "ordered": true,
+      "accepted": ["SELECT nome, nota FROM alunos ORDER BY nome ASC;"],
+      "rejected": ["SELECT nome, nota FROM alunos ORDER BY nome DESC;", "SELECT nome, nota FROM alunos ORDER BY nota;"],
+      "explanation": "`ORDER BY nome` ordena pelo nome, em ordem crescente (o `ASC` é o padrão)."
+    },
+    {
+      "id": "sql.consultas.d11", "lesson": "ordenar",
+      "dataset": "loja",
+      "prompt": "Liste o nome e o preço dos 2 produtos mais baratos, do mais barato para o mais caro.",
+      "answer": "SELECT nome, preco FROM produtos ORDER BY preco LIMIT 2;",
+      "ordered": true,
+      "rejected": ["SELECT nome, preco FROM produtos ORDER BY preco DESC LIMIT 2;", "SELECT nome, preco FROM produtos LIMIT 2;"],
+      "explanation": "Primeiro ordene pelo preço, depois limite: `ORDER BY preco LIMIT 2`."
+    },
+    {
+      "id": "sql.consultas.d12", "lesson": "null",
+      "dataset": "escola",
+      "prompt": "Liste o nome e o e-mail dos alunos que têm e-mail cadastrado.",
+      "answer": "SELECT nome, email FROM alunos WHERE email IS NOT NULL;",
+      "rejected": ["SELECT nome, email FROM alunos;", "SELECT nome, email FROM alunos WHERE email != NULL;"],
+      "explanation": "`IS NOT NULL` fica com quem tem valor. Comparar com `!= NULL` não funciona: não devolve nenhuma linha."
+    },
+    {
+      "id": "sql.consultas.d13", "lesson": "apelidos",
+      "dataset": "escola",
+      "prompt": "Liste os alunos com duas colunas: o nome, com o título `aluno`, e a nota, com o título `media_final`.",
+      "answer": "SELECT nome AS aluno, nota AS media_final FROM alunos;",
+      "columnNames": true,
+      "accepted": ["SELECT nome aluno, nota media_final FROM alunos;"],
+      "rejected": ["SELECT nome, nota FROM alunos;"],
+      "explanation": "Cada coluna ganha seu apelido com `AS`."
+    }
+  ]
+}

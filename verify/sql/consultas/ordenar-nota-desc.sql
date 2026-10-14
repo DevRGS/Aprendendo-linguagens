@@ -1,0 +1,15 @@
+-- verifica: f10 e a aula ordenar (ORDER BY ... DESC)
+-- banco: escola
+-- saida:
+-- nome | nota
+-- Isadora | 10
+-- Ana | 9.5
+-- Elisa | 9
+-- Gabriela | 8.5
+-- Carla | 8
+-- Diego | 7.5
+-- João | 7
+-- Bruno | 6
+-- Fábio | 5.5
+-- Heitor | 4
+SELECT nome, nota FROM alunos ORDER BY nota DESC;
