@@ -1,6 +1,7 @@
 import { h, mount, formatDay } from '../dom.js';
 import { md } from '../markdown.js';
-import { loadLesson, loadModuleBank } from '../../data/content.js';
+import { loadLesson, loadModuleBank, loadChallenges } from '../../data/content.js';
+import { createSqlExercise } from '../components/sql-exercise.js';
 import { lessonKey } from '../../core/progress.js';
 import { openLesson, completeLesson } from '../../core/actions.js';
 import { renderNotFound } from './not-found.js';
@@ -13,7 +14,8 @@ export async function renderLesson(container, app, route) {
   if (index < 0) return renderNotFound(container);
   const lesson = module.lessons[index];
   const key = lessonKey(lang, moduleId, lessonId);
-  const text = await loadLesson(language, module, lesson);
+  const [text, allChallenges] = await Promise.all([loadLesson(language, module, lesson), loadChallenges(language, module)]);
+  const challenges = allChallenges.filter((c) => c.lesson === lessonId);
   app.dispatch(openLesson, { key });
   const prev = module.lessons[index - 1];
   const next = module.lessons[index + 1];
@@ -45,5 +47,10 @@ export async function renderLesson(container, app, route) {
       h('a', { href: `#/${lang}`, text: `${language.icon} ${language.name}` }), ` › ${module.title}`),
     h('p', { class: 'eyebrow', text: `Aula ${index + 1} de ${module.lessons.length} · ${lesson.minutes} min` }),
     md(text, { lang: language.highlight }),
+    challenges.length ? h('section', { class: 'challenges' },
+      h('h2', { text: 'Experimente' }),
+      challenges.map((c, i) => createSqlExercise(c, {
+        service: app.sql, lang: language.highlight, mode: 'challenge', title: challenges.length > 1 ? `Desafio ${i + 1}` : null,
+      }).el)) : null,
     foot));
 }

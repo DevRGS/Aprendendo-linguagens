@@ -3,10 +3,12 @@ import { loadBanks } from '../../data/content.js';
 import { filterPool, selectQuestions, prepareQuestion, pickExisting } from '../../core/quiz.js';
 import { createScopeTree, describeScope } from '../components/scope-tree.js';
 import { runQuiz } from '../components/quiz-runner.js';
+import { usableQuestions, hasSqlQuestions } from '../sql-service.js';
 
 const COUNTS = [10, 20, 30, 50];
 const DIFFICULTIES = [[1, 'Fácil'], [2, 'Médio'], [3, 'Difícil']];
 const TYPES = [['multiple', 'Múltipla escolha'], ['truefalse', 'Verdadeiro ou falso'], ['fill', 'Lacuna'], ['order', 'Ordenar linhas']];
+const SQL_TYPE = ['sql', 'Escrever SQL'];
 
 const fieldset = (legend, ...children) => h('fieldset', { class: 'field' }, h('legend', { text: legend }), children);
 
@@ -28,9 +30,10 @@ function radioGroup(name, options, current, onChange) {
 
 const toggle = (set, value, on) => (on ? set.add(value) : set.delete(value));
 
-function retake(container, app, bank, historyId) {
+async function retake(container, app, bank, historyId) {
   const entry = app.store.get().history.find((e) => e.id === historyId);
-  const questions = entry ? pickExisting(entry.wrongIds, bank.questions) : [];
+  const found = entry ? pickExisting(entry.wrongIds, bank.questions) : [];
+  const questions = hasSqlQuestions(found) ? await usableQuestions(app, found) : found;
   if (!questions.length) {
     mount(container, h('section', { class: 'panel' },
       h('h1', { text: 'Nada para refazer' }),
@@ -52,10 +55,12 @@ export async function renderQuizBuilder(container, app, route) {
   const state = app.store.get();
   const preset = route.query.modulo ? [route.query.modulo] : null;
   const tree = createScopeTree(app, { state, selected: preset });
+  // "Escrever SQL" só existe se alguma linguagem tem perguntas sql, e só aparece quando o escopo tem alguma.
+  const types = bank.questions.some((q) => q.type === 'sql') ? [...TYPES, SQL_TYPE] : TYPES;
   const choice = {
     count: 10,
     difficulties: new Set([1, 2, 3]),
-    types: new Set(TYPES.map(([t]) => t)),
+    types: new Set(types.map(([t]) => t)),
     mode: 'estudo',
     timer: false,
     focusWeak: route.query.foco === '1',
@@ -67,7 +72,15 @@ export async function renderQuizBuilder(container, app, route) {
   const timerInput = timerBox.querySelector('input');
   timerInput.disabled = true;
 
+  const typeBoxes = types.map(([v, label]) => {
+    const box = checkbox(label, true, (on) => { toggle(choice.types, v, on); updateAvailable(); });
+    box.dataset.type = v;
+    return box;
+  });
+  const sqlBox = typeBoxes.find((box) => box.dataset.type === 'sql');
+
   function updateAvailable() {
+    if (sqlBox) sqlBox.hidden = !filterPool(bank.questions, { moduleKeys: tree.getSelected() }).some((q) => q.type === 'sql');
     const n = filterPool(bank.questions, filters()).length;
     available.textContent = `${n} ${plural(n, 'pergunta disponível', 'perguntas disponíveis')} com esses filtros.`;
     startBtn.disabled = n === 0;
@@ -79,7 +92,7 @@ export async function renderQuizBuilder(container, app, route) {
     fieldset('Escopo', tree.el),
     fieldset('Quantidade', radioGroup('quantidade', COUNTS.map((n) => [n, `${n} perguntas`]), choice.count, (v) => { choice.count = v; })),
     fieldset('Dificuldade', DIFFICULTIES.map(([v, label]) => checkbox(label, true, (on) => { toggle(choice.difficulties, v, on); updateAvailable(); }))),
-    fieldset('Tipos de pergunta', TYPES.map(([v, label]) => checkbox(label, true, (on) => { toggle(choice.types, v, on); updateAvailable(); }))),
+    fieldset('Tipos de pergunta', typeBoxes),
     fieldset('Modo',
       radioGroup('modo', [['estudo', 'Estudo: correção a cada pergunta'], ['simulado', 'Simulado: correção só no final']], choice.mode, (v) => {
         choice.mode = v;
@@ -90,11 +103,13 @@ export async function renderQuizBuilder(container, app, route) {
     available,
     startBtn);
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    const eligible = filterPool(bank.questions, filters());
+    const pool = hasSqlQuestions(eligible) ? await usableQuestions(app, eligible) : eligible;
     const s = app.store.get();
     const { questions, available: n } = selectQuestions({
-      pool: bank.questions,
+      pool,
       count: choice.count,
       filters: filters(),
       questionStats: s.questions,

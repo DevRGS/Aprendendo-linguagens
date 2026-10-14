@@ -3,6 +3,7 @@ import { loadBanks } from '../../data/content.js';
 import { selectQuestions, prepareQuestion } from '../../core/quiz.js';
 import { EXAM_QUESTIONS, EXAM_PASS } from '../../core/progress.js';
 import { runQuiz } from '../components/quiz-runner.js';
+import { usableQuestions, hasSqlQuestions } from '../sql-service.js';
 import { renderNotFound } from './not-found.js';
 
 export async function renderExam(container, app, route) {
@@ -13,9 +14,11 @@ export async function renderExam(container, app, route) {
   const count = Math.min(EXAM_QUESTIONS, bank.questions.length);
   const moduleKeys = language.modules.map((m) => m.key);
 
-  const start = () => {
+  const start = async () => {
+    // Sem o banco de SQL, as vagas das perguntas sql vão para outros tipos (a prova mantém o tamanho).
+    const pool = hasSqlQuestions(bank.questions) ? await usableQuestions(app, bank.questions) : bank.questions;
     // Sem histórico nem "último quiz": a prova sorteia todas as perguntas com o mesmo peso.
-    const { questions } = selectQuestions({ pool: bank.questions, count: EXAM_QUESTIONS, filters: { moduleKeys }, today: app.ctx().today });
+    const { questions } = selectQuestions({ pool, count: EXAM_QUESTIONS, filters: { moduleKeys }, today: app.ctx().today });
     runQuiz(container, app, {
       questions: questions.map((q) => prepareQuestion(q)),
       mode: 'simulado',

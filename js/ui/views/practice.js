@@ -2,6 +2,7 @@ import { loadModuleBank } from '../../data/content.js';
 import { selectQuestions, prepareQuestion } from '../../core/quiz.js';
 import { PRACTICE_QUESTIONS } from '../../core/progress.js';
 import { runQuiz } from '../components/quiz-runner.js';
+import { usableQuestions, hasSqlQuestions } from '../sql-service.js';
 import { renderNotFound } from './not-found.js';
 
 export async function renderPractice(container, app, route) {
@@ -9,9 +10,10 @@ export async function renderPractice(container, app, route) {
   const module = language?.modules.find((m) => m.id === route.params.module);
   if (!module) return renderNotFound(container);
   const bank = await loadModuleBank(language, module);
+  const pool = hasSqlQuestions(bank.questions) ? await usableQuestions(app, bank.questions) : bank.questions;
   const state = app.store.get();
   const { questions } = selectQuestions({
-    pool: bank.questions,
+    pool,
     count: PRACTICE_QUESTIONS,
     filters: { moduleKeys: [module.key] },
     questionStats: state.questions,

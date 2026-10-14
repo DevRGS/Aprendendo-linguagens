@@ -1,12 +1,14 @@
 import { h } from '../dom.js';
 import { md, mdInline } from '../markdown.js';
 import { BLANK, isBlankCorrect } from '../../core/grading.js';
+import { createSqlExercise } from './sql-exercise.js';
 
 const TYPE_LABEL = {
   multiple: 'Múltipla escolha',
   truefalse: 'Verdadeiro ou falso',
   fill: 'Complete a lacuna',
   order: 'Ordene as linhas',
+  sql: 'Escreva a consulta',
 };
 const LETTERS = 'ABCDE';
 
@@ -174,13 +176,20 @@ function order(root, q, onSubmit, lang) {
   };
 }
 
-export function createQuestionView(question, { lang, onSubmit }) {
+// O enunciado já vem da pergunta; o exercício cuida das tabelas, da caixa e do Executar.
+function sqlQuestion(root, q, onSubmit, lang, sql) {
+  const ex = createSqlExercise(q, { service: sql, lang, mode: 'question', showPrompt: false, onSubmit });
+  root.append(ex.el);
+  return { reveal: ex.reveal, focus: ex.focus, unlock: ex.unlock };
+}
+
+export function createQuestionView(question, { lang, onSubmit, sql = null }) {
   const root = h('div', { class: `question q-${question.type}`, 'data-qid': question.id },
     h('div', { class: 'q-type', text: TYPE_LABEL[question.type] }),
     md(question.prompt, { lang }));
-  const builders = { multiple, truefalse: trueFalse, fill, order };
-  const { reveal, focus } = builders[question.type](root, question, onSubmit, lang);
-  return { el: root, reveal, focus };
+  const builders = { multiple, truefalse: trueFalse, fill, order, sql: sqlQuestion };
+  const { reveal, focus, unlock = () => {} } = builders[question.type](root, question, onSubmit, lang, sql);
+  return { el: root, reveal, focus, unlock };
 }
 
 export function describeResponse(question, response) {
@@ -190,6 +199,7 @@ export function describeResponse(question, response) {
     case 'truefalse': return h('span', { text: response ? 'Verdadeiro' : 'Falso' });
     case 'fill': return h('code', { text: response.join(' · ') });
     case 'order': return h('pre', {}, h('code', { text: response.join('\n') }));
+    case 'sql': return h('pre', {}, h('code', { text: response }));
     default: return h('span', { text: String(response) });
   }
 }
@@ -200,6 +210,7 @@ export function describeAnswer(question, lang) {
     case 'truefalse': return h('span', { text: question.answer ? 'Verdadeiro' : 'Falso' });
     case 'fill': return h('code', { text: question.blanks.map((b) => b[0]).join(' · ') });
     case 'order': return md(`\`\`\`${lang ?? ''}\n${question.lines.join('\n')}\n\`\`\``, { lang });
+    case 'sql': return md(`\`\`\`sql\n${question.answer}\n\`\`\``, { lang });
     default: return h('span', { text: '' });
   }
 }

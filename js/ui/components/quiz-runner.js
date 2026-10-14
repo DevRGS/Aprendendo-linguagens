@@ -50,7 +50,7 @@ export function runQuiz(container, app, opts) {
       if (index < questions.length) showQuestion();
       else finish();
     });
-    const view = createQuestionView(q, { lang: hl, onSubmit: (response) => submit(q, response, view, feedback, next, hl) });
+    const view = createQuestionView(q, { lang: hl, sql: app.sql, onSubmit: (response) => submit(q, response, view, feedback, next, hl) });
     mount(container, h('section', { class: 'quiz' },
       h('header', { class: 'quiz-head' },
         h('div', {},
@@ -62,12 +62,29 @@ export function runQuiz(container, app, opts) {
     requestAnimationFrame(() => view.focus());
   }
 
+  // Perguntas "sql" são corrigidas pelo banco (assíncrono); as outras, na hora.
   function submit(q, response, view, feedback, next, hl) {
-    const correct = gradeQuestion(q, response);
+    if (q.type !== 'sql') {
+      settle(q, response, gradeQuestion(q, response), null, view, feedback, next, hl);
+      return;
+    }
+    feedback.className = 'feedback';
+    mount(feedback, h('p', { class: 'muted', text: 'Corrigindo…' }));
+    app.sql.grade(q, response).then(
+      (verdict) => settle(q, response, verdict.ok, verdict, view, feedback, next, hl),
+      () => {
+        feedback.className = 'feedback err';
+        mount(feedback, h('p', { text: 'Não foi possível corrigir agora. Tente responder de novo.' }));
+        view.unlock();
+      },
+    );
+  }
+
+  function settle(q, response, correct, verdict, view, feedback, next, hl) {
     answers[index] = { response, correct };
     app.dispatch(recordAnswer, { question: q, correct });
     const study = mode === 'estudo';
-    view.reveal({ response, correct, showCorrect: study });
+    view.reveal({ response, correct, showCorrect: study, verdict });
     if (study) {
       feedback.className = `feedback ${correct ? 'ok' : 'err'}`;
       mount(feedback,
@@ -106,8 +123,8 @@ export function runQuiz(container, app, opts) {
       h('span', { class: 'badge danger', text: found ? `${found.language.name} › ${found.module.title}` : q.module }),
       md(q.prompt, { lang: hl }),
       q.type === 'fill' ? h('pre', { class: 'fill-code' }, h('code', { text: q.code })) : null,
-      h('div', { class: 'review-answer' }, h('span', { class: 'muted', text: 'Sua resposta: ' }), describeResponse(q, answers[i].response)),
-      h('div', { class: 'review-answer' }, h('span', { class: 'muted', text: 'Resposta certa: ' }), describeAnswer(q, hl)),
+      h('div', { class: 'review-answer' }, h('span', { class: 'muted', text: q.type === 'sql' ? 'Sua consulta: ' : 'Sua resposta: ' }), describeResponse(q, answers[i].response)),
+      h('div', { class: 'review-answer' }, h('span', { class: 'muted', text: q.type === 'sql' ? 'Uma resposta certa: ' : 'Resposta certa: ' }), describeAnswer(q, hl)),
       md(q.explanation, { lang: hl }),
       lessonLink(q));
   }
