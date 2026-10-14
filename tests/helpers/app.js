@@ -1,6 +1,7 @@
 // Monta um "app" de verdade (createApp) para testar telas e fluxos, com conteúdo lido do disco,
 // Markdown local, armazenamento do jsdom e backup automático em memória.
 import { installFetchFromDisk } from './fetch-from-disk.js';
+import { nodeSqlEngine } from './sql.js';
 import { initTestMarkdown } from './markdown.js';
 import { loadLanguages, loadAchievementTexts } from '../../js/data/content.js';
 import { createApp } from '../../js/app.js';
@@ -20,9 +21,10 @@ export function profileState(extra = {}) {
   };
 }
 
-// Chame setupDom() no arquivo de teste antes.
-export async function makeTestApp({ state = null, raw = null } = {}) {
-  installFetchFromDisk();
+// Chame setupDom() no arquivo de teste antes. fixture: true (Java congelado) ou o nome de outro conjunto de
+// tests/fixtures/ (como 'sql-ui'). sqlEngine: por padrão, o sql.js do npm.
+export async function makeTestApp({ state = null, raw = null, fixture = true, sqlEngine = nodeSqlEngine() } = {}) {
+  installFetchFromDisk({ overlay: fixture });
   await initTestMarkdown();
   const [languages, achievementTexts] = await Promise.all([loadLanguages(), loadAchievementTexts()]);
   localStorage.clear();
@@ -33,6 +35,7 @@ export async function makeTestApp({ state = null, raw = null } = {}) {
     achievementTexts,
     storageOptions: { debounceMs: 0 },
     autoBackupOptions: { store: memoryStore(), debounceMs: 0 },
+    sqlEngine,
   });
   app.refreshes = 0;
   app.refresh = () => { app.refreshes += 1; };

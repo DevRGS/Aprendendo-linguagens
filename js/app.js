@@ -9,6 +9,8 @@ import { createStore } from './ui/store.js';
 import { createStorage } from './data/storage.js';
 import { createAutoBackup } from './data/backup.js';
 import { loadLanguages, loadAchievementTexts, loadBanks } from './data/content.js';
+import { createSqlEngine } from './data/sql-engine.js';
+import { createSqlService } from './ui/sql-service.js';
 import { initMarkdown } from './ui/markdown.js';
 import { createLayout } from './ui/layout.js';
 import { h, mount } from './ui/dom.js';
@@ -21,8 +23,9 @@ import { APP_NAME, REMINDER_DISMISS_KEY, REMINDER_SNOOZE_DAYS, AUTO_BACKUP_PAUSE
 
 const loading = () => h('p', { class: 'loading', text: 'Carregando…' });
 
-export function createApp({ languages, achievementTexts, storageOptions = {}, autoBackupOptions = {} }) {
+export function createApp({ languages, achievementTexts, storageOptions = {}, autoBackupOptions = {}, sqlEngine = createSqlEngine() }) {
   const app = { languages, achievementTexts, getLanguage: (id) => languages.find((l) => l.id === id), currentRoute: null };
+  app.sql = createSqlService({ engine: sqlEngine, getLanguage: app.getLanguage });
   const layout = createLayout(app);
   const noStorage = () => layout.setBanner('storage', {
     tone: 'danger',
