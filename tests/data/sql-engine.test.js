@@ -95,3 +95,27 @@ test('loadSqlJsFromCdn: se o .wasm falha, a próxima tentativa recarrega o scrip
   assert.deepEqual(await loadSqlJsFromCdn({ inject, scope }), { ok: true });
   assert.equal(injections, 2);
 });
+
+test('createSqlEngine desiste de esperar depois do tempo limite, mas aproveita o carregamento se ele terminar depois', async () => {
+  let finish;
+  const slow = new Promise((resolve) => { finish = resolve; });
+  let calls = 0;
+  const engine = createSqlEngine({ load: () => { calls += 1; return slow; }, timeoutMs: 20 });
+  await assert.rejects(engine.ready(), /demorou demais/);
+  assert.equal(engine.isReady(), false);
+  finish(await loadNodeSqlJs());
+  await slow;
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(engine.isReady(), true);
+  await engine.ready();
+  assert.equal(calls, 1);
+});
+
+test('createSqlEngine: carregamento rápido não deixa o relógio do tempo limite segurando o processo', async () => {
+  const timers = () => process.getActiveResourcesInfo().filter((r) => r === 'Timeout').length;
+  const before = timers();
+  const engine = createSqlEngine({ load: loadNodeSqlJs, timeoutMs: 60_000 });
+  await engine.ready();
+  assert.equal(engine.isReady(), true);
+  assert.equal(timers(), before);
+});

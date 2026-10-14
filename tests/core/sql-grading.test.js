@@ -141,3 +141,19 @@ test('sqlErrorHint: aspa aberta e aspas curvas do celular (que às vezes só apa
   const v = gradeSql(notaAlta, 'SELECT nome FROM alunos WHERE cidade = ‘Recife’', { run, dataset });
   assert.match(v.hint, curvas);
 });
+
+test('compareResults reconhece as colunas certas em outra ordem (pelo nome) e diz qual é a ordem esperada', async () => {
+  const exp = r(['nome', 'turma'], [['Ana', '2A'], ['Bia', '1B']]);
+  const trocadas = { reason: 'colunas-trocadas', expectedNames: ['nome', 'turma'] };
+  assert.deepEqual(compareResults(exp, r(['turma', 'nome'], [['2A', 'Ana'], ['1B', 'Bia']])), trocadas);
+  assert.deepEqual(compareResults(exp, r(['Turma', 'NOME'], [['1B', 'Bia'], ['2A', 'Ana']]), { columnNames: true }), trocadas);
+  // Trocadas, mas com outras linhas também: aí não adianta só trocar a ordem.
+  assert.deepEqual(compareResults(exp, r(['turma', 'nome'], [['2A', 'Ana']])), { reason: 'linhas', expectedCount: 2, actualCount: 1 });
+  // Nomes repetidos não dão para alinhar: segue a comparação normal.
+  assert.deepEqual(compareResults(r(['x', 'x'], [[1, 2]]), r(['x', 'x'], [[2, 1]])), { reason: 'conteudo' });
+  assert.equal(verdictMessage('colunas-trocadas', { expectedNames: ['nome', 'turma'] }),
+    'As colunas estão certas, mas fora de ordem: o esperado é nome, turma.');
+  const run = await nodeRun();
+  const v = gradeSql({ id: 'teste.q05', answer: 'SELECT nome, cidade FROM alunos;' }, 'SELECT cidade, nome FROM alunos', { run, dataset });
+  assert.equal(v.reason, 'colunas-trocadas');
+});

@@ -59,19 +59,29 @@ export async function loadSqlJsFromCdn({ inject = loadScript, scope = globalThis
   }
 }
 
-export function createSqlEngine({ load = () => loadSqlJsFromCdn() } = {}) {
+// Rejeita se `promise` não terminar em `ms`; o relógio é desligado assim que ela termina.
+function withTimeout(promise, ms, message) {
+  let timer;
+  const timeout = new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(message)), ms); });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+export function createSqlEngine({ load = () => loadSqlJsFromCdn(), timeoutMs = 45_000 } = {}) {
   let SQL = null;
   let pending = null;
   return {
-    // Carrega uma vez; se falhar, a próxima chamada tenta de novo.
+    // Carrega uma vez; se falhar ou demorar demais, a próxima chamada tenta de novo. Um carregamento
+    // que termina depois do tempo limite ainda vale: as próximas chamadas já encontram o banco pronto.
     ready() {
       if (SQL) return Promise.resolve();
-      pending ??= Promise.resolve()
-        .then(load)
-        .then((mod) => { SQL = mod; }, (err) => {
-          pending = null;
-          throw err;
-        });
+      if (!pending) {
+        const loading = Promise.resolve().then(load).then((mod) => { SQL = mod; });
+        pending = withTimeout(loading, timeoutMs, 'O banco de dados demorou demais para carregar.')
+          .catch((err) => {
+            pending = null;
+            throw err;
+          });
+      }
       return pending;
     },
     isReady: () => SQL !== null,

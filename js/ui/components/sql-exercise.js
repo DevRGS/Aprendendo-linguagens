@@ -72,7 +72,8 @@ export function createSqlExercise(exercise, {
   const runBtn = h('button', { type: 'button', class: 'btn', disabled: true, text: 'Executar' });
   const showAnswerBtn = h('button', { type: 'button', class: 'btn btn-ghost', hidden: true, text: 'Ver uma resposta' });
   const submitBtn = h('button', { type: 'button', class: 'btn btn-primary', disabled: true, text: 'Responder' });
-  const editor = sqlEditor({ label: 'Sua consulta SQL', onRun: () => run() });
+  // Com dois desafios na mesma aula, o título distingue as caixas para quem usa leitor de tela.
+  const editor = sqlEditor({ label: title ? `Sua consulta SQL, ${title}` : 'Sua consulta SQL', onRun: () => run() });
   let ready = false;
   let locked = false;
 
@@ -100,6 +101,8 @@ export function createSqlExercise(exercise, {
         else if (out.result) output.replaceChildren(resultTable(out.result, { label: 'Resultado' }));
         else output.replaceChildren(h('p', { class: 'muted small', text: 'Sua consulta não devolveu uma tabela.' }));
       }
+    } catch {
+      output.replaceChildren(h('p', { class: 'sql-status err', text: '❌ Não foi possível executar agora. Tente de novo.' }));
     } finally {
       refreshButtons();
     }

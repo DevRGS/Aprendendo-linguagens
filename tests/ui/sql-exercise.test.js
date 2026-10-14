@@ -162,3 +162,29 @@ test('sqlEditor: Tab indenta, Esc libera o Tab para sair e Ctrl+Enter executa', 
   assert.equal(runs, 2);
   area.remove();
 });
+
+test('se a correção ou a execução falha, o exercício avisa e deixa tentar de novo', async () => {
+  const { app, challenges, byId } = await setup();
+  const broken = { ...app.sql, grade: async () => { throw new Error('quebrou'); }, execute: async () => { throw new Error('quebrou'); } };
+  for (const [exercise, mode] of [[challenges[0], 'challenge'], [byId.get('sql.teste.q01'), 'question']]) {
+    const ex = createSqlExercise(exercise, { service: broken, lang: 'sql', mode });
+    document.body.append(ex.el);
+    await ex.loaded;
+    type(ex, 'SELECT nome FROM pessoas');
+    button(ex, 'Executar').click();
+    await waitFor(() => /Não foi possível executar agora/.test(ex.el.querySelector('.sql-output').textContent));
+    assert.equal(button(ex, 'Executar').disabled, false);
+    ex.el.remove();
+  }
+});
+
+test('cada caixa de SQL tem um nome próprio para o leitor de tela', async () => {
+  const { app, challenges } = await setup();
+  const one = await mountExercise(app, challenges[0], { mode: 'challenge', title: 'Desafio 1' });
+  const two = await mountExercise(app, challenges[1], { mode: 'challenge', title: 'Desafio 2' });
+  const plain = await mountExercise(app, challenges[0], { mode: 'challenge' });
+  assert.equal(one.el.querySelector('textarea').getAttribute('aria-label'), 'Sua consulta SQL, Desafio 1');
+  assert.equal(two.el.querySelector('textarea').getAttribute('aria-label'), 'Sua consulta SQL, Desafio 2');
+  assert.equal(plain.el.querySelector('textarea').getAttribute('aria-label'), 'Sua consulta SQL');
+  for (const ex of [one, two, plain]) ex.el.remove();
+});

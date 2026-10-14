@@ -20,10 +20,24 @@ const sortRows = (rows) => [...rows].sort((a, b) => (rowKey(a) < rowKey(b) ? -1 
 const sameRows = (xs, ys) => xs.every((row, i) => row.every((v, j) => sameValue(v, ys[i][j])));
 const sameName = (a, b) => String(a).trim().toLowerCase() === String(b).trim().toLowerCase();
 
+// Se actual tem as mesmas colunas de expected (pelo nome) em outra ordem, devolve actual na ordem de expected.
+function inExpectedOrder(expected, actual) {
+  const want = expected.columns.map((c) => String(c).trim().toLowerCase());
+  const have = actual.columns.map((c) => String(c).trim().toLowerCase());
+  if (new Set(want).size !== want.length || want.every((c, i) => c === have[i])) return null;
+  const pos = want.map((c) => have.indexOf(c));
+  if (pos.includes(-1)) return null;
+  return { columns: pos.map((j) => actual.columns[j]), values: actual.values.map((row) => pos.map((j) => row[j])) };
+}
+
 // Devolve null se os resultados batem, ou { reason, ... } com o primeiro motivo da diferença.
 export function compareResults(expected, actual, { ordered = false, columnNames = false } = {}) {
   if (actual.columns.length !== expected.columns.length) {
     return { reason: 'colunas', expectedCount: expected.columns.length, actualCount: actual.columns.length };
+  }
+  const reordered = inExpectedOrder(expected, actual);
+  if (reordered && !compareResults(expected, reordered, { ordered, columnNames })) {
+    return { reason: 'colunas-trocadas', expectedNames: expected.columns };
   }
   if (columnNames && !expected.columns.every((c, i) => sameName(c, actual.columns[i]))) {
     return { reason: 'nomes', expectedNames: expected.columns };
@@ -83,6 +97,7 @@ export function verdictMessage(reason, detail = {}) {
     case 'colunas':
       return `Sua consulta devolveu ${count(detail.actualCount, 'coluna', 'colunas')}; ${expectedIs(detail.expectedCount, 'coluna', 'colunas')}.`;
     case 'nomes': return `As colunas devem se chamar: ${detail.expectedNames.join(', ')}.`;
+    case 'colunas-trocadas': return `As colunas estão certas, mas fora de ordem: o esperado é ${detail.expectedNames.join(', ')}.`;
     case 'linhas':
       return `Sua consulta devolveu ${count(detail.actualCount, 'linha', 'linhas')}; ${expectedIs(detail.expectedCount, 'linha', 'linhas')}.`;
     case 'conteudo': return 'Algumas linhas não são as esperadas.';
