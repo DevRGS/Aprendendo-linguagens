@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "id": "sql.introducao.q01", "type": "multiple", "difficulty": 1, "lesson": "banco-de-dados",
+      "prompt": "Numa tabela de banco de dados, o que cada **linha** representa?",
+      "options": ["Um registro, como um aluno", "Um tipo de informação, como a idade", "Uma tabela inteira", "Um comando SQL"], "answer": 0,
+      "explanation": "Cada linha é um registro (um aluno, um produto). Cada coluna é um tipo de informação, como `nome` ou `idade`."
+    },
+    {
+      "id": "sql.introducao.q02", "type": "truefalse", "difficulty": 1, "lesson": "banco-de-dados",
+      "prompt": "A chave primária identifica cada linha da tabela de forma única.",
+      "answer": true,
+      "explanation": "Cada linha tem um valor diferente na chave primária (como o `id`), então ela identifica o registro sem confusão, mesmo com nomes repetidos."
+    },
+    {
+      "id": "sql.introducao.q03", "type": "multiple", "difficulty": 1, "lesson": "banco-de-dados",
+      "prompt": "Na tabela `alunos`, o que são `nome`, `idade` e `cidade`?",
+      "options": ["Colunas", "Linhas", "Bancos de dados", "Consultas"], "answer": 0,
+      "explanation": "São colunas: cada uma guarda um tipo de informação de todos os alunos."
+    },
+    {
+      "id": "sql.introducao.q04", "type": "truefalse", "difficulty": 1, "lesson": "sql-e-sqlite",
+      "prompt": "SQL é uma linguagem declarativa: você diz o que quer, e o banco decide como buscar.",
+      "answer": true,
+      "explanation": "Em `SELECT nome FROM alunos;` você não escreve o laço que percorre a tabela: só descreve o resultado, e o banco cuida do resto."
+    },
+    {
+      "id": "sql.introducao.q05", "type": "multiple", "difficulty": 2, "lesson": "sql-e-sqlite",
+      "prompt": "O que o SQLite tem de diferente do MySQL e do PostgreSQL?",
+      "options": ["Guarda o banco inteiro num único arquivo, sem precisar de um servidor", "Não aceita a linguagem SQL", "Só funciona conectado à internet", "Não guarda os dados em tabelas"], "answer": 0,
+      "explanation": "O SQLite é um banco num arquivo só, sem servidor; por isso está em celulares e navegadores. Ele usa SQL e tabelas como os outros."
+    },
+    {
+      "id": "sql.introducao.q06", "type": "truefalse", "difficulty": 1, "lesson": "sql-e-sqlite",
+      "prompt": "Em SQL, `select` e `SELECT` são o mesmo comando.",
+      "answer": true,
+      "explanation": "As palavras-chave do SQL não diferenciam maiúsculas de minúsculas. Escrevê-las em maiúsculas é só um costume, para separar dos nomes das tabelas e colunas."
+    },
+    {
+      "id": "sql.introducao.q07", "type": "fill", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "Complete para listar **todas** as colunas da tabela `alunos`:",
+      "code": "SELECT ___ FROM alunos;",
+      "blanks": [["*", "id, nome, idade, cidade, turma, nota, email"]],
+      "explanation": "O `*` significa \"todas as colunas\". Escrever os nomes de todas as colunas, na ordem da tabela, também funciona, mas dá mais trabalho."
+    },
+    {
+      "id": "sql.introducao.q08", "type": "fill", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "Complete para ler o nome dos produtos da tabela `produtos`:",
+      "code": "SELECT nome ___ produtos;",
+      "blanks": [["FROM"]], "caseInsensitive": true,
+      "explanation": "`FROM` diz de qual tabela vêm os dados. Como toda palavra-chave, pode ser escrita em maiúsculas ou minúsculas."
+    },
+    {
+      "id": "sql.introducao.q09", "type": "order", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "Monte a consulta que lista o nome e o preço de todos os produtos, com uma coluna por linha:",
+      "lines": ["SELECT", "  nome,", "  preco", "FROM produtos;"],
+      "explanation": "Primeiro o `SELECT` com as colunas (a vírgula separa uma da outra), depois o `FROM` com a tabela."
+    },
+    {
+      "id": "sql.introducao.q10", "type": "sql", "difficulty": 1, "lesson": "primeira-consulta",
+      "dataset": "escola",
+      "prompt": "Liste o nome de todos os alunos.",
+      "answer": "SELECT nome FROM alunos;",
+      "accepted": ["select nome from alunos"],
+      "rejected": ["SELECT * FROM alunos;", "SELECT nome, cidade FROM alunos;"],
+      "explanation": "`SELECT nome FROM alunos;` pede só a coluna `nome`, de todas as linhas."
+    },
+    {
+      "id": "sql.introducao.q11", "type": "sql", "difficulty": 1, "lesson": "primeira-consulta",
+      "dataset": "loja",
+      "prompt": "Liste o nome e o preço de todos os produtos.",
+      "answer": "SELECT nome, preco FROM produtos;",
+      "rejected": ["SELECT nome FROM produtos;", "SELECT * FROM produtos;"],
+      "explanation": "As colunas vão no `SELECT`, separadas por vírgula, e a tabela no `FROM`."
+    },
+    {
+      "id": "sql.introducao.q12", "type": "sql", "difficulty": 1, "lesson": "banco-de-dados",
+      "dataset": "escola",
+      "prompt": "Mostre a tabela `alunos` inteira, com todas as colunas.",
+      "answer": "SELECT * FROM alunos;",
+      "accepted": ["SELECT id, nome, idade, cidade, turma, nota, email FROM alunos;"],
+      "rejected": ["SELECT nome FROM alunos;"],
+      "explanation": "O `*` traz todas as colunas da tabela."
+    },
+    {
+      "id": "sql.introducao.q13", "type": "multiple", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "Para que serve o `;` no fim de uma consulta?",
+      "options": ["Marca o fim da instrução", "Começa um comentário", "Junta duas tabelas", "Ordena o resultado"], "answer": 0,
+      "explanation": "O `;` separa uma instrução da outra. Comentários começam com `--`."
+    },
+    {
+      "id": "sql.introducao.q14", "type": "truefalse", "difficulty": 1, "lesson": "primeira-consulta",
+      "prompt": "Em SQL, `--` começa um comentário que vai até o fim da linha.",
+      "answer": true,
+      "explanation": "Tudo o que vem depois de `--` na mesma linha é ignorado. Para várias linhas, use `/*` e `*/`."
+    },
+    {
+      "id": "sql.introducao.q15", "type": "multiple", "difficulty": 1, "lesson": "sql-e-sqlite",
+      "prompt": "Qual comando SQL serve para **ler** dados de uma tabela?",
+      "options": ["`SELECT`", "`INSERT`", "`UPDATE`", "`DELETE`"], "answer": 0,
+      "explanation": "`SELECT` consulta. `INSERT` insere, `UPDATE` altera e `DELETE` apaga linhas."
+    }
+  ]
+}

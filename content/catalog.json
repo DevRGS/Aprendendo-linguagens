@@ -1,1 +1,1 @@
-{ "languages": [ { "id": "java", "dir": "java" } ] }
+{ "languages": [ { "id": "java", "dir": "java" }, { "id": "sql", "dir": "sql" } ] }

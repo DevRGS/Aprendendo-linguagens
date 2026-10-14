@@ -1,0 +1,14 @@
+{
+  "cards": [
+    { "id": "sql.introducao.f01", "lesson": "banco-de-dados", "front": "O que é um banco de dados?", "back": "Um lugar organizado para guardar informações e encontrá-las, mudá-las e mantê-las consistentes." },
+    { "id": "sql.introducao.f02", "lesson": "banco-de-dados", "front": "Numa tabela, o que são linhas e colunas?", "back": "Cada linha é um registro (um aluno, um produto). Cada coluna é um tipo de informação (`nome`, `idade`)." },
+    { "id": "sql.introducao.f03", "lesson": "banco-de-dados", "front": "O que é a chave primária?", "back": "A coluna (como o `id`) cujo valor é diferente em cada linha e identifica o registro sem confusão." },
+    { "id": "sql.introducao.f04", "lesson": "sql-e-sqlite", "front": "O que quer dizer que o SQL é declarativo?", "back": "Você diz o que quer no resultado; o banco decide como buscar." },
+    { "id": "sql.introducao.f05", "lesson": "sql-e-sqlite", "front": "O que é o SQLite?", "back": "Um banco de dados que guarda tudo num único arquivo, sem servidor. Neste site, ele roda dentro do navegador." },
+    { "id": "sql.introducao.f06", "lesson": "sql-e-sqlite", "front": "O que são os dialetos do SQL?", "back": "As pequenas diferenças entre os bancos (SQLite, MySQL, PostgreSQL...). A base da linguagem é a mesma em todos." },
+    { "id": "sql.introducao.f07", "lesson": "sql-e-sqlite", "front": "Palavras-chave do SQL diferenciam maiúsculas?", "back": "Não: `SELECT` e `select` são iguais. Escrever em maiúsculas é só um costume." },
+    { "id": "sql.introducao.f08", "lesson": "primeira-consulta", "front": "Qual é a forma da consulta mais simples?", "back": "`SELECT colunas FROM tabela;`, com as colunas separadas por vírgula." },
+    { "id": "sql.introducao.f09", "lesson": "primeira-consulta", "front": "O que significa `SELECT *`?", "back": "Todas as colunas da tabela." },
+    { "id": "sql.introducao.f10", "lesson": "primeira-consulta", "front": "Como escrever comentários em SQL?", "back": "`--` comenta até o fim da linha; `/* ... */` comenta várias linhas." }
+  ]
+}

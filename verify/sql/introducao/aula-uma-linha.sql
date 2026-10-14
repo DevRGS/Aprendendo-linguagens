@@ -1,0 +1,15 @@
+-- verifica: a dica da aula primeira-consulta (numa linha só, o mesmo resultado)
+-- banco: escola
+-- saida:
+-- nome | cidade
+-- Ana | Recife
+-- Bruno | Natal
+-- Carla | Recife
+-- Diego | Fortaleza
+-- Elisa | Natal
+-- Fábio | Salvador
+-- Gabriela | Recife
+-- Heitor | Fortaleza
+-- Isadora | Salvador
+-- João | Natal
+SELECT nome, cidade FROM alunos;

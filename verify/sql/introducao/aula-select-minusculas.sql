@@ -1,0 +1,15 @@
+-- verifica: sql.introducao.q06 e a aula sql-e-sqlite (palavras-chave em minúsculas)
+-- banco: escola
+-- saida:
+-- nome
+-- Ana
+-- Bruno
+-- Carla
+-- Diego
+-- Elisa
+-- Fábio
+-- Gabriela
+-- Heitor
+-- Isadora
+-- João
+select nome from alunos;

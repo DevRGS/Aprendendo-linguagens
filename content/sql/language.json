@@ -1,0 +1,22 @@
+{
+  "id": "sql",
+  "name": "SQL",
+  "color": "#336791",
+  "icon": "🗄️",
+  "highlight": "sql",
+  "reference": "referencia.md",
+  "engine": "sqlite",
+  "modules": [
+    {
+      "id": "introducao",
+      "dir": "01-introducao",
+      "title": "Introdução",
+      "description": "O que é um banco de dados, o que é SQL, o SQLite e a sua primeira consulta.",
+      "lessons": [
+        { "id": "banco-de-dados", "file": "01-banco-de-dados.md", "title": "O que é um banco de dados", "minutes": 7 },
+        { "id": "sql-e-sqlite", "file": "02-sql-e-sqlite.md", "title": "SQL e o SQLite", "minutes": 7 },
+        { "id": "primeira-consulta", "file": "03-primeira-consulta.md", "title": "Sua primeira consulta", "minutes": 9 }
+      ]
+    }
+  ]
+}

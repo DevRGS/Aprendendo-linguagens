@@ -1,0 +1,37 @@
+{
+  "challenges": [
+    {
+      "id": "sql.introducao.d01", "lesson": "banco-de-dados",
+      "dataset": "escola",
+      "prompt": "Veja a tabela `alunos` inteira: escreva `SELECT * FROM alunos;` na caixa e clique em **Executar**.",
+      "answer": "SELECT * FROM alunos;",
+      "rejected": ["SELECT nome FROM alunos;"],
+      "explanation": "O `*` traz todas as colunas, e sem nenhum filtro vêm todas as linhas."
+    },
+    {
+      "id": "sql.introducao.d02", "lesson": "sql-e-sqlite",
+      "dataset": "loja",
+      "prompt": "Agora é com você: mostre todas as colunas da tabela `produtos`, da loja.",
+      "answer": "SELECT * FROM produtos;",
+      "accepted": ["select * from produtos"],
+      "rejected": ["SELECT nome FROM produtos;"],
+      "explanation": "Mesma forma do desafio anterior, com outra tabela: `SELECT * FROM produtos;`."
+    },
+    {
+      "id": "sql.introducao.d03", "lesson": "primeira-consulta",
+      "dataset": "escola",
+      "prompt": "Liste o nome e a cidade de todos os alunos.",
+      "answer": "SELECT nome, cidade FROM alunos;",
+      "rejected": ["SELECT nome FROM alunos;"],
+      "explanation": "As duas colunas vão no `SELECT`, separadas por vírgula."
+    },
+    {
+      "id": "sql.introducao.d04", "lesson": "primeira-consulta",
+      "dataset": "loja",
+      "prompt": "Liste o nome, a categoria e o estoque de todos os produtos.",
+      "answer": "SELECT nome, categoria, estoque FROM produtos;",
+      "rejected": ["SELECT * FROM produtos;"],
+      "explanation": "Escolha só as três colunas pedidas, na ordem do enunciado."
+    }
+  ]
+}
