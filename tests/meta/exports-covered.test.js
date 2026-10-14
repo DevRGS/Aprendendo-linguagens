@@ -18,6 +18,7 @@ const SKIP = new Set(['js/main.js']);
 const modules = [
   ...listFiles(join(ROOT, 'js'), '.js'),
   join(ROOT, 'tools', 'verify-format.mjs'),
+  join(ROOT, 'tools', 'verify-sql-format.mjs'),
 ].filter((f) => !SKIP.has(relative(ROOT, f).replaceAll('\\', '/')));
 
 const testCorpus = listFiles(join(ROOT, 'tests'), '.test.js')
