@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { installFetchFromDisk } from '../helpers/fetch-from-disk.js';
-import { loadLanguages, loadModuleBank, loadLesson } from '../../js/data/content.js';
+import { loadLanguages, loadModuleBank, loadLesson, loadChallenges, loadDataset } from '../../js/data/content.js';
 
 installFetchFromDisk({ overlay: false });
 
@@ -23,5 +23,19 @@ test('toda aula carrega e começa por um título; todo banco carrega com as chav
     assert.ok(bank.questions.length >= 12, module.id);
     assert.ok(bank.questions.every((q) => q.module === module.key && q.id.startsWith(`${module.key}.q`)), module.id);
     assert.ok(bank.cards.every((c) => c.module === module.key && c.id.startsWith(`${module.key}.f`)), module.id);
+  }
+});
+
+test('SQL tem os módulos da etapa SQL-A; toda aula carrega e tem desafio; os desafios acham os bancos', async () => {
+  const sql = (await loadLanguages()).find((l) => l.id === 'sql');
+  assert.equal(sql.engine, 'sqlite');
+  assert.deepEqual(sql.modules.map((m) => m.id), ['introducao', 'consultas']);
+  for (const module of sql.modules) {
+    const challenges = await loadChallenges(sql, module);
+    for (const lesson of module.lessons) {
+      assert.match(await loadLesson(sql, module, lesson), /^# \S/, `${module.id}/${lesson.id}`);
+      assert.ok(challenges.some((c) => c.lesson === lesson.id), `${module.id}/${lesson.id} sem desafio`);
+    }
+    for (const c of challenges) assert.match((await loadDataset(sql, c.dataset)).schema, /CREATE TABLE/, c.id);
   }
 });

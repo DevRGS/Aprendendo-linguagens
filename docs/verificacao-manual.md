@@ -21,6 +21,15 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] A prova roda em modo simulado com cronômetro; 70% ou mais mostra "Você passou na prova!".
 - [ ] Com o sistema configurado para reduzir movimento, a carta vira sem animação.
 
+## SQL
+- [ ] A página de SQL lista os módulos Introdução e Consultas básicas, e toda aula termina com o bloco "Experimente".
+- [ ] Num desafio: "Tabelas deste exercício" abre e mostra a tabela inteira; Executar (e Ctrl+Enter) mostra o resultado, o veredito e o resultado esperado; "Ver uma resposta" aparece depois da primeira execução.
+- [ ] `SELECT nme FROM alunos` mostra a mensagem do SQLite e a dica em português.
+- [ ] Na caixa de texto, Tab insere dois espaços; Esc e depois Tab saem da caixa.
+- [ ] A prática de um módulo de SQL mistura "Escreva a consulta" com os outros tipos; no modo estudo, depois de responder, aparecem o resultado esperado e uma resposta certa.
+- [ ] Sem internet (DevTools → Network → Offline) e com a página recarregada: a aula avisa que o banco de dados não carregou, e a prática começa sem as perguntas de escrever SQL, com um aviso.
+- [ ] No celular (390 px), a caixa de texto cabe na tela e as tabelas rolam para o lado, sem rolar a página inteira.
+
 ## Flashcards
 - [ ] A carta vira com animação 3D; Revisão do dia, estudo livre e "Meus erros" funcionam; atalhos 1/2/3 e Espaço.
 - [ ] O número de pendentes no menu bate com o da tela de flashcards.

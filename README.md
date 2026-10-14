@@ -21,7 +21,9 @@ npm test
 
 Toda função do site tem teste automático: as regras (`tests/core`), a camada de dados (`tests/data`), as telas e componentes (`tests/ui`, com o navegador simulado pelo jsdom) e o validador de conteúdo (`tests/content.test.js`). O teste `tests/meta/exports-covered.test.js` falha se alguém criar uma função exportada sem teste.
 
-Os testes de telas e da camada de dados leem um manifesto de Java congelado, `tests/fixtures/content/java/language.json` (só o módulo Fundamentos), para não quebrarem quando o curso ganha módulos. O conteúdo real é conferido pelo validador (`tests/content.test.js`) e por um teste de fumaça que carrega todos os módulos de verdade (`tests/data/content-real.test.js`).
+Os testes de telas e da camada de dados leem um catálogo e um manifesto de Java congelados, em `tests/fixtures/content/` (só Java › Fundamentos), para não quebrarem quando o curso cresce. As telas de SQL usam um mini-curso próprio, em `tests/fixtures/sql-ui/`. O conteúdo real é conferido pelo validador (`tests/content.test.js`) e por um teste de fumaça que carrega todos os módulos de verdade (`tests/data/content-real.test.js`).
+
+Os exercícios de SQL rodam no sql.js, o mesmo SQLite do site, instalado como dependência de teste. O `npm test` roda cada resposta de referência, cada forma aceita e cada forma recusada (`tests/content-sql.test.js`) e confere os resultados citados nas aulas, guardados em `verify/sql/` (`tests/sql-snippets.test.js`). O formato desses trechos está no começo de `tools/verify-sql-format.mjs`.
 
 O site em si não tem dependências nem etapa de build: o `npm install` só serve para os testes.
 
@@ -58,14 +60,22 @@ content/
   <linguagem>/
     language.json              nome, cor, ícone e módulos (com as aulas de cada um)
     referencia.md              referência rápida
+    datasets/<id>/             só em linguagens com banco (SQL): schema.sql, data.sql e hidden-data.sql
     <NN-modulo>/
       <NN-aula>.md             aulas em Markdown (alertas: > [!TIP], > [!WARNING]...)
-      questions.json           perguntas: multiple, truefalse, fill, order
+      questions.json           perguntas: multiple, truefalse, fill, order (e sql, em linguagens com banco)
       flashcards.json          cartas: front, back, lesson
+      challenges.json          desafios "Experimente" do fim das aulas (só em linguagens com banco)
 ```
 
-O formato completo está em `docs/superpowers/specs/2026-10-11-central-linguagens-design.md`, seção 4. O validador recusa conteúdo fora do padrão.
+O formato completo está em `docs/superpowers/specs/2026-10-11-central-linguagens-design.md`, seção 4, e o que muda para o SQL, em `docs/superpowers/specs/2026-10-14-sql-design.md`, seção 4. O validador recusa conteúdo fora do padrão.
 
 ## Publicar
 
 No GitHub: **Settings → Pages → Source: GitHub Actions**. A cada `push` na `main`, o workflow instala as ferramentas de teste, roda os testes e a conferência Java e só publica se tudo passar.
+
+## Créditos
+
+- [SQL Teaching](https://www.sqlteaching.com/), de Ronald Cheng (licença MIT): inspiração para os exercícios de SQL e para a ordem dos assuntos.
+- [sql.js](https://github.com/sql-js/sql.js) (licença MIT) e [SQLite](https://sqlite.org/) (domínio público): o banco de dados que roda no navegador.
+- [marked](https://marked.js.org/) (licença MIT) e [highlight.js](https://highlightjs.org/) (licença BSD-3-Clause): o Markdown e as cores do código.
