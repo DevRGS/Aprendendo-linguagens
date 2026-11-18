@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.dados.f01",
+      "lesson": "arrays",
+      "front": "O que fazem push e pop?",
+      "back": "Push acrescenta ao fim e devolve o novo comprimento. Pop remove e devolve o último elemento; ambos alteram o array."
+    },
+    {
+      "id": "javascript.dados.f02",
+      "lesson": "arrays",
+      "front": "Por que evitar delete para remover e deslocar elementos do array?",
+      "back": "Delete deixa um buraco e não encurta o array. Use uma operação adequada, como splice ou filter, conforme a intenção."
+    },
+    {
+      "id": "javascript.dados.f03",
+      "lesson": "arrays",
+      "front": "Slice cria uma cópia profunda?",
+      "back": "Não. Ele cria outro array, mas referências a objetos internos continuam compartilhadas: é uma cópia rasa."
+    },
+    {
+      "id": "javascript.dados.f04",
+      "lesson": "transformar-arrays",
+      "front": "Map, filter e reduce resolvem quais problemas?",
+      "back": "Map transforma; filter seleciona; reduce acumula em um resultado. O comportamento depende também das callbacks fornecidas."
+    },
+    {
+      "id": "javascript.dados.f05",
+      "lesson": "transformar-arrays",
+      "front": "Por que passar valor inicial a reduce?",
+      "back": "Define o acumulador e permite tratar o array vazio sem o TypeError que ocorreria sem valor inicial."
+    },
+    {
+      "id": "javascript.dados.f06",
+      "lesson": "transformar-arrays",
+      "front": "Como ordenar números preservando a ordem do array original?",
+      "back": "Faça uma cópia e ordene com comparador: numeros.slice().sort((a, b) => a - b). Sort altera o array em que é chamado."
+    },
+    {
+      "id": "javascript.dados.f07",
+      "lesson": "objetos-e-referencias",
+      "front": "Atribuir um objeto a outro nome clona o objeto?",
+      "back": "Não. A referência é copiada e ambos observam o mesmo objeto. === compara essa identidade."
+    },
+    {
+      "id": "javascript.dados.f08",
+      "lesson": "objetos-e-referencias",
+      "front": "Quando usar colchetes para acessar propriedades?",
+      "back": "Quando o nome vem de uma expressão/variável, como pessoa[chave], ou não pode ser escrito pela notação de ponto."
+    },
+    {
+      "id": "javascript.dados.f09",
+      "lesson": "json",
+      "front": "Stringify e parse fazem operações inversas para todo objeto JavaScript?",
+      "back": "Não. JSON não preserva funções, undefined, ciclos e toda semântica de classes/datas. É um formato de dados com limites."
+    },
+    {
+      "id": "javascript.dados.f10",
+      "lesson": "json",
+      "front": "O que fazer depois de JSON.parse?",
+      "back": "Validar a estrutura e os tipos esperados. Um texto JSON válido não prova que os dados atendem ao aplicativo."
+    }
+  ]
+}

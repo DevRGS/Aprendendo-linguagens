@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.backend-projeto.f01",
+      "lesson": "estrutura-e-configuracao",
+      "front": "Por que separar servidor, app, repositório e cliente?",
+      "back": "Cada fronteira tem responsabilidade testável: processo/configuração, HTTP, SQL e interface. Isso ajuda a localizar causas e evoluir sem misturar tudo."
+    },
+    {
+      "id": "javascript.backend-projeto.f02",
+      "lesson": "estrutura-e-configuracao",
+      "front": "Um .env público torna seu conteúdo secreto?",
+      "back": "Não. O que é entregue ao navegador pode ser lido. A configuração real deve ficar no servidor e fora de public/repositório."
+    },
+    {
+      "id": "javascript.backend-projeto.f03",
+      "lesson": "estrutura-e-configuracao",
+      "front": "Por que serve apenas public?",
+      "back": "Para não disponibilizar banco, .env e código interno como arquivos HTTP. A escolha da raiz estática é parte do controle de exposição."
+    },
+    {
+      "id": "javascript.backend-projeto.f04",
+      "lesson": "projeto-api-estudos",
+      "front": "O que é baixado para estudar?",
+      "back": "Fonte completa, README, manifestos/lock, etapas, frontend e testes. Não há node_modules, banco pessoal ou segredo real incluído."
+    },
+    {
+      "id": "javascript.backend-projeto.f05",
+      "lesson": "projeto-api-estudos",
+      "front": "Quem executa a API após baixar?",
+      "back": "O aluno em Node local ou um servidor escolhido que execute Node. GitHub Pages hospeda as aulas/ZIP, não o processo da API."
+    },
+    {
+      "id": "javascript.backend-projeto.f06",
+      "lesson": "testes-e-restauracao",
+      "front": "Como comprovar um backup utilizável?",
+      "back": "Teste a restauração e a leitura do esquema/dados em um destino controlado. Copiar bytes sem conferir não comprova recuperação."
+    },
+    {
+      "id": "javascript.backend-projeto.f07",
+      "lesson": "testes-e-restauracao",
+      "front": "Por que injetar caminho e relógio nos testes?",
+      "back": "Permite bancos temporários e expiração determinística, sem alterar dados reais nem esperar horas."
+    },
+    {
+      "id": "javascript.backend-projeto.f08",
+      "lesson": "implantacao-e-evolucao",
+      "front": "O que falta planejar para produção?",
+      "back": "HTTPS/proxy, segredos, limites/observabilidade, backup/migrações, política de contas e revisão de segurança no ambiente. O exemplo é local."
+    },
+    {
+      "id": "javascript.backend-projeto.f09",
+      "lesson": "implantacao-e-evolucao",
+      "front": "O frontend deve conhecer a senha do PostgreSQL?",
+      "back": "Não. Ele continua consumindo a API; driver, conexão e credenciais pertencem ao servidor."
+    },
+    {
+      "id": "javascript.backend-projeto.f10",
+      "lesson": "implantacao-e-evolucao",
+      "front": "Trocar de banco exige reescrever todo DOM?",
+      "back": "Não deveria, se o contrato HTTP for preservado. As diferenças ficam principalmente no repositório/configuração e precisam de testes."
+    }
+  ]
+}

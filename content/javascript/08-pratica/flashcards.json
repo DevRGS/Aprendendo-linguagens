@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.pratica.f01",
+      "lesson": "armazenamento-local",
+      "front": "LocalStorage guarda objetos diretamente?",
+      "back": "Não. Guarda strings por chave. JSON.stringify/parse ajuda com estruturas compatíveis, e os dados restaurados precisam de validação."
+    },
+    {
+      "id": "javascript.pratica.f02",
+      "lesson": "armazenamento-local",
+      "front": "Por que usar try/catch com armazenamento?",
+      "back": "Leitura ou escrita pode falhar por bloqueio, política, limite ou dados inválidos. Avise quando o aplicativo continua apenas em memória."
+    },
+    {
+      "id": "javascript.pratica.f03",
+      "lesson": "armazenamento-local",
+      "front": "O que muda a origem do armazenamento?",
+      "back": "Protocolo, host e porta fazem parte da origem. Trocar localhost por 127.0.0.1 ou mudar porta pode significar outro armazenamento."
+    },
+    {
+      "id": "javascript.pratica.f04",
+      "lesson": "funcoes-testaveis",
+      "front": "O que torna uma regra mais fácil de testar?",
+      "back": "Entradas e saídas explícitas, poucas dependências e ausência de efeitos externos quando possível. Separe cálculo de DOM/rede/storage."
+    },
+    {
+      "id": "javascript.pratica.f05",
+      "lesson": "funcoes-testaveis",
+      "front": "Por que testar lista vazia e limites?",
+      "back": "Esses casos podem revelar ramos que exemplos comuns não exercitam, como reduce sem valor inicial num array vazio."
+    },
+    {
+      "id": "javascript.pratica.f06",
+      "lesson": "funcoes-testaveis",
+      "front": "De onde deve vir o resultado esperado?",
+      "back": "De um cálculo/contrato independente, não de outra chamada à mesma implementação sob teste."
+    },
+    {
+      "id": "javascript.pratica.f07",
+      "lesson": "depuracao",
+      "front": "Como investigar concatenação inesperada com +?",
+      "back": "Observe valores e typeof. Valide entradas textuais e converta explicitamente antes de fazer aritmética."
+    },
+    {
+      "id": "javascript.pratica.f08",
+      "lesson": "depuracao",
+      "front": "Como evitar uma regressão depois de corrigir um erro?",
+      "back": "Crie uma verificação que reproduza a entrada e o resultado esperado; depois confirme o caso corrigido e os demais comportamentos relevantes."
+    },
+    {
+      "id": "javascript.pratica.f09",
+      "lesson": "projeto-final",
+      "front": "Qual o estado do projeto final e como ele aparece na tela?",
+      "back": "Um array de registros com texto e concluida. A função desenhar cria os nós; eventos alteram o array e atualizam/gravam o estado."
+    },
+    {
+      "id": "javascript.pratica.f10",
+      "lesson": "projeto-final",
+      "front": "O que o projeto faz se não consegue salvar?",
+      "back": "Mantém a lista em memória e mostra uma mensagem de que a gravação falhou. Não promete persistência entre recargas nessa condição."
+    }
+  ]
+}

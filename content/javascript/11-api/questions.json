@@ -1,0 +1,202 @@
+{
+  "questions": [
+    {
+      "id": "javascript.api.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "ler-e-criar",
+      "prompt": "De onde vem o dono da tarefa criada no projeto?",
+      "options": [
+        "Da sessão autenticada no servidor",
+        "De usuario_id fornecido livremente no JSON",
+        "Do título digitado",
+        "Da ordem de campos no HTML"
+      ],
+      "answer": 0,
+      "explanation": "A identidade foi resolvida pelo middleware. O corpo não escolhe o proprietário."
+    },
+    {
+      "id": "javascript.api.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "ler-e-criar",
+      "prompt": "Complete o status HTTP usado ao criar um recurso:",
+      "code": "res.status(___).location(`/api/tarefas/${task.id}`).json(task);",
+      "blanks": [
+        [
+          "201"
+        ]
+      ],
+      "explanation": "201 sinaliza criação. Location informa o caminho do recurso criado; a representação pública é devolvida em JSON."
+    },
+    {
+      "id": "javascript.api.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "ler-e-criar",
+      "prompt": "GET de listagem deve criar uma tarefa por efeito colateral para registrar que a pessoa abriu a lista.",
+      "answer": false,
+      "explanation": "A leitura não é o contrato de criação. Mudanças desse tipo precisam de operação explícita e proteção correspondente."
+    },
+    {
+      "id": "javascript.api.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "ler-e-criar",
+      "prompt": "Qual formato a listagem usa para paginação?",
+      "options": [
+        "itens, total, limit, offset",
+        "Somente a senha do usuário",
+        "Um arquivo SQLite entregue ao navegador",
+        "Um elemento DOM serializado obrigatoriamente"
+      ],
+      "answer": 0,
+      "explanation": "O contrato fornece itens e metadados. O frontend usa essas informações para navegar e apresentar a lista."
+    },
+    {
+      "id": "javascript.api.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "alterar-e-remover",
+      "prompt": "Por que atualizar concluida com valor ?? anterior preserva false?",
+      "options": [
+        "Porque ?? só usa o padrão para null/undefined, não para false",
+        "Porque false é sempre convertido em true",
+        "Porque ?? criptografa o JSON",
+        "Porque o SQLite ignora toda atualização"
+      ],
+      "answer": 0,
+      "explanation": "Usar || poderia tratar false como ausência e manter o valor anterior. A validação também exige booleano real."
+    },
+    {
+      "id": "javascript.api.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "alterar-e-remover",
+      "prompt": "Complete a chamada para encerrar a exclusão bem-sucedida sem corpo:",
+      "code": "res.status(204).___();",
+      "blanks": [
+        [
+          "end",
+          "send",
+          "json"
+        ]
+      ],
+      "explanation": "end encerra a resposta sem corpo. No Express, send e json também encerram; o status 204 suprime o corpo. O cliente deve reconhecer 204 antes de tentar interpretar JSON."
+    },
+    {
+      "id": "javascript.api.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "alterar-e-remover",
+      "prompt": "Um PATCH vazio é aceito pelo contrato e retorna sucesso mesmo sem indicar campo algum.",
+      "answer": false,
+      "explanation": "A API exige pelo menos um campo permitido. Isso torna erros de chamada observáveis, em vez de ocultá-los."
+    },
+    {
+      "id": "javascript.api.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "alterar-e-remover",
+      "prompt": "Qual resultado de DELETE para um id que não existe na conta?",
+      "options": [
+        "404",
+        "Sempre 201",
+        "204 com o hash da sessão",
+        "Uma tarefa aleatória removida"
+      ],
+      "answer": 0,
+      "explanation": "O repositório verifica a linha afetada sob o filtro de dono/id. Ausência ou recurso alheio retorna 404."
+    },
+    {
+      "id": "javascript.api.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "validar-e-erros",
+      "prompt": "Por que rejeitar concluida:\"false\" quando o contrato exige booleano?",
+      "options": [
+        "Porque é uma string e coerção com Boolean produziria true",
+        "Porque JSON não suporta false",
+        "Porque todo valor de formulário precisa virar número",
+        "Porque o nome de campo não pode conter letras"
+      ],
+      "answer": 0,
+      "explanation": "Tipos fazem parte do contrato. Boolean(\"false\") é true; isso não expressa a intenção de desmarcar."
+    },
+    {
+      "id": "javascript.api.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "validar-e-erros",
+      "prompt": "Complete o status usado para corpo que excede o limite JSON:",
+      "code": "res.status(___);",
+      "blanks": [
+        [
+          "413"
+        ]
+      ],
+      "explanation": "413 indica que o conteúdo excede o limite. 400 cobre JSON/validação, 415 cobre tipo de conteúdo não aceito."
+    },
+    {
+      "id": "javascript.api.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "validar-e-erros",
+      "prompt": "Uma resposta 500 deve incluir stack e SQL para facilitar a pessoa corrigir a API pelo navegador.",
+      "answer": false,
+      "explanation": "Detalhes internos não pertencem ao contrato público. Use mensagem genérica e diagnóstico operacional apropriado sem expor segredos."
+    },
+    {
+      "id": "javascript.api.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "validar-e-erros",
+      "prompt": "Qual id deve ser rejeitado como entrada inválida pelo contrato?",
+      "options": [
+        "\"12abc\"",
+        "\"12\"",
+        "\"1\"",
+        "\"37\""
+      ],
+      "answer": 0,
+      "explanation": "O parser exige formato inteiro completo e limites seguros, não aceita apenas o prefixo de parseInt."
+    },
+    {
+      "id": "javascript.api.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "testes-http",
+      "prompt": "Qual abordagem verifica o contrato real da API do laboratório?",
+      "options": [
+        "Fazer HTTP real em porta livre e banco temporário",
+        "Confirmar apenas que um mock foi chamado",
+        "Enviar pedidos ao banco pessoal do aluno",
+        "Trocar todos os resultados por 200"
+      ],
+      "answer": 0,
+      "explanation": "O teste observa status, cabeçalhos, JSON e efeitos em um banco separado, usando o mesmo aplicativo."
+    },
+    {
+      "id": "javascript.api.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "testes-http",
+      "prompt": "Injetar um relógio controlado permite testar expiração sem esperar 8 horas reais.",
+      "answer": true,
+      "explanation": "A lógica usa a função de tempo fornecida pela fábrica; o teste avança o valor e confere 401 para a sessão expirada."
+    },
+    {
+      "id": "javascript.api.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "testes-http",
+      "prompt": "Ordene para conferir o valor retornado por um pedido HTTP de saúde. origin já existe; response e data ainda não.",
+      "lines": [
+        "const response = await fetch(`${origin}/api/saude`);",
+        "const data = await response.json();",
+        "assert.equal(data.ok, true);"
+      ],
+      "explanation": "O pedido precisa devolver Response antes da leitura; data precisa existir antes da afirmação. O trecho está num contexto async de teste."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.arquivos.f01",
+      "lesson": "caminhos-e-navegacao",
+      "front": "Qual a diferença entre caminho absoluto e relativo?",
+      "back": "Absoluto começa com `/` e parte da raiz. Relativo parte do diretório atual."
+    },
+    {
+      "id": "linux.arquivos.f02",
+      "lesson": "caminhos-e-navegacao",
+      "front": "O que representam `.`, `..` e `~`?",
+      "back": "`.` é a pasta atual; `..`, a pasta pai. `~` no início e sem aspas é expandido pelo Bash para a pasta pessoal."
+    },
+    {
+      "id": "linux.arquivos.f03",
+      "lesson": "caminhos-e-navegacao",
+      "front": "Qual a diferença entre `ls -a` e `ls -A`?",
+      "back": "Ambos incluem nomes ocultos; `-a` também mostra `.` e `..`, enquanto `-A` os omite."
+    },
+    {
+      "id": "linux.arquivos.f04",
+      "lesson": "criar-e-copiar",
+      "front": "`touch` sempre cria um arquivo vazio?",
+      "back": "Se o arquivo não existe, normalmente cria um vazio. Se existe, atualiza os horários sem apagar seu texto."
+    },
+    {
+      "id": "linux.arquivos.f05",
+      "lesson": "criar-e-copiar",
+      "front": "Como criar diretórios pais e copiar uma árvore?",
+      "back": "`mkdir -p projeto/notas` cria os pais ausentes. `cp -R projeto reserva` copia a árvore de diretórios."
+    },
+    {
+      "id": "linux.arquivos.f06",
+      "lesson": "mover-e-remover",
+      "front": "Qual a diferença entre `cp` e `mv`?",
+      "back": "`cp` copia mantendo a origem; `mv` move/renomeia. Ambos podem sobrescrever um destino existente; use `-i` quando quiser confirmação."
+    },
+    {
+      "id": "linux.arquivos.f07",
+      "lesson": "mover-e-remover",
+      "front": "Qual a diferença entre `rm` e `rmdir`?",
+      "back": "`rm` remove arquivos sem lixeira; `rmdir` remove diretórios vazios. Remoção recursiva com `rm -r` exige cuidado adicional."
+    },
+    {
+      "id": "linux.arquivos.f08",
+      "lesson": "mover-e-remover",
+      "front": "Para que serve `--` antes de um nome de arquivo?",
+      "back": "Em ferramentas que o aceitam, encerra as opções. Exemplo: `rm -- -rascunho.txt` trata o nome iniciado por hífen como alvo, não como opção."
+    },
+    {
+      "id": "linux.arquivos.f09",
+      "lesson": "aspas-e-curingas",
+      "front": "Quando o Bash expande `*.txt`?",
+      "back": "Quando o padrão está sem aspas, o shell tenta substituí-lo por nomes correspondentes antes de chamar o programa. Por padrão, não inclui nomes ocultos."
+    },
+    {
+      "id": "linux.arquivos.f10",
+      "lesson": "aspas-e-curingas",
+      "front": "Como passar um caminho com espaços?",
+      "back": "Use aspas ao redor do caminho inteiro, como `cat \"minhas notas.txt\"`. Para variável de caminho, use `cat \"$arquivo\"`."
+    }
+  ]
+}

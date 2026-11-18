@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.node.f01",
+      "lesson": "instalacao-node",
+      "front": "Node é o mesmo ambiente do navegador?",
+      "back": "Não. Ambos executam JavaScript, mas as APIs do ambiente diferem. DOM é da página; o backend Node recebe HTTP e acessa recursos do servidor."
+    },
+    {
+      "id": "javascript.node.f02",
+      "lesson": "instalacao-node",
+      "front": "O que conferir antes de executar o projeto?",
+      "back": "Node/npm no terminal, versão compatível, ZIP extraído e pasta que contém package.json. Depois npm ci, npm test e npm start."
+    },
+    {
+      "id": "javascript.node.f03",
+      "lesson": "instalacao-node",
+      "front": "Package.json e package-lock.json têm o mesmo papel?",
+      "back": "O primeiro declara scripts/dependências; o lock registra versões resolvidas. npm ci usa os dois para instalar de forma reproduzível."
+    },
+    {
+      "id": "javascript.node.f04",
+      "lesson": "primeiro-http",
+      "front": "Quais partes formam a conversa HTTP?",
+      "back": "Requisição tem método, URL, cabeçalhos e eventualmente corpo. Resposta tem status, cabeçalhos e eventualmente corpo."
+    },
+    {
+      "id": "javascript.node.f05",
+      "lesson": "primeiro-http",
+      "front": "Para que serve res.end no primeiro servidor?",
+      "back": "Encerra a resposta. Esquecer de responder/terminar pode deixar o cliente esperando."
+    },
+    {
+      "id": "javascript.node.f06",
+      "lesson": "express-e-middleware",
+      "front": "Qual a diferença entre params, query e body?",
+      "back": "Params vem do caminho; query vem da consulta da URL; body vem do corpo interpretado. Todos precisam de validação conforme o contrato."
+    },
+    {
+      "id": "javascript.node.f07",
+      "lesson": "express-e-middleware",
+      "front": "Por que middleware tem ordem?",
+      "back": "Cada etapa pode responder ou continuar. Parser/autenticação devem acontecer antes de quem depende deles; erros têm tratamento posterior."
+    },
+    {
+      "id": "javascript.node.f08",
+      "lesson": "contratos-rest",
+      "front": "Qual diferença de status entre criar e excluir no projeto?",
+      "back": "POST de criação usa 201 com JSON/Location. DELETE usa 204 sem corpo, ou 404 se não encontra um recurso da conta."
+    },
+    {
+      "id": "javascript.node.f09",
+      "lesson": "contratos-rest",
+      "front": "HTTP 401 e 403 têm o mesmo sentido no contrato?",
+      "back": "Não. 401 pede sessão/autenticação; 403 recusa origem/CSRF na política do exemplo. 404 cobre recurso ausente ou alheio."
+    },
+    {
+      "id": "javascript.node.f10",
+      "lesson": "contratos-rest",
+      "front": "Por que não repetir POST automaticamente após erro de rede?",
+      "back": "A gravação pode ter ocorrido antes da conexão cair. Sem contrato de idempotência, repetir pode criar uma duplicata."
+    }
+  ]
+}

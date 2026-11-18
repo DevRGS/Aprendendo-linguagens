@@ -2,6 +2,10 @@
 
 Os testes automáticos cobrem as regras, os dados e o comportamento das telas (com o navegador simulado). Este roteiro cobre o que só um navegador de verdade mostra: aparência, celular, impressão, permissões e o backup em arquivo.
 
+Na entrega de Terminal Linux (16/11/2026), foram conferidos no Chrome a trilha em 1280 px, a aula de WSL e a referência em 390 px (sem transbordamento horizontal), além da conclusão de WSL com três cartas e 20 XP. A instalação real do WSL em Windows continua pendente. Os itens abaixo permanecem como roteiro completo para cada nova validação.
+
+Na entrega de JavaScript (16/11/2026), o Chrome confirmou oito módulos em 1280 px, aula/referência/projeto em 390 px, conclusão com duas cartas e 20 XP, importação de módulo local e fluxo do projeto (texto literal, persistência/recarga, remoção, Enter/Space e texto longo sem transbordamento). A instalação de Python em Windows/macOS não foi executada; falhas controladas de HTTP/rede/JSON/storage são cobertas pelos testes.
+
 Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada item.
 
 ## Primeira visita e navegação
@@ -32,6 +36,38 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 - [ ] Com `*sql-wasm*` bloqueado, a prova de SQL continua com 40 perguntas (só de outros tipos), e "Começar a prova" mostra "Preparando o banco de dados…" enquanto tenta carregar.
 - [ ] No celular (390 px), a caixa de texto cabe na tela e as tabelas rolam para o lado, sem rolar a página inteira.
 
+## Terminal Linux
+- [ ] O cartão Terminal Linux aparece no início e abre os seis módulos, com 24 aulas, prática, referência, prova e certificado.
+- [ ] A aula de instalação diferencia PowerShell/administrador de Ubuntu/Bash, inclui requisitos, download, reinício, conta Linux, senha invisível e conferência; os links Microsoft abrem as fontes corretas.
+- [ ] Em Windows compatível, conferir manualmente o fluxo de WSL/Ubuntu em uma máquina de teste. Os testes do projeto não instalam nem reinicializam Windows.
+- [ ] Quem já tem Ubuntu/WSL ou Linux nativo encontra orientação para seguir sem reinstalação.
+- [ ] Blocos Bash e PowerShell têm destaque e botão copiar; a cópia não inclui prompt. Soluções recolhíveis abrem pelo teclado.
+- [ ] Executar uma prática diretamente pela URL: a preparação cria todos os arquivos necessários sem depender de aula anterior.
+- [ ] Concluir uma aula atualiza progresso/XP e libera suas cartas; a prova tem 40 perguntas e o quiz permite filtrar Linux.
+- [ ] No celular (390 px), tabelas e blocos de código cabem/rolam sem alargar a página; a referência e os links internos abrem.
+
+## JavaScript
+- [ ] O cartão JavaScript abre 14 módulos e 56 aulas (oito módulos iniciais e seis de backend), com referência, prática, prova e certificado.
+- [ ] A introdução explica console/editor, arquivos reais e servidor HTTP para módulos/fetch, sem exigir Node ou WSL.
+- [ ] Código HTML aparece como texto copiável, inclusive nos flashcards que ensinam script type="module"; as tags não são inseridas como elementos da interface.
+- [ ] Concluir uma aula libera suas cartas/XP e o quiz permite escolher somente JavaScript; a prova tem 40 perguntas.
+- [ ] Abrir exemplos HTML em pasta própria e conferir botões/formulários no navegador, com teclado e Enter.
+- [ ] Abrir o exemplo de módulos por HTTP e conferir import/export e saída do console.
+- [ ] No projeto final: adicionar, marcar, remover e recarregar; texto com tags aparece literalmente e espaços vazios não viram tarefas.
+- [ ] Conferir o aviso do projeto quando há JSON/formato inválido ou armazenamento bloqueado; a lista deve continuar utilizável em memória.
+- [ ] Na largura de celular (390 px), aula, tabelas, referência e projeto não causam transbordamento horizontal da página.
+
+## JavaScript backend
+- [ ] O ZIP abre e contém fontes/README/lockfile/testes; não contém node_modules, .env real nem banco de dados.
+- [ ] Em pasta nova: npm ci, npm test e npm start; abrir a origem do Node, não o servidor Python anterior.
+- [ ] Cadastro/login: criar conta de estudo, observar cookie HttpOnly e usar a interface sem ler o token em JavaScript.
+- [ ] Adicionar título com HTML literal, editar, marcar/desmarcar, paginar e excluir; respostas e estados aparecem corretamente.
+- [ ] Recarregar a página e reiniciar o Node mantêm os dados do arquivo e respeitam a validade da sessão.
+- [ ] Logout revoga acesso; sessão expirada pede novo login. Conta diferente não lê/edita/exclui tarefa alheia.
+- [ ] Confirmar ausência de transbordamento em 390 px, envio pelo teclado e foco após ações.
+- [ ] Conferir falha de rede com servidor parado, entradas inválidas e resposta204 semJSON; não deve haver reenvio automático dePOST.
+- [ ] Instruções de instalação em Windows/macOS e cenários de HTTPS/proxy devem ser validados nesses ambientes; testes locais não os simulam integralmente.
+
 ## Flashcards
 - [ ] A carta vira com animação 3D; Revisão do dia, estudo livre e "Meus erros" funcionam; atalhos 1/2/3 e Espaço.
 - [ ] O número de pendentes no menu bate com o da tela de flashcards.
@@ -54,3 +90,18 @@ Use um servidor local (`python -m http.server 8000`) e o Chrome. Marque cada ite
 
 ## Conteúdo
 - [ ] `node tools/verify-java.mjs` com o JDK 21: 234/234.
+
+
+## Execução da extensão de backend — 18/11/2026
+
+Conferido no GNU/Linux com Node 22.23.4 e Chrome headless real por CDP:
+
+- `npm test`: 620 testes aprovados, nenhuma falha ou teste pulado. Inclui renderização das 56 aulas, conteúdo, cliente, HTTP real, SQLite, migração de esquema 1 para 2 e conferência do ZIP contra os fontes.
+- ZIP extraído em diretório novo: `npm ci` e `npm test` concluídos; os oito testes do pacote passaram sem depender do node_modules da central.
+- Node 26.13.1: oito testes da API aprovados. `npm audit`: zero vulnerabilidades informadas.
+- Chrome: os 14 módulos abrem; aula de sessão e referência sem transbordamento em 390 px. Projeto local: cadastro, criação por Enter, título HTML literal, marcação por Espaço, edição com 120 caracteres, recarga com sessão/tarefa persistidas, exclusão, logout com resposta 401 na rota protegida e limpeza do rascunho.
+- Foco conferido após login, criação, marcação, exclusão e logout. Imagens da conferência em `/tmp/javascript-backend-aula-desktop.png`, `/tmp/javascript-backend-aula-mobile.png` e `/tmp/javascript-backend-crud-mobile.png` (arquivos temporários da sessão).
+
+A revisão independente foi concluída e seus achados corrigidos com regressões: ids reutilizados, rascunho entre contas, validação nativa/foco, padrão HTML, NUL em títulos e grafias equivalentes das lacunas.
+
+Instaladores Windows/macOS, reinicialização/instalação de WSL, tecnologias assistivas e implantação HTTPS/proxy não foram executados nessa conferência. Os itens acima registram somente os fluxos realmente verificados; a lista geral permanece como roteiro para outros ambientes.

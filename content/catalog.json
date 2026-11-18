@@ -1,1 +1,20 @@
-{ "languages": [ { "id": "java", "dir": "java" }, { "id": "sql", "dir": "sql" } ] }
+{
+  "languages": [
+    {
+      "id": "java",
+      "dir": "java"
+    },
+    {
+      "id": "sql",
+      "dir": "sql"
+    },
+    {
+      "id": "linux",
+      "dir": "linux"
+    },
+    {
+      "id": "javascript",
+      "dir": "javascript"
+    }
+  ]
+}

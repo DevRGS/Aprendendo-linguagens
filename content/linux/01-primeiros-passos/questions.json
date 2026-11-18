@@ -1,0 +1,199 @@
+{
+  "questions": [
+    {
+      "id": "linux.primeiros-passos.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "terminal-e-bash",
+      "prompt": "Qual programa interpreta os comandos nos exemplos desta trilha?",
+      "options": [
+        "O shell Bash",
+        "A janela do terminal, sem precisar de um shell",
+        "O editor de texto",
+        "O navegador do site"
+      ],
+      "answer": 0,
+      "explanation": "O terminal recebe/exibe texto; o **Bash** é o shell que interpreta os comandos. O curso usa Bash em GNU/Linux."
+    },
+    {
+      "id": "linux.primeiros-passos.q02",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "terminal-e-bash",
+      "prompt": "O mesmo aplicativo Windows Terminal pode abrir sessões de PowerShell e de Ubuntu/Bash.",
+      "answer": true,
+      "explanation": "A janela pode hospedar shells diferentes. Confira qual perfil/sessão está usando; a aparência não determina a linguagem dos comandos."
+    },
+    {
+      "id": "linux.primeiros-passos.q03",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "instalacao-wsl",
+      "prompt": "No PowerShell **como administrador**, qual comando pede a instalação do WSL com Ubuntu?",
+      "options": [
+        "`wsl --install -d Ubuntu`",
+        "`sudo install ubuntu`",
+        "`apt install Windows`",
+        "`bash --install-wsl`"
+      ],
+      "answer": 0,
+      "explanation": "O comando de gerenciamento `wsl` roda no Windows. `--install -d Ubuntu` instala os componentes necessários e pede Ubuntu. Siga com reinício e configuração da conta Linux."
+    },
+    {
+      "id": "linux.primeiros-passos.q04",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "instalacao-wsl",
+      "prompt": "Se nada aparece enquanto você digita a senha na configuração inicial do Ubuntu/WSL, o teclado necessariamente parou de funcionar.",
+      "answer": false,
+      "explanation": "A senha não é exibida, nem com asteriscos. Digite-a, pressione Enter e repita quando solicitado. Essa conta Linux é separada da conta Windows."
+    },
+    {
+      "id": "linux.primeiros-passos.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "instalacao-wsl",
+      "prompt": "Complete a **opção longa** para listar as distribuições WSL instaladas, seus estados e suas versões, no PowerShell:",
+      "code": "wsl --list ___",
+      "blanks": [
+        [
+          "--verbose"
+        ]
+      ],
+      "explanation": "`wsl --list --verbose` mostra as distribuições instaladas e a coluna de versão WSL. `wsl --list --online` tem outra finalidade: consultar distribuições disponíveis para instalação."
+    },
+    {
+      "id": "linux.primeiros-passos.q06",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "instalacao-wsl",
+      "prompt": "Você abriu Ubuntu pelo WSL. Onde deve executar `pwd` para acompanhar esta trilha?",
+      "options": [
+        "Na sessão Ubuntu/Bash",
+        "Na tela de configuração da BIOS",
+        "No campo de pesquisa do navegador",
+        "Em qualquer janela, pois PowerShell e Bash têm sintaxe idêntica"
+      ],
+      "answer": 0,
+      "explanation": "Os blocos `bash` devem rodar no Ubuntu/Linux. Os blocos `powershell` da instalação gerenciam o WSL a partir do Windows."
+    },
+    {
+      "id": "linux.primeiros-passos.q07",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "instalacao-wsl",
+      "prompt": "Ordene as etapas do caminho de instalação novo descrito na aula. O Windows atende aos requisitos, e ainda não há WSL instalado.",
+      "lines": [
+        "Abrir PowerShell como administrador",
+        "Executar wsl --install -d Ubuntu e aguardar a instalação",
+        "Reiniciar o computador depois da instalação",
+        "Abrir Ubuntu e criar usuário e senha Linux"
+      ],
+      "explanation": "A instalação precisa começar no Windows com elevação; depois do reinício você conclui a preparação da conta ao abrir Ubuntu."
+    },
+    {
+      "id": "linux.primeiros-passos.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "comandos-e-ajuda",
+      "prompt": "Complete a opção longa de ajuda da ferramenta GNU `ls`:",
+      "code": "ls ___",
+      "blanks": [
+        [
+          "--help"
+        ]
+      ],
+      "explanation": "`ls --help` mostra a ajuda resumida. Essa opção é comum em ferramentas GNU, mas não é garantida em todo programa."
+    },
+    {
+      "id": "linux.primeiros-passos.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "comandos-e-ajuda",
+      "prompt": "Qual consulta a ajuda do comando **interno do Bash** que muda o diretório atual?",
+      "options": [
+        "`help cd`",
+        "`man --install cd`",
+        "`cd --download`",
+        "`sudo cd --manual`"
+      ],
+      "answer": 0,
+      "explanation": "`help cd` usa a ajuda interna do Bash. `cd` precisa mudar o diretório do próprio shell; `sudo` não é necessário."
+    },
+    {
+      "id": "linux.primeiros-passos.q10",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "comandos-e-ajuda",
+      "prompt": "Em `ls -a /tmp`, `/tmp` é o caminho consultado e `-a` é uma opção.",
+      "answer": true,
+      "explanation": "O programa é `ls`, a opção altera a listagem e o argumento `/tmp` indica o diretório. Espaços separam essas partes."
+    },
+    {
+      "id": "linux.primeiros-passos.q11",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "comandos-e-ajuda",
+      "prompt": "Use o comando interno ensinado na aula para identificar o tipo de `cd` (sem imprimir a descrição completa):",
+      "code": "___ -t cd",
+      "blanks": [
+        [
+          "type"
+        ]
+      ],
+      "explanation": "`type -t cd` informa `builtin` no Bash sem personalizações que substituam o nome. Isso identifica um comando interno."
+    },
+    {
+      "id": "linux.primeiros-passos.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "atalhos-e-laboratorio",
+      "prompt": "No Bash interativo, o que a tecla Tab costuma fazer ao digitar parte de um caminho?",
+      "options": [
+        "Tentar completar o nome",
+        "Apagar o arquivo indicado",
+        "Instalar o comando ausente",
+        "Concluir automaticamente a aula no site"
+      ],
+      "answer": 0,
+      "explanation": "Tab tenta completar nomes. Se há várias possibilidades, você pode precisar digitar mais caracteres."
+    },
+    {
+      "id": "linux.primeiros-passos.q13",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "atalhos-e-laboratorio",
+      "prompt": "Ctrl+C no terminal sempre copia o texto selecionado e nunca interrompe programas.",
+      "answer": false,
+      "explanation": "Ctrl+C normalmente envia uma interrupção ao trabalho em primeiro plano. Em muitos terminais Linux, copiar usa Ctrl+Shift+C."
+    },
+    {
+      "id": "linux.primeiros-passos.q14",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "atalhos-e-laboratorio",
+      "prompt": "Complete para pedir ao GNU `mktemp` um **diretório** novo, em vez de um arquivo:",
+      "code": "mktemp ___ \"$HOME/terminal-linux.XXXXXX\"",
+      "blanks": [
+        [
+          "-d",
+          "--directory"
+        ]
+      ],
+      "explanation": "`-d`/`--directory` cria um diretório. O modelo termina em caracteres substituídos para obter um nome único."
+    },
+    {
+      "id": "linux.primeiros-passos.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "atalhos-e-laboratorio",
+      "prompt": "A partir de uma pasta qualquer, crie um laboratório novo e uma subpasta **dentro dele**, usando estas linhas. `LAB` ainda não está definida.",
+      "lines": [
+        "LAB=$(mktemp -d \"$HOME/terminal-linux.XXXXXX\")",
+        "cd \"$LAB\"",
+        "mkdir treino"
+      ],
+      "explanation": "Primeiro obtenha o caminho, depois entre nele e só então crie `treino`. Criar a subpasta antes do `cd` colocaria o treino em outra pasta."
+    }
+  ]
+}

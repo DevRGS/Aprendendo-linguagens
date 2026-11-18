@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.banco.f01",
+      "lesson": "sqlite-no-node",
+      "front": "SQLite precisa sempre de um serviço de banco separado?",
+      "back": "Não. Ele pode usar um arquivo ou memória no próprio processo. O projeto mantém a conexão no servidor Node."
+    },
+    {
+      "id": "javascript.banco.f02",
+      "lesson": "sqlite-no-node",
+      "front": "Qual limite didático de DatabaseSync?",
+      "back": "As consultas são síncronas e podem bloquear o processo se forem longas. É uma escolha para o laboratório pequeno, não uma promessa de escala automática."
+    },
+    {
+      "id": "javascript.banco.f03",
+      "lesson": "esquema-e-restricoes",
+      "front": "Validação na API dispensa restrições SQL?",
+      "back": "Não. Elas se complementam: a API explica entradas e o banco protege integridade com NOT NULL, UNIQUE, CHECK e FK."
+    },
+    {
+      "id": "javascript.banco.f04",
+      "lesson": "esquema-e-restricoes",
+      "front": "Como o projeto representa conclusão?",
+      "back": "0/1 no SQLite com CHECK; true/false no JSON. A camada de repositório faz a conversão."
+    },
+    {
+      "id": "javascript.banco.f05",
+      "lesson": "esquema-e-restricoes",
+      "front": "Para que serve usuario_id em tarefas?",
+      "back": "Relaciona cada tarefa ao proprietário. As consultas usam esse dono identificado pela sessão, não escolhido pelo cliente."
+    },
+    {
+      "id": "javascript.banco.f06",
+      "lesson": "parametros-e-repositorio",
+      "front": "Como parâmetros ajudam contra injeção SQL?",
+      "back": "Mantêm o comando SQL separado dos valores fornecidos. Aspas no título permanecem dados; não viram outro comando."
+    },
+    {
+      "id": "javascript.banco.f07",
+      "lesson": "parametros-e-repositorio",
+      "front": "Get, all e run servem para quê?",
+      "back": "Get lê uma linha; all lê várias; run executa escrita e informa resultados como changes/lastInsertRowid, conforme a API do Node."
+    },
+    {
+      "id": "javascript.banco.f08",
+      "lesson": "persistencia-e-transacoes",
+      "front": "Como demonstrar persistência real?",
+      "back": "Grave em arquivo, encerre a aplicação, reabra no mesmo caminho e confira os dados. Recarregar só a página não prova reabertura do banco."
+    },
+    {
+      "id": "javascript.banco.f09",
+      "lesson": "persistencia-e-transacoes",
+      "front": "Transação é qual compromisso?",
+      "back": "Agrupar escritas que precisam ser confirmadas juntas. Begin inicia, commit confirma e rollback desfaz a unidade ainda não confirmada."
+    },
+    {
+      "id": "javascript.banco.f10",
+      "lesson": "persistencia-e-transacoes",
+      "front": "Por que registrar versão do esquema?",
+      "back": "Para migrar formatos conscientemente e recusar versões desconhecidas. Criar tabela se não existe não atualiza automaticamente tabelas antigas."
+    }
+  ]
+}

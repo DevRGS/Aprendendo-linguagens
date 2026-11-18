@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.assincrono.f01",
+      "lesson": "temporizadores",
+      "front": "SetTimeout com atraso 0 chama a função imediatamente?",
+      "back": "Não. Agenda para depois do trecho atual e das microtarefas relevantes. O atraso é mínimo aproximado, não uma garantia de horário exato."
+    },
+    {
+      "id": "javascript.assincrono.f02",
+      "lesson": "temporizadores",
+      "front": "Uma promise ou async torna cálculo pesado paralelo?",
+      "back": "Não automaticamente. Trabalho síncrono pesado continua ocupando a thread. Async organiza espera/continuações; workers são outro recurso."
+    },
+    {
+      "id": "javascript.assincrono.f03",
+      "lesson": "promises",
+      "front": "Quais são os estados básicos de uma promise?",
+      "back": "Pendente, fulfilled (realizada) e rejected (rejeitada). Um estado final não muda para o outro."
+    },
+    {
+      "id": "javascript.assincrono.f04",
+      "lesson": "promises",
+      "front": "Por que retornar da callback de then?",
+      "back": "O retorno alimenta a promise da etapa seguinte. Sem return num corpo com chaves, a próxima etapa normalmente recebe undefined."
+    },
+    {
+      "id": "javascript.assincrono.f05",
+      "lesson": "promises",
+      "front": "Qual a função de catch e finally?",
+      "back": "Catch trata rejeições. Finally serve para limpeza após a cadeia, sem depender de sucesso ou rejeição; não é o tratamento principal do valor."
+    },
+    {
+      "id": "javascript.assincrono.f06",
+      "lesson": "async-await",
+      "front": "Uma função async sempre retorna o quê?",
+      "back": "Uma promise. Se retornar um valor comum, ele vira o valor de realização; se lançar sem tratamento, a promise rejeita."
+    },
+    {
+      "id": "javascript.assincrono.f07",
+      "lesson": "async-await",
+      "front": "Como tratar rejeição com await?",
+      "back": "Use try/catch ao redor do await. Uma rejeição aguardada lança naquele ponto; promessas que você não aguarda/encadeia não são capturadas magicamente."
+    },
+    {
+      "id": "javascript.assincrono.f08",
+      "lesson": "async-await",
+      "front": "Promise.all cancela as outras operações ao rejeitar?",
+      "back": "Não. Ela rejeita o resultado conjunto; cancelar as operações é outra responsabilidade, quando a API oferece esse recurso."
+    },
+    {
+      "id": "javascript.assincrono.f09",
+      "lesson": "fetch",
+      "front": "Fetch rejeita automaticamente por HTTP 404?",
+      "back": "Não em geral. Confira response.ok/status. Falhas de rede/CORS podem rejeitar; response.json também pode falhar separadamente."
+    },
+    {
+      "id": "javascript.assincrono.f10",
+      "lesson": "fetch",
+      "front": "Por que testar fetch com dados próprios?",
+      "back": "Evita depender de conta, mudanças e disponibilidade de APIs de terceiros. Use JSON local via HTTP ou URL data para aprender a leitura controlada."
+    }
+  ]
+}

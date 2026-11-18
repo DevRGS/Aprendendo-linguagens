@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { setupDom, tick } from '../helpers/dom.js';
+import { setupDom, tick, waitFor } from '../helpers/dom.js';
 import { makeTestApp, profileState, route, container, texts } from '../helpers/app.js';
 import { renderLanguage } from '../../js/ui/views/language.js';
 import { renderLesson } from '../../js/ui/views/lesson.js';
@@ -61,7 +61,7 @@ test('ativar todas as cartas do módulo', async () => {
   await renderLanguage(el, app, route('language', { lang: 'java' }));
   const btn = [...el.querySelectorAll('button')].find((b) => b.textContent.includes('Ativar todas as cartas'));
   btn.click();
-  await tick(20);
+  await waitFor(() => app.store.get().modules['java.fundamentos']?.cardsActivated);
   assert.equal(Object.keys(app.store.get().cards).length, 14);
   assert.equal(app.store.get().modules['java.fundamentos'].cardsActivated, true);
   assert.equal(app.refreshes, 1);

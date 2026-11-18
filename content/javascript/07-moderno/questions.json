@@ -1,0 +1,199 @@
+{
+  "questions": [
+    {
+      "id": "javascript.moderno.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "desestruturacao-e-spread",
+      "prompt": "Qual declaração extrai nome de pessoa por desestruturação?",
+      "options": [
+        "const { nome } = pessoa;",
+        "const nome = { pessoa };",
+        "const pessoa.nome = nome;",
+        "const { pessoa.nome } = nome;"
+      ],
+      "answer": 0,
+      "explanation": "A desestruturação de objeto usa o nome da propriedade para criar a variável correspondente."
+    },
+    {
+      "id": "javascript.moderno.q02",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "desestruturacao-e-spread",
+      "prompt": "A cópia { ...pessoa } clona profundamente todos os objetos internos de pessoa.",
+      "answer": false,
+      "explanation": "Spread cria uma cópia rasa das propriedades correspondentes. Objetos internos podem continuar compartilhados."
+    },
+    {
+      "id": "javascript.moderno.q03",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "desestruturacao-e-spread",
+      "prompt": "Complete os três caracteres do operador que expande o array nesta cópia rasa:",
+      "code": "const copia = [___lista];",
+      "blanks": [
+        [
+          "..."
+        ]
+      ],
+      "explanation": "Spread expande os elementos para outro array. Referências a objetos internos ainda são compartilhadas."
+    },
+    {
+      "id": "javascript.moderno.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "desestruturacao-e-spread",
+      "prompt": "Em const copia = { ...pessoa, nome: \"Bia\" }, qual nome fica em copia se pessoa.nome era Ana?",
+      "options": [
+        "Bia",
+        "Ana sempre",
+        "undefined",
+        "Um array com os dois nomes"
+      ],
+      "answer": 0,
+      "explanation": "A propriedade escrita depois substitui a anterior de mesmo nome no objeto construído. Isso não altera automaticamente pessoa.nome."
+    },
+    {
+      "id": "javascript.moderno.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "opcionais-e-erros",
+      "prompt": "Complete o operador que usa 10 somente para null/undefined, preservando 0:",
+      "code": "const pontos = perfil.pontos ___ 10;",
+      "blanks": [
+        [
+          "??"
+        ]
+      ],
+      "explanation": "A coalescência nula usa o padrão apenas quando o valor é null ou undefined. || também troca valores falsy como 0 e false."
+    },
+    {
+      "id": "javascript.moderno.q06",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "opcionais-e-erros",
+      "prompt": "Com const perfil = {}, qual resultado de perfil.endereco?.cidade?",
+      "options": [
+        "undefined",
+        "Um objeto endereco criado automaticamente",
+        "Uma string vazia obrigatória",
+        "Sempre ReferenceError mesmo com perfil declarado"
+      ],
+      "answer": 0,
+      "explanation": "O acesso opcional para em undefined/null e devolve undefined. Ele não cria a propriedade ausente."
+    },
+    {
+      "id": "javascript.moderno.q07",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "opcionais-e-erros",
+      "prompt": "Usar ?. torna seguro acessar qualquer nome de variável que nunca foi declarado.",
+      "answer": false,
+      "explanation": "O nome base ainda precisa ser resolvido. Um identificador não declarado pode causar ReferenceError antes do acesso opcional."
+    },
+    {
+      "id": "javascript.moderno.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "opcionais-e-erros",
+      "prompt": "Qual diferença entre lançar e retornar new Error(\"teste\")?",
+      "options": [
+        "Lançar interrompe o fluxo para tratamento de exceção; retornar fornece um valor Error como resultado normal",
+        "Ambos sempre causam a mesma rejeição em qualquer função",
+        "Retornar um Error é sintaticamente proibido",
+        "Lançar converte a mensagem em null"
+      ],
+      "answer": 0,
+      "explanation": "Throw e return têm contratos distintos. Numa função async, um throw sem tratamento rejeita; retornar Error resolve com esse objeto como valor."
+    },
+    {
+      "id": "javascript.moderno.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "classes-e-this",
+      "prompt": "O que new Contador() faz no exemplo da aula?",
+      "options": [
+        "Cria uma instância e executa o constructor da classe",
+        "Transforma todo número global em zero",
+        "Chama apenas o método incrementar sem criar objeto",
+        "Importa automaticamente um pacote npm"
+      ],
+      "answer": 0,
+      "explanation": "O constructor inicializa a instância. Os métodos usam this conforme a forma de chamada e o modelo de protótipos."
+    },
+    {
+      "id": "javascript.moderno.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "classes-e-this",
+      "prompt": "Complete o nome especial do método de inicialização da classe:",
+      "code": "class Contador {\n  ___() { this.valor = 0; }\n}",
+      "blanks": [
+        [
+          "constructor"
+        ]
+      ],
+      "explanation": "O constructor é chamado na criação com new. Cada instância recebe seu próprio valor inicial neste exemplo."
+    },
+    {
+      "id": "javascript.moderno.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "classes-e-this",
+      "prompt": "Separar um método normal da classe e chamá-lo sem receptor pode perder o this esperado.",
+      "answer": true,
+      "explanation": "A forma de chamada importa. Corpos de classe usam modo estrito; uma wrapper () => objeto.metodo() preserva a chamada com receptor."
+    },
+    {
+      "id": "javascript.moderno.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "classes-e-this",
+      "prompt": "Uma arrow function recebe automaticamente um this próprio apontando para o objeto em que foi escrita?",
+      "options": [
+        "Não; ela captura this do contexto externo",
+        "Sim, sempre aponta para o objeto literal",
+        "Só quando o nome termina com Async",
+        "Sim, e ignora qualquer escopo externo"
+      ],
+      "answer": 0,
+      "explanation": "Arrows não criam um this próprio. Isso impede tratá-las como substituição universal para métodos normais."
+    },
+    {
+      "id": "javascript.moderno.q13",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "modulos",
+      "prompt": "Complete a palavra para expor a função como exportação nomeada:",
+      "code": "___ function somar(a, b) { return a + b; }",
+      "blanks": [
+        [
+          "export"
+        ]
+      ],
+      "explanation": "Export disponibiliza o nome ao módulo consumidor. A importação nomeada usa chaves: import { somar } from \"./calculos.mjs\"."
+    },
+    {
+      "id": "javascript.moderno.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "modulos",
+      "prompt": "Importações estáticas podem ficar livremente dentro de qualquer if de um script clássico.",
+      "answer": false,
+      "explanation": "Import estático pertence ao nível superior de módulos. Carregue o ponto de entrada com type=\"module\" no navegador."
+    },
+    {
+      "id": "javascript.moderno.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "modulos",
+      "prompt": "O módulo já importou somar. Ordene para calcular e imprimir o dobro da soma usando as variáveis abaixo, que ainda não foram declaradas.",
+      "lines": [
+        "const subtotal = somar(2, 3);",
+        "const total = subtotal * 2;",
+        "console.log(total);"
+      ],
+      "explanation": "Subtotal precisa estar inicializado para calcular total; total precisa existir para ser impresso. A importação já foi realizada e não faz parte das linhas a ordenar."
+    }
+  ]
+}

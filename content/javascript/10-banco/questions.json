@@ -1,0 +1,209 @@
+{
+  "questions": [
+    {
+      "id": "javascript.banco.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "sqlite-no-node",
+      "prompt": "Qual caminho cria um banco SQLite apenas em memória no exemplo?",
+      "options": [
+        "\":memory:\"",
+        "\"http://sqlite\" obrigatório",
+        "\"localStorage\"",
+        "\"document.db\""
+      ],
+      "answer": 0,
+      "explanation": "O identificador :memory: cria um banco temporário da conexão. Um caminho de arquivo permite persistir entre processos."
+    },
+    {
+      "id": "javascript.banco.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "sqlite-no-node",
+      "prompt": "Complete o esquema do módulo SQLite nativo usado no import:",
+      "code": "import { DatabaseSync } from '___';",
+      "blanks": [
+        [
+          "node:sqlite"
+        ]
+      ],
+      "explanation": "O módulo do Node é acessado como node:sqlite. Não é uma API document disponível no navegador."
+    },
+    {
+      "id": "javascript.banco.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "sqlite-no-node",
+      "prompt": "DatabaseSync torna automaticamente todas as consultas não bloqueantes só porque o handler Express pode ser async.",
+      "answer": false,
+      "explanation": "As operações de DatabaseSync são síncronas. Uma consulta longa pode bloquear o processo; async no handler não a transforma em outra operação."
+    },
+    {
+      "id": "javascript.banco.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "sqlite-no-node",
+      "prompt": "Onde fica a conexão SQL do projeto final?",
+      "options": [
+        "No servidor Node",
+        "No código do navegador com a senha do banco",
+        "Em cada input HTML",
+        "No cookie HttpOnly como um arquivo completo"
+      ],
+      "answer": 0,
+      "explanation": "O servidor abre o banco e oferece operações controladas pela API. O navegador não deve receber credenciais de banco."
+    },
+    {
+      "id": "javascript.banco.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "esquema-e-restricoes",
+      "prompt": "Qual regra de banco impede nomes de usuário duplicados no esquema?",
+      "options": [
+        "UNIQUE",
+        "Somente textContent",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "answer": 0,
+      "explanation": "UNIQUE protege a integridade no banco. A API trata o conflito, inclusive se requisições competirem."
+    },
+    {
+      "id": "javascript.banco.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "esquema-e-restricoes",
+      "prompt": "Complete a restrição que impede ausência SQL nessa coluna:",
+      "code": "titulo TEXT ___",
+      "blanks": [
+        [
+          "NOT NULL",
+          "not null",
+          "Not Null"
+        ]
+      ],
+      "explanation": "NOT NULL impede valor SQL null. Outras validações, como texto vazio, exigem regras adicionais como CHECK/validação da API.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "javascript.banco.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "esquema-e-restricoes",
+      "prompt": "No projeto, concluida é 0/1 no SQLite e vira booleano no JSON público.",
+      "answer": true,
+      "explanation": "O repositório faz a conversão de representação. O contrato HTTP aceita booleano real no PATCH, não o texto \"false\"."
+    },
+    {
+      "id": "javascript.banco.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "esquema-e-restricoes",
+      "prompt": "Por que habilitar foreign_keys na conexão além de declarar referências?",
+      "options": [
+        "Para que a política de chaves estrangeiras seja aplicada como esperado",
+        "Para enviar a senha do usuário ao navegador",
+        "Para transformar cada SELECT em DELETE",
+        "Para dispensar validação do servidor"
+      ],
+      "answer": 0,
+      "explanation": "É preciso considerar a configuração da conexão SQLite. Declaração de relacionamento e configuração operacional se complementam."
+    },
+    {
+      "id": "javascript.banco.q09",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "parametros-e-repositorio",
+      "prompt": "Complete o placeholder de valor na consulta parametrizada:",
+      "code": "db.prepare('SELECT id FROM tarefas WHERE usuario_id = ___').all(userId);",
+      "blanks": [
+        [
+          "?"
+        ]
+      ],
+      "explanation": "O placeholder separa SQL de dados. O valor é fornecido como argumento, não concatenado dentro da string da consulta."
+    },
+    {
+      "id": "javascript.banco.q10",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "parametros-e-repositorio",
+      "prompt": "Qual consulta impede ler uma tarefa alheia usando só a troca do id?",
+      "options": [
+        "WHERE usuario_id = ? AND id = ?",
+        "WHERE id = ? sem outra autorização",
+        "SELECT * sem filtro",
+        "ORDER BY id sem WHERE"
+      ],
+      "answer": 0,
+      "explanation": "O filtro inclui a identidade autenticada e o id. Autenticar sem autorizar o recurso não basta."
+    },
+    {
+      "id": "javascript.banco.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "parametros-e-repositorio",
+      "prompt": "Placeholders de valores são uma forma geral de aceitar qualquer nome de coluna SQL enviado pelo cliente.",
+      "answer": false,
+      "explanation": "Valores e identificadores têm papéis diferentes. Para escolhas de coluna/ordem, use um conjunto conhecido e permitido de fragmentos SQL."
+    },
+    {
+      "id": "javascript.banco.q12",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "parametros-e-repositorio",
+      "prompt": "Ordene para preparar, executar e ler uma consulta. db/userId já existem e os nomes abaixo ainda não foram declarados.",
+      "lines": [
+        "const statement = db.prepare('SELECT COUNT(*) AS total FROM tarefas WHERE usuario_id = ?');",
+        "const result = statement.get(userId);",
+        "console.log(result.total);"
+      ],
+      "explanation": "O statement precisa ser criado antes da execução, e o resultado precisa existir antes da leitura."
+    },
+    {
+      "id": "javascript.banco.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "persistencia-e-transacoes",
+      "prompt": "Qual combinação torna a paginação do projeto ordenada de forma explícita?",
+      "options": [
+        "ORDER BY id DESC com LIMIT/OFFSET validados",
+        "LIMIT sem ORDER BY sempre garante a ordem da criação",
+        "Somente contar o tamanho da resposta",
+        "Remover os índices de propósito"
+      ],
+      "answer": 0,
+      "explanation": "A ordenação é parte do contrato. Mudanças entre pedidos ainda podem deslocar páginas por offset."
+    },
+    {
+      "id": "javascript.banco.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "persistencia-e-transacoes",
+      "prompt": "Copiar só o arquivo principal de um SQLite em WAL enquanto ele está sendo escrito garante sempre um backup consistente.",
+      "answer": false,
+      "explanation": "Podem existir dados associados ao WAL. Para o laboratório, pare e copie de forma controlada; em sistemas ativos, use mecanismo de backup apropriado e teste restauração."
+    },
+    {
+      "id": "javascript.banco.q15",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "persistencia-e-transacoes",
+      "prompt": "Complete a instrução de transação que confirma as escritas do bloco:",
+      "code": "db.exec('BEGIN IMMEDIATE');\n// escritas bem-sucedidas\ndb.exec('___');",
+      "blanks": [
+        [
+          "COMMIT",
+          "commit",
+          "Commit",
+          "END TRANSACTION",
+          "END",
+          "end",
+          "COMMIT TRANSACTION"
+        ]
+      ],
+      "explanation": "COMMIT confirma; END/END TRANSACTION são formas aceitas pelo SQLite. Em falha antes de confirmar, use ROLLBACK conforme o fluxo.",
+      "caseInsensitive": true
+    }
+  ]
+}

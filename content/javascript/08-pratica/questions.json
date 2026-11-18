@@ -1,0 +1,202 @@
+{
+  "questions": [
+    {
+      "id": "javascript.pratica.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "armazenamento-local",
+      "prompt": "Qual tipo de valor localStorage guarda por chave?",
+      "options": [
+        "String",
+        "Qualquer objeto vivo com métodos e referências preservadas",
+        "Somente números inteiros",
+        "Elementos DOM completos automaticamente"
+      ],
+      "answer": 0,
+      "explanation": "Serialize estruturas compatíveis com JSON.stringify e interprete com JSON.parse. Ainda é preciso validar o formato lido."
+    },
+    {
+      "id": "javascript.pratica.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "armazenamento-local",
+      "prompt": "Complete o método para gravar a string sob uma chave específica:",
+      "code": "localStorage.___(\"trilha-js:exemplo\", JSON.stringify({ tema: \"DOM\" }));",
+      "blanks": [
+        [
+          "setItem"
+        ]
+      ],
+      "explanation": "SetItem grava; getItem lê e retorna null quando não há a chave. O acesso pode falhar e deve ser tratado."
+    },
+    {
+      "id": "javascript.pratica.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "armazenamento-local",
+      "prompt": "Os dados de localStorage são sincronizados automaticamente entre computadores pelo seu aplicativo, sem nenhum serviço adicional.",
+      "answer": false,
+      "explanation": "O armazenamento é local e por origem do navegador. Pode ser apagado/bloqueado e não substitui conta remota, sincronização ou backup."
+    },
+    {
+      "id": "javascript.pratica.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "armazenamento-local",
+      "prompt": "Por que o exercício remove uma chave com removeItem em vez de chamar clear?",
+      "options": [
+        "Para não apagar todas as outras chaves daquela origem",
+        "Porque clear faz uma cópia em nuvem",
+        "Porque removeItem apaga o sistema operacional",
+        "Porque clear só funciona em Java"
+      ],
+      "answer": 0,
+      "explanation": "Clear remove todas as chaves daquele armazenamento/origem. Uma chave específica evita interferir em outros exercícios."
+    },
+    {
+      "id": "javascript.pratica.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "funcoes-testaveis",
+      "prompt": "Qual comportamento caracteriza uma função pura no contrato discutido?",
+      "options": [
+        "Depender dos argumentos sem alterar estado externo",
+        "Consultar localStorage em toda chamada",
+        "Escrever sempre no DOM",
+        "Mudar uma variável global obrigatoriamente"
+      ],
+      "answer": 0,
+      "explanation": "Separar regras puras facilita testar entradas e saídas, deixando DOM/rede/armazenamento em outras partes."
+    },
+    {
+      "id": "javascript.pratica.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "funcoes-testaveis",
+      "prompt": "Complete o valor inicial que permite somar preços em um array vazio e obter total zero:",
+      "code": "const total = itens.reduce((soma, item) => soma + item.preco, ___);",
+      "blanks": [
+        [
+          "0",
+          "0.0"
+        ]
+      ],
+      "explanation": "O acumulador inicial 0 dá um total válido para a lista vazia. Sem ele, reduce não tem um primeiro valor para iniciar nesse caso."
+    },
+    {
+      "id": "javascript.pratica.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "funcoes-testaveis",
+      "prompt": "Um bom esperado de teste pode ser calculado chamando a mesma função que está sendo testada, pois isso sempre revela o erro.",
+      "answer": false,
+      "explanation": "Isso pode repetir o mesmo erro nos dois lados. Calcule o esperado de forma independente e escolha entradas que revelem falhas reais."
+    },
+    {
+      "id": "javascript.pratica.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "funcoes-testaveis",
+      "prompt": "No contrato da aula, 100 centavos vezes 3 mais 250 centavos vezes 2 dá qual total?",
+      "options": [
+        "800",
+        "750",
+        "350",
+        "600"
+      ],
+      "answer": 0,
+      "explanation": "100 × 3 = 300 e 250 × 2 = 500; o total é 800 centavos. O esperado é calculado independentemente do código."
+    },
+    {
+      "id": "javascript.pratica.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "depuracao",
+      "prompt": "Uma entrada \"8\" somada com + a 2 produziu \"82\". Qual é uma investigação/correção apropriada?",
+      "options": [
+        "Observar typeof, validar a entrada e convertê-la explicitamente para número",
+        "Acrescentar defer ao Number",
+        "Trocar o nome do navegador",
+        "Ignorar o valor e esconder todo erro com catch vazio"
+      ],
+      "answer": 0,
+      "explanation": "A origem do problema é o tipo string e a concatenação. Uma conversão válida com Number permite a soma numérica."
+    },
+    {
+      "id": "javascript.pratica.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "depuracao",
+      "prompt": "Complete o teste que aceita apenas números finitos após a conversão:",
+      "code": "if (!Number.___(numero)) throw new Error(\"Número inválido\");",
+      "blanks": [
+        [
+          "isFinite"
+        ]
+      ],
+      "explanation": "Number.isFinite não faz a coerção do isFinite global; ele exige um número finito. NaN e infinitos são recusados."
+    },
+    {
+      "id": "javascript.pratica.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "depuracao",
+      "prompt": "Uma mensagem com arquivo e linha no console ajuda a localizar o problema, mas a causa pode estar numa linha anterior.",
+      "answer": true,
+      "explanation": "Erros de sintaxe podem resultar de parênteses/aspas anteriores; erros de execução dependem do caminho percorrido. Investigue a origem, não apenas o último sintoma."
+    },
+    {
+      "id": "javascript.pratica.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "depuracao",
+      "prompt": "O que um breakpoint permite fazer nas ferramentas de desenvolvedor?",
+      "options": [
+        "Pausar a execução para observar variáveis e o caminho do código",
+        "Transformar dados inválidos em números válidos",
+        "Remover automaticamente todos os eventos",
+        "Publicar o aplicativo em um servidor remoto"
+      ],
+      "answer": 0,
+      "explanation": "A pausa ajuda a inspecionar estado e fluxo. Ela não corrige o programa sozinha."
+    },
+    {
+      "id": "javascript.pratica.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "projeto-final",
+      "prompt": "No projeto final, por que o texto de uma tarefa é escrito com textContent?",
+      "options": [
+        "Para exibir a entrada literalmente, sem transformá-la em HTML",
+        "Para permitir qualquer onerror enviado como tarefa",
+        "Para armazenar um elemento DOM no JSON",
+        "Para converter todo texto em número"
+      ],
+      "answer": 0,
+      "explanation": "Uma tarefa contendo `<b>` ou `<img>` deve aparecer como texto. Criar nós e escrever textContent evita interpretar essa entrada como marcação."
+    },
+    {
+      "id": "javascript.pratica.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "projeto-final",
+      "prompt": "Se JSON.parse funciona, o projeto pode confiar que cada tarefa tem texto string e concluida boolean sem validar.",
+      "answer": false,
+      "explanation": "O projeto também valida array e tipos/campos. Um JSON válido pode representar uma estrutura que o aplicativo não sabe usar."
+    },
+    {
+      "id": "javascript.pratica.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "projeto-final",
+      "prompt": "Campo, tarefas e chave já existem, e a entrada é válida. Ordene para criar a nova tarefa e salvar o array **incluindo essa tarefa**. texto e tarefa ainda não foram declaradas.",
+      "lines": [
+        "const texto = campo.value.trim();",
+        "const tarefa = { texto, concluida: false };",
+        "tarefas.push(tarefa);",
+        "localStorage.setItem(chave, JSON.stringify(tarefas));"
+      ],
+      "explanation": "As variáveis precisam existir antes do uso. A gravação deve ocorrer depois de acrescentar a nova tarefa, para que o valor persistido a inclua."
+    }
+  ]
+}

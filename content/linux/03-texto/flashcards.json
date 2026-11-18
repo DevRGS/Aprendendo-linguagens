@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.texto.f01",
+      "lesson": "ler-arquivos",
+      "front": "Como ver o começo e o fim de um arquivo?",
+      "back": "`head -n N arquivo` mostra as primeiras N linhas; `tail -n N arquivo`, as últimas. Nenhum deles altera a origem."
+    },
+    {
+      "id": "linux.texto.f02",
+      "lesson": "ler-arquivos",
+      "front": "Como sair do less e interromper tail -f?",
+      "back": "No `less`, aperte `q`. `tail -f` acompanha novas linhas; para interromper no terminal, use Ctrl+C."
+    },
+    {
+      "id": "linux.texto.f03",
+      "lesson": "buscar-texto",
+      "front": "O que mudam `grep -n`, `-i`, `-v` e `-F`?",
+      "back": "`-n`: número da linha; `-i`: ignorar caixa; `-v`: inverter seleção; `-F`: padrão literal, sem regex."
+    },
+    {
+      "id": "linux.texto.f04",
+      "lesson": "buscar-texto",
+      "front": "O que indicam os status 0 e 1 de grep?",
+      "back": "0: encontrou pelo menos uma linha. 1: não encontrou correspondência. Normalmente 2 indica erro de operação."
+    },
+    {
+      "id": "linux.texto.f05",
+      "lesson": "buscar-texto",
+      "front": "Em uma regex, o que representam `^` e `$`?",
+      "back": "`^` ancora no começo da linha e `$` no final. Por exemplo, `^erro` procura linhas que começam com `erro`."
+    },
+    {
+      "id": "linux.texto.f06",
+      "lesson": "localizar-arquivos",
+      "front": "Como buscar arquivos .txt a partir da pasta atual?",
+      "back": "`find . -type f -name '*.txt'`. O padrão entre aspas é interpretado por find, não expandido antes pelo Bash."
+    },
+    {
+      "id": "linux.texto.f07",
+      "lesson": "localizar-arquivos",
+      "front": "Qual a diferença entre grep e find?",
+      "back": "`grep` procura conteúdo textual em linhas; `find` percorre caminhos e seleciona entradas por nome, tipo e outros testes."
+    },
+    {
+      "id": "linux.texto.f08",
+      "lesson": "resumir-e-ordenar",
+      "front": "Por que usar sort antes de uniq?",
+      "back": "`uniq` reduz repetições adjacentes. Ordenar reúne linhas iguais que estavam separadas; o locale influencia a ordenação."
+    },
+    {
+      "id": "linux.texto.f09",
+      "lesson": "resumir-e-ordenar",
+      "front": "O que conta `wc -l`?",
+      "back": "Caracteres de nova linha. Use `wc -l < arquivo` para ler a entrada do arquivo sem acrescentar seu nome à saída."
+    },
+    {
+      "id": "linux.texto.f10",
+      "lesson": "resumir-e-ordenar",
+      "front": "Como extrair campos simples separados por dois-pontos?",
+      "back": "`cut -d \":\" -f 1 arquivo` extrai o primeiro campo. Não trata automaticamente regras complexas de formatos como CSV com aspas."
+    }
+  ]
+}

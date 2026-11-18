@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+</head>
+<body>
+<h1 id="mensagem">Pronto para começar</h1>
+<button id="saudar" type="button">Saudar</button>
+<script>
+const botao = document.querySelector("#saudar");
+botao.addEventListener("click", () => {
+  document.querySelector("#mensagem").textContent = "Olá, JavaScript!";
+});
+</script>
+</body>
+</html>

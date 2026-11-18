@@ -1,0 +1,458 @@
+{
+  "id": "javascript",
+  "name": "JavaScript",
+  "color": "#f7df1e",
+  "icon": "⚡",
+  "highlight": "javascript",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "introducao",
+      "dir": "01-introducao",
+      "title": "Primeiros passos",
+      "description": "Prepare o navegador e o editor, rode sua primeira página e aprenda quando usar um servidor local.",
+      "lessons": [
+        {
+          "id": "javascript-e-web",
+          "file": "01-javascript-e-web.md",
+          "title": "JavaScript, navegador e Web",
+          "minutes": 6
+        },
+        {
+          "id": "console-e-editor",
+          "file": "02-console-e-editor.md",
+          "title": "Prepare o console e o editor",
+          "minutes": 7
+        },
+        {
+          "id": "primeira-pagina",
+          "file": "03-primeira-pagina.md",
+          "title": "Sua primeira página com JavaScript",
+          "minutes": 9
+        },
+        {
+          "id": "servidor-local",
+          "file": "04-servidor-local.md",
+          "title": "Arquivos locais e servidor de estudo",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "fundamentos",
+      "dir": "02-fundamentos",
+      "title": "Fundamentos",
+      "description": "Trabalhe com variáveis, tipos, conversões, operadores e decisões sem depender de coerções implícitas.",
+      "lessons": [
+        {
+          "id": "variaveis-e-tipos",
+          "file": "01-variaveis-e-tipos.md",
+          "title": "Variáveis, const e tipos",
+          "minutes": 8
+        },
+        {
+          "id": "numeros-e-textos",
+          "file": "02-numeros-e-textos.md",
+          "title": "Números, textos e conversões",
+          "minutes": 9
+        },
+        {
+          "id": "operadores-e-comparacoes",
+          "file": "03-operadores-e-comparacoes.md",
+          "title": "Operadores e igualdade",
+          "minutes": 8
+        },
+        {
+          "id": "condicionais",
+          "file": "04-condicionais.md",
+          "title": "Decisões com if e switch",
+          "minutes": 8
+        }
+      ]
+    },
+    {
+      "id": "funcoes",
+      "dir": "03-funcoes",
+      "title": "Funções e repetição",
+      "description": "Repita tarefas e organize código em funções com parâmetros, retorno, callbacks e escopo.",
+      "lessons": [
+        {
+          "id": "lacos",
+          "file": "01-lacos.md",
+          "title": "Repetição com for e while",
+          "minutes": 8
+        },
+        {
+          "id": "parametros-e-retorno",
+          "file": "02-parametros-e-retorno.md",
+          "title": "Parâmetros e retorno de funções",
+          "minutes": 8
+        },
+        {
+          "id": "callbacks-e-arrow",
+          "file": "03-callbacks-e-arrow.md",
+          "title": "Arrow functions e callbacks",
+          "minutes": 8
+        },
+        {
+          "id": "escopo-e-closures",
+          "file": "04-escopo-e-closures.md",
+          "title": "Escopo e closures",
+          "minutes": 9
+        }
+      ]
+    },
+    {
+      "id": "dados",
+      "dir": "04-dados",
+      "title": "Arrays e objetos",
+      "description": "Organize coleções e registros, transforme arrays e serialize dados sem confundir cópia com referência.",
+      "lessons": [
+        {
+          "id": "arrays",
+          "file": "01-arrays.md",
+          "title": "Arrays, índices e mutação",
+          "minutes": 8
+        },
+        {
+          "id": "transformar-arrays",
+          "file": "02-transformar-arrays.md",
+          "title": "map, filter, reduce e sort",
+          "minutes": 9
+        },
+        {
+          "id": "objetos-e-referencias",
+          "file": "03-objetos-e-referencias.md",
+          "title": "Objetos e referências compartilhadas",
+          "minutes": 8
+        },
+        {
+          "id": "json",
+          "file": "04-json.md",
+          "title": "JSON: dados em formato de texto",
+          "minutes": 8
+        }
+      ]
+    },
+    {
+      "id": "dom",
+      "dir": "05-dom",
+      "title": "DOM e eventos",
+      "description": "Selecione e crie elementos, responda a cliques e leia formulários com exemplos HTML completos.",
+      "lessons": [
+        {
+          "id": "selecionar-e-alterar",
+          "file": "01-selecionar-e-alterar.md",
+          "title": "Selecionar elementos e alterar texto",
+          "minutes": 8
+        },
+        {
+          "id": "criar-elementos",
+          "file": "02-criar-elementos.md",
+          "title": "Criar elementos, atributos e classes",
+          "minutes": 8
+        },
+        {
+          "id": "eventos",
+          "file": "03-eventos.md",
+          "title": "Eventos e funções de resposta",
+          "minutes": 9
+        },
+        {
+          "id": "formularios",
+          "file": "04-formularios.md",
+          "title": "Formulários e validação de entrada",
+          "minutes": 9
+        }
+      ]
+    },
+    {
+      "id": "assincrono",
+      "dir": "06-assincrono",
+      "title": "Programação assíncrona",
+      "description": "Entenda ordem de execução, promises, async/await e requisições com tratamento explícito de falhas.",
+      "lessons": [
+        {
+          "id": "temporizadores",
+          "file": "01-temporizadores.md",
+          "title": "Temporizadores e ordem de execução",
+          "minutes": 8
+        },
+        {
+          "id": "promises",
+          "file": "02-promises.md",
+          "title": "Promises e encadeamento",
+          "minutes": 9
+        },
+        {
+          "id": "async-await",
+          "file": "03-async-await.md",
+          "title": "async, await e tratamento de erros",
+          "minutes": 9
+        },
+        {
+          "id": "fetch",
+          "file": "04-fetch.md",
+          "title": "fetch, HTTP e leitura de JSON",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "moderno",
+      "dir": "07-moderno",
+      "title": "JavaScript moderno",
+      "description": "Use desestruturação, valores opcionais, classes e módulos entendendo os limites de cada recurso.",
+      "lessons": [
+        {
+          "id": "desestruturacao-e-spread",
+          "file": "01-desestruturacao-e-spread.md",
+          "title": "Desestruturação e cópia rasa",
+          "minutes": 9
+        },
+        {
+          "id": "opcionais-e-erros",
+          "file": "02-opcionais-e-erros.md",
+          "title": "Valores opcionais e erros explícitos",
+          "minutes": 9
+        },
+        {
+          "id": "classes-e-this",
+          "file": "03-classes-e-this.md",
+          "title": "Classes, instâncias e this",
+          "minutes": 9
+        },
+        {
+          "id": "modulos",
+          "file": "04-modulos.md",
+          "title": "Separar arquivos com import e export",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "pratica",
+      "dir": "08-pratica",
+      "title": "Prática e projeto",
+      "description": "Guarde dados localmente, teste funções, depure erros e monte uma lista de tarefas completa.",
+      "lessons": [
+        {
+          "id": "armazenamento-local",
+          "file": "01-armazenamento-local.md",
+          "title": "Guardar dados com localStorage",
+          "minutes": 9
+        },
+        {
+          "id": "funcoes-testaveis",
+          "file": "02-funcoes-testaveis.md",
+          "title": "Funções pequenas e testes de comportamento",
+          "minutes": 9
+        },
+        {
+          "id": "depuracao",
+          "file": "03-depuracao.md",
+          "title": "Depurar lendo dados e erros",
+          "minutes": 9
+        },
+        {
+          "id": "projeto-final",
+          "file": "04-projeto-final.md",
+          "title": "Projeto: lista de estudos completa",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "node",
+      "dir": "09-node",
+      "title": "Node.js, HTTP e Express",
+      "description": "Instale o ambiente de backend, crie um servidor e entenda os contratos de uma API REST.",
+      "lessons": [
+        {
+          "id": "instalacao-node",
+          "file": "01-instalacao-node.md",
+          "title": "Instalar Node.js e preparar o projeto",
+          "minutes": 18
+        },
+        {
+          "id": "primeiro-http",
+          "file": "02-primeiro-http.md",
+          "title": "Seu primeiro servidor HTTP",
+          "minutes": 15
+        },
+        {
+          "id": "express-e-middleware",
+          "file": "03-express-e-middleware.md",
+          "title": "Express: rotas, parâmetros e middleware",
+          "minutes": 15
+        },
+        {
+          "id": "contratos-rest",
+          "file": "04-contratos-rest.md",
+          "title": "REST, status e testes pelo terminal",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "banco",
+      "dir": "10-banco",
+      "title": "Banco de dados no servidor",
+      "description": "Abra SQLite, modele tabelas e implemente consultas parametrizadas, persistência, transações e paginação.",
+      "lessons": [
+        {
+          "id": "sqlite-no-node",
+          "file": "01-sqlite-no-node.md",
+          "title": "Conectar Node.js ao SQLite",
+          "minutes": 15
+        },
+        {
+          "id": "esquema-e-restricoes",
+          "file": "02-esquema-e-restricoes.md",
+          "title": "Esquema, tipos, chaves e restrições",
+          "minutes": 15
+        },
+        {
+          "id": "parametros-e-repositorio",
+          "file": "03-parametros-e-repositorio.md",
+          "title": "Consultas parametrizadas e repositório",
+          "minutes": 15
+        },
+        {
+          "id": "persistencia-e-transacoes",
+          "file": "04-persistencia-e-transacoes.md",
+          "title": "Persistência, paginação, transações e backup",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "dir": "11-api",
+      "title": "Construindo o CRUD da API",
+      "description": "Implemente criação, consulta, atualização e exclusão com contratos, validação e testes HTTP reais.",
+      "lessons": [
+        {
+          "id": "ler-e-criar",
+          "file": "01-ler-e-criar.md",
+          "title": "GET e POST: consultar e criar tarefas",
+          "minutes": 15
+        },
+        {
+          "id": "alterar-e-remover",
+          "file": "02-alterar-e-remover.md",
+          "title": "PATCH e DELETE: mudar e remover",
+          "minutes": 15
+        },
+        {
+          "id": "validar-e-erros",
+          "file": "03-validar-e-erros.md",
+          "title": "Validar entradas e responder erros",
+          "minutes": 15
+        },
+        {
+          "id": "testes-http",
+          "file": "04-testes-http.md",
+          "title": "Testar a API com HTTP e banco temporário",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "integracao",
+      "dir": "12-integracao",
+      "title": "Frontend conectado à API",
+      "description": "Troque o CRUD só local por pedidos ao servidor, tratando sessão, respostas, falhas e interface assíncrona.",
+      "lessons": [
+        {
+          "id": "cliente-fetch",
+          "file": "01-cliente-fetch.md",
+          "title": "Cliente fetch e mesma origem",
+          "minutes": 15
+        },
+        {
+          "id": "formularios-assincronos",
+          "file": "02-formularios-assincronos.md",
+          "title": "Formulário, listagem e edição assíncronos",
+          "minutes": 15
+        },
+        {
+          "id": "estados-e-falhas",
+          "file": "03-estados-e-falhas.md",
+          "title": "Carregamento, falhas e concorrência",
+          "minutes": 15
+        },
+        {
+          "id": "crud-completo",
+          "file": "04-crud-completo.md",
+          "title": "Percorrer o CRUD completo entre navegador e banco",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "autenticacao",
+      "dir": "13-autenticacao",
+      "title": "Autenticação e autorização",
+      "description": "Cadastre contas com hash de senha, mantenha sessões revogáveis e proteja operações e dados por usuário.",
+      "lessons": [
+        {
+          "id": "senhas-e-cadastro",
+          "file": "01-senhas-e-cadastro.md",
+          "title": "Cadastro e hash de senha com salt",
+          "minutes": 15
+        },
+        {
+          "id": "sessoes-e-cookies",
+          "file": "02-sessoes-e-cookies.md",
+          "title": "Login, sessão, cookie, expiração e logout",
+          "minutes": 15
+        },
+        {
+          "id": "autorizacao-por-dono",
+          "file": "03-autorizacao-por-dono.md",
+          "title": "Autorização: quem pode acessar cada tarefa",
+          "minutes": 15
+        },
+        {
+          "id": "csrf-cors-e-limites",
+          "file": "04-csrf-cors-e-limites.md",
+          "title": "CSRF, CORS e limites de autenticação",
+          "minutes": 15
+        }
+      ]
+    },
+    {
+      "id": "backend-projeto",
+      "dir": "14-backend-projeto",
+      "title": "Projeto completo e próximos passos",
+      "description": "Execute o pacote completo, entenda a organização, teste persistência e planeje evolução e implantação com limites claros.",
+      "lessons": [
+        {
+          "id": "estrutura-e-configuracao",
+          "file": "01-estrutura-e-configuracao.md",
+          "title": "Organizar arquivos, configuração e dependências",
+          "minutes": 15
+        },
+        {
+          "id": "projeto-api-estudos",
+          "file": "02-projeto-api-estudos.md",
+          "title": "Executar o projeto completo: API de estudos",
+          "minutes": 22
+        },
+        {
+          "id": "testes-e-restauracao",
+          "file": "03-testes-e-restauracao.md",
+          "title": "Conferir isolamento, reinício e restauração",
+          "minutes": 15
+        },
+        {
+          "id": "implantacao-e-evolucao",
+          "file": "04-implantacao-e-evolucao.md",
+          "title": "HTTPS, implantação e evolução do banco",
+          "minutes": 15
+        }
+      ]
+    }
+  ]
+}

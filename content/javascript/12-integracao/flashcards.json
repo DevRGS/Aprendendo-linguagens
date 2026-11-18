@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.integracao.f01",
+      "lesson": "cliente-fetch",
+      "front": "Mesma origem significa quais componentes iguais?",
+      "back": "Protocolo, host e porta. Trocar localhost por 127.0.0.1 ou mudar a porta pode mudar a origem e o armazenamento/cookies aplicáveis."
+    },
+    {
+      "id": "javascript.integracao.f02",
+      "lesson": "cliente-fetch",
+      "front": "O que public/cliente.js concentra?",
+      "back": "Fetch, JSON, credenciais, CSRF e transformação de respostas/falhas. O restante da interface não precisa duplicar todo esse tratamento."
+    },
+    {
+      "id": "javascript.integracao.f03",
+      "lesson": "cliente-fetch",
+      "front": "Por que no-cors não resolve leitura de JSON bloqueada?",
+      "back": "Pode produzir uma resposta opaca cujo corpo não é legível. O acesso entre origens precisa de política correta do servidor e do navegador."
+    },
+    {
+      "id": "javascript.integracao.f04",
+      "lesson": "formularios-assincronos",
+      "front": "Qual o papel do frontend depois de criar uma tarefa?",
+      "back": "Aguardar confirmação HTTP e atualizar a representação na tela. O banco no servidor é a persistência deste projeto."
+    },
+    {
+      "id": "javascript.integracao.f05",
+      "lesson": "formularios-assincronos",
+      "front": "Como evitar HTML digitado virar marcação na lista?",
+      "back": "Crie elementos e atribua dados com textContent/propriedades. Não use innerHTML com títulos enviados pela pessoa."
+    },
+    {
+      "id": "javascript.integracao.f06",
+      "lesson": "formularios-assincronos",
+      "front": "O que fazer com uma edição rejeitada?",
+      "back": "Mostrar o erro e preservar o rascunho quando possível. Na checkbox, restaurar o valor confirmado para não fingir persistência."
+    },
+    {
+      "id": "javascript.integracao.f07",
+      "lesson": "estados-e-falhas",
+      "front": "Busy na tela impede pedidos de outro cliente?",
+      "back": "Não. Ele organiza a aba atual. A API continua validando cada pedido e precisa de seu próprio controle para qualquer contrato adicional de concorrência."
+    },
+    {
+      "id": "javascript.integracao.f08",
+      "lesson": "estados-e-falhas",
+      "front": "O que pode significar uma falha de rede depois de escrever?",
+      "back": "Resultado ambíguo: o servidor pode ter gravado antes da queda. Confira a lista antes de repetir POST sem idempotência."
+    },
+    {
+      "id": "javascript.integracao.f09",
+      "lesson": "crud-completo",
+      "front": "Quais arquivos ajudam a seguir um CRUD completo?",
+      "back": "public/app.js e cliente.js no navegador; src/app.mjs nas rotas; database.mjs nas consultas e arquivo SQLite."
+    },
+    {
+      "id": "javascript.integracao.f10",
+      "lesson": "crud-completo",
+      "front": "Como conferir que o logout é mais que esconder a interface?",
+      "back": "Tente usar o cookie antigo em uma rota protegida depois de sair. O servidor deve recusá-lo com 401."
+    }
+  ]
+}

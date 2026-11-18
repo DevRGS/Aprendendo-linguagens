@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.shell.f01",
+      "lesson": "redirecionamentos",
+      "front": "Qual a diferença entre `>`, `>>` e `<`?",
+      "back": "`>` cria/trunca a saída no arquivo; `>>` acrescenta ao final; `<` lê a entrada padrão do arquivo."
+    },
+    {
+      "id": "linux.shell.f02",
+      "lesson": "redirecionamentos",
+      "front": "Quais são os descritores 0, 1 e 2?",
+      "back": "0 é entrada padrão (stdin), 1 é saída padrão (stdout), 2 é erro padrão (stderr). `2> erros.txt` redireciona os erros."
+    },
+    {
+      "id": "linux.shell.f03",
+      "lesson": "redirecionamentos",
+      "front": "Por que evitar `cat arquivo > arquivo`?",
+      "back": "O shell pode truncar o destino antes de cat ler. Usar o mesmo caminho como origem e destino pode destruir a entrada."
+    },
+    {
+      "id": "linux.shell.f04",
+      "lesson": "pipes-e-tee",
+      "front": "O que `tee` faz e como acrescentar?",
+      "back": "Lê stdin, grava no arquivo e também imprime em stdout. `tee -a arquivo` acrescenta em vez de substituir."
+    },
+    {
+      "id": "linux.shell.f05",
+      "lesson": "pipes-e-tee",
+      "front": "O pipe comum também envia stderr?",
+      "back": "Não. `|` conecta stdout. `comando 2>&1 | outro` reúne os erros na saída que será enviada ao próximo comando."
+    },
+    {
+      "id": "linux.shell.f06",
+      "lesson": "variaveis-e-aspas",
+      "front": "Como atribuir e usar uma variável Bash?",
+      "back": "Atribua sem espaços: `nome=Ana`. Leia com `\"$nome\"` ou `\"${nome}\"`; as aspas mantêm o valor como um argumento."
+    },
+    {
+      "id": "linux.shell.f07",
+      "lesson": "variaveis-e-aspas",
+      "front": "Qual a diferença entre aspas simples e duplas?",
+      "back": "Simples mantêm o texto literal; duplas permitem expansões como `$nome` e protegem o resultado contra separação em palavras e expansão de nomes."
+    },
+    {
+      "id": "linux.shell.f08",
+      "lesson": "variaveis-e-aspas",
+      "front": "O que faz `$(comando)`?",
+      "back": "Substitui pela saída padrão do comando, removendo quebras de linha finais. Exemplo: `linhas=$(wc -l < arquivo)`."
+    },
+    {
+      "id": "linux.shell.f09",
+      "lesson": "status-e-condicoes",
+      "front": "Quando usar `&&` e `||`?",
+      "back": "`A && B` executa B se A tem status 0. `A || B` executa B se A tem status não zero. O resultado vem do status, não do texto impresso."
+    },
+    {
+      "id": "linux.shell.f10",
+      "lesson": "status-e-condicoes",
+      "front": "Por que guardar `$?` imediatamente?",
+      "back": "Qualquer comando posterior pode mudar o status mais recente. Use `estado=$?` logo após o comando que quer observar."
+    }
+  ]
+}

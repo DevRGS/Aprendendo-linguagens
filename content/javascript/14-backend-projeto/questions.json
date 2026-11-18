@@ -1,0 +1,205 @@
+{
+  "questions": [
+    {
+      "id": "javascript.backend-projeto.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "estrutura-e-configuracao",
+      "prompt": "Qual pasta o servidor publica como arquivos estáticos?",
+      "options": [
+        "Somente public",
+        "A raiz inteira incluindo .env e data",
+        "A pasta dos hashes de senha",
+        "Qualquer diretório apontado livremente pelo cliente"
+      ],
+      "answer": 0,
+      "explanation": "O app expõe os arquivos de interface escolhidos. Código/configuração/banco ficam fora dessa raiz estática."
+    },
+    {
+      "id": "javascript.backend-projeto.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "estrutura-e-configuracao",
+      "prompt": "Complete o nome da variável de configuração da origem esperada:",
+      "code": "___=http://127.0.0.1:3000",
+      "blanks": [
+        [
+          "APP_ORIGIN"
+        ]
+      ],
+      "explanation": "APP_ORIGIN precisa corresponder ao protocolo, host e porta usados no acesso. Não deve incluir um caminho ou barra final."
+    },
+    {
+      "id": "javascript.backend-projeto.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "estrutura-e-configuracao",
+      "prompt": "Trocar PORT sem atualizar a origem e a URL sempre mantém cookie e verificação de Origin funcionando.",
+      "answer": false,
+      "explanation": "A configuração deve permanecer coerente. Origem inclui porta; a página e os pedidos precisam usar o endereço esperado."
+    },
+    {
+      "id": "javascript.backend-projeto.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "estrutura-e-configuracao",
+      "prompt": "Qual responsabilidade pertence a src/server.mjs?",
+      "options": [
+        "Ler configuração, iniciar HTTP e encerrar recursos do processo",
+        "Criar nós DOM dentro do navegador",
+        "Guardar toda senha no CSS",
+        "Atualizar cada checkbox diretamente"
+      ],
+      "answer": 0,
+      "explanation": "O entrypoint trata o processo; app.mjs descreve HTTP e a conexão/repositório fica na camada SQL."
+    },
+    {
+      "id": "javascript.backend-projeto.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "projeto-api-estudos",
+      "prompt": "Qual é o primeiro passo ao receber o ZIP?",
+      "options": [
+        "Extrair e entrar na pasta que contém package.json",
+        "Executar o banco diretamente no GitHub Pages",
+        "Copiar uma senha pessoal para README",
+        "Editar node_modules antes de instalar"
+      ],
+      "answer": 0,
+      "explanation": "Os arquivos precisam estar extraídos e o terminal deve estar no projeto. Depois confira Node/npm e instale com npm ci."
+    },
+    {
+      "id": "javascript.backend-projeto.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "projeto-api-estudos",
+      "prompt": "Complete o comando de instalação reproduzível do pacote:",
+      "code": "npm ___",
+      "blanks": [
+        [
+          "ci"
+        ]
+      ],
+      "explanation": "npm ci usa o lockfile e não é uma atualização automática de dependências. O pacote fornece package.json/lock coerentes."
+    },
+    {
+      "id": "javascript.backend-projeto.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "projeto-api-estudos",
+      "prompt": "O ZIP deve incluir o arquivo .env real, cookies de teste e banco pessoal do autor para funcionar.",
+      "answer": false,
+      "explanation": "Ele inclui fontes e .env.example sem segredo. Node_modules, dados pessoais, bancos e .env real são excluídos."
+    },
+    {
+      "id": "javascript.backend-projeto.q08",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "projeto-api-estudos",
+      "prompt": "Ordene a preparação de uma cópia recém-extraída antes da primeira requisição do aluno:",
+      "lines": [
+        "Entrar na pasta extraída que contém package.json",
+        "Instalar dependências com npm ci",
+        "Iniciar o servidor com npm start",
+        "Abrir no navegador a origem informada pelo processo"
+      ],
+      "explanation": "A pasta/dependências precisam estar prontas antes de iniciar; o servidor precisa estar ativo antes do acesso HTTP."
+    },
+    {
+      "id": "javascript.backend-projeto.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "testes-e-restauracao",
+      "prompt": "Qual teste demonstra persistência além do processo atual?",
+      "options": [
+        "Gravar, fechar, reabrir no mesmo arquivo e conferir os dados",
+        "Somente mudar uma variável em memória",
+        "Recarregar CSS sem reiniciar nada",
+        "Comparar um mock com ele mesmo"
+      ],
+      "answer": 0,
+      "explanation": "A reabertura testa que o arquivo e o esquema realmente permitem recuperar a gravação."
+    },
+    {
+      "id": "javascript.backend-projeto.q10",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "testes-e-restauracao",
+      "prompt": "Uma mudança de tabela em um banco com dados deve ser tratada com migração/teste, não simplesmente apagando o arquivo para esconder erro.",
+      "answer": true,
+      "explanation": "Apagar pode descartar dados; migração descreve uma transformação conhecida e verifica a atualização do formato."
+    },
+    {
+      "id": "javascript.backend-projeto.q11",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "testes-e-restauracao",
+      "prompt": "Como iniciar um teste manual de restauração sem destruir sua única cópia?",
+      "options": [
+        "Usar uma cópia em outro caminho e preservar o original",
+        "Sobrescrever imediatamente o original sem verificar",
+        "Apagar o WAL em uso para tentar forçar o backup",
+        "Publicar o banco como arquivo estático"
+      ],
+      "answer": 0,
+      "explanation": "A restauração precisa ser verificada num destino controlado. O laboratório permite configurar DATABASE_PATH para uma cópia."
+    },
+    {
+      "id": "javascript.backend-projeto.q12",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "testes-e-restauracao",
+      "prompt": "Complete a instrução que desfaz uma transação ainda não confirmada após falha:",
+      "code": "db.exec('___');",
+      "blanks": [
+        [
+          "ROLLBACK",
+          "rollback",
+          "Rollback",
+          "ROLLBACK TRANSACTION"
+        ]
+      ],
+      "explanation": "Rollback desfaz a unidade de trabalho não confirmada no fluxo da transação. Não é substituto de backup nem apaga toda história do banco.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "javascript.backend-projeto.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "implantacao-e-evolucao",
+      "prompt": "O que muda ao passar SQLite local para PostgreSQL?",
+      "options": [
+        "Serviço, driver/conexão, pool, dialeto e migrações precisam ser planejados/testados",
+        "Apenas o texto do título HTML",
+        "Basta enviar a senha de SQL ao navegador",
+        "Nenhuma responsabilidade muda e qualquer SQL é idêntico"
+      ],
+      "answer": 0,
+      "explanation": "Preserve o contrato HTTP e teste a camada de repositório no novo banco. Backend continua sendo o lugar das credenciais."
+    },
+    {
+      "id": "javascript.backend-projeto.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "implantacao-e-evolucao",
+      "prompt": "O laboratório já implementa recuperação de senha, verificação de e-mail e limitador distribuído de produção.",
+      "answer": false,
+      "explanation": "Esses recursos não fazem parte do pacote. Hospedagem real também precisa HTTPS/proxy/operação, backup e revisão do ambiente."
+    },
+    {
+      "id": "javascript.backend-projeto.q15",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "implantacao-e-evolucao",
+      "prompt": "Qual configuração combina com cookies Secure numa implantação real?",
+      "options": [
+        "Origem HTTPS e infraestrutura TLS coerentes",
+        "Servir tudo por file:// e abrir CORS curinga",
+        "Guardar cookie no CSS",
+        "Desligar toda validação de origem"
+      ],
+      "answer": 0,
+      "explanation": "Secure exige o caminho HTTPS correspondente. Configuração de proxy/TLS/cookies precisa ser feita e conferida no ambiente real."
+    }
+  ]
+}

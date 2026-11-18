@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.funcoes.f01",
+      "lesson": "lacos",
+      "front": "Qual a diferença entre break e continue?",
+      "back": "break encerra o laço; continue pula para a próxima iteração. Garanta que a atualização/condição ainda permite terminar."
+    },
+    {
+      "id": "javascript.funcoes.f02",
+      "lesson": "lacos",
+      "front": "For...of ou for...in para valores de arrays?",
+      "back": "For...of percorre valores. For...in percorre nomes de propriedades enumeráveis e não é o padrão para os valores de um array."
+    },
+    {
+      "id": "javascript.funcoes.f03",
+      "lesson": "parametros-e-retorno",
+      "front": "Parâmetro e argumento são a mesma posição no código?",
+      "back": "Parâmetro é o nome na definição da função; argumento é o valor fornecido na chamada."
+    },
+    {
+      "id": "javascript.funcoes.f04",
+      "lesson": "parametros-e-retorno",
+      "front": "Imprimir é o mesmo que retornar?",
+      "back": "Não. Console.log produz saída para observação; return fornece o resultado para quem chamou e encerra a execução da função."
+    },
+    {
+      "id": "javascript.funcoes.f05",
+      "lesson": "parametros-e-retorno",
+      "front": "Quando um padrão de parâmetro é usado?",
+      "back": "Quando o argumento foi omitido ou é undefined. Null não ativa automaticamente o padrão."
+    },
+    {
+      "id": "javascript.funcoes.f06",
+      "lesson": "callbacks-e-arrow",
+      "front": "Como retornar em uma arrow com chaves?",
+      "back": "Escreva return explicitamente. Sem chaves, um corpo de expressão retorna a expressão; para objeto literal, use parênteses, como nome => ({ nome })."
+    },
+    {
+      "id": "javascript.funcoes.f07",
+      "lesson": "callbacks-e-arrow",
+      "front": "Callback significa execução futura obrigatória?",
+      "back": "Não. É uma função passada para outra parte chamar; pode ser síncrona ou assíncrona conforme quem a utiliza."
+    },
+    {
+      "id": "javascript.funcoes.f08",
+      "lesson": "escopo-e-closures",
+      "front": "O que é uma closure?",
+      "back": "Uma função com acesso ao ambiente léxico em que foi criada. Esse acesso pode continuar depois que a função externa termina."
+    },
+    {
+      "id": "javascript.funcoes.f09",
+      "lesson": "escopo-e-closures",
+      "front": "Duas fábricas de contador criam estados separados?",
+      "back": "Sim, se cada chamada declara sua própria variável local e devolve uma função que a captura. A definição da função pode ser compartilhada sem compartilhar o estado local."
+    },
+    {
+      "id": "javascript.funcoes.f10",
+      "lesson": "escopo-e-closures",
+      "front": "Por que separar regras em funções pequenas?",
+      "back": "Fica mais fácil tornar entradas/saídas claras, conferir casos e evitar depender de estado externo escondido."
+    }
+  ]
+}

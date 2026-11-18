@@ -1,0 +1,231 @@
+[
+  {
+    "file": "primeiros-passos-terminal-e-bash.sh",
+    "lessons": [
+      "primeiros-passos/terminal-e-bash"
+    ],
+    "stdout": "Olá, terminal!\n",
+    "status": 0
+  },
+  {
+    "file": "primeiros-passos-comandos-e-ajuda.sh",
+    "lessons": [
+      "primeiros-passos/comandos-e-ajuda"
+    ],
+    "stdout": "builtin\nUma opção muda como o comando trabalha.\n",
+    "status": 0
+  },
+  {
+    "file": "primeiros-passos-atalhos-e-laboratorio.sh",
+    "lessons": [
+      "primeiros-passos/atalhos-e-laboratorio"
+    ],
+    "stdout": "Pasta de treino criada.\n",
+    "status": 0
+  },
+  {
+    "file": "arquivos-caminhos-e-navegacao.sh",
+    "lessons": [
+      "arquivos/caminhos-e-navegacao"
+    ],
+    "stdout": "Arquivos, incluindo ocultos:\n.rascunho\nnota.txt\nVoltei à pasta pai.\n",
+    "status": 0
+  },
+  {
+    "file": "arquivos-criar-e-copiar.sh",
+    "lessons": [
+      "arquivos/criar-e-copiar"
+    ],
+    "stdout": "Revisar comandos\nRevisar comandos\n",
+    "status": 0,
+    "files": {
+      "projeto/notas/plano.txt": "Revisar comandos\n",
+      "copia.txt": "Revisar comandos\n",
+      "reserva/notas/plano.txt": "Revisar comandos\n"
+    }
+  },
+  {
+    "file": "arquivos-mover-e-remover.sh",
+    "lessons": [
+      "arquivos/mover-e-remover"
+    ],
+    "stdout": "Primeira versão\nDiretório vazio removido.\n",
+    "status": 0,
+    "absent": [
+      "rascunho.txt",
+      "entrega"
+    ]
+  },
+  {
+    "file": "arquivos-aspas-e-curingas.sh",
+    "lessons": [
+      "arquivos/aspas-e-curingas"
+    ],
+    "stdout": "<minhas notas.txt>\n<resumo.txt>\n<*.txt>\n",
+    "status": 0,
+    "files": {
+      "minhas notas.txt": "",
+      "copia das notas.txt": "",
+      ".segredo.txt": ""
+    }
+  },
+  {
+    "file": "texto-ler-arquivos.sh",
+    "lessons": [
+      "texto/ler-arquivos"
+    ],
+    "stdout": "estudar\nrevisar\n",
+    "status": 0
+  },
+  {
+    "file": "texto-buscar-texto.sh",
+    "lessons": [
+      "texto/buscar-texto"
+    ],
+    "stdout": "2:ERRO disco\n3:erro rede\na.b\n",
+    "status": 0,
+    "files": {
+      "eventos.txt": "INFO início\nERRO disco\nerro rede\n",
+      "pontos.txt": "a.b\naxb\n"
+    }
+  },
+  {
+    "file": "texto-localizar-arquivos.sh",
+    "lessons": [
+      "texto/localizar-arquivos"
+    ],
+    "stdout": "./antigas/b.txt\n./notas/a.txt\n",
+    "status": 0
+  },
+  {
+    "file": "texto-resumir-e-ordenar.sh",
+    "lessons": [
+      "texto/resumir-e-ordenar"
+    ],
+    "stdout": "3\nazul\nverde\nAna\nBeto\n",
+    "status": 0
+  },
+  {
+    "file": "shell-redirecionamentos.sh",
+    "lessons": [
+      "shell/redirecionamentos"
+    ],
+    "stdout": "primeira\nsegunda\nFalha registrada no arquivo de erros.\n",
+    "status": 0,
+    "files": {
+      "notas.txt": "primeira\nsegunda\n"
+    }
+  },
+  {
+    "file": "shell-pipes-e-tee.sh",
+    "lessons": [
+      "shell/pipes-e-tee"
+    ],
+    "stdout": "azul\nverde\nLinhas do resumo:\n2\namarelo\n",
+    "status": 0,
+    "files": {
+      "cores.txt": "azul\nverde\nazul\n",
+      "resumo.txt": "azul\nverde\namarelo\n"
+    }
+  },
+  {
+    "file": "shell-variaveis-e-aspas.sh",
+    "lessons": [
+      "shell/variaveis-e-aspas"
+    ],
+    "stdout": "$nome\n<Ana Silva>\nrevisão\nEstudo Linux\n",
+    "status": 0,
+    "files": {
+      "minhas notas.txt": "revisão\n"
+    }
+  },
+  {
+    "file": "shell-status-e-condicoes.sh",
+    "lessons": [
+      "shell/status-e-condicoes"
+    ],
+    "stdout": "Status: 1\nTema encontrado.\nJava não aparece.\n",
+    "status": 0
+  },
+  {
+    "file": "sistema-identidade-e-permissoes.sh",
+    "lessons": [
+      "sistema/identidade-e-permissoes"
+    ],
+    "stdout": "600\n700\n600\n",
+    "status": 0,
+    "files": {
+      "privado.txt": "anotação pessoal\n"
+    },
+    "modes": {
+      "privado.txt": "600"
+    }
+  },
+  {
+    "file": "sistema-privilegios-e-sudo.sh",
+    "lessons": [
+      "sistema/privilegios-e-sudo"
+    ],
+    "stdout": "Arquivo da minha conta.\n",
+    "status": 0
+  },
+  {
+    "file": "sistema-processos-e-jobs.sh",
+    "lessons": [
+      "sistema/processos-e-jobs"
+    ],
+    "stdout": "Meu processo de treino terminou.\n",
+    "status": 0
+  },
+  {
+    "file": "sistema-disco-e-memoria.sh",
+    "lessons": [
+      "sistema/disco-e-memoria"
+    ],
+    "stdout": "Consultas de disco concluídas.\n",
+    "status": 0
+  },
+  {
+    "file": "rotinas-arquivar-com-tar.sh",
+    "lessons": [
+      "rotinas/arquivar-com-tar"
+    ],
+    "stdout": "notas/\nnotas/plano.txt\nRevisar Bash\n",
+    "status": 0,
+    "files": {
+      "notas/plano.txt": "Revisar Bash\n",
+      "destino/notas/plano.txt": "Revisar Bash\n"
+    }
+  },
+  {
+    "file": "rotinas-primeiro-script.sh",
+    "lessons": [
+      "rotinas/primeiro-script"
+    ],
+    "stdout": "Olá do script!\nOlá do script!\n",
+    "status": 0,
+    "modes": {
+      "ola.sh": "700"
+    }
+  },
+  {
+    "file": "rotinas-argumentos-e-condicoes.sh",
+    "lessons": [
+      "rotinas/argumentos-e-condicoes"
+    ],
+    "stdout": "Olá, Ana Silva!\nInforme seu nome na próxima vez.\n",
+    "status": 0
+  },
+  {
+    "file": "rotinas-repeticao-e-projeto.sh",
+    "lessons": [
+      "rotinas/repeticao-e-projeto"
+    ],
+    "stdout": "minhas notas.txt: 2\nresumo.txt: 1\n",
+    "status": 0,
+    "files": {
+      "reserva/minhas notas.txt": "ler\npraticar\n",
+      "reserva/resumo.txt": "revisar\n"
+    }
+  }
+]

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+</head>
+<body>
+<style>.destaque { font-weight: bold; }</style>
+<ul id="temas"></ul>
+<script>
+const item = document.createElement("li");
+item.textContent = "Estudar DOM";
+item.classList.add("destaque");
+item.setAttribute("data-tema", "dom");
+document.querySelector("#temas").append(item);
+</script>
+</body>
+</html>

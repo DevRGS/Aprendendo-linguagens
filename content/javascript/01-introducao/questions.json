@@ -1,0 +1,200 @@
+{
+  "questions": [
+    {
+      "id": "javascript.introducao.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "javascript-e-web",
+      "prompt": "Qual papel o JavaScript pode ter em uma página?",
+      "options": [
+        "Responder a interações e atualizar conteúdo",
+        "Substituir obrigatoriamente todo HTML e CSS",
+        "Executar somente quando existe Node.js instalado",
+        "Ser apenas outro nome para Java"
+      ],
+      "answer": 0,
+      "explanation": "JavaScript descreve comportamentos. HTML estrutura o conteúdo e CSS cuida da apresentação. Java é uma linguagem diferente."
+    },
+    {
+      "id": "javascript.introducao.q02",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "javascript-e-web",
+      "prompt": "O DOM é uma parte da linguagem ECMAScript disponível automaticamente em qualquer ambiente JavaScript.",
+      "answer": false,
+      "explanation": "O DOM é uma API de ambientes como o navegador. Node executa JavaScript, mas não fornece document automaticamente."
+    },
+    {
+      "id": "javascript.introducao.q03",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "javascript-e-web",
+      "prompt": "Complete o método usado para imprimir uma mensagem comum no console:",
+      "code": "console.___(\"Olá!\");",
+      "blanks": [
+        [
+          "log"
+        ]
+      ],
+      "explanation": "console.log registra a mensagem. O console pode mostrar também o valor de retorno da chamada, normalmente undefined."
+    },
+    {
+      "id": "javascript.introducao.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "javascript-e-web",
+      "prompt": "Para começar os exercícios de console desta trilha, o que é necessário?",
+      "options": [
+        "Um navegador atualizado com ferramentas de desenvolvedor",
+        "Um servidor de banco de dados",
+        "Instalar obrigatoriamente Node.js e um framework",
+        "Compilar JavaScript com javac"
+      ],
+      "answer": 0,
+      "explanation": "O navegador executa JavaScript. Node e ferramentas de build não são pré-requisitos para os primeiros exercícios."
+    },
+    {
+      "id": "javascript.introducao.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "console-e-editor",
+      "prompt": "Depois de console.log(\"Olá\"), o console pode exibir undefined. O que isso representa?",
+      "options": [
+        "O valor retornado pela chamada console.log",
+        "Que a mensagem Olá nunca foi impressa",
+        "Um erro obrigatório de compilação",
+        "Uma variável chamada Olá apagada"
+      ],
+      "answer": 0,
+      "explanation": "A mensagem impressa e o resultado da expressão são coisas diferentes. O console pode apresentar ambos."
+    },
+    {
+      "id": "javascript.introducao.q06",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "console-e-editor",
+      "prompt": "Um arquivo salvo como index.html.txt é necessariamente interpretado como HTML só porque contém a palavra html no nome.",
+      "answer": false,
+      "explanation": "A extensão real importa. Confira o nome completo e salve texto simples em UTF-8, sem uma extensão .txt adicional."
+    },
+    {
+      "id": "javascript.introducao.q07",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "console-e-editor",
+      "prompt": "Por que os exemplos de console usam um bloco { ... } ao redor de declarações?",
+      "options": [
+        "Para limitar o escopo de let/const e facilitar executar o exemplo novamente",
+        "Para converter tudo em JSON automaticamente",
+        "Para esconder as mensagens de console.log",
+        "Para tornar qualquer código assíncrono"
+      ],
+      "answer": 0,
+      "explanation": "O bloco cria um escopo para let/const. Isso ajuda a evitar redeclarações no escopo global do console."
+    },
+    {
+      "id": "javascript.introducao.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "console-e-editor",
+      "prompt": "Complete o operador que informa o tipo do valor, como no exemplo que produz \"number\":",
+      "code": "console.log(___ 42);",
+      "blanks": [
+        [
+          "typeof"
+        ]
+      ],
+      "explanation": "typeof é um operador da linguagem. Há exceções históricas, como typeof null resultar em \"object\"."
+    },
+    {
+      "id": "javascript.introducao.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "primeira-pagina",
+      "prompt": "Por que o script do primeiro HTML aparece depois do botão e do título?",
+      "options": [
+        "Para consultar elementos que já foram analisados e criados no DOM",
+        "Para impedir o navegador de ler o HTML",
+        "Porque scripts só podem existir na última linha do arquivo",
+        "Para transformar o botão em uma variável global obrigatória"
+      ],
+      "answer": 0,
+      "explanation": "O código procura elementos existentes. Um script externo clássico com defer também permite executar depois da análise do HTML."
+    },
+    {
+      "id": "javascript.introducao.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "primeira-pagina",
+      "prompt": "Complete o atributo que adia a execução deste script clássico **externo** até depois da análise do HTML:",
+      "code": "<script src=\"app.js\" ___></script>",
+      "blanks": [
+        [
+          "defer"
+        ]
+      ],
+      "explanation": "defer tem esse efeito em scripts clássicos externos. Não oferece o mesmo efeito em um script clássico inline."
+    },
+    {
+      "id": "javascript.introducao.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "primeira-pagina",
+      "prompt": "Registrar botao.addEventListener(\"click\", funcao) chama funcao imediatamente, mesmo sem clique.",
+      "answer": false,
+      "explanation": "O registro fornece a função para ser executada quando o evento ocorrer. Escrever funcao() executaria antes e passaria o retorno."
+    },
+    {
+      "id": "javascript.introducao.q12",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "primeira-pagina",
+      "prompt": "Ordene para criar a referência ao botão, registrar uma função e só então fechar o registro. O HTML já contém #saudar.",
+      "lines": [
+        "const botao = document.querySelector(\"#saudar\");",
+        "botao.addEventListener(\"click\", () => {",
+        "console.log(\"Olá!\");",
+        "});"
+      ],
+      "explanation": "A referência precisa existir antes de registrar o listener. O corpo da callback fica entre a abertura e o fechamento."
+    },
+    {
+      "id": "javascript.introducao.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "servidor-local",
+      "prompt": "Por que abrir os exemplos de módulos e JSON local por um servidor HTTP?",
+      "options": [
+        "Porque file:// não oferece as mesmas regras de origem exigidas por esses recursos",
+        "Porque todo JavaScript exige internet de terceiros",
+        "Porque Python compila os arquivos JavaScript antes de enviá-los",
+        "Porque o navegador não consegue abrir nenhum HTML local"
+      ],
+      "answer": 0,
+      "explanation": "Scripts clássicos simples podem funcionar por file://; módulos e requisições locais têm restrições de origem. Um servidor estático local resolve o ambiente de estudo."
+    },
+    {
+      "id": "javascript.introducao.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "servidor-local",
+      "prompt": "Se trocar a porta do servidor de 8000 para 8001, também precisa usar 8001 no endereço do navegador.",
+      "answer": true,
+      "explanation": "Host, porta e protocolo identificam a origem. Um endereço na porta anterior não passa a apontar automaticamente para a nova."
+    },
+    {
+      "id": "javascript.introducao.q15",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "servidor-local",
+      "prompt": "Complete o módulo padrão do Python 3 usado no comando do servidor local:",
+      "code": "python3 -m ___ 8000 --bind 127.0.0.1",
+      "blanks": [
+        [
+          "http.server"
+        ]
+      ],
+      "explanation": "http.server é o módulo de servidor HTTP simples de desenvolvimento. No Windows, o comando documentado usa py em vez de python3."
+    }
+  ]
+}

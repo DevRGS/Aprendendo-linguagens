@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.dom.f01",
+      "lesson": "selecionar-e-alterar",
+      "front": "QuerySelector e querySelectorAll retornam o quê?",
+      "back": "QuerySelector retorna o primeiro elemento ou null. QuerySelectorAll retorna uma NodeList estática com os elementos correspondentes."
+    },
+    {
+      "id": "javascript.dom.f02",
+      "lesson": "selecionar-e-alterar",
+      "front": "Qual propriedade usar para mostrar texto digitado?",
+      "back": "TextContent, quando a intenção é texto. Ela não transforma sinais de marcação em elementos HTML."
+    },
+    {
+      "id": "javascript.dom.f03",
+      "lesson": "criar-elementos",
+      "front": "Como criar e anexar um li?",
+      "back": "Crie com document.createElement(\"li\"), atribua textContent e use lista.append(item). Criar sozinho não insere na página."
+    },
+    {
+      "id": "javascript.dom.f04",
+      "lesson": "criar-elementos",
+      "front": "ClassList altera o quê?",
+      "back": "As classes do elemento, com add/remove/toggle. As regras CSS existentes determinam como essas classes afetam a aparência."
+    },
+    {
+      "id": "javascript.dom.f05",
+      "lesson": "criar-elementos",
+      "front": "Append duplica um nó que já existe na árvore?",
+      "back": "Não. Reanexar o mesmo nó o move. Para outra entrada, crie outro nó ou clone explicitamente quando apropriado."
+    },
+    {
+      "id": "javascript.dom.f06",
+      "lesson": "eventos",
+      "front": "Como registrar uma callback sem chamá-la antes?",
+      "back": "Passe a função, como addEventListener(\"click\", saudar), ou uma wrapper () => saudar(). Não passe saudar() como se fosse a referência."
+    },
+    {
+      "id": "javascript.dom.f07",
+      "lesson": "eventos",
+      "front": "Qual a diferença entre target e currentTarget?",
+      "back": "Target identifica o alvo original. CurrentTarget identifica o elemento cujo listener executa naquele momento."
+    },
+    {
+      "id": "javascript.dom.f08",
+      "lesson": "formularios",
+      "front": "Por que ouvir submit no form?",
+      "back": "Porque envio pode acontecer pelo botão ou por Enter. O listener acompanha a intenção de envio, em vez de apenas um tipo de clique."
+    },
+    {
+      "id": "javascript.dom.f09",
+      "lesson": "formularios",
+      "front": "Input.value já é número?",
+      "back": "É texto. Confira vazio e converta explicitamente quando o contrato exige número; mesmo campos numéricos precisam de interpretação adequada."
+    },
+    {
+      "id": "javascript.dom.f10",
+      "lesson": "formularios",
+      "front": "PreventDefault e stopPropagation são equivalentes?",
+      "back": "Não. PreventDefault cancela uma ação padrão cancelável; stopPropagation interfere na propagação do evento."
+    }
+  ]
+}

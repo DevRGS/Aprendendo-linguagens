@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+</head>
+<body>
+<h1 id="titulo">Antes</h1>
+<p class="nota">Primeira</p>
+<p class="nota">Segunda</p>
+<script>
+const titulo = document.querySelector("#titulo");
+titulo.textContent = "JavaScript no DOM";
+for (const nota of document.querySelectorAll(".nota")) {
+  nota.textContent = "Revisada";
+}
+</script>
+</body>
+</html>

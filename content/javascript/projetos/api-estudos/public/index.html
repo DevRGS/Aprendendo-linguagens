@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estudos — API e SQLite</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Projeto da trilha JavaScript</p>
+  <h1>Minha lista de estudos</h1>
+  <p>Contas e tarefas ficam no banco SQLite deste servidor de estudo.</p>
+  <p id="aviso" role="status" aria-live="polite">Carregando sessão…</p>
+  <section id="acesso">
+    <h2>Entrar ou criar conta</h2>
+    <form id="form-acesso">
+      <label for="usuario">Usuário</label>
+      <input id="usuario" name="usuario" autocomplete="username" required minlength="3" maxlength="30" pattern="[A-Za-z][A-Za-z0-9_\-]{2,29}" data-lock>
+      <label for="senha">Senha (12 a 128 caracteres)</label>
+      <input id="senha" name="senha" type="password" autocomplete="current-password" required minlength="12" maxlength="128" data-lock>
+      <div class="actions">
+        <button id="entrar" type="submit" data-lock>Entrar</button>
+        <button id="cadastrar" type="button" data-lock>Criar conta e entrar</button>
+      </div>
+    </form>
+  </section>
+  <section id="painel" hidden>
+    <div class="actions"><h2 id="pessoa"></h2><button id="sair" type="button" data-lock>Sair</button></div>
+    <form id="nova">
+      <label for="titulo">Nova tarefa</label>
+      <input id="titulo" name="titulo" required maxlength="120" data-lock>
+      <button type="submit" data-lock>Adicionar tarefa</button>
+    </form>
+    <ul id="lista"></ul>
+    <nav class="actions" aria-label="Paginação">
+      <button id="anterior" type="button">Anterior</button>
+      <span id="pagina"></span>
+      <button id="proximo" type="button">Próxima</button>
+    </nav>
+  </section>
+</main>
+</body>
+</html>

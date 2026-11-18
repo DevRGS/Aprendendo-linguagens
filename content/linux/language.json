@@ -1,0 +1,202 @@
+{
+  "id": "linux",
+  "name": "Terminal Linux",
+  "color": "#4ecca3",
+  "icon": "🐧",
+  "highlight": "bash",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "primeiros-passos",
+      "dir": "01-primeiros-passos",
+      "title": "Primeiros passos",
+      "description": "Entenda o terminal, prepare Ubuntu pelo WSL no Windows e aprenda a consultar ajuda antes de praticar.",
+      "lessons": [
+        {
+          "id": "terminal-e-bash",
+          "file": "01-terminal-e-bash.md",
+          "title": "Terminal, Linux e Bash",
+          "minutes": 6
+        },
+        {
+          "id": "instalacao-wsl",
+          "file": "02-instalacao-wsl.md",
+          "title": "Instalando Ubuntu no Windows com WSL",
+          "minutes": 15
+        },
+        {
+          "id": "comandos-e-ajuda",
+          "file": "03-comandos-e-ajuda.md",
+          "title": "Comandos, opções e ajuda",
+          "minutes": 7
+        },
+        {
+          "id": "atalhos-e-laboratorio",
+          "file": "04-atalhos-e-laboratorio.md",
+          "title": "Atalhos e sua pasta de laboratório",
+          "minutes": 7
+        }
+      ]
+    },
+    {
+      "id": "arquivos",
+      "dir": "02-arquivos",
+      "title": "Navegação e arquivos",
+      "description": "Encontre pastas, crie, copie e mova arquivos; entenda aspas e remoção antes de usá-las.",
+      "lessons": [
+        {
+          "id": "caminhos-e-navegacao",
+          "file": "01-caminhos-e-navegacao.md",
+          "title": "Caminhos: pwd, ls e cd",
+          "minutes": 8
+        },
+        {
+          "id": "criar-e-copiar",
+          "file": "02-criar-e-copiar.md",
+          "title": "Criar e copiar: mkdir, touch e cp",
+          "minutes": 7
+        },
+        {
+          "id": "mover-e-remover",
+          "file": "03-mover-e-remover.md",
+          "title": "Mover e remover com cuidado",
+          "minutes": 8
+        },
+        {
+          "id": "aspas-e-curingas",
+          "file": "04-aspas-e-curingas.md",
+          "title": "Nomes com espaços e curingas",
+          "minutes": 8
+        }
+      ]
+    },
+    {
+      "id": "texto",
+      "dir": "03-texto",
+      "title": "Leitura e busca",
+      "description": "Leia arquivos, encontre texto e caminhos e resuma dados com ferramentas pequenas.",
+      "lessons": [
+        {
+          "id": "ler-arquivos",
+          "file": "01-ler-arquivos.md",
+          "title": "Ler arquivos: cat, less, head e tail",
+          "minutes": 7
+        },
+        {
+          "id": "buscar-texto",
+          "file": "02-buscar-texto.md",
+          "title": "Buscar linhas com grep",
+          "minutes": 8
+        },
+        {
+          "id": "localizar-arquivos",
+          "file": "03-localizar-arquivos.md",
+          "title": "Localizar arquivos com find",
+          "minutes": 8
+        },
+        {
+          "id": "resumir-e-ordenar",
+          "file": "04-resumir-e-ordenar.md",
+          "title": "Resumir texto: wc, sort, uniq e cut",
+          "minutes": 8
+        }
+      ]
+    },
+    {
+      "id": "shell",
+      "dir": "04-shell",
+      "title": "Combinando comandos",
+      "description": "Conecte ferramentas com redirecionamentos, pipelines, variáveis e testes de sucesso.",
+      "lessons": [
+        {
+          "id": "redirecionamentos",
+          "file": "01-redirecionamentos.md",
+          "title": "Entrada, saída e mensagens de erro",
+          "minutes": 9
+        },
+        {
+          "id": "pipes-e-tee",
+          "file": "02-pipes-e-tee.md",
+          "title": "Pipelines e cópia da saída com tee",
+          "minutes": 8
+        },
+        {
+          "id": "variaveis-e-aspas",
+          "file": "03-variaveis-e-aspas.md",
+          "title": "Variáveis e aspas no Bash",
+          "minutes": 8
+        },
+        {
+          "id": "status-e-condicoes",
+          "file": "04-status-e-condicoes.md",
+          "title": "Status de saída, && e ||",
+          "minutes": 8
+        }
+      ]
+    },
+    {
+      "id": "sistema",
+      "dir": "05-sistema",
+      "title": "Permissões e processos",
+      "description": "Entenda sua identidade, permissões de acesso, processos da sessão e uso dos recursos.",
+      "lessons": [
+        {
+          "id": "identidade-e-permissoes",
+          "file": "01-identidade-e-permissoes.md",
+          "title": "Usuários e permissões de arquivos",
+          "minutes": 9
+        },
+        {
+          "id": "privilegios-e-sudo",
+          "file": "02-privilegios-e-sudo.md",
+          "title": "Privilégios: quando usar sudo",
+          "minutes": 7
+        },
+        {
+          "id": "processos-e-jobs",
+          "file": "03-processos-e-jobs.md",
+          "title": "Processos, jobs e interrupção",
+          "minutes": 9
+        },
+        {
+          "id": "disco-e-memoria",
+          "file": "04-disco-e-memoria.md",
+          "title": "Consultar disco e memória",
+          "minutes": 7
+        }
+      ]
+    },
+    {
+      "id": "rotinas",
+      "dir": "06-rotinas",
+      "title": "Rotinas com Bash",
+      "description": "Guarde arquivos com tar e escreva scripts curtos com argumentos, condições e repetição.",
+      "lessons": [
+        {
+          "id": "arquivar-com-tar",
+          "file": "01-arquivar-com-tar.md",
+          "title": "Agrupar e extrair arquivos com tar",
+          "minutes": 8
+        },
+        {
+          "id": "primeiro-script",
+          "file": "02-primeiro-script.md",
+          "title": "Seu primeiro script Bash",
+          "minutes": 9
+        },
+        {
+          "id": "argumentos-e-condicoes",
+          "file": "03-argumentos-e-condicoes.md",
+          "title": "Argumentos, leitura e condições",
+          "minutes": 10
+        },
+        {
+          "id": "repeticao-e-projeto",
+          "file": "04-repeticao-e-projeto.md",
+          "title": "Repetição e um projeto de revisão",
+          "minutes": 10
+        }
+      ]
+    }
+  ]
+}

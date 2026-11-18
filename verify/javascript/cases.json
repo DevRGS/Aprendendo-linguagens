@@ -1,0 +1,435 @@
+[
+  {
+    "file": "introducao-javascript-e-web.mjs",
+    "mode": "node",
+    "lessons": [
+      "introducao/javascript-e-web"
+    ],
+    "stdout": "Olá, JavaScript!\n5\n"
+  },
+  {
+    "file": "introducao-console-e-editor.mjs",
+    "mode": "node",
+    "lessons": [
+      "introducao/console-e-editor"
+    ],
+    "stdout": "JavaScript\nnumber\n"
+  },
+  {
+    "file": "introducao-primeira-pagina.html",
+    "mode": "dom",
+    "lessons": [
+      "introducao/primeira-pagina"
+    ],
+    "actions": [
+      {
+        "type": "click",
+        "selector": "#saudar"
+      }
+    ],
+    "checks": [
+      {
+        "selector": "#mensagem",
+        "text": "Olá, JavaScript!"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "introducao-servidor-local.mjs",
+    "mode": "node",
+    "lessons": [
+      "introducao/servidor-local"
+    ],
+    "stdout": "http://127.0.0.1:8000/dados.json\n"
+  },
+  {
+    "file": "fundamentos-variaveis-e-tipos.mjs",
+    "mode": "node",
+    "lessons": [
+      "fundamentos/variaveis-e-tipos"
+    ],
+    "stdout": "7\nstring\nundefined\nobject\n"
+  },
+  {
+    "file": "fundamentos-numeros-e-textos.mjs",
+    "mode": "node",
+    "lessons": [
+      "fundamentos/numeros-e-textos"
+    ],
+    "stdout": "15\n123\ntrue\nOlá, Ana!\n"
+  },
+  {
+    "file": "fundamentos-operadores-e-comparacoes.mjs",
+    "mode": "node",
+    "lessons": [
+      "fundamentos/operadores-e-comparacoes"
+    ],
+    "stdout": "14\nfalse\ntrue\ntrue\npadrão\n"
+  },
+  {
+    "file": "fundamentos-condicionais.mjs",
+    "mode": "node",
+    "lessons": [
+      "fundamentos/condicionais"
+    ],
+    "stdout": "Aprovado\nContinuar\n"
+  },
+  {
+    "file": "funcoes-lacos.mjs",
+    "mode": "node",
+    "lessons": [
+      "funcoes/lacos"
+    ],
+    "stdout": "6\nler\npraticar\n"
+  },
+  {
+    "file": "funcoes-parametros-e-retorno.mjs",
+    "mode": "node",
+    "lessons": [
+      "funcoes/parametros-e-retorno"
+    ],
+    "stdout": "30\n10\n"
+  },
+  {
+    "file": "funcoes-callbacks-e-arrow.mjs",
+    "mode": "node",
+    "lessons": [
+      "funcoes/callbacks-e-arrow"
+    ],
+    "stdout": "8\n9\n"
+  },
+  {
+    "file": "funcoes-escopo-e-closures.mjs",
+    "mode": "node",
+    "lessons": [
+      "funcoes/escopo-e-closures"
+    ],
+    "stdout": "1\n2\n1\n"
+  },
+  {
+    "file": "dados-arrays.mjs",
+    "mode": "node",
+    "lessons": [
+      "dados/arrays"
+    ],
+    "stdout": "HTML\n3\nDOM\n[\"HTML\",\"JavaScript\"]\n"
+  },
+  {
+    "file": "dados-transformar-arrays.mjs",
+    "mode": "node",
+    "lessons": [
+      "dados/transformar-arrays"
+    ],
+    "stdout": "[4,20,6]\n[10,3]\n15\n[2,3,10]\n[2,10,3]\n"
+  },
+  {
+    "file": "dados-objetos-e-referencias.mjs",
+    "mode": "node",
+    "lessons": [
+      "dados/objetos-e-referencias"
+    ],
+    "stdout": "3\nAna\ntrue\nfalse\n"
+  },
+  {
+    "file": "dados-json.mjs",
+    "mode": "node",
+    "lessons": [
+      "dados/json"
+    ],
+    "stdout": "{\"nome\":\"Ana\",\"ativa\":true}\nAna\nstring\nSyntaxError\n"
+  },
+  {
+    "file": "dom-selecionar-e-alterar.html",
+    "mode": "dom",
+    "lessons": [
+      "dom/selecionar-e-alterar"
+    ],
+    "actions": [],
+    "checks": [
+      {
+        "selector": "#titulo",
+        "text": "JavaScript no DOM"
+      },
+      {
+        "selector": ".nota",
+        "count": 2,
+        "text": "Revisada"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "dom-criar-elementos.html",
+    "mode": "dom",
+    "lessons": [
+      "dom/criar-elementos"
+    ],
+    "actions": [],
+    "checks": [
+      {
+        "selector": "#temas li.destaque",
+        "count": 1,
+        "text": "Estudar DOM"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "dom-eventos.html",
+    "mode": "dom",
+    "lessons": [
+      "dom/eventos"
+    ],
+    "actions": [
+      {
+        "type": "click",
+        "selector": "#somar"
+      },
+      {
+        "type": "click",
+        "selector": "#somar"
+      }
+    ],
+    "checks": [
+      {
+        "selector": "#contador",
+        "text": "2"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "dom-formularios.html",
+    "mode": "dom",
+    "lessons": [
+      "dom/formularios"
+    ],
+    "actions": [
+      {
+        "type": "value",
+        "selector": "#nome",
+        "value": " Ana "
+      },
+      {
+        "type": "submit",
+        "selector": "#formulario"
+      }
+    ],
+    "checks": [
+      {
+        "selector": "#resultado",
+        "text": "Olá, Ana!"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "assincrono-temporizadores.mjs",
+    "mode": "node",
+    "lessons": [
+      "assincrono/temporizadores"
+    ],
+    "stdout": "início\nfim\nmicrotarefa\ntemporizador\n"
+  },
+  {
+    "file": "assincrono-promises.mjs",
+    "mode": "node",
+    "lessons": [
+      "assincrono/promises"
+    ],
+    "stdout": "Registrado\n8\n"
+  },
+  {
+    "file": "assincrono-async-await.mjs",
+    "mode": "node",
+    "lessons": [
+      "assincrono/async-await"
+    ],
+    "stdout": "2\nFalha simulada\nFinalizado\n"
+  },
+  {
+    "file": "assincrono-fetch.mjs",
+    "mode": "node",
+    "lessons": [
+      "assincrono/fetch"
+    ],
+    "stdout": "JavaScript\ntrue\nfalse\n"
+  },
+  {
+    "file": "moderno-desestruturacao-e-spread.mjs",
+    "mode": "node",
+    "lessons": [
+      "moderno/desestruturacao-e-spread"
+    ],
+    "stdout": "Ana\nAna\nOlinda\nBia\n"
+  },
+  {
+    "file": "moderno-opcionais-e-erros.mjs",
+    "mode": "node",
+    "lessons": [
+      "moderno/opcionais-e-erros"
+    ],
+    "stdout": "Não informada\n0\n10\nEntrada inválida\n"
+  },
+  {
+    "file": "moderno-classes-e-this.mjs",
+    "mode": "node",
+    "lessons": [
+      "moderno/classes-e-this"
+    ],
+    "stdout": "1\n0\n2\n"
+  },
+  {
+    "file": "moderno-modulos.mjs",
+    "mode": "node",
+    "lessons": [
+      "moderno/modulos"
+    ],
+    "stdout": "5\n"
+  },
+  {
+    "file": "pratica-armazenamento-local.html",
+    "mode": "dom",
+    "lessons": [
+      "pratica/armazenamento-local"
+    ],
+    "actions": [],
+    "checks": [
+      {
+        "selector": "#resultado",
+        "text": "DOM"
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "pratica-funcoes-testaveis.mjs",
+    "mode": "node",
+    "lessons": [
+      "pratica/funcoes-testaveis"
+    ],
+    "stdout": "Dois casos passaram.\n"
+  },
+  {
+    "file": "pratica-depuracao.mjs",
+    "mode": "node",
+    "lessons": [
+      "pratica/depuracao"
+    ],
+    "stdout": "82\nstring\n10\n"
+  },
+  {
+    "file": "pratica-projeto-final.html",
+    "mode": "dom",
+    "lessons": [
+      "pratica/projeto-final"
+    ],
+    "actions": [
+      {
+        "type": "value",
+        "selector": "#tarefa",
+        "value": "Estudar JavaScript"
+      },
+      {
+        "type": "submit",
+        "selector": "#formulario"
+      }
+    ],
+    "checks": [
+      {
+        "selector": "#lista li",
+        "count": 1
+      },
+      {
+        "selector": "#lista span",
+        "text": "Estudar JavaScript"
+      },
+      {
+        "selector": "#tarefa",
+        "value": ""
+      }
+    ],
+    "logs": []
+  },
+  {
+    "file": "assincrono-falhas.mjs",
+    "mode": "node",
+    "lessons": [
+      "assincrono/fetch"
+    ],
+    "stdout": "Rede, HTTP e JSON conferidos.\n"
+  },
+  {
+    "file": "backend-node.mjs",
+    "mode": "node",
+    "sqlite": false,
+    "lessons": [
+      "node/instalacao-node",
+      "node/primeiro-http",
+      "node/express-e-middleware",
+      "node/contratos-rest"
+    ],
+    "stdout": "HTTP e Express conferidos.\n"
+  },
+  {
+    "file": "backend-banco.mjs",
+    "mode": "node",
+    "sqlite": true,
+    "lessons": [
+      "banco/sqlite-no-node",
+      "banco/esquema-e-restricoes",
+      "banco/parametros-e-repositorio",
+      "banco/persistencia-e-transacoes"
+    ],
+    "stdout": "SQL, transação e persistência conferidos.\n"
+  },
+  {
+    "file": "backend-api.mjs",
+    "mode": "node",
+    "sqlite": true,
+    "lessons": [
+      "api/ler-e-criar",
+      "api/alterar-e-remover",
+      "api/validar-e-erros",
+      "api/testes-http"
+    ],
+    "stdout": "CRUD e erros HTTP conferidos.\n"
+  },
+  {
+    "file": "backend-integracao.mjs",
+    "mode": "node",
+    "sqlite": true,
+    "lessons": [
+      "integracao/cliente-fetch",
+      "integracao/formularios-assincronos",
+      "integracao/estados-e-falhas",
+      "integracao/crud-completo"
+    ],
+    "stdout": "Cliente fetch e API real conferidos.\n"
+  },
+  {
+    "file": "backend-autenticacao.mjs",
+    "mode": "node",
+    "sqlite": true,
+    "lessons": [
+      "autenticacao/senhas-e-cadastro",
+      "autenticacao/sessoes-e-cookies",
+      "autenticacao/autorizacao-por-dono",
+      "autenticacao/csrf-cors-e-limites"
+    ],
+    "stdout": "Senha, sessão, CSRF e proprietário conferidos.\n"
+  },
+  {
+    "file": "backend-projeto.mjs",
+    "mode": "node",
+    "sqlite": true,
+    "lessons": [
+      "backend-projeto/estrutura-e-configuracao",
+      "backend-projeto/projeto-api-estudos",
+      "backend-projeto/testes-e-restauracao",
+      "backend-projeto/implantacao-e-evolucao"
+    ],
+    "stdout": "Configuração e arquivos privados conferidos.\n"
+  }
+]

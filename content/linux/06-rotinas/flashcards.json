@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.rotinas.f01",
+      "lesson": "arquivar-com-tar",
+      "front": "Como criar, listar e extrair um tar.gz?",
+      "back": "Criar: `tar -czf pacote.tar.gz pasta`; listar: `tar -tzf pacote.tar.gz`; extrair: `tar -xzf pacote.tar.gz -C destino`, com destino já existente."
+    },
+    {
+      "id": "linux.rotinas.f02",
+      "lesson": "arquivar-com-tar",
+      "front": "O que indica -f em tar?",
+      "back": "O argumento seguinte é o nome do archive. `-z` pede gzip; sem compressão, um `.tar` pode apenas agrupar arquivos."
+    },
+    {
+      "id": "linux.rotinas.f03",
+      "lesson": "primeiro-script",
+      "front": "Qual a diferença entre bash script.sh e ./script.sh?",
+      "back": "A primeira escolhe Bash e exige leitura. A execução direta precisa do bit de execução e de uma forma de interpretação, normalmente um shebang."
+    },
+    {
+      "id": "linux.rotinas.f04",
+      "lesson": "primeiro-script",
+      "front": "O que faz #!/usr/bin/env bash?",
+      "back": "Ao executar o arquivo diretamente, pede que o sistema use o Bash encontrado pelo ambiente. Não instala o interpretador."
+    },
+    {
+      "id": "linux.rotinas.f05",
+      "lesson": "primeiro-script",
+      "front": "O que observar ao criar um script no Windows para usar no WSL?",
+      "back": "Salve com finais de linha LF, ou crie dentro do Ubuntu. CRLF pode causar erros de interpretação. Use os arquivos Linux na pasta pessoal para estas práticas."
+    },
+    {
+      "id": "linux.rotinas.f06",
+      "lesson": "argumentos-e-condicoes",
+      "front": "O que significam $1, $#, $0 e \"$@\"?",
+      "back": "`$1` é o primeiro argumento; `$#` é a quantidade; `$0` identifica o script. `\"$@\"` expande a lista preservando cada argumento."
+    },
+    {
+      "id": "linux.rotinas.f07",
+      "lesson": "argumentos-e-condicoes",
+      "front": "Como if decide entre os ramos?",
+      "back": "Pelo status do comando de teste: 0 entra no then. Por exemplo, `[ -f \"$arquivo\" ]` testa arquivo regular; os espaços de `[` e `]` são necessários."
+    },
+    {
+      "id": "linux.rotinas.f08",
+      "lesson": "argumentos-e-condicoes",
+      "front": "Como ler uma linha preservando barras e espaços nas pontas?",
+      "back": "No Bash: `IFS= read -r nome`. Depois use `\"$nome\"` como dado, por exemplo com `printf '%s\\n' \"$nome\"`."
+    },
+    {
+      "id": "linux.rotinas.f09",
+      "lesson": "repeticao-e-projeto",
+      "front": "Qual a estrutura básica de um for Bash?",
+      "back": "`for item in lista; do ...; done`. Use `\"$item\"` no corpo para ler cada valor sem separar seu conteúdo por espaços."
+    },
+    {
+      "id": "linux.rotinas.f10",
+      "lesson": "repeticao-e-projeto",
+      "front": "Como o projeto evita tratar um glob sem correspondência como arquivo?",
+      "back": "Dentro do laço: `[ -f \"$arquivo\" ] || continue`. Só continua o processamento quando o caminho é um arquivo regular."
+    }
+  ]
+}

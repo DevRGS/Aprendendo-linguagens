@@ -1,0 +1,202 @@
+{
+  "questions": [
+    {
+      "id": "linux.arquivos.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "caminhos-e-navegacao",
+      "prompt": "Qual comando mostra o diretório atual?",
+      "options": [
+        "`pwd`",
+        "`mkdir`",
+        "`whoami`",
+        "`touch`"
+      ],
+      "answer": 0,
+      "explanation": "`pwd` imprime o caminho do diretório atual. `whoami` mostra o usuário efetivo."
+    },
+    {
+      "id": "linux.arquivos.q02",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "caminhos-e-navegacao",
+      "prompt": "O caminho `notas/aula.txt`, sem `/` no início, é resolvido a partir do diretório atual.",
+      "answer": true,
+      "explanation": "É um caminho relativo. Um caminho absoluto parte da raiz e começa com `/`."
+    },
+    {
+      "id": "linux.arquivos.q03",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "caminhos-e-navegacao",
+      "prompt": "Complete com a opção que inclui **todos os nomes ocultos e também `.` e `..`**, na ferramenta GNU `ls`:",
+      "code": "ls ___",
+      "blanks": [
+        [
+          "-a",
+          "--all"
+        ]
+      ],
+      "explanation": "`-a`/`--all` inclui os nomes especiais `.` e `..`. `-A`/`--almost-all` inclui outros nomes ocultos, mas omite esses dois."
+    },
+    {
+      "id": "linux.arquivos.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "criar-e-copiar",
+      "prompt": "A pasta `notas` existe e contém `plano.txt`. `reserva` ainda não existe. Qual copia a pasta inteira para `reserva`?",
+      "options": [
+        "`cp -R notas reserva`",
+        "`cd notas reserva`",
+        "`touch notas reserva`",
+        "`rmdir notas reserva`"
+      ],
+      "answer": 0,
+      "explanation": "`cp -R` copia diretórios recursivamente. A origem continua existindo. O destino `reserva` recebe o conteúdo da pasta `notas`."
+    },
+    {
+      "id": "linux.arquivos.q05",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "criar-e-copiar",
+      "prompt": "Rodar `touch plano.txt` em um arquivo existente apaga seu texto e o deixa vazio.",
+      "answer": false,
+      "explanation": "`touch` atualiza horários; ele não esvazia o texto de um arquivo existente. Se o caminho não existe, normalmente cria um arquivo vazio."
+    },
+    {
+      "id": "linux.arquivos.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "criar-e-copiar",
+      "prompt": "Complete a opção que também cria as pastas intermediárias ausentes:",
+      "code": "mkdir ___ projeto/notas",
+      "blanks": [
+        [
+          "-p",
+          "--parents"
+        ]
+      ],
+      "explanation": "`mkdir -p`/`--parents` cria os diretórios pais que faltam e aceita diretórios já existentes."
+    },
+    {
+      "id": "linux.arquivos.q07",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "criar-e-copiar",
+      "prompt": "O arquivo `origem.txt` e a pasta vazia `copia` existem. O que faz `cp origem.txt copia/` se tiver permissão?",
+      "options": [
+        "Cria `copia/origem.txt`, mantendo `origem.txt`",
+        "Move o arquivo e apaga a origem",
+        "Troca o nome da pasta para `origem.txt`",
+        "Cria um link de terminal para o navegador"
+      ],
+      "answer": 0,
+      "explanation": "Com destino em um diretório existente, `cp` usa o nome da origem dentro dele. Copiar não remove a origem."
+    },
+    {
+      "id": "linux.arquivos.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "mover-e-remover",
+      "prompt": "Complete somente o nome do comando para renomear `rascunho.txt` para `final.txt`:",
+      "code": "___ rascunho.txt final.txt",
+      "blanks": [
+        [
+          "mv"
+        ]
+      ],
+      "explanation": "`mv` move/renomeia. Se `final.txt` já existe, pode ser sobrescrito; `-i` permite pedir confirmação."
+    },
+    {
+      "id": "linux.arquivos.q09",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "mover-e-remover",
+      "prompt": "O `rm` usado nesta trilha envia os arquivos automaticamente à lixeira do ambiente gráfico.",
+      "answer": false,
+      "explanation": "`rm` remove sem passar pela lixeira. Confira pasta e nomes; nesta trilha pratique somente com arquivos do laboratório."
+    },
+    {
+      "id": "linux.arquivos.q10",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "mover-e-remover",
+      "prompt": "Qual comando remove um diretório **somente se estiver vazio**?",
+      "options": [
+        "`rmdir pasta`",
+        "`cat pasta`",
+        "`cp -R pasta`",
+        "`touch pasta`"
+      ],
+      "answer": 0,
+      "explanation": "`rmdir` falha se o diretório contém entradas. É diferente de pedir remoção recursiva com `rm -r`."
+    },
+    {
+      "id": "linux.arquivos.q11",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "mover-e-remover",
+      "prompt": "A pasta `entrega` não existe. Ordene para criar nela um arquivo vazio e depois movê-lo para `final.txt` na pasta atual. Os caminhos finais devem ser os descritos.",
+      "lines": [
+        "mkdir entrega",
+        "touch entrega/rascunho.txt",
+        "mv entrega/rascunho.txt final.txt"
+      ],
+      "explanation": "A pasta precisa existir para criar o arquivo; o arquivo precisa existir para ser movido."
+    },
+    {
+      "id": "linux.arquivos.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "aspas-e-curingas",
+      "prompt": "Qual comando trata `minhas notas.txt` como **um único caminho de origem**?",
+      "options": [
+        "`cp \"minhas notas.txt\" copia.txt`",
+        "`cp minhas notas.txt copia.txt`",
+        "`cp minhas notas .txt copia.txt`",
+        "`cp \"minhas\" \"notas.txt\" copia.txt`"
+      ],
+      "answer": 0,
+      "explanation": "Aspas ao redor do nome inteiro agrupam o caminho em um argumento. Nas outras opções o programa recebe partes separadas."
+    },
+    {
+      "id": "linux.arquivos.q13",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "aspas-e-curingas",
+      "prompt": "No Bash padrão, `*.txt` sem aspas também inclui automaticamente `.segredo.txt`.",
+      "answer": false,
+      "explanation": "Por padrão, padrões como `*` não incluem nomes com ponto inicial. Configurações como `dotglob` podem mudar esse comportamento."
+    },
+    {
+      "id": "linux.arquivos.q14",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "aspas-e-curingas",
+      "prompt": "O Bash executa `printf '<%s>\\n' '*.txt'`. O que chega ao `printf` como dado?",
+      "options": [
+        "O texto literal `*.txt`",
+        "Uma lista obrigatória de todos os `.txt`",
+        "O conteúdo de todos os `.txt`",
+        "Somente arquivos ocultos"
+      ],
+      "answer": 0,
+      "explanation": "As aspas simples impedem a expansão do curinga pelo shell. O programa recebe o asterisco literalmente."
+    },
+    {
+      "id": "linux.arquivos.q15",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "caminhos-e-navegacao",
+      "prompt": "Complete para subir um nível a partir do diretório atual:",
+      "code": "cd ___",
+      "blanks": [
+        [
+          "..",
+          "../"
+        ]
+      ],
+      "explanation": "`..` representa o diretório pai. `.` representa o próprio diretório."
+    }
+  ]
+}

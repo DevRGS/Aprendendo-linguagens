@@ -1,0 +1,204 @@
+{
+  "questions": [
+    {
+      "id": "linux.rotinas.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "arquivar-com-tar",
+      "prompt": "Qual cria um archive chamado `pacote.tar.gz` com a pasta `notas`, usando gzip?",
+      "options": [
+        "`tar -czf pacote.tar.gz notas`",
+        "`tar -tzf pacote.tar.gz notas`",
+        "`tar -xzf pacote.tar.gz notas`",
+        "`tar -cf notas pacote.tar.gz`"
+      ],
+      "answer": 0,
+      "explanation": "`-c` cria, `-z` usa gzip e `-f` indica que o argumento seguinte é o nome do archive. Listar e extrair usam opções diferentes."
+    },
+    {
+      "id": "linux.rotinas.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "arquivar-com-tar",
+      "prompt": "Complete a opção curta que **lista** o conteúdo sem extrair (a opção pode ser escrita separada):",
+      "code": "tar ___ -zf pacote.tar.gz",
+      "blanks": [
+        [
+          "-t",
+          "--list"
+        ]
+      ],
+      "explanation": "`-t`/`--list` lista os membros. `-x` extrai e pode escrever arquivos; confira o conteúdo antes de extrair."
+    },
+    {
+      "id": "linux.rotinas.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "arquivar-com-tar",
+      "prompt": "Todo archive criado por tar é obrigatoriamente comprimido com gzip.",
+      "answer": false,
+      "explanation": "Tar pode apenas agrupar, como em `tar -cf pacote.tar notas`. A opção `-z` pede gzip; agrupar e comprimir são operações diferentes."
+    },
+    {
+      "id": "linux.rotinas.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "primeiro-script",
+      "prompt": "Um script legível ainda não tem permissão de execução. Qual forma pede explicitamente que Bash leia esse arquivo?",
+      "options": [
+        "`bash ola.sh`",
+        "`./ola.sh`",
+        "`chmod ola.sh`",
+        "`ola.sh --install`"
+      ],
+      "answer": 0,
+      "explanation": "`bash ola.sh` escolhe o interpretador diretamente e não exige o bit de execução. `./ola.sh` exige permissão de execução e uma forma válida de interpretação."
+    },
+    {
+      "id": "linux.rotinas.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "primeiro-script",
+      "prompt": "Complete o nome do interpretador usado no shebang deste curso:",
+      "code": "#!/usr/bin/env ___",
+      "blanks": [
+        [
+          "bash"
+        ]
+      ],
+      "explanation": "Esse shebang pede ao sistema que encontre `bash` pelo ambiente ao executar o script diretamente."
+    },
+    {
+      "id": "linux.rotinas.q06",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "primeiro-script",
+      "prompt": "A extensão `.sh`, sozinha, concede permissão de execução ao arquivo.",
+      "answer": false,
+      "explanation": "A extensão é uma convenção. A execução direta depende de permissões e da interpretação; `chmod u+x` acrescenta execução ao dono."
+    },
+    {
+      "id": "linux.rotinas.q07",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "primeiro-script",
+      "prompt": "Por que executar `./ola.sh` em vez de presumir que `ola.sh` será encontrado?",
+      "options": [
+        "`./` indica o arquivo no diretório atual, que normalmente não está no PATH",
+        "`./` instala Bash automaticamente",
+        "A barra transforma o script em código Java",
+        "`./` remove a necessidade de permissão de execução"
+      ],
+      "answer": 0,
+      "explanation": "Um nome sem barra passa pela resolução de comandos do shell. `./` fornece um caminho explícito; não concede privilégios."
+    },
+    {
+      "id": "linux.rotinas.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "argumentos-e-condicoes",
+      "prompt": "Complete a expansão para ler o **primeiro argumento** do script:",
+      "code": "nome=___",
+      "blanks": [
+        [
+          "$1",
+          "${1}",
+          "\"$1\"",
+          "\"${1}\""
+        ]
+      ],
+      "explanation": "`$1`/`${1}` acessa o primeiro argumento. `$0` identifica o script, `$#` conta os argumentos e `\"$@\"` preserva a lista."
+    },
+    {
+      "id": "linux.rotinas.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "argumentos-e-condicoes",
+      "prompt": "Qual teste verifica se o caminho guardado em `arquivo` é um arquivo regular?",
+      "options": [
+        "`[ -f \"$arquivo\" ]`",
+        "`[ -d \"$arquivo\" ]`",
+        "`[ -f\"$arquivo\"]`",
+        "`[ \"$arquivo\" = diretorio ]`"
+      ],
+      "answer": 0,
+      "explanation": "`-f` testa arquivo regular. `-d` testa diretório. Os espaços são necessários porque `[` é um comando com argumentos."
+    },
+    {
+      "id": "linux.rotinas.q10",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "argumentos-e-condicoes",
+      "prompt": "No Bash, `read -r nome` lê uma linha sem interpretar barras invertidas como escapes.",
+      "answer": true,
+      "explanation": "A opção `-r` preserva as barras invertidas. `IFS= read -r nome` também evita retirar espaços nas pontas conforme a separação por IFS."
+    },
+    {
+      "id": "linux.rotinas.q11",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "argumentos-e-condicoes",
+      "prompt": "Em `bash saudar.sh \"Ana Silva\"`, quantos argumentos, além do nome do script, são passados?",
+      "options": [
+        "Um argumento: `Ana Silva`",
+        "Dois argumentos: `Ana` e `Silva`",
+        "Nenhum, porque aspas descartam o conteúdo",
+        "Três, contando as duas aspas"
+      ],
+      "answer": 0,
+      "explanation": "As aspas agrupam o nome em uma palavra. O script recebe o texto completo em `$1` e `$#` vale 1."
+    },
+    {
+      "id": "linux.rotinas.q12",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "repeticao-e-projeto",
+      "prompt": "Por que a aula evita `for arquivo in $(ls)` para percorrer nomes?",
+      "options": [
+        "A substituição pode separar nomes com espaços ou linhas e alterar os argumentos",
+        "O comando ls sempre apaga arquivos",
+        "Um laço for só aceita números",
+        "Bash não permite nomes de variáveis no for"
+      ],
+      "answer": 0,
+      "explanation": "A separação da saída textual de `ls` pode quebrar nomes. Para o laboratório, use glob e `\"$arquivo\"` no corpo."
+    },
+    {
+      "id": "linux.rotinas.q13",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "repeticao-e-projeto",
+      "prompt": "Com as opções padrão do Bash, se nenhum arquivo combina com `*.txt`, o padrão pode permanecer literal no laço.",
+      "answer": true,
+      "explanation": "Por isso a aula testa `[ -f \"$arquivo\" ] || continue`. Opções como `nullglob` mudam a regra de ausência de correspondências."
+    },
+    {
+      "id": "linux.rotinas.q14",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "repeticao-e-projeto",
+      "prompt": "Complete a palavra reservada que fecha o laço:",
+      "code": "for item in ler praticar; do\n    printf '%s\\n' \"$item\"\n___",
+      "blanks": [
+        [
+          "done"
+        ]
+      ],
+      "explanation": "`do` inicia o corpo e `done` fecha o `for`. Dentro do corpo, `\"$item\"` lê o valor da iteração."
+    },
+    {
+      "id": "linux.rotinas.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "primeiro-script",
+      "prompt": "Ordene para criar um script completo por here-document, terminar a gravação e executá-lo explicitamente com Bash. `ola.sh` não existe.",
+      "lines": [
+        "cat > ola.sh <<'EOF'",
+        "printf '%s\\n' 'Olá!'",
+        "EOF",
+        "bash ola.sh"
+      ],
+      "explanation": "O conteúdo só termina ao aparecer o delimitador EOF sozinho. A chamada de Bash deve acontecer depois que o arquivo foi escrito."
+    }
+  ]
+}

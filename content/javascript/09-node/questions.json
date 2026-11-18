@@ -1,0 +1,202 @@
+{
+  "questions": [
+    {
+      "id": "javascript.node.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "instalacao-node",
+      "prompt": "Onde executar node --version e npm ci?",
+      "options": [
+        "No terminal/PowerShell do computador",
+        "No campo de título da tarefa",
+        "Somente no console JavaScript do navegador",
+        "Dentro de uma consulta SELECT"
+      ],
+      "answer": 0,
+      "explanation": "São comandos do ambiente local. O console do navegador executa JavaScript da página, não comandos de terminal."
+    },
+    {
+      "id": "javascript.node.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "instalacao-node",
+      "prompt": "Complete a opção para conferir a versão do runtime:",
+      "code": "node ___",
+      "blanks": [
+        [
+          "--version",
+          "-v"
+        ]
+      ],
+      "explanation": "Node aceita --version e -v. Conferir a versão ajuda a diagnosticar incompatibilidade de runtime."
+    },
+    {
+      "id": "javascript.node.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "instalacao-node",
+      "prompt": "npm ci serve para atualizar automaticamente todas as dependências para as versões mais novas.",
+      "answer": false,
+      "explanation": "Ele instala de forma reproduzível conforme o lockfile e exige compatibilidade com package.json. Atualização é outra operação a testar."
+    },
+    {
+      "id": "javascript.node.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "instalacao-node",
+      "prompt": "Por que a central pode publicar as aulas no GitHub Pages, mas o projeto da API precisa executar em outro processo?",
+      "options": [
+        "Pages serve arquivos estáticos; o servidor Node precisa de um ambiente que execute seu processo",
+        "Porque JSON só funciona em um servidor Windows",
+        "Porque SQLite exige uma conta no navegador",
+        "Porque Express é uma biblioteca CSS"
+      ],
+      "answer": 0,
+      "explanation": "O pacote é material para baixar. O aluno executa Node localmente; isso não instala um backend no Pages."
+    },
+    {
+      "id": "javascript.node.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "primeiro-http",
+      "prompt": "Qual combinação o primeiro exemplo node:http trata como saúde?",
+      "options": [
+        "GET /api/saude",
+        "POST /api/tarefas sem código adicional",
+        "DELETE /api/usuarios",
+        "Qualquer URL com status 200 sempre"
+      ],
+      "answer": 0,
+      "explanation": "O exemplo verifica método e caminho explicitamente. As demais rotas não surgem automaticamente."
+    },
+    {
+      "id": "javascript.node.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "primeiro-http",
+      "prompt": "Complete o cabeçalho que descreve o formato JSON do corpo:",
+      "code": "res.setHeader('___', 'application/json; charset=utf-8');",
+      "blanks": [
+        [
+          "Content-Type",
+          "content-type"
+        ]
+      ],
+      "explanation": "O cabeçalho Content-Type identifica o formato. Nomes de cabeçalhos HTTP não diferenciam caixa; o valor continua indicando JSON.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "javascript.node.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "primeiro-http",
+      "prompt": "Um caminho de URL determina automaticamente qual arquivo do disco será enviado pelo servidor node:http.",
+      "answer": false,
+      "explanation": "O handler decide a resposta. Servir arquivos é um comportamento que você configura, não uma consequência obrigatória da URL."
+    },
+    {
+      "id": "javascript.node.q08",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "primeiro-http",
+      "prompt": "Ordene para construir uma resposta JSON a partir do objeto e encerrar. res já existe; payload e text ainda não foram declarados.",
+      "lines": [
+        "const payload = { ok: true };",
+        "const text = JSON.stringify(payload);",
+        "res.end(text);"
+      ],
+      "explanation": "Payload precisa existir antes da serialização; o texto precisa existir antes de encerrar a resposta com ele."
+    },
+    {
+      "id": "javascript.node.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "express-e-middleware",
+      "prompt": "No Express, de onde vem o nome em uma rota /api/ola/:nome?",
+      "options": [
+        "req.params.nome",
+        "req.body.password automaticamente",
+        "localStorage.nome do navegador",
+        "process.env de outra máquina"
+      ],
+      "answer": 0,
+      "explanation": "Params contém parâmetros do caminho. Query e body são outras fontes e precisam de validação própria."
+    },
+    {
+      "id": "javascript.node.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "express-e-middleware",
+      "prompt": "Complete o middleware de interpretação de JSON com o limite do exemplo:",
+      "code": "app.use(express.___({ limit: '16kb' }));",
+      "blanks": [
+        [
+          "json"
+        ]
+      ],
+      "explanation": "express.json interpreta o corpo do formato correspondente; o limite restringe o volume recebido."
+    },
+    {
+      "id": "javascript.node.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "express-e-middleware",
+      "prompt": "A ordem dos middlewares não altera o resultado, pois todos sempre executam simultaneamente.",
+      "answer": false,
+      "explanation": "A cadeia tem ordem. Parser precede a leitura do corpo, autenticação precede o handler protegido e tratamento de erro vem depois."
+    },
+    {
+      "id": "javascript.node.q12",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "express-e-middleware",
+      "prompt": "No Express 5, um handler async que devolve uma promise rejeitada é encaminhado como erro?",
+      "options": [
+        "Sim, pelo fluxo de tratamento do Express 5",
+        "Não, todo erro async é convertido em 200",
+        "Somente se o usuário clicar duas vezes",
+        "Nunca, nem com middleware de erro"
+      ],
+      "answer": 0,
+      "explanation": "Express 5 encaminha rejeições retornadas por handlers. Ainda é preciso integrar corretamente callbacks fora desse fluxo."
+    },
+    {
+      "id": "javascript.node.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "contratos-rest",
+      "prompt": "Qual resposta o projeto usa depois de criar uma tarefa?",
+      "options": [
+        "201 com representação e Location",
+        "204 com corpo JSON obrigatório",
+        "404 com a senha do dono",
+        "200 sempre, mesmo em falha de validação"
+      ],
+      "answer": 0,
+      "explanation": "A criação devolve 201, o recurso público e o caminho criado. DELETE bem-sucedido usa 204 sem corpo."
+    },
+    {
+      "id": "javascript.node.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "contratos-rest",
+      "prompt": "Um cliente pode chamar response.json em toda resposta 204 sem considerar que ela não tem corpo.",
+      "answer": false,
+      "explanation": "204 significa ausência de conteúdo. O cliente trata esse status antes de tentar interpretar JSON."
+    },
+    {
+      "id": "javascript.node.q15",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "contratos-rest",
+      "prompt": "Complete o método HTTP escolhido para atualização parcial dos campos da tarefa:",
+      "code": "fetch('/api/tarefas/1', { method: '___' });",
+      "blanks": [
+        [
+          "PATCH"
+        ]
+      ],
+      "explanation": "PATCH é o contrato de atualização parcial deste projeto. Métodos HTTP distinguem caixa; use a escrita em maiúsculas. PUT costuma representar substituição completa."
+    }
+  ]
+}

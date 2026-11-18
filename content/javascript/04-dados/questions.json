@@ -1,0 +1,199 @@
+{
+  "questions": [
+    {
+      "id": "javascript.dados.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "arrays",
+      "prompt": "Qual o primeiro índice de um array JavaScript?",
+      "options": [
+        "0",
+        "1",
+        "-1 obrigatoriamente",
+        "O valor de length"
+      ],
+      "answer": 0,
+      "explanation": "Índices usuais começam em 0. Para um array de três posições, os índices são 0, 1 e 2."
+    },
+    {
+      "id": "javascript.dados.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "arrays",
+      "prompt": "Complete o método que acrescenta um elemento no fim **alterando o array**:",
+      "code": "const temas = [\"JS\"];\ntemas.___(\"DOM\");",
+      "blanks": [
+        [
+          "push"
+        ]
+      ],
+      "explanation": "push acrescenta ao fim. Pop retira do fim; slice não acrescenta no array original."
+    },
+    {
+      "id": "javascript.dados.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "arrays",
+      "prompt": "slice e splice têm o mesmo efeito: ambos sempre alteram o array original.",
+      "answer": false,
+      "explanation": "Slice produz uma cópia de um trecho; splice altera o array removendo/inserindo elementos."
+    },
+    {
+      "id": "javascript.dados.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "arrays",
+      "prompt": "Depois de const a = [\"JS\"]; a.push(\"DOM\");, qual o valor de a.length?",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "TypeError porque a usa const"
+      ],
+      "answer": 0,
+      "explanation": "A mutação do array é permitida; const impede reatribuir o nome a outro valor."
+    },
+    {
+      "id": "javascript.dados.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "transformar-arrays",
+      "prompt": "Qual método cria um array com os resultados de uma callback, um por elemento?",
+      "options": [
+        "map",
+        "filter",
+        "pop",
+        "includes"
+      ],
+      "answer": 0,
+      "explanation": "Map transforma valores. Filter seleciona elementos que passam no teste; pop remove o último."
+    },
+    {
+      "id": "javascript.dados.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "transformar-arrays",
+      "prompt": "Complete o método que seleciona números maiores ou iguais a 3:",
+      "code": "const selecionados = [2, 10, 3].___(n => n >= 3);",
+      "blanks": [
+        [
+          "filter"
+        ]
+      ],
+      "explanation": "Filter mantém 10 e 3, na ordem da entrada. A callback fornece um teste truthy/falsy."
+    },
+    {
+      "id": "javascript.dados.q07",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "transformar-arrays",
+      "prompt": "Qual comparador ordena os números em ordem crescente no sort?",
+      "options": [
+        "(a, b) => a - b",
+        "(a, b) => b - a",
+        "(a, b) => a === b",
+        "Nenhum: sort sempre usa comparação numérica por padrão"
+      ],
+      "answer": 0,
+      "explanation": "O sinal de a - b indica qual número vem antes. Sem comparador, sort usa uma ordem baseada na representação textual."
+    },
+    {
+      "id": "javascript.dados.q08",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "transformar-arrays",
+      "prompt": "reduce com valor inicial 0 pode somar um array vazio e devolver 0.",
+      "answer": true,
+      "explanation": "O valor inicial fornece o acumulador mesmo sem elementos. Sem valor inicial, reduzir um array vazio lança TypeError."
+    },
+    {
+      "id": "javascript.dados.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "objetos-e-referencias",
+      "prompt": "Depois de const a = { pontos: 1 }; const b = a; b.pontos = 2;, quanto vale a.pontos?",
+      "options": [
+        "2",
+        "1",
+        "undefined",
+        "Erro porque const impede mudar propriedades"
+      ],
+      "answer": 0,
+      "explanation": "Os dois nomes referenciam o mesmo objeto. Alterar a propriedade por um deles afeta o objeto visto pelo outro."
+    },
+    {
+      "id": "javascript.dados.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "objetos-e-referencias",
+      "prompt": "Complete o método que fornece nomes de propriedades próprias enumeráveis de string:",
+      "code": "const nomes = Object.___({ nome: \"Ana\", pontos: 2 });",
+      "blanks": [
+        [
+          "keys"
+        ]
+      ],
+      "explanation": "Object.keys devolve os nomes dessas propriedades. Ele não inclui toda forma possível de propriedade/metadado de um objeto."
+    },
+    {
+      "id": "javascript.dados.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "objetos-e-referencias",
+      "prompt": "Dois objetos criados separadamente com as mesmas propriedades são sempre iguais por ===.",
+      "answer": false,
+      "explanation": "A igualdade estrita de objetos compara identidade da referência, não faz comparação profunda de conteúdo."
+    },
+    {
+      "id": "javascript.dados.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "objetos-e-referencias",
+      "prompt": "Se chave = \"nome\", qual acesso usa o **valor da variável chave** como nome da propriedade?",
+      "options": [
+        "pessoa[chave]",
+        "pessoa.chave",
+        "pessoa.\"chave\"",
+        "pessoa(chave) sempre"
+      ],
+      "answer": 0,
+      "explanation": "Colchetes avaliam a expressão. pessoa.chave busca literalmente a propriedade chamada chave."
+    },
+    {
+      "id": "javascript.dados.q13",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "json",
+      "prompt": "Complete a operação que transforma um objeto compatível em texto JSON:",
+      "code": "const texto = JSON.___({ nome: \"Ana\" });",
+      "blanks": [
+        [
+          "stringify"
+        ]
+      ],
+      "explanation": "Stringify serializa para texto; parse interpreta um texto JSON e pode lançar SyntaxError."
+    },
+    {
+      "id": "javascript.dados.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "json",
+      "prompt": "JSON.parse garante que o resultado possui todos os campos esperados pelo seu aplicativo.",
+      "answer": false,
+      "explanation": "Parse verifica a sintaxe JSON. O resultado pode ser null, número, array ou objeto com formato errado; valide o contrato depois."
+    },
+    {
+      "id": "javascript.dados.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "json",
+      "prompt": "Ordene para serializar dados, interpretar o texto e ler o nome do objeto restaurado:",
+      "lines": [
+        "const texto = JSON.stringify({ nome: \"Ana\" });",
+        "const lido = JSON.parse(texto);",
+        "console.log(lido.nome);"
+      ],
+      "explanation": "O texto precisa ser criado antes de parse; lido precisa existir antes da leitura da propriedade."
+    }
+  ]
+}

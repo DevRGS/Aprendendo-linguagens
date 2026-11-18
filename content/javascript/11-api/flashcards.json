@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.api.f01",
+      "lesson": "ler-e-criar",
+      "front": "Qual é a responsabilidade principal da rota?",
+      "back": "Interpretar a entrada validada, chamar a operação apropriada e responder pelo contrato. SQL e DOM ficam em outras fronteiras."
+    },
+    {
+      "id": "javascript.api.f02",
+      "lesson": "ler-e-criar",
+      "front": "Qual cabeçalho acompanha a criação no exemplo?",
+      "back": "Location com o caminho /api/tarefas/id; a resposta 201 também contém a representação pública da nova tarefa."
+    },
+    {
+      "id": "javascript.api.f03",
+      "lesson": "alterar-e-remover",
+      "front": "PATCH apaga todo campo que não recebeu?",
+      "back": "Não no contrato desta API. Ela preserva os valores não enviados e aceita somente os campos parciais permitidos."
+    },
+    {
+      "id": "javascript.api.f04",
+      "lesson": "alterar-e-remover",
+      "front": "Por que tratar 204 antes de response.json?",
+      "back": "Não há corpo para interpretar. O sucesso da exclusão é o status; tentar JSON produziria falha de leitura."
+    },
+    {
+      "id": "javascript.api.f05",
+      "lesson": "alterar-e-remover",
+      "front": "O que a API promete sobre edição concorrente?",
+      "back": "Ela valida e protege dono, mas não tem versão/ETag para todo conflito entre abas. A última escrita no mesmo campo pode prevalecer."
+    },
+    {
+      "id": "javascript.api.f06",
+      "lesson": "validar-e-erros",
+      "front": "Onde validar um dado que também tem regra no HTML?",
+      "back": "No servidor também. Clientes podem ignorar o formulário; tipo, campos, limites e identidade são parte do contrato da API."
+    },
+    {
+      "id": "javascript.api.f07",
+      "lesson": "validar-e-erros",
+      "front": "Como a API padroniza falhas?",
+      "back": "Com {erro:{codigo, mensagem}} e status apropriado. Não devolve stack/SQL/credenciais em 500."
+    },
+    {
+      "id": "javascript.api.f08",
+      "lesson": "testes-http",
+      "front": "Por que testes usam banco temporário?",
+      "back": "Para isolar entradas/efeitos e evitar alterar as tarefas reais. O teste cria e remove apenas seu laboratório."
+    },
+    {
+      "id": "javascript.api.f09",
+      "lesson": "testes-http",
+      "front": "O que um teste de duas contas precisa verificar?",
+      "back": "Leitura, listagem, atualização e exclusão não podem cruzar o proprietário, mesmo quando o id alheio é conhecido."
+    },
+    {
+      "id": "javascript.api.f10",
+      "lesson": "testes-http",
+      "front": "Passar em teste HTTP prova toda configuração de produção?",
+      "back": "Não. Proxy, TLS, operação, segredos e políticas externas precisam de validação no ambiente correspondente."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+</head>
+<body>
+<form id="formulario">
+<label for="nome">Seu nome</label>
+<input id="nome" name="nome" required maxlength="60">
+<button type="submit">Saudar</button>
+</form>
+<p id="resultado" aria-live="polite"></p>
+<script>
+const formulario = document.querySelector("#formulario");
+formulario.addEventListener("submit", evento => {
+  evento.preventDefault();
+  const nome = document.querySelector("#nome").value.trim();
+  const resultado = document.querySelector("#resultado");
+  if (!nome) {
+    resultado.textContent = "Digite seu nome.";
+    return;
+  }
+  resultado.textContent = `Olá, ${nome}!`;
+});
+</script>
+</body>
+</html>

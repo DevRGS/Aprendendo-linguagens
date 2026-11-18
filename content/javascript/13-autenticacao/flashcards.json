@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.autenticacao.f01",
+      "lesson": "senhas-e-cadastro",
+      "front": "Por que usar salt aleatório por senha?",
+      "back": "Diferencia as derivações mesmo para senhas iguais e dificulta reutilizar trabalho pré-calculado. O salt não precisa ser um segredo separado."
+    },
+    {
+      "id": "javascript.autenticacao.f02",
+      "lesson": "senhas-e-cadastro",
+      "front": "Por que SHA256 tem papéis diferentes para senha e token?",
+      "back": "Senha humana é previsível e precisa de derivação custosa; token de sessão é aleatório de 256 bits. O projeto usa SHA256 apenas para indexar esse token aleatório no banco."
+    },
+    {
+      "id": "javascript.autenticacao.f03",
+      "lesson": "senhas-e-cadastro",
+      "front": "O que timingSafeEqual oferece?",
+      "back": "Comparação de bytes adequada ao uso criptográfico quando os tamanhos são tratados corretamente. Não promete que toda requisição HTTP terá tempo total idêntico."
+    },
+    {
+      "id": "javascript.autenticacao.f04",
+      "lesson": "sessoes-e-cookies",
+      "front": "HttpOnly impede o navegador de enviar o cookie?",
+      "back": "Não. Impede JavaScript de lê-lo. O navegador pode anexá-lo aos pedidos permitidos pelas políticas do cookie."
+    },
+    {
+      "id": "javascript.autenticacao.f05",
+      "lesson": "sessoes-e-cookies",
+      "front": "O que logout e expiração precisam fazer?",
+      "back": "Logout revoga o registro e limpa o cookie; expiração é conferida no servidor. O token antigo não deve continuar autorizando CRUD."
+    },
+    {
+      "id": "javascript.autenticacao.f06",
+      "lesson": "sessoes-e-cookies",
+      "front": "O projeto guarda token de sessão em localStorage?",
+      "back": "Não. Usa cookie HttpOnly e mantém o CSRF na memória do cliente. GET/sessão restaura a identidade após recarga."
+    },
+    {
+      "id": "javascript.autenticacao.f07",
+      "lesson": "autorizacao-por-dono",
+      "front": "De onde vem o dono para consultar tarefas?",
+      "back": "Da identidade resolvida no servidor pela sessão. Nunca do usuario_id fornecido livremente no corpo do cliente."
+    },
+    {
+      "id": "javascript.autenticacao.f08",
+      "lesson": "autorizacao-por-dono",
+      "front": "Por que responder 404 para id alheio?",
+      "back": "É a política do exemplo para não revelar desnecessariamente a existência do recurso. O filtro de dono evita retornar ou alterar dados proibidos."
+    },
+    {
+      "id": "javascript.autenticacao.f09",
+      "lesson": "csrf-cors-e-limites",
+      "front": "CORS e CSRF são a mesma coisa?",
+      "back": "Não. CORS regula acesso entre origens no navegador; CSRF trata ações provocadas com credenciais da pessoa. A API combina origem, SameSite e token de sessão independente."
+    },
+    {
+      "id": "javascript.autenticacao.f10",
+      "lesson": "csrf-cors-e-limites",
+      "front": "Qual o limite do limitador em memória do laboratório?",
+      "back": "Vale para um processo e pode reiniciar com ele. Produção com várias instâncias exige estratégia operacional/distribuída apropriada."
+    }
+  ]
+}

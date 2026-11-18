@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.moderno.f01",
+      "lesson": "desestruturacao-e-spread",
+      "front": "O que a desestruturação faz?",
+      "back": "Extrai valores de um array/objeto para nomes, como const { nome } = pessoa. Padrões são usados para undefined/ausência, não para todo null."
+    },
+    {
+      "id": "javascript.moderno.f02",
+      "lesson": "desestruturacao-e-spread",
+      "front": "Spread faz cópia profunda?",
+      "back": "Não. Copia um nível; objetos internos continuam sendo referências compartilhadas. Copie explicitamente os níveis que pretende alterar."
+    },
+    {
+      "id": "javascript.moderno.f03",
+      "lesson": "desestruturacao-e-spread",
+      "front": "Spread e rest usam o mesmo símbolo para quê?",
+      "back": "Spread expande elementos/propriedades em um contexto; rest reúne o restante em outro, como os argumentos restantes de uma função."
+    },
+    {
+      "id": "javascript.moderno.f04",
+      "lesson": "opcionais-e-erros",
+      "front": "Qual a diferença entre ?? e || para um padrão?",
+      "back": "?? troca apenas null/undefined. || usa o segundo operando para qualquer valor falsy, incluindo 0, false e string vazia."
+    },
+    {
+      "id": "javascript.moderno.f05",
+      "lesson": "opcionais-e-erros",
+      "front": "O que ?. protege e o que não protege?",
+      "back": "Evita acessar um nível null/undefined na cadeia indicada. Não declara variáveis, não valida tipos de negócio e não transforma qualquer valor em função chamável."
+    },
+    {
+      "id": "javascript.moderno.f06",
+      "lesson": "classes-e-this",
+      "front": "Classes substituem o modelo de protótipos?",
+      "back": "Não. São uma sintaxe apoiada nesse modelo. New cria a instância e executa o constructor."
+    },
+    {
+      "id": "javascript.moderno.f07",
+      "lesson": "classes-e-this",
+      "front": "Por que this pode se perder ao passar um método como callback?",
+      "back": "Um método normal depende da forma de chamada. Uma chamada sem receptor pode não ter o objeto esperado; use wrapper ou bind quando apropriado."
+    },
+    {
+      "id": "javascript.moderno.f08",
+      "lesson": "modulos",
+      "front": "Como importar uma exportação nomeada local?",
+      "back": "`import { somar } from \"./calculos.mjs\";` no nível superior de um módulo. O navegador usa o caminho explícito, incluindo a extensão."
+    },
+    {
+      "id": "javascript.moderno.f09",
+      "lesson": "modulos",
+      "front": "Como carregar o ponto de entrada de um módulo no HTML?",
+      "back": "Use `<script type=\"module\" src=\"app.mjs\"></script>` e abra a página por HTTP. Imports estáticos ficam no topo do módulo."
+    },
+    {
+      "id": "javascript.moderno.f10",
+      "lesson": "modulos",
+      "front": "Módulos compartilham automaticamente suas variáveis com a página inteira?",
+      "back": "Não. Cada módulo tem seu escopo e roda em modo estrito. Exponha e consuma dependências com export/import."
+    }
+  ]
+}

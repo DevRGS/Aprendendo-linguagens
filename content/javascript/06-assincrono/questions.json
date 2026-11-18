@@ -1,0 +1,200 @@
+{
+  "questions": [
+    {
+      "id": "javascript.assincrono.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "temporizadores",
+      "prompt": "Um setTimeout(callback, 0) interrompe o trecho síncrono atual para executar imediatamente a callback?",
+      "options": [
+        "Não; agenda a callback para uma tarefa posterior",
+        "Sim, sempre interrompe a linha atual",
+        "Só se callback estiver escrita como arrow",
+        "Sim, e bloqueia a thread por zero segundos"
+      ],
+      "answer": 0,
+      "explanation": "O trecho síncrono atual termina antes de uma tarefa de temporizador. O atraso zero não é uma chamada imediata."
+    },
+    {
+      "id": "javascript.assincrono.q02",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "temporizadores",
+      "prompt": "Uma callback de Promise.then é executada como microtarefa, depois do trecho síncrono atual e antes da próxima tarefa de temporizador no exemplo da aula.",
+      "answer": true,
+      "explanation": "A ordem ensinada para o exemplo é início, fim, microtarefa e temporizador. O tempo exato não é a garantia importante."
+    },
+    {
+      "id": "javascript.assincrono.q03",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "temporizadores",
+      "prompt": "Complete a API que cancela um temporizador de setTimeout ainda pendente:",
+      "code": "const id = setTimeout(() => console.log(\"depois\"), 1000);\n___(id);",
+      "blanks": [
+        [
+          "clearTimeout"
+        ]
+      ],
+      "explanation": "O identificador devolvido por setTimeout pode ser passado a clearTimeout. Isso cancela o agendamento pendente."
+    },
+    {
+      "id": "javascript.assincrono.q04",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "temporizadores",
+      "prompt": "O código agenda um setTimeout de 0 ms, registra um then numa promise já resolvida e imprime duas mensagens síncronas. Ordene a saída: console.log(\"início\"); setTimeout(() => console.log(\"temporizador\"), 0); Promise.resolve().then(() => console.log(\"microtarefa\")); console.log(\"fim\");",
+      "lines": [
+        "início",
+        "fim",
+        "microtarefa",
+        "temporizador"
+      ],
+      "explanation": "O síncrono termina primeiro; a microtarefa da promise vem antes da próxima tarefa do temporizador."
+    },
+    {
+      "id": "javascript.assincrono.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "promises",
+      "prompt": "O que then devolve ao ser chamado em uma promise?",
+      "options": [
+        "Outra promise, para encadear o resultado do tratamento",
+        "Sempre o valor resolvido de forma síncrona",
+        "A mesma string passada à primeira callback",
+        "Um elemento DOM"
+      ],
+      "answer": 0,
+      "explanation": "Then cria uma nova promise. Um valor retornado pela callback alimenta a próxima etapa; um erro lançado pode rejeitá-la."
+    },
+    {
+      "id": "javascript.assincrono.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "promises",
+      "prompt": "Complete o método usado para tratar uma rejeição na cadeia:",
+      "code": "Promise.reject(new Error(\"teste\")).___(erro => console.log(erro.message));",
+      "blanks": [
+        [
+          "catch"
+        ]
+      ],
+      "explanation": "Catch registra tratamento de rejeição. Ele pode recuperar a cadeia ao retornar um valor."
+    },
+    {
+      "id": "javascript.assincrono.q07",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "promises",
+      "prompt": "Uma promise já realizada pode depois mudar para rejeitada se você tentar concluí-la outra vez.",
+      "answer": false,
+      "explanation": "Uma vez em estado final, ela não troca para o outro. Resolver para outra promise/thenable pode acompanhar um resultado ainda pendente antes da decisão final."
+    },
+    {
+      "id": "javascript.assincrono.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "promises",
+      "prompt": "Em Promise.resolve(4).then(n => n * 2).then(n => console.log(n)), o que é impresso pela segunda callback?",
+      "options": [
+        "8",
+        "4",
+        "undefined",
+        "Uma string obrigatória chamada Promise"
+      ],
+      "answer": 0,
+      "explanation": "A primeira callback retorna 8 e esse valor chega à etapa seguinte. Retornar é essencial quando o corpo da callback usa chaves."
+    },
+    {
+      "id": "javascript.assincrono.q09",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "async-await",
+      "prompt": "Complete a palavra que declara uma função cujo retorno é uma promise:",
+      "code": "___ function listar() {\n  return [\"JS\"];\n}",
+      "blanks": [
+        [
+          "async"
+        ]
+      ],
+      "explanation": "Uma função async devolve uma promise, mesmo quando retorna um valor comum. Await suspende a execução daquela função ao aguardar."
+    },
+    {
+      "id": "javascript.assincrono.q10",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "async-await",
+      "prompt": "O que await faz enquanto uma operação assíncrona aguardada está pendente?",
+      "options": [
+        "Suspende a função async atual, sem bloquear toda a thread pela espera",
+        "Cria obrigatoriamente uma nova thread para qualquer cálculo",
+        "Pausa todo o navegador até a promise terminar",
+        "Converte toda rejeição em null automaticamente"
+      ],
+      "answer": 0,
+      "explanation": "Await organiza a continuação da função. Trabalho síncrono pesado continua podendo bloquear; async não significa paralelismo automático."
+    },
+    {
+      "id": "javascript.assincrono.q11",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "async-await",
+      "prompt": "Promise.all rejeita quando uma das promises acompanhadas rejeita, mas não cancela automaticamente as operações restantes.",
+      "answer": true,
+      "explanation": "O resultado conjunto falha, porém cancelamento das operações requer um mecanismo próprio quando disponível."
+    },
+    {
+      "id": "javascript.assincrono.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "async-await",
+      "prompt": "Qual bloco é apropriado para retirar um indicador de carregamento tanto após sucesso quanto após falha?",
+      "options": [
+        "finally",
+        "Somente o primeiro then de sucesso",
+        "O parâmetro da função chamado erro",
+        "Uma declaração const sem execução"
+      ],
+      "answer": 0,
+      "explanation": "Finally executa ao sair do try/catch naquele fluxo. Ele é útil para limpeza que independe do resultado."
+    },
+    {
+      "id": "javascript.assincrono.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "fetch",
+      "prompt": "Uma requisição fetch recebe HTTP 404. O que o código precisa fazer para tratar isso como erro de aplicação?",
+      "options": [
+        "Conferir response.ok/status e lançar/tratar a falha conforme o contrato",
+        "Supor que fetch sempre rejeita automaticamente em todo 404",
+        "Ler document.status em vez da resposta",
+        "Usar no-cors para converter 404 em 200"
+      ],
+      "answer": 0,
+      "explanation": "Fetch normalmente resolve com Response para respostas HTTP, inclusive 404/500. Response.ok é falso para status fora de 200–299."
+    },
+    {
+      "id": "javascript.assincrono.q14",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "fetch",
+      "prompt": "Complete o método assíncrono que interpreta o corpo da Response como JSON:",
+      "code": "const dados = await resposta.___();",
+      "blanks": [
+        [
+          "json"
+        ]
+      ],
+      "explanation": "Response.json devolve uma promise e pode rejeitar por corpo inválido. Ela não valida por si só o formato de negócio dos dados."
+    },
+    {
+      "id": "javascript.assincrono.q15",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "fetch",
+      "prompt": "mode: \"no-cors\" é uma forma geral de liberar a leitura de JSON de qualquer origem bloqueada por CORS.",
+      "answer": false,
+      "explanation": "Uma resposta opaca não permite ler seu corpo livremente. O servidor/origem precisa oferecer uma configuração de acesso adequada; no-cors não contorna essa regra."
+    }
+  ]
+}

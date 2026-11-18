@@ -1,0 +1,205 @@
+{
+  "questions": [
+    {
+      "id": "linux.sistema.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "identidade-e-permissoes",
+      "prompt": "Qual comando mostra o usuário efetivo da sessão?",
+      "options": [
+        "`whoami`",
+        "`pwd`",
+        "`du`",
+        "`head`"
+      ],
+      "answer": 0,
+      "explanation": "`whoami` mostra o nome do usuário efetivo. `id` acrescenta IDs e grupos; `pwd` mostra um caminho."
+    },
+    {
+      "id": "linux.sistema.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "identidade-e-permissoes",
+      "prompt": "Complete o comando que define permissões básicas de leitura e escrita **somente para o dono**:",
+      "code": "chmod ___ privado.txt",
+      "blanks": [
+        [
+          "600",
+          "u=rw,go=",
+          "0600"
+        ]
+      ],
+      "explanation": "`600` é dono 6 (4+2, leitura e escrita), grupo 0 e outros 0. A forma simbólica `u=rw,go=` expressa as mesmas permissões básicas."
+    },
+    {
+      "id": "linux.sistema.q03",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "identidade-e-permissoes",
+      "prompt": "Em um diretório, o bit `x` tem o mesmo significado de executar um arquivo de programa.",
+      "answer": false,
+      "explanation": "Em diretórios, `x` permite atravessar/acessar entradas. Listar nomes corresponde a `r`, e alterações de entradas dependem de `w` e acesso adequado."
+    },
+    {
+      "id": "linux.sistema.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "identidade-e-permissoes",
+      "prompt": "Qual acrescenta execução ao **dono**, preservando os demais bits de permissão comuns?",
+      "options": [
+        "`chmod u+x script.sh`",
+        "`chmod a+w script.sh`",
+        "`chmod u-x script.sh`",
+        "`chmod 000 script.sh`"
+      ],
+      "answer": 0,
+      "explanation": "`u` representa o dono e `+x` acrescenta execução. Conceder o bit não transforma qualquer texto em um programa válido."
+    },
+    {
+      "id": "linux.sistema.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "privilegios-e-sudo",
+      "prompt": "Um exercício cria notas na sua pasta pessoal. Qual é a orientação da trilha sobre sudo?",
+      "options": [
+        "Usar a conta comum; investigar caminhos/permissões se houver erro",
+        "Executar toda a sessão como root obrigatoriamente",
+        "Aplicar chmod 777 em todas as pastas",
+        "Prefixar até pwd e printf com sudo sempre"
+      ],
+      "answer": 0,
+      "explanation": "As práticas usam arquivos do próprio aluno e não exigem administração. Privilégio não corrige erro de sintaxe ou nome."
+    },
+    {
+      "id": "linux.sistema.q06",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "privilegios-e-sudo",
+      "prompt": "Toda conta Linux pode usar sudo para executar qualquer comando administrativo, mesmo sem autorização na política do sistema.",
+      "answer": false,
+      "explanation": "`sudo` consulta a política do sistema. A conta precisa estar autorizada, e o programa pode nem estar instalado."
+    },
+    {
+      "id": "linux.sistema.q07",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "privilegios-e-sudo",
+      "prompt": "No Ubuntu/WSL configurado com a conta inicial, qual senha normalmente é solicitada por sudo?",
+      "options": [
+        "A senha da conta Linux, sem caracteres aparecendo ao digitar",
+        "A senha do perfil do site",
+        "Um código que o navegador gera",
+        "Sempre a senha da conta Microsoft"
+      ],
+      "answer": 0,
+      "explanation": "No ambiente Ubuntu/WSL descrito, a conta inicial normalmente tem autorização e usa a senha Linux. Em outros sistemas, a política pode mudar a autenticação."
+    },
+    {
+      "id": "linux.sistema.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "processos-e-jobs",
+      "prompt": "Complete a expansão Bash que captura o PID do último trabalho iniciado em segundo plano:",
+      "code": "sleep 30 &\npid=___",
+      "blanks": [
+        [
+          "$!",
+          "${!}",
+          "\"$!\"",
+          "\"${!}\""
+        ]
+      ],
+      "explanation": "`$!` fornece o PID associado ao trabalho iniciado em segundo plano. Não confunda com `$?`, que é status de saída."
+    },
+    {
+      "id": "linux.sistema.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "processos-e-jobs",
+      "prompt": "Sem informar um sinal, o comando Bash `kill PID` normalmente envia qual sinal?",
+      "options": [
+        "SIGTERM",
+        "SIGKILL obrigatoriamente",
+        "SIGSTOP",
+        "Um pedido para copiar o processo"
+      ],
+      "answer": 0,
+      "explanation": "O padrão é SIGTERM, um pedido de encerramento que o processo pode tratar. SIGKILL é uma medida mais forte e não deve ser a primeira tentativa."
+    },
+    {
+      "id": "linux.sistema.q10",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "processos-e-jobs",
+      "prompt": "`jobs` lista todos os processos de todos os usuários do computador.",
+      "answer": false,
+      "explanation": "`jobs` lista os trabalhos conhecidos do shell atual. Para processos do sistema, use ferramentas como `ps` e `top`."
+    },
+    {
+      "id": "linux.sistema.q11",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "processos-e-jobs",
+      "prompt": "No Bash interativo com controle de jobs, o que fg faz?",
+      "options": [
+        "Traz um job para o primeiro plano",
+        "Apaga um diretório vazio",
+        "Muda o dono de um arquivo",
+        "Mostra espaço livre em disco"
+      ],
+      "answer": 0,
+      "explanation": "`fg` retoma/traz um job ao primeiro plano. `bg` retoma um job suspenso em segundo plano; `%N` identifica o job da sessão."
+    },
+    {
+      "id": "linux.sistema.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "disco-e-memoria",
+      "prompt": "Qual consulta o espaço do **sistema de arquivos** que contém a pasta atual?",
+      "options": [
+        "`df -h .`",
+        "`du -sh .`",
+        "`wc -l .`",
+        "`id .`"
+      ],
+      "answer": 0,
+      "explanation": "`df` responde sobre o sistema de arquivos; `du` estima o uso de disco da árvore de arquivos indicada."
+    },
+    {
+      "id": "linux.sistema.q13",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "disco-e-memoria",
+      "prompt": "Em Linux, memória usada como cache significa necessariamente que toda essa memória está indisponível para aplicações novas.",
+      "answer": false,
+      "explanation": "Parte do cache pode ser recuperada. Em `free`, o campo `available` estima a memória disponível para novas aplicações sem swap."
+    },
+    {
+      "id": "linux.sistema.q14",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "disco-e-memoria",
+      "prompt": "Complete o comando que resume o espaço de disco ocupado pela pasta `notas`:",
+      "code": "___ -sh notas",
+      "blanks": [
+        [
+          "du"
+        ]
+      ],
+      "explanation": "`du -s` apresenta um resumo da árvore; `-h` usa unidades legíveis. O resultado depende dos arquivos e do sistema de arquivos."
+    },
+    {
+      "id": "linux.sistema.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "processos-e-jobs",
+      "prompt": "Ordene para iniciar um processo próprio, guardar seu PID e enviar SIGTERM **ao processo capturado**. `pid` ainda não está definida.",
+      "lines": [
+        "sleep 30 &",
+        "pid=$!",
+        "kill -TERM \"$pid\""
+      ],
+      "explanation": "O processo precisa ser iniciado antes de consultar `$!`; o PID precisa ser guardado antes do kill. Trabalhe apenas com o processo de treino que você criou."
+    }
+  ]
+}

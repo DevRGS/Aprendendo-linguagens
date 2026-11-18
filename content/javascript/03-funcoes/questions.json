@@ -1,0 +1,200 @@
+{
+  "questions": [
+    {
+      "id": "javascript.funcoes.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "lacos",
+      "prompt": "Quantas vezes o corpo executa em for (let i = 0; i < 3; i += 1)?",
+      "options": [
+        "3",
+        "2",
+        "4",
+        "Sempre infinitas"
+      ],
+      "answer": 0,
+      "explanation": "i passa por 0, 1 e 2. Quando chega a 3, a condição i < 3 é falsa."
+    },
+    {
+      "id": "javascript.funcoes.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "lacos",
+      "prompt": "Complete a palavra reservada que percorre os **valores** deste array:",
+      "code": "for (const tema ___ [\"JS\", \"DOM\"]) {\n  console.log(tema);\n}",
+      "blanks": [
+        [
+          "of"
+        ]
+      ],
+      "explanation": "for...of percorre valores de um iterável. for...in percorre nomes de propriedades enumeráveis."
+    },
+    {
+      "id": "javascript.funcoes.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "lacos",
+      "prompt": "continue encerra todo o laço e nunca permite outras iterações.",
+      "answer": false,
+      "explanation": "continue pula para a próxima iteração. break encerra o laço."
+    },
+    {
+      "id": "javascript.funcoes.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "lacos",
+      "prompt": "Qual forma testa a condição **depois** de executar o corpo pelo menos uma vez?",
+      "options": [
+        "do...while",
+        "while",
+        "Um if sem else",
+        "Uma declaração const"
+      ],
+      "answer": 0,
+      "explanation": "do...while executa o corpo e depois confere a condição; while e o for usual testam antes."
+    },
+    {
+      "id": "javascript.funcoes.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "parametros-e-retorno",
+      "prompt": "Complete para devolver o valor calculado a quem chamou a função:",
+      "code": "function dobrar(numero) {\n  ___ numero * 2;\n}",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "return devolve o valor e encerra a execução da função. Imprimir com console.log não substitui esse retorno."
+    },
+    {
+      "id": "javascript.funcoes.q06",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "parametros-e-retorno",
+      "prompt": "O que uma função normal sem return explícito devolve ao terminar?",
+      "options": [
+        "undefined",
+        "Sempre null",
+        "Sempre o último valor que imprimiu",
+        "O próprio texto do código"
+      ],
+      "answer": 0,
+      "explanation": "Sem return de valor, a função devolve undefined. Isso é diferente de um corpo de expressão em arrow function."
+    },
+    {
+      "id": "javascript.funcoes.q07",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "parametros-e-retorno",
+      "prompt": "No parâmetro quantidade = 1, o padrão é usado se o argumento é undefined ou foi omitido, mas não apenas por ser null.",
+      "answer": true,
+      "explanation": "Padrões de parâmetro são acionados por undefined. Null é um valor fornecido explicitamente."
+    },
+    {
+      "id": "javascript.funcoes.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "parametros-e-retorno",
+      "prompt": "Qual o resultado de function total(p, q = 1) { return p * q; } seguido de total(10, 3)?",
+      "options": [
+        "30",
+        "10",
+        "undefined",
+        "13"
+      ],
+      "answer": 0,
+      "explanation": "Os argumentos preenchem p = 10 e q = 3; return devolve o produto 30."
+    },
+    {
+      "id": "javascript.funcoes.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "callbacks-e-arrow",
+      "prompt": "Qual arrow function devolve corretamente o dobro do argumento?",
+      "options": [
+        "n => n * 2",
+        "n => { n * 2; }",
+        "n => { console.log(n * 2); }",
+        "n => undefined"
+      ],
+      "answer": 0,
+      "explanation": "Um corpo de expressão retorna implicitamente. Com bloco, é necessário return para devolver o produto."
+    },
+    {
+      "id": "javascript.funcoes.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "callbacks-e-arrow",
+      "prompt": "Complete a palavra que falta no corpo com chaves:",
+      "code": "const dobrar = n => {\n  ___ n * 2;\n};",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "As chaves formam um corpo de bloco; a expressão isolada não se torna retorno automaticamente."
+    },
+    {
+      "id": "javascript.funcoes.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "callbacks-e-arrow",
+      "prompt": "Uma callback só pode ser chamada de forma assíncrona.",
+      "answer": false,
+      "explanation": "Callback é uma função passada a outra parte do código. Ela pode ser chamada imediatamente, como em map ou em aplicar da aula."
+    },
+    {
+      "id": "javascript.funcoes.q12",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "callbacks-e-arrow",
+      "prompt": "Ordene para declarar a callback, declará-la como argumento de aplicar e imprimir o resultado guardado. aplicar já existe e chama a função recebida.",
+      "lines": [
+        "const dobrar = n => n * 2;",
+        "const resultado = aplicar(4, dobrar);",
+        "console.log(resultado);"
+      ],
+      "explanation": "dobrar precisa estar inicializada antes de ser usada, e resultado precisa existir antes de ser lido."
+    },
+    {
+      "id": "javascript.funcoes.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "escopo-e-closures",
+      "prompt": "Duas chamadas separadas de criarContador() na aula compartilham a mesma variável quantidade?",
+      "options": [
+        "Não; cada chamada cria seu próprio ambiente",
+        "Sim, porque a definição da função é a mesma",
+        "Somente se forem declaradas com const",
+        "A linguagem proíbe devolver funções"
+      ],
+      "answer": 0,
+      "explanation": "Cada chamada cria um ambiente próprio. A função retornada mantém acesso à variável daquela chamada."
+    },
+    {
+      "id": "javascript.funcoes.q14",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "escopo-e-closures",
+      "prompt": "Uma closure preserva acesso às variáveis do ambiente léxico em que a função foi criada, não apenas a uma fotografia congelada dos valores.",
+      "answer": true,
+      "explanation": "Mudanças na variável capturada podem ser observadas em chamadas posteriores da função."
+    },
+    {
+      "id": "javascript.funcoes.q15",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "escopo-e-closures",
+      "prompt": "Qual declaração pertence ao escopo de bloco nos exemplos desta trilha?",
+      "options": [
+        "let e const",
+        "Somente var",
+        "Nenhuma declaração de variável",
+        "Apenas parâmetros de URL"
+      ],
+      "answer": 0,
+      "explanation": "let e const são limitadas ao bloco; var possui regras diferentes de escopo de função/global."
+    }
+  ]
+}

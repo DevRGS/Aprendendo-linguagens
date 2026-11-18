@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 0 auto; padding: 1rem; overflow-wrap: anywhere; }
+form { display: grid; gap: .5rem; }
+input, button { font: inherit; max-width: 100%; box-sizing: border-box; }
+li { margin-block: .5rem; }
+</style>
+</head>
+<body>
+<h1>Minha lista de estudos</h1>
+<form id="formulario">
+  <label for="tarefa">O que você vai estudar?</label>
+  <input id="tarefa" name="tarefa" required maxlength="120">
+  <button type="submit">Adicionar</button>
+</form>
+<p id="aviso" aria-live="polite"></p>
+<ul id="lista"></ul>
+<script>
+const chave = "trilha-js:tarefas:v1";
+const formulario = document.querySelector("#formulario");
+const campo = document.querySelector("#tarefa");
+const aviso = document.querySelector("#aviso");
+const lista = document.querySelector("#lista");
+let tarefas = [];
+
+function formatoValido(valor) {
+  return Array.isArray(valor) && valor.every(item =>
+    item !== null && typeof item === "object" &&
+    typeof item.texto === "string" &&
+    item.texto.trim().length > 0 && item.texto.length <= 120 &&
+    typeof item.concluida === "boolean"
+  );
+}
+
+try {
+  const salvo = localStorage.getItem(chave);
+  if (salvo !== null) {
+    const dados = JSON.parse(salvo);
+    if (!formatoValido(dados)) throw new Error("Formato inválido");
+    tarefas = dados;
+  }
+} catch {
+  aviso.textContent = "Não foi possível ler os dados salvos. Começamos uma lista vazia nesta aba.";
+}
+
+function salvar() {
+  try {
+    localStorage.setItem(chave, JSON.stringify(tarefas));
+    aviso.textContent = "Lista salva neste navegador.";
+  } catch {
+    aviso.textContent = "Não foi possível salvar. A lista continua apenas nesta aba.";
+  }
+}
+
+function desenhar() {
+  lista.replaceChildren();
+  tarefas.forEach((tarefa, indice) => {
+    const item = document.createElement("li");
+    const rotulo = document.createElement("label");
+    const marcar = document.createElement("input");
+    marcar.type = "checkbox";
+    marcar.checked = tarefa.concluida;
+    const texto = document.createElement("span");
+    texto.textContent = tarefa.texto;
+    rotulo.append(marcar, texto);
+    marcar.addEventListener("change", () => {
+      tarefas[indice].concluida = marcar.checked;
+      salvar();
+    });
+    const remover = document.createElement("button");
+    remover.type = "button";
+    remover.textContent = "Remover";
+    remover.setAttribute("aria-label", `Remover ${tarefa.texto}`);
+    remover.addEventListener("click", () => {
+      tarefas.splice(indice, 1);
+      salvar();
+      desenhar();
+      campo.focus();
+    });
+    item.append(rotulo, remover);
+    lista.append(item);
+  });
+}
+
+formulario.addEventListener("submit", evento => {
+  evento.preventDefault();
+  const texto = campo.value.trim();
+  if (!texto || texto.length > 120) {
+    aviso.textContent = "Digite uma tarefa de 1 a 120 caracteres.";
+    return;
+  }
+  tarefas.push({ texto, concluida: false });
+  salvar();
+  desenhar();
+  campo.value = "";
+  campo.focus();
+});
+
+desenhar();
+</script>
+</body>
+</html>

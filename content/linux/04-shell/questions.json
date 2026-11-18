@@ -1,0 +1,203 @@
+{
+  "questions": [
+    {
+      "id": "linux.shell.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "redirecionamentos",
+      "prompt": "O arquivo `notas.txt` já tem conteúdo. O que `printf 'novo\\n' > notas.txt` faz?",
+      "options": [
+        "Substitui o conteúdo por `novo` e uma quebra de linha",
+        "Acrescenta sem alterar o conteúdo anterior",
+        "Só consulta as permissões",
+        "Sempre pede confirmação antes de escrever"
+      ],
+      "answer": 0,
+      "explanation": "`>` abre o destino para escrita truncando o conteúdo anterior. Para acrescentar, use `>>`."
+    },
+    {
+      "id": "linux.shell.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "redirecionamentos",
+      "prompt": "Complete **o operador de redirecionamento** para acrescentar ao final do arquivo:",
+      "code": "printf '%s\\n' 'segunda' ___ notas.txt",
+      "blanks": [
+        [
+          ">>"
+        ]
+      ],
+      "explanation": "`>>` acrescenta; `>` substitui. O arquivo é criado se ainda não existir e houver permissão."
+    },
+    {
+      "id": "linux.shell.q03",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "redirecionamentos",
+      "prompt": "Qual forma envia **somente o erro padrão** para `erros.txt`, mantendo a saída padrão no terminal?",
+      "options": [
+        "`comando 2> erros.txt`",
+        "`comando > erros.txt`",
+        "`comando < erros.txt`",
+        "`comando >> erros.txt`"
+      ],
+      "answer": 0,
+      "explanation": "O descritor 2 é stderr. O redirecionamento sem número usa stdout (1)."
+    },
+    {
+      "id": "linux.shell.q04",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "redirecionamentos",
+      "prompt": "`cat notas.txt > notas.txt` é uma maneira segura de regravar o arquivo com o próprio conteúdo.",
+      "answer": false,
+      "explanation": "O shell abre/trunca o destino antes de iniciar `cat`; isso pode esvaziar a origem antes da leitura. Use outro arquivo de destino."
+    },
+    {
+      "id": "linux.shell.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "pipes-e-tee",
+      "prompt": "Em `sort cores.txt | uniq`, o que o pipe conecta?",
+      "options": [
+        "A saída padrão de sort à entrada padrão de uniq",
+        "O nome do arquivo como argumento obrigatório de uniq",
+        "O erro padrão de sort à pasta atual",
+        "A saída de uniq de volta ao arquivo original automaticamente"
+      ],
+      "answer": 0,
+      "explanation": "O fluxo de dados de stdout do primeiro programa vira stdin do segundo. Isso por si só não modifica o arquivo de origem."
+    },
+    {
+      "id": "linux.shell.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "pipes-e-tee",
+      "prompt": "Complete o comando que grava a entrada em `resumo.txt` e também a imprime:",
+      "code": "sort cores.txt | uniq | ___ resumo.txt",
+      "blanks": [
+        [
+          "tee"
+        ]
+      ],
+      "explanation": "`tee` escreve no arquivo e na saída padrão. Sem `-a`, substitui o arquivo de destino."
+    },
+    {
+      "id": "linux.shell.q07",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "pipes-e-tee",
+      "prompt": "Um pipe comum `|` encaminha automaticamente stderr junto com stdout.",
+      "answer": false,
+      "explanation": "Um pipe comum conecta stdout. Para juntar os dois canais, você pode redirecionar com `2>&1` antes do pipe."
+    },
+    {
+      "id": "linux.shell.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "variaveis-e-aspas",
+      "prompt": "Qual atribuição define corretamente uma variável Bash simples?",
+      "options": [
+        "`nome=Ana`",
+        "`nome = Ana`",
+        "`$nome=Ana`",
+        "`set nome = Ana`"
+      ],
+      "answer": 0,
+      "explanation": "A atribuição simples não tem espaços ao redor de `=` e o nome na atribuição não recebe `$`."
+    },
+    {
+      "id": "linux.shell.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "variaveis-e-aspas",
+      "prompt": "Depois de `nome=Ana`, qual é a saída de `printf '%s\\n' '$nome'`?",
+      "options": [
+        "O texto literal `$nome`",
+        "O texto `Ana`",
+        "Uma linha vazia",
+        "Um erro por variável não exportada"
+      ],
+      "answer": 0,
+      "explanation": "Aspas simples impedem a expansão. Com `\"$nome\"`, o valor `Ana` seria expandido."
+    },
+    {
+      "id": "linux.shell.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "variaveis-e-aspas",
+      "prompt": "Complete para usar o **valor** de `arquivo` como um caminho único (as aspas já estão escritas):",
+      "code": "cat \"___\"",
+      "blanks": [
+        [
+          "$arquivo",
+          "${arquivo}"
+        ]
+      ],
+      "explanation": "Dentro das aspas duplas, `$arquivo` ou `${arquivo}` expande o valor sem separá-lo em argumentos por espaços."
+    },
+    {
+      "id": "linux.shell.q11",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "variaveis-e-aspas",
+      "prompt": "Exportar uma variável permite que processos filhos recebam seu valor no ambiente; não permite que um filho altere a variável do shell pai.",
+      "answer": true,
+      "explanation": "O ambiente é passado aos filhos. Mudar uma variável no processo filho não reatribui a variável da sessão que o iniciou."
+    },
+    {
+      "id": "linux.shell.q12",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "status-e-condicoes",
+      "prompt": "Depois de um comando, qual expansão Bash fornece seu status imediatamente anterior?",
+      "code": "estado=___",
+      "blanks": [
+        [
+          "$?",
+          "${?}",
+          "\"$?\"",
+          "\"${?}\""
+        ]
+      ],
+      "explanation": "`$?` é o status mais recente. Capture antes de executar outro comando, pois ele substituirá esse status."
+    },
+    {
+      "id": "linux.shell.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "status-e-condicoes",
+      "prompt": "Quando B é executado em `A && B`?",
+      "options": [
+        "Quando A termina com status 0",
+        "Somente quando A falha",
+        "Sempre, sem considerar A",
+        "Quando A imprime a palavra true"
+      ],
+      "answer": 0,
+      "explanation": "A decisão usa o status de saída, não o texto impresso. `||` executa o próximo comando quando o anterior termina com status não zero."
+    },
+    {
+      "id": "linux.shell.q14",
+      "type": "truefalse",
+      "difficulty": 3,
+      "lesson": "status-e-condicoes",
+      "prompt": "Em `A && B || C`, se A tem sucesso mas B falha, C pode ser executado.",
+      "answer": true,
+      "explanation": "A lista é avaliada da esquerda para a direita. O resultado não zero de B permite executar C. Por isso essa forma não substitui todo if/else."
+    },
+    {
+      "id": "linux.shell.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "status-e-condicoes",
+      "prompt": "O arquivo `inexistente.txt` não existe. Ordene para tentar lê-lo, guardar imediatamente seu status e depois imprimir o status guardado.",
+      "lines": [
+        "cat inexistente.txt 2> erro.txt",
+        "estado=$?",
+        "printf 'Status: %s\\n' \"$estado\""
+      ],
+      "explanation": "A captura de `$?` precisa vir logo após o comando observado. A impressão consulta a variável já preenchida, não o status alterado por outro comando."
+    }
+  ]
+}

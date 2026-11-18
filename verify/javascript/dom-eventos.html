@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prática de JavaScript</title>
+</head>
+<body>
+<button id="somar" type="button">Somar</button>
+<p id="contador" aria-live="polite">0</p>
+<script>
+let total = 0;
+const botao = document.querySelector("#somar");
+botao.addEventListener("click", () => {
+  total += 1;
+  document.querySelector("#contador").textContent = String(total);
+});
+</script>
+</body>
+</html>

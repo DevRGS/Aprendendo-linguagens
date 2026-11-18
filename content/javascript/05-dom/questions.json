@@ -1,0 +1,205 @@
+{
+  "questions": [
+    {
+      "id": "javascript.dom.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "selecionar-e-alterar",
+      "prompt": "O que document.querySelector devolve se nenhum elemento combina com o seletor?",
+      "options": [
+        "null",
+        "Um array vazio obrigatoriamente",
+        "undefined sempre",
+        "Um elemento invisível criado automaticamente"
+      ],
+      "answer": 0,
+      "explanation": "QuerySelector devolve o primeiro elemento correspondente ou null. Confira seletor e momento da execução antes de acessar propriedades."
+    },
+    {
+      "id": "javascript.dom.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "selecionar-e-alterar",
+      "prompt": "Complete a propriedade que insere o texto **sem interpretá-lo como HTML**:",
+      "code": "elemento.___ = \"<b>texto</b>\";",
+      "blanks": [
+        [
+          "textContent"
+        ]
+      ],
+      "explanation": "TextContent preserva a marcação como texto. InnerHTML interpreta HTML e exige cuidados extras para entrada não confiável."
+    },
+    {
+      "id": "javascript.dom.q03",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "selecionar-e-alterar",
+      "prompt": "A NodeList devolvida por querySelectorAll é uma lista estática dos elementos encontrados naquela consulta.",
+      "answer": true,
+      "explanation": "Uma nova mudança no DOM não acrescenta automaticamente novos resultados àquela NodeList estática. Os nós existentes ainda são os mesmos objetos."
+    },
+    {
+      "id": "javascript.dom.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "selecionar-e-alterar",
+      "prompt": "Uma seleção retorna null, embora você ache que o HTML tem o elemento. Qual investigação faz sentido?",
+      "options": [
+        "Conferir o seletor e se o elemento já existia quando o script rodou",
+        "Acrescentar sudo ao navegador",
+        "Trocar textContent por innerHTML obrigatoriamente",
+        "Somar 1 à variável document"
+      ],
+      "answer": 0,
+      "explanation": "Um seletor incorreto ou execução antes da análise do HTML pode causar ausência. Não esconda um erro estrutural supondo que todo elemento é opcional."
+    },
+    {
+      "id": "javascript.dom.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "criar-elementos",
+      "prompt": "Complete o método que cria um elemento ainda fora do DOM:",
+      "code": "const item = document.___(\"li\");",
+      "blanks": [
+        [
+          "createElement"
+        ]
+      ],
+      "explanation": "CreateElement cria o nó. Depois preencha texto/propriedades e insira num pai com append ou outra operação apropriada."
+    },
+    {
+      "id": "javascript.dom.q06",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "criar-elementos",
+      "prompt": "O que acontece ao usar append com um nó que já está em outro local da página?",
+      "options": [
+        "O nó é movido, não clonado automaticamente",
+        "Uma cópia profunda é sempre criada",
+        "O navegador apaga o documento",
+        "O nó vira uma string JSON"
+      ],
+      "answer": 0,
+      "explanation": "Um nó tem uma posição na árvore. Reanexar move o nó; se quiser duplicá-lo, precisa criar outro ou clonar explicitamente."
+    },
+    {
+      "id": "javascript.dom.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "criar-elementos",
+      "prompt": "classList.add(\"destaque\") cria automaticamente uma regra CSS em negrito, mesmo se não houver CSS para essa classe.",
+      "answer": false,
+      "explanation": "ClassList muda as classes do elemento. A aparência depende das regras de estilo que existirem para elas."
+    },
+    {
+      "id": "javascript.dom.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "criar-elementos",
+      "prompt": "Complete o método usado na aula para inserir o item no contêiner:",
+      "code": "lista.___(item);",
+      "blanks": [
+        [
+          "append",
+          "appendChild"
+        ]
+      ],
+      "explanation": "Append insere o nó; para este argumento único que é nó, appendChild também funciona. As APIs têm diferenças, como valores aceitos e retorno."
+    },
+    {
+      "id": "javascript.dom.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "eventos",
+      "prompt": "Qual chamada registra a função para um clique futuro, sem executá-la antecipadamente?",
+      "options": [
+        "botao.addEventListener(\"click\", saudar)",
+        "botao.addEventListener(\"click\", saudar())",
+        "botao.addEventListener(\"click\", console.log(\"agora\"))",
+        "saudar() sem registro de evento"
+      ],
+      "answer": 0,
+      "explanation": "Passar a função fornece a callback. A forma com parênteses executa agora e passa o resultado."
+    },
+    {
+      "id": "javascript.dom.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "eventos",
+      "prompt": "Complete o nome do evento de clique:",
+      "code": "botao.addEventListener(\"___\", () => { console.log(\"clicou\"); });",
+      "blanks": [
+        [
+          "click"
+        ]
+      ],
+      "explanation": "Click é o nome do evento. Botões reais também oferecem ativação por teclado no navegador."
+    },
+    {
+      "id": "javascript.dom.q11",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "eventos",
+      "prompt": "event.target e event.currentTarget sempre são o mesmo elemento.",
+      "answer": false,
+      "explanation": "Target é o alvo original; currentTarget é o elemento cujo listener está sendo executado. Um clique num filho pode produzir valores diferentes."
+    },
+    {
+      "id": "javascript.dom.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "eventos",
+      "prompt": "Qual elemento é a escolha apropriada para uma ação de somar em uma página?",
+      "options": [
+        "Um button com type=\"button\" e listener",
+        "Um div sem papel nem acesso por teclado, sempre",
+        "Um input type=\"password\" usado como botão",
+        "Uma tag script clicável"
+      ],
+      "answer": 0,
+      "explanation": "Um botão real oferece comportamento e acesso por teclado. Type explícito evita envio acidental quando estiver dentro de formulário."
+    },
+    {
+      "id": "javascript.dom.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "formularios",
+      "prompt": "Qual evento do form trata tanto envio pelo botão quanto por Enter quando a submissão ocorre?",
+      "options": [
+        "submit",
+        "mousemove",
+        "load do input",
+        "keydown como única forma válida"
+      ],
+      "answer": 0,
+      "explanation": "Ouvir submit no form cobre a intenção de envio. O navegador pode aplicar a validação HTML antes de disparar a submissão normal."
+    },
+    {
+      "id": "javascript.dom.q14",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "formularios",
+      "prompt": "Complete o método para cancelar a navegação padrão do envio no handler:",
+      "code": "evento.___();",
+      "blanks": [
+        [
+          "preventDefault"
+        ]
+      ],
+      "explanation": "PreventDefault cancela a ação padrão se o evento é cancelável. Ele não é o mesmo que stopPropagation."
+    },
+    {
+      "id": "javascript.dom.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "formularios",
+      "prompt": "Ordene para ler e limpar o nome, construir a mensagem com esse nome e mostrar o texto. campo e resultado já existem.",
+      "lines": [
+        "const nome = campo.value.trim();",
+        "const mensagem = `Olá, ${nome}!`;",
+        "resultado.textContent = mensagem;"
+      ],
+      "explanation": "A mensagem depende do nome, e a escrita depende da mensagem. Num aplicativo real, valide vazio antes de construir a saudação."
+    }
+  ]
+}

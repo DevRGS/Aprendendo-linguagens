@@ -1,0 +1,200 @@
+{
+  "questions": [
+    {
+      "id": "linux.texto.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "ler-arquivos",
+      "prompt": "Você quer ler um arquivo longo e navegar sem despejar o conteúdo todo na janela. Qual ferramenta foi ensinada?",
+      "options": [
+        "`less arquivo`",
+        "`mkdir arquivo`",
+        "`rm arquivo`",
+        "`chmod arquivo`"
+      ],
+      "answer": 0,
+      "explanation": "`less` é um paginador. Espaço avança; `b` volta; `/texto` procura e `q` sai. Pode precisar estar instalado no ambiente."
+    },
+    {
+      "id": "linux.texto.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "ler-arquivos",
+      "prompt": "Complete a ferramenta que mostra as duas **últimas** linhas:",
+      "code": "___ -n 2 agenda.txt",
+      "blanks": [
+        [
+          "tail"
+        ]
+      ],
+      "explanation": "`tail -n 2` mostra as duas últimas linhas. `head -n 2` mostra as primeiras."
+    },
+    {
+      "id": "linux.texto.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "ler-arquivos",
+      "prompt": "`head -n 1 arquivo` apaga todas as linhas depois da primeira.",
+      "answer": false,
+      "explanation": "`head` apenas apresenta um recorte na saída; o arquivo de origem continua igual."
+    },
+    {
+      "id": "linux.texto.q04",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "buscar-texto",
+      "prompt": "Você quer buscar literalmente `a.b`, sem deixar o ponto significar outro caractere. Qual comando usar?",
+      "options": [
+        "`grep -F 'a.b' pontos.txt`",
+        "`grep -E 'a.b' pontos.txt`",
+        "`grep 'a.b' pontos.txt`",
+        "`find . -name pontos.txt`"
+      ],
+      "answer": 0,
+      "explanation": "`-F` trata o padrão como texto fixo. Em expressões regulares, o ponto normalmente combina um caractere, por isso as duas buscas sem `-F` têm semântica diferente."
+    },
+    {
+      "id": "linux.texto.q05",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "buscar-texto",
+      "prompt": "Complete a opção curta que ignora diferenças de maiúsculas/minúsculas:",
+      "code": "grep ___ 'erro' eventos.txt",
+      "blanks": [
+        [
+          "-i"
+        ]
+      ],
+      "explanation": "`-i` ignora caixa. É diferente de `-n`, que mostra o número da linha, e de `-v`, que inverte a seleção."
+    },
+    {
+      "id": "linux.texto.q06",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "buscar-texto",
+      "prompt": "`grep` retornar status 1 sempre significa que ele não conseguiu abrir o arquivo.",
+      "answer": false,
+      "explanation": "Status 1 significa que não houve linha correspondente. Falhas de operação normalmente usam status 2. Nem todo resultado não zero é o mesmo tipo de erro."
+    },
+    {
+      "id": "linux.texto.q07",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "buscar-texto",
+      "prompt": "Qual padrão seleciona linhas que **começam** com `erro` usando grep com expressões regulares?",
+      "options": [
+        "`^erro`",
+        "`erro$`",
+        "`erro*`",
+        "`*.erro`"
+      ],
+      "answer": 0,
+      "explanation": "`^` ancora no início da linha; `$` ancora no fim. Padrões regex não seguem as mesmas regras dos curingas de nomes."
+    },
+    {
+      "id": "linux.texto.q08",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "localizar-arquivos",
+      "prompt": "Complete o teste de tipo para encontrar somente arquivos regulares:",
+      "code": "find . -type ___ -name '*.txt'",
+      "blanks": [
+        [
+          "f"
+        ]
+      ],
+      "explanation": "`-type f` seleciona arquivos regulares. `-type d` seleciona diretórios."
+    },
+    {
+      "id": "linux.texto.q09",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "localizar-arquivos",
+      "prompt": "Por que usar aspas em `find . -name '*.txt'`?",
+      "options": [
+        "Para o padrão chegar ao find sem ser expandido antes pelo Bash",
+        "Para impedir que find veja subdiretórios",
+        "Para obrigar a criação dos arquivos",
+        "Para fazer o ponto significar raiz"
+      ],
+      "answer": 0,
+      "explanation": "Quem deve interpretar `*.txt` aqui é o `find`, para cada nome encontrado. As aspas impedem que o Bash o troque antes pelos arquivos da pasta atual."
+    },
+    {
+      "id": "linux.texto.q10",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "localizar-arquivos",
+      "prompt": "Sem opções de ordenação ou uma etapa posterior de sort, o find garante listar os resultados alfabeticamente.",
+      "answer": false,
+      "explanation": "A ordem da travessia não é uma garantia de ordenação. Para uma apresentação ordenada, acrescente uma etapa apropriada, como `sort`, para os nomes controlados do laboratório."
+    },
+    {
+      "id": "linux.texto.q11",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "resumir-e-ordenar",
+      "prompt": "O arquivo contém `azul`, `verde`, `azul`, uma linha de cada vez. O que faz `uniq cores.txt`?",
+      "options": [
+        "Mantém as três linhas, pois as repetidas não são adjacentes",
+        "Sempre deixa somente `azul` e `verde`",
+        "Apaga o arquivo",
+        "Ordena antes de comparar, sem precisar pedir"
+      ],
+      "answer": 0,
+      "explanation": "`uniq` compara linhas vizinhas. Para reunir as duas ocorrências de `azul`, uma forma é `sort cores.txt | uniq`."
+    },
+    {
+      "id": "linux.texto.q12",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "resumir-e-ordenar",
+      "prompt": "Complete a opção de `sort` que compara os valores como números:",
+      "code": "sort ___ numeros.txt",
+      "blanks": [
+        [
+          "-n",
+          "--numeric-sort"
+        ]
+      ],
+      "explanation": "`-n`/`--numeric-sort` pede comparação numérica; ordenar só como texto pode colocar `10` antes de `2`."
+    },
+    {
+      "id": "linux.texto.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "resumir-e-ordenar",
+      "prompt": "Qual extrai o primeiro campo de linhas como `Ana:8`?",
+      "options": [
+        "`cut -d \":\" -f 1 notas.txt`",
+        "`cut -d \":\" -f 2 notas.txt`",
+        "`wc -l notas.txt`",
+        "`tail -n 1 notas.txt`"
+      ],
+      "answer": 0,
+      "explanation": "`-d` indica o delimitador e `-f 1` pede o primeiro campo. Isso não constitui um leitor CSV completo."
+    },
+    {
+      "id": "linux.texto.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "resumir-e-ordenar",
+      "prompt": "`wc -l` conta caracteres de nova linha; a falta da quebra final pode afetar a contagem em relação ao que você vê como linhas.",
+      "answer": true,
+      "explanation": "A opção `-l` conta novas linhas, não uma divisão abstrata em registros. Um trecho sem quebra final pode não acrescentar uma unidade."
+    },
+    {
+      "id": "linux.texto.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "resumir-e-ordenar",
+      "prompt": "Um arquivo `cores.txt` já existe. A pasta `relatorio` não existe. Ordene para criar o resumo nessa pasta e depois lê-lo.",
+      "lines": [
+        "mkdir relatorio",
+        "sort cores.txt | uniq > relatorio/cores.txt",
+        "cat relatorio/cores.txt"
+      ],
+      "explanation": "A pasta de destino precisa existir antes do redirecionamento; o resumo precisa ser criado antes de ser lido."
+    }
+  ]
+}

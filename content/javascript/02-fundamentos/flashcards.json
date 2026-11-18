@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.fundamentos.f01",
+      "lesson": "variaveis-e-tipos",
+      "front": "Quando usar let e const?",
+      "back": "Use const quando não vai reatribuir o nome; let quando precisará trocar seu valor. Ambas têm escopo de bloco."
+    },
+    {
+      "id": "javascript.fundamentos.f02",
+      "lesson": "variaveis-e-tipos",
+      "front": "Const torna um array imutável?",
+      "back": "Não. const lista = [] permite lista.push(...); impede reatribuir lista = outroArray."
+    },
+    {
+      "id": "javascript.fundamentos.f03",
+      "lesson": "variaveis-e-tipos",
+      "front": "Undefined e null são iguais conceitualmente?",
+      "back": "São valores distintos. Undefined aparece, por exemplo, após let x; null costuma representar ausência escolhida explicitamente. typeof null é \"object\" por motivo histórico."
+    },
+    {
+      "id": "javascript.fundamentos.f04",
+      "lesson": "numeros-e-textos",
+      "front": "Por que \"12\" + 3 não soma numericamente?",
+      "back": "O valor \"12\" é string e + faz concatenação nesse caso. Number(\"12\") + 3 produz o número 15."
+    },
+    {
+      "id": "javascript.fundamentos.f05",
+      "lesson": "numeros-e-textos",
+      "front": "Como validar conversão de texto numérico?",
+      "back": "Confira vazio após trim; converta explicitamente e teste o contrato, como Number.isFinite. Number(\"\") é 0, e textos inválidos podem produzir NaN."
+    },
+    {
+      "id": "javascript.fundamentos.f06",
+      "lesson": "numeros-e-textos",
+      "front": "Qual a diferença entre Number e parseInt?",
+      "back": "Number procura converter o valor inteiro; parseInt pode aceitar um prefixo inteiro como em parseInt(\"12px\", 10). Não são validações intercambiáveis."
+    },
+    {
+      "id": "javascript.fundamentos.f07",
+      "lesson": "operadores-e-comparacoes",
+      "front": "Qual a diferença entre === e ==?",
+      "back": "=== compara sem conversão de tipos; == segue regras de coerção. Prefira conversão explícita e comparação estrita para decisões desta trilha."
+    },
+    {
+      "id": "javascript.fundamentos.f08",
+      "lesson": "operadores-e-comparacoes",
+      "front": "&& e || sempre retornam booleanos?",
+      "back": "Não: retornam operandos conforme o curto-circuito. ! converte para booleano e inverte."
+    },
+    {
+      "id": "javascript.fundamentos.f09",
+      "lesson": "condicionais",
+      "front": "Como o if decide executar um ramo?",
+      "back": "Avalia a condição como truthy/falsy. Uma comparação como nota >= 7 gera um booleano; else cobre o caminho falso."
+    },
+    {
+      "id": "javascript.fundamentos.f10",
+      "lesson": "condicionais",
+      "front": "Para que servem break e default no switch?",
+      "back": "break encerra o switch naquele ponto; default cobre valores sem caso correspondente. Sem saída, a execução pode seguir pelos casos seguintes."
+    }
+  ]
+}

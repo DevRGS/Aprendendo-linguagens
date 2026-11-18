@@ -1,0 +1,202 @@
+{
+  "questions": [
+    {
+      "id": "javascript.autenticacao.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "senhas-e-cadastro",
+      "prompt": "Como o projeto armazena a senha humana?",
+      "options": [
+        "Derivada por scrypt com salt aleatório e custo configurado",
+        "Em texto puro para o usuário recuperar depois",
+        "Somente codificada em Base64",
+        "Como SHA256 puro sem salt e sem custo de derivação"
+      ],
+      "answer": 0,
+      "explanation": "O exemplo usa derivação apropriada para senha, com parâmetros documentados. Codificação não protege segredo; hash rápido puro não substitui essa derivação."
+    },
+    {
+      "id": "javascript.autenticacao.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "senhas-e-cadastro",
+      "prompt": "Complete a função nativa usada para gerar bytes aleatórios do salt:",
+      "code": "const sal = ___(16).toString(\"hex\");",
+      "blanks": [
+        [
+          "randomBytes"
+        ]
+      ],
+      "explanation": "RandomBytes vem de node:crypto. O salt pode ser armazenado com o hash; a senha original não é gravada."
+    },
+    {
+      "id": "javascript.autenticacao.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "senhas-e-cadastro",
+      "prompt": "Duas contas com a mesma senha precisam ter o mesmo salt para que o login funcione.",
+      "answer": false,
+      "explanation": "Cada cadastro recebe salt aleatório. O login deriva com o salt da própria conta e compara o resultado."
+    },
+    {
+      "id": "javascript.autenticacao.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "senhas-e-cadastro",
+      "prompt": "Por que limitar tentativas e derivações simultâneas de senha?",
+      "options": [
+        "Porque o custo de CPU/memória também pode ser explorado contra o servidor",
+        "Porque um hash forte torna toda API incapaz de responder",
+        "Para dispensar validação de entrada",
+        "Para obrigar a senha a aparecer no JSON"
+      ],
+      "answer": 0,
+      "explanation": "O trabalho caro ajuda a proteger senhas, mas exige limites de recursos. O projeto combina custo, limites locais e um pequeno teto de concorrência."
+    },
+    {
+      "id": "javascript.autenticacao.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "sessoes-e-cookies",
+      "prompt": "O que vai no cookie de sessão do projeto?",
+      "options": [
+        "Um token aleatório de alta entropia",
+        "A senha em texto puro",
+        "O arquivo SQLite inteiro",
+        "Um campo usuario_id que o navegador pode inventar livremente"
+      ],
+      "answer": 0,
+      "explanation": "O servidor emite o token; o banco guarda seu SHA256 e os dados da sessão. A identidade não é confiada a um id inventado pelo cliente."
+    },
+    {
+      "id": "javascript.autenticacao.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "sessoes-e-cookies",
+      "prompt": "Complete o atributo do cookie que impede sua leitura por JavaScript da página:",
+      "code": "res.cookie(nome, token, { ___: true });",
+      "blanks": [
+        [
+          "httpOnly"
+        ]
+      ],
+      "explanation": "HttpOnly limita leitura por JavaScript. O navegador ainda pode enviar o cookie conforme domínio/caminho/origem e demais políticas."
+    },
+    {
+      "id": "javascript.autenticacao.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "sessoes-e-cookies",
+      "prompt": "Apagar só a aparência de login no frontend revoga automaticamente qualquer sessão ainda válida no servidor.",
+      "answer": false,
+      "explanation": "Logout precisa invalidar o registro/token no servidor e limpar o cookie. Esconder a seção da tela não é revogação."
+    },
+    {
+      "id": "javascript.autenticacao.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "sessoes-e-cookies",
+      "prompt": "Qual verificação determina se uma sessão de 8 h ainda autoriza o pedido?",
+      "options": [
+        "A expiração registrada e consultada no servidor",
+        "Somente uma cor de botão",
+        "Um booleano arbitrário no localStorage",
+        "O número de caracteres do título"
+      ],
+      "answer": 0,
+      "explanation": "O servidor confere expiração junto da resolução do token. O cookie expirar no navegador não substitui a regra do banco."
+    },
+    {
+      "id": "javascript.autenticacao.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "autorizacao-por-dono",
+      "prompt": "Qual distinção entre autenticação e autorização?",
+      "options": [
+        "Identificar a conta versus decidir acesso ao recurso/operação",
+        "São nomes sempre intercambiáveis",
+        "Autorização só muda CSS",
+        "Autenticação permite automaticamente todos os dados de todas as contas"
+      ],
+      "answer": 0,
+      "explanation": "Uma identidade válida ainda precisa de permissão para aquele recurso. O filtro de dono aplica essa política em todo CRUD."
+    },
+    {
+      "id": "javascript.autenticacao.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "autorizacao-por-dono",
+      "prompt": "Complete a conjunção que exige dono e id ao mesmo tempo:",
+      "code": "WHERE usuario_id = ? ___ id = ?",
+      "blanks": [
+        [
+          "AND",
+          "and",
+          "And"
+        ]
+      ],
+      "explanation": "AND exige as duas condições. OR permitiria outros registros e violaria a política de acesso.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "javascript.autenticacao.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "autorizacao-por-dono",
+      "prompt": "Proteger a listagem basta; atualizar ou excluir por id sem dono continua seguro.",
+      "answer": false,
+      "explanation": "Uma pessoa pode chamar rotas diretas e trocar o id. Leitura individual, atualização e exclusão também precisam de autorização."
+    },
+    {
+      "id": "javascript.autenticacao.q12",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "autorizacao-por-dono",
+      "prompt": "Ordene para obter a identidade da sessão válida, ler a tarefa dessa conta e responder. req.session já foi validada; userId/task ainda não existem.",
+      "lines": [
+        "const userId = req.session.id;",
+        "const task = store.task(userId, id);",
+        "res.json(task);"
+      ],
+      "explanation": "A identidade precisa existir antes da consulta autorizada, e a representação antes da resposta. No handler real, ausência também é tratada com 404."
+    },
+    {
+      "id": "javascript.autenticacao.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "csrf-cors-e-limites",
+      "prompt": "Qual proteção o projeto exige além de cookie em mutações autenticadas?",
+      "options": [
+        "Origem configurada e token CSRF da sessão",
+        "Qualquer texto chamado CSRF escrito pelo cliente",
+        "CORS curinga com credenciais",
+        "A senha do banco dentro do título"
+      ],
+      "answer": 0,
+      "explanation": "A API compara Origin e valida X-CSRF-Token associado à sessão. SameSite é outra camada, não a única verificação."
+    },
+    {
+      "id": "javascript.autenticacao.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "csrf-cors-e-limites",
+      "prompt": "CORS autentica usuários e impede qualquer cliente de terminal de chamar a API.",
+      "answer": false,
+      "explanation": "CORS é uma política do navegador para acesso entre origens. A API precisa autenticação/autorização próprias e clientes diretos não dependem dessa mesma barreira."
+    },
+    {
+      "id": "javascript.autenticacao.q15",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "csrf-cors-e-limites",
+      "prompt": "Complete o status que informa excesso de tentativas de autenticação:",
+      "code": "res.status(___);",
+      "blanks": [
+        [
+          "429"
+        ]
+      ],
+      "explanation": "429 indica limite excedido. O projeto envia Retry-After; sua limitação é local a um processo e não promete distribuição entre servidores."
+    }
+  ]
+}

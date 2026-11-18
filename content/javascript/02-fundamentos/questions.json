@@ -1,0 +1,203 @@
+{
+  "questions": [
+    {
+      "id": "javascript.fundamentos.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "variaveis-e-tipos",
+      "prompt": "Qual afirmação sobre const está correta?",
+      "options": [
+        "Impede reatribuir o nome, mas não congela automaticamente um objeto",
+        "Impede toda mudança dentro de qualquer objeto associado",
+        "Permite redeclarar o mesmo nome no mesmo bloco ilimitadamente",
+        "Só aceita números"
+      ],
+      "answer": 0,
+      "explanation": "const protege a associação do nome. Um objeto/array guardado nele ainda pode ser alterado conforme suas próprias regras."
+    },
+    {
+      "id": "javascript.fundamentos.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "variaveis-e-tipos",
+      "prompt": "Complete a declaração **com escopo de bloco** que permite reatribuir pontos:",
+      "code": "___ pontos = 1;\npontos = 2;",
+      "blanks": [
+        [
+          "let"
+        ]
+      ],
+      "explanation": "let tem escopo de bloco e permite reatribuição. const não permite trocar a associação; var tem regras de escopo diferentes."
+    },
+    {
+      "id": "javascript.fundamentos.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "variaveis-e-tipos",
+      "prompt": "typeof null resulta em \"object\", mas isso não permite tratar null como um objeto com propriedades.",
+      "answer": true,
+      "explanation": "É uma exceção histórica do operador typeof. Tentar acessar uma propriedade diretamente em null causa erro."
+    },
+    {
+      "id": "javascript.fundamentos.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "variaveis-e-tipos",
+      "prompt": "Qual o valor de uma variável declarada com let, mas ainda não inicializada explicitamente, **depois de sua declaração**?",
+      "options": [
+        "undefined",
+        "Sempre 0",
+        "Sempre null",
+        "Uma string vazia obrigatória"
+      ],
+      "answer": 0,
+      "explanation": "let nome; inicializa com undefined ao executar a declaração. Isso difere de tentar acessar o nome antes de sua declaração, na zona temporal morta."
+    },
+    {
+      "id": "javascript.fundamentos.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "numeros-e-textos",
+      "prompt": "Qual é o resultado de console.log(\"12\" + 3)?",
+      "options": [
+        "O texto 123",
+        "O número 15",
+        "O número 123",
+        "Sempre um TypeError"
+      ],
+      "answer": 0,
+      "explanation": "Com uma string nesse uso de +, ocorre concatenação. Para somar numericamente, converta a entrada explicitamente."
+    },
+    {
+      "id": "javascript.fundamentos.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "numeros-e-textos",
+      "prompt": "Complete com uma função de conversão numérica para que o total seja 15:",
+      "code": "const total = ___(\"12\") + 3;",
+      "blanks": [
+        [
+          "Number",
+          "parseInt",
+          "parseFloat"
+        ]
+      ],
+      "explanation": "Number converte o valor para número. Para este texto específico, parseInt e parseFloat também produzem 12; seus contratos com outros textos são diferentes."
+    },
+    {
+      "id": "javascript.fundamentos.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "numeros-e-textos",
+      "prompt": "Number(\"\") produz NaN, por isso um campo vazio pode ser validado apenas pela conversão.",
+      "answer": false,
+      "explanation": "Number(\"\") produz 0. Confira se a entrada está vazia após trim antes de converter um campo obrigatório."
+    },
+    {
+      "id": "javascript.fundamentos.q08",
+      "type": "multiple",
+      "difficulty": 2,
+      "lesson": "numeros-e-textos",
+      "prompt": "Como testar se Number(\"dez\") resultou em NaN?",
+      "options": [
+        "Number.isNaN(Number(\"dez\"))",
+        "Number(\"dez\") === NaN",
+        "typeof Number(\"dez\") === \"NaN\"",
+        "Number(\"dez\").isNaN === true"
+      ],
+      "answer": 0,
+      "explanation": "NaN não é igual a si mesmo com ===. Number.isNaN verifica se o valor é o NaN numérico."
+    },
+    {
+      "id": "javascript.fundamentos.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "operadores-e-comparacoes",
+      "prompt": "Qual o resultado de \"5\" === 5?",
+      "options": [
+        "false",
+        "true",
+        "O número 5",
+        "Um erro de sintaxe"
+      ],
+      "answer": 0,
+      "explanation": "A igualdade estrita não converte uma string em número. \"5\" e 5 têm tipos diferentes."
+    },
+    {
+      "id": "javascript.fundamentos.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "operadores-e-comparacoes",
+      "prompt": "Complete o operador de **igualdade estrita**:",
+      "code": "console.log(5 ___ 5);",
+      "blanks": [
+        [
+          "==="
+        ]
+      ],
+      "explanation": "=== compara sem a coerção de tipos feita pela igualdade abstrata ==. = é atribuição, não comparação."
+    },
+    {
+      "id": "javascript.fundamentos.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "operadores-e-comparacoes",
+      "prompt": "Um array vazio [] é falsy em uma condição JavaScript.",
+      "answer": false,
+      "explanation": "Arrays e objetos são truthy, mesmo vazios. String vazia, 0, false, null, undefined e NaN são exemplos de falsy."
+    },
+    {
+      "id": "javascript.fundamentos.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "operadores-e-comparacoes",
+      "prompt": "Qual valor a expressão \"\" || \"padrão\" devolve?",
+      "options": [
+        "O texto padrão",
+        "O booleano true obrigatoriamente",
+        "Uma string vazia",
+        "O número 0"
+      ],
+      "answer": 0,
+      "explanation": "|| retorna um dos operandos. Como a string vazia é falsy, ele retorna o segundo valor."
+    },
+    {
+      "id": "javascript.fundamentos.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "condicionais",
+      "prompt": "Com nota = 6, qual ramo roda em if (nota >= 7) { ... } else { ... }?",
+      "options": [
+        "O else",
+        "Os dois ramos sempre",
+        "Somente o if",
+        "Nenhum ramo, porque 6 não é booleano"
+      ],
+      "answer": 0,
+      "explanation": "A comparação gera false e o else é executado. A condição não exige que a variável nota tenha tipo booleano."
+    },
+    {
+      "id": "javascript.fundamentos.q14",
+      "type": "truefalse",
+      "difficulty": 2,
+      "lesson": "condicionais",
+      "prompt": "Em switch, os casos são comparados com igualdade estrita; faltar break pode continuar a execução pelos casos seguintes.",
+      "answer": true,
+      "explanation": "Um case correspondente não encerra automaticamente o switch. break ou outra saída explícita evita o fall-through quando ele não é desejado."
+    },
+    {
+      "id": "javascript.fundamentos.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "condicionais",
+      "prompt": "Ordene para inicializar a nota e imprimir Aprovado somente se a condição for verdadeira:",
+      "lines": [
+        "const nota = 8;",
+        "if (nota >= 7) {",
+        "console.log(\"Aprovado\");",
+        "}"
+      ],
+      "explanation": "A nota deve estar inicializada antes da comparação; a impressão pertence ao bloco aberto pela condição."
+    }
+  ]
+}

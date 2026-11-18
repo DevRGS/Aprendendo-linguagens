@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "javascript.introducao.f01",
+      "lesson": "javascript-e-web",
+      "front": "Java e JavaScript são a mesma linguagem?",
+      "back": "Não. São linguagens diferentes. Esta trilha usa JavaScript no navegador e distingue a linguagem das APIs do ambiente."
+    },
+    {
+      "id": "javascript.introducao.f02",
+      "lesson": "javascript-e-web",
+      "front": "Qual a diferença entre ECMAScript e DOM?",
+      "back": "ECMAScript especifica a linguagem. O DOM é uma API para documentos, normalmente oferecida pelo navegador, não uma parte universal de qualquer runtime JS."
+    },
+    {
+      "id": "javascript.introducao.f03",
+      "lesson": "console-e-editor",
+      "front": "Por que aparece undefined após console.log no console?",
+      "back": "O console pode mostrar o retorno da expressão, além da mensagem impressa. console.log normalmente retorna undefined."
+    },
+    {
+      "id": "javascript.introducao.f04",
+      "lesson": "console-e-editor",
+      "front": "Como evitar redeclarar as mesmas const ao repetir um exemplo de console?",
+      "back": "Execute o exemplo num bloco { ... }, quando indicado, para criar um escopo próprio. Não envolva import estático em um bloco."
+    },
+    {
+      "id": "javascript.introducao.f05",
+      "lesson": "console-e-editor",
+      "front": "Qual editor serve para os arquivos?",
+      "back": "Um editor de código ou texto simples que salve UTF-8 e a extensão correta. Um documento com formatação não é um arquivo de código-fonte."
+    },
+    {
+      "id": "javascript.introducao.f06",
+      "lesson": "primeira-pagina",
+      "front": "Como garantir que elementos existam antes da consulta inicial?",
+      "back": "Coloque o script depois dos elementos, use defer em script clássico externo ou use um módulo. Confira sempre os seletores."
+    },
+    {
+      "id": "javascript.introducao.f07",
+      "lesson": "primeira-pagina",
+      "front": "Qual a diferença entre passar funcao e funcao()?",
+      "back": "funcao passa a referência; funcao() executa a chamada e passa seu resultado. Eventos normalmente precisam da referência/callback."
+    },
+    {
+      "id": "javascript.introducao.f08",
+      "lesson": "servidor-local",
+      "front": "Como iniciar o servidor de estudo com Python 3?",
+      "back": "Na pasta dos arquivos: Windows, py -m http.server 8000 --bind 127.0.0.1; Linux/macOS, python3 -m http.server 8000 --bind 127.0.0.1. Abra a URL correspondente."
+    },
+    {
+      "id": "javascript.introducao.f09",
+      "lesson": "servidor-local",
+      "front": "Como parar o servidor e trocar uma porta ocupada?",
+      "back": "Ctrl+C no terminal interrompe. Troque 8000 por outra porta no comando e também na URL do navegador."
+    },
+    {
+      "id": "javascript.introducao.f10",
+      "lesson": "servidor-local",
+      "front": "WSL e Node são obrigatórios para esta trilha?",
+      "back": "Não. O começo usa navegador. Para módulos/fetch local, use o servidor HTTP documentado ou um equivalente do editor; WSL e Node não são exigidos."
+    }
+  ]
+}

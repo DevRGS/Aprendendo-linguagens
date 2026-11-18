@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.primeiros-passos.f01",
+      "lesson": "terminal-e-bash",
+      "front": "Qual a diferença entre terminal e shell?",
+      "back": "Terminal é a interface de entrada/saída de texto; o shell, como Bash, interpreta comandos."
+    },
+    {
+      "id": "linux.primeiros-passos.f02",
+      "lesson": "terminal-e-bash",
+      "front": "Devo copiar o `$` do prompt?",
+      "back": "Não. O prefixo como `ana@pc:~$` representa o prompt. Copie somente o comando do exemplo."
+    },
+    {
+      "id": "linux.primeiros-passos.f03",
+      "lesson": "instalacao-wsl",
+      "front": "Como instalar Ubuntu pelo WSL no Windows?",
+      "back": "No PowerShell como administrador: `wsl --install -d Ubuntu`. Reinicie, abra Ubuntu e crie a conta Linux. Consulte os requisitos no guia Microsoft da aula."
+    },
+    {
+      "id": "linux.primeiros-passos.f04",
+      "lesson": "instalacao-wsl",
+      "front": "Como conferir distribuições instaladas e suas versões WSL?",
+      "back": "No PowerShell: `wsl --list --verbose`. Para abrir Ubuntu: `wsl -d Ubuntu` (use o nome exato da distribuição instalada)."
+    },
+    {
+      "id": "linux.primeiros-passos.f05",
+      "lesson": "instalacao-wsl",
+      "front": "Por que a senha não aparece na primeira configuração do Ubuntu?",
+      "back": "O terminal não ecoa a senha, nem com asteriscos. Digite e confirme com Enter. A conta é específica do Linux/WSL."
+    },
+    {
+      "id": "linux.primeiros-passos.f06",
+      "lesson": "comandos-e-ajuda",
+      "front": "Qual ajuda consultar para um comando interno do Bash?",
+      "back": "`help nome`, por exemplo `help cd`. Para uma ferramenta GNU, experimente `nome --help`; `man nome` abre o manual se estiver instalado."
+    },
+    {
+      "id": "linux.primeiros-passos.f07",
+      "lesson": "comandos-e-ajuda",
+      "front": "O que faz `type cd`?",
+      "back": "Mostra como o shell resolve `cd`; normalmente é um comando interno do Bash. `type -t cd` mostra só o tipo."
+    },
+    {
+      "id": "linux.primeiros-passos.f08",
+      "lesson": "comandos-e-ajuda",
+      "front": "O que são os três elementos de `ls -a /tmp`?",
+      "back": "`ls` é o comando, `-a` é a opção e `/tmp` é o argumento que indica o diretório."
+    },
+    {
+      "id": "linux.primeiros-passos.f09",
+      "lesson": "atalhos-e-laboratorio",
+      "front": "Como criar uma pasta temporária própria para praticar?",
+      "back": "`LAB=$(mktemp -d \"$HOME/terminal-linux.XXXXXX\")` guarda o caminho; `cd \"$LAB\"` entra nela. Confira com `pwd`."
+    },
+    {
+      "id": "linux.primeiros-passos.f10",
+      "lesson": "atalhos-e-laboratorio",
+      "front": "Como recuperar comandos e interromper um programa?",
+      "back": "Seta para cima recupera o histórico; Ctrl+R pesquisa. Ctrl+C normalmente interrompe o trabalho em primeiro plano. Revise comandos antes de reexecutar."
+    }
+  ]
+}

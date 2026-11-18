@@ -4,6 +4,10 @@ Central gratuita e didática para aprender programação: aulas curtas, quizzes 
 
 Inspirada no trabalho de Gustavo Guanabara de abrir portas para quem está começando. Sem fins comerciais.
 
+Além de Java e SQL, há uma trilha **Terminal Linux**, com 24 aulas, 90 perguntas, 60 flashcards e referência rápida. As práticas são feitas no terminal da pessoa, com arquivos de laboratório separados. Para quem usa Windows, a segunda aula ensina a baixar e instalar Ubuntu pelo WSL, reiniciar, configurar a conta Linux e conferir a instalação, com fontes da Microsoft. Quem já usa Linux pode seguir no próprio terminal.
+
+A trilha **JavaScript** tem 56 aulas, 210 perguntas, 140 flashcards e referência rápida. Os oito módulos iniciais ensinam fundamentos, funções, arrays/objetos, DOM/eventos, assíncrono, classes/módulos e um projeto local. Os seis módulos seguintes ensinam Node, HTTP/Express, SQLite, CRUD, integração frontend/API, autenticação, sessões, autorização e testes. O aluno começa no navegador sem Node; a etapa backend inclui instalação e um [projeto completo para baixar](content/javascript/projetos/api-estudos.zip), com código, etapas menores, lockfile, README e testes. A API é executada localmente pelo aluno; a central continua estática.
+
 ## Rodar no seu computador
 
 ```bash
@@ -13,6 +17,8 @@ python -m http.server 8000
 Abra `http://localhost:8000/`. Abrir o `index.html` com dois cliques não funciona: o navegador bloqueia o carregamento do conteúdo fora de um servidor.
 
 ## Testes
+
+Use Node 22.13 ou posterior para executar a suíte, que também verifica o SQLite nativo do projeto de backend. O site estático não exige Node para estudar os módulos iniciais.
 
 ```bash
 npm install   # só na primeira vez: instala as ferramentas de teste
@@ -26,6 +32,12 @@ Os testes de telas e da camada de dados leem um catálogo e um manifesto de Java
 Os exercícios de SQL rodam no sql.js, o mesmo SQLite do site, instalado como dependência de teste. O `npm test` roda cada resposta de referência, cada forma aceita e cada forma recusada (`tests/content-sql.test.js`) e confere os resultados citados nas aulas, guardados em `verify/sql/` (`tests/sql-snippets.test.js`). O formato desses trechos está no começo de `tools/verify-sql-format.mjs`.
 
 O site em si não tem dependências nem etapa de build: o `npm install` só serve para os testes.
+
+No GNU/Linux, o `npm test` também executa os cenários de `verify/linux/` com Bash e ferramentas GNU. Eles usam diretórios temporários, sem rede nem privilégios administrativos, e conferem as saídas dos exemplos da trilha. `cases.json` associa cada script às aulas e guarda a saída esperada; os scripts são selecionados explicitamente, sem executar blocos extraídos do Markdown. Em outros sistemas, esse teste informa que exige Linux e é pulado; o CI Ubuntu o executa. A instalação do WSL é documentada, não executada pelos testes.
+
+Os exemplos JavaScript em `verify/javascript/` são conferidos por `tests/javascript-snippets.test.js`: arquivos `.mjs` em processos Node isolados e HTMLs próprios em jsdom, com cliques, envios de formulário e verificação do DOM. O manifesto `cases.json` associa cada cenário às aulas e às saídas/efeitos esperados. As falhas de fetch usam um servidor de teste em loopback, sem dependência de APIs externas; o projeto é conferido com texto que parece HTML, entrada vazia, recarga, formato inválido e gravação negada. Os testes não executam código enviado por alunos nem blocos extraídos indiscriminadamente do Markdown.
+
+O projeto de API em `content/javascript/projetos/api-estudos/` é o mesmo entregue no ZIP. Os testes de backend fazem HTTP real com SQLite temporário, cadastro/login, CRUD, isolamento de usuários, CSRF/origem, logout, expiração, erros e persistência. Express é uma dependência de teste da central e do projeto executável; não passa a ser uma dependência do site no navegador. Fflate é usado para empacotar/conferir o download. Para regenerar o ZIP depois de alterar fontes: `node tools/package-api-estudos.mjs`. Os testes conferem correspondência dos arquivos e executam o projeto extraído sem acesso ao registro npm.
 
 ## Conferir os códigos Java
 
@@ -79,3 +91,6 @@ No GitHub: **Settings → Pages → Source: GitHub Actions**. A cada `push` na `
 - [SQL Teaching](https://www.sqlteaching.com/), de Ronald Cheng (licença MIT): inspiração para os exercícios de SQL e para a ordem dos assuntos.
 - [sql.js](https://github.com/sql-js/sql.js) (licença MIT) e [SQLite](https://sqlite.org/) (domínio público): o banco de dados que roda no navegador.
 - [marked](https://marked.js.org/) (licença MIT) e [highlight.js](https://highlightjs.org/) (licença BSD-3-Clause): o Markdown e as cores do código.
+- Terminal Linux: [Microsoft Learn/WSL](https://learn.microsoft.com/pt-br/windows/wsl/install), [Ubuntu](https://ubuntu.com/desktop/docs/en/26.04/tutorial/the-linux-command-line-for-beginners/), [GNU Bash](https://www.gnu.org/software/bash/manual/bash.html), [Coreutils](https://www.gnu.org/software/coreutils/manual/html_node/index.html), [Grep](https://www.gnu.org/software/grep/manual/grep.html), [Findutils](https://www.gnu.org/software/findutils/manual/html_mono/find.html), [tar](https://www.gnu.org/software/tar/manual/tar.html), [Debian Manpages](https://manpages.debian.org/) e [Sudo](https://www.sudo.ws/docs/man/sudo.man/). Textos e exemplos próprios; fontes específicas no fim de cada aula e na referência rápida.
+- JavaScript: [MDN Web Docs](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide), [ECMAScript 2026](https://tc39.es/ecma262/2026/) e documentação oficial do [Python/http.server](https://docs.python.org/3/library/http.server.html) para o ambiente de estudo. Textos, dados e exemplos próprios, com fontes por aula.
+- Backend JavaScript: [Node](https://nodejs.org/api/), [Express](https://expressjs.com/en/5x/api/), [SQLite](https://www.sqlite.org/lang.html) e guias da [OWASP](https://cheatsheetseries.owasp.org/). O projeto usa Express (MIT); a ferramenta de ZIP usa [fflate](https://github.com/101arrowz/fflate) (MIT).

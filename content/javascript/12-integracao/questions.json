@@ -1,0 +1,200 @@
+{
+  "questions": [
+    {
+      "id": "javascript.integracao.q01",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "cliente-fetch",
+      "prompt": "Qual endereço deve servir a interface do projeto final para usar sua API de mesma origem?",
+      "options": [
+        "A origem informada pelo servidor Node",
+        "Qualquer HTML aberto por file:// sem configuração",
+        "O servidor Python da trilha, supondo que execute Express",
+        "Uma origem aleatória, pois cookies ignoram domínio"
+      ],
+      "answer": 0,
+      "explanation": "O Node serve public e /api. O servidor estático anterior não executa as rotas Express."
+    },
+    {
+      "id": "javascript.integracao.q02",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "cliente-fetch",
+      "prompt": "Complete a opção de credenciais usada pelo cliente da mesma origem:",
+      "code": "fetch('/api/tarefas', { credentials: '___' });",
+      "blanks": [
+        [
+          "same-origin"
+        ]
+      ],
+      "explanation": "Same-origin permite credenciais na mesma origem. Isso não muda a política do servidor nem libera qualquer origem externa."
+    },
+    {
+      "id": "javascript.integracao.q03",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "cliente-fetch",
+      "prompt": "Colocar a senha do banco num arquivo .env enviado junto do frontend impede que o navegador a descubra.",
+      "answer": false,
+      "explanation": "O que chega ao cliente não é um segredo do servidor. A conexão e credenciais de banco pertencem ao backend."
+    },
+    {
+      "id": "javascript.integracao.q04",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "cliente-fetch",
+      "prompt": "Quando o cliente deve tratar resposta 204 como ausência de corpo?",
+      "options": [
+        "Antes de tentar interpretar JSON",
+        "Depois de exigir que response.json tenha sucesso",
+        "Só depois de criar uma tarefa fictícia",
+        "Nunca, toda resposta HTTP tem JSON"
+      ],
+      "answer": 0,
+      "explanation": "O cliente retorna null para 204. Status e corpo têm contratos distintos."
+    },
+    {
+      "id": "javascript.integracao.q05",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "formularios-assincronos",
+      "prompt": "Qual operação a checkbox envia para confirmar/desconfirmar uma tarefa?",
+      "options": [
+        "PATCH com concluida boolean",
+        "GET que muda o banco por efeito colateral",
+        "POST com a senha em cada título",
+        "DELETE de todas as tarefas"
+      ],
+      "answer": 0,
+      "explanation": "A mudança parcial usa PATCH com true/false. A API valida e persiste o valor no recurso da conta."
+    },
+    {
+      "id": "javascript.integracao.q06",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "formularios-assincronos",
+      "prompt": "Complete a propriedade para mostrar o título recebido como texto literal:",
+      "code": "titulo.___ = task.titulo;",
+      "blanks": [
+        [
+          "textContent"
+        ]
+      ],
+      "explanation": "TextContent evita transformar o dado em HTML. Criar nós e preencher propriedades é diferente de concatenar marcação não confiável."
+    },
+    {
+      "id": "javascript.integracao.q07",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "formularios-assincronos",
+      "prompt": "Se um PATCH de checkbox falha, o cliente deve sempre mantê-la marcada para fingir que salvou.",
+      "answer": false,
+      "explanation": "O exemplo restaura o estado confirmado quando a gravação falha e mostra o erro. Não promete uma mudança que o servidor não confirmou."
+    },
+    {
+      "id": "javascript.integracao.q08",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "formularios-assincronos",
+      "prompt": "Qual opção ajuda o formulário a funcionar também por Enter?",
+      "options": [
+        "Tratar submit no form, com controles semânticos",
+        "Ouvir somente mousemove no título",
+        "Usar apenas um div sem acesso por teclado",
+        "Remover todos os labels"
+      ],
+      "answer": 0,
+      "explanation": "O formulário expressa a intenção de envio por diferentes meios. Botões e labels também ajudam o acesso."
+    },
+    {
+      "id": "javascript.integracao.q09",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "estados-e-falhas",
+      "prompt": "Por que o cliente usa busy e finally?",
+      "options": [
+        "Para evitar ações sobrepostas na aba e liberar controles mesmo em erro",
+        "Para dispensar toda validação da API",
+        "Para autenticar qualquer usuário automaticamente",
+        "Para prometer que outras abas nunca fazem pedidos"
+      ],
+      "answer": 0,
+      "explanation": "O bloqueio local organiza a interface. Regras e concorrência do servidor continuam sendo responsabilidades separadas."
+    },
+    {
+      "id": "javascript.integracao.q10",
+      "type": "fill",
+      "difficulty": 1,
+      "lesson": "estados-e-falhas",
+      "prompt": "Complete o status que faz o cliente abandonar a sessão atual e pedir novo acesso:",
+      "code": "if (error.status === ___) setSession(null);",
+      "blanks": [
+        [
+          "401"
+        ]
+      ],
+      "explanation": "401 indica sessão/autenticação ausente ou inválida no contrato. O cliente não deve continuar supondo uma conta autorizada."
+    },
+    {
+      "id": "javascript.integracao.q11",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "estados-e-falhas",
+      "prompt": "Depois de falha de rede em POST, reenviar automaticamente é sempre seguro porque nenhuma escrita pode ter ocorrido.",
+      "answer": false,
+      "explanation": "A conexão pode ter falhado depois da gravação. Sem idempotência definida, repetir pode duplicar uma criação."
+    },
+    {
+      "id": "javascript.integracao.q12",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "estados-e-falhas",
+      "prompt": "Um servidor devolve HTML de erro onde o cliente espera JSON. Qual comportamento é apropriado?",
+      "options": [
+        "Mostrar falha de resposta/endereço, sem tratar como lista vazia válida",
+        "Usar eval para executar o HTML como JSON",
+        "Enviar a senha do banco para tentar recuperar",
+        "Trocar toda falha por uma mensagem de sucesso"
+      ],
+      "answer": 0,
+      "explanation": "O contrato de resposta foi violado. O cliente precisa diferenciar esse erro de uma listagem bem-sucedida vazia."
+    },
+    {
+      "id": "javascript.integracao.q13",
+      "type": "multiple",
+      "difficulty": 1,
+      "lesson": "crud-completo",
+      "prompt": "Qual sequência descreve a comunicação do projeto?",
+      "options": [
+        "Navegador →API no servidor →SQLite →resposta →DOM",
+        "Navegador →arquivo SQLite público →senha no DOM",
+        "CSS →cookie com banco inteiro →API",
+        "LocalStorage →servidor de outra pessoa sem pedido"
+      ],
+      "answer": 0,
+      "explanation": "O navegador usa HTTP e o backend controla acesso ao banco. A resposta pública alimenta a tela."
+    },
+    {
+      "id": "javascript.integracao.q14",
+      "type": "truefalse",
+      "difficulty": 1,
+      "lesson": "crud-completo",
+      "prompt": "Recarregar a página e reiniciar o processo Node são verificações equivalentes de persistência.",
+      "answer": false,
+      "explanation": "O processo pode manter estado em memória. Reabrir a aplicação no mesmo arquivo testa persistência além da vida daquele processo."
+    },
+    {
+      "id": "javascript.integracao.q15",
+      "type": "order",
+      "difficulty": 2,
+      "lesson": "crud-completo",
+      "prompt": "Ordene para criar pelo cliente, obter o id devolvido e consultar esse recurso. api já está autenticado; created e path ainda não existem.",
+      "lines": [
+        "const created = await api.request('/api/tarefas', { method: 'POST', body: { titulo: 'Revisar' } });",
+        "const path = `/api/tarefas/${created.id}`;",
+        "const task = await api.request(path);"
+      ],
+      "explanation": "A resposta fornece o id antes de montar o caminho. O trecho roda em uma função async já preparada."
+    }
+  ]
+}

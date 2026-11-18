@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "linux.sistema.f01",
+      "lesson": "identidade-e-permissoes",
+      "front": "Como ler os três grupos de permissão de ls -l?",
+      "back": "Depois do caractere de tipo, vêm três trios: dono, grupo e outros. `r` é leitura, `w` escrita e `x` execução/acesso, conforme seja arquivo ou diretório."
+    },
+    {
+      "id": "linux.sistema.f02",
+      "lesson": "identidade-e-permissoes",
+      "front": "O que significa chmod 600 arquivo?",
+      "back": "Leitura e escrita para o dono; nenhum dos bits básicos para grupo e outros. 6 = 4 (r) + 2 (w)."
+    },
+    {
+      "id": "linux.sistema.f03",
+      "lesson": "identidade-e-permissoes",
+      "front": "Como acrescentar execução só para o dono?",
+      "back": "`chmod u+x arquivo`. Em diretórios, `x` permite acessar/atravessar entradas; não significa executar um programa."
+    },
+    {
+      "id": "linux.sistema.f04",
+      "lesson": "privilegios-e-sudo",
+      "front": "Root é sempre a mesma coisa que o diretório /?",
+      "back": "Não. `/` é a raiz da árvore de diretórios; root também é o nome do usuário com privilégios administrativos."
+    },
+    {
+      "id": "linux.sistema.f05",
+      "lesson": "privilegios-e-sudo",
+      "front": "Sudo resolve qualquer erro de comando?",
+      "back": "Não. Ele solicita execução com outra identidade conforme a política. Confira nome, sintaxe, caminho e permissões; os laboratórios não precisam dele."
+    },
+    {
+      "id": "linux.sistema.f06",
+      "lesson": "processos-e-jobs",
+      "front": "Qual a diferença entre PID e número de job?",
+      "back": "PID identifica um processo. `%N` identifica um job conhecido do shell da sessão, que pode incluir vários processos."
+    },
+    {
+      "id": "linux.sistema.f07",
+      "lesson": "processos-e-jobs",
+      "front": "O que fazem Ctrl+C, Ctrl+Z, bg e fg no Bash interativo?",
+      "back": "Ctrl+C normalmente interrompe o primeiro plano; Ctrl+Z suspende. `bg` retoma em segundo plano e `fg` traz um job ao primeiro plano."
+    },
+    {
+      "id": "linux.sistema.f08",
+      "lesson": "processos-e-jobs",
+      "front": "Qual o sinal padrão de kill e qual PID usar na prática?",
+      "back": "O padrão é SIGTERM. Use apenas o PID do processo de treino que você iniciou, capturado com `$!`; não copie PIDs de exemplos."
+    },
+    {
+      "id": "linux.sistema.f09",
+      "lesson": "disco-e-memoria",
+      "front": "Qual a diferença entre df e du?",
+      "back": "`df` mostra o sistema de arquivos e seu espaço; `du` estima o espaço usado pela árvore de arquivos indicada."
+    },
+    {
+      "id": "linux.sistema.f10",
+      "lesson": "disco-e-memoria",
+      "front": "Por que olhar available em free?",
+      "back": "O Linux usa cache que pode ser recuperado. `available` estima memória para novas aplicações sem swap, em vez de considerar apenas o campo free."
+    }
+  ]
+}
