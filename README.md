@@ -11,17 +11,22 @@ A trilha **JavaScript** tem 56 aulas, 210 perguntas, 140 flashcards e referênci
 ## Rodar no seu computador
 
 ```bash
-python -m http.server 8000
+npm install
+npm run dev
 ```
 
-Abra `http://localhost:8000/`. Abrir o `index.html` com dois cliques não funciona: o navegador bloqueia o carregamento do conteúdo fora de um servidor.
+Abra **http://127.0.0.1:8000/** e mantenha o terminal aberto. Ctrl+C encerra o servidor. `npm test` executa verificações; ele não abre nem inicia o site.
+
+Também é possível servir a central sem Node, usando `python3 -m http.server 8000 --bind 127.0.0.1` (ou `python` no lugar de `python3`, conforme sua instalação). Abrir o `index.html` com dois cliques não funciona: o navegador bloqueia o carregamento do conteúdo fora de um servidor.
+
+O projeto de API das aulas tem seu próprio `npm start`, dentro de `content/javascript/projetos/api-estudos/`, e usa a porta 3000. O `npm run dev` da raiz abre a central de aprendizagem.
 
 ## Testes
 
 Use Node 22.13 ou posterior para executar a suíte, que também verifica o SQLite nativo do projeto de backend. O site estático não exige Node para estudar os módulos iniciais.
 
 ```bash
-npm install   # só na primeira vez: instala as ferramentas de teste
+npm install   # só na primeira vez: instala as ferramentas de desenvolvimento
 npm test
 ```
 
@@ -31,13 +36,13 @@ Os testes de telas e da camada de dados leem um catálogo e um manifesto de Java
 
 Os exercícios de SQL rodam no sql.js, o mesmo SQLite do site, instalado como dependência de teste. O `npm test` roda cada resposta de referência, cada forma aceita e cada forma recusada (`tests/content-sql.test.js`) e confere os resultados citados nas aulas, guardados em `verify/sql/` (`tests/sql-snippets.test.js`). O formato desses trechos está no começo de `tools/verify-sql-format.mjs`.
 
-O site em si não tem dependências nem etapa de build: o `npm install` só serve para os testes.
+O site publicado não tem etapa de build nem depende de Express no navegador. As dependências npm são usadas nos testes, nas ferramentas e no servidor local de desenvolvimento.
 
 No GNU/Linux, o `npm test` também executa os cenários de `verify/linux/` com Bash e ferramentas GNU. Eles usam diretórios temporários, sem rede nem privilégios administrativos, e conferem as saídas dos exemplos da trilha. `cases.json` associa cada script às aulas e guarda a saída esperada; os scripts são selecionados explicitamente, sem executar blocos extraídos do Markdown. Em outros sistemas, esse teste informa que exige Linux e é pulado; o CI Ubuntu o executa. A instalação do WSL é documentada, não executada pelos testes.
 
 Os exemplos JavaScript em `verify/javascript/` são conferidos por `tests/javascript-snippets.test.js`: arquivos `.mjs` em processos Node isolados e HTMLs próprios em jsdom, com cliques, envios de formulário e verificação do DOM. O manifesto `cases.json` associa cada cenário às aulas e às saídas/efeitos esperados. As falhas de fetch usam um servidor de teste em loopback, sem dependência de APIs externas; o projeto é conferido com texto que parece HTML, entrada vazia, recarga, formato inválido e gravação negada. Os testes não executam código enviado por alunos nem blocos extraídos indiscriminadamente do Markdown.
 
-O projeto de API em `content/javascript/projetos/api-estudos/` é o mesmo entregue no ZIP. Os testes de backend fazem HTTP real com SQLite temporário, cadastro/login, CRUD, isolamento de usuários, CSRF/origem, logout, expiração, erros e persistência. Express é uma dependência de teste da central e do projeto executável; não passa a ser uma dependência do site no navegador. Fflate é usado para empacotar/conferir o download. Para regenerar o ZIP depois de alterar fontes: `node tools/package-api-estudos.mjs`. Os testes conferem correspondência dos arquivos e executam o projeto extraído sem acesso ao registro npm.
+O projeto de API em `content/javascript/projetos/api-estudos/` é o mesmo entregue no ZIP. Os testes de backend fazem HTTP real com SQLite temporário, cadastro/login, CRUD, isolamento de usuários, CSRF/origem, logout, expiração, erros e persistência. Express é uma ferramenta de desenvolvimento da central e uma dependência do projeto executável; não passa a ser uma dependência do site no navegador. Fflate é usado para empacotar/conferir o download. Para regenerar o ZIP depois de alterar fontes: `node tools/package-api-estudos.mjs`. Os testes conferem correspondência dos arquivos e executam o projeto extraído sem acesso ao registro npm.
 
 ## Conferir os códigos Java
 
