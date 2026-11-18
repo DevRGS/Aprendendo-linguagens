@@ -1,0 +1,103 @@
+{
+  "title": "While e parada",
+  "minutes": 29,
+  "intro": "Que mudança faz uma contagem iniciada em 3 acabar? Nesta aula você vai prever a parada e usar uma entrada para sinalizar o fim de um lote. Retome [For e acumuladores](#/python/fluxo/for-e-acumuladores) e [Entrada e erros](#/python/inicio/entrada-e-erros) se precisar.\n\nEm `while faltam > 0:`, Python testa a condição antes de cada passagem. Começando em 3 e subtraindo 1 a cada vez, `faltam` chega a 0. A condição falha e o corpo não roda novamente. Se a atualização falta ou move o estado na direção errada, o laço pode nunca parar.\n\nUma sentinela é um valor separado para indicar o fim da leitura. Nesta aula será 0. Dentro de `while True`, `break` encerra imediatamente o laço. Confira a sentinela antes de incrementar a contagem ou a soma. Se precisar parar uma execução no terminal, use Ctrl+C. No caderno, use o controle **Interromper kernel**.\n\nO que deve acontecer quando a primeira entrada já é a sentinela? Nas próximas aulas você vai processar sequências e distinguir valores ausentes de zeros legítimos.",
+  "sources": [
+    [
+      "Instrução while",
+      "https://docs.python.org/pt-br/3.14/reference/compound_stmts.html#the-while-statement"
+    ],
+    [
+      "Controle de laços com break",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#break-and-continue-statements"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja os valores impressos antes da condição falhar. Conte de 3 até 1 com while.",
+      "code": "faltam = 3\nwhile faltam > 0:\n    print(faltam)\n    faltam = faltam - 1",
+      "stdout": "3\n2\n1",
+      "explanation": "O 0 é alcançado depois da última atualização. O próximo teste é falso e impede que 0 seja impresso."
+    },
+    {
+      "prompt": "No papel, trace o trecho intencionalmente incompleto `faltam = 2` seguido de `while faltam > 0: print(faltam)`. Qual valor se repetiria? Escreva a atualização que falta antes de executar a versão corrigida abaixo.",
+      "code": "faltam = 2\nwhile faltam > 0:\n    print(faltam)\n    faltam = faltam - 1\nprint(\"Fim\")",
+      "stdout": "2\n1\nFim",
+      "explanation": "Sem a atualização, faltam continuaria 2. A subtração altera o estado a cada passagem e finalmente torna a condição falsa."
+    },
+    {
+      "prompt": "Leia um inteiro por vez. Digite `3`, `2` e `0`, confirmando cada linha. Mostre a quantidade de entradas anteriores ao zero e a soma delas, sem contar a sentinela. Repita com 0 como primeira entrada.",
+      "code": "quantidade = 0\ntotal = 0\nwhile True:\n    valor = int(input())\n    if valor == 0:\n        break\n    quantidade = quantidade + 1\n    total = total + valor\nprint(\"Quantidade:\", quantidade)\nprint(\"Total:\", total)",
+      "stdout": "Quantidade: 2\nTotal: 5",
+      "explanation": "A checagem antes da atualização impede que zero conte como entrada. Com 0 no primeiro pedido, ambos os acumuladores permanecem em 0. Forneça inteiros até o zero para encerrar.",
+      "hint": "Leia, teste o zero e só depois mude os acumuladores.",
+      "starter": "quantidade = 0\ntotal = 0\nwhile True:\n    valor = int(input())\n    # Teste a sentinela antes de atualizar.\n    break  # Substitua pela condição de parada e pelo acúmulo.",
+      "stdin": "3\n2\n0\n",
+      "checks": [
+        {
+          "code": "quantidade = 0\ntotal = 0\nfor valor in [3, 2, 0]:\n    if valor == 0:\n        break\n    quantidade = quantidade + 1\n    total = total + valor\nprint(\"Quantidade:\", quantidade)\nprint(\"Total:\", total)",
+          "stdout": "Quantidade: 2\nTotal: 5"
+        },
+        {
+          "code": "quantidade = 0\ntotal = 0\nwhile True:\n    valor = int(input())\n    if valor == 0:\n        break\n    quantidade = quantidade + 1\n    total = total + valor\nprint(\"Quantidade:\", quantidade)\nprint(\"Total:\", total)",
+          "stdout": "Quantidade: 0\nTotal: 0",
+          "stdin": "0\n"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `faltam` começa em 0, quantas vezes roda o bloco de `while faltam > 0`?",
+      "options": [
+        "Uma vez",
+        "Duas vezes",
+        "Zero vezes"
+      ],
+      "answer": 2,
+      "explanation": "A condição é testada antes da primeira passagem."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `while faltam > 0`, um valor inteiro inicial positivo vai atingir 0 se o bloco apenas imprime faltam.",
+      "answer": false,
+      "explanation": "Imprimir não altera o valor testado. Sem atualização, a condição permanece verdadeira."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que sai do laço quando chega a sentinela −1.",
+      "code": "while True:\n    valor = int(input())\n    if valor == -1:\n        ___",
+      "blanks": [
+        [
+          "break"
+        ]
+      ],
+      "explanation": "break termina o laço assim que a condição da sentinela é atendida."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as etapas de uma iteração que soma números até receber −1. A sentinela deve ficar fora da soma.",
+      "lines": [
+        "Ler e converter o valor desta iteração",
+        "Se o valor for −1, sair do laço",
+        "Somar o valor ao acumulador"
+      ],
+      "explanation": "A leitura fornece o dado para o teste. O teste deve proteger a soma da entrada de término."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quando while testa a condição?",
+      "back": "Antes da primeira passagem e antes de cada repetição seguinte."
+    },
+    {
+      "front": "O que muda se você contar a entrada antes de testar a sentinela?",
+      "back": "A quantidade fica uma unidade maior, pois inclui a entrada reservada para encerrar."
+    }
+  ]
+}

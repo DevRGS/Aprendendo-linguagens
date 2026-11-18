@@ -1,0 +1,206 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual valor produz `0 <= 10 <= 10`?",
+      "options": [
+        "`False` porque o limite superior é igual",
+        "`True` porque ambos os limites são inclusivos",
+        "`False` porque a condição compara três números"
+      ],
+      "answer": 1,
+      "explanation": "0 <= 10 e 10 <= 10 são comparações verdadeiras.",
+      "id": "python.fluxo.q01",
+      "lesson": "comparacoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Usar `idade > 16` para uma regra de pelo menos 16 anos aceita alguém com idade 16.",
+      "answer": false,
+      "explanation": "A comparação estrita exclui o limite. Use `>=` para incluí-lo.",
+      "id": "python.fluxo.q02",
+      "lesson": "comparacoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que exige as duas condições.",
+      "code": "acesso = True\npresente = False\nprint(acesso ___ presente)",
+      "blanks": [
+        [
+          "and"
+        ]
+      ],
+      "explanation": "Como apenas a primeira condição é verdadeira, o resultado será False.",
+      "id": "python.fluxo.q03",
+      "lesson": "comparacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Aceita-se inscrição por convite ou por lista de espera, desde que haja vaga. Qual regra impõe a disponibilidade nos dois caminhos?",
+      "options": [
+        "`convite or espera and vaga`",
+        "`(convite or espera) and vaga`",
+        "`convite and espera or vaga`"
+      ],
+      "answer": 1,
+      "explanation": "Os parênteses unem os dois caminhos, e a vaga é obrigatória para o resultado conjunto.",
+      "id": "python.fluxo.q04",
+      "lesson": "comparacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em uma cadeia com `if nota >= 7` e `elif nota >= 5`, qual bloco executa quando nota vale 8?",
+      "options": [
+        "Apenas if",
+        "Apenas elif",
+        "Ambos os blocos"
+      ],
+      "answer": 0,
+      "explanation": "O if é verdadeiro e encerra a escolha nessa cadeia.",
+      "id": "python.fluxo.q05",
+      "lesson": "condicoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma instrução alinhada ao if fica fora do bloco desse if, mesmo se estiver na linha seguinte.",
+      "answer": true,
+      "explanation": "O corpo do bloco precisa estar mais à direita. Uma instrução simples sem esse recuo logo após os dois pontos também pode deixar o bloco sem corpo e causar IndentationError.",
+      "id": "python.fluxo.q06",
+      "lesson": "condicoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que abre uma segunda condição da mesma cadeia.",
+      "code": "nota = 6\nif nota >= 7:\n    print('aprovada')\n___ nota >= 5:\n    print('recuperação')",
+      "blanks": [
+        [
+          "elif"
+        ]
+      ],
+      "explanation": "O teste da recuperação ocorre quando o primeiro teste falha.",
+      "id": "python.fluxo.q07",
+      "lesson": "condicoes"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as decisões para classificar um peso de 0 a 30 kg. Pare na primeira regra aplicável e use as regras exatamente como escritas.",
+      "lines": [
+        "Rejeitar peso menor que 0 ou maior que 30",
+        "Se peso >= 10, atribuir a faixa pesada",
+        "Para qualquer peso restante, atribuir a faixa leve"
+      ],
+      "explanation": "Os limiares aceitam casos fora da faixa se a validação vier depois. A regra de qualquer peso restante entra por último.",
+      "id": "python.fluxo.q08",
+      "lesson": "condicoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Somando cada termo de `range(2, 5)`, qual o total?",
+      "options": [
+        "`9`",
+        "`14`",
+        "`10`"
+      ],
+      "answer": 0,
+      "explanation": "O intervalo fornece 2, 3 e 4, que somam 9.",
+      "id": "python.fluxo.q09",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Mover a atribuição `total = 0` para dentro do laço pode apagar a soma de iterações anteriores.",
+      "answer": true,
+      "explanation": "A atribuição interna reinicia a soma em toda iteração em que executa antes da adição.",
+      "id": "python.fluxo.q10",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para percorrer 1, 2 e 3, sem incluir 4.",
+      "code": "for numero in range(1, ___):\n    print(numero)",
+      "blanks": [
+        [
+          "4"
+        ]
+      ],
+      "explanation": "O fim precisa ser o primeiro número excluído.",
+      "id": "python.fluxo.q11",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você quer listar os pontos 3, 6, 9 e 12. Qual intervalo serve?",
+      "options": [
+        "`range(3, 12, 3)`",
+        "`range(3, 13, 3)`",
+        "`range(0, 13, 3)`"
+      ],
+      "answer": 1,
+      "explanation": "O fim 13 fica acima de 12 e o início 3 evita incluir zero.",
+      "id": "python.fluxo.q12",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `faltam` começa em 0, quantas vezes roda o bloco de `while faltam > 0`?",
+      "options": [
+        "Uma vez",
+        "Duas vezes",
+        "Zero vezes"
+      ],
+      "answer": 2,
+      "explanation": "A condição é testada antes da primeira passagem.",
+      "id": "python.fluxo.q13",
+      "lesson": "while-e-parada"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `while faltam > 0`, um valor inteiro inicial positivo vai atingir 0 se o bloco apenas imprime faltam.",
+      "answer": false,
+      "explanation": "Imprimir não altera o valor testado. Sem atualização, a condição permanece verdadeira.",
+      "id": "python.fluxo.q14",
+      "lesson": "while-e-parada"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que sai do laço quando chega a sentinela −1.",
+      "code": "while True:\n    valor = int(input())\n    if valor == -1:\n        ___",
+      "blanks": [
+        [
+          "break"
+        ]
+      ],
+      "explanation": "break termina o laço assim que a condição da sentinela é atendida.",
+      "id": "python.fluxo.q15",
+      "lesson": "while-e-parada"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as etapas de uma iteração que soma números até receber −1. A sentinela deve ficar fora da soma.",
+      "lines": [
+        "Ler e converter o valor desta iteração",
+        "Se o valor for −1, sair do laço",
+        "Somar o valor ao acumulador"
+      ],
+      "explanation": "A leitura fornece o dado para o teste. O teste deve proteger a soma da entrada de término.",
+      "id": "python.fluxo.q16",
+      "lesson": "while-e-parada"
+    }
+  ]
+}

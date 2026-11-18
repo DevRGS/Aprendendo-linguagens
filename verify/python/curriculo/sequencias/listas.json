@@ -1,0 +1,98 @@
+{
+  "title": "Listas e cópias",
+  "minutes": 25,
+  "intro": "Se você acrescentar 8 a uma lista de medidas, o que verá pelo nome original? Retome [Texto e fatias](#/python/sequencias/texto-e-fatias) para rever o índice inicial 0.\n\nUma lista ordena itens entre colchetes. Em `medidas = [4, 6]`, `medidas[0]` é 4. `medidas.append(8)` acrescenta ao fim e altera a lista existente. `medidas[1] = 7` substitui o segundo item. `medidas.remove(7)` remove a primeira ocorrência do valor 7. Para remover pela posição, use `pop(indice)`, que também devolve o item removido.\n\n`outra = medidas` liga outro nome à mesma lista. Uma alteração feita por qualquer nome aparece pelo outro. `outra = medidas.copy()` cria uma nova lista externa, de modo que substituir ou acrescentar itens nela não altera a lista original. Essa cópia é rasa: se os itens forem listas internas, elas continuam compartilhadas. Aqui usamos listas planas de inteiros.\n\nAntes de seguir para [Percorrer e filtrar](#/python/sequencias/percorrer-e-filtrar), explique por que dar um novo nome à mesma lista não protege as medidas originais.",
+  "sources": [
+    [
+      "Listas no tutorial",
+      "https://docs.python.org/pt-br/3.14/tutorial/introduction.html#lists"
+    ],
+    [
+      "Métodos de lista e cópia rasa",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#more-on-lists"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja a posição de 8 depois de acrescentá-lo a [4, 6]. Mostre a lista resultante.",
+      "code": "medidas = [4, 6]\nmedidas.append(8)\nprint(medidas)",
+      "stdout": "[4, 6, 8]",
+      "explanation": "append acrescenta no fim da lista. O 8 fica no índice 2."
+    },
+    {
+      "prompt": "Preveja o conteúdo do original, do nome compartilhado e da cópia ao alterar o primeiro item pelo nome compartilhado.",
+      "code": "original = [4, 6]\ncompartilhada = original\ncopia = original.copy()\ncompartilhada[0] = 9\nprint(original)\nprint(compartilhada)\nprint(copia)",
+      "stdout": "[9, 6]\n[9, 6]\n[4, 6]",
+      "explanation": "original e compartilhada referenciam a mesma lista. A cópia foi criada antes da alteração e conserva a sequência anterior."
+    },
+    {
+      "prompt": "Parta de [4, 6, 4]. Faça uma cópia, remova dela só a primeira ocorrência de 4 e acrescente 8. Exiba o original e a cópia, nessa ordem. Confira também se acrescentar à cópia de uma lista vazia deixa o original vazio.",
+      "code": "original = [4, 6, 4]\najustada = original.copy()\najustada.remove(4)\najustada.append(8)\nprint(original)\nprint(ajustada)",
+      "stdout": "[4, 6, 4]\n[6, 4, 8]",
+      "explanation": "A cópia tem estrutura externa própria. remove atua pela primeira ocorrência do valor. O caso vazio testa apenas append, pois uma lista vazia não contém 4 para remover.",
+      "hint": "Crie a cópia antes de chamar qualquer método que altere a lista.",
+      "starter": "original = [4, 6, 4]\n# Crie outra lista e faça as mudanças apenas nela.",
+      "checks": [
+        {
+          "code": "original = []\najustada = original.copy()\najustada.append(8)\nprint(original)\nprint(ajustada)",
+          "stdout": "[]\n[8]"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Depois de `a = [1, 2]`, `b = a` e `b.append(3)`, o que `print(a)` exibe?",
+      "options": [
+        "`[1, 2]`",
+        "`[1, 2, 3]`",
+        "`[3, 1, 2]`"
+      ],
+      "answer": 1,
+      "explanation": "Os nomes apontam para a mesma lista. O acréscimo aparece pelos dois."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em uma lista `[1, 4, 1]`, chamar `remove(1)` deixa um 1 na lista.",
+      "answer": true,
+      "explanation": "O método tira apenas a primeira ocorrência, produzindo [4, 1]."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método para criar uma cópia rasa.",
+      "code": "base = [4, 6]\ncopia = base.___()\nprint(copia)",
+      "blanks": [
+        [
+          "copy"
+        ]
+      ],
+      "explanation": "copy cria outra lista externa, com os mesmos itens."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você precisa remover o item no índice 1 de `[9, 7, 9]`, usando sua posição. Qual chamada faz isso?",
+      "options": [
+        "`dados.remove(1)`",
+        "`dados.pop(1)`",
+        "`dados.pop(0)`"
+      ],
+      "answer": 1,
+      "explanation": "pop(1) remove o segundo item. remove(1) procuraria o valor 1."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual a diferença entre append e atribuição por índice?",
+      "back": "append aumenta o comprimento em um item. A atribuição por índice substitui um item existente."
+    },
+    {
+      "front": "A cópia rasa de uma lista de listas duplica as listas internas?",
+      "back": "As listas internas continuam compartilhadas. A cópia cria somente uma nova lista externa."
+    }
+  ]
+}

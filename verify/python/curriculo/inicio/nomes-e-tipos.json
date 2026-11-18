@@ -1,0 +1,99 @@
+{
+  "title": "Nomes e tipos",
+  "minutes": 23,
+  "intro": "Como guardar 4 aulas e acrescentar 2 antes de exibir o total? Você já precisa conseguir chamar `print`. Se quiser retomar, abra [Primeira execução](#/python/inicio/primeira-execucao). Cada prática começa com os próprios valores.\n\nUm literal é um valor escrito diretamente no código. Em `aulas = 4`, o literal inteiro é 4 e a atribuição liga o nome `aulas` a esse valor. Ao ler `aulas = aulas + 2`, comece pelo lado direito: o valor anterior é 4, a soma produz 6 e só depois o nome passa a designar 6.\n\n`int` é o tipo de 4, `float` é o tipo de 4.0, `str` é o tipo de `\"4\"` e `bool` é o tipo dos valores `True` e `False`. O tipo define operações possíveis. Multiplicar um texto por um inteiro repete o texto. Multiplicar dois inteiros faz uma conta. Em `type(valor).__name__`, `type(valor)` identifica o tipo e `.__name__` extrai seu nome curto.\n\nPreveja se `print(\"4\")` e `print(4)` exibem a mesma linha. A saída pode coincidir mesmo quando os tipos diferem. A próxima aula usa números para converter unidades.",
+  "sources": [
+    [
+      "Literais numéricos e texto",
+      "https://docs.python.org/pt-br/3.14/tutorial/introduction.html"
+    ],
+    [
+      "Função type",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#type"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Antes de executar, diga quanto vale `aulas` depois de cada atribuição. Exiba o total depois de acrescentar duas aulas a quatro.",
+      "code": "aulas = 4\naulas = aulas + 2\nprint(aulas)",
+      "stdout": "6",
+      "explanation": "A primeira atribuição liga aulas a 4. A expressão à direita da segunda usa esse 4 e liga aulas ao resultado 6."
+    },
+    {
+      "prompt": "Preveja separadamente o valor e o tipo de `\"4\" * 2` e de `4 * 2`. Exiba os dois pares.",
+      "code": "codigo = \"4\" * 2\ndobro = 4 * 2\nprint(codigo, type(codigo).__name__)\nprint(dobro, type(dobro).__name__)",
+      "stdout": "44 str\n8 int",
+      "explanation": "O inteiro à direita de um texto determina o número de repetições. Entre dois inteiros, o mesmo operador calcula o produto."
+    },
+    {
+      "prompt": "Monte uma ficha com título `Revisão`, duração `2.5` em horas e indicador de conclusão verdadeiro. Exiba cada valor com o nome do seu tipo. Em seguida teste uma etapa ainda pendente de duração `0.0`.",
+      "code": "titulo = \"Revisão\"\nduracao = 2.5\nconcluida = True\nprint(titulo, type(titulo).__name__)\nprint(duracao, type(duracao).__name__)\nprint(concluida, type(concluida).__name__)",
+      "stdout": "Revisão str\n2.5 float\nTrue bool",
+      "explanation": "O título é um texto, a duração em horas é float e o indicador é bool. Ao escrever 0.0, você mantém o tipo float mesmo com valor zero. Uma etapa pendente usa o literal False.",
+      "hint": "Use texto entre aspas, ponto na duração decimal e a inicial maiúscula de True ou False.",
+      "starter": "titulo = \"Revisão\"\n# Defina a duração e o indicador. Em seguida mostre valor e tipo de cada campo.",
+      "checks": [
+        {
+          "code": "duracao = 0.0\nconcluida = False\nprint(duracao, type(duracao).__name__)\nprint(concluida, type(concluida).__name__)",
+          "stdout": "0.0 float\nFalse bool"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que sai de `saldo = 5`, depois `saldo = saldo + 4`, depois `print(saldo)`?",
+      "options": [
+        "`4`",
+        "`9`",
+        "`54`"
+      ],
+      "answer": 1,
+      "explanation": "A expressão lê o 5 atual, soma o inteiro 4 e liga o nome saldo a 9."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A expressão `\"2\" + 3` soma dois inteiros e produz 5.",
+      "answer": false,
+      "explanation": "O primeiro operando é texto. Para somar numericamente, você precisa usar 2 ou converter o texto para int."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o literal booleano que indica conclusão.",
+      "code": "concluida = ___\nprint(concluida)",
+      "blanks": [
+        [
+          "True"
+        ]
+      ],
+      "explanation": "True é um literal bool. Entre aspas, a mesma palavra seria texto."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O identificador de mapa é o texto `\"08\"`. Qual operação repete esse identificador preservando o zero inicial?",
+      "options": [
+        "`\"08\" * 2`",
+        "`8 * 2`",
+        "`\"08\" + 2`",
+        "`\"08\" + \"2\"`"
+      ],
+      "answer": 0,
+      "explanation": "A repetição do texto inteiro produz 0808. Operações numéricas não preservam o zero inicial da representação."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que acontece em `minutos = minutos + 5`?",
+      "back": "O lado direito lê o valor anterior, calcula a soma e só depois o nome recebe o resultado."
+    },
+    {
+      "front": "Quais são os tipos de `0`, `0.0`, `'0'` e `False`?",
+      "back": "int, float, str e bool, respectivamente."
+    }
+  ]
+}

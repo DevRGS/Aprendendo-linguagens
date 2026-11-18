@@ -1,0 +1,92 @@
+{
+  "title": "Auditar a qualidade dos dados",
+  "minutes": 50,
+  "intro": "Você recebeu uma tabela de viagens. Em uma linha, a distância é zero. Em outra, está vazia. O que cada caso significa para quem analisa?\n\nUse pandas e retome [Chaves e junções](#/python/pandas/juntar-tabelas). As tabelas são declaradas no código.\n\nEsquema é a descrição de campos, tipos e unidades. Aqui `id` é texto, `km` é distância e deve ser não negativa quando presente. `isna()` detecta ausência. Zero é um número dentro do domínio. `duplicated()` marca ocorrências excedentes de uma linha idêntica. Se a mesma chave identifica duas linhas diferentes, há um conflito que precisa de apuração.",
+  "sources": [
+    [
+      "Dados ausentes",
+      "https://pandas.pydata.org/docs/user_guide/missing_data.html"
+    ],
+    [
+      "Duplicatas",
+      "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.duplicated.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Examine as linhas a:0, b:ausente, a:0. Liste IDs com ausência, com zero e de ocorrências repetidas.",
+      "code": "import pandas as pd\n\ndf = pd.DataFrame({\"id\": [\"a\", \"b\", \"a\"], \"km\": [0, None, 0]})\nprint(\"Ausentes:\", df.loc[df[\"km\"].isna(), \"id\"].tolist())\nprint(\"Zeros:\", df.loc[df[\"km\"].eq(0), \"id\"].tolist())\nprint(\"Duplicatas excedentes:\", df.loc[df.duplicated(), \"id\"].tolist())\n",
+      "stdout": "Ausentes: ['b']\nZeros: ['a', 'a']\nDuplicatas excedentes: ['a']",
+      "explanation": "A ausência é uma propriedade da célula. A duplicata descreve a linha excedente."
+    },
+    {
+      "prompt": "Inclua também a:3. Remova cópias exatas apenas numa tabela temporária. Aponte os IDs conflitantes.",
+      "code": "import pandas as pd\n\ndf = pd.DataFrame({\"id\": [\"a\", \"b\", \"a\", \"a\"], \"km\": [0, None, 0, 3]})\nunicas = df.drop_duplicates()\nconflitos = unicas.loc[unicas[\"id\"].duplicated(keep=False), \"id\"].unique()\nprint(conflitos.tolist())\n",
+      "stdout": "['a']",
+      "explanation": "Depois de retirar a repetição exata, a ainda aponta para duas linhas com distâncias diferentes."
+    },
+    {
+      "prompt": "Audite ausências, negativos, duplicatas excedentes e conflitos de ID sem alterar o original. Use a:0, b:ausente, c:-2, a:0 e a:1. No caso de borda c:-2, mantenha a linha disponível para inspeção e só liste no relatório.",
+      "code": "import pandas as pd\n\ndef auditar(df):\n    unicas = df.drop_duplicates()\n    conflitos = unicas.loc[unicas[\"id\"].duplicated(keep=False), \"id\"].unique()\n    return {\n        \"km ausentes\": df.loc[df[\"km\"].isna(), \"id\"].tolist(),\n        \"km negativos\": df.loc[df[\"km\"].lt(0), \"id\"].tolist(),\n        \"duplicatas excedentes\": df.loc[df.duplicated(), \"id\"].tolist(),\n        \"IDs em conflito\": sorted(conflitos.tolist()),\n    }\n\ndf = pd.DataFrame({\"id\": [\"a\", \"b\", \"c\", \"a\", \"a\"], \"km\": [0, None, -2, 0, 1]})\nfor regra, ids in auditar(df).items():\n    print(regra, len(ids), ids)\nassert len(df) == 5\nassert df.loc[2, \"km\"] == -2\n",
+      "stdout": "km ausentes 1 ['b']\nkm negativos 1 ['c']\nduplicatas excedentes 1 ['a']\nIDs em conflito 1 ['a']",
+      "explanation": "As três primeiras medidas contam linhas brutas. A quarta conta chaves distintas em conflito. A própria tabela permanece disponível para decidir o destino de cada linha. Com a qualidade descrita, avance para distribuições.",
+      "hint": "Investigue duplicidade de ID depois de retirar apenas cópias exatas, em um objeto separado.",
+      "starter": "import pandas as pd\n\ndf = pd.DataFrame({\"id\": [\"a\", \"b\", \"c\", \"a\", \"a\"], \"km\": [0, None, -2, 0, 1]})\n# Monte uma lista de IDs por regra.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em km = [0, ausente, 4, -1], quantas linhas têm valor presente?",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "O domínio é outra regra. Zero e -1 estão preenchidos mesmo que -1 seja inválido."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se um ID aparece em duas linhas com distâncias diferentes, basta descartar a última como duplicata exata.",
+      "answer": false,
+      "explanation": "As linhas divergem. Registre conflito e investigue antes de escolher."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a verificação de valores ausentes.",
+      "code": "df[\"km\"].___()",
+      "blanks": [
+        [
+          "isna"
+        ]
+      ],
+      "explanation": "isna detecta os ausentes, preservando o zero como presente."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O relatório bruto lista duas linhas negativas e uma cópia exata de uma dessas linhas. Quantas regras podem incidir na mesma linha?",
+      "options": [
+        "Uma, pois as contagens sempre são disjuntas",
+        "Duas, pois uma linha pode violar ambas as regras",
+        "Nenhuma, pois uma cópia já sai do relatório"
+      ],
+      "answer": 1,
+      "explanation": "Uma linha pode ser negativa e cópia excedente. Contagens por regra podem se sobrepor."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que faz parte do esquema?",
+      "back": "Nomes, tipos e unidades das colunas, além das condições de validade declaradas."
+    },
+    {
+      "front": "O que distingue 0 km de um km ausente?",
+      "back": "Zero é uma observação. No exemplo, 0 km é válido e ausência é uma célula não preenchida."
+    }
+  ]
+}

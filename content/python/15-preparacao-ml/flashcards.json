@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que é unidade observacional neste problema?",
+      "back": "A entidade representada por cada linha. Aqui é uma viagem.",
+      "id": "python.preparacao-ml.f01",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "front": "Por que guardar o ID fora de X?",
+      "back": "Para rastrear a linha em X e sua posição em y sem usar o identificador como atributo preditivo.",
+      "id": "python.preparacao-ml.f02",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "front": "Para que servem validação e teste?",
+      "back": "Validação permite comparar escolhas. Teste mede as escolhas congeladas em dados reservados.",
+      "id": "python.preparacao-ml.f03",
+      "lesson": "particoes"
+    },
+    {
+      "front": "Onde entram duas viagens com a mesma data na fronteira inclusiva de treino?",
+      "back": "Ambas entram no treino. Uma chave auxiliar como ID pode definir a ordem dentro dessa data.",
+      "id": "python.preparacao-ml.f04",
+      "lesson": "particoes"
+    },
+    {
+      "front": "Qual a diferença entre ajustar e aplicar?",
+      "back": "Ajustar aprende parâmetros a partir do treino. Aplicar usa parâmetros já aprendidos numa partição.",
+      "id": "python.preparacao-ml.f05",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "front": "Como tratar treino com todos os km ausentes?",
+      "back": "Interrompa com mensagem explícita, pois não há valores para definir mediana e amplitude.",
+      "id": "python.preparacao-ml.f06",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "front": "Em que unidade se expressa MAE para um alvo em minutos?",
+      "back": "Minutos, pois cada erro absoluto e a média usam a unidade do alvo.",
+      "id": "python.preparacao-ml.f07",
+      "lesson": "referencia-e-erro"
+    },
+    {
+      "front": "Por que uma referência útil pode prever a mesma duração?",
+      "back": "A mediana de treino fornece um ponto de comparação simples e reproduzível para avaliar quanto um modelo acrescenta.",
+      "id": "python.preparacao-ml.f08",
+      "lesson": "referencia-e-erro"
+    }
+  ]
+}

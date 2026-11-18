@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `import medidas`, como chamar a função minutos do módulo?",
+      "options": [
+        "`minutos(1, 5)`",
+        "`medidas.minutos(1, 5)`",
+        "`medidas(1, 5)`"
+      ],
+      "answer": 1,
+      "explanation": "O import vincula medidas. O ponto seleciona a função.",
+      "id": "python.projetos.q01",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um csv.py local pode ser escolhido se for encontrado antes da biblioteca padrão e csv ainda não estiver carregado.",
+      "answer": true,
+      "explanation": "O caminho de busca pode fazer o arquivo local ser encontrado primeiro.",
+      "id": "python.projetos.q02",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a instrução que vincula minutos diretamente ao espaço de nomes do consumidor.",
+      "code": "from medidas ___ minutos",
+      "blanks": [
+        [
+          "import"
+        ]
+      ],
+      "explanation": "from ... import ... vincula o nome selecionado.",
+      "id": "python.projetos.q03",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Editou o auxiliar e o caderno continua usando a versão antiga. Qual ação testa um primeiro import limpo?",
+      "options": [
+        "Repetir só a mesma linha de import",
+        "Reiniciar o kernel e rodar a preparação",
+        "Renomear a variável que guarda o resultado"
+      ],
+      "answer": 1,
+      "explanation": "Um kernel novo começa sem o cache do módulo importado.",
+      "id": "python.projetos.q04",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual campo identifica o executável que roda o código, quando disponível?",
+      "options": [
+        "`sys.path[0]`",
+        "`sys.executable`",
+        "`numpy.__version__`"
+      ],
+      "answer": 1,
+      "explanation": "sys.executable fornece o caminho do executável Python.",
+      "id": "python.projetos.q05",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`python -m pip` seleciona pip pelo mesmo intérprete chamado pelo comando python.",
+      "answer": true,
+      "explanation": "O intérprete invocado resolve e executa o módulo pip.",
+      "id": "python.projetos.q06",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que consulta a versão dos metadados da distribuição.",
+      "code": "from importlib import metadata\nnumero = metadata.___(\"numpy\")",
+      "blanks": [
+        [
+          "version"
+        ]
+      ],
+      "explanation": "metadata.version consulta a distribuição instalada.",
+      "id": "python.projetos.q07",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O NumPy importa no terminal e falta no caderno. O que comparar primeiro?",
+      "options": [
+        "Somente os nomes dos arquivos de aula",
+        "Intérprete, kernel e instalação em cada ambiente",
+        "Somente a pasta em que o navegador baixou o caderno"
+      ],
+      "answer": 1,
+      "explanation": "Os dois percursos podem usar Pythons e pacotes separados.",
+      "id": "python.projetos.q08",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `type=int, default=3`, qual resultado vem de `parse_args([]).limite`?",
+      "options": [
+        "O texto 3",
+        "O inteiro 3",
+        "A lista vazia"
+      ],
+      "answer": 1,
+      "explanation": "A opção omitida usa o valor padrão inteiro.",
+      "id": "python.projetos.q09",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`--help` termina a análise com SystemExit de código 0.",
+      "answer": true,
+      "explanation": "A ajuda encerra com sucesso. O caderno captura esse encerramento.",
+      "id": "python.projetos.q10",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método do parser que interpreta a lista de opções.",
+      "code": "opcoes = parser.___([\"--limite\", \"2\"])",
+      "blanks": [
+        [
+          "parse_args"
+        ]
+      ],
+      "explanation": "O método recebe os tokens sem o nome do programa.",
+      "id": "python.projetos.q11",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual lista explícita equivale a digitar `relatorio_cli.py --limite 2`?",
+      "options": [
+        "`[\"relatorio_cli.py\", \"--limite\", \"2\"]`",
+        "`[\"--limite\", \"2\"]`",
+        "`[\"--limite 2\"]`"
+      ],
+      "answer": 1,
+      "explanation": "A lista exclui o nome do programa e separa opção e valor.",
+      "id": "python.projetos.q12",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual objeto a etapa de cálculo recebe?",
+      "options": [
+        "Caminho do JSON",
+        "Lista de minutos como inteiros",
+        "DictReader com valores textuais"
+      ],
+      "answer": 1,
+      "explanation": "O contrato do leitor inclui converter os minutos.",
+      "id": "python.projetos.q13",
+      "lesson": "pipeline-de-arquivos"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Rodar de novo no mesmo destino em modo `w` duplica o conteúdo do JSON.",
+      "answer": false,
+      "explanation": "w trunca o destino antes de gravar.",
+      "id": "python.projetos.q14",
+      "lesson": "pipeline-de-arquivos"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que grava o resumo em um arquivo já aberto.",
+      "code": "import json\njson.___(resultado, arquivo)",
+      "blanks": [
+        [
+          "dump"
+        ]
+      ],
+      "explanation": "dump serializa diretamente no arquivo.",
+      "id": "python.projetos.q15",
+      "lesson": "pipeline-de-arquivos"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as etapas até validar o JSON do pipeline.",
+      "lines": [
+        "Ler CSV e converter minutos",
+        "Calcular o resumo dos minutos lidos",
+        "Gravar o resumo calculado no JSON",
+        "Reabrir o JSON e conferir os campos"
+      ],
+      "explanation": "Cada etapa precisa do resultado da anterior.",
+      "id": "python.projetos.q16",
+      "lesson": "pipeline-de-arquivos"
+    }
+  ]
+}

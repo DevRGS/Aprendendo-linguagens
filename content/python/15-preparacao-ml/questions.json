@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Há 12 viagens com dois atributos. Quais formas esperamos para X e y de um alvo por viagem?",
+      "options": [
+        "(2, 12) e (1, 12)",
+        "(12, 2) e (12,)",
+        "(12,) e (12, 2)"
+      ],
+      "answer": 1,
+      "explanation": "Há uma linha por viagem em X e um único valor por viagem em y.",
+      "id": "python.preparacao-ml.q01",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O horário real de chegada pode entrar em X para estimar a duração de uma viagem antes de partir.",
+      "answer": false,
+      "explanation": "A chegada ainda não ocorreu. Essa informação de futuro causa vazamento.",
+      "id": "python.preparacao-ml.q02",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para converter a seleção de atributos em array.",
+      "code": "X = df[atributos].___()",
+      "blanks": [
+        [
+          "to_numpy"
+        ]
+      ],
+      "explanation": "O resultado é um array com as mesmas linhas da tabela de atributos.",
+      "id": "python.preparacao-ml.q03",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "X foi ordenado por ID. y ficou pela ordem de chegada. Como conferir que as duas saídas descrevem os mesmos casos na mesma posição?",
+      "options": [
+        "Comparando apenas shapes",
+        "Comparando e alinhando a sequência de IDs",
+        "Arredondando todos os alvos"
+      ],
+      "answer": 1,
+      "explanation": "A chave precisa acompanhar as duas seleções; alinhe-as pela mesma ordem de IDs.",
+      "id": "python.preparacao-ml.q04",
+      "lesson": "observacao-atributo-alvo"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Após ordenar as datas de dez viagens, de 1 a 10, quais dias caem no teste se reservar os últimos dois?",
+      "options": [
+        "1 e 2",
+        "9 e 10",
+        "7 e 8"
+      ],
+      "answer": 1,
+      "explanation": "Teste recebe as observações posteriores a treino e validação.",
+      "id": "python.preparacao-ml.q05",
+      "lesson": "particoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para avaliar generalização a eventos novos, linhas duplicadas do mesmo evento podem aparecer em treino e validação.",
+      "answer": false,
+      "explanation": "O sistema pode reconhecer o mesmo evento e mascarar erros em eventos novos.",
+      "id": "python.preparacao-ml.q06",
+      "lesson": "particoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a condição para checar que dois conjuntos compartilham zero IDs.",
+      "code": "assert treino.___(teste)",
+      "blanks": [
+        [
+          "isdisjoint"
+        ]
+      ],
+      "explanation": "isdisjoint devolve True quando a interseção está vazia.",
+      "id": "python.preparacao-ml.q07",
+      "lesson": "particoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você tem muitas fotografias por aparelho e quer generalizar para aparelhos nunca vistos. O que separa as partições?",
+      "options": [
+        "Sorteio independente por fotografia",
+        "Divisão por aparelho",
+        "Resolução da fotografia"
+      ],
+      "answer": 1,
+      "explanation": "Fotos de um mesmo aparelho precisam permanecer na mesma partição para sustentar essa avaliação.",
+      "id": "python.preparacao-ml.q08",
+      "lesson": "particoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Treino observado tem 4, 6 e 8. Como preencher uma ausência na validação se a política é mediana de treino?",
+      "options": [
+        "4",
+        "6",
+        "A média da validação"
+      ],
+      "answer": 1,
+      "explanation": "A mediana do treino observado é 6.",
+      "id": "python.preparacao-ml.q09",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para verificar desempenho em dados reservados, cada partição deve ajustar seus próprios parâmetros.",
+      "answer": false,
+      "explanation": "As etapas reservadas reutilizam parâmetros de treino. Ajustar localmente muda o procedimento e pode vazar informação.",
+      "id": "python.preparacao-ml.q10",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o teste com tolerância absoluta da escala observada.",
+      "code": "math.isclose(esperado, observado, ___=1e-6)",
+      "blanks": [
+        [
+          "abs_tol"
+        ]
+      ],
+      "explanation": "abs_tol define diferença absoluta tolerada.",
+      "id": "python.preparacao-ml.q11",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Treino varia de 2 a 8 e teste traz km=14. Com escala min-max sem recorte, o que sai?",
+      "options": [
+        "1",
+        "2",
+        "12"
+      ],
+      "answer": 1,
+      "explanation": "O valor é (14 − 2) / (8 − 2) = 2.",
+      "id": "python.preparacao-ml.q12",
+      "lesson": "ajustar-e-aplicar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para previsão 8 min e alvos [6, 9], qual é o MAE?",
+      "options": [
+        "0,5 min",
+        "1,5 min",
+        "3 min"
+      ],
+      "answer": 1,
+      "explanation": "Os erros absolutos são 2 e 1, cuja média é 1,5 min.",
+      "id": "python.preparacao-ml.q13",
+      "lesson": "referencia-e-erro"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O MAE de uma partição vazia deve ser registrado como 0 min.",
+      "answer": false,
+      "explanation": "Zero significaria ajuste exato. Sem observações, a média fica indefinida.",
+      "id": "python.preparacao-ml.q14",
+      "lesson": "referencia-e-erro"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a expressão que transforma diferença em erro absoluto.",
+      "code": "erro = ___(real - previsao)",
+      "blanks": [
+        [
+          "abs"
+        ]
+      ],
+      "explanation": "abs mede a distância a zero em minutos.",
+      "id": "python.preparacao-ml.q15",
+      "lesson": "referencia-e-erro"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Duas referências têm MAE de validação 3 e 5 min. O teste ainda está fechado. Como escolher a de menor erro medido sem abrir o teste?",
+      "options": [
+        "A de 5 min, porque maior é melhor",
+        "A de 3 min, pelo MAE de validação",
+        "Recalcular as referências com o teste e comparar"
+      ],
+      "answer": 1,
+      "explanation": "A comparação de alternativas usa validação. Reserve teste para a decisão congelada.",
+      "id": "python.preparacao-ml.q16",
+      "lesson": "referencia-e-erro"
+    }
+  ]
+}

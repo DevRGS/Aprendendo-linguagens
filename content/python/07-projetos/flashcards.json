@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Como import medidas difere de from medidas import minutos?",
+      "back": "O primeiro vincula medidas. O segundo vincula minutos no código consumidor.",
+      "id": "python.projetos.f01",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "front": "Por que evitar print no topo do auxiliar?",
+      "back": "As instruções no nível superior executam no primeiro import, inclusive um print deixado ali.",
+      "id": "python.projetos.f02",
+      "lesson": "modulos-e-imports"
+    },
+    {
+      "front": "O que registrar para reproduzir o ambiente?",
+      "back": "Versão do Python, versões das dependências e como instalar ou abrir o kernel.",
+      "id": "python.projetos.f03",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "front": "O que investigar quando as versões do NumPy divergem?",
+      "back": "Qual módulo foi importado, quais metadados foram encontrados e qual Python executou.",
+      "id": "python.projetos.f04",
+      "lesson": "ambiente-e-pacotes"
+    },
+    {
+      "front": "Quanto vale __name__ no ponto de entrada de um script?",
+      "back": "A string __main__. No import, o nome identifica o módulo.",
+      "id": "python.projetos.f05",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "front": "Por que passar lista explícita no caderno?",
+      "back": "Para analisar os argumentos da atividade sem ler as opções usadas para iniciar o kernel.",
+      "id": "python.projetos.f06",
+      "lesson": "entrada-do-programa"
+    },
+    {
+      "front": "Como testar o cálculo sem arquivo de entrada?",
+      "back": "Passe uma lista de inteiros à função de resumo e compare o dicionário devolvido.",
+      "id": "python.projetos.f07",
+      "lesson": "pipeline-de-arquivos"
+    },
+    {
+      "front": "Qual resultado para um CSV só com cabeçalho?",
+      "back": "Zero registros. Total e quantidade são 0.",
+      "id": "python.projetos.f08",
+      "lesson": "pipeline-de-arquivos"
+    }
+  ]
+}

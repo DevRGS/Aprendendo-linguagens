@@ -1,0 +1,92 @@
+{
+  "title": "Indexação, máscaras e cópias",
+  "minutes": 50,
+  "intro": "Você quer manter somente viagens com distância positiva. Preveja os IDs que devem sobreviver se a segunda linha trouxer uma distância negativa.\n\nUse NumPy e retome [Arrays](#/python/numpy/arrays) se precisar rever a forma de uma coluna. Cada atividade cria os próprios dados.\n\nUma comparação com um array produz uma **máscara booleana**, com um verdadeiro ou falso para cada elemento comparado. Se a máscara veio de uma coluna, pode ser usada no primeiro eixo da tabela para selecionar linhas inteiras. Fatias básicas normalmente compartilham os dados com o array de origem, como uma janela para os mesmos valores (**view**). A indexação booleana devolve uma cópia, e `copy()` permite pedir explicitamente uma cópia de uma fatia.",
+  "sources": [
+    [
+      "Indexação de arrays",
+      "https://numpy.org/doc/stable/user/basics.indexing.html"
+    ],
+    [
+      "Cópias e views",
+      "https://numpy.org/doc/stable/user/basics.copies.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Em `[2, -1, 5]`, marque os valores positivos antes de executar. Imprima primeiro a máscara e depois a seleção.",
+      "code": "import numpy as np\n\nvalores = np.array([2, -1, 5])\npositivos = valores > 0\nprint(positivos.tolist())\nprint(valores[positivos].tolist())\n",
+      "stdout": "[True, False, True]\n[2, 5]",
+      "explanation": "A comparação é feita em cada posição. A seleção conserva os dois valores marcados como verdadeiros."
+    },
+    {
+      "prompt": "Mude o primeiro valor de uma fatia básica para 99. Repita com uma cópia independente e tente mudar para 77.",
+      "code": "import numpy as np\n\na = np.array([2, 4, 6])\nfatia = a[:2]\nfatia[0] = 99\nprint(a.tolist())\n\nindependente = a[:2].copy()\nindependente[0] = 77\nprint(a.tolist(), independente.tolist())\n",
+      "stdout": "[99, 4, 6]\n[99, 4, 6] [77, 4]",
+      "explanation": "A primeira escrita chega ao array original porque a fatia compartilha memória. A segunda muda somente a cópia."
+    },
+    {
+      "prompt": "Filtre as viagens com distância de pelo menos 5 km. A primeira coluna é distância e a segunda é tempo. Selecione os IDs da mesma forma. Confira também um limite para o qual nenhuma linha passa.",
+      "code": "import numpy as np\n\ndef filtrar(ids, viagens, limite):\n    mascara = viagens[:, 0] >= limite\n    return ids[mascara], viagens[mascara]\n\nids = np.array([\"L\", \"M\", \"N\"])\nviagens = np.array([[5, 14], [2, 8], [6, 15]])\nids_validos, linhas = filtrar(ids, viagens, 5)\nprint(ids_validos.tolist(), linhas.tolist())\n\nids_vazios, linhas_vazias = filtrar(ids, viagens, 20)\nassert ids_vazios.shape == (0,)\nassert linhas_vazias.shape == (0, 2)\n",
+      "stdout": "['L', 'N'] [[5, 14], [6, 15]]",
+      "explanation": "O teste inclui 5 km, e a mesma máscara guarda os IDs e as linhas nas mesmas posições. Se nenhuma linha passar, a tabela vazia ainda tem duas colunas. Na próxima aula, experimente operar uma tabela inteira por eixo.",
+      "hint": "A máscara deve ter um valor por viagem. Faça a comparação na coluna de distância.",
+      "starter": "import numpy as np\n\nids = np.array([\"L\", \"M\", \"N\"])\nviagens = np.array([[5, 14], [2, 8], [6, 15]])\nlimite = 5\n# Crie uma máscara e aplique a ids e viagens.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual máscara resulta de `np.array([-2, 0, 4]) >= 0`?",
+      "options": [
+        "[False, False, True]",
+        "[False, True, True]",
+        "[True, False, True]"
+      ],
+      "answer": 1,
+      "explanation": "Zero atende ao limite inclusivo."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se `b = a[:2]` é uma fatia básica de um vetor, `b[0] = 9` também pode alterar `a`.",
+      "answer": true,
+      "explanation": "A fatia básica compartilha os dados de origem nesse exemplo."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para editar a fatia em memória independente.",
+      "code": "b = a[:2].___()",
+      "blanks": [
+        [
+          "copy"
+        ]
+      ],
+      "explanation": "`copy()` cria um array independente para esses dados numéricos."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma tabela de forma (4, 2) e um vetor de quatro IDs recebem a máscara [False, True, False, True]. Quais IDs ficam?",
+      "options": [
+        "As da primeira e terceira linhas",
+        "As da segunda e quarta linhas",
+        "As da segunda e terceira linhas"
+      ],
+      "answer": 1,
+      "explanation": "As posições 1 e 3, segunda e quarta, estão marcadas como verdadeiras."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que sai de `a[a > 0]`?",
+      "back": "Um array com os valores positivos selecionados pela máscara, na ordem original."
+    },
+    {
+      "front": "Quando chamar `copy()` ao fazer uma fatia básica?",
+      "back": "Quando for alterar números na seleção e quiser preservar os dados de origem."
+    }
+  ]
+}

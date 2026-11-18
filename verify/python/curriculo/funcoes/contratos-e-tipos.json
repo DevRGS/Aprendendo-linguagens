@@ -1,0 +1,98 @@
+{
+  "title": "Contratos e tipos",
+  "minutes": 37,
+  "intro": "Como comunicar a quem chama uma função de média o que fazer com uma lista vazia? Retome [Parâmetros e retorno](#/python/funcoes/parametros-e-retorno) e [Listas e cópias](#/python/sequencias/listas).\n\nUm contrato explicita pré-condições, como “a lista contém números e tem pelo menos um valor”, e pós-condições, como “o resultado é a soma dividida pela quantidade”. Uma docstring é o texto colocado como primeira instrução do corpo. Use-a para descrever a regra e limites que a assinatura não expressa sozinha.\n\nEm `def media(valores: list[float]) -> float:`, `:` depois de `valores` anota o tipo esperado do argumento e `->` anota o retorno. Anotar não insere testes de validade em tempo de execução. Uma lista vazia chega ao corpo, e dividir por seu comprimento zero levanta `ZeroDivisionError`. Uma função pode escolher outro contrato, como retornar `None` no caso vazio. A anotação `float | None` permite comunicar essas duas possibilidades.\n\nAntes de passar para [Composição](#/python/funcoes/composicao), compare a média de [0, 0] com o resultado de []. Uma tem valor numérico e a outra representa ausência.",
+  "sources": [
+    [
+      "Docstrings",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#documentation-strings"
+    ],
+    [
+      "Anotações de função",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#function-annotations"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "A função abaixo espera uma lista numérica não vazia. Preveja a soma, a quantidade e o retorno para [2.0, 4.0].",
+      "code": "def media(valores: list[float]) -> float:\n    \"\"\"Calcule a média de uma lista não vazia.\"\"\"\n    return sum(valores) / len(valores)\n\nprint(media([2.0, 4.0]))",
+      "stdout": "3.0",
+      "explanation": "sum calcula 6.0 e len informa 2. A divisão retorna 3.0, conforme a regra documentada."
+    },
+    {
+      "prompt": "Faça a chamada intencionalmente fora do contrato com lista vazia. Preveja se a anotação bloqueia a entrada antes de o corpo rodar. O exemplo captura só o erro esperado.",
+      "code": "def media(valores: list[float]) -> float:\n    \"\"\"Calcule a média de uma lista não vazia.\"\"\"\n    return sum(valores) / len(valores)\n\ntry:\n    media([])\nexcept ZeroDivisionError:\n    print(\"ZeroDivisionError\")",
+      "stdout": "ZeroDivisionError",
+      "explanation": "A chamada chega ao corpo. A divisão falha porque len([]) é zero. A anotação não prevê o comprimento e não valida o valor."
+    },
+    {
+      "prompt": "Implemente `media_ou_none` com anotação e docstring. Para uma lista de números não vazia, devolva a média como float. Para uma vazia, devolva None. Mostre o resultado de [2, 4] e []. Confira o caso [0, 0] para distinguir zero de ausência.",
+      "code": "def media_ou_none(valores: list[float]) -> float | None:\n    \"\"\"Retorne a média dos números ou None quando a lista estiver vazia.\"\"\"\n    if len(valores) == 0:\n        return None\n    return sum(valores) / len(valores)\n\nprint(media_ou_none([2, 4]))\nprint(media_ou_none([]))",
+      "stdout": "3.0\nNone",
+      "explanation": "A função verifica o limite antes da divisão. Uma lista de dois zeros produz 0.0 e não passa pelo ramo da ausência. As anotações descrevem os tipos previstos e o teste de comprimento faz a decisão real.",
+      "hint": "Teste o comprimento antes de dividir. Declare as duas formas de retorno na assinatura.",
+      "starter": "def media_ou_none(valores: list[float]) -> float | None:\n    # Documente o contrato antes de escrever as instruções do corpo.\n    pass\n\nprint(media_ou_none([2, 4]))\nprint(media_ou_none([]))",
+      "checks": [
+        {
+          "code": "def media_ou_none(valores: list[float]) -> float | None:\n    if len(valores) == 0:\n        return None\n    return sum(valores) / len(valores)\n\nprint(media_ou_none([0, 0]))",
+          "stdout": "0.0"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `media([5.0, 9.0])` calcula soma dividida pela quantidade, o que devolve?",
+      "options": [
+        "`14.0`",
+        "`2.0`",
+        "`7.0`"
+      ],
+      "answer": 2,
+      "explanation": "A soma é 14.0 e a quantidade é 2."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Mesmo com a anotação `list[float]`, uma lista vazia pode chegar ao corpo e causar erro na divisão.",
+      "answer": true,
+      "explanation": "A anotação descreve o tipo esperado. Se o corpo dividir a soma pelo comprimento zero, ocorrerá ZeroDivisionError."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o valor previsto para ausência quando a lista está vazia.",
+      "code": "def media_ou_none(valores: list[float]) -> float | None:\n    if len(valores) == 0:\n        return ___\n    return sum(valores) / len(valores)",
+      "blanks": [
+        [
+          "None"
+        ]
+      ],
+      "explanation": "O contrato usa None para ausência e preserva zero como resultado numérico possível."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma função devolve `None` para falta de média. Como o chamador identifica ausência sem confundir a média 0.0?",
+      "options": [
+        "`if not resultado:`",
+        "`if resultado is None:`",
+        "`if resultado == 0:`"
+      ],
+      "answer": 1,
+      "explanation": "O teste de identidade seleciona só None. O resultado 0.0 continua sendo uma medida."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que a docstring pode informar que list[float] não explicita?",
+      "back": "Pode indicar regras como aceitar uma lista vazia e o que devolver nesse caso."
+    },
+    {
+      "front": "O que devolve media_ou_none com [0, 0]?",
+      "back": "0.0. A lista tem amostras, ainda que a soma seja zero."
+    }
+  ]
+}

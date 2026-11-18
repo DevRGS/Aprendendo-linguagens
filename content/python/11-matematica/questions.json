@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a dimensão de [7, 0, 2]?",
+      "options": [
+        "2",
+        "3",
+        "7"
+      ],
+      "answer": 1,
+      "explanation": "Há três coordenadas.",
+      "id": "python.matematica.q01",
+      "lesson": "vetores"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O produto escalar fornece um vetor com as mesmas coordenadas.",
+      "answer": false,
+      "explanation": "Ele fornece a soma dos produtos dos pares de coordenadas.",
+      "id": "python.matematica.q02",
+      "lesson": "vetores"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o modo que exige comprimentos iguais.",
+      "code": "zip(x, y, ___=True)",
+      "blanks": [
+        [
+          "strict"
+        ]
+      ],
+      "explanation": "strict exige comprimentos iguais quando zip é consumido.",
+      "id": "python.matematica.q03",
+      "lesson": "vetores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais são os produtos de [2, 3] com [4, 5]?",
+      "options": [
+        "8 e 15",
+        "6 e 8",
+        "10 e 12"
+      ],
+      "answer": 0,
+      "explanation": "2×4 = 8 e 3×5 = 15.",
+      "id": "python.matematica.q04",
+      "lesson": "vetores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a mediana de [6, 2, 4, 100]?",
+      "options": [
+        "4",
+        "5",
+        "28"
+      ],
+      "answer": 1,
+      "explanation": "Ordene e use os centros 4 e 6.",
+      "id": "python.matematica.q05",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Adicionar um valor extremo pode mudar muito a média.",
+      "answer": true,
+      "explanation": "O valor extremo é incluído na soma.",
+      "id": "python.matematica.q06",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o nome da função de desvio padrão amostral já importada.",
+      "code": "print(___([2,4,6]))",
+      "blanks": [
+        [
+          "stdev"
+        ]
+      ],
+      "explanation": "pstdev usa o denominador populacional.",
+      "id": "python.matematica.q07",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual é a unidade do desvio padrão de valores em km?",
+      "options": [
+        "km²",
+        "Sem unidade",
+        "km"
+      ],
+      "answer": 2,
+      "explanation": "A raiz quadrada reconduz a medida à unidade original.",
+      "id": "python.matematica.q08",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Dois A em oito registros dão qual proporção?",
+      "options": [
+        "2.0",
+        "0.5",
+        "0.25"
+      ],
+      "answer": 2,
+      "explanation": "Divida 2 por 8.",
+      "id": "python.matematica.q09",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A condição 'grupo A' troca o denominador pelo tamanho de A.",
+      "answer": true,
+      "explanation": "O cálculo fica restrito aos membros do grupo.",
+      "id": "python.matematica.q10",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que devolve o número de registros.",
+      "code": "total = ___(registros)",
+      "blanks": [
+        [
+          "len"
+        ]
+      ],
+      "explanation": "len devolve a quantidade de itens.",
+      "id": "python.matematica.q11",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quantas pessoas entram no denominador da taxa de acerto condicional se o grupo tem 3 pessoas e a turma tem 8?",
+      "options": [
+        "1",
+        "3",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "Observe apenas o grupo da condição.",
+      "id": "python.matematica.q12",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quanto vale a centralização de [1,3]?",
+      "options": [
+        "[-1, 1]",
+        "[0, 2]",
+        "[1, 3]"
+      ],
+      "answer": 0,
+      "explanation": "A média é 2 e subtraímos 2 de cada valor.",
+      "id": "python.matematica.q13",
+      "lesson": "precisao-e-escalas"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma coluna constante tem amplitude positiva.",
+      "answer": false,
+      "explanation": "O mínimo e o máximo são iguais.",
+      "id": "python.matematica.q14",
+      "lesson": "precisao-e-escalas"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função importada que verifica tolerância.",
+      "code": "assert ___(a, b, abs_tol=1e-6)",
+      "blanks": [
+        [
+          "isclose"
+        ]
+      ],
+      "explanation": "isclose compara considerando tolerâncias.",
+      "id": "python.matematica.q15",
+      "lesson": "precisao-e-escalas"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual valor sai para o máximo de [2,4,8] com a escala proposta?",
+      "options": [
+        "0",
+        "1",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "O numerador do máximo é igual à amplitude.",
+      "id": "python.matematica.q16",
+      "lesson": "precisao-e-escalas"
+    }
+  ]
+}

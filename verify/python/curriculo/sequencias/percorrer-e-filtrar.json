@@ -1,0 +1,98 @@
+{
+  "title": "Percorrer e filtrar",
+  "minutes": 25,
+  "intro": "Quais temperaturas devem continuar se o filtro aceita apenas valores acima de zero? Retome [For e acumuladores](#/python/fluxo/for-e-acumuladores) e [Listas e cópias](#/python/sequencias/listas).\n\n`for valor in dados:` entrega os elementos, um por vez. Se você precisa também da posição, `for indice, valor in enumerate(dados):` dá os dois valores de cada passagem, com índice começando em 0. A condição dentro do laço decide quais itens entram em uma lista inicialmente vazia. Use append na lista de resultado para manter a entrada intacta.\n\nNeste conjunto, `None` representa um valor ausente. `valor is None` testa a presença desse marcador. Um teste como `not valor` englobaria também zero e confundiria dois estados diferentes.\n\nEm [Compreensões](#/python/sequencias/compreensoes) você vai reconhecer esse mesmo filtro em uma expressão. Antes, explique o que se perderia se o teste tratasse zero como ausência.",
+  "sources": [
+    [
+      "Técnicas de iteração",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#looping-techniques"
+    ],
+    [
+      "Função enumerate",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#enumerate"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja quais itens de [−1, 2, 0, 4] passam pelo limite estrito. Construa uma lista contendo só temperaturas positivas.",
+      "code": "temperaturas = [-1, 2, 0, 4]\npositivas = []\nfor temperatura in temperaturas:\n    if temperatura > 0:\n        positivas.append(temperatura)\nprint(positivas)",
+      "stdout": "[2, 4]",
+      "explanation": "A lista começa vazia. O teste > 0 exclui −1 e 0. Cada valor aceito entra na ordem em que foi encontrado."
+    },
+    {
+      "prompt": "Antes de executar, diga qual é a posição do zero e qual valor está na posição zero. Exiba cada posição junto do valor.",
+      "code": "temperaturas = [-1, 2, 0, 4]\nfor indice, temperatura in enumerate(temperaturas):\n    print(indice, temperatura)",
+      "stdout": "0 -1\n1 2\n2 0\n3 4",
+      "explanation": "enumerate começa pelo índice 0. O valor 0 está no terceiro lugar, índice 2."
+    },
+    {
+      "prompt": "Localize os índices de valores ausentes em [3, None, 0, None]. Use None como único marcador de ausência e mantenha a lista original. Mostre os índices. Depois teste [0], que deve produzir lista de índices vazia.",
+      "code": "medicoes = [3, None, 0, None]\nausentes = []\nfor indice, valor in enumerate(medicoes):\n    if valor is None:\n        ausentes.append(indice)\nprint(ausentes)",
+      "stdout": "[1, 3]",
+      "explanation": "Guardamos o índice quando o item é None. Zero é uma medição presente. A lista [0] tem uma medição e nenhum índice de ausência.",
+      "hint": "Use enumerate para receber índice e valor, e faça a comparação explícita com None.",
+      "starter": "medicoes = [3, None, 0, None]\nausentes = []\n# Encontre e exiba os índices dos ausentes.",
+      "checks": [
+        {
+          "code": "medicoes = [0]\nausentes = []\nfor indice, valor in enumerate(medicoes):\n    if valor is None:\n        ausentes.append(indice)\nprint(ausentes)",
+          "stdout": "[]"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em `enumerate([8, 6])`, qual é o segundo par (índice, valor)?",
+      "options": [
+        "`(2, 6)`",
+        "`(6, 1)`",
+        "`(1, 6)`"
+      ],
+      "answer": 2,
+      "explanation": "O segundo item é 6 e o contador padrão começou em 0."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Usar `if not valor` encontra somente entradas None em uma lista com inteiros e None.",
+      "answer": false,
+      "explanation": "O inteiro 0 também é falso nesse teste. Use `valor is None` para selecionar só os ausentes."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que entrega índice e valor.",
+      "code": "for indice, valor in ___([4, 7]):\n    print(indice, valor)",
+      "blanks": [
+        [
+          "enumerate"
+        ]
+      ],
+      "explanation": "enumerate entrega primeiro o índice e depois o elemento."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais índices correspondem a valores estritamente acima de 10 em [12, 10, 11]?",
+      "options": [
+        "`[12, 11]`",
+        "`[0, 2]`",
+        "`[0, 1, 2]`"
+      ],
+      "answer": 1,
+      "explanation": "Os valores aceitos são 12 e 11, nas posições 0 e 2. A posição 1 contém o limite."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Que dois valores enumerate entrega a cada passagem?",
+      "back": "O contador, que por padrão começa em zero, e o elemento da sequência."
+    },
+    {
+      "front": "Como distinguir None de zero em um filtro?",
+      "back": "Use `valor is None` para localizar ausências representadas por None."
+    }
+  ]
+}

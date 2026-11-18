@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que produz `\"mapa\"[1:3]`?",
+      "options": [
+        "`\"ma\"`",
+        "`\"ap\"`",
+        "`\"apa\"`"
+      ],
+      "answer": 1,
+      "explanation": "O índice 1 é o a e o índice 2 é o p. O 3 fica de fora.",
+      "id": "python.sequencias.q01",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `texto = \"azul\"`, a instrução `texto[0] = \"A\"` troca a primeira letra no próprio objeto.",
+      "answer": false,
+      "explanation": "A atribuição por índice é inválida para str. Monte outro texto e guarde o novo valor.",
+      "id": "python.sequencias.q02",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que tira espaços das extremidades.",
+      "code": "nome = \" Lia \".___()\nprint(nome)",
+      "blanks": [
+        [
+          "strip"
+        ]
+      ],
+      "explanation": "strip produz Lia e preserva espaços internos quando eles existem.",
+      "id": "python.sequencias.q03",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual sequência limpa também o espaço ao lado da vírgula em `\" Sul , Norte \"`?",
+      "options": [
+        "Aplicar strip ao texto inteiro e dividir pela vírgula",
+        "Dividir pela vírgula e aplicar strip a cada campo",
+        "Dividir por espaço e escolher os dois primeiros itens"
+      ],
+      "answer": 1,
+      "explanation": "Os espaços perto da vírgula viram extremidades apenas depois da separação.",
+      "id": "python.sequencias.q04",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Depois de `a = [1, 2]`, `b = a` e `b.append(3)`, o que `print(a)` exibe?",
+      "options": [
+        "`[1, 2]`",
+        "`[1, 2, 3]`",
+        "`[3, 1, 2]`"
+      ],
+      "answer": 1,
+      "explanation": "Os nomes apontam para a mesma lista. O acréscimo aparece pelos dois.",
+      "id": "python.sequencias.q05",
+      "lesson": "listas"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em uma lista `[1, 4, 1]`, chamar `remove(1)` deixa um 1 na lista.",
+      "answer": true,
+      "explanation": "O método tira apenas a primeira ocorrência, produzindo [4, 1].",
+      "id": "python.sequencias.q06",
+      "lesson": "listas"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método para criar uma cópia rasa.",
+      "code": "base = [4, 6]\ncopia = base.___()\nprint(copia)",
+      "blanks": [
+        [
+          "copy"
+        ]
+      ],
+      "explanation": "copy cria outra lista externa, com os mesmos itens.",
+      "id": "python.sequencias.q07",
+      "lesson": "listas"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você precisa remover o item no índice 1 de `[9, 7, 9]`, usando sua posição. Qual chamada faz isso?",
+      "options": [
+        "`dados.remove(1)`",
+        "`dados.pop(1)`",
+        "`dados.pop(0)`"
+      ],
+      "answer": 1,
+      "explanation": "pop(1) remove o segundo item. remove(1) procuraria o valor 1.",
+      "id": "python.sequencias.q08",
+      "lesson": "listas"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em `enumerate([8, 6])`, qual é o segundo par (índice, valor)?",
+      "options": [
+        "`(2, 6)`",
+        "`(6, 1)`",
+        "`(1, 6)`"
+      ],
+      "answer": 2,
+      "explanation": "O segundo item é 6 e o contador padrão começou em 0.",
+      "id": "python.sequencias.q09",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Usar `if not valor` encontra somente entradas None em uma lista com inteiros e None.",
+      "answer": false,
+      "explanation": "O inteiro 0 também é falso nesse teste. Use `valor is None` para selecionar só os ausentes.",
+      "id": "python.sequencias.q10",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que entrega índice e valor.",
+      "code": "for indice, valor in ___([4, 7]):\n    print(indice, valor)",
+      "blanks": [
+        [
+          "enumerate"
+        ]
+      ],
+      "explanation": "enumerate entrega primeiro o índice e depois o elemento.",
+      "id": "python.sequencias.q11",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais índices correspondem a valores estritamente acima de 10 em [12, 10, 11]?",
+      "options": [
+        "`[12, 11]`",
+        "`[0, 2]`",
+        "`[0, 1, 2]`"
+      ],
+      "answer": 1,
+      "explanation": "Os valores aceitos são 12 e 11, nas posições 0 e 2. A posição 1 contém o limite.",
+      "id": "python.sequencias.q12",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que produz `[x + 1 for x in [2, 4]]`?",
+      "options": [
+        "`[2, 4, 1]`",
+        "`[3, 5]`",
+        "`[7]`"
+      ],
+      "answer": 1,
+      "explanation": "A expressão soma um a cada item individualmente e guarda os dois resultados.",
+      "id": "python.sequencias.q13",
+      "lesson": "compreensoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `[x * 2 for x in [1, 2] if x > 1]`, o filtro é aplicado aos valores originais.",
+      "answer": true,
+      "explanation": "O teste ocorre antes da multiplicação. Só o 2 passa, gerando [4].",
+      "id": "python.sequencias.q14",
+      "lesson": "compreensoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que introduz o filtro da compreensão.",
+      "code": "positivos = [x for x in [-2, 0, 3] ___ x > 0]\nprint(positivos)",
+      "blanks": [
+        [
+          "if"
+        ]
+      ],
+      "explanation": "A cláusula if só inclui os itens que satisfazem a condição.",
+      "id": "python.sequencias.q15",
+      "lesson": "compreensoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Some 1 a cada número de [0, 1, 2] e guarde apenas os resultados acima de 1. Qual saída respeita essa ordem?",
+      "options": [
+        "`[3]`",
+        "`[2, 3]`",
+        "`[1, 2, 3]`"
+      ],
+      "answer": 1,
+      "explanation": "Os resultados da transformação são 1, 2 e 3. O filtro deixa apenas 2 e 3.",
+      "id": "python.sequencias.q16",
+      "lesson": "compreensoes"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "title": "Escolher entre objeto e função",
+  "minutes": 42,
+  "intro": "Compare dois lotes com medidas diferentes. Antes de rodar, preveja o total de cada um e decida onde guardar o estado. Retome [contratos de funções](#/python/funcoes/contratos-e-tipos) e [estado por instância](#/python/objetos/instancias).\n\nUma transformação sem estado pode ser uma função pura. Ela devolve o mesmo resultado para entradas iguais e não altera os dados nem o ambiente. Um objeto pode manter estado quando há atualizações em momentos diferentes. Passe as dependências explicitamente. Um resumo de lista pronta pode receber os dados por argumento, enquanto uma coleta incremental pode precisar de uma instância por lote.\n\nO caderno e o kit trazem entradas pequenas e independentes. Em E3, confira quantidade, total e o caso de lote vazio. Como a escolha mudaria se as medidas viessem uma por vez? Depois siga para [iteração](#/python/protocolos/iteradores).",
+  "sources": [
+    [
+      "Comportamento funcional",
+      "https://docs.python.org/3.14/howto/functional.html"
+    ],
+    [
+      "Estado de instância e classe",
+      "https://docs.python.org/3.14/tutorial/classes.html#class-and-instance-variables"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Reescreva um resumo sem estado como função pura. Compare seu retorno com o da classe e confira se a lista original mudou.",
+      "code": "class Calculadora:\n    def resumo(self, medidas):\n        return {\"total\": sum(medidas), \"quantidade\": len(medidas)}\n\n\ndef resumir(medidas):\n    return {\"total\": sum(medidas), \"quantidade\": len(medidas)}\n\nmedidas = [2, 5]\nprint(resumir(medidas) == Calculadora().resumo(medidas))\nprint(medidas)\n",
+      "stdout": "True\n[2, 5]",
+      "explanation": "A classe não tem estado próprio. A função obtém o mesmo resultado só com o argumento e preserva a lista de entrada."
+    },
+    {
+      "prompt": "Simule dois lotes de uma coleta incremental. Observe o que acontece ao reutilizar a instância e depois confira o total com instâncias independentes.",
+      "code": "class Coleta:\n    def __init__(self):\n        self.total = 0\n\n    def registrar(self, valor):\n        self.total += valor\n\n\ncompartilhada = Coleta()\ncompartilhada.registrar(2)\ncompartilhada.registrar(5)\nprint(compartilhada.total)\n\nlote_a, lote_b = Coleta(), Coleta()\nlote_a.registrar(2)\nlote_b.registrar(5)\nprint(lote_a.total, lote_b.total)\n",
+      "stdout": "7\n2 5",
+      "explanation": "O contrato pede totais separados por lote. Reusar o mesmo objeto soma os dois. Cada instância carrega sua própria atualização."
+    },
+    {
+      "prompt": "Entregue uma função relatorio(medidas) que devolva total e quantidade para uma lista entregue de uma vez. Teste [2, 5], [0] e []. Mostre que chamá-la duas vezes não acumula estado. Justifique a escolha de função ou objeto.",
+      "code": "def relatorio(medidas):\n    return {\"total\": sum(medidas), \"quantidade\": len(medidas)}\n\nnormal = relatorio([2, 5])\nassert normal == {\"total\": 7, \"quantidade\": 2}\nassert relatorio([0]) == {\"total\": 0, \"quantidade\": 1}\nassert relatorio([]) == {\"total\": 0, \"quantidade\": 0}\nassert relatorio([2, 5]) == normal\nprint(normal)\nprint(\"quatro verificações passaram\")\n",
+      "stdout": "{'total': 7, 'quantidade': 2}\nquatro verificações passaram",
+      "explanation": "A lista completa chega como argumento. Uma função basta, pois cada resultado depende só daquela lista. Zero entra na quantidade. A lista vazia tem total e quantidade 0. As condições de assert verificam resultados previstos independentemente.",
+      "hint": "Some e conte apenas os elementos da lista recebida nesta chamada.",
+      "starter": "def relatorio(medidas):\n    # Devolva os campos total e quantidade.\n    raise NotImplementedError\n\nassert relatorio([2, 5]) == {\"total\": 7, \"quantidade\": 2}\n# Inclua testes de zero, lista vazia e repetição.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual resultado a função relatorio devolve para [0, 3]?",
+      "options": [
+        "Total 3, quantidade 1",
+        "Total 3, quantidade 2",
+        "Total 0, quantidade 2"
+      ],
+      "answer": 1,
+      "explanation": "A soma inclui zero, e a quantidade conta todos os valores."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma instância incremental reutilizada para um segundo lote zera seu total automaticamente.",
+      "answer": false,
+      "explanation": "O valor guardado na instância persiste entre chamadas. Para totais independentes, use instâncias independentes ou uma operação explícita de reinício."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que conta elementos da lista.",
+      "code": "quantidade = ___(medidas)",
+      "blanks": [
+        [
+          "len"
+        ]
+      ],
+      "explanation": "len obtém a quantidade de elementos, incluindo itens com valor zero."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual entrada é suficiente para o relatório puro de um lote de medidas?",
+      "options": [
+        "Uma instância mutável de outro lote",
+        "A lista de medidas daquele lote",
+        "Um contador global da sessão"
+      ],
+      "answer": 1,
+      "explanation": "Todo o cálculo depende apenas dos valores recebidos no argumento."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quando usar uma função pura para resumir medidas?",
+      "back": "Quando a entrada chega completa e o cálculo pode depender só dela."
+    },
+    {
+      "front": "Quando manter uma instância por lote?",
+      "back": "Quando recebe medidas aos poucos e precisa guardar o total de cada lote separadamente."
+    }
+  ]
+}

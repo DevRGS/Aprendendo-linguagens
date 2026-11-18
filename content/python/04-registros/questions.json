@@ -1,0 +1,206 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Depois de `codigo, total = (\"X\", 9)`, o que `print(total)` exibe?",
+      "options": [
+        "`X`",
+        "`9`",
+        "`(\"X\", 9)`"
+      ],
+      "answer": 1,
+      "explanation": "O segundo nome recebe o segundo item da tupla.",
+      "id": "python.registros.q01",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O zip comum verifica automaticamente que as listas fornecidas têm os mesmos comprimentos.",
+      "answer": false,
+      "explanation": "Por padrão ele termina na primeira entrada esgotada. Compare tamanhos ou peça a checagem explícita.",
+      "id": "python.registros.q02",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que combina itens de posições correspondentes.",
+      "code": "nomes = [\"a\", \"b\"]\nmedidas = [3, 4]\nprint(list(___(nomes, medidas)))",
+      "blanks": [
+        [
+          "zip"
+        ]
+      ],
+      "explanation": "zip produz tuplas por posição e list materializa o resultado.",
+      "id": "python.registros.q03",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene o processamento de dois arquivos já lidos como listas: a saída precisa ser uma lista completa de pares ou um diagnóstico.",
+      "lines": [
+        "Verificar se as listas têm tamanhos iguais e rejeitar divergência",
+        "Combinar os itens correspondentes em pares",
+        "Entregar a lista dos pares produzidos"
+      ],
+      "explanation": "A política exige verificar antes de combinar e entregar só depois da combinação.",
+      "id": "python.registros.q04",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `dados = {\"t\": 4}`, qual valor vem de `dados.get(\"v\", 2)`?",
+      "options": [
+        "`2`",
+        "`4`",
+        "`None`"
+      ],
+      "answer": 0,
+      "explanation": "A chave v não existe e 2 é o padrão informado.",
+      "id": "python.registros.q05",
+      "lesson": "dicionarios"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se `dados = {\"a\": 0}`, a expressão `\"a\" in dados` é verdadeira apesar do valor zero.",
+      "answer": true,
+      "explanation": "in testa chaves em um dicionário. O valor zero associado à chave não altera sua presença.",
+      "id": "python.registros.q06",
+      "lesson": "dicionarios"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que entrega cada chave e cada valor juntos.",
+      "code": "dados = {\"a\": 3}\nfor chave, valor in dados.___():\n    print(chave, valor)",
+      "blanks": [
+        [
+          "items"
+        ]
+      ],
+      "explanation": "items fornece os pares (chave, valor).",
+      "id": "python.registros.q07",
+      "lesson": "dicionarios"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Contando os itens [norte, sul, norte, norte], que dicionário resulta?",
+      "options": [
+        "`{\"norte\": 2, \"sul\": 1}`",
+        "`{\"norte\": 3, \"sul\": 1}`",
+        "`{\"norte\": 4, \"sul\": 1}`"
+      ],
+      "answer": 1,
+      "explanation": "Três ocorrências atualizam a mesma chave norte e uma atualiza sul.",
+      "id": "python.registros.q08",
+      "lesson": "dicionarios"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantos elementos tem `set([4, 4, 9, 4])`?",
+      "options": [
+        "`4`",
+        "`2`",
+        "`3`"
+      ],
+      "answer": 1,
+      "explanation": "Há somente os valores distintos 4 e 9.",
+      "id": "python.registros.q09",
+      "lesson": "conjuntos"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `set(\"XY\")`, o conjunto tem um único elemento que é o texto inteiro XY.",
+      "answer": false,
+      "explanation": "O construtor percorre o texto por caracteres. Ele recebe X e Y separadamente.",
+      "id": "python.registros.q10",
+      "lesson": "conjuntos"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o operador de interseção.",
+      "code": "comuns = {2, 4} ___ {2, 9}\nprint(sorted(comuns))",
+      "blanks": [
+        [
+          "&"
+        ]
+      ],
+      "explanation": "Somente o item 2 pertence aos dois conjuntos.",
+      "id": "python.registros.q11",
+      "lesson": "conjuntos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais IDs de `a = {3, 7}` faltam em `b = {7, 9}`?",
+      "options": [
+        "`sorted(a & b)` produz `[7]`",
+        "`sorted(b - a)` produz `[9]`",
+        "`sorted(a - b)` produz `[3]`"
+      ],
+      "answer": 2,
+      "explanation": "A diferença a - b conserva o elemento de a que não está em b.",
+      "id": "python.registros.q12",
+      "lesson": "conjuntos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para (B, 0), (A, 4) e (B, 2), quais são os subtotais de A e B?",
+      "options": [
+        "A vale 4 e B vale 2",
+        "A vale 6 e B vale 0",
+        "A vale 4 e B vale 0"
+      ],
+      "answer": 0,
+      "explanation": "Os dois registros B somam 0 + 2. A aparece uma vez com 4.",
+      "id": "python.registros.q13",
+      "lesson": "resumo-de-lote"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Excluir registros de zero minuto preserva a soma de minutos, mas pode reduzir a quantidade de registros contabilizados.",
+      "answer": true,
+      "explanation": "A duração zero não acrescenta minutos. Cada linha de duração zero ainda corresponde a um registro.",
+      "id": "python.registros.q14",
+      "lesson": "resumo-de-lote"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o padrão que permite acrescentar os minutos da primeira ocorrência de um tema.",
+      "code": "por_tema = {}\ntema, minutos = (\"C\", 2)\npor_tema[tema] = por_tema.get(tema, ___) + minutos",
+      "blanks": [
+        [
+          "0"
+        ]
+      ],
+      "explanation": "O subtotal de um tema começa em 0 antes do primeiro acréscimo.",
+      "id": "python.registros.q15",
+      "lesson": "resumo-de-lote"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas para produzir e publicar um relatório por tema em ordem alfabética.",
+      "lines": [
+        "Acumular todos os minutos por tema",
+        "Ordenar as chaves do mapa de subtotais resultante",
+        "Imprimir os subtotais na ordem calculada"
+      ],
+      "explanation": "As chaves vêm do mapa completado e sua ordem define a apresentação.",
+      "id": "python.registros.q16",
+      "lesson": "resumo-de-lote"
+    }
+  ]
+}

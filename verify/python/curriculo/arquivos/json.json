@@ -1,0 +1,88 @@
+{
+  "title": "Gravar e carregar JSON",
+  "minutes": 34,
+  "intro": "Você vai guardar um campo sem valor. Preveja como ele aparece no arquivo. Retome [dicionários](#/python/registros/dicionarios) e [UTF-8](#/python/arquivos/caminhos-e-texto).\n\nJSON é texto. Para os dados desta aula, dicionários correspondem a objetos JSON, listas a arrays, e `None` a `null`. `json.dump(dados, arquivo)` grava o texto e `json.load(arquivo)` interpreta o texto como um objeto Python. `dumps` e `loads` fazem esse percurso com uma string.\n\nAbra os arquivos com UTF-8 no caderno e no terminal. `ensure_ascii=False` deixa os acentos legíveis no texto gravado. Um campo presente com valor nulo pode exigir um tratamento diferente de uma chave ausente. Qual teste distinguiria os dois? Depois veja [exceções](#/python/arquivos/excecoes).",
+  "sources": [
+    [
+      "Serialização com json",
+      "https://docs.python.org/3.14/library/json.html#basic-usage"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Grave um dicionário com uma lista de temas e um campo fim igual a None. Leia o texto e compare o objeto carregado ao original.",
+      "code": "import json\nfrom pathlib import Path\n\noriginal = {\"temas\": [\"ação\", \"dados\"], \"fim\": None}\ncaminho = Path(\"temas.json\")\nwith caminho.open(\"w\", encoding=\"utf-8\") as arquivo:\n    json.dump(original, arquivo, ensure_ascii=False)\nprint(caminho.read_text(encoding=\"utf-8\"))\n\nwith caminho.open(encoding=\"utf-8\") as arquivo:\n    recuperado = json.load(arquivo)\nprint(recuperado == original)\n",
+      "stdout": "{\"temas\": [\"ação\", \"dados\"], \"fim\": null}\nTrue",
+      "explanation": "O texto contém null. A leitura recupera None no dicionário e o conteúdo original da lista."
+    },
+    {
+      "prompt": "Compare o texto `{\"fim\": null}` e o objeto carregado. Investigue a ausência de `inicio` e a presença de `fim` com valor nulo.",
+      "code": "import json\n\ntexto = '{\"fim\": null}'\nregistro = json.loads(texto)\nprint(type(texto).__name__, type(registro).__name__)\nprint(\"inicio\" in registro)\nprint(\"fim\" in registro, registro[\"fim\"] is None)\n",
+      "stdout": "str dict\nFalse\nTrue True",
+      "explanation": "in verifica a presença da chave. Usar só get sem um valor padrão distinto daria None nos dois casos."
+    },
+    {
+      "prompt": "Grave `resumo.json` para `[3, 7]` com campos total e quantidade. Releia, mostre `10 2` e confira igualdade com as chaves em ordem inversa. Lista vazia deve resultar em `0 0`.",
+      "code": "import json\nfrom pathlib import Path\n\ndef resumir(minutos):\n    return {\"total\": sum(minutos), \"quantidade\": len(minutos)}\n\ncaminho = Path(\"resumo.json\")\nwith caminho.open(\"w\", encoding=\"utf-8\") as arquivo:\n    json.dump(resumir([3, 7]), arquivo)\nwith caminho.open(encoding=\"utf-8\") as arquivo:\n    resumo = json.load(arquivo)\nprint(resumo[\"total\"], resumo[\"quantidade\"])\nprint(resumo == {\"quantidade\": 2, \"total\": 10})\nvazio = resumir([])\nprint(vazio[\"total\"], vazio[\"quantidade\"])\n",
+      "stdout": "10 2\nTrue\n0 0",
+      "explanation": "Leia cada campo por nome. A igualdade de dicionários confere os pares independentemente da ordem. A lista vazia tem soma e quantidade iguais a zero.",
+      "hint": "Use `sum(minutos)` e `len(minutos)`. Compare o objeto lido com outro dicionário.",
+      "starter": "import json\nfrom pathlib import Path\n\nminutos = [3, 7]\ncaminho = Path(\"resumo.json\")\n# Calcule, grave, releia e compare o conteúdo.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que o texto JSON armazena para `{\"fim\": None}`?",
+      "options": [
+        "`\"fim\": None`",
+        "`\"fim\": null`",
+        "Omite o campo"
+      ],
+      "answer": 1,
+      "explanation": "None vira o literal null com a chave preservada."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para `registro = {\"fim\": None}`, a expressão `\"fim\" in registro` é falsa.",
+      "answer": false,
+      "explanation": "in consulta chaves, incluindo fim."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que lê JSON de um arquivo de texto aberto.",
+      "code": "import json\nresumo = json.___(arquivo)",
+      "blanks": [
+        [
+          "load"
+        ]
+      ],
+      "explanation": "load lê de um arquivo. loads recebe uma string."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A ordem das chaves mudou. Como conferir se todos os campos mantiveram os valores?",
+      "options": [
+        "Comparar textos byte a byte",
+        "Carregar e comparar dicionários",
+        "Comparar somente o tamanho dos arquivos"
+      ],
+      "answer": 1,
+      "explanation": "A igualdade de dicionários compara o conteúdo completo e ignora a ordem."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que json.load recebe e devolve?",
+      "back": "Recebe arquivo aberto e devolve o objeto Python representado no JSON."
+    },
+    {
+      "front": "Como distinguir um campo nulo de um campo ausente?",
+      "back": "Teste a existência da chave com in. Se presente, verifique se o valor é None."
+    }
+  ]
+}

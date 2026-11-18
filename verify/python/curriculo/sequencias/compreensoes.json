@@ -1,0 +1,98 @@
+{
+  "title": "Compreensões de lista",
+  "minutes": 25,
+  "intro": "Como escrever o dobro de cada item em uma lista sem perder de vista o laço equivalente? Retome [Percorrer e filtrar](#/python/sequencias/percorrer-e-filtrar).\n\nO laço começa com uma lista vazia, percorre os valores e acrescenta `valor * 2`. A compreensão `[valor * 2 for valor in dados]` produz uma nova lista com a mesma sequência. Leia primeiro o `for`, identifique cada valor e então aplique a expressão à esquerda. Em `[valor * 2 for valor in dados if valor % 2 == 0]`, o teste atua no valor original. Somente quando passa é que o dobro vai para a saída.\n\nPara filtrar depois de transformar, guarde os valores transformados e use outra etapa. Manter duas etapas ajuda a enxergar qual valor passa pelo teste. Ao terminar, explique por que dobrar primeiro pode mudar o resultado. Na próxima aula você vai agrupar valores que pertencem ao mesmo registro.",
+  "sources": [
+    [
+      "Compreensões de lista",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#list-comprehensions"
+    ],
+    [
+      "Semântica de compreensões",
+      "https://docs.python.org/pt-br/3.14/reference/expressions.html#displays-for-lists-sets-and-dictionaries"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o resultado de dobrar [1, 2, 3]. Execute o laço e a compreensão e compare as listas.",
+      "code": "dados = [1, 2, 3]\npelo_laco = []\nfor valor in dados:\n    pelo_laco.append(valor * 2)\n\npela_compreensao = [valor * 2 for valor in dados]\nprint(pelo_laco)\nprint(pela_compreensao)",
+      "stdout": "[2, 4, 6]\n[2, 4, 6]",
+      "explanation": "Cada valor é lido uma vez em cada versão. A expressão da compreensão calcula o mesmo valor enviado a append."
+    },
+    {
+      "prompt": "Preveja a diferença entre selecionar os pares originais e selecionar os pares já dobrados em [1, 2, 3]. Escreva as duas etapas da segunda abordagem.",
+      "code": "dados = [1, 2, 3]\ndobro_dos_pares = [valor * 2 for valor in dados if valor % 2 == 0]\ndobros = [valor * 2 for valor in dados]\npares_dos_dobros = [valor for valor in dobros if valor % 2 == 0]\nprint(dobro_dos_pares)\nprint(pares_dos_dobros)",
+      "stdout": "[4]\n[2, 4, 6]",
+      "explanation": "Só 2 passa pelo primeiro filtro. Depois de dobrar todos os valores, cada dobro é par e passa pelo segundo filtro."
+    },
+    {
+      "prompt": "Use uma compreensão para produzir o quadrado de cada inteiro par de 0 até 5. Confira o resultado também com uma sequência vazia.",
+      "code": "numeros = range(6)\nquadrados = [numero * numero for numero in numeros if numero % 2 == 0]\nprint(quadrados)",
+      "stdout": "[0, 4, 16]",
+      "explanation": "O teste deixa 0, 2 e 4 passarem. O produto do valor por ele mesmo calcula o quadrado. Uma entrada vazia produz [] porque nenhuma expressão é avaliada.",
+      "hint": "Coloque o produto antes do for e o teste de resto zero depois da sequência.",
+      "starter": "numeros = range(6)\n# Construa a compreensão e exiba seu resultado.",
+      "checks": [
+        {
+          "code": "numeros = []\nquadrados = [numero * numero for numero in numeros if numero % 2 == 0]\nprint(quadrados)",
+          "stdout": "[]"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que produz `[x + 1 for x in [2, 4]]`?",
+      "options": [
+        "`[2, 4, 1]`",
+        "`[3, 5]`",
+        "`[7]`"
+      ],
+      "answer": 1,
+      "explanation": "A expressão soma um a cada item individualmente e guarda os dois resultados."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `[x * 2 for x in [1, 2] if x > 1]`, o filtro é aplicado aos valores originais.",
+      "answer": true,
+      "explanation": "O teste ocorre antes da multiplicação. Só o 2 passa, gerando [4]."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que introduz o filtro da compreensão.",
+      "code": "positivos = [x for x in [-2, 0, 3] ___ x > 0]\nprint(positivos)",
+      "blanks": [
+        [
+          "if"
+        ]
+      ],
+      "explanation": "A cláusula if só inclui os itens que satisfazem a condição."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Some 1 a cada número de [0, 1, 2] e guarde apenas os resultados acima de 1. Qual saída respeita essa ordem?",
+      "options": [
+        "`[3]`",
+        "`[2, 3]`",
+        "`[1, 2, 3]`"
+      ],
+      "answer": 1,
+      "explanation": "Os resultados da transformação são 1, 2 e 3. O filtro deixa apenas 2 e 3."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que uma compreensão de lista cria?",
+      "back": "Uma nova lista com o resultado da expressão para cada item que passa pelos filtros."
+    },
+    {
+      "front": "O que acontece com `[x * 2 for x in []]`?",
+      "back": "O resultado é []. O corpo da compreensão não tem itens para transformar."
+    }
+  ]
+}

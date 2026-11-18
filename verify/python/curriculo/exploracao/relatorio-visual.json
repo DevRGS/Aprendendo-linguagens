@@ -1,0 +1,101 @@
+{
+  "title": "Comunicar resultados com gráficos",
+  "minutes": 50,
+  "intro": "Em qual estação uma proporção maior das viagens foi pontual? Preveja se a resposta muda quando os grupos têm tamanhos diferentes.\n\nUse Matplotlib e retome [Dispersão e correlação](#/python/exploracao/relacoes). Os dados são sintéticos, declarados no código. No projeto, escolhas exploratórias serão feitas usando o treino.\n\nComece pela pergunta. Use barras para comparar categorias. Dê nome à medida, unidade e denominador. Uma legenda identifica séries quando há mais de uma. Use também descrição textual e uma tabela equivalente para recuperar os valores sem ver a figura ou depender de cor. Conclua informando o que a amostra permite afirmar.",
+  "sources": [
+    [
+      "Guia Matplotlib",
+      "https://matplotlib.org/stable/users/explain/quick_start.html"
+    ],
+    [
+      "Barras",
+      "https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.bar.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Crie uma figura de barras de viagens pontuais por estação, A=3 e B=4. Rotule o eixo e salve o PNG.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nfig, ax = plt.subplots(layout=\"constrained\")\nax.bar([\"A\", \"B\"], [3, 4], edgecolor=\"black\")\nax.set(xlabel=\"Estação\", ylabel=\"Viagens pontuais (contagem)\", title=\"Registros pontuais\")\nfig.savefig(\"pontuais.png\")\nplt.close(fig)\nprint(\"A: 3 viagens; B: 4 viagens\")\n",
+      "stdout": "A: 3 viagens; B: 4 viagens",
+      "explanation": "B tem a barra mais alta, com 4 viagens contra 3 de A. Essa figura descreve contagens e seu texto informa os valores.",
+      "images": [
+        "pontuais.png"
+      ]
+    },
+    {
+      "prompt": "O rótulo de porcentagem seria incorreto sobre barras de alturas 3 e 4. Use totais 4 e 8 para calcular porcentagens e salve as barras corrigidas.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nestacoes, pontuais, totais = [\"A\", \"B\"], [3, 4], [4, 8]\npercentuais = [100 * pontos / total for pontos, total in zip(pontuais, totais, strict=True)]\nfig, ax = plt.subplots(layout=\"constrained\")\nax.bar(estacoes, percentuais, edgecolor=\"black\")\nax.set(xlabel=\"Estação\", ylabel=\"Viagens pontuais (%)\", ylim=(0, 100), title=\"Pontualidade\")\nfig.savefig(\"percentuais.png\")\nplt.close(fig)\nprint(\"A: 75% de 4; B: 50% de 8\")\n",
+      "stdout": "A: 75% de 4; B: 50% de 8",
+      "explanation": "A passa a aparecer acima de B: 3/4 supera 4/8. A mudança exige recalcular os dados usados nas barras, além de corrigir o rótulo.",
+      "images": [
+        "percentuais.png"
+      ]
+    },
+    {
+      "prompt": "Para A=3/4, B=4/8 e C=0/0, entregue uma figura com percentuais definidos, tabela com numeradores e denominadores e duas frases sustentadas pelos números. Marque C como não calculável.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ndados = [(\"A\", 3, 4), (\"B\", 4, 8), (\"C\", 0, 0)]\nnomes, alturas = [], []\nprint(\"Estação | Pontuais | Total | Percentual\")\nfor nome, pontuais, total in dados:\n    if total == 0:\n        print(f\"{nome} | {pontuais} | {total} | não calculável\")\n    else:\n        percentual = 100 * pontuais / total\n        nomes.append(nome)\n        alturas.append(percentual)\n        print(f\"{nome} | {pontuais} | {total} | {percentual:.0f}%\")\n\nfig, ax = plt.subplots(layout=\"constrained\")\nax.bar(nomes, alturas, edgecolor=\"black\")\nax.set(xlabel=\"Estação\", ylabel=\"Viagens pontuais (%)\", ylim=(0, 100),\n       title=\"Pontualidade entre estações observadas\")\nfig.savefig(\"relatorio.png\")\nplt.close(fig)\nprint(\"A teve 75% e B teve 50% de pontualidade na amostra.\")\nprint(\"C não teve viagens registradas, então não há taxa para comparar.\")\n",
+      "stdout": "Estação | Pontuais | Total | Percentual\nA | 3 | 4 | 75%\nB | 4 | 8 | 50%\nC | 0 | 0 | não calculável\nA teve 75% e B teve 50% de pontualidade na amostra.\nC não teve viagens registradas, então não há taxa para comparar.",
+      "explanation": "As barras de A e B têm alturas de 75% e 50%. C permanece na tabela com denominador zero. Com poucos registros, os percentuais descrevem esta amostra. Na preparação para ML, decida quais dados estarão disponíveis antes da previsão.",
+      "hint": "Em C, a ausência de denominador exige uma política visível na tabela.",
+      "starter": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ndados = [(\"A\", 3, 4), (\"B\", 4, 8), (\"C\", 0, 0)]\n# Prepare a tabela e passe só percentuais definidos ao gráfico.\n",
+      "images": [
+        "relatorio.png"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "A tem 2 pontuais entre 4 viagens, B tem 3 entre 10. Quem tem maior proporção?",
+      "options": [
+        "B",
+        "A",
+        "As proporções são iguais"
+      ],
+      "answer": 1,
+      "explanation": "A tem 50%, enquanto B tem 30%."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um grupo com 0 pontuais entre 0 viagens tem pontualidade de 0%.",
+      "answer": false,
+      "explanation": "A proporção fica indefinida quando faltam viagens no denominador."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para gravar a figura em arquivo.",
+      "code": "fig.___(\"grafico.png\")",
+      "blanks": [
+        [
+          "savefig"
+        ]
+      ],
+      "explanation": "A figura é salva como PNG conforme a extensão."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual texto permite recuperar as alturas de barras sem depender de cores?",
+      "options": [
+        "A barra azul é a maior",
+        "A: 75% de 4, B: 50% de 8",
+        "As estações têm pontualidades diferentes"
+      ],
+      "answer": 1,
+      "explanation": "Os números e as categorias aparecem explicitamente em texto."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Que informação deve acompanhar uma taxa por grupo?",
+      "back": "Unidade, numerador e denominador, além da identificação do grupo."
+    },
+    {
+      "front": "Como relatar um grupo de tamanho zero?",
+      "back": "Mostre denominador zero na tabela e sinalize que a taxa não é calculável."
+    }
+  ]
+}

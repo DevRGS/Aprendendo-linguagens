@@ -1,0 +1,207 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `triplo(n)` retorna `n * 3`, quanto vale `triplo(2) + 1`?",
+      "options": [
+        "`6`",
+        "`7`",
+        "`9`"
+      ],
+      "answer": 1,
+      "explanation": "A chamada devolve 6 e a expressão adiciona 1 ao retorno.",
+      "id": "python.funcoes.q01",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma função que termina depois de `print(5)`, sem return, devolve None ao chamador.",
+      "answer": true,
+      "explanation": "A função escreve 5. Para entregar 5 ao chamador, use return.",
+      "id": "python.funcoes.q02",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que entrega o valor ao código que chamou a função.",
+      "code": "def dobro(numero):\n    ___ numero * 2\n\nprint(dobro(3))",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "return encerra a chamada e entrega o dobro.",
+      "id": "python.funcoes.q03",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você quer somar os valores de `minutos(1, 5)` e `minutos(0, 10)`. Qual contrato permite fazer a soma direta?",
+      "options": [
+        "A função imprime a duração e termina",
+        "A função retorna a duração como inteiro",
+        "A função retorna a duração como texto"
+      ],
+      "answer": 1,
+      "explanation": "Os retornos inteiros 65 e 10 podem ser somados para dar 75. Textos seriam concatenados.",
+      "id": "python.funcoes.q04",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `def desconto(preco, taxa=0.10)` e retorno `preco - preco * taxa`, quanto dá `desconto(80)`?",
+      "options": [
+        "`80.0`",
+        "`8.0`",
+        "`72.0`"
+      ],
+      "answer": 2,
+      "explanation": "A taxa padrão desconta 8.0 de 80.",
+      "id": "python.funcoes.q05",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma lista padrão escrita em `def juntar(item, lista=[])` é recriada em toda chamada que omite lista.",
+      "answer": false,
+      "explanation": "O padrão é avaliado na definição. Uma mutação permanece nas chamadas seguintes que usam o mesmo padrão.",
+      "id": "python.funcoes.q06",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a sentinela que permite escolher uma lista nova dentro da chamada.",
+      "code": "def guardar(valor, itens=___):\n    if itens is None:\n        itens = []\n    itens.append(valor)\n    return itens",
+      "blanks": [
+        [
+          "None"
+        ]
+      ],
+      "explanation": "Usar None como padrão evita guardar uma lista mutável na definição.",
+      "id": "python.funcoes.q07",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma função `etiqueta(texto, prefixo='ID')` deve receber `42` como texto e usar o prefixo `Lote`. Qual chamada nomeia o prefixo corretamente?",
+      "options": [
+        "`etiqueta('42', prefixo='Lote')`",
+        "`etiqueta('Lote', texto='42')`",
+        "`etiqueta(prefixo='Lote')`"
+      ],
+      "answer": 0,
+      "explanation": "O argumento posicional vai para texto. O argumento nomeado preenche prefixo uma única vez.",
+      "id": "python.funcoes.q08",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `media([5.0, 9.0])` calcula soma dividida pela quantidade, o que devolve?",
+      "options": [
+        "`14.0`",
+        "`2.0`",
+        "`7.0`"
+      ],
+      "answer": 2,
+      "explanation": "A soma é 14.0 e a quantidade é 2.",
+      "id": "python.funcoes.q09",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Mesmo com a anotação `list[float]`, uma lista vazia pode chegar ao corpo e causar erro na divisão.",
+      "answer": true,
+      "explanation": "A anotação descreve o tipo esperado. Se o corpo dividir a soma pelo comprimento zero, ocorrerá ZeroDivisionError.",
+      "id": "python.funcoes.q10",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o valor previsto para ausência quando a lista está vazia.",
+      "code": "def media_ou_none(valores: list[float]) -> float | None:\n    if len(valores) == 0:\n        return ___\n    return sum(valores) / len(valores)",
+      "blanks": [
+        [
+          "None"
+        ]
+      ],
+      "explanation": "O contrato usa None para ausência e preserva zero como resultado numérico possível.",
+      "id": "python.funcoes.q11",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma função devolve `None` para falta de média. Como o chamador identifica ausência sem confundir a média 0.0?",
+      "options": [
+        "`if not resultado:`",
+        "`if resultado is None:`",
+        "`if resultado == 0:`"
+      ],
+      "answer": 1,
+      "explanation": "O teste de identidade seleciona só None. O resultado 0.0 continua sendo uma medida.",
+      "id": "python.funcoes.q12",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `limpar(' Lia ')` retorna `'Lia'` e `tag(nome)` retorna `f'[{nome}]'`, o que produz `tag(limpar(' Lia '))`?",
+      "options": [
+        "`'[ Lia ]'`",
+        "`'[Lia]'`",
+        "`'Lia'`"
+      ],
+      "answer": 1,
+      "explanation": "A função interna remove os espaços antes de entregar o nome a tag.",
+      "id": "python.funcoes.q13",
+      "lesson": "composicao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para ordenar por uma função `duracao`, passar `key=duracao(registro)` fornece a regra para sorted aplicar a todos os itens.",
+      "answer": false,
+      "explanation": "Essa expressão chama a função uma vez. Use `key=duracao` para passar a função em si.",
+      "id": "python.funcoes.q14",
+      "lesson": "composicao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome da função que retorna o segundo campo para a ordenação.",
+      "code": "def duracao(registro):\n    return registro[1]\n\nprint(sorted([('A', 6), ('B', 3)], key=___))",
+      "blanks": [
+        [
+          "duracao"
+        ]
+      ],
+      "explanation": "O parâmetro key recebe a função. Seu retorno numérico de cada item determina a ordenação.",
+      "id": "python.funcoes.q15",
+      "lesson": "composicao"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas de um relatório em que nomes com espaços diferentes devem contar como o mesmo tema.",
+      "lines": [
+        "Normalizar os nomes dos registros recebidos",
+        "Somar os minutos por nome normalizado",
+        "Apresentar os subtotais calculados"
+      ],
+      "explanation": "O agrupamento precisa dos nomes limpos e a apresentação precisa dos subtotais.",
+      "id": "python.funcoes.q16",
+      "lesson": "composicao"
+    }
+  ]
+}

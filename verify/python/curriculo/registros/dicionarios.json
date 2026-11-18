@@ -1,0 +1,98 @@
+{
+  "title": "Dicionários",
+  "minutes": 24,
+  "intro": "Como guardar uma medida por ID e substituir só a medida de a? Retome [Tuplas e desempacotamento](#/python/registros/tuplas-e-desempacotamento) para rever registros em pares.\n\nUm dicionário associa chaves a valores. Em `medidas = {\"a\": 2}`, a chave é o texto a e o valor é 2. `medidas[\"a\"]` devolve 2. Se a chave não existir, esse acesso obrigatório gera `KeyError`. `medidas.get(\"b\", 0)` devolve 0 como padrão se não houver b. Se zero for um valor registrado, use `\"b\" in medidas` para testar presença.\n\n`medidas[\"a\"] = 3` substitui apenas a associação de a. `for chave, valor in medidas.items():` entrega cada par para desempacotamento. Antes de avançar, explique quando usar padrão 0 faz sentido, como em uma contagem que ainda não viu a cor. Na próxima aula você vai verificar chaves comuns sem guardar valores.",
+  "sources": [
+    [
+      "Dicionários no tutorial",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#dictionaries"
+    ],
+    [
+      "Métodos dos dicionários",
+      "https://docs.python.org/pt-br/3.14/library/stdtypes.html#mapping-types-dict"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o valor de a antes e depois da atualização. Leia e exiba o campo nas duas etapas.",
+      "code": "medidas = {\"a\": 2}\nprint(medidas[\"a\"])\nmedidas[\"a\"] = 3\nprint(medidas[\"a\"])",
+      "stdout": "2\n3",
+      "explanation": "A segunda atribuição usa a mesma chave e substitui o valor associado."
+    },
+    {
+      "prompt": "Preveja as duas saídas quando a chave a tem valor zero e a chave b está ausente. Compare get com a verificação de presença.",
+      "code": "medidas = {\"a\": 0}\nprint(medidas.get(\"a\", 0), \"a\" in medidas)\nprint(medidas.get(\"b\", 0), \"b\" in medidas)",
+      "stdout": "0 True\n0 False",
+      "explanation": "Os valores lidos coincidem, mas só a consta do mapa. O zero para b vem do padrão de get."
+    },
+    {
+      "prompt": "Conte as ocorrências de cada cor em [azul, azul, verde]. Imprima uma linha por cor na ordem da primeira aparição. Confira também se uma entrada vazia produz zero associações.",
+      "code": "cores = [\"azul\", \"azul\", \"verde\"]\nfrequencias = {}\nfor cor in cores:\n    frequencias[cor] = frequencias.get(cor, 0) + 1\nfor cor, quantidade in frequencias.items():\n    print(cor, quantidade)",
+      "stdout": "azul 2\nverde 1",
+      "explanation": "Cada ocorrência acrescenta 1 à frequência anterior, que começa em 0 para uma chave nova. items percorre na ordem de inserção. Sem ocorrências, o mapa fica vazio e o segundo laço não imprime linhas.",
+      "hint": "Use get com padrão zero para ler a contagem antes do primeiro incremento.",
+      "starter": "cores = [\"azul\", \"azul\", \"verde\"]\nfrequencias = {}\n# Acumule por cor e percorra os pares de frequencias.",
+      "checks": [
+        {
+          "code": "cores = []\nfrequencias = {}\nfor cor in cores:\n    frequencias[cor] = frequencias.get(cor, 0) + 1\nprint(frequencias)",
+          "stdout": "{}"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `dados = {\"t\": 4}`, qual valor vem de `dados.get(\"v\", 2)`?",
+      "options": [
+        "`2`",
+        "`4`",
+        "`None`"
+      ],
+      "answer": 0,
+      "explanation": "A chave v não existe e 2 é o padrão informado."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se `dados = {\"a\": 0}`, a expressão `\"a\" in dados` é verdadeira apesar do valor zero.",
+      "answer": true,
+      "explanation": "in testa chaves em um dicionário. O valor zero associado à chave não altera sua presença."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que entrega cada chave e cada valor juntos.",
+      "code": "dados = {\"a\": 3}\nfor chave, valor in dados.___():\n    print(chave, valor)",
+      "blanks": [
+        [
+          "items"
+        ]
+      ],
+      "explanation": "items fornece os pares (chave, valor)."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Contando os itens [norte, sul, norte, norte], que dicionário resulta?",
+      "options": [
+        "`{\"norte\": 2, \"sul\": 1}`",
+        "`{\"norte\": 3, \"sul\": 1}`",
+        "`{\"norte\": 4, \"sul\": 1}`"
+      ],
+      "answer": 1,
+      "explanation": "Três ocorrências atualizam a mesma chave norte e uma atualiza sul."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quando `dados[chave]` gera KeyError?",
+      "back": "Quando a chave procurada não existe no dicionário."
+    },
+    {
+      "front": "O que `d.get('x', 0)` retorna se x já vale 4?",
+      "back": "Retorna 4. O padrão 0 só entra quando x está ausente."
+    }
+  ]
+}

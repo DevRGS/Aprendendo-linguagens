@@ -1,0 +1,92 @@
+{
+  "title": "Precisão, centralização e escalas",
+  "minutes": 50,
+  "intro": "Números float representam muitos decimais por aproximação binária. Use isclose para verificar uma diferença aceitável e indique tolerância absoluta perto de zero. Centralizar subtrai a média de cada observação. Normalizar pelo intervalo subtrai o mínimo e divide pela amplitude. Um vetor constante exige uma regra porque a amplitude é zero. Guarde a unidade antes de transformar. Revise [centro e dispersão](#/python/matematica/centro-e-dispersao).",
+  "sources": [
+    [
+      "Comparação com tolerância",
+      "https://docs.python.org/pt-br/3.14/library/math.html#math.isclose"
+    ],
+    [
+      "Estatística na biblioteca padrão",
+      "https://docs.python.org/pt-br/3.14/library/statistics.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Compare 0.1+0.2 com 0.3 por igualdade e tolerância.",
+      "code": "from math import isclose\nprint(0.1 + 0.2 == 0.3)\nprint(isclose(0.1 + 0.2, 0.3, abs_tol=1e-9))\n",
+      "stdout": "False\nTrue",
+      "explanation": "A representação binária pode produzir um pequeno erro de arredondamento."
+    },
+    {
+      "prompt": "Centralize [2,4,6] e confira a média dos resultados.",
+      "code": "from statistics import mean\nvalores = [2,4,6]\ncentro = mean(valores)\ncentrados = [x-centro for x in valores]\nprint(centrados)\nprint(mean(centrados))\n",
+      "stdout": "[-2, 0, 2]\n0",
+      "explanation": "Cada valor foi deslocado por 4. A unidade é preservada."
+    },
+    {
+      "prompt": "Normalize [2,4,8] pela amplitude. Comprove, por tolerância, o valor intermediário. Use zero para coluna constante.",
+      "code": "from math import isclose\ndef escalar(valores):\n    minimo, maximo = min(valores), max(valores)\n    amplitude = maximo - minimo\n    if amplitude == 0:\n        return [0.0 for _ in valores]\n    return [(x - minimo) / amplitude for x in valores]\n\nnormal = escalar([2,4,8])\nprint([round(x, 3) for x in normal])\nassert isclose(normal[1], 1/3, abs_tol=1e-9)\nprint(escalar([5,5]))\n",
+      "stdout": "[0.0, 0.333, 1.0]\n[0.0, 0.0]",
+      "explanation": "O intervalo original vale 6. Para entrada constante, combinar a regra dos zeros antes de dividir. A função pressupõe ao menos um valor.",
+      "hint": "Calcule a amplitude antes de calcular os valores para decidir qual regra usar.",
+      "starter": "valores = [2, 4, 8]\n# Implemente escalar e teste [5, 5] também.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quanto vale a centralização de [1,3]?",
+      "options": [
+        "[-1, 1]",
+        "[0, 2]",
+        "[1, 3]"
+      ],
+      "answer": 0,
+      "explanation": "A média é 2 e subtraímos 2 de cada valor."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma coluna constante tem amplitude positiva.",
+      "answer": false,
+      "explanation": "O mínimo e o máximo são iguais."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função importada que verifica tolerância.",
+      "code": "assert ___(a, b, abs_tol=1e-6)",
+      "blanks": [
+        [
+          "isclose"
+        ]
+      ],
+      "explanation": "isclose compara considerando tolerâncias."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual valor sai para o máximo de [2,4,8] com a escala proposta?",
+      "options": [
+        "0",
+        "1",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "O numerador do máximo é igual à amplitude."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Que parâmetro ajuda a comparar perto de zero?",
+      "back": "Uma tolerância absoluta coerente com a unidade e a precisão pretendida."
+    },
+    {
+      "front": "Por que tratar amplitude zero antes de dividir?",
+      "back": "Uma coluna constante teria denominador zero. Defina uma regra explícita."
+    }
+  ]
+}

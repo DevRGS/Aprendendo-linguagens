@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que é desempacotar uma tupla?",
+      "back": "Atribuir seus itens, pela ordem, a vários nomes em uma única instrução.",
+      "id": "python.registros.f01",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "front": "O que ocorre com zip comum sobre listas de tamanhos 3 e 2?",
+      "back": "Saem dois pares. O terceiro item da lista maior fica de fora.",
+      "id": "python.registros.f02",
+      "lesson": "tuplas-e-desempacotamento"
+    },
+    {
+      "front": "Quando `dados[chave]` gera KeyError?",
+      "back": "Quando a chave procurada não existe no dicionário.",
+      "id": "python.registros.f03",
+      "lesson": "dicionarios"
+    },
+    {
+      "front": "O que `d.get('x', 0)` retorna se x já vale 4?",
+      "back": "Retorna 4. O padrão 0 só entra quando x está ausente.",
+      "id": "python.registros.f04",
+      "lesson": "dicionarios"
+    },
+    {
+      "front": "O que distingue uma interseção de uma diferença?",
+      "back": "A interseção guarda elementos comuns. A diferença guarda elementos do primeiro conjunto ausentes do segundo.",
+      "id": "python.registros.f05",
+      "lesson": "conjuntos"
+    },
+    {
+      "front": "Como produzir uma apresentação ordenada de IDs numéricos de um conjunto?",
+      "back": "Use sorted(ids) para obter uma lista em ordem crescente.",
+      "id": "python.registros.f06",
+      "lesson": "conjuntos"
+    },
+    {
+      "front": "Como conferir o total de minutos do lote?",
+      "back": "Some os subtotais de todos os temas e compare com a soma direta das durações.",
+      "id": "python.registros.f07",
+      "lesson": "resumo-de-lote"
+    },
+    {
+      "front": "O que produz um lote vazio?",
+      "back": "O mapa fica vazio e a soma é 0. Não há linha de tema no relatório.",
+      "id": "python.registros.f08",
+      "lesson": "resumo-de-lote"
+    }
+  ]
+}

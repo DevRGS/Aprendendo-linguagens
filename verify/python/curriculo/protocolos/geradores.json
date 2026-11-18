@@ -1,0 +1,96 @@
+{
+  "title": "Geradores sob demanda",
+  "minutes": 38,
+  "intro": "Solicite só o primeiro quadrado e observe quantas multiplicações acontecem. Retome [iteradores](#/python/protocolos/iteradores).\n\nUma função com `yield` cria um gerador ao ser chamada. O corpo começa quando pedimos um valor. `yield` entrega o valor e suspende o corpo, que continua na próxima solicitação. Como iterador, o gerador esgota. Consumir itens sob demanda permite processar dados grandes sem guardar a sequência inteira. Transformá-los em `list` materializa todos os itens.\n\nUse o CSV ou texto fornecido apenas onde indicado no enunciado. O arquivo de E3 fica aberto durante o consumo da função geradora. A atividade consome até o final dentro do cálculo. O que mudaria se o consumidor pedisse só um valor? Depois, veja [decoradores](#/python/protocolos/decoradores).",
+  "sources": [
+    [
+      "Funções geradoras",
+      "https://docs.python.org/3.14/tutorial/classes.html#generators"
+    ],
+    [
+      "Expressões geradoras",
+      "https://docs.python.org/3.14/tutorial/classes.html#generator-expressions"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Gere os quadrados dos inteiros 0, 1 e 2. Antes do laço, diga em que momento a função geradora calculará cada item.",
+      "code": "def quadrados(limite):\n    for n in range(limite):\n        yield n * n\n\nfor valor in quadrados(3):\n    print(valor)\n",
+      "stdout": "0\n1\n4",
+      "explanation": "Cada volta do for solicita mais um valor ao gerador. O limite de range exclui 3."
+    },
+    {
+      "prompt": "Acrescente uma marca antes de yield. Crie um gerador e consuma apenas o primeiro valor. Conte as marcas produzidas.",
+      "code": "def quadrados(limite):\n    for n in range(limite):\n        print(f\"calculando {n}\")\n        yield n * n\n\ncursor = quadrados(3)\nprint(\"gerador criado\")\nprint(\"primeiro:\", next(cursor))\n",
+      "stdout": "gerador criado\ncalculando 0\nprimeiro: 0",
+      "explanation": "Criar o gerador ainda não executa o corpo. next avança até o primeiro yield. Para ver a retomada, peça o próximo valor ao mesmo cursor."
+    },
+    {
+      "prompt": "Some os inteiros de `leituras.txt` sem armazenar todas as linhas. Pule linhas sem inteiro, aceite zero e negativos e faça a soma de arquivo vazio resultar em 0. No arquivo fornecido, espere 6.",
+      "code": "from pathlib import Path\n\ndef inteiros(caminho):\n    with caminho.open(encoding=\"utf-8\") as arquivo:\n        for linha in arquivo:\n            try:\n                numero = int(linha)\n            except ValueError:\n                continue\n            yield numero\n\nprint(sum(inteiros(Path(\"leituras.txt\"))))\nprint(sum(inteiros(Path(\"vazio.txt\"))))\n",
+      "stdout": "6\n0",
+      "explanation": "O gerador lê uma linha de cada vez, e sum consome até o fim sem montar uma lista. O arquivo fica aberto no with durante o consumo e fecha ao encerrar. Sem valores, sum começa e termina em zero.",
+      "hint": "O yield deve ficar depois da conversão válida. Passe o gerador diretamente a sum.",
+      "starter": "from pathlib import Path\n\ndef inteiros(caminho):\n    # Use with, percorra as linhas e emita inteiros com yield.\n    raise NotImplementedError\n\nprint(sum(inteiros(Path(\"leituras.txt\"))))\n",
+      "extensions": {
+        "leituras.txt": "2\nfalha\n0\n5\n-1\n",
+        "vazio.txt": "\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantos cálculos ocorrem ao criar `quadrados(100)` e chamar next só uma vez?",
+      "options": [
+        "100",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "A primeira solicitação executa até o primeiro yield."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Consumir um gerador com `list(gerador)` mantém toda a economia de memória de processar item a item.",
+      "answer": false,
+      "explanation": "list guarda todos os valores emitidos. Um consumidor incremental pode evitar isso."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a palavra que emite o valor e suspende a função geradora.",
+      "code": "def valores():\n    ___ 5",
+      "blanks": [
+        [
+          "yield"
+        ]
+      ],
+      "explanation": "yield entrega 5 e deixa a função pronta para continuar quando houver outra solicitação."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em um arquivo com linhas `4`, `ruim` e `-3`, quanto devolve `sum(inteiros(caminho))` da aula?",
+      "options": [
+        "4",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "O gerador pula ruim e entrega 4 e -3."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Em que momento o corpo de um gerador começa a executar?",
+      "back": "Quando o consumidor pede o primeiro item."
+    },
+    {
+      "front": "Por que passar o gerador a sum sem chamar list primeiro?",
+      "back": "sum pode agregar os itens à medida que chegam, sem manter todos em memória."
+    }
+  ]
+}

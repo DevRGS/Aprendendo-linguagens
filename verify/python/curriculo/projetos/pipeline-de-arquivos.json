@@ -1,0 +1,112 @@
+{
+  "title": "Pipeline de arquivos",
+  "minutes": 43,
+  "intro": "Encadeie CSV, cálculo e gravação JSON. Preveja o que acontece ao repetir a operação com a mesma entrada. Retome [CSV](#/python/arquivos/csv), [JSON](#/python/arquivos/json) e [imports](#/python/projetos/modulos-e-imports).\n\nNum pipeline a saída de uma etapa alimenta a próxima. A leitura recebe um caminho e devolve uma lista de inteiros. O cálculo recebe a lista e devolve um dicionário. A gravação recebe o resultado e um caminho de saída. Configure origens e destinos por argumentos. Use modo `w` para gerar um único relatório da entrada a cada execução.\n\nNo caderno, use os auxiliares da preparação. Reinicie o kernel para reler um auxiliar já importado que tenha editado. No terminal, execute a partir da pasta do exercício para que os caminhos curtos apontem aos dados. Depois de comparar duas execuções, considere o que deve conter um resumo sem registros. Em seguida, veja [instâncias](#/python/objetos/instancias).",
+  "sources": [
+    [
+      "Leitura de CSV",
+      "https://docs.python.org/3.14/library/csv.html#csv.DictReader"
+    ],
+    [
+      "Gravar com json.dump",
+      "https://docs.python.org/3.14/library/json.html#json.dump"
+    ],
+    [
+      "Organizar código em módulos",
+      "https://docs.python.org/3.14/tutorial/modules.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Encadeie as duas funções auxiliares para ler `sessoes.csv` com 3 e 7 minutos. Grave `resumo.json` e mostre o total.",
+      "code": "import json\nfrom pathlib import Path\nfrom ler_sessoes import ler_minutos\nfrom resumir_sessoes import resumir\n\ndef executar(origem, destino):\n    minutos = ler_minutos(origem)\n    resultado = resumir(minutos)\n    with destino.open(\"w\", encoding=\"utf-8\") as arquivo:\n        json.dump(resultado, arquivo)\n    return resultado\n\nresultado = executar(Path(\"sessoes.csv\"), Path(\"resumo.json\"))\nprint(resultado[\"total\"])\n",
+      "stdout": "10",
+      "explanation": "Ler converte as durações. Resumir calcula o total e executar grava o resultado. Abra resumo.json para ver os dois campos.",
+      "extensions": {
+        "ler_sessoes.py": "import csv\n\ndef ler_minutos(caminho):\n    with caminho.open(encoding=\"utf-8\", newline=\"\") as arquivo:\n        return [int(linha[\"minutos\"]) for linha in csv.DictReader(arquivo)]\n",
+        "resumir_sessoes.py": "def resumir(minutos):\n    return {\"total\": sum(minutos), \"quantidade\": len(minutos)}\n",
+        "sessoes.csv": "id,minutos\na,3\nb,7\n"
+      }
+    },
+    {
+      "prompt": "Execute duas vezes com a mesma entrada e o mesmo destino. Compare os objetos lidos depois de cada execução. Preveja a contagem do segundo.",
+      "code": "import json\nfrom pathlib import Path\nfrom ler_sessoes import ler_minutos\nfrom resumir_sessoes import resumir\n\ndef executar(origem, destino):\n    minutos = ler_minutos(origem)\n    resultado = resumir(minutos)\n    with destino.open(\"w\", encoding=\"utf-8\") as arquivo:\n        json.dump(resultado, arquivo)\n    return resultado\n\norigem = Path(\"sessoes.csv\")\ndestino = Path(\"resumo.json\")\nexecutar(origem, destino)\nprimeiro = json.loads(destino.read_text(encoding=\"utf-8\"))\nexecutar(origem, destino)\nsegundo = json.loads(destino.read_text(encoding=\"utf-8\"))\nprint(primeiro == segundo)\nprint(segundo[\"quantidade\"])\n",
+      "stdout": "True\n2",
+      "explanation": "w substitui o arquivo. Cada chamada recalcula a lista e as contagens a partir do CSV. Dois carregamentos com os mesmos pares são iguais.",
+      "extensions": {
+        "ler_sessoes.py": "import csv\n\ndef ler_minutos(caminho):\n    with caminho.open(encoding=\"utf-8\", newline=\"\") as arquivo:\n        return [int(linha[\"minutos\"]) for linha in csv.DictReader(arquivo)]\n",
+        "resumir_sessoes.py": "def resumir(minutos):\n    return {\"total\": sum(minutos), \"quantidade\": len(minutos)}\n",
+        "sessoes.csv": "id,minutos\na,3\nb,7\n"
+      }
+    },
+    {
+      "prompt": "Entregue dois auxiliares e o programa principal. Na pasta nova da atividade, coloque `sessoes.csv` junto dos três arquivos. Execute o principal a partir dessa pasta, releia `resumo.json` e confira total 10 e quantidade 2. Teste um CSV só com cabeçalho, que deve resultar em total e quantidade zero.",
+      "code": "import json\nfrom pathlib import Path\nfrom ler_sessoes import ler_minutos\nfrom resumir_sessoes import resumir\n\ndef executar(origem, destino):\n    minutos = ler_minutos(origem)\n    resultado = resumir(minutos)\n    with destino.open(\"w\", encoding=\"utf-8\") as arquivo:\n        json.dump(resultado, arquivo)\n    return resultado\n\nexecutar(Path(\"sessoes.csv\"), Path(\"resumo.json\"))\nresumo = json.loads(Path(\"resumo.json\").read_text(encoding=\"utf-8\"))\nprint(resumo[\"total\"], resumo[\"quantidade\"])\n\nvazio = executar(Path(\"sem_sessoes.csv\"), Path(\"resumo_vazio.json\"))\nprint(vazio[\"total\"], vazio[\"quantidade\"])\n",
+      "stdout": "10 2\n0 0",
+      "explanation": "ler_sessoes.py converte os campos. resumir_sessoes.py calcula sem abrir arquivos, e o programa principal coordena a entrada e a saída. A célula faz o papel do principal no caderno.",
+      "hint": "Use o dicionário devolvido pelo resumo como entrada de json.dump.",
+      "starter": "from pathlib import Path\nfrom ler_sessoes import ler_minutos\nfrom resumir_sessoes import resumir\n\norigem = Path(\"sessoes.csv\")\ndestino = Path(\"resumo.json\")\n# Leia, resuma e grave o destino.\n",
+      "extensions": {
+        "ler_sessoes.py": "import csv\n\ndef ler_minutos(caminho):\n    with caminho.open(encoding=\"utf-8\", newline=\"\") as arquivo:\n        return [int(linha[\"minutos\"]) for linha in csv.DictReader(arquivo)]\n",
+        "resumir_sessoes.py": "def resumir(minutos):\n    return {\"total\": sum(minutos), \"quantidade\": len(minutos)}\n",
+        "sessoes.csv": "id,minutos\na,3\nb,7\n",
+        "sem_sessoes.csv": "id,minutos\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual objeto a etapa de cálculo recebe?",
+      "options": [
+        "Caminho do JSON",
+        "Lista de minutos como inteiros",
+        "DictReader com valores textuais"
+      ],
+      "answer": 1,
+      "explanation": "O contrato do leitor inclui converter os minutos."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Rodar de novo no mesmo destino em modo `w` duplica o conteúdo do JSON.",
+      "answer": false,
+      "explanation": "w trunca o destino antes de gravar."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que grava o resumo em um arquivo já aberto.",
+      "code": "import json\njson.___(resultado, arquivo)",
+      "blanks": [
+        [
+          "dump"
+        ]
+      ],
+      "explanation": "dump serializa diretamente no arquivo."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as etapas até validar o JSON do pipeline.",
+      "lines": [
+        "Ler CSV e converter minutos",
+        "Calcular o resumo dos minutos lidos",
+        "Gravar o resumo calculado no JSON",
+        "Reabrir o JSON e conferir os campos"
+      ],
+      "explanation": "Cada etapa precisa do resultado da anterior."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Como testar o cálculo sem arquivo de entrada?",
+      "back": "Passe uma lista de inteiros à função de resumo e compare o dicionário devolvido."
+    },
+    {
+      "front": "Qual resultado para um CSV só com cabeçalho?",
+      "back": "Zero registros. Total e quantidade são 0."
+    }
+  ]
+}

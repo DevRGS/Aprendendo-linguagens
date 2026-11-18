@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que torna independente o valor esperado de um teste?",
+      "back": "Ele é obtido do requisito ou de um cálculo separado, sem usar a implementação verificada.",
+      "id": "python.qualidade.f01",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "front": "Qual cenário faz assertRaises(ValueError) passar?",
+      "back": "O bloco levanta ValueError ou uma de suas subclasses.",
+      "id": "python.qualidade.f02",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "front": "Onde começar quando um traceback aparece?",
+      "back": "Leia a última linha para identificar a exceção e rastreie acima o local do código e as chamadas.",
+      "id": "python.qualidade.f03",
+      "lesson": "depuracao"
+    },
+    {
+      "front": "Qual caso mínimo detecta o filtro que perde zero?",
+      "back": "Uma entrada [0] deve continuar como [0].",
+      "id": "python.qualidade.f04",
+      "lesson": "depuracao"
+    },
+    {
+      "front": "Qual é o pior caso para comparações na busca linear de n IDs?",
+      "back": "n comparações, por exemplo ao buscar um ID ausente ou o último sem duplicatas anteriores.",
+      "id": "python.qualidade.f05",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "front": "O que precisa entrar na comparação ao optar pelo set?",
+      "back": "Tempo de construção e memória adicional, junto ao ganho esperado nas consultas repetidas.",
+      "id": "python.qualidade.f06",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "front": "O que é proveniência de um lote?",
+      "back": "Registro de onde vieram os dados e como foram selecionados ou preparados.",
+      "id": "python.qualidade.f07",
+      "lesson": "reprodutibilidade"
+    },
+    {
+      "front": "Por que ordenar a saída de um conjunto a ser publicado?",
+      "back": "A ordem de iteração do set não é uma ordem didática estável. sorted fixa uma ordem de apresentação.",
+      "id": "python.qualidade.f08",
+      "lesson": "reprodutibilidade"
+    }
+  ]
+}

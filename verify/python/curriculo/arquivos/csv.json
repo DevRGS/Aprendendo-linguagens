@@ -1,0 +1,97 @@
+{
+  "title": "Ler e escrever CSV",
+  "minutes": 37,
+  "intro": "Some durações de dois registros. Antes de rodar, preveja se `minutos` chega à leitura como número ou texto. Retome [arquivos de texto](#/python/arquivos/caminhos-e-texto) e [dicionários](#/python/registros/dicionarios).\n\nO cabeçalho do CSV nomeia as colunas. O delimitador usado aqui é a vírgula, que também pode fazer parte do conteúdo de um campo delimitado por aspas. `DictReader` transforma cada registro em dicionário. Converta `linha[\"minutos\"]` com `int` antes de somar. Abra CSV com `encoding=\"utf-8\", newline=\"\"` para que a biblioteca trate as quebras de linha, inclusive dentro de campos entre aspas.\n\nA preparação do caderno cria as entradas de cada exercício. No terminal, localize-as na pasta do exercício do kit. Depois de reler a tabela filtrada, pense em como guardar números sem convertê-los a cada leitura e siga para [JSON](#/python/arquivos/json).",
+  "sources": [
+    [
+      "Leitores e escritores de CSV",
+      "https://docs.python.org/3.14/library/csv.html#module-contents"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Leia `sessoes.csv` com cabeçalho `id,minutos` e registros de 3 e 7 minutos. Mostre o tipo de cada campo minutos antes da conversão e o total 10.",
+      "code": "from pathlib import Path\nfrom csv import DictReader\n\nwith Path(\"sessoes.csv\").open(encoding=\"utf-8\", newline=\"\") as arquivo:\n    total = 0\n    for linha in DictReader(arquivo):\n        print(type(linha[\"minutos\"]).__name__)\n        total += int(linha[\"minutos\"])\nprint(total)\n",
+      "stdout": "str\nstr\n10",
+      "explanation": "O cabeçalho fornece as chaves. A conversão explícita permite a soma numérica.",
+      "extensions": {
+        "sessoes.csv": "id,minutos\na,3\nb,7\n"
+      }
+    },
+    {
+      "prompt": "Compare a leitura de `01,\"fruta, suco\"` com a divisão por vírgula. Quantos pedaços o `split` produz para o registro?",
+      "code": "from pathlib import Path\nfrom csv import DictReader\n\ncaminho = Path(\"pedidos.csv\")\nwith caminho.open(encoding=\"utf-8\", newline=\"\") as arquivo:\n    pedido = next(DictReader(arquivo))\n    print(pedido[\"observacao\"])\n\nlinha = caminho.read_text(encoding=\"utf-8\").splitlines()[1]\nprint(len(linha.split(\",\")))\n",
+      "stdout": "fruta, suco\n3",
+      "explanation": "A vírgula interna faz parte da observação. O split corta nela também e produz três pedaços para duas colunas.",
+      "extensions": {
+        "pedidos.csv": "id,observacao\n01,\"fruta, suco\"\n"
+      }
+    },
+    {
+      "prompt": "Filtre `sessoes.csv` por minutos ≥ 5, grave `selecionadas.csv` com cabeçalho `id,minutos` e releia. Mostre pares com ID como texto e minutos como inteiro. Sem linhas selecionadas, preserve o cabeçalho.",
+      "code": "from pathlib import Path\nfrom csv import DictReader, DictWriter\n\ndestino = Path(\"selecionadas.csv\")\nwith Path(\"sessoes.csv\").open(encoding=\"utf-8\", newline=\"\") as entrada:\n    with destino.open(\"w\", encoding=\"utf-8\", newline=\"\") as saida:\n        escritor = DictWriter(saida, fieldnames=[\"id\", \"minutos\"])\n        escritor.writeheader()\n        for linha in DictReader(entrada):\n            if int(linha[\"minutos\"]) >= 5:\n                escritor.writerow(linha)\n\nwith destino.open(encoding=\"utf-8\", newline=\"\") as saida:\n    for linha in DictReader(saida):\n        print((linha[\"id\"], int(linha[\"minutos\"])))\n",
+      "stdout": "('02', 7)\n('03', 5)",
+      "explanation": "Escreva o cabeçalho antes do filtro. Converta a duração novamente ao reler. O ID mantém o zero à esquerda. Sem selecionados, o último laço não imprime linhas.",
+      "hint": "Chame `writeheader()` antes do laço de seleção.",
+      "starter": "from pathlib import Path\nfrom csv import DictReader, DictWriter\n\norigem = Path(\"sessoes.csv\")\ndestino = Path(\"selecionadas.csv\")\n# Escreva o cabeçalho, filtre a origem e releia o destino.\n",
+      "extensions": {
+        "sessoes.csv": "id,minutos\n01,3\n02,7\n03,5\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em `id,minutos` seguido de `07,03`, o que `linha[\"id\"]` contém após DictReader?",
+      "options": [
+        "O inteiro 7",
+        "A string `\"07\"`",
+        "A string `\"id\"`"
+      ],
+      "answer": 1,
+      "explanation": "A chave vem do cabeçalho. O campo continua texto."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`split(\",\")` interpreta vírgulas contidas em campos CSV entre aspas.",
+      "answer": false,
+      "explanation": "split separa em toda vírgula. O leitor CSV interpreta as aspas."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que grava os nomes das colunas de um DictWriter.",
+      "code": "escritor.___()",
+      "blanks": [
+        [
+          "writeheader"
+        ]
+      ],
+      "explanation": "writeheader grava os nomes da sequência fieldnames."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as operações para somar um CSV já aberto usando a chave minutos.",
+      "lines": [
+        "Criar o DictReader do arquivo",
+        "Ler registros pelo leitor criado",
+        "Converter a duração dos registros lidos",
+        "Somar as durações convertidas"
+      ],
+      "explanation": "A conversão depende da leitura pelo cabeçalho e fornece os valores numéricos da soma."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Por que abrir CSV com newline=\"\"?",
+      "back": "Para o módulo csv controlar as quebras, inclusive em campos entre aspas."
+    },
+    {
+      "front": "Quando manter os zeros de um campo como 007?",
+      "back": "Quando se trata de um identificador textual. Converta para número os campos usados em cálculos."
+    }
+  ]
+}

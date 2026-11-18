@@ -1,0 +1,104 @@
+{
+  "title": "Módulos e imports locais",
+  "minutes": 38,
+  "intro": "Faça um segundo arquivo usar a conversão escrita no primeiro. Preveja `medidas.minutos(1, 5)` e retome [funções](#/python/funcoes/parametros-e-retorno).\n\nUm módulo é, aqui, um arquivo Python com definições reutilizáveis. `import medidas` disponibiliza o objeto módulo. Seu espaço de nomes contém `minutos`, acessível como `medidas.minutos`. O Python procura módulos pelo nome. No terminal, a pasta do script entra na busca no uso normal. No caderno, a preparação disponibiliza as pastas de exercício para importação.\n\nDefina funções no auxiliar e chame-as no consumidor. Um kernel pode reutilizar um módulo importado sem reler o arquivo. Após editar um auxiliar no navegador, salve e execute novamente a preparação desta etapa e a célula que importa o código. Isso reutiliza a pasta desta atividade. No terminal, rodar o script novamente inicia outro processo. Por que o nome do seu arquivo pode mudar um import? Em seguida, veja [ambientes e pacotes](#/python/projetos/ambiente-e-pacotes).",
+  "sources": [
+    [
+      "Módulos e caminhos de busca",
+      "https://docs.python.org/3.14/tutorial/modules.html#the-module-search-path"
+    ],
+    [
+      "Busca por PathFinder",
+      "https://docs.python.org/3.14/library/importlib.html#importlib.machinery.PathFinder"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Confira `medidas.py` junto da atividade. Importe-o e use a função com 1 hora e 5 minutos.",
+      "code": "import medidas\n\nduracao = medidas.minutos(1, 5)\nprint(duracao)\n",
+      "stdout": "65",
+      "explanation": "O ponto seleciona a função no espaço de nomes do módulo. A chamada devolve 65.",
+      "extensions": {
+        "medidas.py": "def minutos(horas, restantes):\n    return horas * 60 + restantes\n"
+      }
+    },
+    {
+      "prompt": "Investigue qual arquivo chamado csv o Python encontra se procurar primeiro na pasta `sombra`. Aqui a busca não substitui o módulo csv carregado no kernel.",
+      "code": "from importlib.machinery import PathFinder\nfrom pathlib import Path\n\npasta = Path(\"sombra\").resolve()\nresultado = PathFinder.find_spec(\"csv\", [str(pasta)])\nprint(Path(resultado.origin).parent == pasta)\nprint(Path(resultado.origin).name)\n",
+      "stdout": "True\ncsv.py",
+      "explanation": "O buscador encontra csv.py no caminho indicado. Na execução comum, a pasta do script pode preceder a biblioteca padrão na busca, se o módulo ainda não estiver carregado. Renomeie o arquivo local para um nome descritivo e reinicie a sessão.",
+      "extensions": {
+        "sombra/csv.py": "# Arquivo local usado para investigar a busca.\n"
+      }
+    },
+    {
+      "prompt": "Escreva `minutos(h, m)` e `segundos(m)` no auxiliar `conversoes.py`. Importe as duas funções em um segundo arquivo, ou na célula do caderno, e mostre 65 e 3900 com (1, 5). A importação deve ser silenciosa, e zero minutos devem resultar em 0 segundos.",
+      "code": "from contextlib import redirect_stdout\nfrom io import StringIO\n\ndurante_import = StringIO()\nwith redirect_stdout(durante_import):\n    from conversoes import minutos, segundos\n\nassert durante_import.getvalue() == \"\"\nduracao = minutos(1, 5)\nprint(duracao, segundos(duracao))\nprint(segundos(minutos(0, 0)))\n",
+      "stdout": "65 3900\n0",
+      "explanation": "O auxiliar define as duas funções. O consumidor decide quando chamar e imprimir. O desvio de stdout testa o silêncio do import. Reinicie o kernel para confirmar um primeiro import após cada edição.",
+      "hint": "Use return em cada função auxiliar. Reserve print para o consumidor.",
+      "starter": "# Defina ou reescreva as duas funções em conversoes.py.\nfrom conversoes import minutos, segundos\n\n# Passe o retorno da primeira para a segunda.\n",
+      "extensions": {
+        "conversoes.py": "def minutos(horas, restantes):\n    return horas * 60 + restantes\n\n\ndef segundos(minutos):\n    return minutos * 60\n"
+      },
+      "starter_extensions": {
+        "conversoes.py": "def minutos(horas, restantes):\n    # Combine as duas entradas.\n    raise NotImplementedError\n\n\ndef segundos(minutos):\n    # Converta para segundos.\n    raise NotImplementedError\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `import medidas`, como chamar a função minutos do módulo?",
+      "options": [
+        "`minutos(1, 5)`",
+        "`medidas.minutos(1, 5)`",
+        "`medidas(1, 5)`"
+      ],
+      "answer": 1,
+      "explanation": "O import vincula medidas. O ponto seleciona a função."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um csv.py local pode ser escolhido se for encontrado antes da biblioteca padrão e csv ainda não estiver carregado.",
+      "answer": true,
+      "explanation": "O caminho de busca pode fazer o arquivo local ser encontrado primeiro."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a instrução que vincula minutos diretamente ao espaço de nomes do consumidor.",
+      "code": "from medidas ___ minutos",
+      "blanks": [
+        [
+          "import"
+        ]
+      ],
+      "explanation": "from ... import ... vincula o nome selecionado."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Editou o auxiliar e o caderno continua usando a versão antiga. Qual ação testa um primeiro import limpo?",
+      "options": [
+        "Repetir só a mesma linha de import",
+        "Reiniciar o kernel e rodar a preparação",
+        "Renomear a variável que guarda o resultado"
+      ],
+      "answer": 1,
+      "explanation": "Um kernel novo começa sem o cache do módulo importado."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Como import medidas difere de from medidas import minutos?",
+      "back": "O primeiro vincula medidas. O segundo vincula minutos no código consumidor."
+    },
+    {
+      "front": "Por que evitar print no topo do auxiliar?",
+      "back": "As instruções no nível superior executam no primeiro import, inclusive um print deixado ali."
+    }
+  ]
+}

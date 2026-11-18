@@ -1,0 +1,92 @@
+{
+  "title": "Testes unitários com unittest",
+  "minutes": 42,
+  "intro": "Verifique a conversão de uma hora e cinco minutos. Antes de chamar sua função, calcule de forma independente o resultado esperado. Retome [retorno de funções](#/python/funcoes/parametros-e-retorno) e [exceções](#/python/arquivos/excecoes).\n\nUm teste prepara uma entrada, executa a ação e compara o resultado com uma previsão. Use `unittest.TestCase` e nomes de métodos que comecem com `test_`. `assertEqual` compara o valor obtido ao esperado. `assertRaises` confere uma exceção prometida pelo contrato. O `TestLoader` carrega os métodos da classe para uma suíte e `TextTestRunner` executa a suíte e devolve o relatório.\n\nUse a suíte explícita de cada exercício, tanto no kit como no caderno. Assim, os argumentos do kernel não entram na execução. Aqui o runner grava o relatório em memória para evitar que o tempo variável faça parte da saída esperada. Para inspecioná-lo, acrescente `print(registro.getvalue())`. Qual borda detecta um retorno que descarta minutos restantes? Depois, veja [depuração](#/python/qualidade/depuracao).",
+  "sources": [
+    [
+      "Testes unitários e asserções",
+      "https://docs.python.org/3.14/library/unittest.html#test-cases"
+    ],
+    [
+      "Suíte e runner",
+      "https://docs.python.org/3.14/library/unittest.html#loading-and-running-tests"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Escreva o teste de minutos(1, 5) com esperado 65. Carregue a classe de teste, execute um caso e confira a contagem.",
+      "code": "import io\nimport unittest\n\ndef minutos(horas, restantes):\n    return horas * 60 + restantes\n\nclass TestesMinutos(unittest.TestCase):\n    def test_hora_e_minutos(self):\n        self.assertEqual(minutos(1, 5), 65)\n\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(TestesMinutos)\nregistro = io.StringIO()\nresultado = unittest.TextTestRunner(stream=registro).run(suite)\n\nprint(\"casos:\", resultado.testsRun, \"sucesso:\", resultado.wasSuccessful())\n",
+      "stdout": "casos: 1 sucesso: True",
+      "explanation": "O teste usa 65 calculado de forma independente. O resultado da suíte informa quantos métodos rodaram e se todos passaram."
+    },
+    {
+      "prompt": "Teste intencionalmente uma implementação que ignora os minutos restantes. Use a entrada de borda (0, 1) e veja se a falha é detectada.",
+      "code": "import io\nimport unittest\n\ndef minutos(horas, restantes):\n    return horas * 60\n\nclass TestesMinutos(unittest.TestCase):\n    def test_um_minuto(self):\n        self.assertEqual(minutos(0, 1), 1)\n\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(TestesMinutos)\nregistro = io.StringIO()\nresultado = unittest.TextTestRunner(stream=registro).run(suite)\n\nprint(\"falhas:\", len(resultado.failures), \"sucesso:\", resultado.wasSuccessful())\n",
+      "stdout": "falhas: 1 sucesso: False",
+      "explanation": "A implementação errada devolve 0. A previsão do teste é 1. Uma diferença de valor rende falha. Corrija a função acrescentando os minutos restantes e espere zero falhas."
+    },
+    {
+      "prompt": "Crie três testes de minutos(horas, restantes), para (1, 5), (0, 0) e (0, 60). O domínio tem horas inteiras não negativas e minutos restantes entre 0 e 59. Caso inválido deve levantar ValueError, verificado com assertRaises.",
+      "code": "import io\nimport unittest\n\ndef minutos(horas, restantes):\n    if type(horas) is not int or type(restantes) is not int:\n        raise ValueError(\"horas e minutos devem ser inteiros\")\n    if horas < 0 or not 0 <= restantes <= 59:\n        raise ValueError(\"horas ou minutos fora do intervalo\")\n    return horas * 60 + restantes\n\nclass TestesMinutos(unittest.TestCase):\n    def test_conversao(self):\n        self.assertEqual(minutos(1, 5), 65)\n\n    def test_limite_inferior(self):\n        self.assertEqual(minutos(0, 0), 0)\n\n    def test_minutos_fora_do_intervalo(self):\n        with self.assertRaises(ValueError):\n            minutos(0, 60)\n\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(TestesMinutos)\nregistro = io.StringIO()\nresultado = unittest.TextTestRunner(stream=registro).run(suite)\n\nprint(\"casos:\", resultado.testsRun, \"sucesso:\", resultado.wasSuccessful())\n",
+      "stdout": "casos: 3 sucesso: True",
+      "explanation": "Zero horas e zero minutos formam a borda inferior válida. Sessenta minutos restantes violam o contrato. O teste passa quando a chamada levanta a classe esperada. Confira sempre testsRun para detectar a suíte vazia.",
+      "hint": "Um método de teste para cada entrada. Use `with self.assertRaises(ValueError):` ao testar o caso rejeitado.",
+      "starter": "import io\nimport unittest\n\ndef minutos(horas, restantes):\n    # Implemente o contrato de conversão.\n    raise NotImplementedError\n\nclass TestesMinutos(unittest.TestCase):\n    def test_conversao(self):\n        self.assertEqual(minutos(1, 5), 65)\n\n    # Escreva os testes de zero e de minutos inválidos.\n\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(TestesMinutos)\nregistro = io.StringIO()\nresultado = unittest.TextTestRunner(stream=registro).run(suite)\n\nprint(\"casos:\", resultado.testsRun, \"sucesso:\", resultado.wasSuccessful())\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se minutos(0, 1) devolve 0 e o teste exige 1 com assertEqual, o que o runner registra?",
+      "options": [
+        "Um teste bem-sucedido",
+        "Uma falha de teste",
+        "Uma falha de sintaxe"
+      ],
+      "answer": 1,
+      "explanation": "A asserção de igualdade falha para os valores diferentes."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O teste `assertEqual(minutos(1, 5), minutos(1, 5))` seria suficiente para flagrar uma fórmula errada, porém determinística.",
+      "answer": false,
+      "explanation": "A mesma função calcula os dois lados. Compare com um esperado obtido independentemente."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a asserção de TestCase que espera a classe ValueError.",
+      "code": "with self.___(ValueError):\n    minutos(0, 60)",
+      "blanks": [
+        [
+          "assertRaises"
+        ]
+      ],
+      "explanation": "A asserção verifica se o bloco levanta a classe de exceção esperada."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que nova entrada de teste confirma o maior valor ainda aceito de minutos restantes?",
+      "options": [
+        "`(0, 60)`, esperando 60",
+        "`(0, 59)`, esperando 59",
+        "`(0, -1)`, esperando -1"
+      ],
+      "answer": 1,
+      "explanation": "59 é a borda superior inclusiva do contrato."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que torna independente o valor esperado de um teste?",
+      "back": "Ele é obtido do requisito ou de um cálculo separado, sem usar a implementação verificada."
+    },
+    {
+      "front": "Qual cenário faz assertRaises(ValueError) passar?",
+      "back": "O bloco levanta ValueError ou uma de suas subclasses."
+    }
+  ]
+}

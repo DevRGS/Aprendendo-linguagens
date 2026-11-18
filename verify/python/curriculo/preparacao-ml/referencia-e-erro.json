@@ -1,0 +1,92 @@
+{
+  "title": "Previsão de referência e MAE",
+  "minutes": 50,
+  "intro": "Sem usar atributos, que duração serviria como previsão inicial para comparar com um modelo futuro? Como medir quão longe ela ficou?\n\nRetome [Ajustar no treino](#/python/preparacao-ml/ajustar-e-aplicar). A biblioteca padrão é suficiente para as atividades e os valores vêm no código.\n\nUma referência constante prevê o mesmo valor para cada observação. Escolhemos a mediana do alvo no treino, uma constante que minimiza a soma de erros absolutos no treino (pode haver mais de uma constante ótima). O erro absoluto é a distância entre previsto e real. O MAE é a média dessas distâncias, com um peso por observação e unidade igual à do alvo. Validação mede a referência e permite comparar alternativas. Teste fica reservado até congelar as escolhas.",
+  "sources": [
+    [
+      "Erro absoluto médio",
+      "https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-error"
+    ],
+    [
+      "Mediana",
+      "https://docs.python.org/pt-br/3.14/library/statistics.html#statistics.median"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Use a mediana do alvo [6, 10, 14] para fixar a previsão constante.",
+      "code": "from statistics import median\n\ny_treino = [6, 10, 14]\nprevisao = median(y_treino)\nprint(f\"Referência: {previsao} min\")\n",
+      "stdout": "Referência: 10 min",
+      "explanation": "O valor central é 10 min. Ele serve como ponto de comparação para próximos modelos."
+    },
+    {
+      "prompt": "Use previsão 10 min e alvos de validação 8 e 15 min. Mostre a lista de erros e a média.",
+      "code": "from statistics import mean\n\nprevisao = 10\nerros = [abs(real - previsao) for real in [8, 15]]\nprint(erros)\nprint(f\"MAE: {mean(erros)} min\")\n",
+      "stdout": "[2, 5]\nMAE: 3.5 min",
+      "explanation": "Os erros absolutos são 2 e 5 min. Divida a soma por duas observações."
+    },
+    {
+      "prompt": "Documente a referência mediana do treino [12,15,18] e calcule o MAE em validação [14,19]. Mantenha os valores de teste reservados. Defina como lidar com uma única observação e uma partição vazia.",
+      "code": "from statistics import mean, median\n\ndef mae(alvos, previsao):\n    if not alvos:\n        raise ValueError(\"MAE requer uma observação\")\n    return mean(abs(real - previsao) for real in alvos)\n\ntreino = [12, 15, 18]\nvalidacao = [14, 19]\nreferencia = median(treino)\nprint(f\"Referência (mediana do treino): {referencia:.1f} min\")\nprint(f\"MAE de validação: {mae(validacao, referencia):.1f} min\")\nassert mae([15], referencia) == 0\ntry:\n    mae([], referencia)\nexcept ValueError as erro:\n    print(erro)\n",
+      "stdout": "Referência (mediana do treino): 15.0 min\nMAE de validação: 2.5 min\nMAE requer uma observação",
+      "explanation": "Com erros de 1 e 4 min, a média de validação é 2,5 min. Com um único caso, o MAE é o seu erro. A média de nenhum erro observado fica indefinida. No projeto, o teste será avaliado após congelar a referência.",
+      "hint": "Calcule primeiro a mediana no treino e passe essa constante à função de avaliação.",
+      "starter": "from statistics import mean, median\n\ntreino, validacao = [12, 15, 18], [14, 19]\n# Defina a referência e calcule a média dos erros absolutos.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para previsão 8 min e alvos [6, 9], qual é o MAE?",
+      "options": [
+        "0,5 min",
+        "1,5 min",
+        "3 min"
+      ],
+      "answer": 1,
+      "explanation": "Os erros absolutos são 2 e 1, cuja média é 1,5 min."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O MAE de uma partição vazia deve ser registrado como 0 min.",
+      "answer": false,
+      "explanation": "Zero significaria ajuste exato. Sem observações, a média fica indefinida."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a expressão que transforma diferença em erro absoluto.",
+      "code": "erro = ___(real - previsao)",
+      "blanks": [
+        [
+          "abs"
+        ]
+      ],
+      "explanation": "abs mede a distância a zero em minutos."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Duas referências têm MAE de validação 3 e 5 min. O teste ainda está fechado. Como escolher a de menor erro medido sem abrir o teste?",
+      "options": [
+        "A de 5 min, porque maior é melhor",
+        "A de 3 min, pelo MAE de validação",
+        "Recalcular as referências com o teste e comparar"
+      ],
+      "answer": 1,
+      "explanation": "A comparação de alternativas usa validação. Reserve teste para a decisão congelada."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Em que unidade se expressa MAE para um alvo em minutos?",
+      "back": "Minutos, pois cada erro absoluto e a média usam a unidade do alvo."
+    },
+    {
+      "front": "Por que uma referência útil pode prever a mesma duração?",
+      "back": "A mediana de treino fornece um ponto de comparação simples e reproduzível para avaliar quanto um modelo acrescenta."
+    }
+  ]
+}

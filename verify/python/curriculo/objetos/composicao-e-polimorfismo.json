@@ -1,0 +1,92 @@
+{
+  "title": "Composição e estratégias",
+  "minutes": 40,
+  "intro": "Compare duas formas de tratar um rótulo, removendo espaços e convertendo para minúsculas ou preservando o texto. Preveja a diferença para `\" Azul \"`. Retome [métodos de texto](#/python/sequencias/texto-e-fatias) e [instâncias](#/python/objetos/instancias).\n\nCombine objetos por composição. Um processador guarda uma estratégia em um atributo e delega o trabalho ao método `transformar(texto)`. O contrato desta aula pede um texto como argumento e devolve um texto. Estratégias diferentes podem ocupar o mesmo papel quando cumprem esse contrato. Essa substituição pelo comportamento é uma forma de polimorfismo.\n\nRode os blocos com as definições de cada exercício no caderno ou kit. Que mudança ocorreria se a estratégia recebesse uma lista em vez de texto? Depois avalie [quando escolher modelo ou função](#/python/objetos/modelo-ou-funcao).",
+  "sources": [
+    [
+      "Métodos e objetos",
+      "https://docs.python.org/3.14/tutorial/classes.html#method-objects"
+    ],
+    [
+      "Duck typing no glossário",
+      "https://docs.python.org/3.14/glossary.html#term-duck-typing"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "As duas estratégias têm o mesmo método. Aplique ambas a \" Azul \" e mostre onde ficaram os espaços.",
+      "code": "class Normalizar:\n    def transformar(self, texto):\n        return texto.strip().lower()\n\n\nclass Identidade:\n    def transformar(self, texto):\n        return texto\n\n\nfor estrategia in [Normalizar(), Identidade()]:\n    print(repr(estrategia.transformar(\" Azul \")))\n",
+      "stdout": "'azul'\n' Azul '",
+      "explanation": "O chamador usa a mesma expressão em ambos os casos. repr torna visíveis as aspas e os espaços preservados."
+    },
+    {
+      "prompt": "Troque a normalização pela identidade ao chamar rotular. Antes de rodar, diga onde os espaços aparecerão entre os delimitadores.",
+      "code": "class Normalizar:\n    def transformar(self, texto):\n        return texto.strip().lower()\n\n\nclass Identidade:\n    def transformar(self, texto):\n        return texto\n\n\ndef rotular(texto, estrategia):\n    return \"[\" + estrategia.transformar(texto) + \"]\"\n\ntexto = \" Leitura \"\nprint(rotular(texto, Normalizar()))\nprint(rotular(texto, Identidade()))\n",
+      "stdout": "[leitura]\n[ Leitura ]",
+      "explanation": "O consumidor continua delegando ao mesmo método. Só o resultado do método muda entre as duas chamadas."
+    },
+    {
+      "prompt": "Construa Processador que recebe uma estratégia no inicializador e processa uma lista de rótulos. Teste Normalizar e Identidade com [\" Azul \", \"VERDE\"]. As saídas devem manter ordem e quantidade. Entrada vazia deve produzir lista vazia.",
+      "code": "class Normalizar:\n    def transformar(self, texto):\n        return texto.strip().lower()\n\n\nclass Identidade:\n    def transformar(self, texto):\n        return texto\n\n\nclass Processador:\n    def __init__(self, estrategia):\n        self.estrategia = estrategia\n\n    def processar(self, rotulos):\n        return [self.estrategia.transformar(rotulo) for rotulo in rotulos]\n\n\nrotulos = [\" Azul \", \"VERDE\"]\nnormalizador = Processador(Normalizar())\nidentidade = Processador(Identidade())\nprint(normalizador.processar(rotulos))\nprint(identidade.processar(rotulos))\nprint(normalizador.processar([]))\n",
+      "stdout": "['azul', 'verde']\n[' Azul ', 'VERDE']\n[]",
+      "explanation": "O processador guarda a estratégia recebida e aplica seu método a cada entrada na ordem. A compreensão cria nova lista e, se a entrada estiver vazia, não chama a estratégia.",
+      "hint": "Guarde a estratégia em self e delegue uma transformação para cada rótulo.",
+      "starter": "class Normalizar:\n    def transformar(self, texto):\n        return texto.strip().lower()\n\n\nclass Identidade:\n    def transformar(self, texto):\n        return texto\n\n\nclass Processador:\n    def __init__(self, estrategia):\n        self.estrategia = estrategia\n\n    def processar(self, rotulos):\n        # Devolva uma nova lista na ordem da entrada.\n        raise NotImplementedError\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a saída da estratégia Identidade para o texto `\" Azul \"`?",
+      "options": [
+        "`\"azul\"`",
+        "`\" Azul \"`",
+        "`\"Azul\"`"
+      ],
+      "answer": 1,
+      "explanation": "Identidade devolve o mesmo conteúdo recebido."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Duas classes sem relação de herança podem cumprir o mesmo contrato de transformar(texto).",
+      "answer": true,
+      "explanation": "O consumidor usa o comportamento fornecido pelo método e não depende de uma classe base."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método esperado pelo contrato do Processador.",
+      "code": "resultado = self.estrategia.___(rotulo)",
+      "blanks": [
+        [
+          "transformar"
+        ]
+      ],
+      "explanation": "Cada estratégia oferece transformar com um texto como argumento."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O que uma estratégia precisa fazer para virar um novo substituto nesse processador?",
+      "options": [
+        "Herança obrigatória de Identidade",
+        "Receber um texto em transformar e devolver um texto",
+        "Modificar a lista original inteira"
+      ],
+      "answer": 1,
+      "explanation": "O contrato é por rótulo, e o processador reúne os resultados."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que o processador compõe?",
+      "back": "Ele guarda um objeto estratégia e delega transformação a esse objeto."
+    },
+    {
+      "front": "Quantas chamadas a transformar ocorrem para uma lista vazia?",
+      "back": "Nenhuma, porque a compreensão não tem itens para percorrer."
+    }
+  ]
+}

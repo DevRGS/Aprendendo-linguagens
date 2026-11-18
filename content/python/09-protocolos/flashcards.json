@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Como um iterador indica que terminou?",
+      "back": "next sem padrão levanta StopIteration. O for encerra quando recebe esse sinal.",
+      "id": "python.protocolos.f01",
+      "lesson": "iteradores"
+    },
+    {
+      "front": "Por que None funciona como padrão para o primeiro inteiro não negativo?",
+      "back": "None não pertence ao conjunto de valores válidos, e zero pertence.",
+      "id": "python.protocolos.f02",
+      "lesson": "iteradores"
+    },
+    {
+      "front": "Em que momento o corpo de um gerador começa a executar?",
+      "back": "Quando o consumidor pede o primeiro item.",
+      "id": "python.protocolos.f03",
+      "lesson": "geradores"
+    },
+    {
+      "front": "Por que passar o gerador a sum sem chamar list primeiro?",
+      "back": "sum pode agregar os itens à medida que chegam, sem manter todos em memória.",
+      "id": "python.protocolos.f04",
+      "lesson": "geradores"
+    },
+    {
+      "front": "O que @contar faz logo após a definição de uma função f?",
+      "back": "Aplica contar à função e vincula f ao valor devolvido pelo decorador.",
+      "id": "python.protocolos.f05",
+      "lesson": "decoradores"
+    },
+    {
+      "front": "O que é preservado por wraps e o que depende do corpo do wrapper?",
+      "back": "wraps copia metadados como o nome. O wrapper precisa encaminhar argumentos e devolver o resultado.",
+      "id": "python.protocolos.f06",
+      "lesson": "decoradores"
+    },
+    {
+      "front": "Qual o papel de yield em um contextmanager?",
+      "back": "Suspender o gerente durante o bloco do with e retomar na saída.",
+      "id": "python.protocolos.f07",
+      "lesson": "gerentes-de-contexto"
+    },
+    {
+      "front": "Se o corpo levantar erro, quando a limpeza precisa ocorrer?",
+      "back": "Durante a saída do contexto, antes que o tratamento externo receba o erro.",
+      "id": "python.protocolos.f08",
+      "lesson": "gerentes-de-contexto"
+    }
+  ]
+}

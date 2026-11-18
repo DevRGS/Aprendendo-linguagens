@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Qual é a diferença entre Series e DataFrame?",
+      "back": "Uma Series tem um eixo de valores com índice. DataFrame tem eixos de linhas e colunas.",
+      "id": "python.pandas.f01",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "front": "Como impedir a conversão de 0007 no inteiro 7?",
+      "back": "Declare dtype={\"id\": \"string\"} durante a leitura.",
+      "id": "python.pandas.f02",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "front": "Qual seletor usa posições?",
+      "back": "iloc usa posições começando em zero. loc usa rótulos.",
+      "id": "python.pandas.f03",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "front": "Como representar min/km para uma linha com 0 km?",
+      "back": "Torne ausente a razão para a linha de distância zero. Preserve o dado original.",
+      "id": "python.pandas.f04",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "front": "Que denominador acompanha uma média por estação?",
+      "back": "A contagem dos valores presentes na coluna que foi agregada.",
+      "id": "python.pandas.f05",
+      "lesson": "agregar"
+    },
+    {
+      "front": "Uma linha tem tempo ausente e duas têm tempo zero. Quais são size e count?",
+      "back": "size = 3 e count = 2. Os zeros são valores presentes.",
+      "id": "python.pandas.f06",
+      "lesson": "agregar"
+    },
+    {
+      "front": "O que distingue left de inner?",
+      "back": "Left preserva viagens sem par. Inner retorna apenas combinações com par.",
+      "id": "python.pandas.f07",
+      "lesson": "juntar-tabelas"
+    },
+    {
+      "front": "Como confirmar se há viagens sem cadastro?",
+      "back": "Use indicator=True numa junção à esquerda e procure left_only em _merge.",
+      "id": "python.pandas.f08",
+      "lesson": "juntar-tabelas"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "title": "Conjuntos",
+  "minutes": 24,
+  "intro": "Dois lotes podem repetir um ID dentro do próprio lote. Como contar IDs distintos? Retome [Listas e cópias](#/python/sequencias/listas) e [Comparações e lógica](#/python/fluxo/comparacoes).\n\n`set([2, 2, 4])` guarda uma vez cada ID. `2 in ids` testa pertinência. A interseção `a & b` contém os itens presentes em ambos. A diferença `a - b` contém os itens de a que estão fora de b. O conjunto não oferece uma ordem de exibição para o relatório. `sorted(ids)` devolve uma lista ordenada dos IDs comparáveis.\n\n`set(\"ab\")` percorre os caracteres do texto. Já `{\"ab\"}` contém o texto inteiro como um elemento. Para escrever um conjunto vazio, use `set()`, pois `{}` cria um dicionário. Antes de seguir para [Resumo de lote](#/python/registros/resumo-de-lote), explique com um exemplo por que a diferença depende da ordem dos lotes.",
+  "sources": [
+    [
+      "Conjuntos no tutorial",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#sets"
+    ],
+    [
+      "Tipos de conjuntos",
+      "https://docs.python.org/pt-br/3.14/library/stdtypes.html#set-types-set-frozenset"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja quantos IDs únicos há em [2, 2, 4]. Mostre a lista ordenada e a quantidade.",
+      "code": "ids = set([2, 2, 4])\nprint(sorted(ids))\nprint(len(ids))",
+      "stdout": "[2, 4]\n2",
+      "explanation": "O 2 repetido vira um único elemento. sorted ordena a lista de apresentação."
+    },
+    {
+      "prompt": "Preveja como cada construção trata o texto `\"ab\"`. Mostre as listas ordenadas para comparar.",
+      "code": "caracteres = set(\"ab\")\ntextos = {\"ab\"}\nprint(sorted(caracteres))\nprint(sorted(textos))",
+      "stdout": "['a', 'b']\n['ab']",
+      "explanation": "O construtor percorre o texto e recebe a e b separadamente. As chaves com o literal inteiro guardam ab como um elemento."
+    },
+    {
+      "prompt": "Para os lotes [8, 2, 8, 4] e [4, 2, 6], mostre os IDs comuns em ordem crescente, sem repetição. Teste também um segundo lote que tenha apenas o ID 9.",
+      "code": "lote_a = [8, 2, 8, 4]\nlote_b = [4, 2, 6]\ncomuns = set(lote_a) & set(lote_b)\nprint(sorted(comuns))",
+      "stdout": "[2, 4]",
+      "explanation": "A interseção exige ocorrência nos dois lotes. Ordenar produz uma lista estável para mostrar. Se nenhum ID coincide, a interseção e a lista de saída ficam vazias.",
+      "hint": "Use um conjunto para cada lote e o operador de interseção entre eles.",
+      "starter": "lote_a = [8, 2, 8, 4]\nlote_b = [4, 2, 6]\n# Encontre os comuns e mostre em ordem crescente.",
+      "checks": [
+        {
+          "code": "lote_a = [8, 2, 8, 4]\nlote_b = [9]\nprint(sorted(set(lote_a) & set(lote_b)))",
+          "stdout": "[]"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantos elementos tem `set([4, 4, 9, 4])`?",
+      "options": [
+        "`4`",
+        "`2`",
+        "`3`"
+      ],
+      "answer": 1,
+      "explanation": "Há somente os valores distintos 4 e 9."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `set(\"XY\")`, o conjunto tem um único elemento que é o texto inteiro XY.",
+      "answer": false,
+      "explanation": "O construtor percorre o texto por caracteres. Ele recebe X e Y separadamente."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o operador de interseção.",
+      "code": "comuns = {2, 4} ___ {2, 9}\nprint(sorted(comuns))",
+      "blanks": [
+        [
+          "&"
+        ]
+      ],
+      "explanation": "Somente o item 2 pertence aos dois conjuntos."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais IDs de `a = {3, 7}` faltam em `b = {7, 9}`?",
+      "options": [
+        "`sorted(a & b)` produz `[7]`",
+        "`sorted(b - a)` produz `[9]`",
+        "`sorted(a - b)` produz `[3]`"
+      ],
+      "answer": 2,
+      "explanation": "A diferença a - b conserva o elemento de a que não está em b."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que distingue uma interseção de uma diferença?",
+      "back": "A interseção guarda elementos comuns. A diferença guarda elementos do primeiro conjunto ausentes do segundo."
+    },
+    {
+      "front": "Como produzir uma apresentação ordenada de IDs numéricos de um conjunto?",
+      "back": "Use sorted(ids) para obter uma lista em ordem crescente."
+    }
+  ]
+}

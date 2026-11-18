@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em km = [0, ausente, 4, -1], quantas linhas têm valor presente?",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "O domínio é outra regra. Zero e -1 estão preenchidos mesmo que -1 seja inválido.",
+      "id": "python.exploracao.q01",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se um ID aparece em duas linhas com distâncias diferentes, basta descartar a última como duplicata exata.",
+      "answer": false,
+      "explanation": "As linhas divergem. Registre conflito e investigue antes de escolher.",
+      "id": "python.exploracao.q02",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a verificação de valores ausentes.",
+      "code": "df[\"km\"].___()",
+      "blanks": [
+        [
+          "isna"
+        ]
+      ],
+      "explanation": "isna detecta os ausentes, preservando o zero como presente.",
+      "id": "python.exploracao.q03",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O relatório bruto lista duas linhas negativas e uma cópia exata de uma dessas linhas. Quantas regras podem incidir na mesma linha?",
+      "options": [
+        "Uma, pois as contagens sempre são disjuntas",
+        "Duas, pois uma linha pode violar ambas as regras",
+        "Nenhuma, pois uma cópia já sai do relatório"
+      ],
+      "answer": 1,
+      "explanation": "Uma linha pode ser negativa e cópia excedente. Contagens por regra podem se sobrepor.",
+      "id": "python.exploracao.q04",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a mediana de [1, 3, 8, 10] pelo método linear?",
+      "options": [
+        "3",
+        "5,5",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "A posição 1,5 interpola entre 3 e 8.",
+      "id": "python.exploracao.q05",
+      "lesson": "distribuicoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se os dados e a cobertura continuam iguais, usar intervalos mais largos no histograma muda a mediana.",
+      "answer": false,
+      "explanation": "A mediana é calculada a partir dos dados originais. Os intervalos afetam as barras.",
+      "id": "python.exploracao.q06",
+      "lesson": "distribuicoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Escolha o método linear no cálculo do quartil.",
+      "code": "np.quantile(valores, 0.25, method=\"___\")",
+      "blanks": [
+        [
+          "linear"
+        ]
+      ],
+      "explanation": "O método interpola quando a posição calculada é fracionária.",
+      "id": "python.exploracao.q07",
+      "lesson": "distribuicoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Com bordas [0, 2, 4] e valores [0, 2, 4], quais as contagens das duas barras?",
+      "options": [
+        "[2, 1]",
+        "[1, 2]",
+        "[1, 1]"
+      ],
+      "answer": 1,
+      "explanation": "O primeiro intervalo é [0,2) e o último inclui a borda 4.",
+      "id": "python.exploracao.q08",
+      "lesson": "distribuicoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para x=[1, 2, 3] e y=[9, 6, 3], qual r faz sentido?",
+      "options": [
+        "1",
+        "−1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "Os pontos formam uma reta decrescente.",
+      "id": "python.exploracao.q09",
+      "lesson": "relacoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em y=[7, 7, 7], a correlação com x=[1, 2, 3] é zero.",
+      "answer": false,
+      "explanation": "Com desvio zero o coeficiente é indefinido.",
+      "id": "python.exploracao.q10",
+      "lesson": "relacoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método que desenha uma nuvem de pontos.",
+      "code": "ax.___(x, y)",
+      "blanks": [
+        [
+          "scatter"
+        ]
+      ],
+      "explanation": "scatter representa cada observação pela posição em dois eixos.",
+      "id": "python.exploracao.q11",
+      "lesson": "relacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A correlação linear em duas medidas variáveis vale zero. O que ainda pode ocorrer?",
+      "options": [
+        "Os dados são todos ausentes",
+        "Há relação não linear entre as medidas",
+        "A dispersão de uma coordenada é nula"
+      ],
+      "answer": 1,
+      "explanation": "Pearson resume a relação linear. Uma curva simétrica, por exemplo, pode ter r zero.",
+      "id": "python.exploracao.q12",
+      "lesson": "relacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "A tem 2 pontuais entre 4 viagens, B tem 3 entre 10. Quem tem maior proporção?",
+      "options": [
+        "B",
+        "A",
+        "As proporções são iguais"
+      ],
+      "answer": 1,
+      "explanation": "A tem 50%, enquanto B tem 30%.",
+      "id": "python.exploracao.q13",
+      "lesson": "relatorio-visual"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um grupo com 0 pontuais entre 0 viagens tem pontualidade de 0%.",
+      "answer": false,
+      "explanation": "A proporção fica indefinida quando faltam viagens no denominador.",
+      "id": "python.exploracao.q14",
+      "lesson": "relatorio-visual"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para gravar a figura em arquivo.",
+      "code": "fig.___(\"grafico.png\")",
+      "blanks": [
+        [
+          "savefig"
+        ]
+      ],
+      "explanation": "A figura é salva como PNG conforme a extensão.",
+      "id": "python.exploracao.q15",
+      "lesson": "relatorio-visual"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual texto permite recuperar as alturas de barras sem depender de cores?",
+      "options": [
+        "A barra azul é a maior",
+        "A: 75% de 4, B: 50% de 8",
+        "As estações têm pontualidades diferentes"
+      ],
+      "answer": 1,
+      "explanation": "Os números e as categorias aparecem explicitamente em texto.",
+      "id": "python.exploracao.q16",
+      "lesson": "relatorio-visual"
+    }
+  ]
+}

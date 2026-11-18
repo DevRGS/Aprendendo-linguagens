@@ -1,0 +1,88 @@
+{
+  "title": "Centro e dispersão",
+  "minutes": 50,
+  "intro": "Média é soma dividida pela quantidade. Mediana é o valor central da lista ordenada ou a média dos dois valores centrais. Amplitude subtrai o menor valor do maior. Desvio padrão mede dispersão na unidade original. Quando toda a população é conhecida, a variância usa n no denominador. A variância amostral usa n−1 para estimar a variância populacional a partir da amostra. O desvio padrão é a raiz quadrada da variância. Revise [funções e contratos](#/python/funcoes/contratos-e-tipos).",
+  "sources": [
+    [
+      "Estatística na biblioteca padrão",
+      "https://docs.python.org/pt-br/3.14/library/statistics.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Calcule média, mediana e amplitude de [2,4,6].",
+      "code": "from statistics import mean, median\nvalores = [2,4,6]\nprint(mean(valores), median(valores), max(valores)-min(valores))\n",
+      "stdout": "4 4 4",
+      "explanation": "A soma é 12, o valor central é 4 e os extremos diferem em 4."
+    },
+    {
+      "prompt": "Acrescente 100 e compare os dois centros.",
+      "code": "from statistics import mean, median\nvalores = [2,4,6,100]\nprint(mean(valores), median(valores))\n",
+      "stdout": "28 5.0",
+      "explanation": "O novo valor entra na soma da média. A mediana usa os dois valores centrais 4 e 6."
+    },
+    {
+      "prompt": "Calcule o desvio padrão amostral de [2,4,6] e teste uma única leitura.",
+      "code": "from statistics import StatisticsError, pstdev, stdev\nprint(stdev([2,4,6]))\nprint(round(pstdev([2,4,6]), 3))\ntry:\n    stdev([2])\nexcept StatisticsError:\n    print(\"amostra requer dois valores\")\n",
+      "stdout": "2.0\n1.633\namostra requer dois valores",
+      "explanation": "Os desvios ao quadrado são 4, 0 e 4. A raiz de 8/2 é 2. Em uma amostra unitária n−1 seria zero.",
+      "hint": "A biblioteca oferece stdev e pstdev.",
+      "starter": "from statistics import stdev\nvalores = [2, 4, 6]\n# Informe o desvio e experimente uma única leitura.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a mediana de [6, 2, 4, 100]?",
+      "options": [
+        "4",
+        "5",
+        "28"
+      ],
+      "answer": 1,
+      "explanation": "Ordene e use os centros 4 e 6."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Adicionar um valor extremo pode mudar muito a média.",
+      "answer": true,
+      "explanation": "O valor extremo é incluído na soma."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o nome da função de desvio padrão amostral já importada.",
+      "code": "print(___([2,4,6]))",
+      "blanks": [
+        [
+          "stdev"
+        ]
+      ],
+      "explanation": "pstdev usa o denominador populacional."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual é a unidade do desvio padrão de valores em km?",
+      "options": [
+        "km²",
+        "Sem unidade",
+        "km"
+      ],
+      "answer": 2,
+      "explanation": "A raiz quadrada reconduz a medida à unidade original."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Como calcular a amplitude?",
+      "back": "Maior valor menos o menor."
+    },
+    {
+      "front": "Qual o mínimo de dados para statistics.stdev?",
+      "back": "Dois valores, pois a variância amostral divide por n−1."
+    }
+  ]
+}

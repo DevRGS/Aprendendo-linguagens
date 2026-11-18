@@ -1,0 +1,90 @@
+{
+  "title": "Arrays, tipos e dimensões",
+  "minutes": 50,
+  "intro": "Imagine três viagens medidas por distância e tempo. Quantos números descrevem cada viagem? Agora imagine guardar apenas a primeira viagem para um programa que espera a tabela inteira. Que formato essa seleção precisa ter?\n\nRevise listas e fatias em [Texto e fatias](#/python/sequencias/texto-e-fatias). No caderno, o kernel precisa oferecer NumPy. No terminal, instale as dependências do kit e rode os scripts com o mesmo intérprete. Nenhum arquivo de entrada é necessário nesta aula.\n\n`np.array` cria um `ndarray`. Este array guarda elementos de um tipo comum, chamado `dtype`. Escolhemos `int64` nos exemplos para tornar explícito o tipo de inteiro usado. `ndim` informa a quantidade de dimensões. `shape` dá o comprimento em cada dimensão, na ordem. Um array de forma `(3, 2)` tem três linhas e duas colunas. Um vetor de forma `(3,)` tem uma dimensão, mesmo se seus três números vieram de uma coluna.",
+  "sources": [
+    [
+      "Fundamentos do NumPy",
+      "https://numpy.org/doc/stable/user/absolute_beginners.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja a forma de três linhas de dois números. Crie o array e confira o tipo, o número de dimensões e a forma.",
+      "code": "import numpy as np\n\nmedidas = np.array([[1, 2], [3, 4], [5, 6]], dtype=np.int64)\nprint(medidas.dtype, medidas.ndim, medidas.shape)\nprint(medidas.tolist())\n",
+      "stdout": "int64 2 (3, 2)\n[[1, 2], [3, 4], [5, 6]]",
+      "explanation": "Cada lista interna fornece uma linha. Há três linhas e cada uma tem dois inteiros."
+    },
+    {
+      "prompt": "Selecione a primeira coluna com o índice `0` e depois com a fatia `0:1`. Compare valores e formas.",
+      "code": "import numpy as np\n\nmedidas = np.array([[1, 2], [3, 4], [5, 6]], dtype=np.int64)\nvetor = medidas[:, 0]\ncoluna = medidas[:, 0:1]\nprint(vetor.shape, vetor.tolist())\nprint(coluna.shape, coluna.tolist())\n",
+      "stdout": "(3,) [1, 3, 5]\n(3, 1) [[1], [3], [5]]",
+      "explanation": "O índice inteiro elimina a dimensão da coluna. A fatia mantém essa dimensão com comprimento 1."
+    },
+    {
+      "prompt": "Se cada linha é uma amostra, devolva a primeira de `[[4, 9], [8, 13]]` com forma `(1, 2)`. Confira o mesmo contrato com um lote de uma única linha.",
+      "code": "import numpy as np\n\ndef primeira_amostra(lote):\n    return lote[0:1, :]\n\nlote = np.array([[4, 9], [8, 13]])\namostra = primeira_amostra(lote)\nprint(amostra.shape, amostra.tolist())\nunica = primeira_amostra(np.array([[2, 7]]))\nassert unica.shape == (1, 2)\nassert unica.tolist() == [[2, 7]]\n",
+      "stdout": "(1, 2) [[4, 9]]",
+      "explanation": "A fatia `0:1` mantém o eixo das amostras para que o próximo programa ainda possa contar linhas e colunas. Ela funciona em um lote que já tem uma linha. Na próxima aula, observe o que acontece se você modificar uma fatia.",
+      "hint": "Conserve a dimensão das linhas da mesma forma que E2 conservou a das colunas.",
+      "starter": "import numpy as np\n\nlote = np.array([[4, 9], [8, 13]])\n# Selecione uma linha e confira forma e valores.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a forma de `np.array([[7], [9], [8]])`?",
+      "options": [
+        "(3,)",
+        "(3, 1)",
+        "(1, 3)",
+        "(3, 3)"
+      ],
+      "answer": 1,
+      "explanation": "Três listas internas com um número cada formam três linhas por uma coluna."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma seleção `a[0]` de uma matriz mantém o eixo das linhas com comprimento 1.",
+      "answer": false,
+      "explanation": "O índice inteiro reduz a dimensionalidade. A fatia `a[0:1]` conserva o eixo."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o atributo que indica o número de dimensões.",
+      "code": "print(medidas.___)",
+      "blanks": [
+        [
+          "ndim"
+        ]
+      ],
+      "explanation": "`ndim` é 2 para uma tabela retangular e 1 para um vetor."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Se `a.shape == (5, 3)`, qual seleção devolve duas linhas e as três colunas?",
+      "options": [
+        "`a[:, :2]`",
+        "`a[2, :]`",
+        "`a[:2, :]`",
+        "`a[:2, 2]`"
+      ],
+      "answer": 2,
+      "explanation": "A fatia `:2` no primeiro eixo conserva as linhas das posições 0 e 1."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que descrevem dtype e shape?",
+      "back": "`dtype` descreve o tipo dos elementos. `shape` informa o comprimento de cada eixo."
+    },
+    {
+      "front": "Como pegar a linha 0 e manter duas dimensões?",
+      "back": "Use `a[0:1, :]`. Uma fatia mantém o eixo das linhas."
+    }
+  ]
+}

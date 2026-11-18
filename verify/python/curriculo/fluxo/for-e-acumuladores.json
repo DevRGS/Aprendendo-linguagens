@@ -1,0 +1,98 @@
+{
+  "title": "For e acumuladores",
+  "minutes": 25,
+  "intro": "Qual será o total depois de cada adição de 1 até 4? Você vai percorrer números e guardar o resultado parcial. Retome [Condições e faixas](#/python/fluxo/condicoes) para rever blocos indentados.\n\nO `for` entrega um valor por iteração, ou repetição. Em `for numero in range(1, 5):`, o primeiro valor é 1 e o limite final 5 fica de fora. O corpo é o bloco indentado. Comece o acumulador `total` em 0 antes do laço. Na passagem com número 2, o total antes da soma é 1 e depois vira 3. Imprimir dentro do laço mostra a evolução. Imprimir depois do laço mostra só o resultado final.\n\nCom três argumentos, `range(inicio, fim, passo)` avança pelo passo indicado. Preveja o primeiro e o último valor de `range(2, 11, 2)`. Em seguida você vai controlar a repetição com uma condição de parada.",
+  "sources": [
+    [
+      "Instrução for",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#for-statements"
+    ],
+    [
+      "A função range",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#the-range-function"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Anote os quatro totais esperados antes de executar. Some 1 até 4 e mostre o acumulador depois de cada adição.",
+      "code": "total = 0\nfor numero in range(1, 5):\n    total = total + numero\n    print(total)",
+      "stdout": "1\n3\n6\n10",
+      "explanation": "A cada iteração, o valor anterior de total participa da nova soma. Colocar total = 0 dentro do laço apagaria os resultados parciais."
+    },
+    {
+      "prompt": "Diga qual número está faltando na primeira contagem e por quê. Compare o total de cada intervalo.",
+      "code": "total = 0\nfor numero in range(1, 4):\n    total = total + numero\nprint(total)\n\ntotal = 0\nfor numero in range(1, 5):\n    total = total + numero\nprint(total)",
+      "stdout": "6\n10",
+      "explanation": "O 4 é limite exclusivo no primeiro range. No segundo ele entra e aumenta o total de 6 para 10."
+    },
+    {
+      "prompt": "Some apenas os números pares de 2 até 10, incluindo 10. Mostre só o total. Como caso de borda, use um intervalo em que não entre nenhum par e confira o resultado.",
+      "code": "total = 0\nfor numero in range(2, 11, 2):\n    total = total + numero\nprint(total)",
+      "stdout": "30",
+      "explanation": "O passo 2 produz 2, 4, 6, 8 e 10. Se o primeiro valor já alcança o limite final, o corpo não roda e total conserva o zero inicial.",
+      "hint": "Comece em 2, avance de 2 em 2 e escolha um limite final maior que 10.",
+      "starter": "total = 0\n# Percorra os pares, atualize total e exiba o resultado.",
+      "checks": [
+        {
+          "code": "total = 0\nfor numero in range(2, 2, 2):\n    total = total + numero\nprint(total)",
+          "stdout": "0"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Somando cada termo de `range(2, 5)`, qual o total?",
+      "options": [
+        "`9`",
+        "`14`",
+        "`10`"
+      ],
+      "answer": 0,
+      "explanation": "O intervalo fornece 2, 3 e 4, que somam 9."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Mover a atribuição `total = 0` para dentro do laço pode apagar a soma de iterações anteriores.",
+      "answer": true,
+      "explanation": "A atribuição interna reinicia a soma em toda iteração em que executa antes da adição."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para percorrer 1, 2 e 3, sem incluir 4.",
+      "code": "for numero in range(1, ___):\n    print(numero)",
+      "blanks": [
+        [
+          "4"
+        ]
+      ],
+      "explanation": "O fim precisa ser o primeiro número excluído."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você quer listar os pontos 3, 6, 9 e 12. Qual intervalo serve?",
+      "options": [
+        "`range(3, 12, 3)`",
+        "`range(3, 13, 3)`",
+        "`range(0, 13, 3)`"
+      ],
+      "answer": 1,
+      "explanation": "O fim 13 fica acima de 12 e o início 3 evita incluir zero."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Onde inicializar um acumulador que deve sobreviver ao laço?",
+      "back": "Antes do laço. Dentro do laço você atualiza o valor acumulado."
+    },
+    {
+      "front": "Quais números percorre `range(2, 7, 2)`?",
+      "back": "2, 4 e 6. O passo é 2 e o limite 7 fica de fora."
+    }
+  ]
+}

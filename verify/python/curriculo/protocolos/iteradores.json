@@ -1,0 +1,92 @@
+{
+  "title": "Iteráveis, iteradores e esgotamento",
+  "minutes": 36,
+  "intro": "Leia dois valores, um por vez. Antes da terceira chamada, preveja se o cursor retorna ao início. Retome [laços](#/python/fluxo/for-e-acumuladores) e [listas](#/python/sequencias/listas).\n\nUm iterável pode fornecer um iterador por `iter(objeto)`. Um iterador guarda a posição, e `next(iterador)` solicita o próximo valor. Quando acaba, a chamada sem padrão levanta `StopIteration`. Um laço for usa esse sinal para terminar. Já `next(iterador, padrão)` devolve o padrão no esgotamento. Uma lista normalmente fornece um iterador novo a cada percurso. Pedir `iter` ao próprio iterador devolve o mesmo objeto.\n\nUse cada bloco na célula ou pasta do próprio exercício. O esgotamento de E1 é intencional. Que padrão você escolheria se zero fosse um valor válido? Em seguida, veja [geradores](#/python/protocolos/geradores).",
+  "sources": [
+    [
+      "Iteradores",
+      "https://docs.python.org/3.14/tutorial/classes.html#iterators"
+    ],
+    [
+      "Função next e valor padrão",
+      "https://docs.python.org/3.14/library/functions.html#next"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Consuma [2, 5] com duas chamadas. Faça uma terceira chamada intencionalmente e capture apenas StopIteration.",
+      "code": "cursor = iter([2, 5])\nprint(next(cursor))\nprint(next(cursor))\ntry:\n    next(cursor)\nexcept StopIteration:\n    print(\"fim do iterador\")\n",
+      "stdout": "2\n5\nfim do iterador",
+      "explanation": "O iterador lembra onde parou. O terceiro next sinaliza esgotamento, e o tratamento mostra isso em uma linha."
+    },
+    {
+      "prompt": "Faça dois percursos de uma lista e dois do mesmo iterador. Preveja o segundo resultado de cada um.",
+      "code": "valores = [2, 5]\nprint([n for n in valores], [n for n in valores])\n\ncursor = iter(valores)\nprint(list(cursor), list(cursor))\n",
+      "stdout": "[2, 5] [2, 5]\n[2, 5] []",
+      "explanation": "Cada compreensão sobre a lista pede outro iterador. Com o cursor, list consome tudo na primeira chamada e não encontra itens na segunda."
+    },
+    {
+      "prompt": "Obtenha apenas o primeiro inteiro não negativo em [None, -1, 0, 4]. Use None como padrão para uma entrada sem válidos, inclusive a sequência vazia.",
+      "code": "def primeiro_valido(registros):\n    validos = (n for n in registros if type(n) is int and n >= 0)\n    return next(validos, None)\n\nprint(primeiro_valido([None, -1, 0, 4]))\nprint(primeiro_valido([None, -2]))\nprint(primeiro_valido([]))\n",
+      "stdout": "0\nNone\nNone",
+      "explanation": "A expressão com parênteses produz os candidatos sob demanda. next só pede um. type(n) is int restringe a inteiros, excluindo bool, e a segunda condição aceita 0. None identifica esgotamento sem ser uma resposta válida.",
+      "hint": "Passe um padrão a `next`. O teste de válido deve aceitar zero.",
+      "starter": "def primeiro_valido(registros):\n    candidatos = (n for n in registros if type(n) is int and n >= 0)\n    # Consuma só o primeiro e informe o que fazer no esgotamento.\n    raise NotImplementedError\n\nprint(primeiro_valido([None, -1, 0, 4]))\nprint(primeiro_valido([]))\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Dadas `it = iter([10, 20])` e `next(it)`, o que o próximo next devolve?",
+      "options": [
+        "10",
+        "20",
+        "StopIteration"
+      ],
+      "answer": 1,
+      "explanation": "Cada chamada avança um item. Já foi consumido o 10."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Depois de consumir um iterador de lista, `iter(it)` cria um cursor reiniciado sobre a lista.",
+      "answer": false,
+      "explanation": "iter sobre um iterador devolve o próprio iterador. Para recomeçar, peça iter à lista."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função embutida que devolve o próximo item ou None ao esgotar.",
+      "code": "item = ___(cursor, None)",
+      "blanks": [
+        [
+          "next"
+        ]
+      ],
+      "explanation": "O segundo argumento é o valor no esgotamento."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que valor envia a função primeiro_valido para `[-2, None, 3, 0]`?",
+      "options": [
+        "0",
+        "3",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "A função retorna o primeiro válido na ordem, aqui o 3."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Como um iterador indica que terminou?",
+      "back": "next sem padrão levanta StopIteration. O for encerra quando recebe esse sinal."
+    },
+    {
+      "front": "Por que None funciona como padrão para o primeiro inteiro não negativo?",
+      "back": "None não pertence ao conjunto de valores válidos, e zero pertence."
+    }
+  ]
+}

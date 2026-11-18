@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Qual a diferença entre parâmetro e argumento em `dobro(3)`?",
+      "back": "O parâmetro é o nome na definição. O argumento 3 é o valor fornecido pela chamada.",
+      "id": "python.funcoes.f01",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "front": "O que retorna uma função que cai no fim do bloco?",
+      "back": "Retorna None, mesmo que tenha escrito algo na saída.",
+      "id": "python.funcoes.f02",
+      "lesson": "parametros-e-retorno"
+    },
+    {
+      "front": "Onde existe um nome criado dentro do corpo de uma função?",
+      "back": "Ele é local à chamada da função, salvo quando explicitamente declarado de outro escopo.",
+      "id": "python.funcoes.f03",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "front": "Quando criar uma lista nova se o parâmetro pode ter valor padrão?",
+      "back": "Dentro da função, ao detectar a sentinela None, para separar o estado das chamadas.",
+      "id": "python.funcoes.f04",
+      "lesson": "escopo-e-padroes"
+    },
+    {
+      "front": "O que a docstring pode informar que list[float] não explicita?",
+      "back": "Pode indicar regras como aceitar uma lista vazia e o que devolver nesse caso.",
+      "id": "python.funcoes.f05",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "front": "O que devolve media_ou_none com [0, 0]?",
+      "back": "0.0. A lista tem amostras, ainda que a soma seja zero.",
+      "id": "python.funcoes.f06",
+      "lesson": "contratos-e-tipos"
+    },
+    {
+      "front": "O que uma etapa precisa devolver para que possa ser composta com outra?",
+      "back": "Um valor no formato que a etapa seguinte espera receber.",
+      "id": "python.funcoes.f07",
+      "lesson": "composicao"
+    },
+    {
+      "front": "Como verificar a função de soma sem depender da limpeza?",
+      "back": "Passe registros já normalizados e compare os subtotais com os valores esperados.",
+      "id": "python.funcoes.f08",
+      "lesson": "composicao"
+    }
+  ]
+}

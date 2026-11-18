@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Dadas `it = iter([10, 20])` e `next(it)`, o que o próximo next devolve?",
+      "options": [
+        "10",
+        "20",
+        "StopIteration"
+      ],
+      "answer": 1,
+      "explanation": "Cada chamada avança um item. Já foi consumido o 10.",
+      "id": "python.protocolos.q01",
+      "lesson": "iteradores"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Depois de consumir um iterador de lista, `iter(it)` cria um cursor reiniciado sobre a lista.",
+      "answer": false,
+      "explanation": "iter sobre um iterador devolve o próprio iterador. Para recomeçar, peça iter à lista.",
+      "id": "python.protocolos.q02",
+      "lesson": "iteradores"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função embutida que devolve o próximo item ou None ao esgotar.",
+      "code": "item = ___(cursor, None)",
+      "blanks": [
+        [
+          "next"
+        ]
+      ],
+      "explanation": "O segundo argumento é o valor no esgotamento.",
+      "id": "python.protocolos.q03",
+      "lesson": "iteradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que valor envia a função primeiro_valido para `[-2, None, 3, 0]`?",
+      "options": [
+        "0",
+        "3",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "A função retorna o primeiro válido na ordem, aqui o 3.",
+      "id": "python.protocolos.q04",
+      "lesson": "iteradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantos cálculos ocorrem ao criar `quadrados(100)` e chamar next só uma vez?",
+      "options": [
+        "100",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "A primeira solicitação executa até o primeiro yield.",
+      "id": "python.protocolos.q05",
+      "lesson": "geradores"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Consumir um gerador com `list(gerador)` mantém toda a economia de memória de processar item a item.",
+      "answer": false,
+      "explanation": "list guarda todos os valores emitidos. Um consumidor incremental pode evitar isso.",
+      "id": "python.protocolos.q06",
+      "lesson": "geradores"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a palavra que emite o valor e suspende a função geradora.",
+      "code": "def valores():\n    ___ 5",
+      "blanks": [
+        [
+          "yield"
+        ]
+      ],
+      "explanation": "yield entrega 5 e deixa a função pronta para continuar quando houver outra solicitação.",
+      "id": "python.protocolos.q07",
+      "lesson": "geradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em um arquivo com linhas `4`, `ruim` e `-3`, quanto devolve `sum(inteiros(caminho))` da aula?",
+      "options": [
+        "4",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "O gerador pula ruim e entrega 4 e -3.",
+      "id": "python.protocolos.q08",
+      "lesson": "geradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que valor sai de um wrapper sem return mesmo se a função original devolver 5?",
+      "options": [
+        "5",
+        "None",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "Uma função que termina sem return explícito devolve None.",
+      "id": "python.protocolos.q09",
+      "lesson": "decoradores"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`*args` em uma definição de função, sozinho, recebe todos os argumentos nomeados que não correspondem a outro parâmetro.",
+      "answer": false,
+      "explanation": "Para argumentos nomeados extras, declare **kwargs. args captura os posicionais extras.",
+      "id": "python.protocolos.q10",
+      "lesson": "decoradores"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra-chave que preserva o valor devolvido.",
+      "code": "def wrapper(*args, **kwargs):\n    ___ funcao(*args, **kwargs)",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "return devolve o resultado produzido pela função original.",
+      "id": "python.protocolos.q11",
+      "lesson": "decoradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em contar da aula, se você decorar duas funções e chamar apenas a primeira duas vezes, quais são os contadores?",
+      "options": [
+        "2 e 2",
+        "2 e 0",
+        "1 e 1"
+      ],
+      "answer": 1,
+      "explanation": "Cada aplicação cria seu próprio wrapper e atributo chamadas.",
+      "id": "python.protocolos.q12",
+      "lesson": "decoradores"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é o valor de arquivo.closed depois de sair de um with de leitura?",
+      "options": [
+        "False",
+        "True",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "O gerenciador fecha o recurso ao sair.",
+      "id": "python.protocolos.q13",
+      "lesson": "gerentes-de-contexto"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um bloco finally é pulado quando ValueError é levantado no try.",
+      "answer": false,
+      "explanation": "finally executa na saída por erro e na saída normal.",
+      "id": "python.protocolos.q14",
+      "lesson": "gerentes-de-contexto"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a cláusula que registra a saída em cenário normal ou por erro.",
+      "code": "try:\n    yield\n___:\n    eventos.append(\"fim\")",
+      "blanks": [
+        [
+          "finally"
+        ]
+      ],
+      "explanation": "finally garante a etapa de saída nos dois caminhos.",
+      "id": "python.protocolos.q15",
+      "lesson": "gerentes-de-contexto"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene o caminho de um erro no corpo de `with registrar(eventos)`, até o tratamento externo.",
+      "lines": [
+        "O contexto registra início",
+        "O corpo levanta ValueError",
+        "O contexto registra fim",
+        "O except externo recebe a exceção"
+      ],
+      "explanation": "A limpeza acontece ao deixar o with, antes do tratamento que o envolve.",
+      "id": "python.protocolos.q16",
+      "lesson": "gerentes-de-contexto"
+    }
+  ]
+}

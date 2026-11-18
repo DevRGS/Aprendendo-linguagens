@@ -8,6 +8,8 @@ Além de Java e SQL, há uma trilha **Terminal Linux**, com 24 aulas, 90 pergunt
 
 A trilha **JavaScript** tem 56 aulas, 210 perguntas, 140 flashcards e referência rápida. Os oito módulos iniciais ensinam fundamentos, funções, arrays/objetos, DOM/eventos, assíncrono, classes/módulos e um projeto local. Os seis módulos seguintes ensinam Node, HTTP/Express, SQLite, CRUD, integração frontend/API, autenticação, sessões, autorização e testes. O aluno começa no navegador sem Node; a etapa backend inclui instalação e um [projeto completo para baixar](content/javascript/projetos/api-estudos.zip), com código, etapas menores, lockfile, README e testes. A API é executada localmente pelo aluno; a central continua estática.
 
+A trilha de Python oferece cadernos para o JupyterLite no navegador e arquivos para rodar com Python 3.14 no terminal. O [kit completo](content/python/kits/python-completo.zip) tem as 64 aulas, as soluções e o projeto final com dados sintéticos.
+
 ## Rodar no seu computador
 
 ```bash
@@ -43,6 +45,8 @@ No GNU/Linux, o `npm test` também executa os cenários de `verify/linux/` com B
 Os exemplos JavaScript em `verify/javascript/` são conferidos por `tests/javascript-snippets.test.js`: arquivos `.mjs` em processos Node isolados e HTMLs próprios em jsdom, com cliques, envios de formulário e verificação do DOM. O manifesto `cases.json` associa cada cenário às aulas e às saídas/efeitos esperados. As falhas de fetch usam um servidor de teste em loopback, sem dependência de APIs externas; o projeto é conferido com texto que parece HTML, entrada vazia, recarga, formato inválido e gravação negada. Os testes não executam código enviado por alunos nem blocos extraídos indiscriminadamente do Markdown.
 
 O projeto de API em `content/javascript/projetos/api-estudos/` é o mesmo entregue no ZIP. Os testes de backend fazem HTTP real com SQLite temporário, cadastro/login, CRUD, isolamento de usuários, CSRF/origem, logout, expiração, erros e persistência. Express é uma ferramenta de desenvolvimento da central e uma dependência do projeto executável; não passa a ser uma dependência do site no navegador. Fflate é usado para empacotar/conferir o download. Para regenerar o ZIP depois de alterar fontes: `node tools/package-api-estudos.mjs`. Os testes conferem correspondência dos arquivos e executam o projeto extraído sem acesso ao registro npm.
+
+Os exemplos de Python têm fonte em `verify/python/curriculo/`. Com Python 3.14 e as dependências de `verify/python/requirements.txt` instaladas, execute `python tools/python-course.py run` para conferir as saídas. Os comandos `python tools/python-course.py build` e `python tools/python-course.py check` regeneram e conferem as aulas, os cadernos e os kits.
 
 ## Conferir os códigos Java
 
@@ -89,7 +93,7 @@ O formato completo está em `docs/superpowers/specs/2026-10-11-central-linguagen
 
 ## Publicar
 
-No GitHub: **Settings → Pages → Source: GitHub Actions**. A cada `push` na `main`, o workflow instala as ferramentas de teste, roda os testes e a conferência Java e só publica se tudo passar.
+No GitHub: **Settings → Pages → Source: GitHub Actions**. A cada `push` na `main`, o workflow instala as ferramentas de teste, roda os testes e as verificações de Java e Python e só publica se tudo passar.
 
 ## Créditos
 

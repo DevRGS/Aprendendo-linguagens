@@ -4,8 +4,8 @@ import { readFileSync, existsSync } from 'node:fs';
 
 const yml = readFileSync(new URL('../../.github/workflows/pages.yml', import.meta.url), 'utf8');
 
-test('a publicação só acontece depois dos testes e da conferência Java', () => {
-  for (const trecho of ['npm ci', 'npm test', 'node tools/verify-java.mjs', "java-version: '21'", 'needs: testes', 'actions/deploy-pages']) {
+test('a publicação só acontece após as verificações da central, de Java e de Python', () => {
+  for (const trecho of ['npm ci', 'npm test', 'node tools/verify-java.mjs', "java-version: '21'", 'python tools/python-course.py check', 'python tools/python-course.py run', 'needs: [testes, python]', 'actions/deploy-pages']) {
     assert.ok(yml.includes(trecho), `o workflow precisa conter: ${trecho}`);
   }
 });

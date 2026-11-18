@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que descrevem dtype e shape?",
+      "back": "`dtype` descreve o tipo dos elementos. `shape` informa o comprimento de cada eixo.",
+      "id": "python.numpy.f01",
+      "lesson": "arrays"
+    },
+    {
+      "front": "Como pegar a linha 0 e manter duas dimensões?",
+      "back": "Use `a[0:1, :]`. Uma fatia mantém o eixo das linhas.",
+      "id": "python.numpy.f02",
+      "lesson": "arrays"
+    },
+    {
+      "front": "O que sai de `a[a > 0]`?",
+      "back": "Um array com os valores positivos selecionados pela máscara, na ordem original.",
+      "id": "python.numpy.f03",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "front": "Quando chamar `copy()` ao fazer uma fatia básica?",
+      "back": "Quando for alterar números na seleção e quiser preservar os dados de origem.",
+      "id": "python.numpy.f04",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "front": "Num array 2D, qual resultado sobrou depois de mean(axis=0)?",
+      "back": "Uma média por coluna, obtida ao percorrer as linhas.",
+      "id": "python.numpy.f05",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "front": "Quando (4, 3) e (4, 1) são compatíveis?",
+      "back": "Na operação elemento a elemento, a dimensão 1 pode se estender a 3. As dimensões 4 já coincidem.",
+      "id": "python.numpy.f06",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "front": "Qual é a condição de dimensões para (n, p) @ (q, m)?",
+      "back": "As dimensões internas p e q devem coincidir. A saída tem forma (n, m).",
+      "id": "python.numpy.f07",
+      "lesson": "produto-matricial"
+    },
+    {
+      "front": "O que muda entre a @ pesos para pesos de forma (p,) e (p, 1)?",
+      "back": "A primeira saída é um vetor (n,) e a segunda é uma matriz coluna (n, 1).",
+      "id": "python.numpy.f08",
+      "lesson": "produto-matricial"
+    }
+  ]
+}

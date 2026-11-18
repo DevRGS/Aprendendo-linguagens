@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O limite final de uma fatia entra no resultado?",
+      "back": "Não. Em texto[0:2], entram os índices 0 e 1 quando existem.",
+      "id": "python.sequencias.f01",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "front": "Qual o efeito de `\"\"[:1]` e `\"\"[0]`?",
+      "back": "A fatia devolve texto vazio. O índice levanta IndexError.",
+      "id": "python.sequencias.f02",
+      "lesson": "texto-e-fatias"
+    },
+    {
+      "front": "Qual a diferença entre append e atribuição por índice?",
+      "back": "append aumenta o comprimento em um item. A atribuição por índice substitui um item existente.",
+      "id": "python.sequencias.f03",
+      "lesson": "listas"
+    },
+    {
+      "front": "A cópia rasa de uma lista de listas duplica as listas internas?",
+      "back": "As listas internas continuam compartilhadas. A cópia cria somente uma nova lista externa.",
+      "id": "python.sequencias.f04",
+      "lesson": "listas"
+    },
+    {
+      "front": "Que dois valores enumerate entrega a cada passagem?",
+      "back": "O contador, que por padrão começa em zero, e o elemento da sequência.",
+      "id": "python.sequencias.f05",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "front": "Como distinguir None de zero em um filtro?",
+      "back": "Use `valor is None` para localizar ausências representadas por None.",
+      "id": "python.sequencias.f06",
+      "lesson": "percorrer-e-filtrar"
+    },
+    {
+      "front": "O que uma compreensão de lista cria?",
+      "back": "Uma nova lista com o resultado da expressão para cada item que passa pelos filtros.",
+      "id": "python.sequencias.f07",
+      "lesson": "compreensoes"
+    },
+    {
+      "front": "O que acontece com `[x * 2 for x in []]`?",
+      "back": "O resultado é []. O corpo da compreensão não tem itens para transformar.",
+      "id": "python.sequencias.f08",
+      "lesson": "compreensoes"
+    }
+  ]
+}

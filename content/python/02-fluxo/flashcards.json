@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Qual operador compara igualdade? Qual atribui?",
+      "back": "`==` compara igualdade. `=` atribui um valor a um nome.",
+      "id": "python.fluxo.f01",
+      "lesson": "comparacoes"
+    },
+    {
+      "front": "Qual o efeito de `and` quando uma condição é falsa?",
+      "back": "Em uma combinação de condições booleanas, o resultado é False.",
+      "id": "python.fluxo.f02",
+      "lesson": "comparacoes"
+    },
+    {
+      "front": "Quantos blocos executam numa cadeia if/elif/else?",
+      "back": "Com else, exatamente um. Sem else, pode não executar nenhum.",
+      "id": "python.fluxo.f03",
+      "lesson": "condicoes"
+    },
+    {
+      "front": "Na regra de aprovação a partir de 7, por que validar 0 a 10 antes?",
+      "back": "Sem a validação inicial, uma nota inválida como 11 passaria pelo teste de aprovação.",
+      "id": "python.fluxo.f04",
+      "lesson": "condicoes"
+    },
+    {
+      "front": "Onde inicializar um acumulador que deve sobreviver ao laço?",
+      "back": "Antes do laço. Dentro do laço você atualiza o valor acumulado.",
+      "id": "python.fluxo.f05",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "front": "Quais números percorre `range(2, 7, 2)`?",
+      "back": "2, 4 e 6. O passo é 2 e o limite 7 fica de fora.",
+      "id": "python.fluxo.f06",
+      "lesson": "for-e-acumuladores"
+    },
+    {
+      "front": "Quando while testa a condição?",
+      "back": "Antes da primeira passagem e antes de cada repetição seguinte.",
+      "id": "python.fluxo.f07",
+      "lesson": "while-e-parada"
+    },
+    {
+      "front": "O que muda se você contar a entrada antes de testar a sentinela?",
+      "back": "A quantidade fica uma unidade maior, pois inclui a entrada reservada para encerrar.",
+      "id": "python.fluxo.f08",
+      "lesson": "while-e-parada"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "title": "Interprete a referência e seu erro",
+  "minutes": 55,
+  "intro": "Use a preparação do marco anterior e revise [referência e erro](#/python/preparacao-ml/referencia-e-erro). No treino, descreva a duração com mediana e extremos e use um histograma com eixos em minutos e contagem. A mediana de y no treino fornece uma referência constante de 10 minutos. Calcule o desvio absoluto de cada previsão e tire a média. Congelar a referência antes de consultar o teste mantém o conjunto final para avaliação.\n\nRastrear ou gravar os alvos de teste durante a preparação é uma operação estrutural. Produza gráficos exploratórios com treino, decida com validação e use os alvos de teste para medir a escolha congelada. Compare os erros em minutos e explique os limites de uma amostra tão pequena.",
+  "sources": [
+    [
+      "Evitar vazamento de dados",
+      "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
+    ],
+    [
+      "Métricas de regressão",
+      "https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics"
+    ],
+    [
+      "Plotar com Matplotlib",
+      "https://matplotlib.org/stable/users/explain/quick_start.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Resuma o alvo do treino em minutos.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n\nfrom statistics import median\nalvos = partes[\"treino\"][\"minutos_reais\"].tolist()\nprint(alvos)\nprint(f\"mínimo={min(alvos):.1f} mediana={median(alvos):.1f} máximo={max(alvos):.1f}\")\n",
+      "stdout": "[6.0, 8.0, 10.0, 10.0, 12.0, 14.0]\nmínimo=6.0 mediana=10.0 máximo=14.0",
+      "explanation": "O gráfico final usa somente essas seis observações.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ]
+    },
+    {
+      "prompt": "Calcule à mão os erros absolutos de 10 contra alvos de validação 8 e 15, e compare.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n\nfrom preparacao_viagens import mae\nref = parametros[\"referencia_minutos\"]\nalvos = partes[\"validacao\"][\"minutos_reais\"]\nprint([abs(y-ref) for y in alvos])\nprint(mae(alvos, ref))\n",
+      "stdout": "[2.0, 5.0]\n3.5",
+      "explanation": "7 minutos de erro absoluto somados, divididos por duas viagens, resultam em 3.5 minutos.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ]
+    },
+    {
+      "prompt": "Congele a referência. Calcule então o erro de teste e exporte um relatório com gráfico de treino, tabela, unidade e limites.",
+      "code": "from pathlib import Path\nfrom executar_projeto import executar, mostrar\n\npasta = Path.cwd()\nresultados = executar(pasta/\"dados/viagens.csv\", pasta/\"dados/estacoes.csv\", pasta/\"saida\")\n\n_, _, _, metricas = resultados\nassert metricas == {\"validacao\":3.5, \"teste\":10.0}\nprint(Path(\"saida/relatorio.md\").is_file())\nprint(metricas)\n",
+      "stdout": "True\n{'validacao': 3.5, 'teste': 10.0}",
+      "explanation": "No teste, os alvos 18 e 22 estão a 8 e 12 minutos da previsão. A média é 10. O relatório inclui título, eixos, descrição e tabela com os valores do treino. Em uma avaliação com pouquíssimas observações, um valor novo pode mudar a métrica substancialmente.",
+      "hint": "Use média dos erros absolutos nas duas partições. Reserve o gráfico exploratório para treino.",
+      "starter": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n# Calcule os erros e escreva relatorio.md com uma figura.\n",
+      "images": [
+        "saida/duracoes_treino.png"
+      ],
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py",
+        "relatorio_viagens.py",
+        "executar_projeto.py",
+        "testes_projeto.py",
+        "LEIA-ME-PROJETO.md"
+      ],
+      "starter_support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual alvo central define a referência?",
+      "options": [
+        "3.5",
+        "8",
+        "10"
+      ],
+      "answer": 2,
+      "explanation": "Ela usa a mediana do treino."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Escolher o método após olhar o MAE de teste usa informação reservada.",
+      "answer": true,
+      "explanation": "O teste é para avaliar a decisão já congelada."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que torna o erro não negativo.",
+      "code": "erros = [___(y - ref) for y in alvos]",
+      "blanks": [
+        [
+          "abs"
+        ]
+      ],
+      "explanation": "abs devolve o módulo da diferença."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O MAE de 10 tem qual unidade?",
+      "options": [
+        "km",
+        "minutos",
+        "Porcentagem"
+      ],
+      "answer": 1,
+      "explanation": "Usamos erro absoluto médio em minutos."
+    }
+  ],
+  "cards": [
+    {
+      "front": "MAE de validação e teste da referência?",
+      "back": "3.5 min na validação e 10.0 min no teste."
+    },
+    {
+      "front": "De onde vêm as observações do histograma?",
+      "back": "Somente do treino, para manter a exploração separada da avaliação."
+    }
+  ]
+}
