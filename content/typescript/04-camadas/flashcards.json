@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "typescript.camadas.f01",
+      "lesson": "modulos",
+      "front": "Qual pasta do kit recebe o JavaScript compilado?",
+      "back": "dist. outDir no tsconfig aponta para dist."
+    },
+    {
+      "id": "typescript.camadas.f02",
+      "lesson": "modulos",
+      "front": "Para chamar converter em runtime, que import usar?",
+      "back": "Importação comum do valor. A função precisa existir quando o JavaScript roda."
+    },
+    {
+      "id": "typescript.camadas.f03",
+      "lesson": "assincrono",
+      "front": "O que a chamada buscar(7) devolve antes de usar await?",
+      "back": "Uma Promise. Uma função async sempre devolve uma promessa."
+    },
+    {
+      "id": "typescript.camadas.f04",
+      "lesson": "assincrono",
+      "front": "Que tipo anota o retorno de uma função async que resolve um número?",
+      "back": "`Promise<number>`. O parâmetro de Promise representa o valor entregue no sucesso."
+    },
+    {
+      "id": "typescript.camadas.f05",
+      "lesson": "repositorio",
+      "front": "Que contrato criarTarefa exige do adaptador?",
+      "back": "Os métodos de Repositorio e seus retornos. A compatibilidade estrutural permite implementações diferentes."
+    },
+    {
+      "id": "typescript.camadas.f06",
+      "lesson": "repositorio",
+      "front": "De onde o handler real obtém o dono da tarefa?",
+      "back": "Da sessão autenticada. O caso de uso recebe o usuário determinado no servidor."
+    },
+    {
+      "id": "typescript.camadas.f07",
+      "lesson": "genericos",
+      "front": "O que T representa em `Resultado<T>`?",
+      "back": "O tipo do valor no ramo de sucesso. T é substituído pelo tipo concreto usado em cada aplicação."
+    },
+    {
+      "id": "typescript.camadas.f08",
+      "lesson": "genericos",
+      "front": "Qual operação é válida em item.valor de sucesso('SQL') depois de testar ok?",
+      "back": "toLowerCase(). O valor inferido é textual, então os métodos de string estão disponíveis."
+    }
+  ]
+}

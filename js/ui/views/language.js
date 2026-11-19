@@ -4,9 +4,10 @@ import {
 } from '../../core/progress.js';
 import { activateModuleCards } from '../../core/actions.js';
 import { loadModuleBank } from '../../data/content.js';
+import { nextStudyStep } from '../components/study-path.js';
 import { renderNotFound } from './not-found.js';
 
-function moduleCard(app, state, language, module, index) {
+function moduleCard(app, state, language, module, index, recommended) {
   const entry = state.modules[moduleKey(language.id, module.id)] ?? {};
   const done = isModuleComplete(state, language, module);
   const lessonsDone = moduleLessonsDone(state, language, module);
@@ -16,13 +17,15 @@ function moduleCard(app, state, language, module, index) {
     app.layout.toast(`Cartas de "${module.title}" ativadas.`, { tone: 'success' });
     app.refresh();
   };
-  return h('section', { class: `panel module-card${done ? ' done' : ''}` },
-    h('header', { class: 'module-head' },
-      h('div', {},
-        h('p', { class: 'eyebrow', text: `Módulo ${index + 1}` }),
-        h('h2', { text: module.title }),
-        h('p', { class: 'muted', text: module.description })),
-      done ? h('span', { class: 'badge success', text: '✓ Concluído' }) : h('span', { class: 'badge', text: `${lessonsDone}/${module.lessons.length} aulas` })),
+  const active = lessonsDone > 0 || entry.bestPractice !== undefined;
+  return h('details', { class: `panel module-card${done ? ' done' : ''}`, open: recommended },
+    h('summary', { class: 'module-head' },
+      h('span', { class: 'module-summary' },
+        h('span', { class: 'eyebrow', text: `Módulo ${index + 1}` }),
+        h('strong', { class: 'module-title', text: module.title }),
+        h('span', { class: 'muted small', text: `${lessonsDone}/${module.lessons.length} aulas · ${entry.bestPractice === undefined ? 'Prática pendente' : `Prática: ${pct(entry.bestPractice)}`}` })),
+      h('span', { class: `badge${done ? ' success' : ''}`, text: done ? '✓ Concluído' : active ? 'Em andamento' : 'A começar' })),
+    h('p', { class: 'muted module-description', text: module.description }),
     h('ol', { class: 'lesson-list' }, module.lessons.map((l) => {
       const ok = Boolean(state.lessons[lessonKey(language.id, module.id, l.id)]);
       return h('li', { class: ok ? 'done' : null },
@@ -49,6 +52,7 @@ export async function renderLanguage(container, app, route) {
   const progress = languageProgress(state, language);
   const exam = state.exams[language.id];
   const complete = isLanguageComplete(state, language);
+  const recommended = nextStudyStep(state, language).module ?? language.modules.at(-1);
   mount(container, h('div', { class: 'lang-page', style: { '--accent': language.color } },
     h('section', { class: 'lang-hero' },
       h('div', { class: 'lang-icon', text: language.icon }),
@@ -60,5 +64,5 @@ export async function renderLanguage(container, app, route) {
       h('a', { class: 'btn', href: `#/${language.id}/referencia`, text: '📋 Referência rápida' }),
       h('a', { class: 'btn', href: `#/${language.id}/prova`, text: exam?.best !== undefined ? `🎯 Prova (melhor nota: ${pct(exam.best)})` : '🎯 Prova' }),
       h('a', { class: `btn${complete ? ' btn-primary' : ' btn-ghost'}`, href: `#/${language.id}/certificado`, text: complete ? '🎓 Ver certificado' : '🔒 Certificado' })),
-    language.modules.map((m, i) => moduleCard(app, state, language, m, i))));
+    h('div', { class: 'module-map' }, language.modules.map((m, i) => moduleCard(app, state, language, m, i, m === recommended)))));
 }

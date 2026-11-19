@@ -1,0 +1,213 @@
+{
+  "questions": [
+    {
+      "id": "git.diferencas.q01",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual par git diff compara por padrão?",
+      "options": [
+        "Duas branches remotas",
+        "Índice e servidor",
+        "Diretório de trabalho e índice"
+      ],
+      "answer": 2,
+      "explanation": "Ele exibe alterações ainda fora do índice para arquivos rastreados."
+    },
+    {
+      "id": "git.diferencas.q02",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "git show :README.md pode mostrar algo diferente de cat README.md.",
+      "answer": true,
+      "explanation": "O primeiro lê o índice e o segundo lê o disco."
+    },
+    {
+      "id": "git.diferencas.q03",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha a opção longa que compara o índice com HEAD.",
+      "code": "git diff ___ -- README.md",
+      "blanks": [
+        [
+          "--cached",
+          "--staged"
+        ]
+      ],
+      "explanation": "Ambas as opções consultam a alteração preparada.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.diferencas.q04",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Após preparar A e editar B no mesmo arquivo, qual passo entra no commit padrão?",
+      "options": [
+        "A e B",
+        "A",
+        "Somente B"
+      ],
+      "answer": 1,
+      "explanation": "O índice ainda termina no passo A."
+    },
+    {
+      "id": "git.diferencas.q05",
+      "lesson": "comparar-mudancas-preparadas",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Como retirar uma mudança preparada preservando o arquivo no disco?",
+      "options": [
+        "git restore --staged README.md",
+        "git commit README.md",
+        "git show README.md"
+      ],
+      "answer": 0,
+      "explanation": "--staged altera o índice."
+    },
+    {
+      "id": "git.diferencas.q06",
+      "lesson": "comparar-mudancas-preparadas",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um resumo --stat exibe necessariamente o texto de cada linha adicionada.",
+      "answer": false,
+      "explanation": "O resumo mostra arquivos e contagem. O patch mostra o texto."
+    },
+    {
+      "id": "git.diferencas.q07",
+      "lesson": "comparar-mudancas-preparadas",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha a opção que limita a saída aos nomes.",
+      "code": "git diff --cached ___",
+      "blanks": [
+        [
+          "--name-only"
+        ]
+      ],
+      "explanation": "Assim é possível prever a lista de arquivos da mudança.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.diferencas.q08",
+      "lesson": "comparar-mudancas-preparadas",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O diff preparado está vazio mas o disco contém edições. Qual hipótese explica isso?",
+      "options": [
+        "Um push está em andamento",
+        "A branch perdeu o nome",
+        "As edições ainda estão fora do índice"
+      ],
+      "answer": 2,
+      "explanation": "git diff sem --cached permite inspecionar as edições pendentes."
+    },
+    {
+      "id": "git.diferencas.q09",
+      "lesson": "consultar-o-historico",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Neste histórico linear, o que HEAD~1 seleciona?",
+      "options": [
+        "O próximo commit futuro",
+        "O pai do commit atual",
+        "A primeira branch remota"
+      ],
+      "answer": 1,
+      "explanation": "~1 percorre um elo pelo primeiro pai."
+    },
+    {
+      "id": "git.diferencas.q10",
+      "lesson": "consultar-o-historico",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Ler git show HEAD~1:README.md deixa o arquivo de trabalho na versão antiga.",
+      "answer": false,
+      "explanation": "show imprime o conteúdo sem alterar a cópia."
+    },
+    {
+      "id": "git.diferencas.q11",
+      "lesson": "consultar-o-historico",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual subcomando lista commits?",
+      "code": "git ___ -2 --oneline",
+      "blanks": [
+        [
+          "log"
+        ]
+      ],
+      "explanation": "log percorre o histórico alcançável.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.diferencas.q12",
+      "lesson": "consultar-o-historico",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como conferir as diferenças entre dois commits específicos?",
+      "options": [
+        "git diff HEAD~1 HEAD",
+        "git diff --cached",
+        "git status -s"
+      ],
+      "answer": 0,
+      "explanation": "Os dois argumentos indicam as fotografias comparadas."
+    },
+    {
+      "id": "git.diferencas.q13",
+      "lesson": "ignorar-arquivos-gerados",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual padrão cobre relatorio.log e teste.log?",
+      "options": [
+        ".log.txt",
+        "logs/",
+        "*.log"
+      ],
+      "answer": 2,
+      "explanation": "O asterisco aceita diferentes nomes terminados em .log."
+    },
+    {
+      "id": "git.diferencas.q14",
+      "lesson": "ignorar-arquivos-gerados",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma nova regra remove de commits passados arquivos que já estavam rastreados.",
+      "answer": false,
+      "explanation": "O histórico continua contendo as fotografias registradas."
+    },
+    {
+      "id": "git.diferencas.q15",
+      "lesson": "ignorar-arquivos-gerados",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para identificar de onde veio a regra.",
+      "code": "git ___ -v execucao.log",
+      "blanks": [
+        [
+          "check-ignore"
+        ]
+      ],
+      "explanation": "A opção -v inclui a origem do padrão.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.diferencas.q16",
+      "lesson": "ignorar-arquivos-gerados",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que registrar .gitignore no histórico?",
+      "options": [
+        "Enviar todos os logs acumulados",
+        "Distribuir os padrões com o projeto",
+        "Apagar arquivos de outras máquinas"
+      ],
+      "answer": 1,
+      "explanation": "Clones passam a receber as mesmas regras."
+    }
+  ]
+}

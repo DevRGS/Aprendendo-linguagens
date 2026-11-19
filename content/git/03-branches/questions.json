@@ -1,0 +1,214 @@
+{
+  "questions": [
+    {
+      "id": "git.branches.q01",
+      "lesson": "criar-uma-branch",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual comando cria a branch e entra nela?",
+      "options": [
+        "git switch -c sumario",
+        "git branch --show-current",
+        "git log sumario"
+      ],
+      "answer": 0,
+      "explanation": "switch -c cria e seleciona a referência."
+    },
+    {
+      "id": "git.branches.q02",
+      "lesson": "criar-uma-branch",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Criar uma branch duplica imediatamente todos os commits existentes.",
+      "answer": false,
+      "explanation": "A nova referência pode apontar para o mesmo objeto."
+    },
+    {
+      "id": "git.branches.q03",
+      "lesson": "criar-uma-branch",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a opção curta de criação.",
+      "code": "git switch ___ sumario",
+      "blanks": [
+        [
+          "-c"
+        ]
+      ],
+      "explanation": "A opção -c cria a nova branch.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.branches.q04",
+      "lesson": "criar-uma-branch",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como começar uma branch em main estando em sumario?",
+      "options": [
+        "git switch main revisao",
+        "git log main",
+        "git switch -c revisao main"
+      ],
+      "answer": 2,
+      "explanation": "O último argumento escolhe o ponto inicial."
+    },
+    {
+      "id": "git.branches.q05",
+      "lesson": "alternar-entre-versoes",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Ao voltar para main limpa, o que ocorre com editor.txt rastreado apenas em docs?",
+      "options": [
+        "Seu commit é apagado",
+        "Ele sai da cópia de trabalho",
+        "Ele vira remoto"
+      ],
+      "answer": 1,
+      "explanation": "A cópia passa a representar main."
+    },
+    {
+      "id": "git.branches.q06",
+      "lesson": "alternar-entre-versoes",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "git show docs:editor.txt permite consultar a outra versão estando em main.",
+      "answer": true,
+      "explanation": "A referência e o caminho identificam o objeto a mostrar."
+    },
+    {
+      "id": "git.branches.q07",
+      "lesson": "alternar-entre-versoes",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha o subcomando que troca para a branch existente.",
+      "code": "git ___ docs",
+      "blanks": [
+        [
+          "switch",
+          "checkout"
+        ]
+      ],
+      "explanation": "switch ou checkout aceita o nome da branch existente nesta situação.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.branches.q08",
+      "lesson": "alternar-entre-versoes",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como saber a branch atual sem deduzir pelos arquivos?",
+      "options": [
+        "git branch --show-current",
+        "git add --all",
+        "git log --all"
+      ],
+      "answer": 0,
+      "explanation": "O comando imprime o nome da referência ativa."
+    },
+    {
+      "id": "git.branches.q09",
+      "lesson": "integrar-mudancas",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em que branch ficar para integrar docs em main?",
+      "options": [
+        "docs",
+        "Uma branch remota obrigatória",
+        "main"
+      ],
+      "answer": 2,
+      "explanation": "A branch atual recebe o resultado de merge."
+    },
+    {
+      "id": "git.branches.q10",
+      "lesson": "integrar-mudancas",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um fast-forward precisa criar um commit novo de integração.",
+      "answer": false,
+      "explanation": "O Git pode apenas avançar a referência até a ponta existente."
+    },
+    {
+      "id": "git.branches.q11",
+      "lesson": "integrar-mudancas",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha a opção que exige avanço rápido.",
+      "code": "git merge ___ docs",
+      "blanks": [
+        [
+          "--ff-only"
+        ]
+      ],
+      "explanation": "A opção recusa histórias que necessitem de um merge real.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.branches.q12",
+      "lesson": "integrar-mudancas",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Após a integração, main..docs ficou vazio. O que isso mostra?",
+      "options": [
+        "docs deixou de existir",
+        "main já alcança os commits de docs",
+        "O editor foi apagado"
+      ],
+      "answer": 1,
+      "explanation": "A diferença de conjuntos não contém commits."
+    },
+    {
+      "id": "git.branches.q13",
+      "lesson": "resolver-conflito-de-texto",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual sinal no status curto corresponde a este conflito?",
+      "options": [
+        "UU",
+        "??",
+        "A "
+      ],
+      "answer": 0,
+      "explanation": "As duas branches modificaram o mesmo arquivo e ele ficou sem resolução."
+    },
+    {
+      "id": "git.branches.q14",
+      "lesson": "resolver-conflito-de-texto",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "É suficiente apagar os marcadores e deixar de preparar o arquivo resolvido.",
+      "answer": false,
+      "explanation": "git add registra o resultado escolhido para o caminho."
+    },
+    {
+      "id": "git.branches.q15",
+      "lesson": "resolver-conflito-de-texto",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Depois de editar, qual subcomando registra a resolução no índice?",
+      "code": "git ___ README.md",
+      "blanks": [
+        [
+          "add",
+          "stage"
+        ]
+      ],
+      "explanation": "A operação substitui as entradas em conflito pelo arquivo resolvido.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.branches.q16",
+      "lesson": "resolver-conflito-de-texto",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como comprovar que o commit de integração preserva duas linhas de história?",
+      "options": [
+        "Contar os arquivos da pasta",
+        "Ler somente o nome da branch",
+        "Inspecionar os hashes pais com %P"
+      ],
+      "answer": 2,
+      "explanation": "Os dois pais representam as duas pontas integradas."
+    }
+  ]
+}

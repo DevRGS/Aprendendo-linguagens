@@ -2,6 +2,8 @@ import { h, mount, formatDateTime } from '../dom.js';
 import { APP_NAME, PRE_IMPORT_KEY } from '../../config.js';
 import { setProfile, updateBackupMeta, resetProgress } from '../../core/actions.js';
 import { exportNow, importFromFile, canUndoImport, undoImport } from '../backup-flow.js';
+import { byteMode } from '../components/byte.js';
+import { resumoIntensiva } from '../../core/intensiva.js';
 import { profileFields } from '../components/profile-fields.js';
 
 function autoBackupSection(app) {
@@ -83,10 +85,17 @@ async function reset(app) {
 export function renderSettings(container, app) {
   const state = app.store.get();
   const fields = profileFields(state.profile);
+  const day = resumoIntensiva(state, app.ctx().today).days.at(-1);
+  const byteModes = [['animated', 'Byte animado'], ['still', 'Byte parado'], ['off', 'Ocultar Byte']];
+  const byteOptions = h('fieldset', { class: 'field byte-options' },
+    h('legend', { text: 'Mascote de estudo' }),
+    byteModes.map(([value, label]) => h('label', { class: 'check' },
+      h('input', { type: 'radio', name: 'byte-mode', value, checked: byteMode(state.profile) === value }), label)),
+    h('p', { class: 'small muted', text: 'Byte respeita a preferência de movimento reduzido do seu aparelho.' }));
   const saveProfile = () => {
     const data = fields.read();
     if (!data) return;
-    app.dispatch(setProfile, data);
+    app.dispatch(setProfile, { ...data, settings: { byte: byteOptions.querySelector('input:checked').value } });
     app.layout.toast('Perfil atualizado.', { tone: 'success' });
   };
   const fileInput = h('input', { type: 'file', accept: 'application/json,.json', hidden: true });
@@ -109,6 +118,8 @@ export function renderSettings(container, app) {
     h('section', { class: 'panel' },
       h('h2', { text: 'Perfil' }),
       fields.el,
+      day.status === 'goal' || day.status === 'studied' ? h('p', { class: 'small muted', text: `Hoje sua meta é ${day.goal} XP. Alterações valem a partir do próximo dia de estudo.` }) : null,
+      byteOptions,
       h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn-primary', onClick: saveProfile, text: 'Salvar perfil' }))),
     h('section', { class: 'panel' },
       h('h2', { text: 'Backup manual' }),

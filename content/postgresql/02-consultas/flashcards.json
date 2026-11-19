@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "postgresql.consultas.f01",
+      "lesson": "juncoes",
+      "front": "Por que Caio aparece com tema nulo?",
+      "back": "LEFT JOIN preserva o lado esquerdo sem correspondência. A ausência de leitura produz nulos nas colunas da direita."
+    },
+    {
+      "id": "postgresql.consultas.f02",
+      "lesson": "juncoes",
+      "front": "Que filtro localiza alunos sem correspondência após a junção externa?",
+      "back": "WHERE l.id IS NULL. A chave primária da direita só aparece nula quando não houve correspondência."
+    },
+    {
+      "id": "postgresql.consultas.f03",
+      "lesson": "agregar",
+      "front": "O que count(l.id) ignora neste relatório?",
+      "back": "Valores NULL da coluna contada. Isso permite obter zero para quem não tem leitura."
+    },
+    {
+      "id": "postgresql.consultas.f04",
+      "lesson": "agregar",
+      "front": "Que agregado totaliza minutos efetivamente registrados?",
+      "back": "sum(l.minutos). SUM adiciona os valores; COUNT conta e MAX seleciona o maior."
+    },
+    {
+      "id": "postgresql.consultas.f05",
+      "lesson": "filtrar-grupos",
+      "front": "Onde expressar o mínimo de duas leituras por grupo?",
+      "back": "HAVING count(*) >= 2. HAVING consegue consultar o agregado calculado."
+    },
+    {
+      "id": "postgresql.consultas.f06",
+      "lesson": "filtrar-grupos",
+      "front": "Qual contagem resta para Ana quando WHERE feita está ativo?",
+      "back": "1. Das duas leituras de Ana, somente a de Git está marcada como feita."
+    },
+    {
+      "id": "postgresql.consultas.f07",
+      "lesson": "paginacao",
+      "front": "Qual cláusula define a ordem entre leituras com a mesma duração?",
+      "back": "A chave id no ORDER BY após minutos. O segundo critério resolve o empate na duração."
+    },
+    {
+      "id": "postgresql.consultas.f08",
+      "lesson": "paginacao",
+      "front": "O que pode acontecer se outra sessão inserir linhas entre leituras paginadas com OFFSET?",
+      "back": "Os itens podem mudar de página. A consulta seguinte pode observar um conjunto novo sob o isolamento padrão."
+    }
+  ]
+}

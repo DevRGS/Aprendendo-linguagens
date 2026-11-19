@@ -10,6 +10,20 @@ A trilha **JavaScript** tem 56 aulas, 210 perguntas, 140 flashcards e referênci
 
 A trilha de Python oferece cadernos para o JupyterLite no navegador e arquivos para rodar com Python 3.14 no terminal. O [kit completo](content/python/kits/python-completo.zip) tem as 64 aulas, as soluções e o projeto final com dados sintéticos.
 
+## Continuar os estudos
+
+A página inicial recomenda a próxima aula ou prática e mostra a semana da Intensiva. A primeira atividade de cada dia fixa a meta de XP daquele dia. Sete dias consecutivos atingindo a meta liberam a conquista da Intensiva. Em Configurações, escolha se Byte aparece animado, parado ou oculto.
+
+Cada nova trilha tem 5 módulos, 20 aulas, 80 questões e 40 flashcards. A página **Projetos** reúne os roteiros e os arquivos para praticar.
+
+| Trilha | O que você entrega |
+| --- | --- |
+| Git e GitHub | Um guia revisado, marcado com uma versão e conferido em um clone limpo. |
+| Machine Learning com Python | Uma comparação entre um modelo de duração de viagens e uma referência, em um caderno ou script local. |
+| HTML e CSS | Um catálogo acessível por teclado, legível em telas estreitas. |
+| TypeScript | Uma rota da API de estudos migrada com validação de entrada e testes de contrato. |
+| PostgreSQL | Um CRUD com persistência no servidor, controle de acesso e gravações em transação. |
+
 ## Rodar no seu computador
 
 ```bash

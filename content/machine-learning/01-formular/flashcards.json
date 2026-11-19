@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "machine-learning.formular.f01",
+      "lesson": "instante",
+      "front": "O que é o instante de previsão?",
+      "back": "O momento em que o sistema precisa entregar a estimativa e em que seus atributos devem estar disponíveis."
+    },
+    {
+      "id": "machine-learning.formular.f02",
+      "lesson": "instante",
+      "front": "Para que conservar o ID fora dos atributos?",
+      "back": "Para ligar resultados e erros às viagens de origem."
+    },
+    {
+      "id": "machine-learning.formular.f03",
+      "lesson": "particoes",
+      "front": "Por que dividir pelos mesmos índices?",
+      "back": "Para conservar o alinhamento de identificador, entrada e duração."
+    },
+    {
+      "id": "machine-learning.formular.f04",
+      "lesson": "particoes",
+      "front": "Como detectar um ID usado em treino e validação?",
+      "back": "Faça a interseção entre os conjuntos de IDs e investigue se tiver elementos."
+    },
+    {
+      "id": "machine-learning.formular.f05",
+      "lesson": "referencia",
+      "front": "Em qual partição a referência aprende a constante?",
+      "back": "No treino disponível para aquela janela."
+    },
+    {
+      "id": "machine-learning.formular.f06",
+      "lesson": "referencia",
+      "front": "Prever 10 minutos em duas viagens já informa seu erro?",
+      "back": "Ainda é preciso comparar cada valor previsto com o alvo medido."
+    },
+    {
+      "id": "machine-learning.formular.f07",
+      "lesson": "mae",
+      "front": "Qual a unidade do MAE se o alvo é tempo em minutos?",
+      "back": "Minutos."
+    },
+    {
+      "id": "machine-learning.formular.f08",
+      "lesson": "mae",
+      "front": "Em que situação a comparação entre dois MAEs é justa nesta aula?",
+      "back": "Quando usam os mesmos alvos, datas e unidade, sem ajustar à validação."
+    }
+  ]
+}

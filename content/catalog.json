@@ -19,6 +19,26 @@
     {
       "id": "python",
       "dir": "python"
+    },
+    {
+      "id": "git",
+      "dir": "git"
+    },
+    {
+      "id": "machine-learning",
+      "dir": "machine-learning"
+    },
+    {
+      "id": "html-css",
+      "dir": "html-css"
+    },
+    {
+      "id": "typescript",
+      "dir": "typescript"
+    },
+    {
+      "id": "postgresql",
+      "dir": "postgresql"
     }
   ]
 }

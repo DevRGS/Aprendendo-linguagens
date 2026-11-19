@@ -177,6 +177,11 @@ export async function renderFlashcards(container, app, route) {
 
   tree.onChange(() => home());
   if (route.query.modo === 'erros') startErrors();
-  else home();
+  else if (route.query.modo === 'pendentes') {
+    const state = app.store.get();
+    const due = unlockedInScope().filter((c) => isDue(state.cards[c.id], app.ctx().today));
+    if (due.length) session(shuffle(due), true);
+    else home();
+  } else home();
   return stopKeys;
 }

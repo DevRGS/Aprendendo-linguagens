@@ -1,4 +1,4 @@
-export const RESERVED_ROUTES = new Set(['quiz', 'flashcards', 'perfil', 'config']);
+export const RESERVED_ROUTES = new Set(['quiz', 'flashcards', 'perfil', 'config', 'projetos']);
 
 export function parseRoute(hash) {
   const raw = String(hash ?? '').replace(/^#/, '');

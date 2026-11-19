@@ -166,6 +166,8 @@ export function createSqlExercise(exercise, {
     reveal({ verdict = null, showCorrect }) {
       lock();
       if (!showCorrect || !verdict) return;
+      // A região de feedback do quiz já anuncia a correção uma vez.
+      output.setAttribute('aria-live', 'off');
       output.replaceChildren(statusLine(verdict), verdictBody(verdict) ?? '',
         verdict.expected ? resultTable(verdict.expected, { label: 'Resultado esperado' }) : '',
         h('p', { class: 'sql-label', text: 'Uma resposta certa:' }), answerBlock(exercise, lang));

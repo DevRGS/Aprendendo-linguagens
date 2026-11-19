@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "git.colaborar.q01",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que origin nomeia no novo clone?",
+      "options": [
+        "O autor do commit",
+        "O repositório de origem",
+        "A pasta de documentação"
+      ],
+      "answer": 1,
+      "explanation": "Git registra o endereço remoto com esse apelido por padrão."
+    },
+    {
+      "id": "git.colaborar.q02",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "É possível clonar um repositório usando somente um caminho local.",
+      "answer": true,
+      "explanation": "O transporte local serve aos exercícios de colaboração."
+    },
+    {
+      "id": "git.colaborar.q03",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para fazer outra cópia de trabalho.",
+      "code": "git ___ ../central.git ../leitura",
+      "blanks": [
+        [
+          "clone"
+        ]
+      ],
+      "explanation": "clone inicia o destino com histórico e referência à origem.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.colaborar.q04",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que a edição em leitura não aparece no status de aluna?",
+      "options": [
+        "Os diretórios de trabalho e índices são distintos",
+        "O Git apagou a edição",
+        "A origin bloqueia a leitura"
+      ],
+      "answer": 0,
+      "explanation": "Cada clone mantém seu estado local."
+    },
+    {
+      "id": "git.colaborar.q05",
+      "lesson": "buscar-referencias",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que git fetch origin atualiza neste exemplo?",
+      "options": [
+        "O texto aberto automaticamente",
+        "O autor da branch",
+        "A referência origin/main na cópia local"
+      ],
+      "answer": 2,
+      "explanation": "fetch traz objetos e atualiza referências de acompanhamento."
+    },
+    {
+      "id": "git.colaborar.q06",
+      "lesson": "buscar-referencias",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Após fetch, main e origin/main podem apontar para commits diferentes.",
+      "answer": true,
+      "explanation": "Buscar e integrar são operações separadas."
+    },
+    {
+      "id": "git.colaborar.q07",
+      "lesson": "buscar-referencias",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para buscar sem integrar.",
+      "code": "git ___ origin",
+      "blanks": [
+        [
+          "fetch"
+        ]
+      ],
+      "explanation": "fetch permite examinar as mudanças primeiro.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.colaborar.q08",
+      "lesson": "buscar-referencias",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como visualizar precisamente o texto que o colega alterou?",
+      "options": [
+        "git remote -v",
+        "git diff main origin/main -- README.md",
+        "git status --short"
+      ],
+      "answer": 1,
+      "explanation": "O diff compara as duas fotografias."
+    },
+    {
+      "id": "git.colaborar.q09",
+      "lesson": "enviar-uma-branch",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual comando publica a branch glossario no remoto do kit?",
+      "options": [
+        "git push -u origin glossario",
+        "git switch glossario",
+        "git fetch origin"
+      ],
+      "answer": 0,
+      "explanation": "push transfere objetos e atualiza a referência no destino."
+    },
+    {
+      "id": "git.colaborar.q10",
+      "lesson": "enviar-uma-branch",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Enviar glossario integra automaticamente a proposta em main.",
+      "answer": false,
+      "explanation": "São referências diferentes e o push nomeou glossario."
+    },
+    {
+      "id": "git.colaborar.q11",
+      "lesson": "enviar-uma-branch",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha a opção curta que configura o acompanhamento.",
+      "code": "git push ___ origin glossario",
+      "blanks": [
+        [
+          "-u"
+        ]
+      ],
+      "explanation": "Equivale a --set-upstream.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.colaborar.q12",
+      "lesson": "enviar-uma-branch",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como um colega lê a proposta sem alternar de main, depois do fetch?",
+      "options": [
+        "git config termos.txt",
+        "git show main:termos.txt",
+        "git show origin/glossario:termos.txt"
+      ],
+      "answer": 2,
+      "explanation": "A referência de acompanhamento local aponta para a proposta."
+    },
+    {
+      "id": "git.colaborar.q13",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Na proposta de docs para main, qual é a base?",
+      "options": [
+        "docs",
+        "main",
+        "README.md"
+      ],
+      "answer": 1,
+      "explanation": "A base é a branch que receberia a integração."
+    },
+    {
+      "id": "git.colaborar.q14",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Outro commit enviado à mesma branch de origem pode atualizar o pull request aberto.",
+      "answer": true,
+      "explanation": "O pull request acompanha a branch de comparação."
+    },
+    {
+      "id": "git.colaborar.q15",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual branch fornece as mudanças neste laboratório?",
+      "code": "base: main / compare: ___",
+      "blanks": [
+        [
+          "docs"
+        ]
+      ],
+      "explanation": "O commit de correção foi registrado em docs.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.colaborar.q16",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual evidência responde ao comentário Qual arquivo devo abrir?",
+      "options": [
+        "O diff agora nomeia README.md",
+        "Somente mudar o título do pull request",
+        "Criar outra branch vazia"
+      ],
+      "answer": 0,
+      "explanation": "A revisão pediu uma informação dentro da instrução."
+    }
+  ]
+}

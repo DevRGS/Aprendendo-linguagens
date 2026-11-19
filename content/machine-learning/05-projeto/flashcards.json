@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "machine-learning.projeto.f01",
+      "lesson": "receber",
+      "front": "O que verifica len(set(ids)) == len(ids)?",
+      "back": "Que os IDs não se repetem no lote."
+    },
+    {
+      "id": "machine-learning.projeto.f02",
+      "lesson": "receber",
+      "front": "Por que auditar atributos antes de medir o modelo?",
+      "back": "Um placar favorável pode esconder um campo indisponível em produção ou uma falha de alinhamento."
+    },
+    {
+      "id": "machine-learning.projeto.f03",
+      "lesson": "congelar",
+      "front": "O que significa congelar o procedimento?",
+      "back": "Fixar escolhas de atributos, transformação, modelo e regra de avaliação antes de consultar os alvos finais."
+    },
+    {
+      "id": "machine-learning.projeto.f04",
+      "lesson": "congelar",
+      "front": "Como avaliar uma escolha feita depois de ver o resultado final?",
+      "back": "Reserve novos dados posteriores para uma avaliação independente da hipótese revisada."
+    },
+    {
+      "id": "machine-learning.projeto.f05",
+      "lesson": "avaliar",
+      "front": "Por que usar também o modelo de referência na reserva?",
+      "back": "Para medir contra uma alternativa simples nas mesmas viagens e com o mesmo histórico disponível."
+    },
+    {
+      "id": "machine-learning.projeto.f06",
+      "lesson": "avaliar",
+      "front": "Por que o MAE sob a variação de sete minutos pode mudar menos de sete?",
+      "back": "Alguns resíduos negativos se aproximam de zero enquanto outros aumentam de magnitude."
+    },
+    {
+      "id": "machine-learning.projeto.f07",
+      "lesson": "comunicar",
+      "front": "O que um gráfico de resíduos complementa no relatório?",
+      "back": "Mostra distribuição, direção e possíveis padrões dos erros que a média esconde."
+    },
+    {
+      "id": "machine-learning.projeto.f08",
+      "lesson": "comunicar",
+      "front": "Como explicar ganho absoluto de MAE contra a referência?",
+      "back": "Subtraia o MAE do modelo do MAE da referência, nas mesmas viagens, e informe o resultado em minutos."
+    }
+  ]
+}

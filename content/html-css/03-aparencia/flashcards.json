@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "html-css.aparencia.f01",
+      "lesson": "selecionar-elementos",
+      "front": "Onde fica a declaração em uma regra CSS?",
+      "back": "Entre chaves, no formato propriedade e valor."
+    },
+    {
+      "id": "html-css.aparencia.f02",
+      "lesson": "selecionar-elementos",
+      "front": "Como aplicar um estilo a várias marcas diferentes?",
+      "back": "Atribua uma classe comum e selecione-a pelo nome com ponto."
+    },
+    {
+      "id": "html-css.aparencia.f03",
+      "lesson": "explicar-a-regra-vencedora",
+      "front": "O que significa uma declaração riscada no painel de estilos neste caso?",
+      "back": "Uma declaração concorrente venceu para a propriedade."
+    },
+    {
+      "id": "html-css.aparencia.f04",
+      "lesson": "explicar-a-regra-vencedora",
+      "front": "Que elemento recebe navy por herança no início da demonstração?",
+      "back": "O título dentro de main, sem uma cor especificada diretamente."
+    },
+    {
+      "id": "html-css.aparencia.f05",
+      "lesson": "medir-o-modelo-de-caixa",
+      "front": "Que parte do diagrama do inspetor mostra o espaço exterior?",
+      "back": "A margem."
+    },
+    {
+      "id": "html-css.aparencia.f06",
+      "lesson": "medir-o-modelo-de-caixa",
+      "front": "Qual a largura de conteúdo quando 200 px em border-box incluem 28 px de borda e preenchimento?",
+      "back": "172 px."
+    },
+    {
+      "id": "html-css.aparencia.f07",
+      "lesson": "dar-contraste-ao-foco",
+      "front": "A que tamanho a unidade rem é relativa?",
+      "back": "Ao tamanho da fonte do elemento raiz."
+    },
+    {
+      "id": "html-css.aparencia.f08",
+      "lesson": "dar-contraste-ao-foco",
+      "front": "Qual a diferença prática entre foco e hover neste teste?",
+      "back": "Foco acompanha o controle ativo no teclado; hover indica o ponteiro sobre um elemento."
+    }
+  ]
+}

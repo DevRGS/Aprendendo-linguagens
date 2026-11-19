@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "machine-learning.projeto.q01",
+      "lesson": "receber",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que corresponde ao primeiro ID reservado no lote de 120 dias?",
+      "options": [
+        "S101",
+        "S100",
+        "S120"
+      ],
+      "answer": 0,
+      "explanation": "Os primeiros cem IDs pertencem ao desenvolvimento."
+    },
+    {
+      "id": "machine-learning.projeto.q02",
+      "lesson": "receber",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A presença de uma distância ausente autoriza descartar sua viagem de todo relatório sem registrar a decisão.",
+      "answer": false,
+      "explanation": "Defina e documente uma regra compatível com o objetivo, como a imputação aprendida no treino."
+    },
+    {
+      "id": "machine-learning.projeto.q03",
+      "lesson": "receber",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual corte obtém o desenvolvimento, mantendo as cem primeiras linhas em ordem?",
+      "code": "dev = X[:___]",
+      "blanks": [
+        [
+          "100"
+        ]
+      ],
+      "explanation": "O limite exclusivo 100 deixa S101 para o período reservado."
+    },
+    {
+      "id": "machine-learning.projeto.q04",
+      "lesson": "receber",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que coluna precisa continuar fora dos atributos para uma previsão antes da partida?",
+      "options": [
+        "Duração medida após a chegada",
+        "Paradas planejadas",
+        "Distância planejada"
+      ],
+      "answer": 0,
+      "explanation": "A duração realizada é o alvo."
+    },
+    {
+      "id": "machine-learning.projeto.q05",
+      "lesson": "congelar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual candidato vence pelo menor MAE médio nas três janelas fornecidas?",
+      "options": [
+        "ridge-10",
+        "ridge-1",
+        "mediana"
+      ],
+      "answer": 1,
+      "explanation": "A comparação reproduz cerca de 2,60, 2,62 e 6,66 minutos, respectivamente."
+    },
+    {
+      "id": "machine-learning.projeto.q06",
+      "lesson": "congelar",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A regra de escolha pode incluir a métrica final e ainda tratar o mesmo teste como independente.",
+      "answer": false,
+      "explanation": "Uma regra que consulta o teste incorpora informação da avaliação na decisão."
+    },
+    {
+      "id": "machine-learning.projeto.q07",
+      "lesson": "congelar",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Preencha o ID textual que encerra o desenvolvimento.",
+      "code": "fim_treino = \"___\"",
+      "blanks": [
+        [
+          "S100"
+        ]
+      ],
+      "explanation": "Os cem primeiros dias antecedem a avaliação final."
+    },
+    {
+      "id": "machine-learning.projeto.q08",
+      "lesson": "congelar",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual registro permite a outra pessoa reproduzir a escolha?",
+      "options": [
+        "Apenas o gráfico final",
+        "Alternativas, cortes, métrica, versão dos dados e critério de seleção",
+        "Só o nome de quem treinou"
+      ],
+      "answer": 1,
+      "explanation": "O protocolo especifica as operações sobre os dados."
+    },
+    {
+      "id": "machine-learning.projeto.q09",
+      "lesson": "avaliar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual período mede o desempenho final do projeto maior?",
+      "options": [
+        "S041 a S060",
+        "S001 a S040",
+        "S101 a S120"
+      ],
+      "answer": 2,
+      "explanation": "As vinte últimas viagens ficaram fora da seleção e do reajuste."
+    },
+    {
+      "id": "machine-learning.projeto.q10",
+      "lesson": "avaliar",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Somar sete minutos a cada alvo final, mantendo as previsões, soma exatamente sete a cada resíduo real menos previsto.",
+      "answer": true,
+      "explanation": "Na diferença, apenas o minuendo aumenta."
+    },
+    {
+      "id": "machine-learning.projeto.q11",
+      "lesson": "avaliar",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual método localiza a posição do maior módulo do vetor de resíduos?",
+      "code": "pos = abs(residuos).___()",
+      "blanks": [
+        [
+          "argmax"
+        ]
+      ],
+      "explanation": "A posição permite recuperar o ID."
+    },
+    {
+      "id": "machine-learning.projeto.q12",
+      "lesson": "avaliar",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que interpretação tem MAE final de 3,41 neste lote?",
+      "options": [
+        "Garantia de erro máximo de 3,41",
+        "Ganho de 3,41 pontos percentuais",
+        "Distância absoluta média de 3,41 minutos entre previsão e medição"
+      ],
+      "answer": 2,
+      "explanation": "É uma média em minutos sobre as vinte viagens."
+    },
+    {
+      "id": "machine-learning.projeto.q13",
+      "lesson": "comunicar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que frase descreve corretamente os limites da entrega?",
+      "options": [
+        "O resultado mede vinte viagens sintéticas do período reservado",
+        "O modelo supera qualquer referência em qualquer cidade",
+        "O erro médio é uma garantia individual"
+      ],
+      "answer": 0,
+      "explanation": "O conjunto foi gerado para um cenário específico."
+    },
+    {
+      "id": "machine-learning.projeto.q14",
+      "lesson": "comunicar",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Mesmo que a referência tenha menor erro, uma avaliação sem vazamento pode cumprir o objetivo do projeto.",
+      "answer": true,
+      "explanation": "A competência é comparar corretamente e justificar a decisão pelos dados."
+    },
+    {
+      "id": "machine-learning.projeto.q15",
+      "lesson": "comunicar",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Preencha a unidade abreviada do MAE de duração usado no relatório.",
+      "code": "unidade = \"___\"",
+      "blanks": [
+        [
+          "min"
+        ]
+      ],
+      "explanation": "O alvo mede minutos."
+    },
+    {
+      "id": "machine-learning.projeto.q16",
+      "lesson": "comunicar",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual evidência sustenta transportar o modelo para outro contexto?",
+      "options": [
+        "Avaliação em dados representativos do novo uso",
+        "Somente renomear o modelo",
+        "Obter outro gráfico com os mesmos números"
+      ],
+      "answer": 0,
+      "explanation": "Outra população pode ter frequências e relações diferentes."
+    }
+  ]
+}

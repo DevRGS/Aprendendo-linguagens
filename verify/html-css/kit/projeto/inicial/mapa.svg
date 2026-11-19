@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="64" viewBox="0 0 360 64">
+  <rect width="360" height="64" rx="10" fill="#e7effa"/>
+  <g fill="#172435" font-family="sans-serif" font-size="20" text-anchor="middle">
+    <text x="180" y="40">HTML → CSS → Projeto</text>
+  </g>
+</svg>

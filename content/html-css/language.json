@@ -1,0 +1,170 @@
+{
+  "id": "html-css",
+  "name": "HTML e CSS",
+  "icon": "🎨",
+  "color": "#e49a6a",
+  "highlight": "html",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "documento",
+      "dir": "01-documento",
+      "title": "Um documento navegável",
+      "description": "Crie as páginas de um catálogo e conecte seus recursos.",
+      "lessons": [
+        {
+          "id": "criar-index-html",
+          "file": "01-criar-index-html.md",
+          "title": "Criar index.html",
+          "minutes": 16
+        },
+        {
+          "id": "organizar-titulos",
+          "file": "02-organizar-titulos.md",
+          "title": "Organizar títulos",
+          "minutes": 18
+        },
+        {
+          "id": "ligar-duas-paginas",
+          "file": "03-ligar-duas-paginas.md",
+          "title": "Ligar duas páginas",
+          "minutes": 20
+        },
+        {
+          "id": "descrever-imagens",
+          "file": "04-descrever-imagens.md",
+          "title": "Descrever imagens",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "conteudo",
+      "dir": "02-conteudo",
+      "title": "Conteúdo e formulários",
+      "description": "Escreva regiões, listas, rótulos e controles nativos.",
+      "lessons": [
+        {
+          "id": "definir-regioes-semanticas",
+          "file": "01-definir-regioes-semanticas.md",
+          "title": "Definir regiões semânticas",
+          "minutes": 16
+        },
+        {
+          "id": "estruturar-listas-e-artigos",
+          "file": "02-estruturar-listas-e-artigos.md",
+          "title": "Estruturar listas e artigos",
+          "minutes": 18
+        },
+        {
+          "id": "associar-rotulos-aos-campos",
+          "file": "03-associar-rotulos-aos-campos.md",
+          "title": "Associar rótulos aos campos",
+          "minutes": 20
+        },
+        {
+          "id": "usar-a-validacao-nativa",
+          "file": "04-usar-a-validacao-nativa.md",
+          "title": "Usar a validação nativa",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "aparencia",
+      "dir": "03-aparencia",
+      "title": "Aparência",
+      "description": "Inspecione regras de CSS e configure caixa, texto e foco.",
+      "lessons": [
+        {
+          "id": "selecionar-elementos",
+          "file": "01-selecionar-elementos.md",
+          "title": "Selecionar elementos",
+          "minutes": 16
+        },
+        {
+          "id": "explicar-a-regra-vencedora",
+          "file": "02-explicar-a-regra-vencedora.md",
+          "title": "Explicar a regra vencedora",
+          "minutes": 18
+        },
+        {
+          "id": "medir-o-modelo-de-caixa",
+          "file": "03-medir-o-modelo-de-caixa.md",
+          "title": "Medir o modelo de caixa",
+          "minutes": 20
+        },
+        {
+          "id": "dar-contraste-ao-foco",
+          "file": "04-dar-contraste-ao-foco.md",
+          "title": "Dar contraste ao foco",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "dir": "04-layout",
+      "title": "Layout",
+      "description": "Compare fluxo, Flexbox e Grid em diferentes larguras.",
+      "lessons": [
+        {
+          "id": "observar-o-fluxo-normal",
+          "file": "01-observar-o-fluxo-normal.md",
+          "title": "Observar o fluxo normal",
+          "minutes": 16
+        },
+        {
+          "id": "alinhar-com-flexbox",
+          "file": "02-alinhar-com-flexbox.md",
+          "title": "Alinhar com Flexbox",
+          "minutes": 18
+        },
+        {
+          "id": "distribuir-cartoes-em-grade",
+          "file": "03-distribuir-cartoes-em-grade.md",
+          "title": "Distribuir cartões em grade",
+          "minutes": 20
+        },
+        {
+          "id": "adaptar-a-largura",
+          "file": "04-adaptar-a-largura.md",
+          "title": "Adaptar à largura",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "publicacao",
+      "dir": "05-publicacao",
+      "title": "Publicação",
+      "description": "Reproduza e revise o catálogo em um subdiretório.",
+      "lessons": [
+        {
+          "id": "organizar-caminhos",
+          "file": "01-organizar-caminhos.md",
+          "title": "Organizar caminhos",
+          "minutes": 16
+        },
+        {
+          "id": "testar-a-navegacao",
+          "file": "02-testar-a-navegacao.md",
+          "title": "Testar a navegação",
+          "minutes": 18
+        },
+        {
+          "id": "publicar-arquivos-estaticos",
+          "file": "03-publicar-arquivos-estaticos.md",
+          "title": "Publicar arquivos estáticos",
+          "minutes": 20
+        },
+        {
+          "id": "revisar-a-pagina-entregue",
+          "file": "04-revisar-a-pagina-entregue.md",
+          "title": "Revisar a página entregue",
+          "minutes": 22
+        }
+      ]
+    }
+  ]
+}

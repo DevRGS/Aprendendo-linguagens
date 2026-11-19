@@ -1,20 +1,20 @@
 import { newCard, rateCard } from './srs.js';
-import { XP, addXp, updateStreak, crossedGoal, levelForXp } from './gamification.js';
+import { XP, addXp, updateStreak, levelForXp } from './gamification.js';
 import { checkAchievements } from './achievements.js';
 import { lessonKey, moduleKey, isModuleComplete, EXAM_PASS } from './progress.js';
 import { createInitialState, HISTORY_LIMIT } from './state.js';
+import { startGoalDay, markGoal } from './intensiva.js';
 
-const noEvents = () => ({ xpGained: 0, achievements: [], levelUp: null, moduleCompleted: null, examPassed: false });
+const noEvents = () => ({ goalReached: false, xpGained: 0, achievements: [], levelUp: null, moduleCompleted: null, examPassed: false });
 
 function gainXp(s, amount, today) {
-  const goal = s.profile?.dailyGoal ?? 50;
-  const next = addXp(s.xp, amount, today);
-  if (crossedGoal(s.xp, next, goal, today)) s.counters.goalDays += 1;
-  s.xp = next;
+  if (s.streak.lastDay !== today || !s.intensiva.days[today]) touchStudy(s, today);
+  s.xp = addXp(s.xp, amount, today);
 }
 
 // Dia com estudo de verdade: atualiza a sequência e marca o dia no calendário.
 function touchStudy(s, today) {
+  startGoalDay(s, today);
   s.streak = updateStreak(s.streak, today);
   if (!(today in s.xp.byDay)) s.xp = addXp(s.xp, 0, today);
 }
@@ -34,22 +34,25 @@ function checkModuleCompletion(s, language, moduleId, today) {
 }
 
 function finalize(prev, s, ctx, extra = {}) {
+  const goalReached = (ctx.event?.study || (s.xp.total > prev.xp.total)) && markGoal(s, ctx.today);
   const unlocked = checkAchievements(s, ctx);
   for (const id of unlocked) s.achievements[id] = ctx.today;
   const before = levelForXp(prev.xp.total);
   const after = levelForXp(s.xp.total);
   return {
     state: s,
-    events: { ...noEvents(), ...extra, xpGained: s.xp.total - prev.xp.total, achievements: unlocked, levelUp: after > before ? after : null },
+    events: { ...noEvents(), ...extra, goalReached: Boolean(goalReached), xpGained: s.xp.total - prev.xp.total, achievements: unlocked, levelUp: after > before ? after : null },
   };
 }
 
-export function setProfile(state, { name, avatar, dailyGoal }, ctx) {
+export function setProfile(state, { name, avatar, dailyGoal, settings }, ctx) {
   const s = structuredClone(state);
   s.profile = {
     name: String(name).trim().slice(0, 60),
     avatar,
     dailyGoal,
+    ...(state.profile?.settings && { settings: state.profile.settings }),
+    ...(['animated', 'still', 'off'].includes(settings?.byte) && { settings: { byte: settings.byte } }),
     createdAt: state.profile?.createdAt ?? ctx.now.toISOString(),
   };
   return { state: s, events: noEvents() };

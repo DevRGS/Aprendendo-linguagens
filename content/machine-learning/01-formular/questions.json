@@ -1,0 +1,209 @@
+{
+  "questions": [
+    {
+      "id": "machine-learning.formular.q01",
+      "lesson": "instante",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual entrada atende ao instante da solicitação?",
+      "options": [
+        "Duração realizada",
+        "Minutos faturados",
+        "Paradas planejadas"
+      ],
+      "answer": 2,
+      "explanation": "O itinerário já existe quando se pede a estimativa."
+    },
+    {
+      "id": "machine-learning.formular.q02",
+      "lesson": "instante",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um campo preenchido depois da chegada pode vazar o resultado durante o treino.",
+      "answer": true,
+      "explanation": "O modelo teria acesso a informação impossível de consultar na partida."
+    },
+    {
+      "id": "machine-learning.formular.q03",
+      "lesson": "instante",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "No CSV, qual coluna contém a duração observada usada como alvo?",
+      "code": "alvo = \"___\"",
+      "blanks": [
+        [
+          "minutos_reais"
+        ]
+      ],
+      "explanation": "A medição após a chegada permite aprender com viagens concluídas."
+    },
+    {
+      "id": "machine-learning.formular.q04",
+      "lesson": "instante",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que unidade identifica uma observação deste projeto?",
+      "options": [
+        "Uma estação inteira",
+        "Cada minuto do relógio",
+        "Uma viagem"
+      ],
+      "answer": 2,
+      "explanation": "Cada linha tem ID de uma viagem."
+    },
+    {
+      "id": "machine-learning.formular.q05",
+      "lesson": "particoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual recorte preserva o futuro para escolher entre candidatos?",
+      "options": [
+        "Treinar em V01–V06 e validar em V07–V08",
+        "Validar em V01 e treinar em V10",
+        "Treinar em todas e validar em duas delas"
+      ],
+      "answer": 0,
+      "explanation": "A janela posterior ao treino representa viagens inéditas."
+    },
+    {
+      "id": "machine-learning.formular.q06",
+      "lesson": "particoes",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Podemos ordenar X e y separadamente pelo valor de cada coluna e manter os pares originais.",
+      "answer": false,
+      "explanation": "A associação entre medição e alvo depende da linha ou de uma chave compartilhada."
+    },
+    {
+      "id": "machine-learning.formular.q07",
+      "lesson": "particoes",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o índice final exclusivo que seleciona apenas os seis primeiros IDs.",
+      "code": "ids[:___]",
+      "blanks": [
+        [
+          "6"
+        ]
+      ],
+      "explanation": "O índice 6 inicia a sétima linha."
+    },
+    {
+      "id": "machine-learning.formular.q08",
+      "lesson": "particoes",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "A que servem V09 e V10 no exemplo?",
+      "options": [
+        "Avaliar a escolha depois de congelada",
+        "Ajustar a mediana inicial",
+        "Preencher lacunas de validação"
+      ],
+      "answer": 0,
+      "explanation": "O teste fica fora dos cálculos de escolha."
+    },
+    {
+      "id": "machine-learning.formular.q09",
+      "lesson": "referencia",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que número a referência aprende de 6, 8, 10, 10, 12 e 14?",
+      "options": [
+        "14",
+        "10",
+        "6"
+      ],
+      "answer": 1,
+      "explanation": "A mediana fica entre o terceiro e o quarto valores ordenados."
+    },
+    {
+      "id": "machine-learning.formular.q10",
+      "lesson": "referencia",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A referência constante pode prever para uma viagem com distância diferente das que aparecem no treino.",
+      "answer": true,
+      "explanation": "Ela devolve o mesmo número independentemente da distância."
+    },
+    {
+      "id": "machine-learning.formular.q11",
+      "lesson": "referencia",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o nome em inglês da estratégia do DummyRegressor.",
+      "code": "strategy=\"___\"",
+      "blanks": [
+        [
+          "median"
+        ]
+      ],
+      "explanation": "A estratégia calcula a mediana dos alvos fornecidos a fit."
+    },
+    {
+      "id": "machine-learning.formular.q12",
+      "lesson": "referencia",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Se o maior tempo passar de 14 para 140, o que muda neste treino?",
+      "options": [
+        "A mediana passa a 140",
+        "A média aumenta e a mediana permanece 10",
+        "As duas medidas permanecem 10"
+      ],
+      "answer": 1,
+      "explanation": "Os valores centrais permanecem no mesmo lugar."
+    },
+    {
+      "id": "machine-learning.formular.q13",
+      "lesson": "mae",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Quais erros absolutos resultam de prever 10 para 8 e 15?",
+      "options": [
+        "−2 e 5",
+        "8 e 15",
+        "2 e 5"
+      ],
+      "answer": 2,
+      "explanation": "O módulo elimina o sinal de cada diferença."
+    },
+    {
+      "id": "machine-learning.formular.q14",
+      "lesson": "mae",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "MAE de 3,5 minutos garante que cada erro individual foi exatamente 3,5.",
+      "answer": false,
+      "explanation": "Uma média pode reunir erros de magnitudes diferentes."
+    },
+    {
+      "id": "machine-learning.formular.q15",
+      "lesson": "mae",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a função que remove o sinal antes de calcular a média.",
+      "code": "np.___(y_real - previsto).mean()",
+      "blanks": [
+        [
+          "abs",
+          "absolute"
+        ]
+      ],
+      "explanation": "O valor absoluto impede cancelamento de erros opostos."
+    },
+    {
+      "id": "machine-learning.formular.q16",
+      "lesson": "mae",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Dois candidatos têm MAE de 1,5 e 3,5 na mesma janela. Qual teve o menor desvio absoluto médio?",
+      "options": [
+        "O de 3,5",
+        "Ambos tiveram o mesmo",
+        "O de 1,5"
+      ],
+      "answer": 2,
+      "explanation": "Menor MAE corresponde a menor distância média entre os pares."
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "html-css.documento.q01",
+      "lesson": "criar-index-html",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual elemento define o texto da aba?",
+      "options": [
+        "h1",
+        "title",
+        "p"
+      ],
+      "answer": 1,
+      "explanation": "title é o título do documento no cabeçalho."
+    },
+    {
+      "id": "html-css.documento.q02",
+      "lesson": "criar-index-html",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O navegador local pode abrir o arquivo HTML sem servidor.",
+      "answer": true,
+      "explanation": "A página introdutória usa somente arquivos locais."
+    },
+    {
+      "id": "html-css.documento.q03",
+      "lesson": "criar-index-html",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Indique a marca que abre o corpo.",
+      "code": "<___>",
+      "blanks": [
+        [
+          "body"
+        ]
+      ],
+      "explanation": "body contém o conteúdo apresentado na página.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.documento.q04",
+      "lesson": "criar-index-html",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O nome da aba está correto mas o título visível está errado. Onde editar?",
+      "options": [
+        "No h1 do corpo",
+        "No atributo charset",
+        "No nome da pasta"
+      ],
+      "answer": 0,
+      "explanation": "h1 contém o título principal apresentado no documento."
+    },
+    {
+      "id": "html-css.documento.q05",
+      "lesson": "organizar-titulos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual título é irmão de Desenvolvimento na demonstração?",
+      "options": [
+        "Páginas web",
+        "Catálogo",
+        "Dados"
+      ],
+      "answer": 2,
+      "explanation": "Dados e Desenvolvimento usam h2 no mesmo nível."
+    },
+    {
+      "id": "html-css.documento.q06",
+      "lesson": "organizar-titulos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A escolha dos níveis de título comunica organização mesmo sem uma folha CSS.",
+      "answer": true,
+      "explanation": "Os níveis fazem parte da semântica do documento."
+    },
+    {
+      "id": "html-css.documento.q07",
+      "lesson": "organizar-titulos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o nível logo abaixo de h2.",
+      "code": "<___>Tabelas</h3>",
+      "blanks": [
+        [
+          "h3"
+        ]
+      ],
+      "explanation": "A abertura corresponde ao fechamento h3.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.documento.q08",
+      "lesson": "organizar-titulos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Se um título ficou visualmente grande, como manter sua função correta?",
+      "options": [
+        "Substituir todos os títulos por parágrafos",
+        "Ajustar seu estilo com CSS",
+        "Escolher h6 em toda página"
+      ],
+      "answer": 1,
+      "explanation": "A apresentação pode mudar sem destruir a hierarquia."
+    },
+    {
+      "id": "html-css.documento.q09",
+      "lesson": "ligar-duas-paginas",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "De index.html, qual caminho entra na pasta trilhas?",
+      "options": [
+        "trilhas/web.html",
+        "../web.html",
+        "#web.html"
+      ],
+      "answer": 0,
+      "explanation": "Um segmento seguido de barra desce para a pasta indicada."
+    },
+    {
+      "id": "html-css.documento.q10",
+      "lesson": "ligar-duas-paginas",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O texto entre as marcas a pode explicar o destino ao usuário.",
+      "answer": true,
+      "explanation": "Esse conteúdo forma o nome usual do link."
+    },
+    {
+      "id": "html-css.documento.q11",
+      "lesson": "ligar-duas-paginas",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha o segmento para subir exatamente um nível.",
+      "code": "href=\"___/index.html\"",
+      "blanks": [
+        [
+          ".."
+        ]
+      ],
+      "explanation": "Dois pontos referenciam a pasta superior.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.documento.q12",
+      "lesson": "ligar-duas-paginas",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Se trilhas/web.html usa href=\"index.html\", onde busca o destino?",
+      "options": [
+        "Sempre na raiz do site",
+        "Ao lado da pasta trilhas",
+        "Em trilhas/index.html"
+      ],
+      "answer": 2,
+      "explanation": "A resolução parte do diretório do documento atual."
+    },
+    {
+      "id": "html-css.documento.q13",
+      "lesson": "descrever-imagens",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual alternativa transmite o significado do desenho?",
+      "options": [
+        "mapa.svg",
+        "HTML, depois CSS, depois projeto",
+        "Imagem bonita"
+      ],
+      "answer": 1,
+      "explanation": "A ordem é a informação importante para o estudante."
+    },
+    {
+      "id": "html-css.documento.q14",
+      "lesson": "descrever-imagens",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Omitir o atributo alt é equivalente a definir alt vazio em todos os contextos.",
+      "answer": false,
+      "explanation": "A ausência pode levar a tecnologia assistiva a anunciar o arquivo ou outra indicação."
+    },
+    {
+      "id": "html-css.documento.q15",
+      "lesson": "descrever-imagens",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual atributo informa o caminho do arquivo de imagem?",
+      "code": "<img ___=\"mapa.svg\" alt=\"Percurso\">",
+      "blanks": [
+        [
+          "src"
+        ]
+      ],
+      "explanation": "src localiza o recurso.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.documento.q16",
+      "lesson": "descrever-imagens",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quando usar alt vazio no segundo desenho?",
+      "options": [
+        "Quando ele apenas repete informação já disponível no contexto",
+        "Sempre que ele for SVG",
+        "Sempre que estiver colorido"
+      ],
+      "answer": 0,
+      "explanation": "A decisão depende da função da imagem."
+    }
+  ]
+}

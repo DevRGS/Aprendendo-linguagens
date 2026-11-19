@@ -1,0 +1,213 @@
+{
+  "questions": [
+    {
+      "id": "html-css.layout.q01",
+      "lesson": "observar-o-fluxo-normal",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual disposição aparece inicialmente?",
+      "options": [
+        "Três colunas fixas",
+        "Artigos empilhados",
+        "Artigos sobrepostos"
+      ],
+      "answer": 1,
+      "explanation": "Os artigos participam do fluxo como blocos."
+    },
+    {
+      "id": "html-css.layout.q02",
+      "lesson": "observar-o-fluxo-normal",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Adicionar texto ao segundo artigo pode deslocar o terceiro para baixo.",
+      "answer": true,
+      "explanation": "A altura automática acomoda o conteúdo."
+    },
+    {
+      "id": "html-css.layout.q03",
+      "lesson": "observar-o-fluxo-normal",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o combinador de irmão imediatamente seguinte.",
+      "code": "article ___ article",
+      "blanks": [
+        [
+          "+"
+        ]
+      ],
+      "explanation": "O segundo artigo precisa vir logo após o primeiro no mesmo pai.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.layout.q04",
+      "lesson": "observar-o-fluxo-normal",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que os resumos maiores não exigem uma altura predefinida?",
+      "options": [
+        "A altura automática acompanha o conteúdo",
+        "O navegador corta todas as linhas extras",
+        "O texto sai do fluxo"
+      ],
+      "answer": 0,
+      "explanation": "A próxima caixa é posicionada depois da anterior."
+    },
+    {
+      "id": "html-css.layout.q05",
+      "lesson": "alinhar-com-flexbox",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em qual elemento se coloca display: flex para organizar os links irmãos?",
+      "options": [
+        "Em title",
+        "Na imagem do catálogo",
+        "No pai .menu"
+      ],
+      "answer": 2,
+      "explanation": "Os filhos diretos do contêiner tornam-se itens flexíveis."
+    },
+    {
+      "id": "html-css.layout.q06",
+      "lesson": "alinhar-com-flexbox",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Mudar flex-direction para column exige alterar a ordem dos links no HTML.",
+      "answer": false,
+      "explanation": "A direção visual é definida pelo contêiner."
+    },
+    {
+      "id": "html-css.layout.q07",
+      "lesson": "alinhar-com-flexbox",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o valor que permite novas linhas.",
+      "code": "flex-wrap: ___",
+      "blanks": [
+        [
+          "wrap"
+        ]
+      ],
+      "explanation": "wrap permite distribuir os itens por mais de uma linha.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.layout.q08",
+      "lesson": "alinhar-com-flexbox",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que propriedade controla a distribuição no eixo principal?",
+      "options": [
+        "font-family",
+        "justify-content",
+        "border-radius"
+      ],
+      "answer": 1,
+      "explanation": "Ela alinha os itens no eixo principal do contêiner."
+    },
+    {
+      "id": "html-css.layout.q09",
+      "lesson": "distribuir-cartoes-em-grade",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantas colunas a demonstração declara?",
+      "options": [
+        "Duas",
+        "Uma",
+        "Três"
+      ],
+      "answer": 0,
+      "explanation": "repeat usa 2 como quantidade de repetições."
+    },
+    {
+      "id": "html-css.layout.q10",
+      "lesson": "distribuir-cartoes-em-grade",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um terceiro cartão inicia a segunda linha na grade inicial.",
+      "answer": true,
+      "explanation": "As duas posições da primeira linha já foram usadas."
+    },
+    {
+      "id": "html-css.layout.q11",
+      "lesson": "distribuir-cartoes-em-grade",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o valor de uma única palavra que cria um contêiner de grade de nível de bloco.",
+      "code": "display: ___",
+      "blanks": [
+        [
+          "grid"
+        ]
+      ],
+      "explanation": "grid define o contêiner de grade.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.layout.q12",
+      "lesson": "distribuir-cartoes-em-grade",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como fazer um cartão atravessar todas as colunas explícitas deste caso?",
+      "options": [
+        "gap: 0",
+        "align-items: center",
+        "grid-column: 1 / -1"
+      ],
+      "answer": 2,
+      "explanation": "A primeira e a última linhas de grade delimitam a extensão."
+    },
+    {
+      "id": "html-css.layout.q13",
+      "lesson": "adaptar-a-largura",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quando a regra @media deste exemplo se aplica?",
+      "options": [
+        "Só em celulares",
+        "Quando a largura alcança pelo menos 48rem",
+        "Sempre que o usuário rola a página"
+      ],
+      "answer": 1,
+      "explanation": "A condição usa min-width."
+    },
+    {
+      "id": "html-css.layout.q14",
+      "lesson": "adaptar-a-largura",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Dois cartões lado a lado são obrigatórios em qualquer largura neste exemplo.",
+      "answer": false,
+      "explanation": "O estilo base usa uma coluna."
+    },
+    {
+      "id": "html-css.layout.q15",
+      "lesson": "adaptar-a-largura",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual propriedade permite quebrar uma palavra comprida?",
+      "code": "___: anywhere",
+      "blanks": [
+        [
+          "overflow-wrap",
+          "word-wrap"
+        ]
+      ],
+      "explanation": "overflow-wrap, também reconhecida pelo alias word-wrap, permite quebrar uma palavra para evitar estouro.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.layout.q16",
+      "lesson": "adaptar-a-largura",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que teste combina adaptação visual e uso real?",
+      "options": [
+        "Simular 390 px e percorrer os links por teclado",
+        "Somente contar arquivos HTML",
+        "Abrir apenas a aba de código"
+      ],
+      "answer": 0,
+      "explanation": "Esse teste revela controles cortados ou foco inacessível."
+    }
+  ]
+}

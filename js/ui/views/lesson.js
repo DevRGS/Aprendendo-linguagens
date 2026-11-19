@@ -4,6 +4,7 @@ import { loadLesson, loadModuleBank, loadChallenges } from '../../data/content.j
 import { createSqlExercise } from '../components/sql-exercise.js';
 import { lessonKey } from '../../core/progress.js';
 import { openLesson, completeLesson } from '../../core/actions.js';
+import { byteLessonHint } from '../components/byte.js';
 import { renderNotFound } from './not-found.js';
 
 export async function renderLesson(container, app, route) {
@@ -52,5 +53,6 @@ export async function renderLesson(container, app, route) {
       challenges.map((c, i) => createSqlExercise(c, {
         service: app.sql, lang: language.highlight, mode: 'challenge', title: challenges.length > 1 ? `Desafio ${i + 1}` : null,
       }).el)) : null,
+    byteLessonHint(app.store.get().profile, `#/${lang}/${moduleId}/pratica`),
     foot));
 }

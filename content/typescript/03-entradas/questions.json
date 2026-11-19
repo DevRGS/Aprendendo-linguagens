@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "typescript.entradas.q01",
+      "lesson": "unknown",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que tipo exige refinar antes de acessar membros arbitrários?",
+      "options": [
+        "any",
+        "unknown",
+        "string já validada"
+      ],
+      "answer": 1,
+      "explanation": "unknown impede pressupor a estrutura do valor."
+    },
+    {
+      "id": "typescript.entradas.q02",
+      "lesson": "unknown",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o método para interpretar texto JSON.",
+      "code": "JSON.___('true')",
+      "blanks": [
+        [
+          "parse"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "parse converte texto JSON válido em um valor de JavaScript."
+    },
+    {
+      "id": "typescript.entradas.q03",
+      "lesson": "unknown",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Receber JSON sintaticamente válido prova que o cliente enviou um objeto com titulo.",
+      "answer": false,
+      "explanation": "JSON válido inclui arrays, textos, números, booleanos e null."
+    },
+    {
+      "id": "typescript.entradas.q04",
+      "lesson": "unknown",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "O que ocorre com JSON.parse de um texto contendo apenas uma chave de abertura?",
+      "options": [
+        "O parse produz um objeto vazio",
+        "O parse lança um erro de sintaxe",
+        "TypeScript completa o texto"
+      ],
+      "answer": 1,
+      "explanation": "A sintaxe deve ser tratada antes da validação do formato."
+    },
+    {
+      "id": "typescript.entradas.q05",
+      "lesson": "estrutura",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Por que verificar v !== null após typeof v === 'object'?",
+      "options": [
+        "null é sempre uma string",
+        "null sempre possui titulo",
+        "null também produz object em typeof"
+      ],
+      "answer": 2,
+      "explanation": "O teste explícito permite acessar chaves com segurança."
+    },
+    {
+      "id": "typescript.entradas.q06",
+      "lesson": "estrutura",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a verificação nativa de array.",
+      "code": "Array.___(v)",
+      "blanks": [
+        [
+          "isArray"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "isArray distingue arrays de outros objetos."
+    },
+    {
+      "id": "typescript.entradas.q07",
+      "lesson": "estrutura",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "O operador in por si só garante que o valor de titulo seja string.",
+      "answer": false,
+      "explanation": "Ele testa a presença da chave; o valor requer outra verificação."
+    },
+    {
+      "id": "typescript.entradas.q08",
+      "lesson": "estrutura",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que caso básico ainda passa no exemplo antes da variação?",
+      "options": [
+        "{titulo:2}",
+        "null",
+        "{titulo:' '}"
+      ],
+      "answer": 2,
+      "explanation": "O código inicial exige string, mas ainda não verifica conteúdo após trim."
+    },
+    {
+      "id": "typescript.entradas.q09",
+      "lesson": "entrada-registro",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Quem fornece o id persistido no contrato da API?",
+      "options": [
+        "O banco durante a criação",
+        "O campo secreto do navegador",
+        "A pessoa que escreve o título"
+      ],
+      "answer": 0,
+      "explanation": "O recurso atribui a identidade depois de validar a entrada."
+    },
+    {
+      "id": "typescript.entradas.q10",
+      "lesson": "entrada-registro",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o operador que combina Entrada com os campos do registro.",
+      "code": "type Registro = Entrada ___ { id: number };",
+      "blanks": [
+        [
+          "&"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A interseção reúne as propriedades requeridas pelas duas partes."
+    },
+    {
+      "id": "typescript.entradas.q11",
+      "lesson": "entrada-registro",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um alias de entrada impede sozinho que um cliente HTTP envie campos extras.",
+      "answer": false,
+      "explanation": "Os bytes que chegam precisam de validação em runtime."
+    },
+    {
+      "id": "typescript.entradas.q12",
+      "lesson": "entrada-registro",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual campo só aparece no resultado desta demonstração?",
+      "options": [
+        "id",
+        "titulo",
+        "mensagem obrigatória"
+      ],
+      "answer": 0,
+      "explanation": "id é atribuído no salvamento e titulo já está na entrada."
+    },
+    {
+      "id": "typescript.entradas.q13",
+      "lesson": "converter",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "O que salvar para a entrada '  Git ' ao seguir esse contrato?",
+      "options": [
+        "O número de espaços",
+        "O texto Git",
+        "Uma string vazia"
+      ],
+      "answer": 1,
+      "explanation": "O título é aparado uma única vez antes da gravação."
+    },
+    {
+      "id": "typescript.entradas.q14",
+      "lesson": "converter",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a conversão de um título válido para objeto com a propriedade de mesmo nome.",
+      "code": "const entrada = { ___ };",
+      "blanks": [
+        [
+          "titulo"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A abreviação de propriedade usa o identificador como chave e valor."
+    },
+    {
+      "id": "typescript.entradas.q15",
+      "lesson": "converter",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um título constituído apenas de espaços vira um valor válido após trim.",
+      "answer": false,
+      "explanation": "Ele vira texto vazio e falha no requisito mínimo."
+    },
+    {
+      "id": "typescript.entradas.q16",
+      "lesson": "converter",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que caso testa precisamente o primeiro comprimento rejeitado acima do máximo?",
+      "options": [
+        "120 unidades",
+        "121 unidades de comprimento",
+        "1 unidade"
+      ],
+      "answer": 1,
+      "explanation": "O limite superior 120 é inclusivo."
+    }
+  ]
+}

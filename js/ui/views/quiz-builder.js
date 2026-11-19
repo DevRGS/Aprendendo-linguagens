@@ -107,6 +107,7 @@ export async function renderQuizBuilder(container, app, route) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (preparing) return;
+    const builderRoute = app.currentRoute;
     const eligible = filterPool(bank.questions, filters());
     let pool = eligible;
     if (hasSqlQuestions(eligible)) {
@@ -119,6 +120,7 @@ export async function renderQuizBuilder(container, app, route) {
       startBtn.textContent = 'Começar quiz';
       updateAvailable();
     }
+    if (app.currentRoute !== builderRoute) return;
     const s = app.store.get();
     const { questions, available: n } = selectQuestions({
       pool,

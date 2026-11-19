@@ -17,6 +17,7 @@ export const ACHIEVEMENT_RULES = [
   { id: 'sequencia-7', test: (s) => s.streak.best >= 7 },
   { id: 'sequencia-30', test: (s) => s.streak.best >= 30 },
   { id: 'sequencia-100', test: (s) => s.streak.best >= 100 },
+  { id: 'intensiva-7', test: (s) => s.intensiva?.best >= 7 },
   { id: 'meta-7', test: (s) => s.counters.goalDays >= 7 },
   { id: 'poliglota', test: (s) => languagesStudied(s) >= 3 },
   { id: 'na-ponta-da-lingua', test: (s) => masteredCount(s) >= 1 },

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "git.diferencas.f01",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "front": "Que comando mostra o README armazenado no commit atual?",
+      "back": "git show HEAD:README.md."
+    },
+    {
+      "id": "git.diferencas.f02",
+      "lesson": "diretorio-de-trabalho-e-indice",
+      "front": "Por que uma linha pode aparecer sem + em um diff?",
+      "back": "É uma linha ao redor da mudança, exibida como contexto."
+    },
+    {
+      "id": "git.diferencas.f03",
+      "lesson": "comparar-mudancas-preparadas",
+      "front": "Que consulta mostra o patch preparado?",
+      "back": "git diff --cached."
+    },
+    {
+      "id": "git.diferencas.f04",
+      "lesson": "comparar-mudancas-preparadas",
+      "front": "Um arquivo novo marcado ?? entra em um commit padrão?",
+      "back": "Ele precisa ser preparado primeiro."
+    },
+    {
+      "id": "git.diferencas.f05",
+      "lesson": "consultar-o-historico",
+      "front": "Como restringir o log ao histórico de um caminho?",
+      "back": "Use git log -- caminho."
+    },
+    {
+      "id": "git.diferencas.f06",
+      "lesson": "consultar-o-historico",
+      "front": "Que parte do commit é exibida por --format=%s?",
+      "back": "A linha de assunto da mensagem."
+    },
+    {
+      "id": "git.diferencas.f07",
+      "lesson": "ignorar-arquivos-gerados",
+      "front": "Por que colocar aspas ao escrever '*.log' pelo Bash?",
+      "back": "Para o shell passar o padrão literal ao comando."
+    },
+    {
+      "id": "git.diferencas.f08",
+      "lesson": "ignorar-arquivos-gerados",
+      "front": "O que acontece com o conteúdo de um arquivo ignorado no disco?",
+      "back": "Ele permanece disponível no sistema de arquivos."
+    }
+  ]
+}

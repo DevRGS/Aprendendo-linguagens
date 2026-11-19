@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "postgresql.esquema.f01",
+      "lesson": "conectar",
+      "front": "Qual programa recebe os comandos com barra invertida nesta aula?",
+      "back": "psql. Esses metacomandos são processados pelo cliente psql."
+    },
+    {
+      "id": "postgresql.esquema.f02",
+      "lesson": "conectar",
+      "front": "Que nome qualificado funciona mesmo sem configurar search_path?",
+      "back": "caderno.alunos. O nome qualificado da relação começa pelo esquema."
+    },
+    {
+      "id": "postgresql.esquema.f03",
+      "lesson": "tabelas",
+      "front": "Que palavra restringe a tabela criada à sessão?",
+      "back": "TEMP. CREATE TEMP TABLE cria uma relação temporária."
+    },
+    {
+      "id": "postgresql.esquema.f04",
+      "lesson": "tabelas",
+      "front": "Qual declaração identifica unicamente cada linha de rascunho?",
+      "back": "id integer PRIMARY KEY. A chave primária combina identificação única e ausência de nulos."
+    },
+    {
+      "id": "postgresql.esquema.f05",
+      "lesson": "tipos",
+      "front": "Qual tipo representa um estado verdadeiro ou falso?",
+      "back": "boolean. A coluna feita aceita os valores lógicos do banco."
+    },
+    {
+      "id": "postgresql.esquema.f06",
+      "lesson": "tipos",
+      "front": "Qual expressão preserva a fração de 30 minutos em horas?",
+      "back": "30/60.0. O literal decimal desencadeia a divisão numérica com fração."
+    },
+    {
+      "id": "postgresql.esquema.f07",
+      "lesson": "restricoes",
+      "front": "Qual restrição impede cadastrar uma leitura para aluno inexistente?",
+      "back": "FOREIGN KEY com REFERENCES. A referência exige linha correspondente na tabela de alunos."
+    },
+    {
+      "id": "postgresql.esquema.f08",
+      "lesson": "restricoes",
+      "front": "Que comando encerra e desfaz a transação após o erro?",
+      "back": "ROLLBACK. O rollback libera a sessão do estado de transação abortada."
+    }
+  ]
+}

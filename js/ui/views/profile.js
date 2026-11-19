@@ -1,3 +1,4 @@
+import { resumoIntensiva } from '../../core/intensiva.js';
 import { h, mount, bar, pct, plural, formatDay, formatDateTime, formatDuration, toneFor } from '../dom.js';
 import { levelInfo, displayStreak } from '../../core/gamification.js';
 import { languageProgress } from '../../core/progress.js';
@@ -8,13 +9,12 @@ import { statCard } from '../components/common.js';
 const KIND_LABEL = { practice: 'Prática', quiz: 'Quiz', exam: 'Prova', review: 'Revisão de erros' };
 
 function heatmap(state, today) {
-  const goal = state.profile.dailyGoal;
   const cells = activityGrid(state.xp.byDay, today, 12);
   const studied = cells.filter((c) => c.xp !== null).length;
   const describe = (c) => `${formatDay(c.day)}: ${c.xp === null ? 'sem estudo' : `${c.xp} XP`}`;
   return h('section', { class: 'panel' },
     h('div', { class: 'heatmap', role: 'img', 'aria-label': `Calendário de atividade das últimas 12 semanas: ${studied} ${plural(studied, 'dia', 'dias')} com estudo.` },
-      cells.map((c) => h('span', { class: `hm-cell hm-${activityLevel(c.xp, goal)}`, title: describe(c) }))),
+      cells.map((c) => h('span', { class: `hm-cell hm-${activityLevel(c.xp, state.intensiva?.days[c.day]?.goal ?? state.profile.dailyGoal)}`, title: describe(c) }))),
     h('div', { class: 'hm-legend muted small' },
       'Menos ', [0, 1, 2, 3, 4].map((n) => h('span', { class: `hm-cell hm-${n}` })), ' Mais'));
 }
@@ -74,7 +74,7 @@ export async function renderProfile(container, app) {
         h('p', { class: 'small muted', text: `${info.current}/${info.needed} XP para o nível ${info.level + 1}` }))),
     h('div', { class: 'grid stats' },
       statCard('Sequência', `🔥 ${streak} ${plural(streak, 'dia', 'dias')}`, `Recorde: ${state.streak.best} ${plural(state.streak.best, 'dia', 'dias')}`),
-      statCard('Meta diária', `${state.profile.dailyGoal} XP`, `Cumprida em ${state.counters.goalDays} ${plural(state.counters.goalDays, 'dia', 'dias')}`),
+      statCard('Meta diária', `${resumoIntensiva(state, today).goal} XP`, `Cumprida em ${state.counters.goalDays} ${plural(state.counters.goalDays, 'dia', 'dias')}`),
       statCard('Perguntas', String(t.answered), t.accuracy === null ? 'Sem respostas ainda' : `${pct(t.accuracy)} de acerto`),
       statCard('Cartas revisadas', String(t.cardReviews), `${t.daysStudied} ${plural(t.daysStudied, 'dia', 'dias')} de estudo`)),
     h('h2', { text: 'Por linguagem' }),

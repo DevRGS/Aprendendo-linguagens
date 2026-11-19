@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "postgresql.integracao.q01",
+      "lesson": "conexao-api",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Onde a URL de conexão com senha deve ficar?",
+      "options": [
+        "No JavaScript entregue ao navegador",
+        "Num flashcard público",
+        "No ambiente do servidor local"
+      ],
+      "answer": 2,
+      "explanation": "O servidor precisa da conexão e mantém credenciais fora do cliente."
+    },
+    {
+      "id": "postgresql.integracao.q02",
+      "lesson": "conexao-api",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o nome da variável lida pelo repositório do kit.",
+      "code": "process.env.___",
+      "blanks": [
+        [
+          "DATABASE_URL"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "Ela informa host, base e credenciais para criar o pool."
+    },
+    {
+      "id": "postgresql.integracao.q03",
+      "lesson": "conexao-api",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "O script reiniciar.sql do laboratório apaga também as contas de central_api.",
+      "answer": false,
+      "explanation": "O script recria apenas o esquema caderno da base dedicada."
+    },
+    {
+      "id": "postgresql.integracao.q04",
+      "lesson": "conexao-api",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que comando do kit deve preparar o esquema antes de iniciar o servidor?",
+      "options": [
+        "node dist/laboratorio.js",
+        "npm run check como migração",
+        "npm run migrar"
+      ],
+      "answer": 2,
+      "explanation": "O script abre a conexão e aplica o esquema inicial."
+    },
+    {
+      "id": "postgresql.integracao.q05",
+      "lesson": "parametros",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Como enviar dois valores a uma consulta parametrizada com node-postgres?",
+      "options": [
+        "Marcadores posicionais e array separado",
+        "Inserir os valores manualmente em uma template string SQL",
+        "Renomear o arquivo .sql para .js"
+      ],
+      "answer": 0,
+      "explanation": "O driver envia os parâmetros separadamente do texto do comando."
+    },
+    {
+      "id": "postgresql.integracao.q06",
+      "lesson": "parametros",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o marcador do segundo valor do array.",
+      "code": "WHERE aluno_id=$1 AND tema=___",
+      "blanks": [
+        [
+          "$2"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "Os índices de marcadores PostgreSQL começam em 1."
+    },
+    {
+      "id": "postgresql.integracao.q07",
+      "lesson": "parametros",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "O mesmo marcador de valor serve para substituir livremente o nome da tabela no FROM.",
+      "answer": false,
+      "explanation": "Parâmetros são valores de dados; identificadores exigem outra estratégia, como escolher entre nomes previamente definidos."
+    },
+    {
+      "id": "postgresql.integracao.q08",
+      "lesson": "parametros",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Por que chamar pool.end() no script de uma execução?",
+      "options": [
+        "Encerrar as conexões quando a consulta terminar",
+        "Apagar os resultados do banco",
+        "Desfazer todo SELECT automaticamente"
+      ],
+      "answer": 0,
+      "explanation": "O cliente deixa de manter conexões abertas depois do uso."
+    },
+    {
+      "id": "postgresql.integracao.q09",
+      "lesson": "isolamento",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual condição deve aparecer na consulta de acesso individual?",
+      "options": [
+        "id=$2 sozinho para todas as contas",
+        "usuario_id=$1 AND id=$2",
+        "usuario_id fornecido no corpo sem autenticação"
+      ],
+      "answer": 1,
+      "explanation": "A combinação liga o recurso solicitado à identidade autenticada."
+    },
+    {
+      "id": "postgresql.integracao.q10",
+      "lesson": "isolamento",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o status de leitura de recurso de outra pessoa conforme o contrato.",
+      "code": "HTTP ___",
+      "blanks": [
+        [
+          "404"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "O retorno evita revelar a existência daquele id para a outra conta."
+    },
+    {
+      "id": "postgresql.integracao.q11",
+      "lesson": "isolamento",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "O token CSRF válido de Bia dá permissão para alterar a tarefa de Ana.",
+      "answer": false,
+      "explanation": "A verificação CSRF e a autorização sobre o recurso atendem a condições diferentes."
+    },
+    {
+      "id": "postgresql.integracao.q12",
+      "lesson": "isolamento",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual controle positivo confirma que a tarefa ainda existe?",
+      "options": [
+        "GET sem sessão retorna 401",
+        "GET com a sessão da dona retorna 200",
+        "Abrir novamente a página inicial"
+      ],
+      "answer": 1,
+      "explanation": "A leitura autorizada diferencia a filtragem por dono da remoção acidental."
+    },
+    {
+      "id": "postgresql.integracao.q13",
+      "lesson": "entrega",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual camada muda principalmente no projeto de migração para PostgreSQL?",
+      "options": [
+        "O significado de 201 na criação",
+        "A identidade visual obrigatória do navegador",
+        "Persistência e adaptação assíncrona das chamadas"
+      ],
+      "answer": 2,
+      "explanation": "O contrato público orienta os testes enquanto o banco e seu cliente mudam."
+    },
+    {
+      "id": "postgresql.integracao.q14",
+      "lesson": "entrega",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o comando que executa o arquivo de teste isoladamente.",
+      "code": "node ___ test/atomicidade.test.mjs",
+      "blanks": [
+        [
+          "--test"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "O executor nativo aceita um caminho de teste."
+    },
+    {
+      "id": "postgresql.integracao.q15",
+      "lesson": "entrega",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "Em uma transação usando pg, é necessário executar BEGIN, escritas e COMMIT na mesma conexão.",
+      "answer": true,
+      "explanation": "O estado da transação pertence à sessão de banco; o pool pode entregar conexões diferentes em chamadas independentes."
+    },
+    {
+      "id": "postgresql.integracao.q16",
+      "lesson": "entrega",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que evidência demonstra simultaneamente rollback e preservação da sessão?",
+      "options": [
+        "A API apenas abre a porta",
+        "O banco tem alguma tabela chamada sessoes",
+        "A segunda escrita falha e uma consulta posterior encontra a sessão antiga"
+      ],
+      "answer": 2,
+      "explanation": "A falha observada e a checagem do estado posterior comprovam a atomicidade."
+    }
+  ]
+}

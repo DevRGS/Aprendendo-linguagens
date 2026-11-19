@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "machine-learning.fluxo.f01",
+      "lesson": "ausentes",
+      "front": "O que checar ao alterar um valor do período final?",
+      "back": "Que as estatísticas aprendidas no treino permaneçam idênticas."
+    },
+    {
+      "id": "machine-learning.fluxo.f02",
+      "lesson": "ausentes",
+      "front": "Qual a diferença entre substituir um ausente por zero e estimá-lo pela mediana?",
+      "back": "Zero afirma distância nula. A mediana usa uma regra derivada do treino para uma distância desconhecida."
+    },
+    {
+      "id": "machine-learning.fluxo.f03",
+      "lesson": "pipeline",
+      "front": "Qual a vantagem de compor a imputação e o estimador na validação?",
+      "back": "Em cada treino ambos são ajustados juntos e as mesmas transformações se aplicam à janela seguinte."
+    },
+    {
+      "id": "machine-learning.fluxo.f04",
+      "lesson": "pipeline",
+      "front": "Depois de ajustar o pipeline, como inspecionar a primeira etapa?",
+      "back": "Use modelo[0] ou procure o nome em modelo.named_steps."
+    },
+    {
+      "id": "machine-learning.fluxo.f05",
+      "lesson": "janelas",
+      "front": "Que relação devem ter o último índice de treino e o primeiro de validação?",
+      "back": "O último de treino deve ser menor que o primeiro de validação na série ordenada."
+    },
+    {
+      "id": "machine-learning.fluxo.f06",
+      "lesson": "janelas",
+      "front": "Quais linhas ficam de fora de todas as janelas de escolha?",
+      "back": "As últimas vinte, S101 a S120."
+    },
+    {
+      "id": "machine-learning.fluxo.f07",
+      "lesson": "parametros",
+      "front": "Como se distingue um coeficiente de um hiperparâmetro?",
+      "back": "O coeficiente é aprendido pelo ajuste. O hiperparâmetro controla o ajuste e é escolhido por um procedimento de validação."
+    },
+    {
+      "id": "machine-learning.fluxo.f08",
+      "lesson": "parametros",
+      "front": "Por que registrar as alternativas antes da avaliação final?",
+      "back": "Para impedir que o período reservado se transforme em mais uma etapa de escolha."
+    }
+  ]
+}

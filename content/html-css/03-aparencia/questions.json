@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "html-css.aparencia.q01",
+      "lesson": "selecionar-elementos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual seletor encontra class=\"aviso\"?",
+      "options": [
+        ".aviso",
+        "#aviso",
+        "aviso"
+      ],
+      "answer": 0,
+      "explanation": "O ponto introduz o nome de uma classe."
+    },
+    {
+      "id": "html-css.aparencia.q02",
+      "lesson": "selecionar-elementos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A regra p pode alcançar parágrafos que também possuem uma classe.",
+      "answer": true,
+      "explanation": "O seletor de tipo considera o nome do elemento."
+    },
+    {
+      "id": "html-css.aparencia.q03",
+      "lesson": "selecionar-elementos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a propriedade que coloca o texto em negrito.",
+      "code": "___: bold",
+      "blanks": [
+        [
+          "font-weight"
+        ]
+      ],
+      "explanation": "O peso da fonte é controlado por font-weight.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.aparencia.q04",
+      "lesson": "selecionar-elementos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A segunda regra funciona no inspetor mas desaparece ao atualizar. Onde persistir a alteração?",
+      "options": [
+        "No histórico do navegador",
+        "No título da página",
+        "No arquivo estilo.css usado por link"
+      ],
+      "answer": 2,
+      "explanation": "A página recarrega a folha salva no disco."
+    },
+    {
+      "id": "html-css.aparencia.q05",
+      "lesson": "explicar-a-regra-vencedora",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que regra colore o parágrafo na demonstração?",
+      "options": [
+        "p",
+        ".aviso",
+        "main"
+      ],
+      "answer": 1,
+      "explanation": "Na competição direta, a classe tem mais especificidade que o seletor de tipo."
+    },
+    {
+      "id": "html-css.aparencia.q06",
+      "lesson": "explicar-a-regra-vencedora",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Duas regras idênticas de classe na mesma folha podem ser decididas pela ordem.",
+      "answer": true,
+      "explanation": "Em empate nas etapas anteriores da cascata, vale a declaração posterior."
+    },
+    {
+      "id": "html-css.aparencia.q07",
+      "lesson": "explicar-a-regra-vencedora",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o valor que pede herança explícita.",
+      "code": "color: ___",
+      "blanks": [
+        [
+          "inherit"
+        ]
+      ],
+      "explanation": "O valor instrui o elemento a usar o valor computado do pai.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.aparencia.q08",
+      "lesson": "explicar-a-regra-vencedora",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como descobrir o valor que realmente chegou ao parágrafo?",
+      "options": [
+        "Ler o painel Computado do elemento",
+        "Contar a quantidade de seletores no arquivo",
+        "Olhar o nome da classe"
+      ],
+      "answer": 0,
+      "explanation": "O painel apresenta o valor resultante da cascata."
+    },
+    {
+      "id": "html-css.aparencia.q09",
+      "lesson": "medir-o-modelo-de-caixa",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que espaço fica entre conteúdo e borda?",
+      "options": [
+        "margin",
+        "outline-offset",
+        "padding"
+      ],
+      "answer": 2,
+      "explanation": "padding ocupa a parte interna da caixa."
+    },
+    {
+      "id": "html-css.aparencia.q10",
+      "lesson": "medir-o-modelo-de-caixa",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A margem entra na largura definida por border-box.",
+      "answer": false,
+      "explanation": "A margem continua fora da borda."
+    },
+    {
+      "id": "html-css.aparencia.q11",
+      "lesson": "medir-o-modelo-de-caixa",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual valor inclui borda e preenchimento na largura definida?",
+      "code": "box-sizing: ___",
+      "blanks": [
+        [
+          "border-box"
+        ]
+      ],
+      "explanation": "Com border-box, eles ocupam parte do valor declarado.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.aparencia.q12",
+      "lesson": "medir-o-modelo-de-caixa",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma caixa content-box de 100 px com padding 5 px e borda 1 px por lado mede quanto entre bordas?",
+      "options": [
+        "100 px",
+        "112 px",
+        "106 px"
+      ],
+      "answer": 1,
+      "explanation": "Somam-se 10 px de padding e 2 px de bordas."
+    },
+    {
+      "id": "html-css.aparencia.q13",
+      "lesson": "dar-contraste-ao-foco",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que pseudoclasse é usada para o indicador de foco do exemplo?",
+      "options": [
+        ":focus-visible",
+        ":checked",
+        ":visited"
+      ],
+      "answer": 0,
+      "explanation": "Ela apresenta o foco quando o navegador identifica a necessidade de um indicador."
+    },
+    {
+      "id": "html-css.aparencia.q14",
+      "lesson": "dar-contraste-ao-foco",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Sublinhar o link ajuda a identificá-lo sem depender apenas da cor.",
+      "answer": true,
+      "explanation": "A diferença de forma fornece uma pista adicional."
+    },
+    {
+      "id": "html-css.aparencia.q15",
+      "lesson": "dar-contraste-ao-foco",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para afastar o contorno da borda.",
+      "code": "___: 3px",
+      "blanks": [
+        [
+          "outline-offset"
+        ]
+      ],
+      "explanation": "O afastamento separa o anel do conteúdo.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.aparencia.q16",
+      "lesson": "dar-contraste-ao-foco",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como testar de fato o estado de foco durante a leitura?",
+      "options": [
+        "Somente passar o ponteiro sobre o texto",
+        "Ler o título da aba",
+        "Usar Tab e Shift+Tab e observar cada controle"
+      ],
+      "answer": 2,
+      "explanation": "O teste percorre a navegação real de teclado."
+    }
+  ]
+}

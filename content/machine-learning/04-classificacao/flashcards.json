@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "machine-learning.classificacao.f01",
+      "lesson": "rotulo",
+      "front": "Por que conferir a presença das duas classes no treino deste exemplo?",
+      "back": "A regressão logística precisa de exemplos de mais de uma classe para ajustar."
+    },
+    {
+      "id": "machine-learning.classificacao.f02",
+      "lesson": "rotulo",
+      "front": "O que diferencia o alvo deste caso do alvo das viagens?",
+      "back": "É uma classe binária. Nas viagens a saída era uma duração numérica."
+    },
+    {
+      "id": "machine-learning.classificacao.f03",
+      "lesson": "classificador",
+      "front": "Por que se chama classificação mesmo usando regressão logística?",
+      "back": "O objetivo é distinguir classes, e o modelo permite prever rótulos."
+    },
+    {
+      "id": "machine-learning.classificacao.f04",
+      "lesson": "classificador",
+      "front": "Se a classe 1 está na segunda coluna, como extrair sua probabilidade para todos?",
+      "back": "Use a seleção de todas as linhas e da coluna de índice 1."
+    },
+    {
+      "id": "machine-learning.classificacao.f05",
+      "lesson": "matriz",
+      "front": "Como localizar cada caso contado na célula de falso positivo?",
+      "back": "Identifique índices com rótulo real 0 e previsão 1."
+    },
+    {
+      "id": "machine-learning.classificacao.f06",
+      "lesson": "matriz",
+      "front": "O que soma a diagonal de uma matriz de confusão?",
+      "back": "O total de previsões corretas, somando um acerto por classe."
+    },
+    {
+      "id": "machine-learning.classificacao.f07",
+      "lesson": "precisao",
+      "front": "Por que declarar a classe positiva?",
+      "back": "Precisão e revocação dependem de qual evento se deseja detectar."
+    },
+    {
+      "id": "machine-learning.classificacao.f08",
+      "lesson": "precisao",
+      "front": "Inflar a quantidade de alertas pode melhorar qual métrica mesmo que a precisão caia?",
+      "back": "A revocação pode subir ao encontrar desgastes anteriormente liberados."
+    }
+  ]
+}

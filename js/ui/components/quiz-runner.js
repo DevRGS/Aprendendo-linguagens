@@ -4,6 +4,7 @@ import { gradeQuestion } from '../../core/grading.js';
 import { prepareQuestion } from '../../core/quiz.js';
 import { recordAnswer, finishQuiz } from '../../core/actions.js';
 import { createQuestionView, describeResponse, describeAnswer } from './question.js';
+import { byteFigure } from './byte.js';
 import { findModule } from './common.js';
 
 export function runQuiz(container, app, opts) {
@@ -17,6 +18,9 @@ export function runQuiz(container, app, opts) {
       h('p', { text: 'Não há perguntas disponíveis para este quiz.' })));
     return;
   }
+  const routeAtStart = app.currentRoute;
+  const study = mode === 'estudo';
+  if (!study) app.beginAssessment();
   const answers = [];
   const startedAt = Date.now();
   let index = 0;
@@ -81,17 +85,18 @@ export function runQuiz(container, app, opts) {
   }
 
   function settle(q, response, correct, verdict, view, feedback, next, hl) {
+    if (app.currentRoute !== routeAtStart) return;
     answers[index] = { response, correct };
-    app.dispatch(recordAnswer, { question: q, correct });
-    const study = mode === 'estudo';
+    const events = app.dispatch(recordAnswer, { question: q, correct });
     view.reveal({ response, correct, showCorrect: study, verdict });
     if (study) {
       feedback.className = `feedback ${correct ? 'ok' : 'err'}`;
       mount(feedback,
-        h('strong', { text: correct ? '✅ Correto!' : '❌ Não foi dessa vez.' }),
+        h('div', { class: 'byte-feedback' },
+          events.goalReached ? null : byteFigure(app.store.get().profile, correct ? 'success' : 'encourage'),
+          h('strong', { text: correct ? '✅ Correto!' : '❌ Não foi dessa vez.' })),
         md(q.explanation, { lang: hl }),
         correct ? null : lessonLink(q));
-      app.layout.announce(correct ? 'Resposta correta.' : 'Resposta incorreta.');
     } else {
       mount(feedback, h('p', { class: 'muted', text: 'Resposta registrada.' }));
     }
@@ -113,6 +118,7 @@ export function runQuiz(container, app, opts) {
       wrongIds: wrongIdx.map((i) => questions[i].id),
     });
     renderResult({ total, correct, durationSec, wrongIdx });
+    if (!study) app.endAssessment(true);
   }
 
   function reviewItem(i) {
@@ -156,6 +162,7 @@ export function runQuiz(container, app, opts) {
     mount(container, h('section', { class: 'quiz-result' },
       h('div', { class: 'panel center' },
         h('p', { class: 'muted', text: title }),
+        !study ? byteFigure(app.store.get().profile, correct === total ? 'success' : 'encourage') : null,
         h('div', { class: 'big-score', text: `${correct}/${total}` }),
         h('p', { text: `${pct(rate)} de acerto · ${formatDuration(durationSec)}` }),
         headline ? h('p', { class: 'headline', text: headline(rate) }) : null),

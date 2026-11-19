@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "typescript.tipagem.q01",
+      "lesson": "executar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Quem executa dist/laboratorio.js?",
+      "options": [
+        "Node.js",
+        "O arquivo tsconfig.json",
+        "O verificador de tipos"
+      ],
+      "answer": 0,
+      "explanation": "A saída emitida é JavaScript executável pelo Node."
+    },
+    {
+      "id": "typescript.tipagem.q02",
+      "lesson": "executar",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Preencha o script de compilação deste kit.",
+      "code": "npm run ___",
+      "blanks": [
+        [
+          "build"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "O script build chama tsc com as opções do projeto."
+    },
+    {
+      "id": "typescript.tipagem.q03",
+      "lesson": "executar",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Rodar npm run check basta para reescrever o JavaScript em dist.",
+      "answer": false,
+      "explanation": "O script usa --noEmit, que verifica o código sem emitir arquivos."
+    },
+    {
+      "id": "typescript.tipagem.q04",
+      "lesson": "executar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que garante a instalação das versões registradas no lockfile?",
+      "options": [
+        "npm ci",
+        "node dist/laboratorio.js",
+        "Alterar a extensão para .js"
+      ],
+      "answer": 0,
+      "explanation": "O npm usa package-lock.json para reproduzir a árvore de dependências."
+    },
+    {
+      "id": "typescript.tipagem.q05",
+      "lesson": "inferencia",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual tipo é inferido para let pontos = 3?",
+      "options": [
+        "string",
+        "number",
+        "boolean"
+      ],
+      "answer": 1,
+      "explanation": "O inicializador numérico determina o tipo da variável neste contexto."
+    },
+    {
+      "id": "typescript.tipagem.q06",
+      "lesson": "inferencia",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete com o operador de atribuição que soma 2 à variável numérica.",
+      "code": "pontos ___ 2;",
+      "blanks": [
+        [
+          "+="
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A atribuição composta lê, soma e guarda o novo valor."
+    },
+    {
+      "id": "typescript.tipagem.q07",
+      "lesson": "inferencia",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "O valor 2.5 também tem tipo number.",
+      "answer": true,
+      "explanation": "O sistema de tipos usa number tanto para esse valor quanto para inteiros como 2."
+    },
+    {
+      "id": "typescript.tipagem.q08",
+      "lesson": "inferencia",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Por que '10' + 5 produz o texto 105?",
+      "options": [
+        "TypeScript transforma tudo em inteiros",
+        "O operando string leva à concatenação",
+        "Node ignora o primeiro operando"
+      ],
+      "answer": 1,
+      "explanation": "A operação usa a semântica de JavaScript em tempo de execução."
+    },
+    {
+      "id": "typescript.tipagem.q09",
+      "lesson": "anotacoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual assinatura promete um resultado textual?",
+      "options": [
+        "function nome(id: string): number",
+        "function nome(id: number): boolean",
+        "function nome(id: number): string"
+      ],
+      "answer": 2,
+      "explanation": "A anotação depois do fechamento dos parâmetros indica o retorno."
+    },
+    {
+      "id": "typescript.tipagem.q10",
+      "lesson": "anotacoes",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete o tipo primitivo de uma duração medida em minutos.",
+      "code": "function dobra(n: ___) { return n * 2; }",
+      "blanks": [
+        [
+          "number"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "number representa o valor numérico usado na multiplicação."
+    },
+    {
+      "id": "typescript.tipagem.q11",
+      "lesson": "anotacoes",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Uma anotação string converte automaticamente um argumento numérico em texto.",
+      "answer": false,
+      "explanation": "A anotação participa da checagem estática e é apagada na compilação."
+    },
+    {
+      "id": "typescript.tipagem.q12",
+      "lesson": "anotacoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual chamada atende à assinatura de etiqueta?",
+      "options": [
+        "etiqueta(30, 'SQL')",
+        "etiqueta('SQL')",
+        "etiqueta('SQL', 30)"
+      ],
+      "answer": 2,
+      "explanation": "O título é o primeiro argumento e a duração numérica é o segundo."
+    },
+    {
+      "id": "typescript.tipagem.q13",
+      "lesson": "diagnostico",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que mudança corrige a atribuição de '40' quando o domínio exige um número?",
+      "options": [
+        "Fornecer o valor numérico 40",
+        "Apagar somente a mensagem do terminal",
+        "Trocar a extensão do lockfile"
+      ],
+      "answer": 0,
+      "explanation": "O valor e a anotação passam a concordar."
+    },
+    {
+      "id": "typescript.tipagem.q14",
+      "lesson": "diagnostico",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete o método que testa se n é um número finito.",
+      "code": "Number.___(n)",
+      "blanks": [
+        [
+          "isFinite"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A chamada retorna false para NaN e infinitos."
+    },
+    {
+      "id": "typescript.tipagem.q15",
+      "lesson": "diagnostico",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "O kit usa noEmitOnError para evitar emissão quando há erros.",
+      "answer": true,
+      "explanation": "Uma compilação com erro pode deixar em dist arquivos antigos de uma execução anterior."
+    },
+    {
+      "id": "typescript.tipagem.q16",
+      "lesson": "diagnostico",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que fazer se o build falhou mas um arquivo antigo ainda executa?",
+      "options": [
+        "Corrigir o diagnóstico e recompilar antes de validar",
+        "Considerar esse arquivo prova de que o fonte atual compila",
+        "Executar npm ci a cada erro de tipo"
+      ],
+      "answer": 0,
+      "explanation": "O artefato existente pode corresponder à última compilação bem-sucedida."
+    }
+  ]
+}

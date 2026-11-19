@@ -37,7 +37,7 @@ test('loadLesson e loadAchievementTexts', async () => {
   const module = java.modules[0];
   const text = await loadLesson(java, module, module.lessons[0]);
   assert.match(text, /^# Variáveis e tipos primitivos/);
-  assert.equal((await loadAchievementTexts()).length, 21);
+  assert.equal((await loadAchievementTexts()).length, 22);
 });
 
 test('cada arquivo é buscado uma vez só (cache em memória)', async () => {

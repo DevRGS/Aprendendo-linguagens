@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "git.branches.f01",
+      "lesson": "criar-uma-branch",
+      "front": "O que avança ao registrar um commit em sumario?",
+      "back": "A referência sumario, que está ativa."
+    },
+    {
+      "id": "git.branches.f02",
+      "lesson": "criar-uma-branch",
+      "front": "Como listar os caminhos de uma fotografia sem alternar de branch?",
+      "back": "git ls-tree --name-only e o nome da referência."
+    },
+    {
+      "id": "git.branches.f03",
+      "lesson": "alternar-entre-versoes",
+      "front": "Por que conferir git status antes da troca?",
+      "back": "Alterações locais podem acompanhar a troca ou impedir uma sobrescrita."
+    },
+    {
+      "id": "git.branches.f04",
+      "lesson": "alternar-entre-versoes",
+      "front": "Como ver arquivos rastreados no índice?",
+      "back": "Com git ls-files."
+    },
+    {
+      "id": "git.branches.f05",
+      "lesson": "integrar-mudancas",
+      "front": "Como pré-visualizar os commits exclusivos da proposta?",
+      "back": "git log main..docs."
+    },
+    {
+      "id": "git.branches.f06",
+      "lesson": "integrar-mudancas",
+      "front": "O que permite o avanço rápido?",
+      "back": "A ponta da receptora é ancestral da ponta que se quer integrar."
+    },
+    {
+      "id": "git.branches.f07",
+      "lesson": "resolver-conflito-de-texto",
+      "front": "Qual é o papel dos marcadores de conflito?",
+      "back": "Delimitar as versões que precisam de uma decisão."
+    },
+    {
+      "id": "git.branches.f08",
+      "lesson": "resolver-conflito-de-texto",
+      "front": "Como reconhecer a versão recebida no índice durante o merge desta aula?",
+      "back": "git show :3:README.md mostra o terceiro estágio."
+    }
+  ]
+}

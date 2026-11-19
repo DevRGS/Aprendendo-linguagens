@@ -7,9 +7,9 @@ const base = () => createInitialState();
 const ctx = (extra = {}) => ({ now: new Date(2026, 9, 11, 12), languages: [], event: null, ...extra });
 const quiz = (total, correct, mode = 'estudo') => ({ type: 'quizFinished', kind: 'quiz', mode, total, correct });
 
-test('são 21 conquistas com ids únicos', () => {
-  assert.equal(ACHIEVEMENT_IDS.length, 21);
-  assert.equal(new Set(ACHIEVEMENT_IDS).size, 21);
+test('são 22 conquistas com ids únicos', () => {
+  assert.equal(ACHIEVEMENT_IDS.length, 22);
+  assert.equal(new Set(ACHIEVEMENT_IDS).size, 22);
   assert.equal(ACHIEVEMENT_RULES.every((r) => typeof r.test === 'function'), true);
 });
 

@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "machine-learning.fluxo.q01",
+      "lesson": "ausentes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Como tratar V08 com km ausente sem olhar o futuro?",
+      "options": [
+        "Ajustar a mediana em V08 isolada",
+        "Aplicar a mediana de km aprendida no treino",
+        "Remover todas as viagens com zero paradas"
+      ],
+      "answer": 1,
+      "explanation": "A estatística pode ser aprendida antes da chegada do lote."
+    },
+    {
+      "id": "machine-learning.fluxo.q02",
+      "lesson": "ausentes",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Uma viagem com zero paradas deve ser tratada como se o número de paradas fosse desconhecido.",
+      "answer": false,
+      "explanation": "Zero é uma medição válida neste campo."
+    },
+    {
+      "id": "machine-learning.fluxo.q03",
+      "lesson": "ausentes",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o método do imputador ajustado que aplica a regra ao lote.",
+      "code": "im.___(X_validacao)",
+      "blanks": [
+        [
+          "transform"
+        ]
+      ],
+      "explanation": "transform reaproveita as estatísticas existentes."
+    },
+    {
+      "id": "machine-learning.fluxo.q04",
+      "lesson": "ausentes",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual km o imputador usa quando os observados de treino são 2, 4, 6, 4, 8?",
+      "options": [
+        "6",
+        "4",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "Em ordem 2, 4, 4, 6, 8, o valor central é 4."
+    },
+    {
+      "id": "machine-learning.fluxo.q05",
+      "lesson": "pipeline",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Em qual ordem o pipeline processa a entrada?",
+      "options": [
+        "Regressão e depois imputação das previsões",
+        "Previsão e depois ajuste do imputador em validação",
+        "Imputação seguida de regressão"
+      ],
+      "answer": 2,
+      "explanation": "Ridge recebe os atributos já transformados."
+    },
+    {
+      "id": "machine-learning.fluxo.q06",
+      "lesson": "pipeline",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Ao chamar predict, o pipeline volta a calcular medianas com as novas viagens.",
+      "answer": false,
+      "explanation": "Durante a inferência a transformação usa as estatísticas aprendidas."
+    },
+    {
+      "id": "machine-learning.fluxo.q07",
+      "lesson": "pipeline",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a função de composição importada de sklearn.pipeline.",
+      "code": "modelo = ___(SimpleImputer(), Ridge())",
+      "blanks": [
+        [
+          "make_pipeline"
+        ]
+      ],
+      "explanation": "make_pipeline monta e nomeia automaticamente as etapas."
+    },
+    {
+      "id": "machine-learning.fluxo.q08",
+      "lesson": "pipeline",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que problema aparece se trocar a ordem das colunas apenas em produção?",
+      "options": [
+        "O modelo sempre reordena colunas por unidade",
+        "O número de previsões dobra",
+        "Valores serão interpretados com outro significado"
+      ],
+      "answer": 2,
+      "explanation": "Em matrizes numéricas, a posição identifica cada atributo."
+    },
+    {
+      "id": "machine-learning.fluxo.q09",
+      "lesson": "janelas",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Onde termina a primeira validação se o treino tem S001–S040 e o horizonte tem 20 dias?",
+      "options": [
+        "S060",
+        "S040",
+        "S061"
+      ],
+      "answer": 0,
+      "explanation": "O bloco começa em S041 e inclui vinte viagens."
+    },
+    {
+      "id": "machine-learning.fluxo.q10",
+      "lesson": "janelas",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Uma janela pode usar dias anteriores de validação como treino de uma rodada posterior.",
+      "answer": true,
+      "explanation": "No novo instante essas observações já fazem parte do passado."
+    },
+    {
+      "id": "machine-learning.fluxo.q11",
+      "lesson": "janelas",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual valor completa o tamanho do bloco de validação do roteiro?",
+      "code": "TimeSeriesSplit(n_splits=3, test_size=___)",
+      "blanks": [
+        [
+          "20"
+        ]
+      ],
+      "explanation": "Os primeiros cem registros comportam os três blocos de vinte após o treino inicial."
+    },
+    {
+      "id": "machine-learning.fluxo.q12",
+      "lesson": "janelas",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Por que a média simples dos três MAEs dá o mesmo peso a cada observação?",
+      "options": [
+        "Todas as janelas têm vinte observações",
+        "Todos os alvos são idênticos",
+        "Todas as previsões têm erro zero"
+      ],
+      "answer": 0,
+      "explanation": "Cada média reúne o mesmo número de erros absolutos."
+    },
+    {
+      "id": "machine-learning.fluxo.q13",
+      "lesson": "parametros",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que diferencia ridge-1 de ridge-10 no experimento?",
+      "options": [
+        "O número de viagens finais",
+        "A intensidade de penalização",
+        "A definição do alvo"
+      ],
+      "answer": 1,
+      "explanation": "Os dois usam Ridge com valores de alpha distintos."
+    },
+    {
+      "id": "machine-learning.fluxo.q14",
+      "lesson": "parametros",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Usar o placar do teste para escolher alpha compromete a independência da avaliação final.",
+      "answer": true,
+      "explanation": "O teste passaria a influenciar a seleção do candidato."
+    },
+    {
+      "id": "machine-learning.fluxo.q15",
+      "lesson": "parametros",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o parâmetro de Ridge que controla a penalização.",
+      "code": "Ridge(___=10)",
+      "blanks": [
+        [
+          "alpha"
+        ]
+      ],
+      "explanation": "alpha é definido antes do ajuste de cada candidato."
+    },
+    {
+      "id": "machine-learning.fluxo.q16",
+      "lesson": "parametros",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Depois de selecionar a alternativa, quais dados podem participar do reajuste para prever a reserva?",
+      "options": [
+        "Todos os 120 alvos",
+        "Os cem dias de desenvolvimento",
+        "Apenas os últimos vinte"
+      ],
+      "answer": 1,
+      "explanation": "Até S100 está disponível antes de avaliar a reserva."
+    }
+  ]
+}

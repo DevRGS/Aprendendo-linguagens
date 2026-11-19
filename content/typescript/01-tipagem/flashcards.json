@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "typescript.tipagem.f01",
+      "lesson": "executar",
+      "front": "Quem executa dist/laboratorio.js?",
+      "back": "Node.js. A saída emitida é JavaScript executável pelo Node."
+    },
+    {
+      "id": "typescript.tipagem.f02",
+      "lesson": "executar",
+      "front": "O que garante a instalação das versões registradas no lockfile?",
+      "back": "npm ci. O npm usa package-lock.json para reproduzir a árvore de dependências."
+    },
+    {
+      "id": "typescript.tipagem.f03",
+      "lesson": "inferencia",
+      "front": "Qual tipo é inferido para let pontos = 3?",
+      "back": "number. O inicializador numérico determina o tipo da variável neste contexto."
+    },
+    {
+      "id": "typescript.tipagem.f04",
+      "lesson": "inferencia",
+      "front": "Por que '10' + 5 produz o texto 105?",
+      "back": "O operando string leva à concatenação. A operação usa a semântica de JavaScript em tempo de execução."
+    },
+    {
+      "id": "typescript.tipagem.f05",
+      "lesson": "anotacoes",
+      "front": "Qual assinatura promete um resultado textual?",
+      "back": "function nome(id: number): string. A anotação depois do fechamento dos parâmetros indica o retorno."
+    },
+    {
+      "id": "typescript.tipagem.f06",
+      "lesson": "anotacoes",
+      "front": "Qual chamada atende à assinatura de etiqueta?",
+      "back": "etiqueta('SQL', 30). O título é o primeiro argumento e a duração numérica é o segundo."
+    },
+    {
+      "id": "typescript.tipagem.f07",
+      "lesson": "diagnostico",
+      "front": "Que mudança corrige a atribuição de '40' quando o domínio exige um número?",
+      "back": "Fornecer o valor numérico 40. O valor e a anotação passam a concordar."
+    },
+    {
+      "id": "typescript.tipagem.f08",
+      "lesson": "diagnostico",
+      "front": "O que fazer se o build falhou mas um arquivo antigo ainda executa?",
+      "back": "Corrigir o diagnóstico e recompilar antes de validar. O artefato existente pode corresponder à última compilação bem-sucedida."
+    }
+  ]
+}

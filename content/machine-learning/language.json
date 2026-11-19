@@ -1,0 +1,170 @@
+{
+  "id": "machine-learning",
+  "name": "Machine Learning com Python",
+  "icon": "📈",
+  "color": "#65b1a3",
+  "highlight": "python",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "formular",
+      "dir": "01-formular",
+      "title": "Formular e medir",
+      "description": "Defina uma previsão com momento, unidade e referência observável.",
+      "lessons": [
+        {
+          "id": "instante",
+          "title": "Prever antes da partida",
+          "file": "01-instante.md",
+          "minutes": 21
+        },
+        {
+          "id": "particoes",
+          "title": "Separar observações no tempo",
+          "file": "02-particoes.md",
+          "minutes": 22
+        },
+        {
+          "id": "referencia",
+          "title": "Construir a previsão de referência",
+          "file": "03-referencia.md",
+          "minutes": 23
+        },
+        {
+          "id": "mae",
+          "title": "Interpretar o erro em minutos",
+          "file": "04-mae.md",
+          "minutes": 24
+        }
+      ]
+    },
+    {
+      "id": "regressao",
+      "dir": "02-regressao",
+      "title": "Regressão linear",
+      "description": "Ajuste uma reta, use-a em viagens inéditas e investigue o sinal dos resíduos.",
+      "lessons": [
+        {
+          "id": "atributos",
+          "title": "Alinhar atributos e alvo",
+          "file": "01-atributos.md",
+          "minutes": 21
+        },
+        {
+          "id": "ajuste",
+          "title": "Ajustar uma reta",
+          "file": "02-ajuste.md",
+          "minutes": 22
+        },
+        {
+          "id": "previsoes",
+          "title": "Prever sem reajustar",
+          "file": "03-previsoes.md",
+          "minutes": 23
+        },
+        {
+          "id": "residuos",
+          "title": "Investigar o maior resíduo",
+          "file": "04-residuos.md",
+          "minutes": 24
+        }
+      ]
+    },
+    {
+      "id": "fluxo",
+      "dir": "03-fluxo",
+      "title": "Fluxo reproduzível",
+      "description": "Impute valores dentro de cada treino e compare parâmetros em janelas cronológicas.",
+      "lessons": [
+        {
+          "id": "ausentes",
+          "title": "Aprender a preencher ausências",
+          "file": "01-ausentes.md",
+          "minutes": 21
+        },
+        {
+          "id": "pipeline",
+          "title": "Compor transformação e modelo",
+          "file": "02-pipeline.md",
+          "minutes": 22
+        },
+        {
+          "id": "janelas",
+          "title": "Validar no futuro de cada janela",
+          "file": "03-janelas.md",
+          "minutes": 23
+        },
+        {
+          "id": "parametros",
+          "title": "Escolher um hiperparâmetro",
+          "file": "04-parametros.md",
+          "minutes": 24
+        }
+      ]
+    },
+    {
+      "id": "classificacao",
+      "dir": "04-classificacao",
+      "title": "Classificação",
+      "description": "Use um segundo conjunto para distinguir classes, falsos negativos, precisão e revocação.",
+      "lessons": [
+        {
+          "id": "rotulo",
+          "title": "Definir a classe positiva",
+          "file": "01-rotulo.md",
+          "minutes": 21
+        },
+        {
+          "id": "classificador",
+          "title": "Ajustar e prever classes",
+          "file": "02-classificador.md",
+          "minutes": 22
+        },
+        {
+          "id": "matriz",
+          "title": "Ler uma matriz de confusão",
+          "file": "03-matriz.md",
+          "minutes": 23
+        },
+        {
+          "id": "precisao",
+          "title": "Comparar precisão e revocação",
+          "file": "04-precisao.md",
+          "minutes": 24
+        }
+      ]
+    },
+    {
+      "id": "projeto",
+      "dir": "05-projeto",
+      "title": "Projeto de viagens",
+      "description": "Entregue um procedimento congelado, um confronto com a referência e um relatório dos limites.",
+      "lessons": [
+        {
+          "id": "receber",
+          "title": "Receber e auditar o lote",
+          "file": "01-receber.md",
+          "minutes": 31
+        },
+        {
+          "id": "congelar",
+          "title": "Congelar o procedimento",
+          "file": "02-congelar.md",
+          "minutes": 32
+        },
+        {
+          "id": "avaliar",
+          "title": "Avaliar o período reservado",
+          "file": "03-avaliar.md",
+          "minutes": 33
+        },
+        {
+          "id": "comunicar",
+          "title": "Comunicar resultados e limites",
+          "file": "04-comunicar.md",
+          "minutes": 34
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "html-css.conteudo.q01",
+      "lesson": "definir-regioes-semanticas",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que elemento identifica o conteúdo principal?",
+      "options": [
+        "footer",
+        "nav",
+        "main"
+      ],
+      "answer": 2,
+      "explanation": "main representa o conteúdo dominante do documento."
+    },
+    {
+      "id": "html-css.conteudo.q02",
+      "lesson": "definir-regioes-semanticas",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um href iniciado por # pode apontar para um id da página atual.",
+      "answer": true,
+      "explanation": "O fragmento identifica um destino dentro do documento."
+    },
+    {
+      "id": "html-css.conteudo.q03",
+      "lesson": "definir-regioes-semanticas",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o valor que encontra id=\"conteudo\".",
+      "code": "href=\"___\"",
+      "blanks": [
+        [
+          "#conteudo"
+        ]
+      ],
+      "explanation": "O cerquilha introduz o fragmento no endereço.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "html-css.conteudo.q04",
+      "lesson": "definir-regioes-semanticas",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que nomear duas navegações de maneiras diferentes?",
+      "options": [
+        "Alterar automaticamente a cor dos links",
+        "Permitir distingui-las ao navegar por regiões",
+        "Impedir que a página role"
+      ],
+      "answer": 1,
+      "explanation": "Os nomes distinguem regiões com a mesma função."
+    },
+    {
+      "id": "html-css.conteudo.q05",
+      "lesson": "estruturar-listas-e-artigos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual elemento representa um item da lista?",
+      "options": [
+        "li",
+        "ul",
+        "article"
+      ],
+      "answer": 0,
+      "explanation": "li é o item individual dentro da lista."
+    },
+    {
+      "id": "html-css.conteudo.q06",
+      "lesson": "estruturar-listas-e-artigos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um artigo pode conter título, parágrafo e link.",
+      "answer": true,
+      "explanation": "article agrupa conteúdo que tem significado como unidade."
+    },
+    {
+      "id": "html-css.conteudo.q07",
+      "lesson": "estruturar-listas-e-artigos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a abertura da lista ordenada.",
+      "code": "<___><li>Documento</li></ol>",
+      "blanks": [
+        [
+          "ol"
+        ]
+      ],
+      "explanation": "ol organiza itens cuja ordem tem significado.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.conteudo.q08",
+      "lesson": "estruturar-listas-e-artigos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual nome de link informa melhor o destino quando lido isoladamente?",
+      "options": [
+        "Aqui",
+        "Mais",
+        "Abrir trilha Web"
+      ],
+      "answer": 2,
+      "explanation": "O nome inclui a trilha que será aberta."
+    },
+    {
+      "id": "html-css.conteudo.q09",
+      "lesson": "associar-rotulos-aos-campos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O valor de for deve coincidir com qual atributo do campo?",
+      "options": [
+        "name",
+        "id",
+        "placeholder"
+      ],
+      "answer": 1,
+      "explanation": "O identificador seleciona o controle associado ao rótulo."
+    },
+    {
+      "id": "html-css.conteudo.q10",
+      "lesson": "associar-rotulos-aos-campos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Dois controles da página devem compartilhar o mesmo id para simplificar seus rótulos.",
+      "answer": false,
+      "explanation": "Identificadores únicos evitam associações ambíguas."
+    },
+    {
+      "id": "html-css.conteudo.q11",
+      "lesson": "associar-rotulos-aos-campos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a marca do rótulo.",
+      "code": "<___ for=\"tema\">Tema</label>",
+      "blanks": [
+        [
+          "label"
+        ]
+      ],
+      "explanation": "label dá nome ao controle associado.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.conteudo.q12",
+      "lesson": "associar-rotulos-aos-campos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O placeholder some após digitar. Qual elemento mantém a identificação visível?",
+      "options": [
+        "label com texto",
+        "Um id sem rótulo",
+        "O valor digitado"
+      ],
+      "answer": 0,
+      "explanation": "O texto do label continua disponível."
+    },
+    {
+      "id": "html-css.conteudo.q13",
+      "lesson": "usar-a-validacao-nativa",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual atributo torna o campo obrigatório?",
+      "options": [
+        "checked",
+        "disabled",
+        "required"
+      ],
+      "answer": 2,
+      "explanation": "required participa da validação de restrições."
+    },
+    {
+      "id": "html-css.conteudo.q14",
+      "lesson": "usar-a-validacao-nativa",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O formulário de demonstração armazena o endereço de e-mail num banco de dados.",
+      "answer": false,
+      "explanation": "O exemplo apenas abre um documento estático e o campo nem tem name."
+    },
+    {
+      "id": "html-css.conteudo.q15",
+      "lesson": "usar-a-validacao-nativa",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual tipo verifica o formato básico de e-mail?",
+      "code": "<input type=\"___\">",
+      "blanks": [
+        [
+          "email"
+        ]
+      ],
+      "explanation": "A validação do navegador verifica o formato básico do valor.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.conteudo.q16",
+      "lesson": "usar-a-validacao-nativa",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O campo contém contato, mas o navegador recusa. O que corrigir?",
+      "options": [
+        "O título da aba",
+        "O formato exigido pelo tipo email",
+        "O nome da folha CSS"
+      ],
+      "answer": 1,
+      "explanation": "Um campo preenchido ainda pode falhar na regra de tipo."
+    }
+  ]
+}

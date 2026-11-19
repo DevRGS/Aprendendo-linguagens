@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "html-css.conteudo.f01",
+      "lesson": "definir-regioes-semanticas",
+      "front": "Como chegar ao atalho inicial sem mouse?",
+      "back": "Use Tab até o link e Enter para seguir."
+    },
+    {
+      "id": "html-css.conteudo.f02",
+      "lesson": "definir-regioes-semanticas",
+      "front": "O que um footer pode conter neste catálogo?",
+      "back": "Informações finais e uma navegação de rodapé."
+    },
+    {
+      "id": "html-css.conteudo.f03",
+      "lesson": "estruturar-listas-e-artigos",
+      "front": "Quando usar uma lista ordenada?",
+      "back": "Quando trocar a ordem dos itens mudaria o significado."
+    },
+    {
+      "id": "html-css.conteudo.f04",
+      "lesson": "estruturar-listas-e-artigos",
+      "front": "Como distinguir coleção e cartão na estrutura?",
+      "back": "A lista representa a coleção e cada artigo descreve um cartão."
+    },
+    {
+      "id": "html-css.conteudo.f05",
+      "lesson": "associar-rotulos-aos-campos",
+      "front": "Qual ação manual testa a associação explícita?",
+      "back": "Clique no rótulo e confira se o campo recebe foco."
+    },
+    {
+      "id": "html-css.conteudo.f06",
+      "lesson": "associar-rotulos-aos-campos",
+      "front": "Qual a função de name em um envio de formulário?",
+      "back": "Nomear a chave usada para representar o valor do controle no envio."
+    },
+    {
+      "id": "html-css.conteudo.f07",
+      "lesson": "usar-a-validacao-nativa",
+      "front": "Por que o e-mail não integra a consulta desta demonstração?",
+      "back": "O input não tem name."
+    },
+    {
+      "id": "html-css.conteudo.f08",
+      "lesson": "usar-a-validacao-nativa",
+      "front": "Qual tecla costuma ativar o botão focado?",
+      "back": "Enter ou Espaço em um botão nativo."
+    }
+  ]
+}

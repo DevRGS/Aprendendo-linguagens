@@ -1,0 +1,170 @@
+{
+  "id": "postgresql",
+  "name": "PostgreSQL",
+  "color": "#65a2bd",
+  "icon": "🐘",
+  "highlight": "sql",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "esquema",
+      "dir": "01-esquema",
+      "title": "Banco e esquema",
+      "description": "Abra psql e experimente tabelas, tipos, chaves e restrições em uma base dedicada.",
+      "lessons": [
+        {
+          "id": "conectar",
+          "file": "01-conectar.md",
+          "title": "Abrir uma sessão no banco do laboratório",
+          "minutes": 12
+        },
+        {
+          "id": "tabelas",
+          "file": "02-tabelas.md",
+          "title": "Criar uma tabela temporária de rascunho",
+          "minutes": 12
+        },
+        {
+          "id": "tipos",
+          "file": "03-tipos.md",
+          "title": "Escolher tipos para duração e estado",
+          "minutes": 12
+        },
+        {
+          "id": "restricoes",
+          "file": "04-restricoes.md",
+          "title": "Verificar chaves e regras de domínio",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "consultas",
+      "dir": "02-consultas",
+      "title": "Consultas do projeto",
+      "description": "Produza relatórios com alunos, leituras e páginas de ordem estável.",
+      "lessons": [
+        {
+          "id": "juncoes",
+          "file": "01-juncoes.md",
+          "title": "Relacionar alunos e leituras",
+          "minutes": 12
+        },
+        {
+          "id": "agregar",
+          "file": "02-agregar.md",
+          "title": "Contar leituras de cada aluno",
+          "minutes": 12
+        },
+        {
+          "id": "filtrar-grupos",
+          "file": "03-filtrar-grupos.md",
+          "title": "Filtrar grupos depois da agregação",
+          "minutes": 12
+        },
+        {
+          "id": "paginacao",
+          "file": "04-paginacao.md",
+          "title": "Ordenar resultados e desempatar a página",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "escrita",
+      "dir": "03-escrita",
+      "title": "Escrita consistente",
+      "description": "Insira, atualize, confirme e desfaça gravações relacionadas.",
+      "lessons": [
+        {
+          "id": "retorno",
+          "file": "01-retorno.md",
+          "title": "Inserir e receber os valores gerados",
+          "minutes": 12
+        },
+        {
+          "id": "atualizar",
+          "file": "02-atualizar.md",
+          "title": "Alterar somente a leitura pretendida",
+          "minutes": 12
+        },
+        {
+          "id": "transacao",
+          "file": "03-transacao.md",
+          "title": "Confirmar duas escritas como unidade",
+          "minutes": 12
+        },
+        {
+          "id": "desfazer",
+          "file": "04-desfazer.md",
+          "title": "Comprovar o rollback após uma falha",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "evolucao",
+      "dir": "04-evolucao",
+      "title": "Evolução e desempenho",
+      "description": "Ensaie uma migração, gere uma amostra e compare planos de uma mesma consulta.",
+      "lessons": [
+        {
+          "id": "migracao",
+          "file": "01-migracao.md",
+          "title": "Adicionar uma coluna com migração",
+          "minutes": 12
+        },
+        {
+          "id": "carga",
+          "file": "02-carga.md",
+          "title": "Popular dados fictícios de forma repetível",
+          "minutes": 12
+        },
+        {
+          "id": "plano",
+          "file": "03-plano.md",
+          "title": "Interpretar o plano de uma consulta",
+          "minutes": 12
+        },
+        {
+          "id": "indice",
+          "file": "04-indice.md",
+          "title": "Experimentar um índice na mesma consulta",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "integracao",
+      "dir": "05-integracao",
+      "title": "API integrada",
+      "description": "Conecte o CRUD ao PostgreSQL e teste atomicidade e autorização entre contas.",
+      "lessons": [
+        {
+          "id": "conexao-api",
+          "file": "01-conexao-api.md",
+          "title": "Conectar a API ao PostgreSQL local",
+          "minutes": 22
+        },
+        {
+          "id": "parametros",
+          "file": "02-parametros.md",
+          "title": "Passar valores separados da consulta",
+          "minutes": 22
+        },
+        {
+          "id": "isolamento",
+          "file": "03-isolamento.md",
+          "title": "Confirmar a autorização entre duas contas",
+          "minutes": 22
+        },
+        {
+          "id": "entrega",
+          "file": "04-entrega.md",
+          "title": "Reproduzir o CRUD e a escrita atômica",
+          "minutes": 22
+        }
+      ]
+    }
+  ]
+}

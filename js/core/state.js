@@ -1,7 +1,7 @@
 import { isDayKey } from './dates.js';
 import { AVATARS } from '../config.js';
 
-export const CURRENT_SCHEMA = 1;
+export const CURRENT_SCHEMA = 2;
 export const HISTORY_LIMIT = 200;
 export const XP_DAYS_KEPT = 400;
 
@@ -18,6 +18,7 @@ export function createInitialState() {
     counters: { answered: 0, cardReviews: 0, mistakesFixed: 0, goalDays: 0, quizzes: 0 },
     xp: { total: 0, byDay: {} },
     streak: { current: 0, best: 0, lastDay: null },
+    intensiva: { current: 0, best: 0, lastDay: null, days: {} },
     achievements: {},
     history: [],
     lastLesson: null,
@@ -27,7 +28,7 @@ export function createInitialState() {
 }
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
-const OBJECT_FIELDS = ['lessons', 'modules', 'exams', 'questions', 'cards', 'counters', 'xp', 'streak', 'achievements', 'backup'];
+const OBJECT_FIELDS = ['lessons', 'modules', 'exams', 'questions', 'cards', 'counters', 'xp', 'streak', 'intensiva', 'achievements', 'backup'];
 const ARRAY_FIELDS = ['mistakes', 'history', 'lastQuizIds'];
 
 export function validateState(s) {
@@ -72,6 +73,7 @@ const cleanProfile = (p) => (isObj(p) && typeof p.name === 'string'
     avatar: AVATARS.includes(p.avatar) ? p.avatar : DEFAULT_AVATAR,
     dailyGoal: GOALS.includes(p.dailyGoal) ? p.dailyGoal : 50,
     createdAt: strOrNull(p.createdAt),
+    ...(['animated', 'still', 'off'].includes(p.settings?.byte) && { settings: { byte: p.settings.byte } }),
   }
   : null);
 
@@ -134,6 +136,14 @@ export function normalizeState(s) {
       best: isCount(s.streak?.best) ? s.streak.best : 0,
       lastDay: dayOrNull(s.streak?.lastDay),
     },
+    intensiva: {
+      current: isCount(s.intensiva?.current) ? s.intensiva.current : 0,
+      best: isCount(s.intensiva?.best) ? s.intensiva.best : 0,
+      lastDay: dayOrNull(s.intensiva?.lastDay),
+      days: Object.fromEntries(Object.entries(s.intensiva?.days ?? {})
+        .filter(([day, r]) => isDayKey(day) && GOALS.includes(r?.goal))
+        .map(([day, r]) => [day, { goal: r.goal, reached: r.reached === true, legacy: r.legacy === true }])),
+    },
     achievements,
     history: (Array.isArray(s.history) ? s.history : []).map(cleanHistoryEntry).filter(Boolean),
     lastLesson: strOrNull(s.lastLesson),
@@ -148,7 +158,7 @@ export function normalizeState(s) {
 }
 
 // Cada versão nova do formato ganha uma entrada aqui: de N para N+1.
-export const MIGRATIONS = {};
+export const MIGRATIONS = { 1: (state) => ({ ...state, schema: 2 }) };
 
 export function runMigrations(raw, migrations, target) {
   let s = raw;

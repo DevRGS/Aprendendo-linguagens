@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "git.historico.f01",
+      "lesson": "identificar-o-repositorio",
+      "front": "O que existe logo após git init em pasta vazia?",
+      "back": "Metadados locais e uma branch inicial ainda sem commit."
+    },
+    {
+      "id": "git.historico.f02",
+      "lesson": "identificar-o-repositorio",
+      "front": "Onde --local grava a identidade?",
+      "back": "Na configuração do repositório atual."
+    },
+    {
+      "id": "git.historico.f03",
+      "lesson": "inspecionar-o-status",
+      "front": "Que coluna mostra o arquivo rastreado editado e ainda não preparado?",
+      "back": "A segunda coluna do status curto."
+    },
+    {
+      "id": "git.historico.f04",
+      "lesson": "inspecionar-o-status",
+      "front": "Como reconhecer que o laboratório começa limpo?",
+      "back": "git status --short termina sem listar arquivos."
+    },
+    {
+      "id": "git.historico.f05",
+      "lesson": "selecionar-alteracoes",
+      "front": "Qual é a função do índice?",
+      "back": "Montar o conteúdo que será registrado no próximo commit."
+    },
+    {
+      "id": "git.historico.f06",
+      "lesson": "selecionar-alteracoes",
+      "front": "Como incluir a edição feita após o primeiro add?",
+      "back": "Rode git add novamente para o caminho editado."
+    },
+    {
+      "id": "git.historico.f07",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "front": "O que HEAD indica quando você trabalha em uma branch?",
+      "back": "O commit atual apontado por essa branch."
+    },
+    {
+      "id": "git.historico.f08",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "front": "Por que separar glossário e instrução em dois commits?",
+      "back": "Cada intenção pode ser inspecionada e recuperada isoladamente."
+    }
+  ]
+}
