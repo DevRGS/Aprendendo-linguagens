@@ -2,7 +2,7 @@
 
 Abra a pasta de um exercício e preveja o que acontece se pedir para abrir `mensagem.txt` antes de criá-lo. Retome [texto](#/python/sequencias/texto-e-fatias) e [funções](#/python/funcoes/parametros-e-retorno).
 
-O diretório de trabalho é a pasta a partir da qual caminhos relativos são interpretados. `from pathlib import Path` torna o nome `Path` disponível. `Path("mensagem.txt")` representa um caminho relativo, `Path.cwd()` identifica a pasta atual e `resolve()` obtém o caminho absoluto.
+O diretório de trabalho é a pasta a partir da qual caminhos relativos são interpretados. `from pathlib import Path` torna o nome `Path` disponível. `Path("mensagem.txt")` representa um caminho relativo, `Path.cwd()` identifica a pasta atual e `resolve()` obtém o caminho absoluto, com links simbólicos já resolvidos.
 
 UTF-8 permite converter bytes em texto com acentos como “ação”. Use o modo `r` para ler, `w` para escrever truncando o conteúdo existente ou `x` para criar um arquivo novo sem sobrescrever. `with` fecha o arquivo ao sair do bloco.
 
@@ -84,7 +84,7 @@ relativo = Path("mensagem.txt")
 absoluto = relativo.resolve()
 print(relativo.is_absolute(), absoluto.is_absolute())
 print(absoluto.name)
-print(absoluto == Path.cwd() / relativo)
+print(absoluto == Path.cwd().resolve() / relativo)
 ```
 
 Saída esperada
@@ -95,7 +95,7 @@ mensagem.txt
 True
 ```
 
-O nome continua mensagem.txt. O endereço absoluto inclui a pasta da atividade e varia por execução. Acrescente print(absoluto) para inspecioná-lo.
+O nome continua mensagem.txt. O endereço absoluto inclui a pasta da atividade e varia por execução. Como resolve() também troca links simbólicos e, no Windows, nomes curtos como RUNNER~1 pelo caminho real, a pasta atual também passa por resolve() antes da comparação. Acrescente print(absoluto) para inspecioná-lo.
 
 ## E3 · Resolva
 
