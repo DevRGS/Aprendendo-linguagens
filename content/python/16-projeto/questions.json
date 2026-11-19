@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a unidade da observação?",
+      "options": [
+        "Uma viagem",
+        "Uma estação",
+        "Um quilômetro"
+      ],
+      "answer": 0,
+      "explanation": "Cada linha representa uma viagem.",
+      "id": "python.projeto.q01",
+      "lesson": "auditar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma viagem com zero paradas deve ser removida como ausente.",
+      "answer": false,
+      "explanation": "Zero é uma contagem válida.",
+      "id": "python.projeto.q02",
+      "lesson": "auditar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual método identifica cópias repetidas no DataFrame?",
+      "code": "duplicatas = brutas.___()",
+      "blanks": [
+        [
+          "duplicated"
+        ]
+      ],
+      "explanation": "duplicated marca as cópias excedentes mantendo a primeira por padrão.",
+      "id": "python.projeto.q03",
+      "lesson": "auditar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Dois registros divergentes compartilham V01. Qual a decisão deste projeto?",
+      "options": [
+        "Manter o último",
+        "Calcular a média",
+        "Interromper e informar o ID"
+      ],
+      "answer": 2,
+      "explanation": "O conflito impede decidir qual registro descreve a viagem.",
+      "id": "python.projeto.q04",
+      "lesson": "auditar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual observação inicia a validação?",
+      "options": [
+        "V06",
+        "V07",
+        "V09"
+      ],
+      "answer": 1,
+      "explanation": "O treino encerra no dia 6 e essa é a primeira viagem posterior.",
+      "id": "python.projeto.q05",
+      "lesson": "preparar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "V07 escalada pode ultrapassar 1.",
+      "answer": true,
+      "explanation": "O valor bruto pode exceder o máximo observado no treino.",
+      "id": "python.projeto.q06",
+      "lesson": "preparar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a chave do conjunto usado para aprender a mediana.",
+      "code": "parametros = ajustar(partes[\"___\"])",
+      "blanks": [
+        [
+          "treino"
+        ]
+      ],
+      "explanation": "Os parâmetros são aprendidos no treino.",
+      "id": "python.projeto.q07",
+      "lesson": "preparar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que minutos_faturados fica fora de X?",
+      "options": [
+        "O dado chega tarde para o instante de previsão",
+        "Ele sempre está ausente",
+        "O campo é um ID"
+      ],
+      "answer": 0,
+      "explanation": "O dado só existe após a chegada.",
+      "id": "python.projeto.q08",
+      "lesson": "preparar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual alvo central define a referência?",
+      "options": [
+        "3.5",
+        "8",
+        "10"
+      ],
+      "answer": 2,
+      "explanation": "Ela usa a mediana do treino.",
+      "id": "python.projeto.q09",
+      "lesson": "interpretar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Escolher o método após olhar o MAE de teste usa informação reservada.",
+      "answer": true,
+      "explanation": "O teste é para avaliar a decisão já congelada.",
+      "id": "python.projeto.q10",
+      "lesson": "interpretar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que torna o erro não negativo.",
+      "code": "erros = [___(y - ref) for y in alvos]",
+      "blanks": [
+        [
+          "abs"
+        ]
+      ],
+      "explanation": "abs devolve o módulo da diferença.",
+      "id": "python.projeto.q11",
+      "lesson": "interpretar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O MAE de 10 tem qual unidade?",
+      "options": [
+        "km",
+        "minutos",
+        "Porcentagem"
+      ],
+      "answer": 1,
+      "explanation": "Usamos erro absoluto médio em minutos.",
+      "id": "python.projeto.q12",
+      "lesson": "interpretar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual controle detecta que um programa ordenou por ID?",
+      "options": [
+        "Executar o mesmo CSV de novo",
+        "Imprimir a primeira chave",
+        "Trocar as datas entre V06 e V07"
+      ],
+      "answer": 2,
+      "explanation": "No CSV original ID e data têm a mesma ordem. Trocar as datas muda apenas a ordem temporal.",
+      "id": "python.projeto.q13",
+      "lesson": "reproduzir"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Alterar apenas valores das viagens de teste deve mudar os parâmetros aprendidos.",
+      "answer": false,
+      "explanation": "O ajuste usa apenas o treino.",
+      "id": "python.projeto.q14",
+      "lesson": "reproduzir"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual método do resultado devolvido pelo executor de unittest informa se os testes passaram?",
+      "code": "assert resultado.___()",
+      "blanks": [
+        [
+          "wasSuccessful"
+        ]
+      ],
+      "explanation": "wasSuccessful indica que nenhum teste falhou nem lançou erro.",
+      "id": "python.projeto.q15",
+      "lesson": "reproduzir"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que arquivos permitem reaplicar a transformação?",
+      "options": [
+        "Parâmetros e código de preparação",
+        "A imagem sozinha",
+        "Somente o CSV de teste"
+      ],
+      "answer": 0,
+      "explanation": "Precisamos dos parâmetros congelados e do código da transformação.",
+      "id": "python.projeto.q16",
+      "lesson": "reproduzir"
+    }
+  ]
+}

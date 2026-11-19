@@ -1,0 +1,88 @@
+{
+  "title": "Vetores e soma ponderada",
+  "minutes": 50,
+  "intro": "Cada linha de uma tabela pode descrever uma observação por meio de várias coordenadas. Em (distância, paradas), a ordem diz o que representa cada número. A dimensão é a quantidade de coordenadas. Para somar dois vetores ou multiplicar coordenadas correspondentes, confira dimensões iguais. A soma de (1, 2) e (3, 4) é (1+3, 2+4), ou (4, 6). No produto escalar somamos os produtos depois de multiplicar os pares: (1, 2) e (3, 4) fornecem 1×3 + 2×4 = 11. Revise [tuplas e desempacotamento](#/python/registros/tuplas-e-desempacotamento).",
+  "sources": [
+    [
+      "Função zip",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#zip"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Calcule os produtos antes de executar e compare o total.",
+      "code": "x, y = [1, 2], [3, 4]\nprodutos = [a * b for a, b in zip(x, y, strict=True)]\nprint(produtos)\nprint(sum(produtos))\n",
+      "stdout": "[3, 8]\n11",
+      "explanation": "A correspondência é por posição. O produto escalar devolve um número."
+    },
+    {
+      "prompt": "Inspecione os comprimentos. Como impedir que o terceiro valor desapareça?",
+      "code": "x, y = [1, 2], [3, 4, 5]\nprint(len(x), len(y))\ntry:\n    list(zip(x, y, strict=True))\nexcept ValueError:\n    print(\"dimensões incompatíveis\")\n",
+      "stdout": "2 3\ndimensões incompatíveis",
+      "explanation": "Sem strict, zip para quando termina a menor sequência. O modo estrito detecta a diferença ao consumir o iterador."
+    },
+    {
+      "prompt": "Combine pesos 0.25, 0.75 com os valores 4, 8. Depois faça o mesmo com um elemento e com comprimentos distintos.",
+      "code": "def ponderar(pesos, valores):\n    return sum(peso * valor for peso, valor in zip(pesos, valores, strict=True))\n\nprint(ponderar([0.25, 0.75], [4, 8]))\nassert ponderar([1], [12]) == 12\ntry:\n    ponderar([1], [2, 3])\nexcept ValueError:\n    print(\"tamanhos diferentes\")\n",
+      "stdout": "7.0\ntamanhos diferentes",
+      "explanation": "Os produtos são 1 e 6. Em uma média ponderada os pesos somam 1. O modo estrito também protege o caso de tamanhos diferentes.",
+      "hint": "Multiplique pares e some.",
+      "starter": "pesos = [0.25, 0.75]\nvalores = [4, 8]\n# Complete a soma dos produtos e confira os tamanhos.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a dimensão de [7, 0, 2]?",
+      "options": [
+        "2",
+        "3",
+        "7"
+      ],
+      "answer": 1,
+      "explanation": "Há três coordenadas."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O produto escalar fornece um vetor com as mesmas coordenadas.",
+      "answer": false,
+      "explanation": "Ele fornece a soma dos produtos dos pares de coordenadas."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o modo que exige comprimentos iguais.",
+      "code": "zip(x, y, ___=True)",
+      "blanks": [
+        [
+          "strict"
+        ]
+      ],
+      "explanation": "strict exige comprimentos iguais quando zip é consumido."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quais são os produtos de [2, 3] com [4, 5]?",
+      "options": [
+        "8 e 15",
+        "6 e 8",
+        "10 e 12"
+      ],
+      "answer": 0,
+      "explanation": "2×4 = 8 e 3×5 = 15."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que é dimensão de um vetor?",
+      "back": "Quantidade de coordenadas."
+    },
+    {
+      "front": "Para que serve strict=True em zip?",
+      "back": "Detectar sequências de comprimentos diferentes ao consumir o resultado."
+    }
+  ]
+}

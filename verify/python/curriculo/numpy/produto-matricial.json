@@ -1,0 +1,93 @@
+{
+  "title": "Produto matricial e pontuação",
+  "minutes": 50,
+  "intro": "Uma viagem tem dois valores e você quer uma nota calculada com um peso para cada um. Quantas notas você espera de três viagens?\n\nUse NumPy e retome [Eixos e broadcasting](#/python/numpy/eixos-e-broadcasting). As atividades criam os arrays diretamente.\n\n`a * b` multiplica elementos, seguindo as regras de broadcasting. `a @ b` realiza produto matricial. Em `(n, p) @ (p, m)`, cada linha da primeira matriz é combinada com cada coluna da segunda. O comprimento interno `p` deve coincidir. A saída tem forma `(n, m)`. Se o segundo operando for um vetor de forma `(p,)`, o resultado fica com forma `(n,)`: uma soma de produtos por linha.",
+  "sources": [
+    [
+      "Produto matricial",
+      "https://numpy.org/doc/stable/reference/generated/numpy.matmul.html"
+    ],
+    [
+      "Comparação numérica",
+      "https://numpy.org/doc/stable/reference/generated/numpy.allclose.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja a nota da segunda linha antes de usar os pesos `[2, 1]`. Compare o efeito de `*` e `@`.",
+      "code": "import numpy as np\n\na = np.array([[1, 2], [3, 4]])\npesos = np.array([2, 1])\nprint((a * pesos).tolist())\nprint((a @ pesos).tolist())\n",
+      "stdout": "[[2, 2], [6, 4]]\n[4, 10]",
+      "explanation": "O produto elemento a elemento deixa os termos separados. O produto matricial soma 2 + 2 e 6 + 4."
+    },
+    {
+      "prompt": "Use três linhas e uma matriz coluna de pesos. Antecipe a forma de `(3, 2) @ (2, 1)` antes de rodar.",
+      "code": "import numpy as np\n\na = np.array([[1, 2], [3, 4], [5, 6]])\npesos = np.array([[2], [1]])\nnotas = a @ pesos\nprint(notas.shape, notas.tolist())\n",
+      "stdout": "(3, 1) [[4], [10], [16]]",
+      "explanation": "Há três linhas e uma coluna no resultado, pois a segunda matriz tem uma coluna."
+    },
+    {
+      "prompt": "Obtenha uma pontuação por linha de `[[1, 3], [2, 5], [0, 4]]` com pesos `[0.5, 2.0]`. Faça por laços e por `@`, compare com `np.allclose` e teste lote de uma linha.",
+      "code": "import numpy as np\n\ndef pontuar_laco(a, pesos):\n    notas = []\n    for linha in a:\n        soma = 0.0\n        for valor, peso in zip(linha, pesos, strict=True):\n            soma += valor * peso\n        notas.append(soma)\n    return notas\n\na = np.array([[1, 3], [2, 5], [0, 4]])\npesos = np.array([0.5, 2.0])\nnotas = a @ pesos\nprint(notas.tolist())\nprint(np.allclose(pontuar_laco(a, pesos), notas))\nassert (a[:1] @ pesos).shape == (1,)\nassert np.allclose(pontuar_laco(a[:1], pesos), a[:1] @ pesos)\n",
+      "stdout": "[6.5, 11.0, 8.0]\nTrue",
+      "explanation": "O laço interno combina cada valor com seu peso e acumula a pontuação. `strict=True` evita truncar silenciosamente uma linha de comprimento incompatível. Para uma linha a saída continua sendo um vetor. Se errou o eixo no marco, volte a [Eixos e broadcasting](#/python/numpy/eixos-e-broadcasting) e repita aqui com pesos [1, 0] e uma linha [7, 2]. A seguir, o pandas acrescenta rótulos e chaves às tabelas.",
+      "hint": "Faça uma soma de produtos separada para cada linha. Reinicie o acumulador a cada linha.",
+      "starter": "import numpy as np\n\na = np.array([[1, 3], [2, 5], [0, 4]])\npesos = np.array([0.5, 2.0])\n# Calcule a primeira nota à mão antes de escrever os laços.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a primeira nota de `[[2, 3], [4, 6]] @ [5, 1]` usando arrays NumPy?",
+      "options": [
+        "10",
+        "13",
+        "15",
+        "26"
+      ],
+      "answer": 1,
+      "explanation": "A primeira nota é 2 × 5 + 3 × 1."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O produto matricial de (3, 2) com (3, 1) é válido porque os operandos têm três linhas.",
+      "answer": false,
+      "explanation": "As dimensões internas 2 e 3 precisam coincidir."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função NumPy que compara todos os valores dentro de tolerância.",
+      "code": "np.___(notas_laco, notas_matriz)",
+      "blanks": [
+        [
+          "allclose"
+        ]
+      ],
+      "explanation": "`allclose` testa valores numéricos dentro das tolerâncias escolhidas."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em `(5, 3) @ (3, 2)`, o que descreve a segunda dimensão da saída?",
+      "options": [
+        "As três medidas de cada amostra",
+        "Os dois conjuntos de pesos",
+        "As cinco amostras"
+      ],
+      "answer": 1,
+      "explanation": "Cada uma das duas colunas de pesos produz uma pontuação diferente por amostra."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual é a condição de dimensões para (n, p) @ (q, m)?",
+      "back": "As dimensões internas p e q devem coincidir. A saída tem forma (n, m)."
+    },
+    {
+      "front": "O que muda entre a @ pesos para pesos de forma (p,) e (p, 1)?",
+      "back": "A primeira saída é um vetor (n,) e a segunda é uma matriz coluna (n, 1)."
+    }
+  ]
+}

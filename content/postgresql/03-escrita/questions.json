@@ -1,0 +1,215 @@
+{
+  "questions": [
+    {
+      "id": "postgresql.escrita.q01",
+      "lesson": "retorno",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que parte do INSERT expõe o id da própria escrita?",
+      "options": [
+        "SELECT max(id) anterior",
+        "RETURNING id",
+        "ORDER BY id antes do insert"
+      ],
+      "answer": 1,
+      "explanation": "RETURNING está ligado às linhas afetadas pela instrução."
+    },
+    {
+      "id": "postgresql.escrita.q02",
+      "lesson": "retorno",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o trecho que devolve o estado padrão.",
+      "code": "VALUES (3,'CSS',5) ___ feita",
+      "blanks": [
+        [
+          "RETURNING"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "O PostgreSQL devolve o valor que aplicou à linha."
+    },
+    {
+      "id": "postgresql.escrita.q03",
+      "lesson": "retorno",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um rollback garante que o próximo id gerado seja exatamente o mesmo.",
+      "answer": false,
+      "explanation": "O avanço de uma sequência não é revertido com a escrita."
+    },
+    {
+      "id": "postgresql.escrita.q04",
+      "lesson": "retorno",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Por que evitar inferir o último id com contagem de linhas?",
+      "options": [
+        "COUNT nunca funciona com inteiros",
+        "Exclusões, concorrência e lacunas invalidam a inferência",
+        "O banco não gera ids"
+      ],
+      "answer": 1,
+      "explanation": "A identidade correta vem da própria operação que criou a linha."
+    },
+    {
+      "id": "postgresql.escrita.q05",
+      "lesson": "atualizar",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que filtro associa a operação a um dono e recurso específicos?",
+      "options": [
+        "WHERE aluno_id=1 OR id=2",
+        "LIMIT 1 sem filtro",
+        "WHERE aluno_id=1 AND id=2"
+      ],
+      "answer": 2,
+      "explanation": "A conjunção exige que as duas condições sejam satisfeitas na mesma linha."
+    },
+    {
+      "id": "postgresql.escrita.q06",
+      "lesson": "atualizar",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a cláusula para alterar feita.",
+      "code": "UPDATE caderno.leituras ___ feita=true WHERE id=2",
+      "blanks": [
+        [
+          "SET"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "SET define as colunas e os novos valores da alteração."
+    },
+    {
+      "id": "postgresql.escrita.q07",
+      "lesson": "atualizar",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "UPDATE sem linha correspondente sempre gera exceção de chave estrangeira.",
+      "answer": false,
+      "explanation": "É possível executar a instrução com sucesso e nenhuma linha afetada."
+    },
+    {
+      "id": "postgresql.escrita.q08",
+      "lesson": "atualizar",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que expressão adiciona cinco ao valor registrado?",
+      "options": [
+        "SET minutos=5",
+        "SET minutos=0",
+        "SET minutos=minutos+5"
+      ],
+      "answer": 2,
+      "explanation": "O lado direito usa o valor da linha antes da atribuição."
+    },
+    {
+      "id": "postgresql.escrita.q09",
+      "lesson": "transacao",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que comando confirma o conjunto de alterações?",
+      "options": [
+        "COMMIT",
+        "ROLLBACK",
+        "EXPLAIN"
+      ],
+      "answer": 0,
+      "explanation": "A confirmação conclui a transação e torna as mudanças persistentes."
+    },
+    {
+      "id": "postgresql.escrita.q10",
+      "lesson": "transacao",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a instrução que abre a transação.",
+      "code": "___; UPDATE caderno.leituras SET feita=true WHERE id=2;",
+      "blanks": [
+        [
+          "BEGIN",
+          "START TRANSACTION",
+          "BEGIN TRANSACTION",
+          "BEGIN WORK"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "BEGIN inicia um bloco explícito no PostgreSQL."
+    },
+    {
+      "id": "postgresql.escrita.q11",
+      "lesson": "transacao",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A segunda sessão lê as novas linhas de uma transação ainda sem commit em seu SELECT comum.",
+      "answer": false,
+      "explanation": "O PostgreSQL não oferece leitura suja nessa situação."
+    },
+    {
+      "id": "postgresql.escrita.q12",
+      "lesson": "transacao",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Por que recarregar os dados antes de repetir a demonstração?",
+      "options": [
+        "A demonstração confirma uma nova linha a cada execução",
+        "O psql descarta tabelas permanentes ao sair",
+        "COUNT modifica os dados"
+      ],
+      "answer": 0,
+      "explanation": "A previsão numérica pressupõe a carga inicial."
+    },
+    {
+      "id": "postgresql.escrita.q13",
+      "lesson": "desfazer",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Por que o UPDATE de 99 não permanece?",
+      "options": [
+        "A leitura tem id negativo",
+        "O rollback desfaz o bloco inteiro",
+        "O cliente arredonda 99 para 10"
+      ],
+      "answer": 1,
+      "explanation": "A primeira escrita pertencia à mesma transação que a falha."
+    },
+    {
+      "id": "postgresql.escrita.q14",
+      "lesson": "desfazer",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o código SQLSTATE de violação de chave estrangeira no exemplo.",
+      "code": "SQLSTATE ___",
+      "blanks": [
+        [
+          "23503"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "A linha de leitura referencia um aluno inexistente."
+    },
+    {
+      "id": "postgresql.escrita.q15",
+      "lesson": "desfazer",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Capturar uma exceção na aplicação por si só executa ROLLBACK no cliente pg.",
+      "answer": false,
+      "explanation": "No kit o bloco catch instrui o cliente explicitamente a desfazer."
+    },
+    {
+      "id": "postgresql.escrita.q16",
+      "lesson": "desfazer",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual observação prova o desfazimento da primeira escrita?",
+      "options": [
+        "Somente a presença de um log de erro",
+        "Após ROLLBACK a duração voltou a 10",
+        "A conexão permanece aberta"
+      ],
+      "answer": 1,
+      "explanation": "Verificar o dado persistido testa a propriedade observável."
+    }
+  ]
+}

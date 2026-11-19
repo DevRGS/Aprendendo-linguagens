@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "postgresql.integracao.f01",
+      "lesson": "conexao-api",
+      "front": "Onde a URL de conexão com senha deve ficar?",
+      "back": "No ambiente do servidor local. O servidor precisa da conexão e mantém credenciais fora do cliente."
+    },
+    {
+      "id": "postgresql.integracao.f02",
+      "lesson": "conexao-api",
+      "front": "Que comando do kit deve preparar o esquema antes de iniciar o servidor?",
+      "back": "npm run migrar. O script abre a conexão e aplica o esquema inicial."
+    },
+    {
+      "id": "postgresql.integracao.f03",
+      "lesson": "parametros",
+      "front": "Como enviar dois valores a uma consulta parametrizada com node-postgres?",
+      "back": "Marcadores posicionais e array separado. O driver envia os parâmetros separadamente do texto do comando."
+    },
+    {
+      "id": "postgresql.integracao.f04",
+      "lesson": "parametros",
+      "front": "Por que chamar pool.end() no script de uma execução?",
+      "back": "Encerrar as conexões quando a consulta terminar. O cliente deixa de manter conexões abertas depois do uso."
+    },
+    {
+      "id": "postgresql.integracao.f05",
+      "lesson": "isolamento",
+      "front": "Qual condição deve aparecer na consulta de acesso individual?",
+      "back": "usuario_id=$1 AND id=$2. A combinação liga o recurso solicitado à identidade autenticada."
+    },
+    {
+      "id": "postgresql.integracao.f06",
+      "lesson": "isolamento",
+      "front": "Qual controle positivo confirma que a tarefa ainda existe?",
+      "back": "GET com a sessão da dona retorna 200. A leitura autorizada diferencia a filtragem por dono da remoção acidental."
+    },
+    {
+      "id": "postgresql.integracao.f07",
+      "lesson": "entrega",
+      "front": "Qual camada muda principalmente no projeto de migração para PostgreSQL?",
+      "back": "Persistência e adaptação assíncrona das chamadas. O contrato público orienta os testes enquanto o banco e seu cliente mudam."
+    },
+    {
+      "id": "postgresql.integracao.f08",
+      "lesson": "entrega",
+      "front": "Que evidência demonstra simultaneamente rollback e preservação da sessão?",
+      "back": "A segunda escrita falha e uma consulta posterior encontra a sessão antiga. A falha observada e a checagem do estado posterior comprovam a atomicidade."
+    }
+  ]
+}

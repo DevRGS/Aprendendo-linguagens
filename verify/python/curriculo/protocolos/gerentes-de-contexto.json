@@ -1,0 +1,98 @@
+{
+  "title": "Contexto e limpeza de recursos",
+  "minutes": 42,
+  "intro": "Leia um arquivo pequeno e preveja se continuará aberto após sair do bloco. Retome [with e arquivos](#/python/arquivos/caminhos-e-texto), [exceções](#/python/arquivos/excecoes) e [yield](#/python/protocolos/geradores).\n\nUm recurso tem entrada, uso e liberação. `with` aciona o gerente que prepara e finaliza esse uso. O gerenciador pode lidar com a saída por erro. `try/finally` executa a limpeza ao sair do bloco, inclusive se uma exceção se propagar. Com `contextlib.contextmanager`, código antes de `yield` prepara, o valor emitido pode ser usado por `as`, e `finally` executa a liberação.\n\nOs arquivos de E1 e E2 estão nas pastas do roteiro. E2 e E3 levantam erros intencionais e os capturam após a saída do contexto. Qual saída mostraria que a limpeza aconteceu antes da captura? Depois, veja [testes unitários](#/python/qualidade/testes-unitarios).",
+  "sources": [
+    [
+      "A instrução with",
+      "https://docs.python.org/3.14/reference/compound_stmts.html#the-with-statement"
+    ],
+    [
+      "Gerentes com contextmanager",
+      "https://docs.python.org/3.14/library/contextlib.html#contextlib.contextmanager"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Leia `amostra.txt` e imprima `arquivo.closed` dentro e fora de with. Preveja as duas respostas.",
+      "code": "from pathlib import Path\n\nwith Path(\"amostra.txt\").open(encoding=\"utf-8\") as arquivo:\n    print(arquivo.read().strip())\n    print(arquivo.closed)\nprint(arquivo.closed)\n",
+      "stdout": "sessão\nFalse\nTrue",
+      "explanation": "O arquivo está aberto para leitura dentro do bloco e fechado após a saída. O nome permanece disponível para consultar seu estado.",
+      "extensions": {
+        "amostra.txt": "sessão\n"
+      }
+    },
+    {
+      "prompt": "Levante ValueError intencional dentro do bloco após ler `amostra.txt`. Capture fora e verifique se o arquivo já está fechado.",
+      "code": "from pathlib import Path\n\ntry:\n    with Path(\"amostra.txt\").open(encoding=\"utf-8\") as arquivo:\n        print(arquivo.read().strip())\n        raise ValueError(\"dado inválido\")\nexcept ValueError as erro:\n    print(erro)\n    print(\"fechado:\", arquivo.closed)\n",
+      "stdout": "sessão\ndado inválido\nfechado: True",
+      "explanation": "O gerente fecha o arquivo durante a saída por exceção e a captura externa recebe o ValueError original.",
+      "extensions": {
+        "amostra.txt": "sessão\n"
+      }
+    },
+    {
+      "prompt": "Implemente um contexto que registre início e fim. Faça uma execução normal e outra que levante ValueError no bloco. Registre o fim em ambos os casos e confirme que a exceção observada fora é a original.",
+      "code": "from contextlib import contextmanager\n\n@contextmanager\ndef registrar(eventos):\n    eventos.append(\"início\")\n    try:\n        yield\n    finally:\n        eventos.append(\"fim\")\n\nnormal = []\nwith registrar(normal):\n    normal.append(\"trabalho\")\nprint(\" / \".join(normal))\n\ncom_erro = []\nfalha = ValueError(\"dado inválido\")\ntry:\n    with registrar(com_erro):\n        raise falha\nexcept ValueError as observada:\n    print(\" / \".join(com_erro))\n    print(\"mesma exceção:\", observada is falha)\n",
+      "stdout": "início / trabalho / fim\ninício / fim\nmesma exceção: True",
+      "explanation": "A entrada registra início. Durante yield, o bloco do with roda. finally executa a limpeza nas duas saídas. Como o gerente não captura o erro, ele se propaga para o tratamento externo.",
+      "hint": "Coloque yield dentro de try e registre o fim em finally.",
+      "starter": "from contextlib import contextmanager\n\n@contextmanager\ndef registrar(eventos):\n    eventos.append(\"início\")\n    # Suspenda durante o bloco e registre o fim na saída.\n    raise NotImplementedError\n\neventos = []\n# Teste saídas normal e por ValueError.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é o valor de arquivo.closed depois de sair de um with de leitura?",
+      "options": [
+        "False",
+        "True",
+        "None"
+      ],
+      "answer": 1,
+      "explanation": "O gerenciador fecha o recurso ao sair."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um bloco finally é pulado quando ValueError é levantado no try.",
+      "answer": false,
+      "explanation": "finally executa na saída por erro e na saída normal."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a cláusula que registra a saída em cenário normal ou por erro.",
+      "code": "try:\n    yield\n___:\n    eventos.append(\"fim\")",
+      "blanks": [
+        [
+          "finally"
+        ]
+      ],
+      "explanation": "finally garante a etapa de saída nos dois caminhos."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene o caminho de um erro no corpo de `with registrar(eventos)`, até o tratamento externo.",
+      "lines": [
+        "O contexto registra início",
+        "O corpo levanta ValueError",
+        "O contexto registra fim",
+        "O except externo recebe a exceção"
+      ],
+      "explanation": "A limpeza acontece ao deixar o with, antes do tratamento que o envolve."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual o papel de yield em um contextmanager?",
+      "back": "Suspender o gerente durante o bloco do with e retomar na saída."
+    },
+    {
+      "front": "Se o corpo levantar erro, quando a limpeza precisa ocorrer?",
+      "back": "Durante a saída do contexto, antes que o tratamento externo receba o erro."
+    }
+  ]
+}

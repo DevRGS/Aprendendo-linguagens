@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com UTF-8 em modo `r`, o que `read()` devolve para o conteúdo `ação`?",
+      "options": [
+        "Uma lista com quatro caracteres",
+        "A string `ação`",
+        "Um objeto bytes"
+      ],
+      "answer": 1,
+      "explanation": "No modo texto, a leitura decodifica os bytes e entrega uma string.",
+      "id": "python.arquivos.q01",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Abrir um arquivo existente em modo `w` preserva o texto anterior.",
+      "answer": false,
+      "explanation": "w trunca o arquivo existente ao abrir. O modo x só cria arquivo novo.",
+      "id": "python.arquivos.q02",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método de Path do diretório de trabalho.",
+      "code": "from pathlib import Path\npasta = Path.___()",
+      "blanks": [
+        [
+          "cwd"
+        ]
+      ],
+      "explanation": "Path.cwd() devolve a pasta de execução.",
+      "id": "python.arquivos.q03",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Um arquivo tem uma linha de três espaços e outra com `0`. Quantas contam com `if linha.strip()`?",
+      "options": [
+        "0",
+        "1",
+        "2"
+      ],
+      "answer": 1,
+      "explanation": "Espaços e quebras somem em strip(). A string \"0\" tem conteúdo.",
+      "id": "python.arquivos.q04",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em `id,minutos` seguido de `07,03`, o que `linha[\"id\"]` contém após DictReader?",
+      "options": [
+        "O inteiro 7",
+        "A string `\"07\"`",
+        "A string `\"id\"`"
+      ],
+      "answer": 1,
+      "explanation": "A chave vem do cabeçalho. O campo continua texto.",
+      "id": "python.arquivos.q05",
+      "lesson": "csv"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`split(\",\")` interpreta vírgulas contidas em campos CSV entre aspas.",
+      "answer": false,
+      "explanation": "split separa em toda vírgula. O leitor CSV interpreta as aspas.",
+      "id": "python.arquivos.q06",
+      "lesson": "csv"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que grava os nomes das colunas de um DictWriter.",
+      "code": "escritor.___()",
+      "blanks": [
+        [
+          "writeheader"
+        ]
+      ],
+      "explanation": "writeheader grava os nomes da sequência fieldnames.",
+      "id": "python.arquivos.q07",
+      "lesson": "csv"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene as operações para somar um CSV já aberto usando a chave minutos.",
+      "lines": [
+        "Criar o DictReader do arquivo",
+        "Ler registros pelo leitor criado",
+        "Converter a duração dos registros lidos",
+        "Somar as durações convertidas"
+      ],
+      "explanation": "A conversão depende da leitura pelo cabeçalho e fornece os valores numéricos da soma.",
+      "id": "python.arquivos.q08",
+      "lesson": "csv"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que o texto JSON armazena para `{\"fim\": None}`?",
+      "options": [
+        "`\"fim\": None`",
+        "`\"fim\": null`",
+        "Omite o campo"
+      ],
+      "answer": 1,
+      "explanation": "None vira o literal null com a chave preservada.",
+      "id": "python.arquivos.q09",
+      "lesson": "json"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para `registro = {\"fim\": None}`, a expressão `\"fim\" in registro` é falsa.",
+      "answer": false,
+      "explanation": "in consulta chaves, incluindo fim.",
+      "id": "python.arquivos.q10",
+      "lesson": "json"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que lê JSON de um arquivo de texto aberto.",
+      "code": "import json\nresumo = json.___(arquivo)",
+      "blanks": [
+        [
+          "load"
+        ]
+      ],
+      "explanation": "load lê de um arquivo. loads recebe uma string.",
+      "id": "python.arquivos.q11",
+      "lesson": "json"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A ordem das chaves mudou. Como conferir se todos os campos mantiveram os valores?",
+      "options": [
+        "Comparar textos byte a byte",
+        "Carregar e comparar dicionários",
+        "Comparar somente o tamanho dos arquivos"
+      ],
+      "answer": 1,
+      "explanation": "A igualdade de dicionários compara o conteúdo completo e ignora a ordem.",
+      "id": "python.arquivos.q12",
+      "lesson": "json"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a exceção da abertura de um caminho inexistente para leitura neste laboratório?",
+      "options": [
+        "`ValueError`",
+        "`FileNotFoundError`",
+        "`StopIteration`"
+      ],
+      "answer": 1,
+      "explanation": "A abertura falha antes de acessar conteúdo.",
+      "id": "python.arquivos.q13",
+      "lesson": "excecoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Capturar ValueError em um try que contém várias operações que podem lançar essa classe identifica por si só a operação que falhou.",
+      "answer": false,
+      "explanation": "A classe sozinha não identifica a operação. Restrinja o bloco ou examine a causa.",
+      "id": "python.arquivos.q14",
+      "lesson": "excecoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a palavra-chave que vincula a causa à nova exceção.",
+      "code": "raise ValueError(\"linha inválida\") ___ erro",
+      "blanks": [
+        [
+          "from"
+        ]
+      ],
+      "explanation": "raise ... from ... encadeia a nova exceção à causa original.",
+      "id": "python.arquivos.q15",
+      "lesson": "excecoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Com linhas `0`, `-1` e `x`, o que o programa da aula deve devolver em (válidos, rejeitados, soma)?",
+      "options": [
+        "`(1, 2, -1)`",
+        "`(2, 1, -1)`",
+        "`(1, 2, 0)`"
+      ],
+      "answer": 1,
+      "explanation": "0 e -1 são convertidos. Só x falha.",
+      "id": "python.arquivos.q16",
+      "lesson": "excecoes"
+    }
+  ]
+}

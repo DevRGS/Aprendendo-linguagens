@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "html-css.documento.f01",
+      "lesson": "criar-index-html",
+      "front": "Para que serve lang no html?",
+      "back": "Declarar o idioma principal do documento."
+    },
+    {
+      "id": "html-css.documento.f02",
+      "lesson": "criar-index-html",
+      "front": "Que par de operações revela a edição feita no editor?",
+      "back": "Salvar o arquivo e recarregar a página."
+    },
+    {
+      "id": "html-css.documento.f03",
+      "lesson": "organizar-titulos",
+      "front": "Qual pergunta ajuda a escolher h2 ou h3?",
+      "back": "Esse tópico é irmão da seção atual ou está dentro dela?"
+    },
+    {
+      "id": "html-css.documento.f04",
+      "lesson": "organizar-titulos",
+      "front": "Como conferir títulos sem depender do tamanho visual?",
+      "back": "Inspecione seus níveis na árvore de acessibilidade."
+    },
+    {
+      "id": "html-css.documento.f05",
+      "lesson": "ligar-duas-paginas",
+      "front": "Como abrir um link focado usando teclado?",
+      "back": "Pressione Enter."
+    },
+    {
+      "id": "html-css.documento.f06",
+      "lesson": "ligar-duas-paginas",
+      "front": "Que evidência mostra que o retorno funciona?",
+      "back": "O endereço volta à inicial e o título principal é o do catálogo."
+    },
+    {
+      "id": "html-css.documento.f07",
+      "lesson": "descrever-imagens",
+      "front": "O que verificar além de olhar o desenho carregado?",
+      "back": "Confira seu nome na árvore de acessibilidade."
+    },
+    {
+      "id": "html-css.documento.f08",
+      "lesson": "descrever-imagens",
+      "front": "Por que “mapa.svg” costuma ser uma alternativa insuficiente?",
+      "back": "É o nome técnico do arquivo e não explica o conteúdo relevante."
+    }
+  ]
+}

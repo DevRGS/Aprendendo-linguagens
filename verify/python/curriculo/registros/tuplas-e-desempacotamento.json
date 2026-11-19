@@ -1,0 +1,97 @@
+{
+  "title": "Tuplas e desempacotamento",
+  "minutes": 25,
+  "intro": "Como manter o ID de uma leitura ligado ao seu valor? Retome [Listas e cópias](#/python/sequencias/listas). Aqui cada registro tem dois campos em ordem fixa.\n\nA tupla `(\"a\", 3)` guarda texto e número em um mesmo registro. A tupla é imutável: a posição 0 continua com o mesmo item. Em `identificador, valor = registro`, o desempacotamento liga cada nome ao item da posição correspondente. Para dois nomes, o registro precisa ter dois itens.\n\n`zip(nomes, medidas)` produz pares, um por posição. Por padrão, para assim que uma das entradas termina. Com nomes `[\"a\", \"b\"]` e medidas `[3]`, só aparece `(\"a\", 3)`. Se todos os nomes precisarem de medida, compare os comprimentos antes de combinar ou use `zip(..., strict=True)` e percorra os resultados para detectar a divergência. Nesta aula usamos listas, cujo tamanho se consulta com `len`.\n\nExplique por que o truncamento pode esconder um registro incompleto. Em [Dicionários](#/python/registros/dicionarios) você vai usar o ID para localizar um valor.",
+  "sources": [
+    [
+      "Tuplas e sequências",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#tuples-and-sequences"
+    ],
+    [
+      "Função zip e strict",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#zip"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Indique a posição de cada campo e desempacote `(\"a\", 3)` em dois nomes.",
+      "code": "registro = (\"a\", 3)\nidentificador, valor = registro\nprint(identificador, valor)",
+      "stdout": "a 3",
+      "explanation": "A ordem na atribuição é a ordem da tupla. O ID continua texto e a medida continua inteira."
+    },
+    {
+      "prompt": "Preveja quantos pares saem de duas listas com 2 e 1 itens. Mostre o resultado do zip comum e confira se os comprimentos coincidem.",
+      "code": "nomes = [\"a\", \"b\"]\nmedidas = [3]\nprint(list(zip(nomes, medidas)))\nprint(len(nomes) == len(medidas))",
+      "stdout": "[('a', 3)]\nFalse",
+      "explanation": "list materializa os pares para exibi-los. A comparação dos comprimentos revela que b ficou sem medida."
+    },
+    {
+      "prompt": "Combine os nomes A, B e C com as medidas 2, 3 e 4, na mesma ordem. Exiba cada par. Se o tamanho divergir, rejeite o lote com `Tamanhos incompatíveis`, sem imprimir pares parciais. Teste com a última medida removida.",
+      "code": "nomes = [\"A\", \"B\", \"C\"]\nmedidas = [2, 3, 4]\n\nif len(nomes) != len(medidas):\n    print(\"Tamanhos incompatíveis\")\nelse:\n    for nome, medida in zip(nomes, medidas):\n        print(nome, medida)",
+      "stdout": "A 2\nB 3\nC 4",
+      "explanation": "Comparar os tamanhos antes da iteração impede que parte do lote seja mostrada. Com duas medidas, só sai a mensagem de incompatibilidade. Duas listas vazias têm tamanhos compatíveis e produzem zero pares.",
+      "hint": "Compare os comprimentos antes de chamar zip.",
+      "starter": "nomes = [\"A\", \"B\", \"C\"]\nmedidas = [2, 3, 4]\n# Valide os tamanhos e só então mostre os pares.",
+      "checks": [
+        {
+          "code": "nomes = [\"A\", \"B\", \"C\"]\nmedidas = [2, 3]\nif len(nomes) != len(medidas):\n    print(\"Tamanhos incompatíveis\")\nelse:\n    for nome, medida in zip(nomes, medidas):\n        print(nome, medida)",
+          "stdout": "Tamanhos incompatíveis"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Depois de `codigo, total = (\"X\", 9)`, o que `print(total)` exibe?",
+      "options": [
+        "`X`",
+        "`9`",
+        "`(\"X\", 9)`"
+      ],
+      "answer": 1,
+      "explanation": "O segundo nome recebe o segundo item da tupla."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O zip comum verifica automaticamente que as listas fornecidas têm os mesmos comprimentos.",
+      "answer": false,
+      "explanation": "Por padrão ele termina na primeira entrada esgotada. Compare tamanhos ou peça a checagem explícita."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a função que combina itens de posições correspondentes.",
+      "code": "nomes = [\"a\", \"b\"]\nmedidas = [3, 4]\nprint(list(___(nomes, medidas)))",
+      "blanks": [
+        [
+          "zip"
+        ]
+      ],
+      "explanation": "zip produz tuplas por posição e list materializa o resultado."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene o processamento de dois arquivos já lidos como listas: a saída precisa ser uma lista completa de pares ou um diagnóstico.",
+      "lines": [
+        "Verificar se as listas têm tamanhos iguais e rejeitar divergência",
+        "Combinar os itens correspondentes em pares",
+        "Entregar a lista dos pares produzidos"
+      ],
+      "explanation": "A política exige verificar antes de combinar e entregar só depois da combinação."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que é desempacotar uma tupla?",
+      "back": "Atribuir seus itens, pela ordem, a vários nomes em uma única instrução."
+    },
+    {
+      "front": "O que ocorre com zip comum sobre listas de tamanhos 3 e 2?",
+      "back": "Saem dois pares. O terceiro item da lista maior fica de fora."
+    }
+  ]
+}

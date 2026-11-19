@@ -36,11 +36,23 @@ test('perfil: cabeçalho, números, linguagem, conquistas e histórico vazio', a
   assert.match(lang.textContent, /75% de acerto em 4 respostas/);
   assert.match(lang.textContent, /1 carta dominada/);
   const achievements = el.querySelectorAll('.achievement');
-  assert.equal(achievements.length, 21);
+  assert.equal(achievements.length, 22);
   assert.equal(el.querySelectorAll('.achievement.unlocked').length, 1);
   assert.match(el.querySelector('.achievement.unlocked').textContent, /Concluiu a primeira aula\.Desbloqueada em 01\/10\/2026/);
   assert.match(el.querySelector('.achievement.locked').textContent, /\(bloqueada\)/);
   assert.match(el.textContent, /Seus quizzes, práticas e provas aparecem aqui\./);
+});
+
+test('perfil: calendário mantém a meta congelada do dia após edição', async () => {
+  const state = profileState({
+    xp: { total: 20, byDay: { [today]: 20 } },
+    intensiva: { current: 1, best: 1, lastDay: today, days: { [today]: { goal: 20, reached: true, legacy: false } } },
+  });
+  state.profile.dailyGoal = 100;
+  const app = await makeTestApp({ state });
+  const el = container();
+  await renderProfile(el, app, route('perfil'));
+  assert.equal(el.querySelector('.heatmap .hm-cell:last-child').className, 'hm-cell hm-4');
 });
 
 test('perfil: calendário de 12 semanas com o dia de hoje colorido pela meta', async () => {

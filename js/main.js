@@ -2,4 +2,9 @@
 import { boot } from './app.js';
 
 document.querySelector('.skip-link')?.addEventListener('click', () => document.getElementById('main').focus());
+function syncVisibility() {
+  document.documentElement.classList.toggle('tab-hidden', document.hidden);
+}
+document.addEventListener('visibilitychange', syncVisibility);
+syncVisibility();
 boot();

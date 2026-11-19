@@ -1,0 +1,213 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a forma de `np.array([[7], [9], [8]])`?",
+      "options": [
+        "(3,)",
+        "(3, 1)",
+        "(1, 3)",
+        "(3, 3)"
+      ],
+      "answer": 1,
+      "explanation": "Três listas internas com um número cada formam três linhas por uma coluna.",
+      "id": "python.numpy.q01",
+      "lesson": "arrays"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma seleção `a[0]` de uma matriz mantém o eixo das linhas com comprimento 1.",
+      "answer": false,
+      "explanation": "O índice inteiro reduz a dimensionalidade. A fatia `a[0:1]` conserva o eixo.",
+      "id": "python.numpy.q02",
+      "lesson": "arrays"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o atributo que indica o número de dimensões.",
+      "code": "print(medidas.___)",
+      "blanks": [
+        [
+          "ndim"
+        ]
+      ],
+      "explanation": "`ndim` é 2 para uma tabela retangular e 1 para um vetor.",
+      "id": "python.numpy.q03",
+      "lesson": "arrays"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Se `a.shape == (5, 3)`, qual seleção devolve duas linhas e as três colunas?",
+      "options": [
+        "`a[:, :2]`",
+        "`a[2, :]`",
+        "`a[:2, :]`",
+        "`a[:2, 2]`"
+      ],
+      "answer": 2,
+      "explanation": "A fatia `:2` no primeiro eixo conserva as linhas das posições 0 e 1.",
+      "id": "python.numpy.q04",
+      "lesson": "arrays"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual máscara resulta de `np.array([-2, 0, 4]) >= 0`?",
+      "options": [
+        "[False, False, True]",
+        "[False, True, True]",
+        "[True, False, True]"
+      ],
+      "answer": 1,
+      "explanation": "Zero atende ao limite inclusivo.",
+      "id": "python.numpy.q05",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se `b = a[:2]` é uma fatia básica de um vetor, `b[0] = 9` também pode alterar `a`.",
+      "answer": true,
+      "explanation": "A fatia básica compartilha os dados de origem nesse exemplo.",
+      "id": "python.numpy.q06",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para editar a fatia em memória independente.",
+      "code": "b = a[:2].___()",
+      "blanks": [
+        [
+          "copy"
+        ]
+      ],
+      "explanation": "`copy()` cria um array independente para esses dados numéricos.",
+      "id": "python.numpy.q07",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma tabela de forma (4, 2) e um vetor de quatro IDs recebem a máscara [False, True, False, True]. Quais IDs ficam?",
+      "options": [
+        "As da primeira e terceira linhas",
+        "As da segunda e quarta linhas",
+        "As da segunda e terceira linhas"
+      ],
+      "answer": 1,
+      "explanation": "As posições 1 e 3, segunda e quarta, estão marcadas como verdadeiras.",
+      "id": "python.numpy.q08",
+      "lesson": "indexacao-e-mascaras"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para `[[2, 6, 4], [8, 0, 2]]`, quais são as médias com `axis=0`?",
+      "options": [
+        "[4, 10/3]",
+        "[5, 3, 3]",
+        "[2, 6, 4]",
+        "[4, 3, 3]"
+      ],
+      "answer": 1,
+      "explanation": "Cada coluna combina os valores das duas linhas.",
+      "id": "python.numpy.q09",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Subtrair um vetor de forma (3,) diretamente de uma matriz de forma (3, 2) ajusta um valor por linha.",
+      "answer": false,
+      "explanation": "As dimensões finais 3 e 2 são incompatíveis. Dê às três médias forma (3, 1).",
+      "id": "python.numpy.q10",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o parâmetro que torna o eixo reduzido de comprimento 1.",
+      "code": "medias = a.mean(axis=1, ___=True)",
+      "blanks": [
+        [
+          "keepdims"
+        ]
+      ],
+      "explanation": "`keepdims=True` preserva o eixo da agregação na forma resultante.",
+      "id": "python.numpy.q11",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual é a forma resultante de subtrair (4, 1) de (4, 3)?",
+      "options": [
+        "(4, 1)",
+        "(1, 3)",
+        "(4, 3)",
+        "As formas são incompatíveis"
+      ],
+      "answer": 2,
+      "explanation": "A dimensão final de tamanho 1 se estende às três colunas, e a dimensão anterior coincide.",
+      "id": "python.numpy.q12",
+      "lesson": "eixos-e-broadcasting"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a primeira nota de `[[2, 3], [4, 6]] @ [5, 1]` usando arrays NumPy?",
+      "options": [
+        "10",
+        "13",
+        "15",
+        "26"
+      ],
+      "answer": 1,
+      "explanation": "A primeira nota é 2 × 5 + 3 × 1.",
+      "id": "python.numpy.q13",
+      "lesson": "produto-matricial"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O produto matricial de (3, 2) com (3, 1) é válido porque os operandos têm três linhas.",
+      "answer": false,
+      "explanation": "As dimensões internas 2 e 3 precisam coincidir.",
+      "id": "python.numpy.q14",
+      "lesson": "produto-matricial"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função NumPy que compara todos os valores dentro de tolerância.",
+      "code": "np.___(notas_laco, notas_matriz)",
+      "blanks": [
+        [
+          "allclose"
+        ]
+      ],
+      "explanation": "`allclose` testa valores numéricos dentro das tolerâncias escolhidas.",
+      "id": "python.numpy.q15",
+      "lesson": "produto-matricial"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em `(5, 3) @ (3, 2)`, o que descreve a segunda dimensão da saída?",
+      "options": [
+        "As três medidas de cada amostra",
+        "Os dois conjuntos de pesos",
+        "As cinco amostras"
+      ],
+      "answer": 1,
+      "explanation": "Cada uma das duas colunas de pesos produz uma pontuação diferente por amostra.",
+      "id": "python.numpy.q16",
+      "lesson": "produto-matricial"
+    }
+  ]
+}

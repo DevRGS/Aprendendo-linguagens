@@ -1,0 +1,95 @@
+{
+  "title": "Registros com dataclasses",
+  "minutes": 39,
+  "intro": "Modele dois registros com ID e valor. Preveja como a igualdade funciona se os campos são iguais e os objetos foram criados separadamente. Retome [instâncias](#/python/objetos/instancias) e [leitura de CSV](#/python/arquivos/csv).\n\nOs campos anotados de uma classe decorada com `@dataclass` definem parâmetros do inicializador gerado. Com as opções padrão, a igualdade de instâncias da mesma classe compara seus campos. Anotações descrevem os tipos, e a validação dos dados vindos de fora ainda deve ser escrita. `field(default_factory=list)` chama `list()` para cada instância criada sem valor para aquele campo.\n\nA entrada E3 está na pasta do exercício no kit e é criada na preparação do caderno. Qual consequência tem converter um ID com zeros à esquerda? Depois, veja [composição](#/python/objetos/composicao-e-polimorfismo).",
+  "sources": [
+    [
+      "Campos, igualdade e fábrica de valores",
+      "https://docs.python.org/3.14/library/dataclasses.html"
+    ],
+    [
+      "Números de ponto flutuante finitos",
+      "https://docs.python.org/3.14/library/math.html#math.isfinite"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Defina Medida(id, valor) e crie dois registros iguais. Compare igualdade por conteúdo e identidade.",
+      "code": "from dataclasses import dataclass\n\n@dataclass\nclass Medida:\n    id: str\n    valor: float\n\na = Medida(\"007\", 3.5)\nb = Medida(\"007\", 3.5)\nprint(a == b, a is b)\n",
+      "stdout": "True False",
+      "explanation": "Os dois objetos têm os mesmos campos, então são iguais pelo __eq__ gerado. Cada construção cria sua própria instância."
+    },
+    {
+      "prompt": "Guarde uma lista de marcas em cada medição. Adicione uma marca só à primeira e preveja a segunda lista.",
+      "code": "from dataclasses import dataclass, field\n\n@dataclass\nclass Medicao:\n    id: str\n    marcas: list[str] = field(default_factory=list)\n\na = Medicao(\"a\")\nb = Medicao(\"b\")\na.marcas.append(\"revista\")\nprint(a.marcas, b.marcas)\n",
+      "stdout": "['revista'] []",
+      "explanation": "A fábrica executa list() para cada valor padrão. Modificar a primeira lista não altera a segunda."
+    },
+    {
+      "prompt": "Leia `medicoes.csv` e converta seus dois registros em Medida. Mantenha ID textual e aceite apenas valores numéricos finitos. Mostre cada ID e valor. Pela mesma função, teste e capture `ValueError` para uma linha com valor inválido.",
+      "code": "import csv\nfrom dataclasses import dataclass\nfrom math import isfinite\nfrom pathlib import Path\n\n@dataclass\nclass Medida:\n    id: str\n    valor: float\n\ndef converter(linha):\n    valor = float(linha[\"valor\"])\n    if not isfinite(valor):\n        raise ValueError(\"valor deve ser finito\")\n    return Medida(linha[\"id\"], valor)\n\nwith Path(\"medicoes.csv\").open(encoding=\"utf-8\", newline=\"\") as arquivo:\n    medidas = [converter(linha) for linha in csv.DictReader(arquivo)]\nfor medida in medidas:\n    print(medida.id, medida.valor)\n\ntry:\n    converter({\"id\": \"003\", \"valor\": \"NaN\"})\nexcept ValueError as erro:\n    print(f\"rejeitado: {erro}\")\n",
+      "stdout": "001 3.5\n002 0.0\nrejeitado: valor deve ser finito",
+      "explanation": "O CSV fornece campos de texto. float converte valor e rejeita texto não numérico. isfinite rejeita NaN e infinitos, que float aceita. Zero é válido e o ID conserva os zeros iniciais.",
+      "hint": "Converta só `valor`. Depois confirme se o número é finito.",
+      "starter": "import csv\nfrom dataclasses import dataclass\nfrom math import isfinite\nfrom pathlib import Path\n\n@dataclass\nclass Medida:\n    id: str\n    valor: float\n\ndef converter(linha):\n    # Converta e valide valor, preserve id e crie a Medida.\n    raise NotImplementedError\n\nwith Path(\"medicoes.csv\").open(encoding=\"utf-8\", newline=\"\") as arquivo:\n    medidas = [converter(linha) for linha in csv.DictReader(arquivo)]\nprint(medidas)\n",
+      "extensions": {
+        "medicoes.csv": "id,valor\n001,3.5\n002,0\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com as opções padrão da aula, o que resulta de `Medida(\"a\", 2.0) == Medida(\"a\", 2.0)`?",
+      "options": [
+        "False",
+        "True",
+        "TypeError"
+      ],
+      "answer": 1,
+      "explanation": "O __eq__ gerado compara os campos de instâncias da mesma classe."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Anotar `valor: float` em uma dataclass obriga o inicializador a rejeitar qualquer valor textual.",
+      "answer": false,
+      "explanation": "A anotação descreve o tipo. A conversão e a validação em execução foram definidas em converter."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o argumento de field que recebe uma fábrica de listas independentes.",
+      "code": "marcas: list[str] = field(___=list)",
+      "blanks": [
+        [
+          "default_factory"
+        ]
+      ],
+      "explanation": "default_factory chama list sem argumentos a cada valor padrão criado."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que o conversor da aula não aceita `valor=\"inf\"`?",
+      "options": [
+        "float sempre dá SyntaxError para essa string",
+        "float aceita a entrada, mas isfinite retorna False",
+        "inf torna o ID inteiro automaticamente"
+      ],
+      "answer": 1,
+      "explanation": "O contrato exige valor finito. A validação vem depois de float."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quais métodos básicos @dataclass pode gerar?",
+      "back": "Com a configuração padrão, gera inicialização, representação e igualdade a partir dos campos, se aplicável."
+    },
+    {
+      "front": "Por que usar default_factory=list para um campo de lista?",
+      "back": "A função fabrica uma lista distinta para cada instância que omite o campo."
+    }
+  ]
+}

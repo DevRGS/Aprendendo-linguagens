@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "machine-learning.regressao.f01",
+      "lesson": "atributos",
+      "front": "Em X.shape, o que significa o primeiro número?",
+      "back": "O número de observações."
+    },
+    {
+      "id": "machine-learning.regressao.f02",
+      "lesson": "atributos",
+      "front": "No exemplo com paradas, por que V08 continua válida com distância ausente?",
+      "back": "O modelo dessa aula recebe somente paradas, um atributo conhecido para V08."
+    },
+    {
+      "id": "machine-learning.regressao.f03",
+      "lesson": "ajuste",
+      "front": "Como conferir a inclinação usando predict?",
+      "back": "Subtraia a previsão para duas paradas da previsão para três."
+    },
+    {
+      "id": "machine-learning.regressao.f04",
+      "lesson": "ajuste",
+      "front": "Por que uma associação na reta exige cuidado causal?",
+      "back": "Outros fatores podem estar associados tanto às paradas quanto à duração."
+    },
+    {
+      "id": "machine-learning.regressao.f05",
+      "lesson": "previsoes",
+      "front": "Por que predict dispensa y da viagem nova?",
+      "back": "O alvo é justamente o valor ainda desconhecido no instante de uso."
+    },
+    {
+      "id": "machine-learning.regressao.f06",
+      "lesson": "previsoes",
+      "front": "O que comparar antes de interpretar a diferença entre dois MAEs?",
+      "back": "Confira a unidade, os IDs da janela e a correspondência de cada par."
+    },
+    {
+      "id": "machine-learning.regressao.f07",
+      "lesson": "residuos",
+      "front": "O que significa resíduo positivo?",
+      "back": "A duração medida excede a estimativa."
+    },
+    {
+      "id": "machine-learning.regressao.f08",
+      "lesson": "residuos",
+      "front": "O que se perde calculando só o valor absoluto?",
+      "back": "A direção do erro, que distingue superestimação de subestimação."
+    }
+  ]
+}

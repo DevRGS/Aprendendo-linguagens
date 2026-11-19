@@ -1,6 +1,7 @@
 import { h, mount } from './dom.js';
 import { APP_NAME } from '../config.js';
 import { levelInfo, displayStreak } from '../core/gamification.js';
+import { resumoIntensiva } from '../core/intensiva.js';
 import { isDue } from '../core/srs.js';
 import { toDayKey } from '../core/dates.js';
 
@@ -8,6 +9,7 @@ const NAV = [
   { route: 'home', href: '#/', icon: '🏠', label: 'Início' },
   { route: 'quiz', href: '#/quiz', icon: '🎯', label: 'Quiz' },
   { route: 'flashcards', href: '#/flashcards', icon: '🧠', label: 'Flashcards', badge: true },
+  { route: 'projetos', href: '#/projetos', icon: '🧰', label: 'Projetos' },
   { route: 'perfil', href: '#/perfil', icon: '👤', label: 'Perfil' },
   { route: 'config', href: '#/config', icon: '⚙️', label: 'Config' },
 ];
@@ -51,7 +53,7 @@ export function createLayout(app) {
         h('span', { class: 'brand-icon', 'aria-hidden': 'true', text: '</>' }),
         h('span', { class: 'brand-name', text: APP_NAME })),
       profile ? h('div', { class: 'topbar-stats' },
-        goalRing(state.xp.byDay[today] ?? 0, profile.dailyGoal),
+        goalRing(state.xp.byDay[today] ?? 0, resumoIntensiva(state, today).goal),
         h('span', { class: 'pill', title: 'Sequência de dias' }, '🔥 ', h('strong', { text: String(displayStreak(state.streak, today)) })),
         h('span', { class: 'pill pill-level', title: `${info.title} · ${state.xp.total} XP` }, '⭐ Nv ', h('strong', { text: String(info.level) })),
         h('a', { class: 'avatar', href: '#/perfil', 'aria-label': `Perfil de ${profile.name}`, text: profile.avatar })) : null);
@@ -86,8 +88,8 @@ export function createLayout(app) {
     if (banners.delete(id)) renderBanners();
   }
 
-  function toast(text, { tone = 'info', timeout = 4000 } = {}) {
-    const el = h('div', { class: `toast toast-${tone}`, text });
+  function toast(text, { tone = 'info', timeout = 4000, figure = null } = {}) {
+    const el = h('div', { class: `toast toast-${tone}${figure ? ' toast-byte' : ''}` }, figure, text);
     toastBox.append(el);
     setTimeout(() => {
       el.classList.add('leaving');

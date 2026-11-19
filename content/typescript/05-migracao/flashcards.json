@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "typescript.migracao.f01",
+      "lesson": "contrato-http",
+      "front": "Que status o teste original espera na criação válida?",
+      "back": "201. A criação devolve o registro novo com Location."
+    },
+    {
+      "id": "typescript.migracao.f02",
+      "lesson": "contrato-http",
+      "front": "Qual dado é tão importante quanto o JSON para o contrato da criação?",
+      "back": "O cabeçalho Location. Clientes podem seguir o endereço retornado."
+    },
+    {
+      "id": "typescript.migracao.f03",
+      "lesson": "rota-vertical",
+      "front": "Qual valor deve entrar no caso de uso como identidade do usuário?",
+      "back": "req.session.id. A autenticação determina o dono no servidor."
+    },
+    {
+      "id": "typescript.migracao.f04",
+      "lesson": "rota-vertical",
+      "front": "Que efeito evidencia validação real de um corpo inválido?",
+      "back": "400 e quantidade de tarefas inalterada. Verificar a resposta e o estado comprova a recusa em tempo de execução."
+    },
+    {
+      "id": "typescript.migracao.f05",
+      "lesson": "testes-contrato",
+      "front": "Como enviar texto que deliberadamente não fecha um objeto no helper dos testes?",
+      "back": "Com a opção raw. raw passa o texto diretamente ao corpo da requisição."
+    },
+    {
+      "id": "typescript.migracao.f06",
+      "lesson": "testes-contrato",
+      "front": "Como distinguir falha de sintaxe JSON e falha de domínio com o mesmo status HTTP?",
+      "back": "Conferir erro.codigo. O contrato devolve JSON e VALIDACAO como códigos de aplicação distintos."
+    },
+    {
+      "id": "typescript.migracao.f07",
+      "lesson": "reproducao",
+      "front": "Que arquivo permite reproduzir a instalação com npm ci?",
+      "back": "package-lock.json junto de package.json. O lock registra as versões concretas coerentes com o manifesto."
+    },
+    {
+      "id": "typescript.migracao.f08",
+      "lesson": "reproducao",
+      "front": "Qual conjunto de evidências mostra a migração completa do recorte?",
+      "back": "Compilação estrita e testes HTTP válidos, inválidos e entre contas. As evidências precisam cobrir tanto o sistema de tipos quanto o comportamento público."
+    }
+  ]
+}

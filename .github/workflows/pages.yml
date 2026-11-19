@@ -33,9 +33,28 @@ jobs:
       - name: Conferência dos trechos Java
         run: node tools/verify-java.mjs
 
+  python:
+    name: Python 3.14 em ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+      - name: Instalar bibliotecas da trilha
+        run: python -m pip install -r verify/python/requirements.txt
+      - name: Conferir aulas, cadernos e kits
+        run: python tools/python-course.py check
+      - name: Executar exemplos e casos de borda
+        run: python tools/python-course.py run
+
   publicar:
     if: github.event_name != 'pull_request'
-    needs: testes
+    needs: [testes, python]
     runs-on: ubuntu-latest
     permissions:
       contents: read

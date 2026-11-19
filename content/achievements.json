@@ -8,6 +8,7 @@
   { "id": "sequencia-7", "name": "Uma semana firme", "icon": "🔥", "description": "Estudou 7 dias seguidos.", "hint": "Estude 7 dias seguidos." },
   { "id": "sequencia-30", "name": "Um mês firme", "icon": "📅", "description": "Estudou 30 dias seguidos.", "hint": "Estude 30 dias seguidos." },
   { "id": "sequencia-100", "name": "Cem dias", "icon": "💎", "description": "Estudou 100 dias seguidos.", "hint": "Estude 100 dias seguidos." },
+  { "id": "intensiva-7", "name": "Intensiva de sete dias", "icon": "🗓️", "description": "Alcançou sua meta diária por sete dias consecutivos.", "hint": "Complete a meta de XP em sete dias seguidos." },
   { "id": "meta-7", "name": "Meta cumprida", "icon": "🎯", "description": "Bateu a meta diária em 7 dias.", "hint": "Bata sua meta diária de XP em 7 dias (não precisam ser seguidos)." },
   { "id": "poliglota", "name": "Poliglota", "icon": "🌎", "description": "Concluiu aulas de 3 linguagens diferentes.", "hint": "Conclua aulas em 3 linguagens." },
   { "id": "na-ponta-da-lingua", "name": "Na ponta da língua", "icon": "👅", "description": "Dominou a primeira carta.", "hint": "Leve uma carta ao nível 6 respondendo \"Fácil\" nas revisões." },

@@ -1,0 +1,92 @@
+{
+  "title": "Seleções e colunas derivadas",
+  "minutes": 50,
+  "intro": "Você precisa filtrar viagens longas e calcular tempo por quilômetro. Decida o que a saída deve mostrar para uma viagem de distância zero.\n\nRetome [Ler e inspecionar](#/python/pandas/ler-e-inspecionar) e use pandas. As tabelas são criadas no código.\n\n`loc` seleciona por rótulos e aceita uma máscara booleana alinhada pelo índice. `iloc` usa posições inteiras começando em zero. Com índices de 10, 30 e 50, `loc[30]` e `iloc[1]` selecionam a segunda linha. Faça uma cópia para acrescentar uma coluna sem editar a origem. Para calcular a taxa, torne ausentes os denominadores zero antes da divisão.",
+  "sources": [
+    [
+      "Seleção de dados tabulares",
+      "https://pandas.pydata.org/docs/getting_started/intro_tutorials/03_subset_data.html"
+    ],
+    [
+      "Método Series.where",
+      "https://pandas.pydata.org/docs/reference/api/pandas.Series.where.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Quais viagens têm pelo menos 5 km? Faça uma máscara e selecione os IDs com loc.",
+      "code": "import pandas as pd\n\nviagens = pd.DataFrame({\"id\": [\"a\", \"b\", \"c\"], \"km\": [4, 5, 9]})\nmascara = viagens[\"km\"] >= 5\nprint(viagens.loc[mascara, \"id\"].tolist())\n",
+      "stdout": "['b', 'c']",
+      "explanation": "A máscara inclui a viagem no limite. O segundo argumento seleciona a coluna de ID."
+    },
+    {
+      "prompt": "Use índices 10, 30 e 50. Ache a segunda linha pelo rótulo e pela posição. Compare com a tentativa intencionalmente errada de usar loc[1].",
+      "code": "import pandas as pd\n\nviagens = pd.DataFrame({\"id\": [\"a\", \"b\", \"c\"], \"km\": [4, 5, 9]}, index=[10, 30, 50])\nprint(viagens.loc[30, \"id\"], viagens.iloc[1, 0])\ntry:\n    viagens.loc[1]\nexcept KeyError:\n    print(\"KeyError: rótulo 1 ausente\")\n",
+      "stdout": "b b\nKeyError: rótulo 1 ausente",
+      "explanation": "Use iloc[1] quando 1 indica posição. Como o rótulo 1 está ausente, loc[1] gera a exceção."
+    },
+    {
+      "prompt": "Acrescente a coluna min_por_km em uma cópia. No caso de 0 km, a taxa deve ficar ausente. Confira que a tabela original segue com as duas colunas iniciais.",
+      "code": "import pandas as pd\n\noriginal = pd.DataFrame({\"km\": [5, 0, 2], \"minutos\": [15, 3, 8]})\ntaxas = original.copy()\ndistancias = taxas[\"km\"].where(taxas[\"km\"] != 0)\ntaxas[\"min_por_km\"] = taxas[\"minutos\"] / distancias\nprint(taxas[\"min_por_km\"].dropna().tolist())\nprint(\"Índice da taxa ausente:\", taxas.index[taxas[\"min_por_km\"].isna()].tolist())\nassert original.columns.tolist() == [\"km\", \"minutos\"]\nassert pd.isna(taxas.loc[1, \"min_por_km\"])\n",
+      "stdout": "[3.0, 4.0]\nÍndice da taxa ausente: [1]",
+      "explanation": "A unidade é min/km. where conserva valores com condição verdadeira e marca os demais como ausentes. A distância permanece zero e somente a taxa fica ausente. A seguir, veja como ausentes afetam resumos.",
+      "hint": "Prepare os denominadores antes de dividir. Que condição preserva valores diferentes de zero?",
+      "starter": "import pandas as pd\n\noriginal = pd.DataFrame({\"km\": [5, 0, 2], \"minutos\": [15, 3, 8]})\ntaxas = original.copy()\n# Prepare os denominadores e faça a divisão.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O índice contém [20, 10, 30]. Qual rótulo df.iloc[1] seleciona?",
+      "options": [
+        "20",
+        "10",
+        "30"
+      ],
+      "answer": 1,
+      "explanation": "A posição 1 é a segunda posição, cujo rótulo é 10."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Com índices [20, 10, 30], df.loc[1] seleciona a segunda linha.",
+      "answer": false,
+      "explanation": "O rótulo 1 não existe. Para a segunda posição, use df.iloc[1]."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Selecione apenas os IDs que atendem à máscara.",
+      "code": "df.___[mascara, \"id\"]",
+      "blanks": [
+        [
+          "loc"
+        ]
+      ],
+      "explanation": "loc aceita a máscara alinhada com o índice e o rótulo da coluna."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A viagem demora 8 min para percorrer 2 km. Qual é o tempo por distância?",
+      "options": [
+        "0,25 min/km",
+        "4 km/min",
+        "4 min/km"
+      ],
+      "answer": 2,
+      "explanation": "Divida minutos por quilômetros."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual seletor usa posições?",
+      "back": "iloc usa posições começando em zero. loc usa rótulos."
+    },
+    {
+      "front": "Como representar min/km para uma linha com 0 km?",
+      "back": "Torne ausente a razão para a linha de distância zero. Preserve o dado original."
+    }
+  ]
+}

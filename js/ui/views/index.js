@@ -9,10 +9,12 @@ import { renderExam } from './exam.js';
 import { renderFlashcards } from './flashcards.js';
 import { renderProfile } from './profile.js';
 import { renderCertificate } from './certificate.js';
+import { renderProjects } from './projects.js';
 import { renderSettings } from './settings.js';
 
 export const VIEWS = {
   home: renderHome,
+  projetos: renderProjects,
   notFound: renderNotFound,
   language: renderLanguage,
   lesson: renderLesson,

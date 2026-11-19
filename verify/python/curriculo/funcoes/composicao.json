@@ -1,0 +1,105 @@
+{
+  "title": "Composição de funções",
+  "minutes": 38,
+  "intro": "Onde investigar se um relatório mostra o nome certo mas a soma errada? Você vai passar o resultado de uma função à seguinte e testar cada etapa. Retome [Contratos e tipos](#/python/funcoes/contratos-e-tipos) e [Resumo de lote](#/python/registros/resumo-de-lote).\n\nSepare a obtenção dos dados, a transformação e a apresentação. Nesta aula os dados de entrada já estão em uma lista. No começo da composição, `limpar_nome(\" Lia \")` devolve `\"Lia\"`. Em seguida `gerar_etiqueta(\"Lia\")` devolve `\"Nome: Lia\"`. O código que chama decide quando imprimir. A saída de uma etapa precisa respeitar o formato que a seguinte recebe.\n\nFunções também podem ser argumentos. Em `sorted(registros, key=duracao)`, passe a função pelo nome, sem parênteses. sorted chama `duracao` para cada registro e usa seu retorno para ordenar. Chamar `duracao(registro)` no lugar do argumento key passaria um valor e perderia a regra.\n\nTeste limpeza sem somar e teste soma com nomes já limpos. Se cada etapa tiver uma entrada conhecida, você consegue descobrir em qual delas o resultado mudou. Na próxima aula a entrada vai chegar de um arquivo.",
+  "sources": [
+    [
+      "Parâmetros nomeados",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#keyword-arguments"
+    ],
+    [
+      "Guia de ordenação e funções chave",
+      "https://docs.python.org/pt-br/3.14/howto/sorting.html#key-functions"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o retorno da limpeza e a etiqueta final para um nome com espaços. Execute a composição e exiba a etiqueta.",
+      "code": "def limpar_nome(texto):\n    return texto.strip()\n\ndef gerar_etiqueta(nome):\n    return f\"Nome: {nome}\"\n\nprint(gerar_etiqueta(limpar_nome(\" Lia \")))",
+      "stdout": "Nome: Lia",
+      "explanation": "A chamada interna devolve Lia e a externa cria a etiqueta. print trabalha com o texto final."
+    },
+    {
+      "prompt": "Compare a ordem inicial com a ordem esperada por duração crescente. Forneça uma função key que leia a duração de cada registro.",
+      "code": "def duracao(registro):\n    tema, minutos = registro\n    return minutos\n\nregistros = [(\"Água\", 6), (\"Luz\", 3), (\"Som\", 4)]\nordenados = sorted(registros, key=duracao)\nprint(ordenados)",
+      "stdout": "[('Luz', 3), ('Som', 4), ('Água', 6)]",
+      "explanation": "sorted obtém 6, 3 e 4 chamando duracao nos registros e devolve uma lista ordenada por esses números."
+    },
+    {
+      "prompt": "Separe a limpeza dos temas, a soma de minutos e a apresentação em funções. Use [(\" Água \", 2), (\"água\", 4), (\"LUZ\", 3)] e mostre minutos por tema normalizado pela ordem de `sorted`, além do total. Confira cada etapa com entrada própria: a limpeza recebe [(\" SOM \", 0)] e a soma recebe [(\"luz\", 2), (\"luz\", 0), (\"luz\", 1)]. No lote vazio, mostre apenas total zero.",
+      "code": "def normalizar(registros):\n    return [(tema.strip().lower(), minutos) for tema, minutos in registros]\n\ndef somar_por_tema(registros):\n    totais = {}\n    for tema, minutos in registros:\n        totais[tema] = totais.get(tema, 0) + minutos\n    return totais\n\ndef apresentar(totais):\n    for tema in sorted(totais):\n        print(f\"{tema}: {totais[tema]} min\")\n    print(f\"Total: {sum(totais.values())} min\")\n\nregistros = [(\" Água \", 2), (\"água\", 4), (\"LUZ\", 3)]\napresentar(somar_por_tema(normalizar(registros)))",
+      "stdout": "luz: 3 min\nágua: 6 min\nTotal: 9 min",
+      "explanation": "normalizar tira espaços e converte os nomes em minúsculas. somar_por_tema reúne nomes iguais. apresentar usa a ordem de sorted, que compara textos por pontos de código. Assim, luz precede água. Os dois testes isolam a limpeza para som e a soma 3 para luz. Com lote vazio, não há temas e sum dos subtotais devolve 0.",
+      "hint": "Faça a primeira função devolver pares. A segunda recebe esses pares e devolve o dicionário que a terceira mostra.",
+      "starter": "registros = [(\" Água \", 2), (\"água\", 4), (\"LUZ\", 3)]\n\ndef normalizar(registros):\n    pass\n\ndef somar_por_tema(registros):\n    pass\n\ndef apresentar(totais):\n    pass\n\n# Componha as funções passando adiante cada retorno.",
+      "checks": [
+        {
+          "code": "def normalizar(registros):\n    return [(tema.strip().lower(), minutos) for tema, minutos in registros]\n\nprint(normalizar([(\" SOM \", 0)]))",
+          "stdout": "[('som', 0)]"
+        },
+        {
+          "code": "def somar_por_tema(registros):\n    totais = {}\n    for tema, minutos in registros:\n        totais[tema] = totais.get(tema, 0) + minutos\n    return totais\n\nprint(somar_por_tema([(\"luz\", 2), (\"luz\", 0), (\"luz\", 1)]))",
+          "stdout": "{'luz': 3}"
+        },
+        {
+          "code": "def normalizar(registros):\n    return [(tema.strip().lower(), minutos) for tema, minutos in registros]\n\ndef somar_por_tema(registros):\n    totais = {}\n    for tema, minutos in registros:\n        totais[tema] = totais.get(tema, 0) + minutos\n    return totais\n\ndef apresentar(totais):\n    for tema in sorted(totais):\n        print(f\"{tema}: {totais[tema]} min\")\n    print(f\"Total: {sum(totais.values())} min\")\n\nregistros = []\napresentar(somar_por_tema(normalizar(registros)))",
+          "stdout": "Total: 0 min"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `limpar(' Lia ')` retorna `'Lia'` e `tag(nome)` retorna `f'[{nome}]'`, o que produz `tag(limpar(' Lia '))`?",
+      "options": [
+        "`'[ Lia ]'`",
+        "`'[Lia]'`",
+        "`'Lia'`"
+      ],
+      "answer": 1,
+      "explanation": "A função interna remove os espaços antes de entregar o nome a tag."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para ordenar por uma função `duracao`, passar `key=duracao(registro)` fornece a regra para sorted aplicar a todos os itens.",
+      "answer": false,
+      "explanation": "Essa expressão chama a função uma vez. Use `key=duracao` para passar a função em si."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome da função que retorna o segundo campo para a ordenação.",
+      "code": "def duracao(registro):\n    return registro[1]\n\nprint(sorted([('A', 6), ('B', 3)], key=___))",
+      "blanks": [
+        [
+          "duracao"
+        ]
+      ],
+      "explanation": "O parâmetro key recebe a função. Seu retorno numérico de cada item determina a ordenação."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas de um relatório em que nomes com espaços diferentes devem contar como o mesmo tema.",
+      "lines": [
+        "Normalizar os nomes dos registros recebidos",
+        "Somar os minutos por nome normalizado",
+        "Apresentar os subtotais calculados"
+      ],
+      "explanation": "O agrupamento precisa dos nomes limpos e a apresentação precisa dos subtotais."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que uma etapa precisa devolver para que possa ser composta com outra?",
+      "back": "Um valor no formato que a etapa seguinte espera receber."
+    },
+    {
+      "front": "Como verificar a função de soma sem depender da limpeza?",
+      "back": "Passe registros já normalizados e compare os subtotais com os valores esperados."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "typescript.entradas.f01",
+      "lesson": "unknown",
+      "front": "Que tipo exige refinar antes de acessar membros arbitrários?",
+      "back": "unknown. unknown impede pressupor a estrutura do valor."
+    },
+    {
+      "id": "typescript.entradas.f02",
+      "lesson": "unknown",
+      "front": "O que ocorre com JSON.parse de um texto contendo apenas uma chave de abertura?",
+      "back": "O parse lança um erro de sintaxe. A sintaxe deve ser tratada antes da validação do formato."
+    },
+    {
+      "id": "typescript.entradas.f03",
+      "lesson": "estrutura",
+      "front": "Por que verificar v !== null após typeof v === 'object'?",
+      "back": "null também produz object em typeof. O teste explícito permite acessar chaves com segurança."
+    },
+    {
+      "id": "typescript.entradas.f04",
+      "lesson": "estrutura",
+      "front": "Que caso básico ainda passa no exemplo antes da variação?",
+      "back": "{titulo:' '}. O código inicial exige string, mas ainda não verifica conteúdo após trim."
+    },
+    {
+      "id": "typescript.entradas.f05",
+      "lesson": "entrada-registro",
+      "front": "Quem fornece o id persistido no contrato da API?",
+      "back": "O banco durante a criação. O recurso atribui a identidade depois de validar a entrada."
+    },
+    {
+      "id": "typescript.entradas.f06",
+      "lesson": "entrada-registro",
+      "front": "Qual campo só aparece no resultado desta demonstração?",
+      "back": "id. id é atribuído no salvamento e titulo já está na entrada."
+    },
+    {
+      "id": "typescript.entradas.f07",
+      "lesson": "converter",
+      "front": "O que salvar para a entrada '  Git ' ao seguir esse contrato?",
+      "back": "O texto Git. O título é aparado uma única vez antes da gravação."
+    },
+    {
+      "id": "typescript.entradas.f08",
+      "lesson": "converter",
+      "front": "Que caso testa precisamente o primeiro comprimento rejeitado acima do máximo?",
+      "back": "121 unidades de comprimento. O limite superior 120 é inclusivo."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Onde a saída de print aparece no caderno?",
+      "back": "Na região de saída abaixo da célula executada.",
+      "id": "python.inicio.f01",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "front": "O que duas chamadas de print produzem em `print(\"A\")` seguido de `print(\"B\")`?",
+      "back": "Duas linhas, primeiro A e depois B.",
+      "id": "python.inicio.f02",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "front": "O que acontece em `minutos = minutos + 5`?",
+      "back": "O lado direito lê o valor anterior, calcula a soma e só depois o nome recebe o resultado.",
+      "id": "python.inicio.f03",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "front": "Quais são os tipos de `0`, `0.0`, `'0'` e `False`?",
+      "back": "int, float, str e bool, respectivamente.",
+      "id": "python.inicio.f04",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "front": "O que `//` e `%` fornecem para 135 e 60?",
+      "back": "Com esses inteiros positivos, // fornece o quociente 2 e % fornece o resto 15.",
+      "id": "python.inicio.f05",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "front": "O que `f'{7.5:.2f}'` produz?",
+      "back": "O texto 7.50, com exatamente duas casas decimais.",
+      "id": "python.inicio.f06",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "front": "Qual é o tipo devolvido por `input()`?",
+      "back": "str, mesmo que a pessoa tenha digitado apenas dígitos.",
+      "id": "python.inicio.f07",
+      "lesson": "entrada-e-erros"
+    },
+    {
+      "front": "O que acontece ao executar `int('doze')`?",
+      "back": "A conversão levanta ValueError porque o texto não representa um inteiro no formato esperado.",
+      "id": "python.inicio.f08",
+      "lesson": "entrada-e-erros"
+    }
+  ]
+}

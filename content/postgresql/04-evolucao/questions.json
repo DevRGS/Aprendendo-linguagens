@@ -1,0 +1,213 @@
+{
+  "questions": [
+    {
+      "id": "postgresql.evolucao.q01",
+      "lesson": "migracao",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual comando altera a estrutura de uma tabela existente?",
+      "options": [
+        "ALTER TABLE",
+        "UPDATE de uma linha",
+        "SELECT DISTINCT"
+      ],
+      "answer": 0,
+      "explanation": "ALTER TABLE descreve mudanças no esquema."
+    },
+    {
+      "id": "postgresql.evolucao.q02",
+      "lesson": "migracao",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a cláusula para criar prioridade.",
+      "code": "ALTER TABLE caderno.leituras ___ COLUMN prioridade integer",
+      "blanks": [
+        [
+          "ADD"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "ADD COLUMN acrescenta uma nova coluna."
+    },
+    {
+      "id": "postgresql.evolucao.q03",
+      "lesson": "migracao",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "O rollback do ensaio também remove a restrição criada na mesma transação.",
+      "answer": true,
+      "explanation": "A mudança de esquema nesta demonstração é transacional."
+    },
+    {
+      "id": "postgresql.evolucao.q04",
+      "lesson": "migracao",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que consulta verifica o preenchimento das linhas antigas?",
+      "options": [
+        "Agrupar por prioridade e contar",
+        "Apenas consultar o horário atual",
+        "Contar alunos de outra tabela"
+      ],
+      "answer": 0,
+      "explanation": "O grupo e sua quantidade evidenciam o valor das linhas já existentes."
+    },
+    {
+      "id": "postgresql.evolucao.q05",
+      "lesson": "carga",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual função gera diretamente os inteiros de 1 a 100?",
+      "options": [
+        "count(100)",
+        "generate_series(1,100)",
+        "random() sem limite"
+      ],
+      "answer": 1,
+      "explanation": "generate_series produz as linhas de origem para o INSERT SELECT."
+    },
+    {
+      "id": "postgresql.evolucao.q06",
+      "lesson": "carga",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o operador de concatenação de texto do PostgreSQL.",
+      "code": "SELECT 'Série ' ___ n FROM generate_series(1,3) AS dados(n)",
+      "blanks": [
+        [
+          "||"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "As duas barras verticais formam o operador de concatenação."
+    },
+    {
+      "id": "postgresql.evolucao.q07",
+      "lesson": "carga",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "É melhor calcular o número de linhas inseridas observando apenas o maior id.",
+      "answer": false,
+      "explanation": "Lacunas e outras linhas podem invalidar essa inferência; filtre e conte."
+    },
+    {
+      "id": "postgresql.evolucao.q08",
+      "lesson": "carga",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Como preservar os dados de referência após o ensaio?",
+      "options": [
+        "COMMIT seguido de sair do terminal",
+        "ROLLBACK ao fim do bloco",
+        "Encerrar a consulta SELECT com LIMIT"
+      ],
+      "answer": 1,
+      "explanation": "O rollback desfaz as inserções do bloco."
+    },
+    {
+      "id": "postgresql.evolucao.q09",
+      "lesson": "plano",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual opção faz a consulta rodar para medir as linhas reais?",
+      "options": [
+        "Apenas escrever o nome da tabela",
+        "LIMIT 0 como medição equivalente",
+        "ANALYZE dentro de EXPLAIN"
+      ],
+      "answer": 2,
+      "explanation": "EXPLAIN ANALYZE executa e acrescenta dados observados."
+    },
+    {
+      "id": "postgresql.evolucao.q10",
+      "lesson": "plano",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o comando que mostra o plano sem executar a consulta comum.",
+      "code": "___ SELECT tema FROM caderno.leituras",
+      "blanks": [
+        [
+          "EXPLAIN"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "A forma simples obtém o plano estimado."
+    },
+    {
+      "id": "postgresql.evolucao.q11",
+      "lesson": "plano",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Os custos exibidos pelo planejador são diretamente milissegundos.",
+      "answer": false,
+      "explanation": "Os custos são unidades do modelo de planejamento; o tempo real é informado separadamente."
+    },
+    {
+      "id": "postgresql.evolucao.q12",
+      "lesson": "plano",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "O que ajuda a conferir a cardinalidade observada da consulta?",
+      "options": [
+        "Uma contagem de todas as tabelas do banco",
+        "O maior id gerado",
+        "Uma contagem com o mesmo filtro"
+      ],
+      "answer": 2,
+      "explanation": "O filtro igual torna os conjuntos comparáveis."
+    },
+    {
+      "id": "postgresql.evolucao.q13",
+      "lesson": "indice",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Por que manter idêntica a consulta ao comparar os planos?",
+      "options": [
+        "Para observar o efeito das condições de indexação na mesma tarefa",
+        "Para obrigar o PostgreSQL a usar o índice",
+        "Para que os tempos sejam idênticos"
+      ],
+      "answer": 0,
+      "explanation": "Variar filtro e índice juntos dificulta explicar diferenças."
+    },
+    {
+      "id": "postgresql.evolucao.q14",
+      "lesson": "indice",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a instrução que atualiza estatísticas da tabela.",
+      "code": "___ caderno.leituras;",
+      "blanks": [
+        [
+          "ANALYZE",
+          "ANALYSE"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "As estatísticas ajudam o planejador a estimar cardinalidades."
+    },
+    {
+      "id": "postgresql.evolucao.q15",
+      "lesson": "indice",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Criar um índice garante que toda consulta usará esse índice.",
+      "answer": false,
+      "explanation": "O planejador compara custos e pode preferir a leitura sequencial."
+    },
+    {
+      "id": "postgresql.evolucao.q16",
+      "lesson": "indice",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que filtro é mais seletivo na amostra de 5003 linhas?",
+      "options": [
+        "aluno_id=1",
+        "aluno_id=3",
+        "Ausência de WHERE"
+      ],
+      "answer": 0,
+      "explanation": "Na carga proposta o primeiro seleciona duas linhas e o segundo seleciona 5000."
+    }
+  ]
+}

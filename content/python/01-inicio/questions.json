@@ -1,0 +1,214 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que aparece ao executar `print(\"Bom dia\")`?",
+      "options": [
+        "`\"Bom dia\"` com as aspas",
+        "`Bom dia` sem as aspas",
+        "`print(\"Bom dia\")` inteiro"
+      ],
+      "answer": 1,
+      "explanation": "As aspas delimitam o argumento no código. A saída contém apenas o texto e a quebra de linha.",
+      "id": "python.inicio.q01",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Editar `exemplo.py` no editor, sem salvar, atualiza o arquivo que o terminal executará.",
+      "answer": false,
+      "explanation": "O terminal executa a versão salva no disco. Salve antes de repetir o comando.",
+      "id": "python.inicio.q02",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome da função que mostra o texto na saída.",
+      "code": "___(\"Revisão\")",
+      "blanks": [
+        [
+          "print"
+        ]
+      ],
+      "explanation": "A função print mostra o argumento na região de saída.",
+      "id": "python.inicio.q03",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas para ver no terminal uma mensagem nova digitada no editor.",
+      "lines": [
+        "Alterar o texto entre aspas no editor",
+        "Salvar a versão alterada de exemplo.py",
+        "Executar o arquivo salvo pelo terminal"
+      ],
+      "explanation": "A execução pelo terminal lê a versão no disco, então a edição precede o salvamento e o salvamento precede a execução.",
+      "id": "python.inicio.q04",
+      "lesson": "primeira-execucao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que sai de `saldo = 5`, depois `saldo = saldo + 4`, depois `print(saldo)`?",
+      "options": [
+        "`4`",
+        "`9`",
+        "`54`"
+      ],
+      "answer": 1,
+      "explanation": "A expressão lê o 5 atual, soma o inteiro 4 e liga o nome saldo a 9.",
+      "id": "python.inicio.q05",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A expressão `\"2\" + 3` soma dois inteiros e produz 5.",
+      "answer": false,
+      "explanation": "O primeiro operando é texto. Para somar numericamente, você precisa usar 2 ou converter o texto para int.",
+      "id": "python.inicio.q06",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o literal booleano que indica conclusão.",
+      "code": "concluida = ___\nprint(concluida)",
+      "blanks": [
+        [
+          "True"
+        ]
+      ],
+      "explanation": "True é um literal bool. Entre aspas, a mesma palavra seria texto.",
+      "id": "python.inicio.q07",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O identificador de mapa é o texto `\"08\"`. Qual operação repete esse identificador preservando o zero inicial?",
+      "options": [
+        "`\"08\" * 2`",
+        "`8 * 2`",
+        "`\"08\" + 2`",
+        "`\"08\" + \"2\"`"
+      ],
+      "answer": 0,
+      "explanation": "A repetição do texto inteiro produz 0808. Operações numéricas não preservam o zero inicial da representação.",
+      "id": "python.inicio.q08",
+      "lesson": "nomes-e-tipos"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quais são os valores de `75 // 60` e `75 % 60`, nessa ordem?",
+      "options": [
+        "`15` e `1`",
+        "`1.25` e `15`",
+        "`1` e `15`"
+      ],
+      "answer": 2,
+      "explanation": "Cabe um grupo de 60 em 75 e sobram 15.",
+      "id": "python.inicio.q09",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Quem espera 24 de `2 + 6 * 3` precisa pôr a soma entre parênteses.",
+      "answer": true,
+      "explanation": "A multiplicação vem primeiro na expressão original e o resultado é 20. Use `(2 + 6) * 3` para obter 24.",
+      "id": "python.inicio.q10",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o operador que obtém o resto inteiro para esse caso.",
+      "code": "sobras = 26 ___ 10\nprint(sobras)",
+      "blanks": [
+        [
+          "%"
+        ]
+      ],
+      "explanation": "O operador % calcula o resto. Depois de dois grupos de 10, sobram 6.",
+      "id": "python.inicio.q11",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Com `total = 2.5`, qual expressão cria o texto `2.50` para uma etiqueta?",
+      "options": [
+        "`f\"{total:.1f}\"`",
+        "`f\"{total:.2f}\"`",
+        "`f\"{total}\"`",
+        "`f\"{total:.0f}\"`"
+      ],
+      "answer": 1,
+      "explanation": "A formatação .2f fixa duas casas decimais no texto, inclusive o zero final.",
+      "id": "python.inicio.q12",
+      "lesson": "contas-e-formatacao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se você digitar `07` em `entrada = input()`, qual valor ficará em `entrada`?",
+      "options": [
+        "O inteiro `7`",
+        "O texto `\"07\"`",
+        "O texto `\"7\"`",
+        "O float `7.0`"
+      ],
+      "answer": 1,
+      "explanation": "input devolve o texto digitado e preserva o zero inicial.",
+      "id": "python.inicio.q13",
+      "lesson": "entrada-e-erros"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 2,
+      "prompt": "Qual correção permite executar `print(\"Total)`?",
+      "options": [
+        "Trocar print por prin",
+        "Acrescentar parênteses depois de Total",
+        "Fechar o texto com aspas antes do parêntese"
+      ],
+      "answer": 2,
+      "explanation": "A string está aberta. Com as aspas e o parêntese fechados, a chamada pode ser analisada e executada.",
+      "id": "python.inicio.q14",
+      "lesson": "entrada-e-erros"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome que converte o texto digitado em inteiro.",
+      "code": "texto = input()\nnumero = ___(texto)\nprint(numero + 1)",
+      "blanks": [
+        [
+          "int"
+        ]
+      ],
+      "explanation": "int converte representações como '12' em inteiros.",
+      "id": "python.inicio.q15",
+      "lesson": "entrada-e-erros"
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene a leitura e o cálculo para obter o dobro de um inteiro digitado.",
+      "lines": [
+        "texto = input()",
+        "quantidade = int(texto)",
+        "print(quantidade * 2)"
+      ],
+      "explanation": "A conversão depende do texto lido e a multiplicação depende do inteiro convertido.",
+      "id": "python.inicio.q16",
+      "lesson": "entrada-e-erros"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "inicio",
+    "dir": "01-inicio",
+    "title": "Primeiros programas",
+    "lessons": [
+      "primeira-execucao",
+      "nomes-e-tipos",
+      "contas-e-formatacao",
+      "entrada-e-erros"
+    ]
+  },
+  {
+    "id": "fluxo",
+    "dir": "02-fluxo",
+    "title": "Decisões e repetições",
+    "lessons": [
+      "comparacoes",
+      "condicoes",
+      "for-e-acumuladores",
+      "while-e-parada"
+    ]
+  },
+  {
+    "id": "sequencias",
+    "dir": "03-sequencias",
+    "title": "Texto, sequências e mutabilidade",
+    "lessons": [
+      "texto-e-fatias",
+      "listas",
+      "percorrer-e-filtrar",
+      "compreensoes"
+    ]
+  },
+  {
+    "id": "registros",
+    "dir": "04-registros",
+    "title": "Registros e agregações",
+    "lessons": [
+      "tuplas-e-desempacotamento",
+      "dicionarios",
+      "conjuntos",
+      "resumo-de-lote"
+    ]
+  },
+  {
+    "id": "funcoes",
+    "dir": "05-funcoes",
+    "title": "Funções e contratos",
+    "lessons": [
+      "parametros-e-retorno",
+      "escopo-e-padroes",
+      "contratos-e-tipos",
+      "composicao"
+    ]
+  },
+  {
+    "id": "arquivos",
+    "dir": "06-arquivos",
+    "title": "Arquivos e erros",
+    "lessons": [
+      "caminhos-e-texto",
+      "csv",
+      "json",
+      "excecoes"
+    ]
+  },
+  {
+    "id": "projetos",
+    "dir": "07-projetos",
+    "title": "Organização e reprodução",
+    "lessons": [
+      "modulos-e-imports",
+      "ambiente-e-pacotes",
+      "entrada-do-programa",
+      "pipeline-de-arquivos"
+    ]
+  },
+  {
+    "id": "objetos",
+    "dir": "08-objetos",
+    "title": "Objetos e modelagem",
+    "lessons": [
+      "instancias",
+      "dataclasses",
+      "composicao-e-polimorfismo",
+      "modelo-ou-funcao"
+    ]
+  },
+  {
+    "id": "protocolos",
+    "dir": "09-protocolos",
+    "title": "Iteração e recursos",
+    "lessons": [
+      "iteradores",
+      "geradores",
+      "decoradores",
+      "gerentes-de-contexto"
+    ]
+  },
+  {
+    "id": "qualidade",
+    "dir": "10-qualidade",
+    "title": "Qualidade e eficiência",
+    "lessons": [
+      "testes-unitarios",
+      "depuracao",
+      "custo-de-operacoes",
+      "reprodutibilidade"
+    ]
+  },
+  {
+    "id": "matematica",
+    "dir": "11-matematica",
+    "title": "Matemática e estatística em Python",
+    "lessons": [
+      "vetores",
+      "centro-e-dispersao",
+      "frequencia-e-probabilidade",
+      "precisao-e-escalas"
+    ]
+  },
+  {
+    "id": "numpy",
+    "dir": "12-numpy",
+    "title": "Computação com NumPy",
+    "lessons": [
+      "arrays",
+      "indexacao-e-mascaras",
+      "eixos-e-broadcasting",
+      "produto-matricial"
+    ]
+  },
+  {
+    "id": "pandas",
+    "dir": "13-pandas",
+    "title": "Tabelas com pandas",
+    "lessons": [
+      "ler-e-inspecionar",
+      "selecionar-e-transformar",
+      "agregar",
+      "juntar-tabelas"
+    ]
+  },
+  {
+    "id": "exploracao",
+    "dir": "14-exploracao",
+    "title": "Auditoria e exploração",
+    "lessons": [
+      "qualidade-dos-dados",
+      "distribuicoes",
+      "relacoes",
+      "relatorio-visual"
+    ]
+  },
+  {
+    "id": "preparacao-ml",
+    "dir": "15-preparacao-ml",
+    "title": "Preparação para machine learning",
+    "lessons": [
+      "observacao-atributo-alvo",
+      "particoes",
+      "ajustar-e-aplicar",
+      "referencia-e-erro"
+    ]
+  },
+  {
+    "id": "projeto",
+    "dir": "16-projeto",
+    "title": "Projeto de conclusão",
+    "lessons": [
+      "auditar",
+      "preparar",
+      "interpretar",
+      "reproduzir"
+    ]
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "title": "Dispersão e correlação",
+  "minutes": 50,
+  "intro": "Uma nuvem de pontos cresce da esquerda para a direita. Que tipo de relação ela sugere? E se todos os pontos estiverem na mesma altura?\n\nUse NumPy e Matplotlib. Retome [Quartis e histogramas](#/python/exploracao/distribuicoes) para lembrar figura, eixos e PNG. As atividades usam pares sintéticos no código.\n\nEm um gráfico de dispersão, cada ponto é uma observação com duas medidas. A correlação de Pearson resume associação linear de −1 a 1. Uma coluna constante tem desvio zero e torna o coeficiente indefinido. Relações curvas podem produzir correlação perto de zero. Uma associação observada pode ter fatores em comum e não estabelece uma causa por si só.",
+  "sources": [
+    [
+      "Correlação de Pearson no NumPy",
+      "https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html"
+    ],
+    [
+      "Dispersão no Matplotlib",
+      "https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.scatter.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Acople [1, 2, 3] km a [2, 4, 6] min e calcule a correlação linear. Preveja o sinal.",
+      "code": "import numpy as np\n\nx = [1, 2, 3]\ny = [2, 4, 6]\nprint(f\"r = {np.corrcoef(x, y)[0, 1]:.1f}\")\n",
+      "stdout": "r = 1.0",
+      "explanation": "A matriz de correlação usa a posição [0, 1] para o par x e y, que cresce como uma reta."
+    },
+    {
+      "prompt": "Troque y por [4, 4, 4]. Detecte desvio zero antes de calcular e apresente o estado do coeficiente.",
+      "code": "import numpy as np\n\nx = [1, 2, 3]\ny = [4, 4, 4]\nif np.std(x) == 0 or np.std(y) == 0:\n    print(\"r indefinido\")\nelse:\n    print(np.corrcoef(x, y)[0, 1])\n",
+      "stdout": "r indefinido",
+      "explanation": "A divisão necessária para normalizar a correlação teria denominador zero."
+    },
+    {
+      "prompt": "Compare pontos de dois sensores fictícios nos ajustes [-2,-1,0,1,2]. O sensor 1 lê o próprio ajuste e o sensor 2 lê seu quadrado. Salve dois gráficos com unidades arbitrárias, liste os pares e explique o caso de borda de variáveis relacionadas com r igual a zero.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.array([-2, -1, 0, 1, 2])\nfig, axes = plt.subplots(1, 2, layout=\"constrained\")\nfor ax, y, titulo in zip(axes, [x, x**2], [\"Reta\", \"Curva\"], strict=True):\n    r = np.corrcoef(x, y)[0, 1]\n    print(f\"{titulo}: r = {r:.1f}\", list(zip(x.tolist(), y.tolist(), strict=True)))\n    ax.scatter(x, y, marker=\"o\", edgecolors=\"black\")\n    ax.set(xlabel=\"Ajuste (u.a.)\", ylabel=\"Leitura (u.a.)\", title=titulo)\nfig.savefig(\"relacoes.png\")\nplt.close(fig)\nassert np.isclose(np.corrcoef(x, x**2)[0, 1], 0, atol=1e-9)\n",
+      "stdout": "Reta: r = 1.0 [(-2, -2), (-1, -1), (0, 0), (1, 1), (2, 2)]\nCurva: r = 0.0 [(-2, 4), (-1, 1), (0, 0), (1, 1), (2, 4)]",
+      "explanation": "Na figura da esquerda os pontos formam uma reta crescente. À direita formam um U simétrico, com correlação linear zero e relação matemática exata. Os pares escritos permitem reconstruir os gráficos. Em dados observacionais, mesmo r alto pode refletir um terceiro fator. A próxima aula liga o gráfico à pergunta.",
+      "hint": "Compare a simetria dos pares com x negativo e positivo no segundo painel.",
+      "starter": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.array([-2, -1, 0, 1, 2])\n# Compare x com x e com x**2 usando dois gráficos de dispersão.\n",
+      "images": [
+        "relacoes.png"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para x=[1, 2, 3] e y=[9, 6, 3], qual r faz sentido?",
+      "options": [
+        "1",
+        "−1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "Os pontos formam uma reta decrescente."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em y=[7, 7, 7], a correlação com x=[1, 2, 3] é zero.",
+      "answer": false,
+      "explanation": "Com desvio zero o coeficiente é indefinido."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método que desenha uma nuvem de pontos.",
+      "code": "ax.___(x, y)",
+      "blanks": [
+        [
+          "scatter"
+        ]
+      ],
+      "explanation": "scatter representa cada observação pela posição em dois eixos."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A correlação linear em duas medidas variáveis vale zero. O que ainda pode ocorrer?",
+      "options": [
+        "Os dados são todos ausentes",
+        "Há relação não linear entre as medidas",
+        "A dispersão de uma coordenada é nula"
+      ],
+      "answer": 1,
+      "explanation": "Pearson resume a relação linear. Uma curva simétrica, por exemplo, pode ter r zero."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Que informação cada ponto de um gráfico de dispersão guarda?",
+      "back": "As duas medidas da mesma observação, uma em cada eixo."
+    },
+    {
+      "front": "Por que não atribuir causa quando r está perto de 1?",
+      "back": "Um fator comum ou a forma de coleta pode explicar a associação observada."
+    }
+  ]
+}

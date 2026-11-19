@@ -1,0 +1,92 @@
+{
+  "title": "Ajustar no treino e aplicar a regra",
+  "minutes": 50,
+  "intro": "A distância de uma viagem de validação está ausente. Você tem alguns valores no treino e um valor alto na validação. De quais observações virá o preenchimento?\n\nRetome [Treino, validação e teste](#/python/preparacao-ml/particoes) e [Precisão e escalas](#/python/matematica/precisao-e-escalas). Os exercícios usam a biblioteca padrão, guardam a saída do último em JSON e criam os dados de entrada no código.\n\nAjustar é calcular parâmetros a partir dos exemplos de treino. Aplicar é preencher e transformar com esses valores já calculados. A mediana dos valores observados no treino preenche ausentes nas três partições. Para escala mínimo-máximo, subtraia o mínimo do treino e divida pela amplitude do treino. Se a amplitude for zero, esta aula define escalados como zero. Valores novos podem ficar fora de [0, 1].",
+  "sources": [
+    [
+      "Pré-processamento e vazamento",
+      "https://scikit-learn.org/stable/common_pitfalls.html"
+    ],
+    [
+      "Mediana",
+      "https://docs.python.org/pt-br/3.14/library/statistics.html#statistics.median"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Ache a mediana dos valores observados em [2, 4, ausente, 6].",
+      "code": "from statistics import median\n\ntreino = [2, 4, None, 6]\nobservados = [km for km in treino if km is not None]\nprint(median(observados))\n",
+      "stdout": "4",
+      "explanation": "A mediana usa três números observados. A célula ausente não entra no cálculo."
+    },
+    {
+      "prompt": "A validação é [100, ausente]. Compare preencher com 4, da mediana do treino, e com a mediana local.",
+      "code": "from statistics import median\n\nvalidacao = [100, None]\nlocal = median(km for km in validacao if km is not None)\nfor valor in (4, local):\n    print([valor if km is None else km for km in validacao])\n",
+      "stdout": "[100, 4]\n[100, 100]",
+      "explanation": "O preenchimento com a mediana local aprende sobre o conjunto reservado. Reuse a mediana do treino."
+    },
+    {
+      "prompt": "Implemente ajustar e aplicar separadamente. Salve e recarregue parâmetros de [2,4,ausente,6]. Troque somente um valor de teste e confirme que o JSON guardado se mantém. Cubra amplitude zero e treino todo ausente.",
+      "code": "import json\nimport math\nfrom pathlib import Path\nfrom statistics import median\n\ndef ajustar(treino):\n    observados = [km for km in treino if km is not None]\n    if not observados:\n        raise ValueError(\"treino sem km observados\")\n    return {\"mediana\": median(observados), \"minimo\": min(observados), \"maximo\": max(observados)}\n\ndef aplicar(lote, params):\n    amplitude = params[\"maximo\"] - params[\"minimo\"]\n    preenchidos = [params[\"mediana\"] if km is None else km for km in lote]\n    return [(km - params[\"minimo\"]) / amplitude if amplitude else 0.0 for km in preenchidos]\n\ntreino = [2, 4, None, 6]\ncaminho = Path(\"parametros.json\")\ncaminho.write_text(json.dumps(ajustar(treino), sort_keys=True), encoding=\"utf-8\")\nantes = caminho.read_text(encoding=\"utf-8\")\nparams = json.loads(antes)\nprint(aplicar([None, 8], params))\nprint(aplicar([None, 12], params))\nassert json.dumps(ajustar(treino), sort_keys=True) == antes\nassert caminho.read_text(encoding=\"utf-8\") == antes\nassert math.isclose(aplicar([None], params)[0], 0.5, abs_tol=1e-6)\nassert aplicar([None, 9], ajustar([4, None, 4])) == [0.0, 0.0]\ntry:\n    ajustar([None])\nexcept ValueError as erro:\n    print(erro)\n",
+      "stdout": "[0.5, 1.5]\n[0.5, 2.5]\ntreino sem km observados",
+      "explanation": "A troca de km altera apenas o escalado da segunda linha de teste. A min-max do treino pode produzir 2,5 e não recorta valores. Uma coluna constante mapeia todos os valores para zero pela regra explícita. A próxima aula usa o alvo de treino para uma previsão de referência.",
+      "hint": "Ajustar pode receber só o treino. Aplicar recebe um lote e os parâmetros que já foram congelados.",
+      "starter": "from statistics import median\n\ntreino = [2, 4, None, 6]\nteste = [None, 8]\n# Separe o ajuste, a transformação e a persistência dos parâmetros.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Treino observado tem 4, 6 e 8. Como preencher uma ausência na validação se a política é mediana de treino?",
+      "options": [
+        "4",
+        "6",
+        "A média da validação"
+      ],
+      "answer": 1,
+      "explanation": "A mediana do treino observado é 6."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Para verificar desempenho em dados reservados, cada partição deve ajustar seus próprios parâmetros.",
+      "answer": false,
+      "explanation": "As etapas reservadas reutilizam parâmetros de treino. Ajustar localmente muda o procedimento e pode vazar informação."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o teste com tolerância absoluta da escala observada.",
+      "code": "math.isclose(esperado, observado, ___=1e-6)",
+      "blanks": [
+        [
+          "abs_tol"
+        ]
+      ],
+      "explanation": "abs_tol define diferença absoluta tolerada."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Treino varia de 2 a 8 e teste traz km=14. Com escala min-max sem recorte, o que sai?",
+      "options": [
+        "1",
+        "2",
+        "12"
+      ],
+      "answer": 1,
+      "explanation": "O valor é (14 − 2) / (8 − 2) = 2."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual a diferença entre ajustar e aplicar?",
+      "back": "Ajustar aprende parâmetros a partir do treino. Aplicar usa parâmetros já aprendidos numa partição."
+    },
+    {
+      "front": "Como tratar treino com todos os km ausentes?",
+      "back": "Interrompa com mensagem explícita, pois não há valores para definir mediana e amplitude."
+    }
+  ]
+}

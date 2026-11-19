@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que é dimensão de um vetor?",
+      "back": "Quantidade de coordenadas.",
+      "id": "python.matematica.f01",
+      "lesson": "vetores"
+    },
+    {
+      "front": "Para que serve strict=True em zip?",
+      "back": "Detectar sequências de comprimentos diferentes ao consumir o resultado.",
+      "id": "python.matematica.f02",
+      "lesson": "vetores"
+    },
+    {
+      "front": "Como calcular a amplitude?",
+      "back": "Maior valor menos o menor.",
+      "id": "python.matematica.f03",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "front": "Qual o mínimo de dados para statistics.stdev?",
+      "back": "Dois valores, pois a variância amostral divide por n−1.",
+      "id": "python.matematica.f04",
+      "lesson": "centro-e-dispersao"
+    },
+    {
+      "front": "Qual o denominador de uma proporção conjunta?",
+      "back": "O total do conjunto observado.",
+      "id": "python.matematica.f05",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "front": "A frequência de 20 lançamentos deve ser igual à probabilidade?",
+      "back": "Ela pode variar. Compare as duas e diga de quantas observações a frequência veio.",
+      "id": "python.matematica.f06",
+      "lesson": "frequencia-e-probabilidade"
+    },
+    {
+      "front": "Que parâmetro ajuda a comparar perto de zero?",
+      "back": "Uma tolerância absoluta coerente com a unidade e a precisão pretendida.",
+      "id": "python.matematica.f07",
+      "lesson": "precisao-e-escalas"
+    },
+    {
+      "front": "Por que tratar amplitude zero antes de dividir?",
+      "back": "Uma coluna constante teria denominador zero. Defina uma regra explícita.",
+      "id": "python.matematica.f08",
+      "lesson": "precisao-e-escalas"
+    }
+  ]
+}

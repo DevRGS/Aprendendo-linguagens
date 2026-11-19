@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "html-css.layout.f01",
+      "lesson": "observar-o-fluxo-normal",
+      "front": "Que diferença se observa ao reduzir a largura dos parágrafos?",
+      "back": "As linhas quebram e a altura necessária tende a aumentar."
+    },
+    {
+      "id": "html-css.layout.f02",
+      "lesson": "observar-o-fluxo-normal",
+      "front": "Qual artigo não recebe a margem de article + article?",
+      "back": "O primeiro do grupo."
+    },
+    {
+      "id": "html-css.layout.f03",
+      "lesson": "alinhar-com-flexbox",
+      "front": "Para que serve gap?",
+      "back": "Definir espaçamento entre os itens ou linhas do layout."
+    },
+    {
+      "id": "html-css.layout.f04",
+      "lesson": "alinhar-com-flexbox",
+      "front": "Qual é o eixo principal de flex-direction: column na escrita horizontal usual?",
+      "back": "O eixo vertical."
+    },
+    {
+      "id": "html-css.layout.f05",
+      "lesson": "distribuir-cartoes-em-grade",
+      "front": "Para que serve o inspetor de grade?",
+      "back": "Visualizar os limites e acompanhar a distribuição dos itens."
+    },
+    {
+      "id": "html-css.layout.f06",
+      "lesson": "distribuir-cartoes-em-grade",
+      "front": "Como descrever 1fr no exemplo de colunas iguais?",
+      "back": "Cada trilha recebe uma fração igual do espaço distribuível."
+    },
+    {
+      "id": "html-css.layout.f07",
+      "lesson": "adaptar-a-largura",
+      "front": "Por que usar uma coluna como padrão?",
+      "back": "Manter o conteúdo legível quando o espaço é limitado."
+    },
+    {
+      "id": "html-css.layout.f08",
+      "lesson": "adaptar-a-largura",
+      "front": "O que pode acontecer ao ampliar a página a 200%?",
+      "back": "A área disponível em pixels CSS diminui e o layout pode reorganizar-se."
+    }
+  ]
+}

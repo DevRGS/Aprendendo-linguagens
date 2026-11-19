@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "postgresql.esquema.q01",
+      "lesson": "conectar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual programa recebe os comandos com barra invertida nesta aula?",
+      "options": [
+        "psql",
+        "O console JavaScript",
+        "O compilador TypeScript"
+      ],
+      "answer": 0,
+      "explanation": "Esses metacomandos são processados pelo cliente psql."
+    },
+    {
+      "id": "postgresql.esquema.q02",
+      "lesson": "conectar",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete o metacomando de saída do psql.",
+      "code": "\\___",
+      "blanks": [
+        [
+          "q"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "O cliente encerra a sessão com barra invertida seguida de q."
+    },
+    {
+      "id": "postgresql.esquema.q03",
+      "lesson": "conectar",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Encerrar o cliente elimina os dados confirmados no servidor.",
+      "answer": false,
+      "explanation": "A persistência pertence ao banco, não ao tempo de vida do psql."
+    },
+    {
+      "id": "postgresql.esquema.q04",
+      "lesson": "conectar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que nome qualificado funciona mesmo sem configurar search_path?",
+      "options": [
+        "caderno.alunos",
+        "alunos.caderno",
+        "central_lab.psql"
+      ],
+      "answer": 0,
+      "explanation": "O nome qualificado da relação começa pelo esquema."
+    },
+    {
+      "id": "postgresql.esquema.q05",
+      "lesson": "tabelas",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que palavra restringe a tabela criada à sessão?",
+      "options": [
+        "UNIQUE",
+        "TEMP",
+        "ORDER"
+      ],
+      "answer": 1,
+      "explanation": "CREATE TEMP TABLE cria uma relação temporária."
+    },
+    {
+      "id": "postgresql.esquema.q06",
+      "lesson": "tabelas",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a restrição que torna tema obrigatório e impede valor nulo.",
+      "code": "tema text NOT ___",
+      "blanks": [
+        [
+          "NULL"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "NOT NULL recusa o marcador nulo."
+    },
+    {
+      "id": "postgresql.esquema.q07",
+      "lesson": "tabelas",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Uma tabela criada dentro de uma transação pode desaparecer se essa transação for desfeita.",
+      "answer": true,
+      "explanation": "As operações DDL desta demonstração participam da transação."
+    },
+    {
+      "id": "postgresql.esquema.q08",
+      "lesson": "tabelas",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual declaração identifica unicamente cada linha de rascunho?",
+      "options": [
+        "tema text",
+        "id integer PRIMARY KEY",
+        "TEMP isoladamente"
+      ],
+      "answer": 1,
+      "explanation": "A chave primária combina identificação única e ausência de nulos."
+    },
+    {
+      "id": "postgresql.esquema.q09",
+      "lesson": "tipos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual tipo representa um estado verdadeiro ou falso?",
+      "options": [
+        "text por obrigação",
+        "timestamp",
+        "boolean"
+      ],
+      "answer": 2,
+      "explanation": "A coluna feita aceita os valores lógicos do banco."
+    },
+    {
+      "id": "postgresql.esquema.q10",
+      "lesson": "tipos",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a função de inspeção do tipo de uma expressão.",
+      "code": "SELECT ___(true);",
+      "blanks": [
+        [
+          "pg_typeof"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "pg_typeof informa boolean para true."
+    },
+    {
+      "id": "postgresql.esquema.q11",
+      "lesson": "tipos",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "No PostgreSQL, 30/60 com ambos os operandos inteiros resulta em zero.",
+      "answer": true,
+      "explanation": "A divisão inteira trunca o resultado em direção a zero."
+    },
+    {
+      "id": "postgresql.esquema.q12",
+      "lesson": "tipos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual expressão preserva a fração de 30 minutos em horas?",
+      "options": [
+        "30/60 entre inteiros",
+        "30 % 60 como conversão de horas",
+        "30/60.0"
+      ],
+      "answer": 2,
+      "explanation": "O literal decimal desencadeia a divisão numérica com fração."
+    },
+    {
+      "id": "postgresql.esquema.q13",
+      "lesson": "restricoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual restrição impede cadastrar uma leitura para aluno inexistente?",
+      "options": [
+        "FOREIGN KEY com REFERENCES",
+        "ORDER BY",
+        "LIMIT"
+      ],
+      "answer": 0,
+      "explanation": "A referência exige linha correspondente na tabela de alunos."
+    },
+    {
+      "id": "postgresql.esquema.q14",
+      "lesson": "restricoes",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a cláusula que restringe os minutos a um valor positivo.",
+      "code": "minutos integer NOT NULL ___ (minutos > 0)",
+      "blanks": [
+        [
+          "CHECK"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "CHECK avalia a condição na inserção ou alteração."
+    },
+    {
+      "id": "postgresql.esquema.q15",
+      "lesson": "restricoes",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Uma falha de chave estrangeira se resolve criando um id de leitura maior.",
+      "answer": false,
+      "explanation": "A referência que falta é o aluno, independentemente do id da leitura."
+    },
+    {
+      "id": "postgresql.esquema.q16",
+      "lesson": "restricoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que comando encerra e desfaz a transação após o erro?",
+      "options": [
+        "ROLLBACK",
+        "SELECT",
+        "EXPLAIN"
+      ],
+      "answer": 0,
+      "explanation": "O rollback libera a sessão do estado de transação abortada."
+    }
+  ]
+}

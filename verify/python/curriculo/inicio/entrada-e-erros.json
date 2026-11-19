@@ -1,0 +1,125 @@
+{
+  "title": "Entrada e erros",
+  "minutes": 28,
+  "intro": "Se alguém digita 12, o que você precisa fazer antes de somar 1? Você vai ler texto, convertê-lo e aprender por onde começar a investigar um erro. Retome [Nomes e tipos](#/python/inicio/nomes-e-tipos) para rever a diferença entre texto e inteiro.\n\n`input()` espera uma linha e devolve o texto digitado sem a quebra de linha. Ao digitar 12, o valor lido é `\"12\"`. A chamada `int(\"12\")` devolve o inteiro 12. O programa então consegue calcular 12 + 1. No caderno o pedido aparece sob a célula, na área de entrada do kernel. No terminal, digite quando o programa estiver aguardando. Estes exemplos usam `input()` sem mensagem de prompt e o enunciado indica cada entrada.\n\nQuando surge um erro, leia a última linha da mensagem para localizar a classe, como `ValueError`. Leia também a linha do código apontada pelo intérprete. Um erro pode impedir a análise do programa (`SyntaxError`) ou surgir durante uma instrução analisada com sucesso (`NameError`, por exemplo).\n\n**Exemplo intencionalmente incorreto:** em `prin(\"ola mundo)` a string está aberta. Confira numa célula descartável ou num arquivo separado. Fechar a string em `prin(\"ola mundo\")` revela o `NameError` numa sessão nova, pois `prin` não foi definido. A correção `print(\"ola mundo\")` exibe `ola mundo`. Compare a classe do erro, pois a mensagem detalhada pode variar.\n\nExplique por que digitar `doze` não equivale a digitar `12` para `int`. O tratamento automático de entradas inválidas vem no [módulo Arquivos e erros](#/python/arquivos/excecoes).",
+  "sources": [
+    [
+      "Função input",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#input"
+    ],
+    [
+      "Conversão para int",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#int"
+    ],
+    [
+      "Sintaxe, exceções e últimas linhas",
+      "https://docs.python.org/pt-br/3.14/tutorial/errors.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Quando a execução esperar a entrada, digite `12` e confirme com Enter. Transcrição da prática: você digita `12` e o programa escreve `13`. Antes de rodar, diga em que momento surge um inteiro.",
+      "code": "texto = input()\nnumero = int(texto)\nprint(numero + 1)",
+      "stdout": "13",
+      "explanation": "A leitura produz o texto '12'. A chamada de int converte o texto e a expressão soma 1 ao inteiro.",
+      "stdin": "12\n",
+      "checks": [
+        {
+          "code": "texto = \"12\"\nnumero = int(texto)\nprint(numero + 1)",
+          "stdout": "13"
+        }
+      ]
+    },
+    {
+      "prompt": "Compare os exemplos intencionalmente incorretos `prin(\"oi\")` e `print(\"oi)`. Antes de rodar a demonstração abaixo, classifique qual falha na leitura e qual falha só ao executar. O bloco usa `try` para observar exatamente a classe esperada e seguir com a outra demonstração.",
+      "code": "try:\n    prin(\"oi\")\nexcept NameError:\n    print(\"NameError\")\n\ntry:\n    compile('print(\"oi)', \"<exemplo>\", \"exec\")\nexcept SyntaxError:\n    print(\"SyntaxError\")\n\nprint(\"oi\")",
+      "stdout": "NameError\nSyntaxError\noi",
+      "explanation": "prin tem sintaxe de chamada, mas o nome não existe nesta sessão. compile analisa o texto sem executá-lo e detecta a string aberta. A versão corrigida tem aspas fechadas e chama print.",
+      "checks": [
+        {
+          "code": "try:\n    compile('prin(\"ola mundo)', \"<exemplo>\", \"exec\")\nexcept SyntaxError:\n    print(\"SyntaxError\")\n\ntry:\n    prin(\"ola mundo\")\nexcept NameError:\n    print(\"NameError\")\n\nprint(\"ola mundo\")",
+          "stdout": "SyntaxError\nNameError\nola mundo"
+        }
+      ]
+    },
+    {
+      "prompt": "Leia dois inteiros, um por linha, e mostre a soma. Digite `12`, depois `5`. A saída deve ser `17`. Como variação, tente `doze` na primeira leitura. Preveja a classe de erro e se a soma aparece.",
+      "code": "primeiro = int(input())\nsegundo = int(input())\nprint(primeiro + segundo)",
+      "stdout": "17",
+      "explanation": "Cada conversão cria um inteiro antes da adição. Na variação, int('doze') levanta ValueError, a segunda leitura não começa e a soma não aparece. No terminal ou caderno, leia a última linha do erro para confirmar a classe.",
+      "hint": "Faça uma leitura por valor e converta cada texto com int antes de usar +.",
+      "starter": "primeiro_texto = input()\n# Converta o primeiro texto, leia e converta o segundo.\n# Mostre a soma.",
+      "stdin": "12\n5\n",
+      "checks": [
+        {
+          "code": "primeiro = int(\"12\")\nsegundo = int(\"5\")\nprint(primeiro + segundo)",
+          "stdout": "17"
+        },
+        {
+          "code": "try:\n    int(\"doze\")\nexcept ValueError:\n    print(\"ValueError\")",
+          "stdout": "ValueError"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se você digitar `07` em `entrada = input()`, qual valor ficará em `entrada`?",
+      "options": [
+        "O inteiro `7`",
+        "O texto `\"07\"`",
+        "O texto `\"7\"`",
+        "O float `7.0`"
+      ],
+      "answer": 1,
+      "explanation": "input devolve o texto digitado e preserva o zero inicial."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 2,
+      "prompt": "Qual correção permite executar `print(\"Total)`?",
+      "options": [
+        "Trocar print por prin",
+        "Acrescentar parênteses depois de Total",
+        "Fechar o texto com aspas antes do parêntese"
+      ],
+      "answer": 2,
+      "explanation": "A string está aberta. Com as aspas e o parêntese fechados, a chamada pode ser analisada e executada."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome que converte o texto digitado em inteiro.",
+      "code": "texto = input()\nnumero = ___(texto)\nprint(numero + 1)",
+      "blanks": [
+        [
+          "int"
+        ]
+      ],
+      "explanation": "int converte representações como '12' em inteiros."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Ordene a leitura e o cálculo para obter o dobro de um inteiro digitado.",
+      "lines": [
+        "texto = input()",
+        "quantidade = int(texto)",
+        "print(quantidade * 2)"
+      ],
+      "explanation": "A conversão depende do texto lido e a multiplicação depende do inteiro convertido."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual é o tipo devolvido por `input()`?",
+      "back": "str, mesmo que a pessoa tenha digitado apenas dígitos."
+    },
+    {
+      "front": "O que acontece ao executar `int('doze')`?",
+      "back": "A conversão levanta ValueError porque o texto não representa um inteiro no formato esperado."
+    }
+  ]
+}

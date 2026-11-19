@@ -1,0 +1,92 @@
+{
+  "title": "Decoradores e encaminhamento de chamadas",
+  "minutes": 43,
+  "intro": "Envolva uma função de cálculo com um registro de chamadas e verifique se o valor calculado é preservado. Retome [funções como valores](#/python/funcoes/composicao) e [retorno](#/python/funcoes/parametros-e-retorno).\n\nUma função de ordem superior recebe ou devolve funções. No decorador, a função interna guarda acesso ao argumento da função externa. Isso é uma closure. Essa função interna, chamada wrapper, roda no lugar da original. A notação `@decorar` equivale a definir a função e aplicar `nome = decorar(nome)`. `functools.wraps` copia metadados, como `__name__`. Encaminhar `*args` e `**kwargs` e usar `return` preserva a chamada e o resultado.\n\nCada bloco define seu próprio decorador na célula ou no kit. O erro do segundo exercício é intencional. O que permanece no objeto função em E3 depois de chamar duas vezes? Em seguida, veja [gerentes de contexto](#/python/protocolos/gerentes-de-contexto).",
+  "sources": [
+    [
+      "Sintaxe e ordem de decoradores",
+      "https://docs.python.org/3.14/reference/compound_stmts.html#function-definitions"
+    ],
+    [
+      "Preservar metadados com wraps",
+      "https://docs.python.org/3.14/library/functools.html#functools.wraps"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Envolva uma função dobro, registre uma chamada e confira se o registro aparece antes ou depois do resultado.",
+      "code": "def registrar(funcao):\n    def wrapper(valor):\n        print(\"chamada registrada\")\n        return funcao(valor)\n    return wrapper\n\n@registrar\ndef dobro(n):\n    return n * 2\n\nprint(dobro(3))\n",
+      "stdout": "chamada registrada\n6",
+      "explanation": "dobro foi substituída pelo wrapper. Ele registra e devolve o cálculo da função que guardou."
+    },
+    {
+      "prompt": "Investigue o wrapper que perde o retorno e não aceita argumento nomeado. Capture o TypeError intencional e compare com o wrapper reparado.",
+      "code": "def defeituoso(funcao):\n    def wrapper(*args):\n        funcao(*args)\n    return wrapper\n\ndef corrigido(funcao):\n    def wrapper(*args, **kwargs):\n        return funcao(*args, **kwargs)\n    return wrapper\n\ndef somar(a, b=0):\n    return a + b\n\nruim = defeituoso(somar)\nprint(ruim(2, 3))\ntry:\n    ruim(2, b=3)\nexcept TypeError:\n    print(\"argumento nomeado rejeitado\")\n\nbom = corrigido(somar)\nprint(bom(2, b=3))\n",
+      "stdout": "None\nargumento nomeado rejeitado\n5",
+      "explanation": "Sem return, o wrapper devolve None. Sem kwargs, a chamada nomeada falha na entrada do wrapper. A correção encaminha os dois grupos de argumentos e devolve o resultado."
+    },
+    {
+      "prompt": "Decore `etiqueta` para contar duas chamadas e preserve seus retornos e nome. Use um contador por função decorada. Antes da primeira chamada, a contagem deve ser zero.",
+      "code": "from functools import wraps\n\ndef contar(funcao):\n    @wraps(funcao)\n    def wrapper(*args, **kwargs):\n        wrapper.chamadas += 1\n        return funcao(*args, **kwargs)\n\n    wrapper.chamadas = 0\n    return wrapper\n\n@contar\ndef etiqueta(texto, prefixo=\"ID\"):\n    return f\"{prefixo}: {texto}\"\n\nprint(etiqueta.chamadas)\nprint(etiqueta(\"a\"))\nprint(etiqueta(\"b\", prefixo=\"Lote\"))\nprint(etiqueta.__name__, etiqueta.chamadas)\n",
+      "stdout": "0\nID: a\nLote: b\netiqueta 2",
+      "explanation": "Cada aplicação cria um wrapper com seu contador. wraps mantém o nome e return preserva o resultado. A contagem é incrementada antes de executar, então uma chamada que falhe também conta como tentativa.",
+      "hint": "Inicialize `wrapper.chamadas` na função externa e incremente dentro do wrapper.",
+      "starter": "from functools import wraps\n\ndef contar(funcao):\n    @wraps(funcao)\n    def wrapper(*args, **kwargs):\n        # Conte a tentativa e devolva o resultado original.\n        raise NotImplementedError\n\n    # Inicialize o contador no wrapper antes de devolvê-lo.\n    return wrapper\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que valor sai de um wrapper sem return mesmo se a função original devolver 5?",
+      "options": [
+        "5",
+        "None",
+        "False"
+      ],
+      "answer": 1,
+      "explanation": "Uma função que termina sem return explícito devolve None."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`*args` em uma definição de função, sozinho, recebe todos os argumentos nomeados que não correspondem a outro parâmetro.",
+      "answer": false,
+      "explanation": "Para argumentos nomeados extras, declare **kwargs. args captura os posicionais extras."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra-chave que preserva o valor devolvido.",
+      "code": "def wrapper(*args, **kwargs):\n    ___ funcao(*args, **kwargs)",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "return devolve o resultado produzido pela função original."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Em contar da aula, se você decorar duas funções e chamar apenas a primeira duas vezes, quais são os contadores?",
+      "options": [
+        "2 e 2",
+        "2 e 0",
+        "1 e 1"
+      ],
+      "answer": 1,
+      "explanation": "Cada aplicação cria seu próprio wrapper e atributo chamadas."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que @contar faz logo após a definição de uma função f?",
+      "back": "Aplica contar à função e vincula f ao valor devolvido pelo decorador."
+    },
+    {
+      "front": "O que é preservado por wraps e o que depende do corpo do wrapper?",
+      "back": "wraps copia metadados como o nome. O wrapper precisa encaminhar argumentos e devolver o resultado."
+    }
+  ]
+}

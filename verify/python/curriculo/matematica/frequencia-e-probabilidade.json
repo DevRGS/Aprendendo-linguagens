@@ -1,0 +1,92 @@
+{
+  "title": "Frequência, condição e probabilidade",
+  "minutes": 50,
+  "intro": "O espaço amostral reúne os resultados possíveis de um experimento. Em um conjunto observado, frequência relativa divide ocorrências pelo número de observações. Para uma proporção condicional, restrinja primeiro o grupo e conte dentro dele. Uma proporção conjunta usa o total e conta só as observações que satisfazem as duas condições. Uma simulação usa números pseudoaleatórios para ilustrar a diferença entre frequência observada e probabilidade teórica. Retome [reprodutibilidade](#/python/qualidade/reprodutibilidade).",
+  "sources": [
+    [
+      "Gerador pseudoaleatório local",
+      "https://docs.python.org/pt-br/3.14/library/random.html"
+    ],
+    [
+      "Contagem de ocorrências",
+      "https://docs.python.org/pt-br/3.14/library/collections.html#collections.Counter"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Meça a proporção de A em [A, A, B, B].",
+      "code": "grupos = [\"A\", \"A\", \"B\", \"B\"]\nprint(grupos.count(\"A\"), len(grupos))\nprint(grupos.count(\"A\") / len(grupos))\n",
+      "stdout": "2 4\n0.5",
+      "explanation": "Há duas ocorrências em quatro."
+    },
+    {
+      "prompt": "Conte um acerto no grupo A. Compare a frequência no grupo e a frequência conjunta.",
+      "code": "registros = [(\"A\", True), (\"A\", False), (\"B\", True), (\"B\", False)]\ngrupo_a = [acerto for grupo, acerto in registros if grupo == \"A\"]\nprint(sum(grupo_a) / len(grupo_a), sum(grupo_a) / len(registros))\n",
+      "stdout": "0.5 0.25",
+      "explanation": "O numerador é 1 nos dois cálculos. Os denominadores são 2 e 4."
+    },
+    {
+      "prompt": "Simule 20 lançamentos equiprováveis. Compare com 0.5 e verifique que a mesma semente reproduz a frequência.",
+      "code": "from random import Random\ndef proporcao(seed, n):\n    if n <= 0:\n        raise ValueError(\"n deve ser positivo\")\n    rng = Random(seed)\n    return sum(rng.random() < 0.5 for _ in range(n)) / n\n\nobservado = proporcao(3, 20)\nprint(f\"observado={observado:.2f} esperado=0.50\")\nassert proporcao(3, 20) == observado\ntry:\n    proporcao(3, 0)\nexcept ValueError as erro:\n    print(erro)\n",
+      "stdout": "observado=0.45 esperado=0.50\nn deve ser positivo",
+      "explanation": "O modelo atribui probabilidade 0.5 ao evento gerado. A frequência da amostra pode variar. O caso vazio é rejeitado antes da divisão.",
+      "hint": "Crie um Random com a semente e conte quantos valores ficaram abaixo de 0.5.",
+      "starter": "from random import Random\nrng = Random(3)\n# Faça 20 sorteios e calcule a frequência.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Dois A em oito registros dão qual proporção?",
+      "options": [
+        "2.0",
+        "0.5",
+        "0.25"
+      ],
+      "answer": 2,
+      "explanation": "Divida 2 por 8."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "A condição 'grupo A' troca o denominador pelo tamanho de A.",
+      "answer": true,
+      "explanation": "O cálculo fica restrito aos membros do grupo."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que devolve o número de registros.",
+      "code": "total = ___(registros)",
+      "blanks": [
+        [
+          "len"
+        ]
+      ],
+      "explanation": "len devolve a quantidade de itens."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quantas pessoas entram no denominador da taxa de acerto condicional se o grupo tem 3 pessoas e a turma tem 8?",
+      "options": [
+        "1",
+        "3",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "Observe apenas o grupo da condição."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual o denominador de uma proporção conjunta?",
+      "back": "O total do conjunto observado."
+    },
+    {
+      "front": "A frequência de 20 lançamentos deve ser igual à probabilidade?",
+      "back": "Ela pode variar. Compare as duas e diga de quantas observações a frequência veio."
+    }
+  ]
+}

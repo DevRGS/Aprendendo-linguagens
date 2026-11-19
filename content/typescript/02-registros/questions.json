@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "typescript.registros.q01",
+      "lesson": "objetos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que o campo concluida representa neste registro?",
+      "options": [
+        "A senha de quem criou",
+        "Uma string de paginação",
+        "Um estado booleano"
+      ],
+      "answer": 2,
+      "explanation": "O registro distingue concluída e pendente usando boolean."
+    },
+    {
+      "id": "typescript.registros.q02",
+      "lesson": "objetos",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a declaração de alias.",
+      "code": "___ Tarefa = { id: number };",
+      "blanks": [
+        [
+          "type"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "type permite dar um nome reutilizável à forma do objeto."
+    },
+    {
+      "id": "typescript.registros.q03",
+      "lesson": "objetos",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Se um campo obrigatório faltar no literal atribuído a Tarefa, o compilador aceita mesmo assim.",
+      "answer": false,
+      "explanation": "O literal deve fornecer os campos obrigatórios com tipos compatíveis."
+    },
+    {
+      "id": "typescript.registros.q04",
+      "lesson": "objetos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual leitura devolve o identificador do exemplo?",
+      "options": [
+        "item.titulo",
+        "item.concluida",
+        "item.id"
+      ],
+      "answer": 2,
+      "explanation": "id vale 7, enquanto titulo e concluida têm outros papéis."
+    },
+    {
+      "id": "typescript.registros.q05",
+      "lesson": "opcionais",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual tipo descreve um campo lógico que pode faltar?",
+      "options": [
+        "{ concluida?: boolean }",
+        "{ concluida: string }",
+        "{ concluida: boolean[] }"
+      ],
+      "answer": 0,
+      "explanation": "O marcador ? indica que a propriedade pode ser omitida."
+    },
+    {
+      "id": "typescript.registros.q06",
+      "lesson": "opcionais",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Preserve false e use valor anterior apenas para null ou undefined.",
+      "code": "mudanca.concluida ___ antes",
+      "blanks": [
+        [
+          "??"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A coalescência nula mantém os demais valores."
+    },
+    {
+      "id": "typescript.registros.q07",
+      "lesson": "opcionais",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "A ausência de concluida e o envio explícito de false sempre significam a mesma atualização.",
+      "answer": false,
+      "explanation": "Ausência pode significar manter; false solicita deixar pendente."
+    },
+    {
+      "id": "typescript.registros.q08",
+      "lesson": "opcionais",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Por que || é inadequado para reabrir a tarefa?",
+      "options": [
+        "Considera false um motivo para usar o padrão",
+        "Só funciona com arrays",
+        "Converte o tipo em Promise"
+      ],
+      "answer": 0,
+      "explanation": "false é um valor de negócio e precisa sobreviver ao fallback."
+    },
+    {
+      "id": "typescript.registros.q09",
+      "lesson": "unioes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que propriedade distingue as alternativas de Busca?",
+      "options": [
+        "titulo em ambas",
+        "ok",
+        "motivo em ambas"
+      ],
+      "answer": 1,
+      "explanation": "A etiqueta literal está nos dois formatos e tem valores diferentes."
+    },
+    {
+      "id": "typescript.registros.q10",
+      "lesson": "unioes",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a etiqueta da alternativa que fornece motivo.",
+      "code": "mensagem({ ok: ___, motivo: 'Ausente' })",
+      "blanks": [
+        [
+          "false"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A falha da união aceita ok igual a false."
+    },
+    {
+      "id": "typescript.registros.q11",
+      "lesson": "unioes",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Na alternativa de sucesso, o contrato garante que motivo existe.",
+      "answer": false,
+      "explanation": "A definição associa motivo à falha e titulo ao sucesso."
+    },
+    {
+      "id": "typescript.registros.q12",
+      "lesson": "unioes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que colocar no ramo de erro da mensagem?",
+      "options": [
+        "r.titulo",
+        "r.motivo",
+        "r.id inexistente"
+      ],
+      "answer": 1,
+      "explanation": "O discriminante já identifica o formato que contém motivo."
+    },
+    {
+      "id": "typescript.registros.q13",
+      "lesson": "narrowing",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que teste refina string neste exemplo?",
+      "options": [
+        "v === 'string' para qualquer string",
+        "Number(v) === 0",
+        "typeof v === 'string'"
+      ],
+      "answer": 2,
+      "explanation": "typeof compara o nome do tipo de execução."
+    },
+    {
+      "id": "typescript.registros.q14",
+      "lesson": "narrowing",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete o método que remove espaços nas extremidades.",
+      "code": "v.___()",
+      "blanks": [
+        [
+          "trim"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "trim devolve outro texto com as extremidades aparadas."
+    },
+    {
+      "id": "typescript.registros.q15",
+      "lesson": "narrowing",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Depois de excluir string em string ou number, resta number.",
+      "answer": true,
+      "explanation": "As duas alternativas eram as únicas previstas na assinatura."
+    },
+    {
+      "id": "typescript.registros.q16",
+      "lesson": "narrowing",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Como excluir null de uma entrada antes de chamar trim?",
+      "options": [
+        "Aplicar v.trim() em todos os casos",
+        "Somar 1 à entrada",
+        "Testar v === null e retornar nesse caso"
+      ],
+      "answer": 2,
+      "explanation": "O retorno antecipado deixa somente a string no caminho restante."
+    }
+  ]
+}

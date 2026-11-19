@@ -79,5 +79,5 @@ test('início: "continuar de onde parou" e nome sempre como texto', async () => 
   assert.match(el.querySelector('h1').textContent, /<img src=x/);
   const cont = el.querySelector('.continue');
   assert.equal(cont.getAttribute('href'), '#/java/fundamentos/lacos');
-  assert.match(cont.textContent, /Laços de repetição/);
+  assert.match(cont.getAttribute('aria-label'), /Laços de repetição/);
 });

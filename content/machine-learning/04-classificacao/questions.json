@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "machine-learning.classificacao.q01",
+      "lesson": "rotulo",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que observação corresponde à classe positiva da bateria?",
+      "options": [
+        "Medição de vibração igual a zero",
+        "Qualquer bateria nova",
+        "Inspeção posterior confirmou desgaste"
+      ],
+      "answer": 2,
+      "explanation": "O alvo é o resultado binário da inspeção."
+    },
+    {
+      "id": "machine-learning.classificacao.q02",
+      "lesson": "rotulo",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A vibração medida antes da inspeção pode ser um atributo disponível no instante de decisão.",
+      "answer": true,
+      "explanation": "A medição já existe quando a equipe decide inspecionar."
+    },
+    {
+      "id": "machine-learning.classificacao.q03",
+      "lesson": "rotulo",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual inteiro representa desgaste confirmado no roteiro?",
+      "code": "positivo = ___",
+      "blanks": [
+        [
+          "1"
+        ]
+      ],
+      "explanation": "A convenção é zero para ausência de desgaste e um para presença."
+    },
+    {
+      "id": "machine-learning.classificacao.q04",
+      "lesson": "rotulo",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Uma regra libera todas e há dois desgastes reais. Quantos falsos negativos?",
+      "options": [
+        "Zero",
+        "Quatro",
+        "Dois"
+      ],
+      "answer": 2,
+      "explanation": "Cada desgaste real liberado é um falso negativo."
+    },
+    {
+      "id": "machine-learning.classificacao.q05",
+      "lesson": "classificador",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual método devolve probabilidades por classe da regressão logística?",
+      "options": [
+        "predict_proba",
+        "fit",
+        "transform"
+      ],
+      "answer": 0,
+      "explanation": "As colunas representam as classes de classes_."
+    },
+    {
+      "id": "machine-learning.classificacao.q06",
+      "lesson": "classificador",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A classe verdadeira da bateria deve ser entregue a predict para decidir se a equipe a inspeciona.",
+      "answer": false,
+      "explanation": "O rótulo verdadeiro será conhecido depois. predict recebe os atributos."
+    },
+    {
+      "id": "machine-learning.classificacao.q07",
+      "lesson": "classificador",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Como consultar a ordem das classes de um modelo ajustado?",
+      "code": "print(modelo.___)",
+      "blanks": [
+        [
+          "classes_"
+        ]
+      ],
+      "explanation": "O atributo liga as colunas de probabilidade aos rótulos."
+    },
+    {
+      "id": "machine-learning.classificacao.q08",
+      "lesson": "classificador",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Baixar o limiar positivo de 0,5 para 0,2 pode ter qual efeito?",
+      "options": [
+        "Incluir baterias adicionais entre os alertas",
+        "Reduzir obrigatoriamente todos os falsos positivos",
+        "Eliminar a necessidade de inspeções"
+      ],
+      "answer": 0,
+      "explanation": "Mais probabilidades atingem o limiar inferior."
+    },
+    {
+      "id": "machine-learning.classificacao.q09",
+      "lesson": "matriz",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Na matriz com linhas reais e colunas previstas, onde fica o falso negativo com labels=[0,1]?",
+      "options": [
+        "Linha 0, coluna 1 (rótulos)",
+        "Linha 1, coluna 0 (rótulos)",
+        "Linha 1, coluna 1 (rótulos)"
+      ],
+      "answer": 1,
+      "explanation": "A inspeção confirmou classe 1 e o modelo previu classe 0."
+    },
+    {
+      "id": "machine-learning.classificacao.q10",
+      "lesson": "matriz",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Fixar a ordem de labels facilita comparar matrizes de lotes diferentes.",
+      "answer": true,
+      "explanation": "As células conservam seus significados, inclusive com classe ausente."
+    },
+    {
+      "id": "machine-learning.classificacao.q11",
+      "lesson": "matriz",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a função de sklearn.metrics que conta as combinações entre real e previsto.",
+      "code": "___(real, previsto, labels=[0, 1])",
+      "blanks": [
+        [
+          "confusion_matrix"
+        ]
+      ],
+      "explanation": "A função organiza as contagens por linha verdadeira e coluna prevista."
+    },
+    {
+      "id": "machine-learning.classificacao.q12",
+      "lesson": "matriz",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Corrigir um falso negativo para verdadeiro positivo muda o quê?",
+      "options": [
+        "Altera o número de baterias reais",
+        "Transfere uma contagem entre colunas na linha real positiva",
+        "Remove um verdadeiro negativo"
+      ],
+      "answer": 1,
+      "explanation": "O rótulo verdadeiro permanece o mesmo."
+    },
+    {
+      "id": "machine-learning.classificacao.q13",
+      "lesson": "precisao",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Se 3 alertas contêm 2 desgastes, qual é a precisão positiva?",
+      "options": [
+        "3/2",
+        "1/3",
+        "2/3"
+      ],
+      "answer": 2,
+      "explanation": "Precisão divide verdadeiros positivos pelos alertas positivos."
+    },
+    {
+      "id": "machine-learning.classificacao.q14",
+      "lesson": "precisao",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Inspecionar todas as baterias garante precisão 1 se existir algum desgaste.",
+      "answer": false,
+      "explanation": "Também serão gerados alertas para todas as baterias sem desgaste."
+    },
+    {
+      "id": "machine-learning.classificacao.q15",
+      "lesson": "precisao",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a métrica que divide verdadeiros positivos por todos os positivos reais.",
+      "code": "from sklearn.metrics import ___",
+      "blanks": [
+        [
+          "recall_score"
+        ]
+      ],
+      "explanation": "Revocação mede a fração dos desgastes detectados."
+    },
+    {
+      "id": "machine-learning.classificacao.q16",
+      "lesson": "precisao",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Um falso negativo custa 10 e um falso positivo custa 2. Com um de cada, qual o custo total?",
+      "options": [
+        "8",
+        "20",
+        "12"
+      ],
+      "answer": 2,
+      "explanation": "Some a contribuição de cada tipo."
+    }
+  ]
+}

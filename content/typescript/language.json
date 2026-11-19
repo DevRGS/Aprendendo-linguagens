@@ -1,0 +1,170 @@
+{
+  "id": "typescript",
+  "name": "TypeScript",
+  "color": "#58a6e7",
+  "icon": "🟦",
+  "highlight": "typescript",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "tipagem",
+      "dir": "01-tipagem",
+      "title": "Começar a tipar",
+      "description": "Rode o compilador, compare inferência e anotações e corrija uma atribuição incompatível.",
+      "lessons": [
+        {
+          "id": "executar",
+          "file": "01-executar.md",
+          "title": "Compilar e executar o primeiro arquivo",
+          "minutes": 12
+        },
+        {
+          "id": "inferencia",
+          "file": "02-inferencia.md",
+          "title": "Descobrir tipos pela inicialização",
+          "minutes": 12
+        },
+        {
+          "id": "anotacoes",
+          "file": "03-anotacoes.md",
+          "title": "Declarar parâmetros e retorno",
+          "minutes": 12
+        },
+        {
+          "id": "diagnostico",
+          "file": "04-diagnostico.md",
+          "title": "Ler e corrigir um diagnóstico",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "registros",
+      "dir": "02-registros",
+      "title": "Modelar registros",
+      "description": "Descreva tarefas, alterações opcionais e resultados de sucesso ou falha.",
+      "lessons": [
+        {
+          "id": "objetos",
+          "file": "01-objetos.md",
+          "title": "Descrever a forma de uma tarefa",
+          "minutes": 12
+        },
+        {
+          "id": "opcionais",
+          "file": "02-opcionais.md",
+          "title": "Distinguir ausência e valor falso",
+          "minutes": 12
+        },
+        {
+          "id": "unioes",
+          "file": "03-unioes.md",
+          "title": "Modelar sucesso e falha",
+          "minutes": 12
+        },
+        {
+          "id": "narrowing",
+          "file": "04-narrowing.md",
+          "title": "Refinar um tipo antes de usá-lo",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "entradas",
+      "dir": "03-entradas",
+      "title": "Dados externos",
+      "description": "Receba JSON como unknown e normalize a entrada antes de criar um registro.",
+      "lessons": [
+        {
+          "id": "unknown",
+          "file": "01-unknown.md",
+          "title": "Receber dados desconhecidos",
+          "minutes": 12
+        },
+        {
+          "id": "estrutura",
+          "file": "02-estrutura.md",
+          "title": "Validar as propriedades de um objeto",
+          "minutes": 12
+        },
+        {
+          "id": "entrada-registro",
+          "file": "03-entrada-registro.md",
+          "title": "Separar a entrada do registro salvo",
+          "minutes": 12
+        },
+        {
+          "id": "converter",
+          "file": "04-converter.md",
+          "title": "Converter uma entrada ao domínio",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "camadas",
+      "dir": "04-camadas",
+      "title": "Contratos entre camadas",
+      "description": "Organize módulos, modele promises e troque o repositório com um contrato comum.",
+      "lessons": [
+        {
+          "id": "modulos",
+          "file": "01-modulos.md",
+          "title": "Conectar arquivos e configuração",
+          "minutes": 12
+        },
+        {
+          "id": "assincrono",
+          "file": "02-assincrono.md",
+          "title": "Descrever uma operação assíncrona",
+          "minutes": 12
+        },
+        {
+          "id": "repositorio",
+          "file": "03-repositorio.md",
+          "title": "Trocar o repositório preservando o contrato",
+          "minutes": 12
+        },
+        {
+          "id": "genericos",
+          "file": "04-genericos.md",
+          "title": "Reaproveitar um resultado com genéricos",
+          "minutes": 12
+        }
+      ]
+    },
+    {
+      "id": "migracao",
+      "dir": "05-migracao",
+      "title": "Migração da API",
+      "description": "Migre criação e leitura de tarefas e preserve os testes HTTP e a autorização.",
+      "lessons": [
+        {
+          "id": "contrato-http",
+          "file": "01-contrato-http.md",
+          "title": "Registrar o comportamento antes de migrar",
+          "minutes": 22
+        },
+        {
+          "id": "rota-vertical",
+          "file": "02-rota-vertical.md",
+          "title": "Migrar criação e leitura da tarefa",
+          "minutes": 22
+        },
+        {
+          "id": "testes-contrato",
+          "file": "03-testes-contrato.md",
+          "title": "Exercitar o contrato e um corpo malformado",
+          "minutes": 22
+        },
+        {
+          "id": "reproducao",
+          "file": "04-reproducao.md",
+          "title": "Entregar e reproduzir a migração",
+          "minutes": 22
+        }
+      ]
+    }
+  ]
+}

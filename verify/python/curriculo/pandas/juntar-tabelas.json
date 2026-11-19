@@ -1,0 +1,89 @@
+{
+  "title": "Chaves e junções de tabelas",
+  "minutes": 50,
+  "intro": "Anexe nomes de estação a uma tabela em que uma linha é uma viagem. O que deverá acontecer com uma viagem que usa uma estação sem cadastro?\n\nUse pandas. Retome [Resumir dados por grupo](#/python/pandas/agregar). As tabelas são criadas no código.\n\nUma chave relaciona registros. Muitas viagens podem apontar para a mesma estação, mas o cadastro deve ter no máximo uma linha por chave. `merge` com `how=\"left\"` mantém as viagens do lado esquerdo. Um `inner` conserva somente linhas com par. `validate=\"many_to_one\"` verifica a unicidade na direita. `indicator=True` cria a coluna `_merge`, que contém `left_only` para viagem sem par.",
+  "sources": [
+    [
+      "Junção de DataFrames",
+      "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Combine duas viagens com o cadastro e confira que os IDs de viagem continuam na saída.",
+      "code": "import pandas as pd\n\nviagens = pd.DataFrame({\"id\": [\"v1\", \"v2\"], \"estacao\": [\"A\", \"A\"]})\nestacoes = pd.DataFrame({\"estacao\": [\"A\", \"B\"], \"nome\": [\"Centro\", \"Norte\"]})\nuniao = viagens.merge(estacoes, on=\"estacao\", how=\"left\", validate=\"many_to_one\")\nprint(uniao[[\"id\", \"nome\"]].values.tolist())\n",
+      "stdout": "[['v1', 'Centro'], ['v2', 'Centro']]",
+      "explanation": "As duas viagens recebem o nome da única linha referente a A no cadastro."
+    },
+    {
+      "prompt": "Crie duas linhas com chave A no cadastro. Compare a junção simples com o erro intencional usando a validação many_to_one.",
+      "code": "import pandas as pd\n\nviagens = pd.DataFrame({\"id\": [\"v1\", \"v2\"], \"estacao\": [\"A\", \"B\"]})\nestacoes = pd.DataFrame({\"estacao\": [\"A\", \"A\", \"B\"], \"nome\": [\"Centro\", \"Sul\", \"Norte\"]})\nprint(\"Linhas sem validação:\", len(viagens.merge(estacoes, on=\"estacao\", how=\"left\")))\ntry:\n    viagens.merge(estacoes, on=\"estacao\", how=\"left\", validate=\"many_to_one\")\nexcept pd.errors.MergeError:\n    print(\"MergeError: chave duplicada no cadastro\")\n",
+      "stdout": "Linhas sem validação: 3\nMergeError: chave duplicada no cadastro",
+      "explanation": "A viagem v1 teria duas combinações. Investigue o cadastro antes de tentar novamente."
+    },
+    {
+      "prompt": "Enriqueça três viagens e liste os IDs sem cadastro. Compare com inner e confira o caso de um cadastro vazio com as mesmas colunas.",
+      "code": "import pandas as pd\n\ndef enriquecer(viagens, estacoes):\n    return viagens.merge(estacoes, on=\"estacao\", how=\"left\",\n                          validate=\"many_to_one\", indicator=True)\n\nviagens = pd.DataFrame({\"id\": [\"v1\", \"v2\", \"v3\"], \"estacao\": [\"A\", \"C\", \"B\"]})\nestacoes = pd.DataFrame({\"estacao\": [\"A\", \"B\"], \"nome\": [\"Centro\", \"Norte\"]})\nuniao = enriquecer(viagens, estacoes)\nsem_par = uniao.loc[uniao[\"_merge\"] == \"left_only\", \"id\"]\nprint(\"IDs:\", uniao[\"id\"].tolist())\nprint(\"Sem par:\", sem_par.tolist())\nprint(\"Linhas com inner:\", len(viagens.merge(estacoes, on=\"estacao\", how=\"inner\")))\nassert enriquecer(viagens, estacoes.iloc[:0])[\"_merge\"].eq(\"left_only\").all()\n",
+      "stdout": "IDs: ['v1', 'v2', 'v3']\nSem par: ['v2']\nLinhas com inner: 2",
+      "explanation": "A viagem v2 continua na junção à esquerda. Com cadastro vazio, todas as viagens ficam sem par. Em seguida, leve essa contagem à auditoria.",
+      "hint": "Filtre _merge pelo rótulo que indica uma linha presente apenas no lado esquerdo.",
+      "starter": "import pandas as pd\n\nviagens = pd.DataFrame({\"id\": [\"v1\", \"v2\", \"v3\"], \"estacao\": [\"A\", \"C\", \"B\"]})\nestacoes = pd.DataFrame({\"estacao\": [\"A\", \"B\"], \"nome\": [\"Centro\", \"Norte\"]})\n# Faça a junção e liste os IDs sem par.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Há duas viagens de chaves A e Z. O cadastro só tem A. Quantas linhas saem com how=\"left\"?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "A viagem de Z fica na tabela mesmo sem correspondência."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "validate=\"many_to_one\" exige que a chave do cadastro à direita seja única.",
+      "answer": true,
+      "explanation": "Pode haver várias viagens por estação. A validação exige no máximo um registro por estação no cadastro."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Habilite a coluna que indica se houve par.",
+      "code": "viagens.merge(estacoes, on=\"estacao\", how=\"left\", ___=True)",
+      "blanks": [
+        [
+          "indicator"
+        ]
+      ],
+      "explanation": "O argumento cria _merge."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Três viagens usam A e o cadastro tem duas linhas com A. Quantas linhas para A num merge sem validação?",
+      "options": [
+        "3",
+        "6",
+        "2",
+        "5"
+      ],
+      "answer": 1,
+      "explanation": "Cada uma das três viagens combina com as duas linhas do cadastro."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que distingue left de inner?",
+      "back": "Left preserva viagens sem par. Inner retorna apenas combinações com par."
+    },
+    {
+      "front": "Como confirmar se há viagens sem cadastro?",
+      "back": "Use indicator=True numa junção à esquerda e procure left_only em _merge."
+    }
+  ]
+}

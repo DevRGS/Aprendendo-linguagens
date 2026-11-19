@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "postgresql.consultas.q01",
+      "lesson": "juncoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Por que Caio aparece com tema nulo?",
+      "options": [
+        "Caio tem uma leitura com título NULL",
+        "ORDER BY cria linhas",
+        "LEFT JOIN preserva o lado esquerdo sem correspondência"
+      ],
+      "answer": 2,
+      "explanation": "A ausência de leitura produz nulos nas colunas da direita."
+    },
+    {
+      "id": "postgresql.consultas.q02",
+      "lesson": "juncoes",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a condição de vínculo.",
+      "code": "ON l.aluno_id = a.___",
+      "blanks": [
+        [
+          "id"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "A chave estrangeira aponta para a chave primária do aluno."
+    },
+    {
+      "id": "postgresql.consultas.q03",
+      "lesson": "juncoes",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Trocar LEFT JOIN por INNER JOIN preserva Caio com a carga inicial.",
+      "answer": false,
+      "explanation": "A junção interna requer correspondência dos dois lados."
+    },
+    {
+      "id": "postgresql.consultas.q04",
+      "lesson": "juncoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que filtro localiza alunos sem correspondência após a junção externa?",
+      "options": [
+        "WHERE a.id IS NULL",
+        "WHERE l.tema = NULL",
+        "WHERE l.id IS NULL"
+      ],
+      "answer": 2,
+      "explanation": "A chave primária da direita só aparece nula quando não houve correspondência."
+    },
+    {
+      "id": "postgresql.consultas.q05",
+      "lesson": "agregar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que count(l.id) ignora neste relatório?",
+      "options": [
+        "Valores NULL da coluna contada",
+        "Todos os alunos com nome curto",
+        "Leituras concluídas"
+      ],
+      "answer": 0,
+      "explanation": "Isso permite obter zero para quem não tem leitura."
+    },
+    {
+      "id": "postgresql.consultas.q06",
+      "lesson": "agregar",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete o agrupamento pelas colunas do aluno.",
+      "code": "GROUP ___ a.id,a.nome",
+      "blanks": [
+        [
+          "BY"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "GROUP BY forma os conjuntos sobre os quais o agregado é calculado."
+    },
+    {
+      "id": "postgresql.consultas.q07",
+      "lesson": "agregar",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "SUM de uma coluna composta só por valores nulos produz automaticamente zero.",
+      "answer": false,
+      "explanation": "O resultado é NULL; COALESCE pode fornecer zero na apresentação."
+    },
+    {
+      "id": "postgresql.consultas.q08",
+      "lesson": "agregar",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que agregado totaliza minutos efetivamente registrados?",
+      "options": [
+        "sum(l.minutos)",
+        "count(l.minutos)",
+        "max(l.minutos) sempre"
+      ],
+      "answer": 0,
+      "explanation": "SUM adiciona os valores; COUNT conta e MAX seleciona o maior."
+    },
+    {
+      "id": "postgresql.consultas.q09",
+      "lesson": "filtrar-grupos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Onde expressar o mínimo de duas leituras por grupo?",
+      "options": [
+        "WHERE count(*) >= 2 na mesma etapa",
+        "HAVING count(*) >= 2",
+        "ORDER BY 2 como filtro"
+      ],
+      "answer": 1,
+      "explanation": "HAVING consegue consultar o agregado calculado."
+    },
+    {
+      "id": "postgresql.consultas.q10",
+      "lesson": "filtrar-grupos",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a cláusula de filtragem de linhas antes do GROUP BY.",
+      "code": "FROM caderno.leituras ___ feita",
+      "blanks": [
+        [
+          "WHERE"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "Ela seleciona somente linhas concluídas para o agrupamento."
+    },
+    {
+      "id": "postgresql.consultas.q11",
+      "lesson": "filtrar-grupos",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "Trocar a origem por leituras faz um aluno sem leituras surgir como grupo vazio.",
+      "answer": false,
+      "explanation": "Só se formam grupos a partir de linhas da origem da consulta."
+    },
+    {
+      "id": "postgresql.consultas.q12",
+      "lesson": "filtrar-grupos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual contagem resta para Ana quando WHERE feita está ativo?",
+      "options": [
+        "2",
+        "1",
+        "0"
+      ],
+      "answer": 1,
+      "explanation": "Das duas leituras de Ana, somente a de Git está marcada como feita."
+    },
+    {
+      "id": "postgresql.consultas.q13",
+      "lesson": "paginacao",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Qual cláusula define a ordem entre leituras com a mesma duração?",
+      "options": [
+        "LIMIT isolado",
+        "OFFSET isolado",
+        "A chave id no ORDER BY após minutos"
+      ],
+      "answer": 2,
+      "explanation": "O segundo critério resolve o empate na duração."
+    },
+    {
+      "id": "postgresql.consultas.q14",
+      "lesson": "paginacao",
+      "difficulty": 1,
+      "type": "fill",
+      "prompt": "Complete a cláusula que pula os dois primeiros registros ordenados.",
+      "code": "LIMIT 2 ___ 2",
+      "blanks": [
+        [
+          "OFFSET"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "OFFSET informa quantas linhas pular antes de retornar a página."
+    },
+    {
+      "id": "postgresql.consultas.q15",
+      "lesson": "paginacao",
+      "difficulty": 1,
+      "type": "truefalse",
+      "prompt": "ORDER BY minutos sozinho garante a posição relativa de leituras de igual duração.",
+      "answer": false,
+      "explanation": "Sem outra chave o empate permanece sem ordem especificada."
+    },
+    {
+      "id": "postgresql.consultas.q16",
+      "lesson": "paginacao",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "O que pode acontecer se outra sessão inserir linhas entre leituras paginadas com OFFSET?",
+      "options": [
+        "A ordem fica congelada para todas as sessões",
+        "O servidor sempre elimina os empates",
+        "Os itens podem mudar de página"
+      ],
+      "answer": 2,
+      "explanation": "A consulta seguinte pode observar um conjunto novo sob o isolamento padrão."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "git.colaborar.f01",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "front": "Como executar uma consulta Git em outra pasta?",
+      "back": "Passe -C pasta antes do subcomando."
+    },
+    {
+      "id": "git.colaborar.f02",
+      "lesson": "clonar-o-remoto-de-estudo",
+      "front": "O que caracteriza o repositório bare do kit?",
+      "back": "Ele guarda o histórico compartilhado sem a árvore de trabalho habitual."
+    },
+    {
+      "id": "git.colaborar.f03",
+      "lesson": "buscar-referencias",
+      "front": "O que é origin/main neste clone?",
+      "back": "Uma referência local que acompanha a branch main conhecida do remoto."
+    },
+    {
+      "id": "git.colaborar.f04",
+      "lesson": "buscar-referencias",
+      "front": "Quando a nova linha aparece no README desta cópia?",
+      "back": "Depois que a mudança é integrada à branch local."
+    },
+    {
+      "id": "git.colaborar.f05",
+      "lesson": "enviar-uma-branch",
+      "front": "O que mostrar com git branch -vv?",
+      "back": "Branches locais com commits e informações de acompanhamento quando configuradas."
+    },
+    {
+      "id": "git.colaborar.f06",
+      "lesson": "enviar-uma-branch",
+      "front": "Que ação torna a proposta disponível para o colega buscar?",
+      "back": "Publicar a branch no mesmo remoto."
+    },
+    {
+      "id": "git.colaborar.f07",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "front": "Onde revisar o patch no pull request?",
+      "back": "Na aba Files changed."
+    },
+    {
+      "id": "git.colaborar.f08",
+      "lesson": "abrir-e-revisar-um-pull-request",
+      "front": "Para que serve a descrição de uma proposta?",
+      "back": "Registrar o problema, a intenção da solução e a forma de verificar."
+    }
+  ]
+}

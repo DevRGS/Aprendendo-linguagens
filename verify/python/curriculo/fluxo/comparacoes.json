@@ -1,0 +1,98 @@
+{
+  "title": "Comparações e lógica",
+  "minutes": 24,
+  "intro": "A nota zero deve passar por uma validação que aceita valores de 0 a 10? Use nomes e valores como em [Nomes e tipos](#/python/inicio/nomes-e-tipos) para escrever regras que devolvem `True` ou `False`.\n\nEm `nota >= 0`, o sinal `>=` inclui a igualdade. Use `==` para comparar valores e `=` para atribuir um valor a um nome. `0 <= nota <= 10` verifica os dois lados do intervalo: 0 e 10 pertencem ao intervalo e 11 fica fora. Para condições booleanas, `and` exige as duas verdadeiras, `or` aceita uma ou ambas e `not` inverte a condição. Em `True or False and False`, `and` é avaliado como parte do operando à direita de `or`. A expressão é verdadeira. Parênteses permitem exigir outra associação.\n\nExplique por que um limite de “pelo menos 16” inclui 16. Em [Condições](#/python/fluxo/condicoes), as comparações vão decidir quais linhas executar.",
+  "sources": [
+    [
+      "Comparações encadeadas",
+      "https://docs.python.org/pt-br/3.14/reference/expressions.html#comparisons"
+    ],
+    [
+      "Operações booleanas",
+      "https://docs.python.org/pt-br/3.14/reference/expressions.html#boolean-operations"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja se as notas 0, 10 e 11 passam por um intervalo com os dois extremos inclusivos.",
+      "code": "nota = 0\nprint(nota, 0 <= nota <= 10)\nnota = 10\nprint(nota, 0 <= nota <= 10)\nnota = 11\nprint(nota, 0 <= nota <= 10)",
+      "stdout": "0 True\n10 True\n11 False",
+      "explanation": "A comparação encadeada exige que nota seja pelo menos 0 e no máximo 10."
+    },
+    {
+      "prompt": "Calcule mentalmente os resultados antes de rodar. Compare os efeitos do agrupamento em duas regras booleanas.",
+      "code": "autorizado = True\nconvite = False\nsala_aberta = False\nprint(autorizado or convite and sala_aberta)\nprint((autorizado or convite) and sala_aberta)",
+      "stdout": "True\nFalse",
+      "explanation": "A primeira regra permite acesso só com autorização. A segunda exige sala aberta mesmo para quem tem autorização."
+    },
+    {
+      "prompt": "Uma oficina admite quem tem cadastro e tem pelo menos 16 anos. Demonstre três casos, nesta ordem: cadastro e 15 anos, cadastro e 16 anos, sem cadastro e 18 anos. O segundo caso testa o limite inclusivo.",
+      "code": "cadastro = True\nidade = 15\nprint(cadastro and idade >= 16)\n\ncadastro = True\nidade = 16\nprint(cadastro and idade >= 16)\n\ncadastro = False\nidade = 18\nprint(cadastro and idade >= 16)",
+      "stdout": "False\nTrue\nFalse",
+      "explanation": "Cada situação precisa passar pelas duas verificações. Uma pessoa cadastrada de exatamente 16 anos passa por causa da igualdade em >=.",
+      "hint": "Combine a informação de cadastro com a comparação de idade usando and.",
+      "starter": "cadastro = True\nidade = 15\n# Exiba a regra e repita para os outros dois casos.",
+      "checks": [
+        {
+          "code": "cadastro = False\nidade = 16\nprint(cadastro and idade >= 16)",
+          "stdout": "False"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual valor produz `0 <= 10 <= 10`?",
+      "options": [
+        "`False` porque o limite superior é igual",
+        "`True` porque ambos os limites são inclusivos",
+        "`False` porque a condição compara três números"
+      ],
+      "answer": 1,
+      "explanation": "0 <= 10 e 10 <= 10 são comparações verdadeiras."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Usar `idade > 16` para uma regra de pelo menos 16 anos aceita alguém com idade 16.",
+      "answer": false,
+      "explanation": "A comparação estrita exclui o limite. Use `>=` para incluí-lo."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que exige as duas condições.",
+      "code": "acesso = True\npresente = False\nprint(acesso ___ presente)",
+      "blanks": [
+        [
+          "and"
+        ]
+      ],
+      "explanation": "Como apenas a primeira condição é verdadeira, o resultado será False."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Aceita-se inscrição por convite ou por lista de espera, desde que haja vaga. Qual regra impõe a disponibilidade nos dois caminhos?",
+      "options": [
+        "`convite or espera and vaga`",
+        "`(convite or espera) and vaga`",
+        "`convite and espera or vaga`"
+      ],
+      "answer": 1,
+      "explanation": "Os parênteses unem os dois caminhos, e a vaga é obrigatória para o resultado conjunto."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual operador compara igualdade? Qual atribui?",
+      "back": "`==` compara igualdade. `=` atribui um valor a um nome."
+    },
+    {
+      "front": "Qual o efeito de `and` quando uma condição é falsa?",
+      "back": "Em uma combinação de condições booleanas, o resultado é False."
+    }
+  ]
+}

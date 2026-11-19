@@ -1,0 +1,100 @@
+{
+  "title": "Ambiente e versões de pacotes",
+  "minutes": 42,
+  "intro": "Descubra qual Python executa a atividade e se a versão do NumPy importado coincide com a registrada na instalação. Retome [imports](#/python/projetos/modulos-e-imports).\n\nUm intérprete executa o código. `sys.executable` indica o caminho quando disponível, e `sys.version` informa versão e detalhes da compilação. Um ambiente virtual tem o intérprete do ambiente e um conjunto isolado de pacotes. Use esse mesmo intérprete com `-m pip` para selecionar o instalador do ambiente. Registre dependências e versões para outra pessoa reconstruir a sessão.\n\n**Terminal**. A partir da raiz do kit, em PowerShell no Windows:\n\n```powershell\npy -3.14 -m venv .venv\n.\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt\n.\\.venv\\Scripts\\python.exe -m pip --version\n```\n\nEm Bash no Linux ou macOS:\n\n```bash\npython3.14 -m venv .venv\n.venv/bin/python -m pip install -r requirements.txt\n.venv/bin/python -m pip --version\n```\n\nRode os exemplos com o Python da `.venv`. Se só houver `python` ou `python3`, confira `--version` antes de criar o ambiente. Se `venv` faltar no Linux, consulte a instalação desse componente Python na documentação da distribuição. Se o pacote faltar, confira o intérprete e a pasta do kit.\n\n**Caderno**. Abra a atividade com o kernel Python com NumPy indicado na preparação e confira a versão pela célula. Os comandos anteriores são do terminal. Se outro ambiente mostrar uma versão diferente, quais valores você compararia? Siga para [argumentos](#/python/projetos/entrada-do-programa).",
+  "sources": [
+    [
+      "Ambientes virtuais e pip na PyPA",
+      "https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/"
+    ],
+    [
+      "venv",
+      "https://docs.python.org/3.14/library/venv.html"
+    ],
+    [
+      "Metadados de versões",
+      "https://docs.python.org/3.14/library/importlib.metadata.html#distribution-versions"
+    ],
+    [
+      "Diagnóstico de versão no NumPy",
+      "https://numpy.org/doc/stable/user/troubleshooting-importerror.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Localize `sys.executable` e `sys.version`. Depois da primeira execução, mostre os valores completos como indicado abaixo e anote-os. No terminal, repita pelo Python da .venv.",
+      "code": "import sys\n\nexecutavel = sys.executable\nversao = sys.version\nprint(\"versão identificada:\", bool(versao))\nprint(\"versão começa com o número principal:\", versao.startswith(str(sys.version_info.major)))\n",
+      "stdout": "versão identificada: True\nversão começa com o número principal: True",
+      "explanation": "Acrescente print(executavel) e print(versao) para ver os valores concretos. O caminho muda por sessão e pode vir vazio em alguns ambientes. A versão continua identificável."
+    },
+    {
+      "prompt": "No ambiente preparado, compare `numpy.__version__` e `importlib.metadata.version(\"numpy\")`. Qual delas vem da distribuição instalada?",
+      "code": "from importlib.metadata import version\nimport numpy\n\nimportada = numpy.__version__\ninstalada = version(\"numpy\")\nprint(\"versões coincidem:\", importada == instalada)\n",
+      "stdout": "versões coincidem: True",
+      "explanation": "A primeira vem do módulo importado. A segunda vem dos metadados da distribuição. Acrescente print(importada, instalada) para ver os números. Se divergirem, confira numpy.__file__, o executável e a instalação selecionada."
+    },
+    {
+      "prompt": "Grave `ambiente.json` com versões do Python e do NumPy e um procedimento para reproduzir a sessão. Identifique o percurso usado. Se o caminho do executável for vazio, registre isso explicitamente.",
+      "code": "import json\nimport sys\nfrom importlib.metadata import version\nfrom pathlib import Path\n\ndef ficha(executavel):\n    return {\n        \"python\": \".\".join(map(str, sys.version_info[:3])),\n        \"numpy\": version(\"numpy\"),\n        \"executavel\": executavel or \"não informado pelo ambiente\",\n        \"terminal\": \"Criar a .venv, instalar requirements.txt e rodar pelo Python da .venv\",\n        \"caderno\": \"Abrir no kernel Python com NumPy, preparar e executar as células\",\n    }\n\ncaminho = Path(\"ambiente.json\")\ncaminho.write_text(json.dumps(ficha(sys.executable), ensure_ascii=False, indent=2),\n                   encoding=\"utf-8\")\nregistro = json.loads(caminho.read_text(encoding=\"utf-8\"))\nprint(\"versões registradas:\", bool(registro[\"python\"] and registro[\"numpy\"]))\nprint(\"instruções registradas:\", bool(registro[\"terminal\"] and registro[\"caderno\"]))\nprint(\"caminho ausente:\", ficha(\"\")[\"executavel\"])\n",
+      "stdout": "versões registradas: True\ninstruções registradas: True\ncaminho ausente: não informado pelo ambiente",
+      "explanation": "A ficha de referência registra como repetir nos dois percursos. Abra ambiente.json e acrescente o sistema e a origem do kit ou o kernel que usou. A ficha continua legível quando sys.executable está vazio.",
+      "hint": "Escreva um dicionário de versões e instruções com json. Teste caminho vazio.",
+      "starter": "import json\nimport sys\nfrom importlib.metadata import version\nfrom pathlib import Path\n\ncaminho = Path(\"ambiente.json\")\n# Registre as versões, salve a ficha e releia-a.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual campo identifica o executável que roda o código, quando disponível?",
+      "options": [
+        "`sys.path[0]`",
+        "`sys.executable`",
+        "`numpy.__version__`"
+      ],
+      "answer": 1,
+      "explanation": "sys.executable fornece o caminho do executável Python."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`python -m pip` seleciona pip pelo mesmo intérprete chamado pelo comando python.",
+      "answer": true,
+      "explanation": "O intérprete invocado resolve e executa o módulo pip."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função que consulta a versão dos metadados da distribuição.",
+      "code": "from importlib import metadata\nnumero = metadata.___(\"numpy\")",
+      "blanks": [
+        [
+          "version"
+        ]
+      ],
+      "explanation": "metadata.version consulta a distribuição instalada."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O NumPy importa no terminal e falta no caderno. O que comparar primeiro?",
+      "options": [
+        "Somente os nomes dos arquivos de aula",
+        "Intérprete, kernel e instalação em cada ambiente",
+        "Somente a pasta em que o navegador baixou o caderno"
+      ],
+      "answer": 1,
+      "explanation": "Os dois percursos podem usar Pythons e pacotes separados."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que registrar para reproduzir o ambiente?",
+      "back": "Versão do Python, versões das dependências e como instalar ou abrir o kernel."
+    },
+    {
+      "front": "O que investigar quando as versões do NumPy divergem?",
+      "back": "Qual módulo foi importado, quais metadados foram encontrados e qual Python executou."
+    }
+  ]
+}

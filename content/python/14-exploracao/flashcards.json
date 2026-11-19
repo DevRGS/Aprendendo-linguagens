@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que faz parte do esquema?",
+      "back": "Nomes, tipos e unidades das colunas, além das condições de validade declaradas.",
+      "id": "python.exploracao.f01",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "front": "O que distingue 0 km de um km ausente?",
+      "back": "Zero é uma observação. No exemplo, 0 km é válido e ausência é uma célula não preenchida.",
+      "id": "python.exploracao.f02",
+      "lesson": "qualidade-dos-dados"
+    },
+    {
+      "front": "O que mede a amplitude interquartil?",
+      "back": "Q3 menos Q1, uma medida de dispersão na mesma unidade dos valores.",
+      "id": "python.exploracao.f03",
+      "lesson": "distribuicoes"
+    },
+    {
+      "front": "Duas amostras têm a mesma mediana. Seus histogramas precisam ser iguais?",
+      "back": "Podem ter contagens e espalhamento diferentes. A mediana resume um ponto da distribuição.",
+      "id": "python.exploracao.f04",
+      "lesson": "distribuicoes"
+    },
+    {
+      "front": "Que informação cada ponto de um gráfico de dispersão guarda?",
+      "back": "As duas medidas da mesma observação, uma em cada eixo.",
+      "id": "python.exploracao.f05",
+      "lesson": "relacoes"
+    },
+    {
+      "front": "Por que não atribuir causa quando r está perto de 1?",
+      "back": "Um fator comum ou a forma de coleta pode explicar a associação observada.",
+      "id": "python.exploracao.f06",
+      "lesson": "relacoes"
+    },
+    {
+      "front": "Que informação deve acompanhar uma taxa por grupo?",
+      "back": "Unidade, numerador e denominador, além da identificação do grupo.",
+      "id": "python.exploracao.f07",
+      "lesson": "relatorio-visual"
+    },
+    {
+      "front": "Como relatar um grupo de tamanho zero?",
+      "back": "Mostre denominador zero na tabela e sinalize que a taxa não é calculável.",
+      "id": "python.exploracao.f08",
+      "lesson": "relatorio-visual"
+    }
+  ]
+}

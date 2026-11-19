@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "html-css.publicacao.f01",
+      "lesson": "organizar-caminhos",
+      "front": "Qual caminho usa a inicial para um arquivo em recursos ao seu lado?",
+      "back": "recursos/nome-do-arquivo."
+    },
+    {
+      "id": "html-css.publicacao.f02",
+      "lesson": "organizar-caminhos",
+      "front": "Por que testar uma segunda página dentro de uma subpasta?",
+      "back": "A base dos caminhos muda conforme o endereço do documento."
+    },
+    {
+      "id": "html-css.publicacao.f03",
+      "lesson": "testar-a-navegacao",
+      "front": "Que informação convém anotar durante um teste de teclado?",
+      "back": "Controle focado, ação realizada e resultado observado."
+    },
+    {
+      "id": "html-css.publicacao.f04",
+      "lesson": "testar-a-navegacao",
+      "front": "Que tecla ativa um link já focado?",
+      "back": "Enter."
+    },
+    {
+      "id": "html-css.publicacao.f05",
+      "lesson": "publicar-arquivos-estaticos",
+      "front": "Por que vincular o servidor a 127.0.0.1 neste teste?",
+      "back": "Para acessá-lo pela própria máquina durante a prática."
+    },
+    {
+      "id": "html-css.publicacao.f06",
+      "lesson": "publicar-arquivos-estaticos",
+      "front": "O que deve ir na raiz selecionada para Pages?",
+      "back": "O index.html e a estrutura de recursos que seus caminhos referenciam."
+    },
+    {
+      "id": "html-css.publicacao.f07",
+      "lesson": "revisar-a-pagina-entregue",
+      "front": "Por que revisar a partir de uma cópia limpa?",
+      "back": "Detectar arquivos esquecidos e caminhos dependentes da máquina de autoria."
+    },
+    {
+      "id": "html-css.publicacao.f08",
+      "lesson": "revisar-a-pagina-entregue",
+      "front": "Qual é o destino dos dados digitados no projeto de exemplo?",
+      "back": "O navegador valida o campo e navega para uma confirmação local sem incluir o valor no envio."
+    }
+  ]
+}

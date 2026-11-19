@@ -30,7 +30,9 @@ test('página da linguagem sem progresso', async () => {
   const card = el.querySelector('.module-card');
   assert.equal(card.querySelectorAll('.lesson-list li').length, 6);
   assert.equal(card.querySelector('.lesson-list a').getAttribute('href'), '#/java/fundamentos/variaveis-e-tipos');
-  assert.equal(card.querySelector('.badge').textContent, '0/6 aulas');
+  assert.equal(card.querySelector('.badge').textContent, 'A começar');
+  assert.equal(card.open, true);
+  assert.match(card.querySelector('summary').textContent, /0\/6 aulas · Prática pendente/);
   assert.match(card.textContent, /Para concluir: todas as aulas e 60% na prática/);
   assert.equal(card.querySelector('a.btn-primary').getAttribute('href'), '#/java/fundamentos/pratica');
 });

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "O que self representa em a.incrementar()?",
+      "back": "A própria instância a passada ao método.",
+      "id": "python.objetos.f01",
+      "lesson": "instancias"
+    },
+    {
+      "front": "Por que criar lista em __init__ se ela deve ser independente?",
+      "back": "Cada inicialização cria uma lista e a armazena no objeto novo.",
+      "id": "python.objetos.f02",
+      "lesson": "instancias"
+    },
+    {
+      "front": "Quais métodos básicos @dataclass pode gerar?",
+      "back": "Com a configuração padrão, gera inicialização, representação e igualdade a partir dos campos, se aplicável.",
+      "id": "python.objetos.f03",
+      "lesson": "dataclasses"
+    },
+    {
+      "front": "Por que usar default_factory=list para um campo de lista?",
+      "back": "A função fabrica uma lista distinta para cada instância que omite o campo.",
+      "id": "python.objetos.f04",
+      "lesson": "dataclasses"
+    },
+    {
+      "front": "O que o processador compõe?",
+      "back": "Ele guarda um objeto estratégia e delega transformação a esse objeto.",
+      "id": "python.objetos.f05",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "front": "Quantas chamadas a transformar ocorrem para uma lista vazia?",
+      "back": "Nenhuma, porque a compreensão não tem itens para percorrer.",
+      "id": "python.objetos.f06",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "front": "Quando usar uma função pura para resumir medidas?",
+      "back": "Quando a entrada chega completa e o cálculo pode depender só dela.",
+      "id": "python.objetos.f07",
+      "lesson": "modelo-ou-funcao"
+    },
+    {
+      "front": "Quando manter uma instância por lote?",
+      "back": "Quando recebe medidas aos poucos e precisa guardar o total de cada lote separadamente.",
+      "id": "python.objetos.f08",
+      "lesson": "modelo-ou-funcao"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "postgresql.evolucao.f01",
+      "lesson": "migracao",
+      "front": "Qual comando altera a estrutura de uma tabela existente?",
+      "back": "ALTER TABLE. ALTER TABLE descreve mudanças no esquema."
+    },
+    {
+      "id": "postgresql.evolucao.f02",
+      "lesson": "migracao",
+      "front": "Que consulta verifica o preenchimento das linhas antigas?",
+      "back": "Agrupar por prioridade e contar. O grupo e sua quantidade evidenciam o valor das linhas já existentes."
+    },
+    {
+      "id": "postgresql.evolucao.f03",
+      "lesson": "carga",
+      "front": "Qual função gera diretamente os inteiros de 1 a 100?",
+      "back": "generate_series(1,100). generate_series produz as linhas de origem para o INSERT SELECT."
+    },
+    {
+      "id": "postgresql.evolucao.f04",
+      "lesson": "carga",
+      "front": "Como preservar os dados de referência após o ensaio?",
+      "back": "ROLLBACK ao fim do bloco. O rollback desfaz as inserções do bloco."
+    },
+    {
+      "id": "postgresql.evolucao.f05",
+      "lesson": "plano",
+      "front": "Qual opção faz a consulta rodar para medir as linhas reais?",
+      "back": "ANALYZE dentro de EXPLAIN. EXPLAIN ANALYZE executa e acrescenta dados observados."
+    },
+    {
+      "id": "postgresql.evolucao.f06",
+      "lesson": "plano",
+      "front": "O que ajuda a conferir a cardinalidade observada da consulta?",
+      "back": "Uma contagem com o mesmo filtro. O filtro igual torna os conjuntos comparáveis."
+    },
+    {
+      "id": "postgresql.evolucao.f07",
+      "lesson": "indice",
+      "front": "Por que manter idêntica a consulta ao comparar os planos?",
+      "back": "Para observar o efeito das condições de indexação na mesma tarefa. Variar filtro e índice juntos dificulta explicar diferenças."
+    },
+    {
+      "id": "postgresql.evolucao.f08",
+      "lesson": "indice",
+      "front": "Que filtro é mais seletivo na amostra de 5003 linhas?",
+      "back": "aluno_id=1. Na carga proposta o primeiro seleciona duas linhas e o segundo seleciona 5000."
+    }
+  ]
+}

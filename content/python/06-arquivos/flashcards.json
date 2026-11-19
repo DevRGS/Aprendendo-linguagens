@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "De onde parte um caminho relativo?",
+      "back": "Do diretório de trabalho, identificado por Path.cwd().",
+      "id": "python.arquivos.f01",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "front": "O que acontece se o modo x encontrar um arquivo existente?",
+      "back": "O Python levanta FileExistsError. O arquivo anterior permanece intacto.",
+      "id": "python.arquivos.f02",
+      "lesson": "caminhos-e-texto"
+    },
+    {
+      "front": "Por que abrir CSV com newline=\"\"?",
+      "back": "Para o módulo csv controlar as quebras, inclusive em campos entre aspas.",
+      "id": "python.arquivos.f03",
+      "lesson": "csv"
+    },
+    {
+      "front": "Quando manter os zeros de um campo como 007?",
+      "back": "Quando se trata de um identificador textual. Converta para número os campos usados em cálculos.",
+      "id": "python.arquivos.f04",
+      "lesson": "csv"
+    },
+    {
+      "front": "O que json.load recebe e devolve?",
+      "back": "Recebe arquivo aberto e devolve o objeto Python representado no JSON.",
+      "id": "python.arquivos.f05",
+      "lesson": "json"
+    },
+    {
+      "front": "Como distinguir um campo nulo de um campo ausente?",
+      "back": "Teste a existência da chave com in. Se presente, verifique se o valor é None.",
+      "id": "python.arquivos.f06",
+      "lesson": "json"
+    },
+    {
+      "front": "Quando usar except específico?",
+      "back": "Quando conhece a resposta adequada para aquele erro. Restrinja o try à operação esperada.",
+      "id": "python.arquivos.f07",
+      "lesson": "excecoes"
+    },
+    {
+      "front": "Como acrescentar número de linha e preservar a causa?",
+      "back": "Capture o erro e use raise com a nova mensagem seguido de from e da exceção capturada.",
+      "id": "python.arquivos.f08",
+      "lesson": "excecoes"
+    }
+  ]
+}

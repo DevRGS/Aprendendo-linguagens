@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "html-css.publicacao.q01",
+      "lesson": "organizar-caminhos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Em trilhas/web.html, onde ../mapa.svg procura o arquivo?",
+      "options": [
+        "No diretório atual de trilhas",
+        "Na raiz de qualquer domínio",
+        "Na pasta acima de trilhas"
+      ],
+      "answer": 2,
+      "explanation": "O segmento .. sobe um nível."
+    },
+    {
+      "id": "html-css.publicacao.q02",
+      "lesson": "organizar-caminhos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um href que começa com / pode escapar do prefixo do site de projeto.",
+      "answer": true,
+      "explanation": "A resolução começa na raiz da origem."
+    },
+    {
+      "id": "html-css.publicacao.q03",
+      "lesson": "organizar-caminhos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o caminho da folha no detalhe.",
+      "code": "href=\"___/estilo.css\"",
+      "blanks": [
+        [
+          ".."
+        ]
+      ],
+      "explanation": "A folha está na pasta superior à do detalhe.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.publicacao.q04",
+      "lesson": "organizar-caminhos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma imagem funciona localmente mas falha no servidor sensível a maiúsculas. O que conferir?",
+      "options": [
+        "Somente o tamanho da fonte",
+        "A correspondência exata do caminho e do nome",
+        "A ordem dos títulos"
+      ],
+      "answer": 1,
+      "explanation": "Diferenças como Mapa.svg e mapa.svg podem apontar para arquivos diferentes."
+    },
+    {
+      "id": "html-css.publicacao.q05",
+      "lesson": "testar-a-navegacao",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual critério demonstra a conclusão da tarefa?",
+      "options": [
+        "O teclado abre o detalhe certo e permite voltar",
+        "Os links estão azuis",
+        "O HTML possui muitos elementos"
+      ],
+      "answer": 0,
+      "explanation": "A tarefa pede um destino alcançável e um caminho de retorno."
+    },
+    {
+      "id": "html-css.publicacao.q06",
+      "lesson": "testar-a-navegacao",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Shift+Tab normalmente percorre os controles no sentido inverso.",
+      "answer": true,
+      "explanation": "Esse atalho ajuda a conferir a navegação para trás."
+    },
+    {
+      "id": "html-css.publicacao.q07",
+      "lesson": "testar-a-navegacao",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual atributo contém o destino de um link?",
+      "code": "<a ___=\"trilhas/web.html\">Web</a>",
+      "blanks": [
+        [
+          "href"
+        ]
+      ],
+      "explanation": "O atributo href identifica o recurso ligado.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.publicacao.q08",
+      "lesson": "testar-a-navegacao",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O documento abriu mas o título indica outra trilha. Como registrar o problema?",
+      "options": [
+        "Marcar sucesso porque o servidor respondeu",
+        "Trocar a cor do foco",
+        "Anotar link acionado, destino esperado e título observado"
+      ],
+      "answer": 2,
+      "explanation": "A comparação expõe um erro de destino reproduzível."
+    },
+    {
+      "id": "html-css.publicacao.q09",
+      "lesson": "publicar-arquivos-estaticos",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual arquivo o servidor de exemplo procura ao abrir a pasta /19/?",
+      "options": [
+        "estilo.css",
+        "index.html",
+        "obrigado.html"
+      ],
+      "answer": 1,
+      "explanation": "index.html funciona como documento inicial da pasta."
+    },
+    {
+      "id": "html-css.publicacao.q10",
+      "lesson": "publicar-arquivos-estaticos",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Ctrl+C no terminal encerra o servidor local iniciado nessa sessão.",
+      "answer": true,
+      "explanation": "O processo está em primeiro plano no terminal."
+    },
+    {
+      "id": "html-css.publicacao.q11",
+      "lesson": "publicar-arquivos-estaticos",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o módulo Python usado no laboratório.",
+      "code": "python3 -m ___ 8000 --bind 127.0.0.1",
+      "blanks": [
+        [
+          "http.server"
+        ]
+      ],
+      "explanation": "O módulo fornece um servidor simples para o teste.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "html-css.publicacao.q12",
+      "lesson": "publicar-arquivos-estaticos",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A página inicial abre mas a folha CSS retorna 404. Qual é o primeiro diagnóstico?",
+      "options": [
+        "Comparar a URL solicitada com a pasta publicada",
+        "Criar uma conta para cada visitante",
+        "Apagar o elemento title"
+      ],
+      "answer": 0,
+      "explanation": "Um caminho incorreto gera pedido a um arquivo ausente."
+    },
+    {
+      "id": "html-css.publicacao.q13",
+      "lesson": "revisar-a-pagina-entregue",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que conjunto demonstra uma entrega utilizável?",
+      "options": [
+        "Somente uma captura do editor",
+        "Somente as cores aprovadas",
+        "Pacote reproduzível, navegação por teclado e validação conferida"
+      ],
+      "answer": 2,
+      "explanation": "O colega precisa conseguir executar as tarefas."
+    },
+    {
+      "id": "html-css.publicacao.q14",
+      "lesson": "revisar-a-pagina-entregue",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "É preciso explicar ao aluno o destino dos dados mesmo em um formulário demonstrativo.",
+      "answer": true,
+      "explanation": "A explicação permite entender o que o teste realmente faz."
+    },
+    {
+      "id": "html-css.publicacao.q15",
+      "lesson": "revisar-a-pagina-entregue",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual atributo declara o texto alternativo no detalhe?",
+      "code": "<img src=\"../mapa.svg\" ___=\"HTML, CSS e projeto\">",
+      "blanks": [
+        [
+          "alt"
+        ]
+      ],
+      "explanation": "O atributo transmite o conteúdo contextual da imagem.",
+      "caseInsensitive": true
+    },
+    {
+      "id": "html-css.publicacao.q16",
+      "lesson": "revisar-a-pagina-entregue",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual relato é mais reproduzível?",
+      "options": [
+        "Funcionou comigo",
+        "Em 390 px, após focar Abrir Web e pressionar Enter, aparece Trilha web",
+        "O visual está bom"
+      ],
+      "answer": 1,
+      "explanation": "O relato inclui condição, ação e resultado verificável."
+    }
+  ]
+}

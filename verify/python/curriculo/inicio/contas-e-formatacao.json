@@ -1,0 +1,99 @@
+{
+  "title": "Contas e formatação",
+  "minutes": 24,
+  "intro": "Quantas horas completas cabem em 135 minutos e quanto sobra? Você vai escolher operações e exibir o resultado em uma forma legível. Retome [Nomes e tipos](#/python/inicio/nomes-e-tipos) se precisar rever atribuições e números.\n\nUse `+`, `-` e `*` para somar, subtrair e multiplicar. Multiplicação e divisão têm prioridade sobre soma e subtração. Parênteses indicam a operação que você quer calcular primeiro. Para inteiros como 135 e 60, `135 / 60` devolve 2.25, um `float`. `135 // 60` dá o quociente inteiro 2 e `135 % 60` dá o resto 15. Conferimos com `2 * 60 + 15 == 135`.\n\nUma f-string começa com `f` e deixa inserir valores calculados entre chaves. Se `valor` é 7.5, `f\"{valor:.2f}\"` produz o texto `7.50`. A instrução após os dois pontos controla a apresentação. O número guardado em `valor` continua 7.5.\n\nAntes de avançar, explique qual operação mostraria apenas os minutos que sobraram. Na próxima aula, o valor virá de uma entrada digitada.",
+  "sources": [
+    [
+      "Usar Python como calculadora",
+      "https://docs.python.org/pt-br/3.14/tutorial/introduction.html#using-python-as-a-calculator"
+    ],
+    [
+      "Strings literais formatadas",
+      "https://docs.python.org/pt-br/3.14/tutorial/inputoutput.html#formatted-string-literals"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o número de horas completas e de minutos restantes. Em seguida, converta 135 minutos e imprima os dois valores em uma frase.",
+      "code": "total_minutos = 135\nhoras = total_minutos // 60\nminutos = total_minutos % 60\nprint(f\"{horas} horas e {minutos} minutos\")",
+      "stdout": "2 horas e 15 minutos",
+      "explanation": "O quociente conta grupos completos de 60. O resto mede o que ainda não forma um grupo."
+    },
+    {
+      "prompt": "Preveja qual expressão calcula a soma primeiro. Execute as duas e confira seus palpites.",
+      "code": "print(2 + 3 * 4)\nprint((2 + 3) * 4)",
+      "stdout": "14\n20",
+      "explanation": "Na primeira linha, 3 vezes 4 vale 12 e depois entra o 2. Na segunda, os parênteses fazem o 2 mais 3 virar o primeiro fator."
+    },
+    {
+      "prompt": "Calcule o total de 3 itens de 2,50 e exiba `Total: 7.50`. Mostre como caso de borda o total de zero itens e explique onde surgem os zeros à direita.",
+      "code": "quantidade = 3\npreco = 2.50\ntotal = quantidade * preco\nprint(f\"Total: {total:.2f}\")",
+      "stdout": "Total: 7.50",
+      "explanation": "A multiplicação produz o número 7.5. A f-string monta o texto com duas casas decimais. Com zero itens a conta dá 0.0 e a mesma formatação mostra 0.00.",
+      "hint": "Calcule o produto antes e escreva `:.2f` depois do nome dentro das chaves.",
+      "starter": "quantidade = 3\npreco = 2.50\n# Calcule e exiba o total.",
+      "checks": [
+        {
+          "code": "quantidade = 0\npreco = 2.50\ntotal = quantidade * preco\nprint(f\"Total: {total:.2f}\")",
+          "stdout": "Total: 0.00"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quais são os valores de `75 // 60` e `75 % 60`, nessa ordem?",
+      "options": [
+        "`15` e `1`",
+        "`1.25` e `15`",
+        "`1` e `15`"
+      ],
+      "answer": 2,
+      "explanation": "Cabe um grupo de 60 em 75 e sobram 15."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Quem espera 24 de `2 + 6 * 3` precisa pôr a soma entre parênteses.",
+      "answer": true,
+      "explanation": "A multiplicação vem primeiro na expressão original e o resultado é 20. Use `(2 + 6) * 3` para obter 24."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o operador que obtém o resto inteiro para esse caso.",
+      "code": "sobras = 26 ___ 10\nprint(sobras)",
+      "blanks": [
+        [
+          "%"
+        ]
+      ],
+      "explanation": "O operador % calcula o resto. Depois de dois grupos de 10, sobram 6."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Com `total = 2.5`, qual expressão cria o texto `2.50` para uma etiqueta?",
+      "options": [
+        "`f\"{total:.1f}\"`",
+        "`f\"{total:.2f}\"`",
+        "`f\"{total}\"`",
+        "`f\"{total:.0f}\"`"
+      ],
+      "answer": 1,
+      "explanation": "A formatação .2f fixa duas casas decimais no texto, inclusive o zero final."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que `//` e `%` fornecem para 135 e 60?",
+      "back": "Com esses inteiros positivos, // fornece o quociente 2 e % fornece o resto 15."
+    },
+    {
+      "front": "O que `f'{7.5:.2f}'` produz?",
+      "back": "O texto 7.50, com exatamente duas casas decimais."
+    }
+  ]
+}

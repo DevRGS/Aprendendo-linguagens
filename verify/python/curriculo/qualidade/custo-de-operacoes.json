@@ -1,0 +1,92 @@
+{
+  "title": "Custo de buscas e índices",
+  "minutes": 41,
+  "intro": "Procure o último ID e um ausente em uma lista. Antes da busca, estime o número de comparações. Retome [percorrer sequências](#/python/sequencias/percorrer-e-filtrar) e [conjuntos](#/python/registros/conjuntos).\n\nUma busca linear compara elementos até achar o alvo ou acabar a lista. Seu pior caso cresce na proporção do comprimento. Um `set` cria um índice de pertinência por hash, com busca usual de custo médio constante sob condições típicas. Sua construção percorre os dados, guarda as chaves únicas e usa memória adicional. O custo de colisões depende dos dados, portanto o exemplo conta passagens e consultas, e deixa a medição de tempo para uma comparação controlada.\n\nNo caderno e no kit, rode os mesmos valores. Em E2, compare contagens, não segundos. Quantas consultas justificam construir um índice neste cenário? Em seguida, veja [reprodutibilidade](#/python/qualidade/reprodutibilidade).",
+  "sources": [
+    [
+      "Conjuntos e pertinência",
+      "https://docs.python.org/3.14/library/stdtypes.html#set-types-set-frozenset"
+    ],
+    [
+      "Objetos que podem servir como chaves de hash",
+      "https://docs.python.org/3.14/glossary.html#term-hashable"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Conte comparações ao buscar 40 e 99 em [10, 20, 30, 40]. Identifique se uma busca para antes da outra.",
+      "code": "def buscar_lista(valores, alvo):\n    comparacoes = 0\n    for valor in valores:\n        comparacoes += 1\n        if valor == alvo:\n            return True, comparacoes\n    return False, comparacoes\n\nids = [10, 20, 30, 40]\nfor alvo in [40, 99]:\n    print(buscar_lista(ids, alvo))\n",
+      "stdout": "(True, 4)\n(False, 4)",
+      "explanation": "40 está na última posição. 99 não existe. Ambos os casos examinam todos os itens, embora a resposta de pertinência seja diferente."
+    },
+    {
+      "prompt": "Para quatro IDs e três consultas, compare a busca repetida na lista com a construção de um único set e consultas de pertinência. Confira as mesmas respostas.",
+      "code": "def buscar_lista(valores, alvo):\n    comparacoes = 0\n    for valor in valores:\n        comparacoes += 1\n        if valor == alvo:\n            return True, comparacoes\n    return False, comparacoes\n\nids = [10, 20, 30, 40]\nconsultas = [40, 99, 10]\n\nresultados = [buscar_lista(ids, alvo) for alvo in consultas]\nindice = set(ids)\nrespostas = [alvo in indice for alvo in consultas]\nprint([encontrado for encontrado, _ in resultados] == respostas)\nprint(\"comparações na lista:\", sum(contagem for _, contagem in resultados))\nprint(\"itens lidos para construir:\", len(ids))\nprint(\"consultas ao índice:\", len(consultas))\n",
+      "stdout": "True\ncomparações na lista: 9\nitens lidos para construir: 4\nconsultas ao índice: 3",
+      "explanation": "As comparações lineares somam 4 + 4 + 1. O índice usa uma passagem inicial e três operações de pertinência. Estas são contagens de atividades diferentes, pois cada consulta ao set pode ter mais de uma operação interna."
+    },
+    {
+      "prompt": "Confirme o acordo entre lista e índice para 100 IDs e 1000 consultas alternadas ao último e a um ausente. Conte comparações da lista, itens da construção e consultas ao índice. Confira a pertinência em entrada vazia e justifique quando reaproveitar o índice.",
+      "code": "def buscar_lista(valores, alvo):\n    comparacoes = 0\n    for valor in valores:\n        comparacoes += 1\n        if valor == alvo:\n            return True, comparacoes\n    return False, comparacoes\n\nids = list(range(100))\nconsultas = [99, -1] * 500\nindice = set(ids)\nresultados = [buscar_lista(ids, alvo) for alvo in consultas]\niguais = [a for a, _ in resultados] == [alvo in indice for alvo in consultas]\nprint(\"respostas iguais:\", iguais)\nprint(\"comparações:\", sum(qtd for _, qtd in resultados))\nprint(\"construção e consultas:\", len(ids), len(consultas))\nprint(\"vazio:\", buscar_lista([], 99)[0] == (99 in set()))\n",
+      "stdout": "respostas iguais: True\ncomparações: 100000\nconstrução e consultas: 100 1000\nvazio: True",
+      "explanation": "São 100 comparações em cada busca de último ou ausente. Construir o índice uma vez favorece muitas consultas repetidas e custa memória para as chaves. Para uma consulta simples em uma lista pequena, a passagem de construção pode não compensar. Uma entrada vazia dá ausência nos dois casos.",
+      "hint": "Crie `set(ids)` fora do laço de consultas e compare todas as respostas em ordem.",
+      "starter": "ids = list(range(100))\nconsultas = [99, -1] * 500\n# Use a busca contada de E1 e compare os resultados com um set.\n# Inclua uma entrada vazia.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantas comparações a busca por 30 em [10, 20, 30, 40] exige?",
+      "options": [
+        "1",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "A busca testa 10, 20 e 30, quando para."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Construir um set a partir de uma lista tem custo mesmo quando só uma consulta será feita.",
+      "answer": true,
+      "explanation": "A construção lê a entrada e guarda as chaves únicas antes da consulta."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o construtor embutido para criar o índice de pertinência.",
+      "code": "indice = ___(ids)",
+      "blanks": [
+        [
+          "set"
+        ]
+      ],
+      "explanation": "O conjunto reúne chaves únicas e oferece consulta de pertinência."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quando costuma compensar reaproveitar um índice para pertinência?",
+      "options": [
+        "Uma inspeção que precisa sempre retornar cada duplicata na ordem",
+        "Muitas consultas sobre uma coleção estável de IDs",
+        "Um único dado em uma lista pequena com uma consulta"
+      ],
+      "answer": 1,
+      "explanation": "Repetir buscas pode amortizar a construção. Um set representa pertinência, não multiplicidade."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual é o pior caso para comparações na busca linear de n IDs?",
+      "back": "n comparações, por exemplo ao buscar um ID ausente ou o último sem duplicatas anteriores."
+    },
+    {
+      "front": "O que precisa entrar na comparação ao optar pelo set?",
+      "back": "Tempo de construção e memória adicional, junto ao ganho esperado nas consultas repetidas."
+    }
+  ]
+}

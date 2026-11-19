@@ -1,0 +1,101 @@
+{
+  "title": "Marco 04 · Resumo de lote",
+  "minutes": 30,
+  "intro": "Em três registros de estudo, quanto tempo foi para cada tema e como conferir o total? Retome [For e acumuladores](#/python/fluxo/for-e-acumuladores), [Percorrer e filtrar](#/python/sequencias/percorrer-e-filtrar) e [Dicionários](#/python/registros/dicionarios) conforme precisar.\n\nDecomponha a tarefa em ler cada par (tema, minutos), atualizar a soma do tema e apresentar o resultado. Ao receber (A, 2), o mapa passa a ter A=2. Após (B, 3), ele também tem B=3. Receber (A, 4) muda A para 6. Guarde separadamente a soma de todas as durações. Uma verificação que deve valer para todo lote é comparar essa soma com a soma dos subtotais. Essa condição é um invariante.\n\nA quantidade mede registros e a soma mede minutos. Um registro de zero minutos acrescenta uma unidade na primeira e zero na segunda. A ordem de saída é alfabética por tema. Antes de iniciar [Parâmetros e retorno](#/python/funcoes/parametros-e-retorno), explique que contagem e total mudariam ao acrescentar um registro de zero a um lote vazio. Se empacar no marco, retome os links e refaça o problema com (B, 0), (C, 3), (B, 2).",
+  "sources": [
+    [
+      "Dicionários e técnicas de iteração",
+      "https://docs.python.org/pt-br/3.14/tutorial/datastructures.html#dictionaries"
+    ],
+    [
+      "Função sorted",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#sorted"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o subtotal de A depois de cada passagem. Some os minutos por tema nos pares (A, 2), (B, 3) e (A, 4).",
+      "code": "registros = [(\"A\", 2), (\"B\", 3), (\"A\", 4)]\npor_tema = {}\nfor tema, minutos in registros:\n    por_tema[tema] = por_tema.get(tema, 0) + minutos\n    print(tema, por_tema[tema])",
+      "stdout": "A 2\nB 3\nA 6",
+      "explanation": "Cada linha mostra o subtotal do próprio tema, logo o B não altera o total de A."
+    },
+    {
+      "prompt": "Acrescente (A, 0). Antes de rodar, diga quais resultados mudam entre soma e contagem.",
+      "code": "registros = [(\"A\", 2), (\"B\", 3), (\"A\", 4), (\"A\", 0)]\nquantidade = 0\ntotal = 0\nfor tema, minutos in registros:\n    quantidade = quantidade + 1\n    total = total + minutos\nprint(\"Registros:\", quantidade)\nprint(\"Minutos:\", total)",
+      "stdout": "Registros: 4\nMinutos: 9",
+      "explanation": "A contagem aumentou de 3 para 4 e a soma ficou 9. Zero é uma duração registrada."
+    },
+    {
+      "prompt": "Gere um relatório de minutos dos registros (A, 2), (B, 3) e (A, 4). Mostre `A=6`, `B=3` e `total=9`, um por linha e na ordem mostrada. Explique também a saída esperada para um lote vazio.",
+      "code": "registros = [(\"A\", 2), (\"B\", 3), (\"A\", 4)]\npor_tema = {}\ntotal = 0\nfor tema, minutos in registros:\n    por_tema[tema] = por_tema.get(tema, 0) + minutos\n    total = total + minutos\n\nfor tema in sorted(por_tema):\n    print(f\"{tema}={por_tema[tema]}\")\nprint(f\"total={total}\")",
+      "stdout": "A=6\nB=3\ntotal=9",
+      "explanation": "O mapa acumula por tema, sorted garante a ordem e a soma direta fornece o total. Confira que 6 + 3 dá 9. No lote vazio nenhum tema aparece e a saída contém apenas total=0.",
+      "hint": "Use um dicionário para subtotais e mantenha um acumulador do lote. Ordene as chaves antes de imprimir.",
+      "starter": "registros = [(\"A\", 2), (\"B\", 3), (\"A\", 4)]\npor_tema = {}\ntotal = 0\n# Acumule, ordene a apresentação e compare subtotais com o total.",
+      "checks": [
+        {
+          "code": "registros = []\npor_tema = {}\ntotal = 0\nfor tema, minutos in registros:\n    por_tema[tema] = por_tema.get(tema, 0) + minutos\n    total = total + minutos\n\nfor tema in sorted(por_tema):\n    print(f\"{tema}={por_tema[tema]}\")\nprint(f\"total={total}\")",
+          "stdout": "total=0"
+        },
+        {
+          "code": "registros = [(\"B\", 0), (\"C\", 3), (\"B\", 2)]\npor_tema = {}\ntotal = 0\nfor tema, minutos in registros:\n    por_tema[tema] = por_tema.get(tema, 0) + minutos\n    total = total + minutos\n\nfor tema in sorted(por_tema):\n    print(f\"{tema}={por_tema[tema]}\")\nprint(f\"total={total}\")",
+          "stdout": "B=2\nC=3\ntotal=5"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Para (B, 0), (A, 4) e (B, 2), quais são os subtotais de A e B?",
+      "options": [
+        "A vale 4 e B vale 2",
+        "A vale 6 e B vale 0",
+        "A vale 4 e B vale 0"
+      ],
+      "answer": 0,
+      "explanation": "Os dois registros B somam 0 + 2. A aparece uma vez com 4."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Excluir registros de zero minuto preserva a soma de minutos, mas pode reduzir a quantidade de registros contabilizados.",
+      "answer": true,
+      "explanation": "A duração zero não acrescenta minutos. Cada linha de duração zero ainda corresponde a um registro."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o padrão que permite acrescentar os minutos da primeira ocorrência de um tema.",
+      "code": "por_tema = {}\ntema, minutos = (\"C\", 2)\npor_tema[tema] = por_tema.get(tema, ___) + minutos",
+      "blanks": [
+        [
+          "0"
+        ]
+      ],
+      "explanation": "O subtotal de um tema começa em 0 antes do primeiro acréscimo."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas para produzir e publicar um relatório por tema em ordem alfabética.",
+      "lines": [
+        "Acumular todos os minutos por tema",
+        "Ordenar as chaves do mapa de subtotais resultante",
+        "Imprimir os subtotais na ordem calculada"
+      ],
+      "explanation": "As chaves vêm do mapa completado e sua ordem define a apresentação."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Como conferir o total de minutos do lote?",
+      "back": "Some os subtotais de todos os temas e compare com a soma direta das durações."
+    },
+    {
+      "front": "O que produz um lote vazio?",
+      "back": "O mapa fica vazio e a soma é 0. Não há linha de tema no relatório."
+    }
+  ]
+}

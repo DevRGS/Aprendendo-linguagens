@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "typescript.migracao.q01",
+      "lesson": "contrato-http",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que status o teste original espera na criação válida?",
+      "options": [
+        "204",
+        "401",
+        "201"
+      ],
+      "answer": 2,
+      "explanation": "A criação devolve o registro novo com Location."
+    },
+    {
+      "id": "typescript.migracao.q02",
+      "lesson": "contrato-http",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o cabeçalho HTTP que aponta para a tarefa criada.",
+      "code": "___: /api/tarefas/7",
+      "blanks": [
+        [
+          "Location"
+        ]
+      ],
+      "caseInsensitive": true,
+      "explanation": "O caminho identifica a nova tarefa para uma leitura posterior."
+    },
+    {
+      "id": "typescript.migracao.q03",
+      "lesson": "contrato-http",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "O acesso de outra conta a uma tarefa específica revela o conteúdo com status 200.",
+      "answer": false,
+      "explanation": "O recurso filtra por dono e responde 404 à outra conta."
+    },
+    {
+      "id": "typescript.migracao.q04",
+      "lesson": "contrato-http",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual dado é tão importante quanto o JSON para o contrato da criação?",
+      "options": [
+        "O nome da variável local do repositório",
+        "O número da linha no app.mjs",
+        "O cabeçalho Location"
+      ],
+      "answer": 2,
+      "explanation": "Clientes podem seguir o endereço retornado."
+    },
+    {
+      "id": "typescript.migracao.q05",
+      "lesson": "rota-vertical",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual valor deve entrar no caso de uso como identidade do usuário?",
+      "options": [
+        "req.session.id",
+        "req.body.usuario_id",
+        "req.query.dono"
+      ],
+      "answer": 0,
+      "explanation": "A autenticação determina o dono no servidor."
+    },
+    {
+      "id": "typescript.migracao.q06",
+      "lesson": "rota-vertical",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete a palavra de controle que encerra o caminho inválido antes da gravação.",
+      "code": "if (!entrada.ok) ___ entrada;",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A falha já tem o formato aceito como resposta de erro pelo caso de uso."
+    },
+    {
+      "id": "typescript.migracao.q07",
+      "lesson": "rota-vertical",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "A migração precisa conservar o middleware CSRF na rota de escrita.",
+      "answer": true,
+      "explanation": "O novo módulo troca a implementação do caso de uso e preserva as proteções da rota."
+    },
+    {
+      "id": "typescript.migracao.q08",
+      "lesson": "rota-vertical",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que efeito evidencia validação real de um corpo inválido?",
+      "options": [
+        "400 e quantidade de tarefas inalterada",
+        "Erro do editor com gravação realizada",
+        "200 com título numérico"
+      ],
+      "answer": 0,
+      "explanation": "Verificar a resposta e o estado comprova a recusa em tempo de execução."
+    },
+    {
+      "id": "typescript.migracao.q09",
+      "lesson": "testes-contrato",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Como enviar texto que deliberadamente não fecha um objeto no helper dos testes?",
+      "options": [
+        "Com body e um objeto JavaScript válido",
+        "Com a opção raw",
+        "Com o cabeçalho Location"
+      ],
+      "answer": 1,
+      "explanation": "raw passa o texto diretamente ao corpo da requisição."
+    },
+    {
+      "id": "typescript.migracao.q10",
+      "lesson": "testes-contrato",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o status esperado para Content-Type text/plain no POST dessa API.",
+      "code": "HTTP ___",
+      "blanks": [
+        [
+          "415"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "A rota exige application/json."
+    },
+    {
+      "id": "typescript.migracao.q11",
+      "lesson": "testes-contrato",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "Um array pode ter sintaxe JSON válida e mesmo assim ser um corpo inválido para criar uma tarefa.",
+      "answer": true,
+      "explanation": "O domínio exige objeto com titulo; parsear e validar são etapas distintas."
+    },
+    {
+      "id": "typescript.migracao.q12",
+      "lesson": "testes-contrato",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Como distinguir falha de sintaxe JSON e falha de domínio com o mesmo status HTTP?",
+      "options": [
+        "Ver se a conexão usa a porta 3000",
+        "Conferir erro.codigo",
+        "Comparar o nome do usuário"
+      ],
+      "answer": 1,
+      "explanation": "O contrato devolve JSON e VALIDACAO como códigos de aplicação distintos."
+    },
+    {
+      "id": "typescript.migracao.q13",
+      "lesson": "reproducao",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Que arquivo permite reproduzir a instalação com npm ci?",
+      "options": [
+        "Apenas uma captura de tela",
+        "Apenas dist/laboratorio.js",
+        "package-lock.json junto de package.json"
+      ],
+      "answer": 2,
+      "explanation": "O lock registra as versões concretas coerentes com o manifesto."
+    },
+    {
+      "id": "typescript.migracao.q14",
+      "lesson": "reproducao",
+      "difficulty": 3,
+      "type": "fill",
+      "prompt": "Complete o comando para conferir a versão local instalada do compilador.",
+      "code": "npx --no-install ___ --version",
+      "blanks": [
+        [
+          "tsc"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "tsc é o executável do compilador fornecido por typescript."
+    },
+    {
+      "id": "typescript.migracao.q15",
+      "lesson": "reproducao",
+      "difficulty": 3,
+      "type": "truefalse",
+      "prompt": "A execução manual de um caso válido cobre sozinha o requisito de autorização entre contas.",
+      "answer": false,
+      "explanation": "A autorização exige exercitar outra identidade sobre o mesmo recurso."
+    },
+    {
+      "id": "typescript.migracao.q16",
+      "lesson": "reproducao",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual conjunto de evidências mostra a migração completa do recorte?",
+      "options": [
+        "Somente o número de arquivos .ts",
+        "Só a resposta do endpoint de saúde",
+        "Compilação estrita e testes HTTP válidos, inválidos e entre contas"
+      ],
+      "answer": 2,
+      "explanation": "As evidências precisam cobrir tanto o sistema de tipos quanto o comportamento público."
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "title": "Quartis e histogramas",
+  "minutes": 50,
+  "intro": "Coloque 0, 2, 4, 6 e 8 minutos em ordem. Onde ficam 25%, 50% e 75% ao longo da amostra ordenada pelo método linear? Preveja como um intervalo mais largo muda o desenho.\n\nUse NumPy e Matplotlib e retome [Auditar a qualidade](#/python/exploracao/qualidade-dos-dados). No terminal, Agg salva sem janela. No caderno, veja o PNG mostrado após a execução ou abra o arquivo gerado. Nenhum arquivo de entrada é necessário.\n\nQuantis são pontos de referência na sequência ordenada. O método linear do NumPy usa posição `q * (n - 1)` e interpola entre vizinhos se ela for fracionária. Q2 é a mediana. A amplitude interquartil é Q3 − Q1. Com `fig, ax = plt.subplots()` você obtém a figura e seus eixos. `ax.hist` conta números em intervalos, fechados à esquerda e abertos à direita, exceto o último, que inclui a borda final. Um extremo pode aparecer numa cauda. A quantidade de intervalos altera sua aparência.",
+  "sources": [
+    [
+      "Quantil linear",
+      "https://numpy.org/doc/stable/reference/generated/numpy.quantile.html"
+    ],
+    [
+      "Guia Matplotlib",
+      "https://matplotlib.org/stable/users/explain/quick_start.html"
+    ],
+    [
+      "Histograma",
+      "https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.hist.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Calcule os quartis de [0, 2, 4, 6, 8]. Salve o histograma com intervalos [0, 4) e [4, 8] e indique as alturas em texto.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ntempos = [0, 2, 4, 6, 8]\nprint(np.quantile(tempos, [0.25, 0.50, 0.75], method=\"linear\").tolist())\nfig, ax = plt.subplots(layout=\"constrained\")\ncontagens, _, _ = ax.hist(tempos, bins=[0, 4, 8], edgecolor=\"black\")\nax.set(xlabel=\"Tempo (min)\", ylabel=\"Viagens (contagem)\", title=\"Distribuição de tempos\")\nfig.savefig(\"quartis.png\")\nplt.close(fig)\nprint(contagens.astype(int).tolist())\n",
+      "stdout": "[2.0, 4.0, 6.0]\n[2, 3]",
+      "explanation": "Os quartis estão nas posições 1, 2 e 3. O gráfico tem duas barras, de alturas 2 e 3, e inclui 8 na última.",
+      "images": [
+        "quartis.png"
+      ]
+    },
+    {
+      "prompt": "Para os mesmos tempos, compare as contagens com bordas [0,4,8] e [0,2,4,6,8]. Explique por que o valor máximo entra no último intervalo.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ntempos = [0, 2, 4, 6, 8]\nfig, axes = plt.subplots(1, 2, sharey=True, layout=\"constrained\")\nfor ax, bordas in zip(axes, [[0, 4, 8], [0, 2, 4, 6, 8]], strict=True):\n    contagens, _, _ = ax.hist(tempos, bins=bordas, edgecolor=\"black\")\n    ax.set(xlabel=\"Tempo (min)\", ylabel=\"Viagens (contagem)\", title=f\"{len(bordas) - 1} intervalos\")\n    print(bordas, contagens.astype(int).tolist())\nfig.savefig(\"intervalos.png\")\nplt.close(fig)\n",
+      "stdout": "[0, 4, 8] [2, 3]\n[0, 2, 4, 6, 8] [1, 1, 1, 2]",
+      "explanation": "A tabela impressa descreve a altura de cada barra. O total e os dados continuam iguais. O último intervalo inclui a borda direita.",
+      "images": [
+        "intervalos.png"
+      ]
+    },
+    {
+      "prompt": "Para [1, 2, 2, 3, 9] minutos, entregue mediana, amplitude interquartil e um histograma com bordas [0, 3, 6, 9] e eixos com unidades. Mostre também que uma amostra constante [2, 2] tem amplitude interquartil zero.",
+      "code": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ndef resumo(tempos):\n    q1, mediana, q3 = np.quantile(tempos, [0.25, 0.5, 0.75], method=\"linear\")\n    return mediana, q3 - q1\n\ntempos = [1, 2, 2, 3, 9]\nmediana, aiq = resumo(tempos)\nprint(f\"Mediana: {mediana:.1f} min. AIQ: {aiq:.1f} min.\")\nfig, ax = plt.subplots(layout=\"constrained\")\ncontagens, _, _ = ax.hist(tempos, bins=[0, 3, 6, 9], edgecolor=\"black\")\nax.set(xlabel=\"Tempo (min)\", ylabel=\"Viagens (contagem)\", title=\"Tempos observados\")\nfig.savefig(\"distribuicao.png\")\nplt.close(fig)\nprint(\"Contagens:\", contagens.astype(int).tolist())\nassert resumo([2, 2])[1] == 0\n",
+      "stdout": "Mediana: 2.0 min. AIQ: 1.0 min.\nContagens: [3, 1, 1]",
+      "explanation": "A amplitude entre Q1=2 e Q3=3 é 1 min. As barras mostram três viagens abaixo de 3 min, uma de 3 até menos de 6 e outra de 6 a 9. A amostra constante tem quartis iguais. A seguir estudaremos duas medidas de cada viagem.",
+      "hint": "Calcule os três quantis juntos e preserve os valores retornados por hist para montar a descrição.",
+      "starter": "import matplotlib\nmatplotlib.use(\"Agg\")\nimport matplotlib.pyplot as plt\nimport numpy as np\n\ntempos = [1, 2, 2, 3, 9]\nbordas = [0, 3, 6, 9]\n# Calcule os quartis e salve a figura.\n",
+      "images": [
+        "distribuicao.png"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a mediana de [1, 3, 8, 10] pelo método linear?",
+      "options": [
+        "3",
+        "5,5",
+        "8"
+      ],
+      "answer": 1,
+      "explanation": "A posição 1,5 interpola entre 3 e 8."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se os dados e a cobertura continuam iguais, usar intervalos mais largos no histograma muda a mediana.",
+      "answer": false,
+      "explanation": "A mediana é calculada a partir dos dados originais. Os intervalos afetam as barras."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Escolha o método linear no cálculo do quartil.",
+      "code": "np.quantile(valores, 0.25, method=\"___\")",
+      "blanks": [
+        [
+          "linear"
+        ]
+      ],
+      "explanation": "O método interpola quando a posição calculada é fracionária."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Com bordas [0, 2, 4] e valores [0, 2, 4], quais as contagens das duas barras?",
+      "options": [
+        "[2, 1]",
+        "[1, 2]",
+        "[1, 1]"
+      ],
+      "answer": 1,
+      "explanation": "O primeiro intervalo é [0,2) e o último inclui a borda 4."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que mede a amplitude interquartil?",
+      "back": "Q3 menos Q1, uma medida de dispersão na mesma unidade dos valores."
+    },
+    {
+      "front": "Duas amostras têm a mesma mediana. Seus histogramas precisam ser iguais?",
+      "back": "Podem ter contagens e espalhamento diferentes. A mediana resume um ponto da distribuição."
+    }
+  ]
+}

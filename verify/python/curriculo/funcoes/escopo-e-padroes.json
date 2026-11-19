@@ -1,0 +1,98 @@
+{
+  "title": "Escopo e valores padrão",
+  "minutes": 35,
+  "intro": "Como receber um preço e aplicar normalmente 10% de desconto, deixando o chamador mudar a taxa? Retome [Parâmetros e retorno](#/python/funcoes/parametros-e-retorno).\n\nNomes definidos dentro de uma função, como `abatimento = preco * taxa`, são locais à sua chamada. Um parâmetro também é local. Você pode chamar `desconto(preco=100, taxa=0.10)` e indicar a qual parâmetro pertence cada argumento. Em `def desconto(preco, taxa=0.10):`, omitir a taxa usa o valor padrão. Uma taxa de 0.10 aplicada a 100 produz abatimento 10.0 e preço final 90.0.\n\nO Python avalia um valor padrão quando executa a definição da função. Uma lista escrita como padrão pode acumular mudanças entre chamadas que omitem o argumento. Use `None` como sentinela e crie uma lista nova dentro da função para cada chamada sem lista. O teste `is None` separa o argumento omitido nessa política de uma lista vazia fornecida de propósito.\n\nExplique qual estado acompanha cada chamada. Na aula seguinte você vai documentar o que uma função recebe e entrega.",
+  "sources": [
+    [
+      "Valores padrão",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#default-argument-values"
+    ],
+    [
+      "Argumentos nomeados",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#keyword-arguments"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o preço final de 100 sem passar taxa. Chame também com taxa explícita de 25%.",
+      "code": "def desconto(preco, taxa=0.10):\n    abatimento = preco * taxa\n    return preco - abatimento\n\nprint(desconto(100))\nprint(desconto(preco=100, taxa=0.25))",
+      "stdout": "90.0\n75.0",
+      "explanation": "A primeira chamada usa a taxa padrão 0.10. A segunda informa pelo nome taxa o valor 0.25."
+    },
+    {
+      "prompt": "A primeira versão tem uma lista compartilhada como padrão, um erro intencional de estado. Preveja os retornos de duas chamadas seguidas e compare com a versão corrigida.",
+      "code": "def adicionar_partilhado(item, lista=[]):\n    lista.append(item)\n    return lista\n\nprint(adicionar_partilhado(\"A\"))\nprint(adicionar_partilhado(\"B\"))\n\ndef adicionar(item, lista=None):\n    if lista is None:\n        lista = []\n    lista.append(item)\n    return lista\n\nprint(adicionar(\"A\"))\nprint(adicionar(\"B\"))",
+      "stdout": "['A']\n['A', 'B']\n['A']\n['B']",
+      "explanation": "A lista padrão da primeira versão é criada na definição e reaparece na segunda chamada. A correção cria uma lista nova em cada chamada com None."
+    },
+    {
+      "prompt": "Crie `rotular(texto, prefixo='Item')` para devolver o rótulo com dois pontos e um espaço entre prefixo e texto. Mostre o padrão e a troca por `Tema` via argumento nomeado para `Água`, depois mostre que a origem permanece `Água`. Teste também texto vazio.",
+      "code": "def rotular(texto, prefixo=\"Item\"):\n    return f\"{prefixo}: {texto}\"\n\norigem = \"Água\"\nprint(rotular(origem))\nprint(rotular(origem, prefixo=\"Tema\"))\nprint(origem)",
+      "stdout": "Item: Água\nTema: Água\nÁgua",
+      "explanation": "A f-string cria outro texto. O argumento nomeado muda o prefixo apenas naquela chamada. Para texto vazio, o resultado termina em dois pontos e um espaço, sem caracteres de texto depois.",
+      "hint": "Declare o padrão na definição e monte a string com os dois parâmetros.",
+      "starter": "def rotular(texto, prefixo=\"Item\"):\n    pass  # Devolva o rótulo.\n\norigem = \"Água\"\n# Experimente as duas formas de chamar e exiba a origem.",
+      "checks": [
+        {
+          "code": "def rotular(texto, prefixo=\"Item\"):\n    return f\"{prefixo}: {texto}\"\n\nprint(repr(rotular(\"\")))",
+          "stdout": "'Item: '"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `def desconto(preco, taxa=0.10)` e retorno `preco - preco * taxa`, quanto dá `desconto(80)`?",
+      "options": [
+        "`80.0`",
+        "`8.0`",
+        "`72.0`"
+      ],
+      "answer": 2,
+      "explanation": "A taxa padrão desconta 8.0 de 80."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma lista padrão escrita em `def juntar(item, lista=[])` é recriada em toda chamada que omite lista.",
+      "answer": false,
+      "explanation": "O padrão é avaliado na definição. Uma mutação permanece nas chamadas seguintes que usam o mesmo padrão."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a sentinela que permite escolher uma lista nova dentro da chamada.",
+      "code": "def guardar(valor, itens=___):\n    if itens is None:\n        itens = []\n    itens.append(valor)\n    return itens",
+      "blanks": [
+        [
+          "None"
+        ]
+      ],
+      "explanation": "Usar None como padrão evita guardar uma lista mutável na definição."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Uma função `etiqueta(texto, prefixo='ID')` deve receber `42` como texto e usar o prefixo `Lote`. Qual chamada nomeia o prefixo corretamente?",
+      "options": [
+        "`etiqueta('42', prefixo='Lote')`",
+        "`etiqueta('Lote', texto='42')`",
+        "`etiqueta(prefixo='Lote')`"
+      ],
+      "answer": 0,
+      "explanation": "O argumento posicional vai para texto. O argumento nomeado preenche prefixo uma única vez."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Onde existe um nome criado dentro do corpo de uma função?",
+      "back": "Ele é local à chamada da função, salvo quando explicitamente declarado de outro escopo."
+    },
+    {
+      "front": "Quando criar uma lista nova se o parâmetro pode ter valor padrão?",
+      "back": "Dentro da função, ao detectar a sentinela None, para separar o estado das chamadas."
+    }
+  ]
+}

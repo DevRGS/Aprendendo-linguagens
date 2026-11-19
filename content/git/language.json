@@ -1,0 +1,170 @@
+{
+  "id": "git",
+  "name": "Git e GitHub",
+  "icon": "🌿",
+  "color": "#70c49b",
+  "highlight": "bash",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "historico",
+      "dir": "01-historico",
+      "title": "Primeiro histórico",
+      "description": "Identifique o repositório e transforme duas mudanças em commits.",
+      "lessons": [
+        {
+          "id": "identificar-o-repositorio",
+          "file": "01-identificar-o-repositorio.md",
+          "title": "Identificar o repositório",
+          "minutes": 16
+        },
+        {
+          "id": "inspecionar-o-status",
+          "file": "02-inspecionar-o-status.md",
+          "title": "Inspecionar o status",
+          "minutes": 18
+        },
+        {
+          "id": "selecionar-alteracoes",
+          "file": "03-selecionar-alteracoes.md",
+          "title": "Selecionar alterações",
+          "minutes": 20
+        },
+        {
+          "id": "criar-e-inspecionar-um-commit",
+          "file": "04-criar-e-inspecionar-um-commit.md",
+          "title": "Criar e inspecionar um commit",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "diferencas",
+      "dir": "02-diferencas",
+      "title": "Entender diferenças",
+      "description": "Compare a cópia de trabalho, o índice e a versão registrada.",
+      "lessons": [
+        {
+          "id": "diretorio-de-trabalho-e-indice",
+          "file": "01-diretorio-de-trabalho-e-indice.md",
+          "title": "Diretório de trabalho e índice",
+          "minutes": 16
+        },
+        {
+          "id": "comparar-mudancas-preparadas",
+          "file": "02-comparar-mudancas-preparadas.md",
+          "title": "Comparar mudanças preparadas",
+          "minutes": 18
+        },
+        {
+          "id": "consultar-o-historico",
+          "file": "03-consultar-o-historico.md",
+          "title": "Consultar o histórico",
+          "minutes": 20
+        },
+        {
+          "id": "ignorar-arquivos-gerados",
+          "file": "04-ignorar-arquivos-gerados.md",
+          "title": "Ignorar arquivos gerados",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "branches",
+      "dir": "03-branches",
+      "title": "Trabalhar em paralelo",
+      "description": "Use branches e resolva uma integração com conflito.",
+      "lessons": [
+        {
+          "id": "criar-uma-branch",
+          "file": "01-criar-uma-branch.md",
+          "title": "Criar uma branch",
+          "minutes": 16
+        },
+        {
+          "id": "alternar-entre-versoes",
+          "file": "02-alternar-entre-versoes.md",
+          "title": "Alternar entre versões",
+          "minutes": 18
+        },
+        {
+          "id": "integrar-mudancas",
+          "file": "03-integrar-mudancas.md",
+          "title": "Integrar mudanças",
+          "minutes": 20
+        },
+        {
+          "id": "resolver-conflito-de-texto",
+          "file": "04-resolver-conflito-de-texto.md",
+          "title": "Resolver conflito de texto",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "colaborar",
+      "dir": "04-colaborar",
+      "title": "Colaborar",
+      "description": "Pratique com dois clones e proponha uma revisão no GitHub.",
+      "lessons": [
+        {
+          "id": "clonar-o-remoto-de-estudo",
+          "file": "01-clonar-o-remoto-de-estudo.md",
+          "title": "Clonar o remoto de estudo",
+          "minutes": 16
+        },
+        {
+          "id": "buscar-referencias",
+          "file": "02-buscar-referencias.md",
+          "title": "Buscar referências",
+          "minutes": 18
+        },
+        {
+          "id": "enviar-uma-branch",
+          "file": "03-enviar-uma-branch.md",
+          "title": "Enviar uma branch",
+          "minutes": 20
+        },
+        {
+          "id": "abrir-e-revisar-um-pull-request",
+          "file": "04-abrir-e-revisar-um-pull-request.md",
+          "title": "Abrir e revisar um pull request",
+          "minutes": 22
+        }
+      ]
+    },
+    {
+      "id": "entregar",
+      "dir": "05-entregar",
+      "title": "Recuperar e entregar",
+      "description": "Reverta, marque e reproduza o guia em outra pasta.",
+      "lessons": [
+        {
+          "id": "reverter-um-commit-publicado",
+          "file": "01-reverter-um-commit-publicado.md",
+          "title": "Reverter um commit publicado",
+          "minutes": 16
+        },
+        {
+          "id": "conferir-o-resultado",
+          "file": "02-conferir-o-resultado.md",
+          "title": "Conferir o resultado",
+          "minutes": 18
+        },
+        {
+          "id": "marcar-uma-versao",
+          "file": "03-marcar-uma-versao.md",
+          "title": "Marcar uma versão",
+          "minutes": 20
+        },
+        {
+          "id": "reproduzir-a-partir-de-clone-limpo",
+          "file": "04-reproduzir-a-partir-de-clone-limpo.md",
+          "title": "Reproduzir a partir de clone limpo",
+          "minutes": 22
+        }
+      ]
+    }
+  ]
+}

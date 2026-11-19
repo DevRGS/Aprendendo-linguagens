@@ -1,0 +1,215 @@
+{
+  "questions": [
+    {
+      "id": "git.entregar.q01",
+      "lesson": "reverter-um-commit-publicado",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Como compensar um commit publicado preservando sua presença no histórico?",
+      "options": [
+        "git status",
+        "git clone",
+        "git revert"
+      ],
+      "answer": 2,
+      "explanation": "revert cria outro commit com o efeito inverso quando aplicado com sucesso."
+    },
+    {
+      "id": "git.entregar.q02",
+      "lesson": "reverter-um-commit-publicado",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Depois da reversão o commit problemático continua consultável.",
+      "answer": true,
+      "explanation": "O histórico anterior continua alcançável."
+    },
+    {
+      "id": "git.entregar.q03",
+      "lesson": "reverter-um-commit-publicado",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o subcomando de reversão.",
+      "code": "git ___ --no-edit HEAD",
+      "blanks": [
+        [
+          "revert"
+        ]
+      ],
+      "explanation": "--no-edit aceita a mensagem preparada automaticamente.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.entregar.q04",
+      "lesson": "reverter-um-commit-publicado",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O patch entre HEAD~2 e HEAD está vazio neste guia. O que podemos concluir?",
+      "options": [
+        "São o mesmo commit",
+        "O conteúdo do guia coincide nessas pontas",
+        "Nunca houve erro"
+      ],
+      "answer": 1,
+      "explanation": "Duas fotografias podem ter o mesmo arquivo e históricos distintos."
+    },
+    {
+      "id": "git.entregar.q05",
+      "lesson": "conferir-o-resultado",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual comando lê o README da branch remota conhecida após fetch?",
+      "options": [
+        "git show origin/main:README.md",
+        "cat README.md",
+        "git status"
+      ],
+      "answer": 0,
+      "explanation": "A referência e o caminho nomeiam o arquivo desejado."
+    },
+    {
+      "id": "git.entregar.q06",
+      "lesson": "conferir-o-resultado",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um diff vazio entre dois commits prova que a cópia de trabalho está limpa.",
+      "answer": false,
+      "explanation": "Alterações locais podem existir independentemente dos dois commits."
+    },
+    {
+      "id": "git.entregar.q07",
+      "lesson": "conferir-o-resultado",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha a opção que devolve código de saída indicando diferenças.",
+      "code": "git diff ___ HEAD origin/main",
+      "blanks": [
+        [
+          "--exit-code",
+          "--quiet"
+        ]
+      ],
+      "explanation": "--exit-code devolve zero sem diferenças e um quando há diferenças. --quiet também ativa essa convenção e omite o patch.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.entregar.q08",
+      "lesson": "conferir-o-resultado",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que consulta detecta o rascunho local acrescentado após a publicação?",
+      "options": [
+        "git diff HEAD origin/main -- README.md",
+        "git log -1",
+        "git diff origin/main -- README.md"
+      ],
+      "answer": 2,
+      "explanation": "Com uma só referência, diff compara essa versão com a cópia de trabalho."
+    },
+    {
+      "id": "git.entregar.q09",
+      "lesson": "marcar-uma-versao",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que a tag v1.0 identifica neste exercício?",
+      "options": [
+        "O último arquivo que alguém editou",
+        "Uma versão específica do guia",
+        "Todo commit futuro em main"
+      ],
+      "answer": 1,
+      "explanation": "A tag permanece apontando para a versão escolhida."
+    },
+    {
+      "id": "git.entregar.q10",
+      "lesson": "marcar-uma-versao",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Criar uma tag local já faz outro clone recebê-la pela rede.",
+      "answer": false,
+      "explanation": "O remoto precisa receber a referência antes de outro clone buscá-la."
+    },
+    {
+      "id": "git.entregar.q11",
+      "lesson": "marcar-uma-versao",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a opção que cria uma tag anotada.",
+      "code": "git tag ___ v1.0 -m \"Guia revisado\"",
+      "blanks": [
+        [
+          "-a",
+          "--annotate"
+        ]
+      ],
+      "explanation": "A opção cria o objeto anotado explicitamente.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.entregar.q12",
+      "lesson": "marcar-uma-versao",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como publicar só a referência v1.0?",
+      "options": [
+        "git push origin v1.0",
+        "git fetch v1.0",
+        "git log v1.0"
+      ],
+      "answer": 0,
+      "explanation": "A referência nomeada é enviada ao remoto."
+    },
+    {
+      "id": "git.entregar.q13",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Ao clonar --branch v1.0 quando v1.0 é uma tag, o que esperar?",
+      "options": [
+        "Criação automática de uma branch main nova no remoto",
+        "Envio de alterações locais",
+        "HEAD no commit marcado"
+      ],
+      "answer": 2,
+      "explanation": "A tag escolhe o commit que será extraído."
+    },
+    {
+      "id": "git.entregar.q14",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um arquivo criado apenas no computador do autor aparece no clone limpo de v1.0.",
+      "answer": false,
+      "explanation": "O clone recebe o conteúdo registrado e alcançável pelo remoto."
+    },
+    {
+      "id": "git.entregar.q15",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para ler a fotografia do guia no clone.",
+      "code": "git -C ../avaliacao show ___:README.md",
+      "blanks": [
+        [
+          "HEAD",
+          "v1.0"
+        ]
+      ],
+      "explanation": "No clone recém-criado, HEAD e v1.0 identificam a mesma fotografia.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.entregar.q16",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que verificação permite avaliar duas reproduções com hashes diferentes?",
+      "options": [
+        "Exigir igualdade da data do commit",
+        "Comparar guia, pais relevantes e tag",
+        "Usar o nome de usuário do avaliador"
+      ],
+      "answer": 1,
+      "explanation": "Metadados podem variar mesmo quando o aprendizado e o conteúdo coincidem."
+    }
+  ]
+}

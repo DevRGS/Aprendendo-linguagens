@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "typescript.registros.f01",
+      "lesson": "objetos",
+      "front": "O que o campo concluida representa neste registro?",
+      "back": "Um estado booleano. O registro distingue concluída e pendente usando boolean."
+    },
+    {
+      "id": "typescript.registros.f02",
+      "lesson": "objetos",
+      "front": "Qual leitura devolve o identificador do exemplo?",
+      "back": "item.id. id vale 7, enquanto titulo e concluida têm outros papéis."
+    },
+    {
+      "id": "typescript.registros.f03",
+      "lesson": "opcionais",
+      "front": "Qual tipo descreve um campo lógico que pode faltar?",
+      "back": "{ concluida?: boolean }. O marcador ? indica que a propriedade pode ser omitida."
+    },
+    {
+      "id": "typescript.registros.f04",
+      "lesson": "opcionais",
+      "front": "Por que || é inadequado para reabrir a tarefa?",
+      "back": "Considera false um motivo para usar o padrão. false é um valor de negócio e precisa sobreviver ao fallback."
+    },
+    {
+      "id": "typescript.registros.f05",
+      "lesson": "unioes",
+      "front": "Que propriedade distingue as alternativas de Busca?",
+      "back": "ok. A etiqueta literal está nos dois formatos e tem valores diferentes."
+    },
+    {
+      "id": "typescript.registros.f06",
+      "lesson": "unioes",
+      "front": "O que colocar no ramo de erro da mensagem?",
+      "back": "r.motivo. O discriminante já identifica o formato que contém motivo."
+    },
+    {
+      "id": "typescript.registros.f07",
+      "lesson": "narrowing",
+      "front": "Que teste refina string neste exemplo?",
+      "back": "typeof v === 'string'. typeof compara o nome do tipo de execução."
+    },
+    {
+      "id": "typescript.registros.f08",
+      "lesson": "narrowing",
+      "front": "Como excluir null de uma entrada antes de chamar trim?",
+      "back": "Testar v === null e retornar nesse caso. O retorno antecipado deixa somente a string no caminho restante."
+    }
+  ]
+}

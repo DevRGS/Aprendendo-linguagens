@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "id": "machine-learning.regressao.q01",
+      "lesson": "atributos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Como obter uma matriz bidimensional contendo apenas a segunda coluna?",
+      "options": [
+        "X[:, 1:2]",
+        "X[:, 1]",
+        "X[1, :]"
+      ],
+      "answer": 0,
+      "explanation": "A fatia preserva o eixo das colunas."
+    },
+    {
+      "id": "machine-learning.regressao.q02",
+      "lesson": "atributos",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um vetor com formato (10,) já explicita dez linhas e uma coluna como uma matriz 2D.",
+      "answer": false,
+      "explanation": "O vetor tem um eixo. Uma matriz de uma coluna precisa de dois."
+    },
+    {
+      "id": "machine-learning.regressao.q03",
+      "lesson": "atributos",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual atributo do NumPy expõe as dimensões de X?",
+      "code": "print(X.___)",
+      "blanks": [
+        [
+          "shape"
+        ]
+      ],
+      "explanation": "A tupla informa linhas e colunas."
+    },
+    {
+      "id": "machine-learning.regressao.q04",
+      "lesson": "atributos",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Um colega reverte apenas y antes do ajuste. O que acontece?",
+      "options": [
+        "As viagens passam a usar alvos de outras linhas",
+        "Os atributos ganham uma coluna",
+        "A contagem de viagens dobra"
+      ],
+      "answer": 0,
+      "explanation": "Tamanho igual não garante alinhamento."
+    },
+    {
+      "id": "machine-learning.regressao.q05",
+      "lesson": "ajuste",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Na regressão de tempo em função das paradas, o que representa o intercepto?",
+      "options": [
+        "Quantidade máxima de paradas",
+        "Duração estimada com zero paradas",
+        "Erro absoluto médio"
+      ],
+      "answer": 1,
+      "explanation": "O termo constante é a previsão quando o atributo vale zero."
+    },
+    {
+      "id": "machine-learning.regressao.q06",
+      "lesson": "ajuste",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "LinearRegression escolhe parâmetros minimizando diretamente o MAE por padrão.",
+      "answer": false,
+      "explanation": "O ajuste ordinário usa mínimos quadrados. O MAE pode avaliar a solução depois."
+    },
+    {
+      "id": "machine-learning.regressao.q07",
+      "lesson": "ajuste",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o método que aprende com pares (X, y).",
+      "code": "modelo.___(X_treino, y_treino)",
+      "blanks": [
+        [
+          "fit"
+        ]
+      ],
+      "explanation": "O método estima os parâmetros a partir do treino."
+    },
+    {
+      "id": "machine-learning.regressao.q08",
+      "lesson": "ajuste",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Qual a unidade da inclinação deste exemplo?",
+      "options": [
+        "Paradas por minuto",
+        "Minutos por parada",
+        "Minutos ao quadrado"
+      ],
+      "answer": 1,
+      "explanation": "Cada parada adicional altera a estimativa pela inclinação em minutos."
+    },
+    {
+      "id": "machine-learning.regressao.q09",
+      "lesson": "previsoes",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Que entrada cabe em predict para V07 e V08 no modelo de paradas?",
+      "options": [
+        "Seus tempos reais",
+        "Somente os nomes das viagens",
+        "As duas linhas com a coluna de paradas"
+      ],
+      "answer": 2,
+      "explanation": "O contrato de entrada deve ser o mesmo usado em fit."
+    },
+    {
+      "id": "machine-learning.regressao.q10",
+      "lesson": "previsoes",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Reverter juntos a ordem de alvos e previsões altera o MAE.",
+      "answer": false,
+      "explanation": "Os mesmos pares contribuem com as mesmas distâncias."
+    },
+    {
+      "id": "machine-learning.regressao.q11",
+      "lesson": "previsoes",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete o método que devolve estimativas usando parâmetros já aprendidos.",
+      "code": "p = modelo.___(X_validacao)",
+      "blanks": [
+        [
+          "predict"
+        ]
+      ],
+      "explanation": "A inferência aplica a reta às entradas novas."
+    },
+    {
+      "id": "machine-learning.regressao.q12",
+      "lesson": "previsoes",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "A reta tem erro maior que a constante na validação. Como relatar?",
+      "options": [
+        "A reta jamais pode melhorar a previsão",
+        "A constante conhecia o futuro",
+        "A referência venceu nesta janela"
+      ],
+      "answer": 2,
+      "explanation": "O resultado vale para a comparação e os dados observados."
+    },
+    {
+      "id": "machine-learning.regressao.q13",
+      "lesson": "residuos",
+      "difficulty": 1,
+      "type": "multiple",
+      "prompt": "Se observado = 15 e previsto = 6, qual resíduo usamos?",
+      "options": [
+        "+9",
+        "−9",
+        "21"
+      ],
+      "answer": 0,
+      "explanation": "A convenção do curso é observado menos previsto."
+    },
+    {
+      "id": "machine-learning.regressao.q14",
+      "lesson": "residuos",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "O maior resíduo em magnitude pode ser negativo.",
+      "answer": true,
+      "explanation": "Uma superestimação grande tem sinal negativo e módulo alto."
+    },
+    {
+      "id": "machine-learning.regressao.q15",
+      "lesson": "residuos",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a operação que localiza o índice do maior módulo no vetor.",
+      "code": "i = np.abs(r).___()",
+      "blanks": [
+        [
+          "argmax"
+        ]
+      ],
+      "explanation": "argmax retorna o índice, enquanto max retorna o valor."
+    },
+    {
+      "id": "machine-learning.regressao.q16",
+      "lesson": "residuos",
+      "difficulty": 3,
+      "type": "multiple",
+      "prompt": "Como investigar a maior falha da janela?",
+      "options": [
+        "Recuperar ID e examinar o contexto do erro",
+        "Remover a linha automaticamente",
+        "Treinar sobre o erro e recalcular a mesma validação"
+      ],
+      "answer": 0,
+      "explanation": "Um caso difícil merece diagnóstico antes de alterar dados ou protocolo."
+    }
+  ]
+}

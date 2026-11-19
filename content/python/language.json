@@ -1,0 +1,522 @@
+{
+  "id": "python",
+  "name": "Python",
+  "color": "#70a9dc",
+  "icon": "🐍",
+  "highlight": "python",
+  "reference": "referencia.md",
+  "modules": [
+    {
+      "id": "inicio",
+      "dir": "01-inicio",
+      "title": "Primeiros programas",
+      "lessons": [
+        {
+          "id": "primeira-execucao",
+          "file": "01-primeira-execucao.md",
+          "title": "Primeira execução",
+          "minutes": 25
+        },
+        {
+          "id": "nomes-e-tipos",
+          "file": "02-nomes-e-tipos.md",
+          "title": "Nomes e tipos",
+          "minutes": 23
+        },
+        {
+          "id": "contas-e-formatacao",
+          "file": "03-contas-e-formatacao.md",
+          "title": "Contas e formatação",
+          "minutes": 24
+        },
+        {
+          "id": "entrada-e-erros",
+          "file": "04-entrada-e-erros.md",
+          "title": "Entrada e erros",
+          "minutes": 28
+        }
+      ],
+      "description": "Primeira execução · Nomes e tipos · Contas e formatação · Entrada e erros"
+    },
+    {
+      "id": "fluxo",
+      "dir": "02-fluxo",
+      "title": "Decisões e repetições",
+      "lessons": [
+        {
+          "id": "comparacoes",
+          "file": "01-comparacoes.md",
+          "title": "Comparações e lógica",
+          "minutes": 24
+        },
+        {
+          "id": "condicoes",
+          "file": "02-condicoes.md",
+          "title": "Condições e faixas",
+          "minutes": 25
+        },
+        {
+          "id": "for-e-acumuladores",
+          "file": "03-for-e-acumuladores.md",
+          "title": "For e acumuladores",
+          "minutes": 25
+        },
+        {
+          "id": "while-e-parada",
+          "file": "04-while-e-parada.md",
+          "title": "While e parada",
+          "minutes": 29
+        }
+      ],
+      "description": "Comparações e lógica · Condições e faixas · For e acumuladores · While e parada"
+    },
+    {
+      "id": "sequencias",
+      "dir": "03-sequencias",
+      "title": "Texto, sequências e mutabilidade",
+      "lessons": [
+        {
+          "id": "texto-e-fatias",
+          "file": "01-texto-e-fatias.md",
+          "title": "Texto e fatias",
+          "minutes": 24
+        },
+        {
+          "id": "listas",
+          "file": "02-listas.md",
+          "title": "Listas e cópias",
+          "minutes": 25
+        },
+        {
+          "id": "percorrer-e-filtrar",
+          "file": "03-percorrer-e-filtrar.md",
+          "title": "Percorrer e filtrar",
+          "minutes": 25
+        },
+        {
+          "id": "compreensoes",
+          "file": "04-compreensoes.md",
+          "title": "Compreensões de lista",
+          "minutes": 25
+        }
+      ],
+      "description": "Texto e fatias · Listas e cópias · Percorrer e filtrar · Compreensões de lista"
+    },
+    {
+      "id": "registros",
+      "dir": "04-registros",
+      "title": "Registros e agregações",
+      "lessons": [
+        {
+          "id": "tuplas-e-desempacotamento",
+          "file": "01-tuplas-e-desempacotamento.md",
+          "title": "Tuplas e desempacotamento",
+          "minutes": 25
+        },
+        {
+          "id": "dicionarios",
+          "file": "02-dicionarios.md",
+          "title": "Dicionários",
+          "minutes": 24
+        },
+        {
+          "id": "conjuntos",
+          "file": "03-conjuntos.md",
+          "title": "Conjuntos",
+          "minutes": 24
+        },
+        {
+          "id": "resumo-de-lote",
+          "file": "04-resumo-de-lote.md",
+          "title": "Marco 04 · Resumo de lote",
+          "minutes": 30
+        }
+      ],
+      "description": "Tuplas e desempacotamento · Dicionários · Conjuntos · Marco 04 · Resumo de lote"
+    },
+    {
+      "id": "funcoes",
+      "dir": "05-funcoes",
+      "title": "Funções e contratos",
+      "lessons": [
+        {
+          "id": "parametros-e-retorno",
+          "file": "01-parametros-e-retorno.md",
+          "title": "Parâmetros e retorno",
+          "minutes": 34
+        },
+        {
+          "id": "escopo-e-padroes",
+          "file": "02-escopo-e-padroes.md",
+          "title": "Escopo e valores padrão",
+          "minutes": 35
+        },
+        {
+          "id": "contratos-e-tipos",
+          "file": "03-contratos-e-tipos.md",
+          "title": "Contratos e tipos",
+          "minutes": 37
+        },
+        {
+          "id": "composicao",
+          "file": "04-composicao.md",
+          "title": "Composição de funções",
+          "minutes": 38
+        }
+      ],
+      "description": "Parâmetros e retorno · Escopo e valores padrão · Contratos e tipos · Composição de funções"
+    },
+    {
+      "id": "arquivos",
+      "dir": "06-arquivos",
+      "title": "Arquivos e erros",
+      "lessons": [
+        {
+          "id": "caminhos-e-texto",
+          "file": "01-caminhos-e-texto.md",
+          "title": "Caminhos e arquivos de texto",
+          "minutes": 34
+        },
+        {
+          "id": "csv",
+          "file": "02-csv.md",
+          "title": "Ler e escrever CSV",
+          "minutes": 37
+        },
+        {
+          "id": "json",
+          "file": "03-json.md",
+          "title": "Gravar e carregar JSON",
+          "minutes": 34
+        },
+        {
+          "id": "excecoes",
+          "file": "04-excecoes.md",
+          "title": "Tratar erros com contexto",
+          "minutes": 39
+        }
+      ],
+      "description": "Caminhos e arquivos de texto · Ler e escrever CSV · Gravar e carregar JSON · Tratar erros com contexto"
+    },
+    {
+      "id": "projetos",
+      "dir": "07-projetos",
+      "title": "Organização e reprodução",
+      "lessons": [
+        {
+          "id": "modulos-e-imports",
+          "file": "01-modulos-e-imports.md",
+          "title": "Módulos e imports locais",
+          "minutes": 38
+        },
+        {
+          "id": "ambiente-e-pacotes",
+          "file": "02-ambiente-e-pacotes.md",
+          "title": "Ambiente e versões de pacotes",
+          "minutes": 42
+        },
+        {
+          "id": "entrada-do-programa",
+          "file": "03-entrada-do-programa.md",
+          "title": "Ponto de entrada e argumentos",
+          "minutes": 42
+        },
+        {
+          "id": "pipeline-de-arquivos",
+          "file": "04-pipeline-de-arquivos.md",
+          "title": "Pipeline de arquivos",
+          "minutes": 43
+        }
+      ],
+      "description": "Módulos e imports locais · Ambiente e versões de pacotes · Ponto de entrada e argumentos · Pipeline de arquivos"
+    },
+    {
+      "id": "objetos",
+      "dir": "08-objetos",
+      "title": "Objetos e modelagem",
+      "lessons": [
+        {
+          "id": "instancias",
+          "file": "01-instancias.md",
+          "title": "Instâncias e estado",
+          "minutes": 36
+        },
+        {
+          "id": "dataclasses",
+          "file": "02-dataclasses.md",
+          "title": "Registros com dataclasses",
+          "minutes": 39
+        },
+        {
+          "id": "composicao-e-polimorfismo",
+          "file": "03-composicao-e-polimorfismo.md",
+          "title": "Composição e estratégias",
+          "minutes": 40
+        },
+        {
+          "id": "modelo-ou-funcao",
+          "file": "04-modelo-ou-funcao.md",
+          "title": "Escolher entre objeto e função",
+          "minutes": 42
+        }
+      ],
+      "description": "Instâncias e estado · Registros com dataclasses · Composição e estratégias · Escolher entre objeto e função"
+    },
+    {
+      "id": "protocolos",
+      "dir": "09-protocolos",
+      "title": "Iteração e recursos",
+      "lessons": [
+        {
+          "id": "iteradores",
+          "file": "01-iteradores.md",
+          "title": "Iteráveis, iteradores e esgotamento",
+          "minutes": 36
+        },
+        {
+          "id": "geradores",
+          "file": "02-geradores.md",
+          "title": "Geradores sob demanda",
+          "minutes": 38
+        },
+        {
+          "id": "decoradores",
+          "file": "03-decoradores.md",
+          "title": "Decoradores e encaminhamento de chamadas",
+          "minutes": 43
+        },
+        {
+          "id": "gerentes-de-contexto",
+          "file": "04-gerentes-de-contexto.md",
+          "title": "Contexto e limpeza de recursos",
+          "minutes": 42
+        }
+      ],
+      "description": "Iteráveis, iteradores e esgotamento · Geradores sob demanda · Decoradores e encaminhamento de chamadas · Contexto e limpeza de recursos"
+    },
+    {
+      "id": "qualidade",
+      "dir": "10-qualidade",
+      "title": "Qualidade e eficiência",
+      "lessons": [
+        {
+          "id": "testes-unitarios",
+          "file": "01-testes-unitarios.md",
+          "title": "Testes unitários com unittest",
+          "minutes": 42
+        },
+        {
+          "id": "depuracao",
+          "file": "02-depuracao.md",
+          "title": "Reproduzir e depurar falhas",
+          "minutes": 38
+        },
+        {
+          "id": "custo-de-operacoes",
+          "file": "03-custo-de-operacoes.md",
+          "title": "Custo de buscas e índices",
+          "minutes": 41
+        },
+        {
+          "id": "reprodutibilidade",
+          "file": "04-reprodutibilidade.md",
+          "title": "Resultados reprodutíveis",
+          "minutes": 42
+        }
+      ],
+      "description": "Testes unitários com unittest · Reproduzir e depurar falhas · Custo de buscas e índices · Resultados reprodutíveis"
+    },
+    {
+      "id": "matematica",
+      "dir": "11-matematica",
+      "title": "Matemática e estatística em Python",
+      "lessons": [
+        {
+          "id": "vetores",
+          "file": "01-vetores.md",
+          "title": "Vetores e soma ponderada",
+          "minutes": 50
+        },
+        {
+          "id": "centro-e-dispersao",
+          "file": "02-centro-e-dispersao.md",
+          "title": "Centro e dispersão",
+          "minutes": 50
+        },
+        {
+          "id": "frequencia-e-probabilidade",
+          "file": "03-frequencia-e-probabilidade.md",
+          "title": "Frequência, condição e probabilidade",
+          "minutes": 50
+        },
+        {
+          "id": "precisao-e-escalas",
+          "file": "04-precisao-e-escalas.md",
+          "title": "Precisão, centralização e escalas",
+          "minutes": 50
+        }
+      ],
+      "description": "Vetores e soma ponderada · Centro e dispersão · Frequência, condição e probabilidade · Precisão, centralização e escalas"
+    },
+    {
+      "id": "numpy",
+      "dir": "12-numpy",
+      "title": "Computação com NumPy",
+      "lessons": [
+        {
+          "id": "arrays",
+          "file": "01-arrays.md",
+          "title": "Arrays, tipos e dimensões",
+          "minutes": 50
+        },
+        {
+          "id": "indexacao-e-mascaras",
+          "file": "02-indexacao-e-mascaras.md",
+          "title": "Indexação, máscaras e cópias",
+          "minutes": 50
+        },
+        {
+          "id": "eixos-e-broadcasting",
+          "file": "03-eixos-e-broadcasting.md",
+          "title": "Eixos e broadcasting",
+          "minutes": 50
+        },
+        {
+          "id": "produto-matricial",
+          "file": "04-produto-matricial.md",
+          "title": "Produto matricial e pontuação",
+          "minutes": 50
+        }
+      ],
+      "description": "Arrays, tipos e dimensões · Indexação, máscaras e cópias · Eixos e broadcasting · Produto matricial e pontuação"
+    },
+    {
+      "id": "pandas",
+      "dir": "13-pandas",
+      "title": "Tabelas com pandas",
+      "lessons": [
+        {
+          "id": "ler-e-inspecionar",
+          "file": "01-ler-e-inspecionar.md",
+          "title": "Ler e inspecionar tabelas",
+          "minutes": 50
+        },
+        {
+          "id": "selecionar-e-transformar",
+          "file": "02-selecionar-e-transformar.md",
+          "title": "Seleções e colunas derivadas",
+          "minutes": 50
+        },
+        {
+          "id": "agregar",
+          "file": "03-agregar.md",
+          "title": "Resumir dados por grupo",
+          "minutes": 50
+        },
+        {
+          "id": "juntar-tabelas",
+          "file": "04-juntar-tabelas.md",
+          "title": "Chaves e junções de tabelas",
+          "minutes": 50
+        }
+      ],
+      "description": "Ler e inspecionar tabelas · Seleções e colunas derivadas · Resumir dados por grupo · Chaves e junções de tabelas"
+    },
+    {
+      "id": "exploracao",
+      "dir": "14-exploracao",
+      "title": "Auditoria e exploração",
+      "lessons": [
+        {
+          "id": "qualidade-dos-dados",
+          "file": "01-qualidade-dos-dados.md",
+          "title": "Auditar a qualidade dos dados",
+          "minutes": 50
+        },
+        {
+          "id": "distribuicoes",
+          "file": "02-distribuicoes.md",
+          "title": "Quartis e histogramas",
+          "minutes": 50
+        },
+        {
+          "id": "relacoes",
+          "file": "03-relacoes.md",
+          "title": "Dispersão e correlação",
+          "minutes": 50
+        },
+        {
+          "id": "relatorio-visual",
+          "file": "04-relatorio-visual.md",
+          "title": "Comunicar resultados com gráficos",
+          "minutes": 50
+        }
+      ],
+      "description": "Auditar a qualidade dos dados · Quartis e histogramas · Dispersão e correlação · Comunicar resultados com gráficos"
+    },
+    {
+      "id": "preparacao-ml",
+      "dir": "15-preparacao-ml",
+      "title": "Preparação para machine learning",
+      "lessons": [
+        {
+          "id": "observacao-atributo-alvo",
+          "file": "01-observacao-atributo-alvo.md",
+          "title": "Observação, atributos e alvo",
+          "minutes": 50
+        },
+        {
+          "id": "particoes",
+          "file": "02-particoes.md",
+          "title": "Treino, validação e teste",
+          "minutes": 50
+        },
+        {
+          "id": "ajustar-e-aplicar",
+          "file": "03-ajustar-e-aplicar.md",
+          "title": "Ajustar no treino e aplicar a regra",
+          "minutes": 50
+        },
+        {
+          "id": "referencia-e-erro",
+          "file": "04-referencia-e-erro.md",
+          "title": "Previsão de referência e MAE",
+          "minutes": 50
+        }
+      ],
+      "description": "Observação, atributos e alvo · Treino, validação e teste · Ajustar no treino e aplicar a regra · Previsão de referência e MAE"
+    },
+    {
+      "id": "projeto",
+      "dir": "16-projeto",
+      "title": "Projeto de conclusão",
+      "lessons": [
+        {
+          "id": "auditar",
+          "file": "01-auditar.md",
+          "title": "Audite as viagens antes de preparar",
+          "minutes": 55
+        },
+        {
+          "id": "preparar",
+          "file": "02-preparar.md",
+          "title": "Separe períodos e prepare as matrizes",
+          "minutes": 55
+        },
+        {
+          "id": "interpretar",
+          "file": "03-interpretar.md",
+          "title": "Interprete a referência e seu erro",
+          "minutes": 55
+        },
+        {
+          "id": "reproduzir",
+          "file": "04-reproduzir.md",
+          "title": "Reproduza, teste e entregue o projeto",
+          "minutes": 60
+        }
+      ],
+      "description": "Audite as viagens antes de preparar · Separe períodos e prepare as matrizes · Interprete a referência e seu erro · Reproduza, teste e entregue o projeto"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "postgresql.escrita.f01",
+      "lesson": "retorno",
+      "front": "Que parte do INSERT expõe o id da própria escrita?",
+      "back": "RETURNING id. RETURNING está ligado às linhas afetadas pela instrução."
+    },
+    {
+      "id": "postgresql.escrita.f02",
+      "lesson": "retorno",
+      "front": "Por que evitar inferir o último id com contagem de linhas?",
+      "back": "Exclusões, concorrência e lacunas invalidam a inferência. A identidade correta vem da própria operação que criou a linha."
+    },
+    {
+      "id": "postgresql.escrita.f03",
+      "lesson": "atualizar",
+      "front": "Que filtro associa a operação a um dono e recurso específicos?",
+      "back": "WHERE aluno_id=1 AND id=2. A conjunção exige que as duas condições sejam satisfeitas na mesma linha."
+    },
+    {
+      "id": "postgresql.escrita.f04",
+      "lesson": "atualizar",
+      "front": "Que expressão adiciona cinco ao valor registrado?",
+      "back": "SET minutos=minutos+5. O lado direito usa o valor da linha antes da atribuição."
+    },
+    {
+      "id": "postgresql.escrita.f05",
+      "lesson": "transacao",
+      "front": "Que comando confirma o conjunto de alterações?",
+      "back": "COMMIT. A confirmação conclui a transação e torna as mudanças persistentes."
+    },
+    {
+      "id": "postgresql.escrita.f06",
+      "lesson": "transacao",
+      "front": "Por que recarregar os dados antes de repetir a demonstração?",
+      "back": "A demonstração confirma uma nova linha a cada execução. A previsão numérica pressupõe a carga inicial."
+    },
+    {
+      "id": "postgresql.escrita.f07",
+      "lesson": "desfazer",
+      "front": "Por que o UPDATE de 99 não permanece?",
+      "back": "O rollback desfaz o bloco inteiro. A primeira escrita pertencia à mesma transação que a falha."
+    },
+    {
+      "id": "postgresql.escrita.f08",
+      "lesson": "desfazer",
+      "front": "Qual observação prova o desfazimento da primeira escrita?",
+      "back": "Após ROLLBACK a duração voltou a 10. Verificar o dado persistido testa a propriedade observável."
+    }
+  ]
+}

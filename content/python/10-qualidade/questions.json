@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se minutos(0, 1) devolve 0 e o teste exige 1 com assertEqual, o que o runner registra?",
+      "options": [
+        "Um teste bem-sucedido",
+        "Uma falha de teste",
+        "Uma falha de sintaxe"
+      ],
+      "answer": 1,
+      "explanation": "A asserção de igualdade falha para os valores diferentes.",
+      "id": "python.qualidade.q01",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "O teste `assertEqual(minutos(1, 5), minutos(1, 5))` seria suficiente para flagrar uma fórmula errada, porém determinística.",
+      "answer": false,
+      "explanation": "A mesma função calcula os dois lados. Compare com um esperado obtido independentemente.",
+      "id": "python.qualidade.q02",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a asserção de TestCase que espera a classe ValueError.",
+      "code": "with self.___(ValueError):\n    minutos(0, 60)",
+      "blanks": [
+        [
+          "assertRaises"
+        ]
+      ],
+      "explanation": "A asserção verifica se o bloco levanta a classe de exceção esperada.",
+      "id": "python.qualidade.q03",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que nova entrada de teste confirma o maior valor ainda aceito de minutos restantes?",
+      "options": [
+        "`(0, 60)`, esperando 60",
+        "`(0, 59)`, esperando 59",
+        "`(0, -1)`, esperando -1"
+      ],
+      "answer": 1,
+      "explanation": "59 é a borda superior inclusiva do contrato.",
+      "id": "python.qualidade.q04",
+      "lesson": "testes-unitarios"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Que exceção o acesso `registro[\"id\"]` produz quando a chave não existe?",
+      "options": [
+        "ValueError",
+        "KeyError",
+        "TypeError"
+      ],
+      "answer": 1,
+      "explanation": "O dicionário recebe uma chave que não está presente.",
+      "id": "python.qualidade.q05",
+      "lesson": "depuracao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`if n` distingue None de zero no filtro da aula.",
+      "answer": false,
+      "explanation": "Ambos são falsos em uma condição. Compare com None explicitamente.",
+      "id": "python.qualidade.q06",
+      "lesson": "depuracao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a negação do teste de identidade.",
+      "code": "manter = valor is ___ None",
+      "blanks": [
+        [
+          "not"
+        ]
+      ],
+      "explanation": "is not None é verdadeiro para zero e falso para None.",
+      "id": "python.qualidade.q07",
+      "lesson": "depuracao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual teste de regressão detecta que zero sumiu do filtro de ausentes?",
+      "options": [
+        "Que [] deve produzir []",
+        "Que [None, 0] deve produzir [0]",
+        "Que [None] deve produzir []"
+      ],
+      "answer": 1,
+      "explanation": "Só o primeiro caso inclui o zero que a implementação antiga descartava.",
+      "id": "python.qualidade.q08",
+      "lesson": "depuracao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Quantas comparações a busca por 30 em [10, 20, 30, 40] exige?",
+      "options": [
+        "1",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "A busca testa 10, 20 e 30, quando para.",
+      "id": "python.qualidade.q09",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Construir um set a partir de uma lista tem custo mesmo quando só uma consulta será feita.",
+      "answer": true,
+      "explanation": "A construção lê a entrada e guarda as chaves únicas antes da consulta.",
+      "id": "python.qualidade.q10",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o construtor embutido para criar o índice de pertinência.",
+      "code": "indice = ___(ids)",
+      "blanks": [
+        [
+          "set"
+        ]
+      ],
+      "explanation": "O conjunto reúne chaves únicas e oferece consulta de pertinência.",
+      "id": "python.qualidade.q11",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Quando costuma compensar reaproveitar um índice para pertinência?",
+      "options": [
+        "Uma inspeção que precisa sempre retornar cada duplicata na ordem",
+        "Muitas consultas sobre uma coleção estável de IDs",
+        "Um único dado em uma lista pequena com uma consulta"
+      ],
+      "answer": 1,
+      "explanation": "Repetir buscas pode amortizar a construção. Um set representa pertinência, não multiplicidade.",
+      "id": "python.qualidade.q12",
+      "lesson": "custo-de-operacoes"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que acontece com dois Random recém-criados com mesma semente e a mesma sequência de chamadas a random()?",
+      "options": [
+        "Compartilham um único estado global",
+        "Entregam a mesma sequência",
+        "Devolvem sempre o mesmo número em cada chamada"
+      ],
+      "answer": 1,
+      "explanation": "Estados iniciais iguais evoluem da mesma forma com as mesmas chamadas.",
+      "id": "python.qualidade.q13",
+      "lesson": "reprodutibilidade"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Registrar a semente basta para garantir a mesma sequência se alguém acrescenta chamadas antes das medições.",
+      "answer": false,
+      "explanation": "O estado avança a cada chamada. É necessário reproduzir a sequência de operações.",
+      "id": "python.qualidade.q14",
+      "lesson": "reprodutibilidade"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que ordena os IDs únicos da saída.",
+      "code": "unicos = ___(set(ids))",
+      "blanks": [
+        [
+          "sorted"
+        ]
+      ],
+      "explanation": "sorted devolve uma lista em ordem definida para os IDs de texto.",
+      "id": "python.qualidade.q15",
+      "lesson": "reprodutibilidade"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Ao comparar dois relatórios que registram apenas a semente e têm resultados diferentes, o que investigar?",
+      "options": [
+        "Apenas o nome dos arquivos finais",
+        "Sequência de chamadas, versões e entradas",
+        "Somente se as listas contêm a mesma quantidade de caracteres"
+      ],
+      "answer": 1,
+      "explanation": "A semente é uma parte do procedimento. A sequência de operações, o ambiente e os dados também influenciam.",
+      "id": "python.qualidade.q16",
+      "lesson": "reprodutibilidade"
+    }
+  ]
+}

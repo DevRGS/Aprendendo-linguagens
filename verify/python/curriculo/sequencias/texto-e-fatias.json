@@ -1,0 +1,98 @@
+{
+  "title": "Texto e fatias",
+  "minutes": 24,
+  "intro": "Como transformar `\" Ana \"` no nome `ana` para compará-lo com outro cadastro? Retome [Nomes e tipos](#/python/inicio/nomes-e-tipos) para rever texto e atribuição.\n\nO índice começa em zero: em `\"sol\"`, o índice 0 aponta para `s`. Uma fatia como `\"sol\"[0:2]` começa em 0 e vai até antes de 2, produzindo `\"so\"`. Uma fatia pode ser vazia. Um índice individual precisa existir. Texto é imutável. Você pode ligar um nome a um novo texto, mas não pode trocar um caractere do texto original por atribuição a um índice.\n\nMétodos são operações acessadas depois de um ponto. Em `\" Ana \".strip().lower()`, `strip()` produz `\"Ana\"` ao tirar espaços nas extremidades. `lower()` usa esse resultado e produz `\"ana\"`. O método `split(\",\")` separa campos onde encontra vírgulas e devolve uma lista. Na próxima aula você vai alterar os itens de uma lista. Antes, explique por que cortar uma fatia é diferente de editar o texto no lugar.",
+  "sources": [
+    [
+      "Índices, fatias e texto",
+      "https://docs.python.org/pt-br/3.14/tutorial/introduction.html#text"
+    ],
+    [
+      "Métodos de strings",
+      "https://docs.python.org/pt-br/3.14/library/stdtypes.html#string-methods"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o texto depois de cada método. Normalize o nome com espaços e maiúscula inicial.",
+      "code": "bruto = \" Ana \"\nsem_espacos = bruto.strip()\nnormalizado = sem_espacos.lower()\nprint(normalizado)",
+      "stdout": "ana",
+      "explanation": "strip tira espaços nas extremidades e lower devolve o texto em minúsculas. O novo valor está em normalizado."
+    },
+    {
+      "prompt": "Compare a fatia [:1] do texto vazio com o acesso intencionalmente inválido ao índice 0. Preveja qual operação retorna normalmente. O bloco captura o erro para que o exemplo termine.",
+      "code": "texto = \"\"\nprint(\"Fatia:\", repr(texto[:1]))\ntry:\n    print(texto[0])\nexcept IndexError:\n    print(\"IndexError\")",
+      "stdout": "Fatia: ''\nIndexError",
+      "explanation": "A fatia disponível não contém caracteres. repr torna as aspas visíveis para mostrar o texto vazio. O índice 0 exigiria um primeiro caractere."
+    },
+    {
+      "prompt": "Receba `\" azul , verde \"`, separe pela vírgula e retire os espaços das extremidades de cada palavra. Imprima uma por linha. Depois observe o segundo campo de `\"azul,\"`: preserve a posição mesmo quando o campo está vazio.",
+      "code": "texto = \" azul , verde \"\ncampos = texto.split(\",\")\nprint(campos[0].strip())\nprint(campos[1].strip())",
+      "stdout": "azul\nverde",
+      "explanation": "O separador tira a vírgula e preserva os campos. Aplicar strip a cada campo remove também espaços próximos da vírgula. Com vírgula final, o segundo campo existe e é vazio.",
+      "hint": "Faça split antes de limpar os dois campos. Acesse a primeira palavra com índice 0.",
+      "starter": "texto = \" azul , verde \"\n# Separe pela vírgula e limpe cada campo.",
+      "checks": [
+        {
+          "code": "campos = \"azul,\".split(\",\")\nprint(len(campos))\nprint(repr(campos[1].strip()))",
+          "stdout": "2\n''"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que produz `\"mapa\"[1:3]`?",
+      "options": [
+        "`\"ma\"`",
+        "`\"ap\"`",
+        "`\"apa\"`"
+      ],
+      "answer": 1,
+      "explanation": "O índice 1 é o a e o índice 2 é o p. O 3 fica de fora."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Em `texto = \"azul\"`, a instrução `texto[0] = \"A\"` troca a primeira letra no próprio objeto.",
+      "answer": false,
+      "explanation": "A atribuição por índice é inválida para str. Monte outro texto e guarde o novo valor."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o método que tira espaços das extremidades.",
+      "code": "nome = \" Lia \".___()\nprint(nome)",
+      "blanks": [
+        [
+          "strip"
+        ]
+      ],
+      "explanation": "strip produz Lia e preserva espaços internos quando eles existem."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual sequência limpa também o espaço ao lado da vírgula em `\" Sul , Norte \"`?",
+      "options": [
+        "Aplicar strip ao texto inteiro e dividir pela vírgula",
+        "Dividir pela vírgula e aplicar strip a cada campo",
+        "Dividir por espaço e escolher os dois primeiros itens"
+      ],
+      "answer": 1,
+      "explanation": "Os espaços perto da vírgula viram extremidades apenas depois da separação."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O limite final de uma fatia entra no resultado?",
+      "back": "Não. Em texto[0:2], entram os índices 0 e 1 quando existem."
+    },
+    {
+      "front": "Qual o efeito de `\"\"[:1]` e `\"\"[0]`?",
+      "back": "A fatia devolve texto vazio. O índice levanta IndexError."
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "title": "Ponto de entrada e argumentos",
+  "minutes": 42,
+  "intro": "Faça um relatório das primeiras tarefas até um limite. Preveja a quantidade para `--limite 2`. Retome [funções](#/python/funcoes/parametros-e-retorno) e [imports](#/python/projetos/modulos-e-imports).\n\n`main(args)` coordena a execução. O módulo auxiliar define main. Já o ponto de entrada protege a chamada com `if __name__ == \"__main__\":`. `argparse.ArgumentParser` descreve opções com tipo e valor padrão. Passar uma lista explícita a `parse_args` evita ler os argumentos do kernel. Sem lista, o parser lê os argumentos do processo.\n\nNo terminal, use o arquivo `relatorio_cli.py` de cada exercício. No caderno, passe listas explícitas. Em E3, `runpy` executa o ponto de entrada como script para comparar a saída. A atividade restaura os argumentos da sessão em seguida. O que deve acontecer se a opção for omitida? Veja [pipeline](#/python/projetos/pipeline-de-arquivos) depois.",
+  "sources": [
+    [
+      "Módulos como scripts",
+      "https://docs.python.org/3.14/tutorial/modules.html#executing-modules-as-scripts"
+    ],
+    [
+      "Argumentos, tipos e padrões",
+      "https://docs.python.org/3.14/library/argparse.html#quick-links-for-add-argument"
+    ],
+    [
+      "Executar um arquivo com runpy",
+      "https://docs.python.org/3.14/library/runpy.html#runpy.run_path"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Receba limite 5 pela lista explícita. No terminal da pasta E1, compare com `python3 relatorio_cli.py --limite 5` em Bash ou `py relatorio_cli.py --limite 5` em PowerShell.",
+      "code": "from entrada_limite import main\n\nmain([\"--limite\", \"5\"])\n",
+      "stdout": "limite: 5",
+      "explanation": "O parser converte o argumento textual em inteiro. A opção omitida usa o padrão 3.",
+      "extensions": {
+        "entrada_limite.py": "from argparse import ArgumentParser\n\ndef main(args=None):\n    parser = ArgumentParser()\n    parser.add_argument(\"--limite\", type=int, default=3)\n    opcoes = parser.parse_args(args)\n    print(f\"limite: {opcoes.limite}\")\n",
+        "relatorio_cli.py": "from entrada_limite import main\n\nif __name__ == \"__main__\":\n    main()\n"
+      }
+    },
+    {
+      "prompt": "Compare análise válida, pedido de ajuda e opção não numérica. A ajuda e o erro encerrariam o processo e são capturados aqui. Determine qual usa a saída de diagnóstico.",
+      "code": "from argparse import ArgumentParser\nfrom contextlib import redirect_stdout, redirect_stderr\nfrom io import StringIO\n\nparser = ArgumentParser(prog=\"relatorio\")\nparser.add_argument(\"--limite\", type=int, default=3)\nprint(parser.parse_args([\"--limite\", \"5\"]).limite)\n\nfor rotulo, args in [(\"ajuda\", [\"--help\"]), (\"erro\", [\"--limite\", \"dois\"])]:\n    saida, diagnostico = StringIO(), StringIO()\n    with redirect_stdout(saida), redirect_stderr(diagnostico):\n        try:\n            parser.parse_args(args)\n        except SystemExit as fim:\n            codigo = fim.code\n    print(rotulo, codigo, bool(saida.getvalue()), bool(diagnostico.getvalue()))\n",
+      "stdout": "5\najuda 0 True False\nerro 2 False True",
+      "explanation": "A ajuda vai à saída padrão e termina com código 0. A opção inválida usa a saída de diagnóstico e código 2. Para inspecionar o texto real, imprima o conteúdo de saida e diagnostico dentro do laço após a captura."
+    },
+    {
+      "prompt": "Faça `main([\"--limite\", \"2\"])` e a chamada `relatorio_cli.py --limite 2` emitirem o mesmo relatório com duas tarefas. Use 3 como padrão e 0 como seleção vazia. Na pasta E3, experimente `python3 relatorio_cli.py --limite 2` em Bash ou `py relatorio_cli.py --limite 2` em PowerShell.",
+      "code": "import runpy\nimport sys\nfrom contextlib import redirect_stdout\nfrom io import StringIO\nfrom entrada_relatorio import main\n\nno_caderno = StringIO()\nwith redirect_stdout(no_caderno):\n    main([\"--limite\", \"2\"])\n\nna_cli = StringIO()\nargumentos_anteriores = sys.argv\ntry:\n    sys.argv = [\"relatorio_cli.py\", \"--limite\", \"2\"]\n    with redirect_stdout(na_cli):\n        runpy.run_path(\"relatorio_cli.py\", run_name=\"__main__\")\nfinally:\n    sys.argv = argumentos_anteriores\n\nprint(no_caderno.getvalue(), end=\"\")\nprint(\"mesmo relatório:\", no_caderno.getvalue() == na_cli.getvalue())\nmain([\"--limite\", \"0\"])\n",
+      "stdout": "tarefas=2\nler, revisar\nmesmo relatório: True\ntarefas=0",
+      "explanation": "main recebe a lista do caderno. O ponto de entrada chama main sem lista e o parser usa sys.argv. Zero seleciona uma fatia vazia. Valores negativos são rejeitados para que não sejam tratados como índices de fim negativos.",
+      "hint": "Use fatiamento. No arquivo de entrada, chame `main()` dentro da guarda de `__name__`.",
+      "starter": "# Em entrada_relatorio.py, implemente main com ArgumentParser.\n# Em relatorio_cli.py, importe main e proteja sua chamada.\nfrom entrada_relatorio import main\n\nmain([\"--limite\", \"2\"])\n",
+      "extensions": {
+        "entrada_relatorio.py": "from argparse import ArgumentParser\n\ndef main(args=None):\n    parser = ArgumentParser(prog=\"relatorio\")\n    parser.add_argument(\"--limite\", type=int, default=3)\n    opcoes = parser.parse_args(args)\n    if opcoes.limite < 0:\n        parser.error(\"--limite deve ser >= 0\")\n\n    tarefas = [\"ler\", \"revisar\", \"salvar\"][:opcoes.limite]\n    print(f\"tarefas={len(tarefas)}\")\n    if tarefas:\n        print(\", \".join(tarefas))\n",
+        "relatorio_cli.py": "from entrada_relatorio import main\n\nif __name__ == \"__main__\":\n    main()\n"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com `type=int, default=3`, qual resultado vem de `parse_args([]).limite`?",
+      "options": [
+        "O texto 3",
+        "O inteiro 3",
+        "A lista vazia"
+      ],
+      "answer": 1,
+      "explanation": "A opção omitida usa o valor padrão inteiro."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "`--help` termina a análise com SystemExit de código 0.",
+      "answer": true,
+      "explanation": "A ajuda encerra com sucesso. O caderno captura esse encerramento."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método do parser que interpreta a lista de opções.",
+      "code": "opcoes = parser.___([\"--limite\", \"2\"])",
+      "blanks": [
+        [
+          "parse_args"
+        ]
+      ],
+      "explanation": "O método recebe os tokens sem o nome do programa."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual lista explícita equivale a digitar `relatorio_cli.py --limite 2`?",
+      "options": [
+        "`[\"relatorio_cli.py\", \"--limite\", \"2\"]`",
+        "`[\"--limite\", \"2\"]`",
+        "`[\"--limite 2\"]`"
+      ],
+      "answer": 1,
+      "explanation": "A lista exclui o nome do programa e separa opção e valor."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quanto vale __name__ no ponto de entrada de um script?",
+      "back": "A string __main__. No import, o nome identifica o módulo."
+    },
+    {
+      "front": "Por que passar lista explícita no caderno?",
+      "back": "Para analisar os argumentos da atividade sem ler as opções usadas para iniciar o kernel."
+    }
+  ]
+}

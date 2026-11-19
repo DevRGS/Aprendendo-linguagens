@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "id": "git.entregar.f01",
+      "lesson": "reverter-um-commit-publicado",
+      "front": "Que cuidado tomar antes de usar HEAD como alvo?",
+      "back": "Conferir com git show que o commit atual contém a alteração pretendida."
+    },
+    {
+      "id": "git.entregar.f02",
+      "lesson": "reverter-um-commit-publicado",
+      "front": "Como publicar normalmente a reversão em main?",
+      "back": "Enviar main com git push origin main."
+    },
+    {
+      "id": "git.entregar.f03",
+      "lesson": "conferir-o-resultado",
+      "front": "Por que buscar antes de conferir origin/main?",
+      "back": "Para atualizar a referência local com o estado anunciado no remoto."
+    },
+    {
+      "id": "git.entregar.f04",
+      "lesson": "conferir-o-resultado",
+      "front": "Como conferir se sobrou algum arquivo novo fora do índice?",
+      "back": "git status --short também lista arquivos desconhecidos não ignorados."
+    },
+    {
+      "id": "git.entregar.f05",
+      "lesson": "marcar-uma-versao",
+      "front": "Como ler o guia selecionado pela marca?",
+      "back": "git show v1.0:README.md."
+    },
+    {
+      "id": "git.entregar.f06",
+      "lesson": "marcar-uma-versao",
+      "front": "Por que resolver uma tag anotada com ^{commit}?",
+      "back": "Para obter o commit apontado em vez do objeto da anotação."
+    },
+    {
+      "id": "git.entregar.f07",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "front": "O que comprova um clone limpo na revisão de entrega?",
+      "back": "Que o remoto contém a versão e os arquivos necessários ao roteiro."
+    },
+    {
+      "id": "git.entregar.f08",
+      "lesson": "reproduzir-a-partir-de-clone-limpo",
+      "front": "Como começar a editar normalmente a partir de uma tag destacada?",
+      "back": "Crie uma branch com git switch -c nome."
+    }
+  ]
+}

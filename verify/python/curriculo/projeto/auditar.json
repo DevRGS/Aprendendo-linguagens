@@ -1,0 +1,109 @@
+{
+  "title": "Audite as viagens antes de preparar",
+  "minutes": 55,
+  "intro": "Uma equipe quer prever a duração de uma viagem antes de ela partir. Cada linha é uma viagem fictícia. O contrato da entrada prevê ID textual, data ISO, código de estação, distância planejada em km, paradas como contagem, duração real em minutos e faturamento em minutos após a chegada. O segundo CSV relaciona códigos e nomes de estações. Comece com os arquivos sintéticos da atividade. Preserve-os. Revise [duplicatas e qualidade](#/python/exploracao/qualidade-dos-dados).\n\nCompare duplicata exata com conflito de ID. Retire apenas a cópia idêntica. Se houver dados divergentes com mesmo ID, os critérios do projeto exigem interromper para esclarecimento. Rejeite distâncias negativas e alvos ausentes ou inválidos. Ausência de distância pode ser tratada depois. Zero paradas é válido. Guarde o ID em todas as decisões e use uma junção à esquerda para encontrar estações sem cadastro.",
+  "sources": [
+    [
+      "Importar tabelas",
+      "https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"
+    ],
+    [
+      "Juntar tabelas",
+      "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Leia os dois CSVs e conte observações antes de limpar.",
+      "code": "import pandas as pd\nviagens = pd.read_csv(\"dados/viagens.csv\", dtype={\"id\":\"string\"})\nestacoes = pd.read_csv(\"dados/estacoes.csv\", dtype=\"string\")\nprint(viagens.shape)\nprint(estacoes[\"estacao\"].tolist())\nprint(viagens[\"id\"].iloc[0])\n",
+      "stdout": "(12, 7)\n['A', 'B']\nV01",
+      "explanation": "O cabeçalho descreve sete colunas. A tabela de estações tem duas chaves e a de viagens tem 12 registros brutos.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv"
+      ]
+    },
+    {
+      "prompt": "Localize a cópia extra, as distâncias ausentes e os zeros de paradas, sem editar os dados.",
+      "code": "import pandas as pd\nbrutas = pd.read_csv(\"dados/viagens.csv\")\nprint(brutas.loc[brutas.duplicated(), \"id\"].tolist())\nprint(brutas.loc[brutas[\"km_planejados\"].isna(), \"id\"].tolist())\nprint(brutas.loc[brutas[\"paradas_planejadas\"].eq(0), \"id\"].tolist())\n",
+      "stdout": "['V04']\n['V03', 'V08']\n['V01', 'V08']",
+      "explanation": "Zero é uma observação. Ausente é uma lacuna. V08 mostra que uma linha pode ter os dois em colunas diferentes.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv"
+      ]
+    },
+    {
+      "prompt": "Produza auditoria.json com contagem antes e depois, motivos, unidades e IDs. Faça uma junção que preserve viagens e identifique a estação ausente.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom auditoria_viagens import salvar_json\nsalvar_json(Path(\"auditoria.json\"), auditoria)\nassert set(validas[\"id\"]) == {f\"V{i:02}\" for i in range(1, 11)}\nprint(auditoria[\"linhas_brutas\"], auditoria[\"linhas_validas\"])\nprint(auditoria[\"duplicatas_excedentes\"])\nprint(auditoria[\"rejeitadas\"])\nprint(auditoria[\"km_ausentes_validas\"], auditoria[\"viagens_sem_cadastro\"])\n",
+      "stdout": "12 10\n{'V04': 1}\n{'V11': ['km_planejados negativo']}\n['V03', 'V08'] ['V08']",
+      "explanation": "V11 falha pelo domínio, V04 aparece uma vez na saída e V08 permanece mesmo com estação desconhecida. V07 tem valor alto porém válido. Um conflito de ID deve produzir erro em vez de apagar uma versão. A solução inclui as regras no arquivo auditoria_viagens.py.",
+      "hint": "Audite primeiro as cópias idênticas. Depois procure IDs repetidos nos registros únicos e valide o domínio.",
+      "starter": "import pandas as pd\nbrutas = pd.read_csv(\"dados/viagens.csv\")\nestacoes = pd.read_csv(\"dados/estacoes.csv\")\n# Preserve brutas. Registre os motivos de cada exclusão e faça a junção.\n",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py"
+      ],
+      "starter_support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual é a unidade da observação?",
+      "options": [
+        "Uma viagem",
+        "Uma estação",
+        "Um quilômetro"
+      ],
+      "answer": 0,
+      "explanation": "Cada linha representa uma viagem."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma viagem com zero paradas deve ser removida como ausente.",
+      "answer": false,
+      "explanation": "Zero é uma contagem válida."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual método identifica cópias repetidas no DataFrame?",
+      "code": "duplicatas = brutas.___()",
+      "blanks": [
+        [
+          "duplicated"
+        ]
+      ],
+      "explanation": "duplicated marca as cópias excedentes mantendo a primeira por padrão."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Dois registros divergentes compartilham V01. Qual a decisão deste projeto?",
+      "options": [
+        "Manter o último",
+        "Calcular a média",
+        "Interromper e informar o ID"
+      ],
+      "answer": 2,
+      "explanation": "O conflito impede decidir qual registro descreve a viagem."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quantas linhas válidas restam?",
+      "back": "10, após 1 cópia de V04 e a rejeição de V11."
+    },
+    {
+      "front": "Qual junção preserva viagens sem cadastro?",
+      "back": "À esquerda, colocando viagens do lado esquerdo e exigindo chave de estação única à direita."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "title": "Reproduza, teste e entregue o projeto",
+  "minutes": 60,
+  "intro": "Uma colega precisa sair de uma pasta limpa e obter os mesmos resultados. Abra o caderno e rode desde a preparação ou extraia o kit em pasta nova. Documente a versão, a origem sintética, a ordem de execução e os nomes dos arquivos de saída. Prefira parâmetros explícitos e confirme com testes. No navegador, baixe o caderno editável e a pasta de resultados arquivo por arquivo. No terminal, reúna os arquivos em sua pasta de projeto.\n\nProve três propriedades. Reordenar as linhas brutas preserva o resultado. Mudar somente o km ou o alvo do teste preserva os parâmetros do treino. Trocar as datas de V06 e V07 muda a partição e os valores aprendidos. Um ID conflitante deve produzir erro com a chave. Consulte as instruções da solução em LEIA-ME-PROJETO.md.\n\n### Rubrica (100 pontos)\n\nAvalie cinco itens com 0, 10 ou 20 pontos. Use 0 para ausente ou contraditório, 10 para parcial e 20 para evidência completa.\n\n1. Contagens e decisões auditáveis, com IDs e unidades.\n2. Partições cronológicas e atributos disponíveis antes da partida.\n3. Imputação e escala ajustadas no treino, parâmetros persistidos e saídas conferidas.\n4. Referência, MAE, gráfico, tabela e limites explicados.\n5. Reprodução limpa e testes dos casos de borda.\n\nMeta para seguir a machine learning: 80 pontos, com 20 nos itens 2 e 3.",
+  "sources": [
+    [
+      "Evitar vazamento de dados",
+      "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
+    ],
+    [
+      "Métricas de regressão",
+      "https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics"
+    ],
+    [
+      "Executar testes",
+      "https://docs.python.org/pt-br/3.14/library/unittest.html"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Execute o projeto do início com os dados originais e registre o resultado.",
+      "code": "from pathlib import Path\nfrom executar_projeto import executar, mostrar\n\npasta = Path.cwd()\nresultados = executar(pasta/\"dados/viagens.csv\", pasta/\"dados/estacoes.csv\", pasta/\"saida\")\nmostrar(*resultados)\n",
+      "stdout": "Auditoria: 12 brutas, 10 válidas.\nMediana de km no treino: 4.0\ntreino (6, 2) (6,) ['V01', 'V02', 'V03', 'V04', 'V05', 'V06']\nvalidacao (2, 2) (2,) ['V07', 'V08']\nteste (2, 2) (2,) ['V09', 'V10']\nMAE de validação: 3.5 min\nMAE de teste: 10.0 min",
+      "explanation": "O terminal pode rodar executar_projeto.py na solução, conforme o guia do kit. O caderno reproduz as mesmas etapas e a figura. Confira os arquivos em saida.",
+      "images": [
+        "saida/duracoes_treino.png"
+      ],
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py",
+        "relatorio_viagens.py",
+        "executar_projeto.py",
+        "testes_projeto.py",
+        "LEIA-ME-PROJETO.md"
+      ]
+    },
+    {
+      "prompt": "Adicione uma linha com V01 divergente a uma cópia da tabela e confira o diagnóstico.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nimport pandas as pd\nmudada = brutas.loc[brutas[\"id\"].eq(\"V01\")].assign(km_planejados=99.0)\ntry:\n    auditar(pd.concat([brutas, mudada], ignore_index=True), estacoes)\nexcept ValueError as erro:\n    print(erro)\nelse:\n    raise AssertionError(\"o conflito deveria interromper a auditoria\")\n",
+      "stdout": "ID em conflito: V01",
+      "explanation": "Não tente adivinhar qual registro representa a viagem. A chamada original produz suas saídas em uma pasta independente.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py"
+      ]
+    },
+    {
+      "prompt": "Execute os testes, troque as datas de V06 e V07 em uma cópia e explique como X, y e os parâmetros irão chegar a um futuro modelo.",
+      "code": "from pathlib import Path\nfrom executar_projeto import executar, mostrar\n\npasta = Path.cwd()\nresultados = executar(pasta/\"dados/viagens.csv\", pasta/\"dados/estacoes.csv\", pasta/\"saida\")\n\nfrom io import StringIO\nimport unittest\nfrom testes_projeto import ProjetoTest\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(ProjetoTest)\nteste = unittest.TextTestRunner(stream=StringIO()).run(suite)\nif not teste.wasSuccessful():\n    for _, falha in teste.failures + teste.errors:\n        print(falha)\n    raise AssertionError(\"algum controle falhou\")\nprint(teste.testsRun, \"testes do projeto passaram\")\nmostrar(*resultados)\n",
+      "stdout": "7 testes do projeto passaram\nAuditoria: 12 brutas, 10 válidas.\nMediana de km no treino: 4.0\ntreino (6, 2) (6,) ['V01', 'V02', 'V03', 'V04', 'V05', 'V06']\nvalidacao (2, 2) (2,) ['V07', 'V08']\nteste (2, 2) (2,) ['V09', 'V10']\nMAE de validação: 3.5 min\nMAE de teste: 10.0 min",
+      "explanation": "Com as datas trocadas, V07 passa a encerrar o treino e V06 entra na validação. O máximo aprendido passa a 100 e a mediana de y passa a 9. Use IDs para verificar alinhamento, X para entrada e y para alvo. Mantenha os parâmetros com a entrega para reproduzir o tratamento em novas viagens.",
+      "hint": "Rode primeiro sem alterações. Use uma cópia para as variações e guarde os JSONs de parâmetros para comparar.",
+      "starter": "from pathlib import Path\nfrom executar_projeto import executar, mostrar\n\npasta = Path.cwd()\nresultados = executar(pasta/\"dados/viagens.csv\", pasta/\"dados/estacoes.csv\", pasta/\"saida\")\n# Use os testes do projeto e registre as variações com uma cópia dos dados.\n",
+      "images": [
+        "saida/duracoes_treino.png"
+      ],
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py",
+        "relatorio_viagens.py",
+        "executar_projeto.py",
+        "testes_projeto.py",
+        "LEIA-ME-PROJETO.md"
+      ],
+      "starter_support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py",
+        "relatorio_viagens.py",
+        "executar_projeto.py",
+        "testes_projeto.py",
+        "LEIA-ME-PROJETO.md"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual controle detecta que um programa ordenou por ID?",
+      "options": [
+        "Executar o mesmo CSV de novo",
+        "Imprimir a primeira chave",
+        "Trocar as datas entre V06 e V07"
+      ],
+      "answer": 2,
+      "explanation": "No CSV original ID e data têm a mesma ordem. Trocar as datas muda apenas a ordem temporal."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Alterar apenas valores das viagens de teste deve mudar os parâmetros aprendidos.",
+      "answer": false,
+      "explanation": "O ajuste usa apenas o treino."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Qual método do resultado devolvido pelo executor de unittest informa se os testes passaram?",
+      "code": "assert resultado.___()",
+      "blanks": [
+        [
+          "wasSuccessful"
+        ]
+      ],
+      "explanation": "wasSuccessful indica que nenhum teste falhou nem lançou erro."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Que arquivos permitem reaplicar a transformação?",
+      "options": [
+        "Parâmetros e código de preparação",
+        "A imagem sozinha",
+        "Somente o CSV de teste"
+      ],
+      "answer": 0,
+      "explanation": "Precisamos dos parâmetros congelados e do código da transformação."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que deve acontecer após trocar as datas de V06 e V07?",
+      "back": "V07 entra em treino; V06 entra em validação. O máximo de km de treino vai a 100 e a mediana do alvo vai a 9."
+    },
+    {
+      "front": "Quais variações devem preservar os parâmetros?",
+      "back": "Reordenação do CSV e mudanças limitadas a valores de observações de teste."
+    }
+  ]
+}

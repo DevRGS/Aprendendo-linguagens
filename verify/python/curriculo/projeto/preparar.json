@@ -1,0 +1,115 @@
+{
+  "title": "Separe períodos e prepare as matrizes",
+  "minutes": 55,
+  "intro": "Retome o [ajuste em treino](#/python/preparacao-ml/ajustar-e-aplicar). Use a versão auditada do marco anterior, fornecida nos arquivos da atividade. Ordene por data e ID. Datas até 6 de janeiro de 2026 são treino, até 8 de janeiro são validação, e as demais são teste. A coluna minutos_faturados é posterior à chegada. Identifique o vazamento antes de construir X.\n\nA mediana dos km observados apenas no treino é 4. Distâncias ausentes recebem 4. Os extremos após preenchimento são 2 e 8. Subtraia 2 e divida por 6, sem recortar. V07 contém 100 km e pode ter resultado acima de 1. Se a amplitude do treino for zero, a coluna escalada toda vale zero. Se não houver km observados no treino, interrompa com mensagem. Mantenha paradas na escala original. Conserve os IDs e as datas para rastrear as linhas.",
+  "sources": [
+    [
+      "Evitar vazamento de dados",
+      "https://scikit-learn.org/stable/common_pitfalls.html#data-leakage"
+    ],
+    [
+      "Métricas de regressão",
+      "https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Construa partições cronológicas e confira as chaves em cada conjunto.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n\nfor nome, parte in partes.items():\n    print(nome, parte[\"id\"].tolist())\nids = [set(p[\"id\"]) for p in partes.values()]\nassert all(not a & b for i, a in enumerate(ids) for b in ids[i+1:])\n",
+      "stdout": "treino ['V01', 'V02', 'V03', 'V04', 'V05', 'V06']\nvalidacao ['V07', 'V08']\nteste ['V09', 'V10']",
+      "explanation": "Os limites de cada etapa são inclusivos no lado final, com os conjuntos disjuntos. Os IDs servem para conferir a separação, e a data determina a ordem.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ]
+    },
+    {
+      "prompt": "Em treino apenas, copie faturamento como se fosse uma previsão. Meça o erro e explique por que não usar a coluna.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n\ntreino = partes[\"treino\"]\nerro = (treino[\"minutos_faturados\"] - treino[\"minutos_reais\"]).abs().mean()\nprint(f\"{erro:.1f} min\")\nprint(parametros[\"atributos\"])\n",
+      "stdout": "0.0 min\n['km_escalados', 'paradas_planejadas']",
+      "explanation": "Faturamento coincide com duração real nestes dados. O resultado usa informação posterior, indisponível antes da partida.",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ]
+    },
+    {
+      "prompt": "Exporte as três partições e parametros.json. Confira formas, ordem das colunas e os controles de V01, V03, V07, V08, V09 e V10.",
+      "code": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n\nfrom preparacao_viagens import ajustar, aplicar, exportar, extrair, particionar\npartes = particionar(validas)\nparametros = ajustar(partes[\"treino\"])\n\nfrom math import isclose\nfrom auditoria_viagens import salvar_json\npasta = Path(\"saida\")\npasta.mkdir(exist_ok=True)\nsalvar_json(pasta/\"parametros.json\", parametros)\ntabelas = exportar(partes, parametros, pasta)\nfor nome, tabela in tabelas.items():\n    X, y, ids = extrair(tabela)\n    print(nome, X.shape, y.shape)\nvalores = {\"V01\":(0,0), \"V03\":(1/3,1), \"V07\":(98/6,1), \"V08\":(1/3,0), \"V09\":(.5,2), \"V10\":(7/6,3)}\nfor t in tabelas.values():\n    for chave, km, paradas in t[[\"id\",\"km_escalados\",\"paradas_planejadas\"]].itertuples(index=False):\n        if chave in valores:\n            a, b = valores[chave]\n            assert isclose(km, a, rel_tol=0, abs_tol=1e-6) and paradas == b\nprint(\"controles conferidos\")\n",
+      "stdout": "treino (6, 2) (6,)\nvalidacao (2, 2) (2,)\nteste (2, 2) (2,)\ncontroles conferidos",
+      "explanation": "Os shapes preservam a contagem de viagens. As duas colunas de X têm ordem fixa. V07 e V10 ficam acima de 1, pois excedem o máximo do treino. V08 usa o preenchimento aprendido no treino e preserva zero paradas. Verifique um treino constante para testar a regra da amplitude.",
+      "hint": "Ajuste uma única vez com partes['treino']; itere as partições com os mesmos parâmetros.",
+      "starter": "from pathlib import Path\nfrom auditoria_viagens import auditar, ler_estacoes, ler_viagens\n\nbrutas = ler_viagens(Path(\"dados/viagens.csv\"))\nestacoes = ler_estacoes(Path(\"dados/estacoes.csv\"))\nvalidas, auditoria = auditar(brutas, estacoes)\n# Escreva as funções de particionar, ajustar e transformar.\n",
+      "support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py",
+        "preparacao_viagens.py"
+      ],
+      "starter_support": [
+        "dados/estacoes.csv",
+        "dados/viagens.csv",
+        "auditoria_viagens.py"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual observação inicia a validação?",
+      "options": [
+        "V06",
+        "V07",
+        "V09"
+      ],
+      "answer": 1,
+      "explanation": "O treino encerra no dia 6 e essa é a primeira viagem posterior."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "V07 escalada pode ultrapassar 1.",
+      "answer": true,
+      "explanation": "O valor bruto pode exceder o máximo observado no treino."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a chave do conjunto usado para aprender a mediana.",
+      "code": "parametros = ajustar(partes[\"___\"])",
+      "blanks": [
+        [
+          "treino"
+        ]
+      ],
+      "explanation": "Os parâmetros são aprendidos no treino."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que minutos_faturados fica fora de X?",
+      "options": [
+        "O dado chega tarde para o instante de previsão",
+        "Ele sempre está ausente",
+        "O campo é um ID"
+      ],
+      "answer": 0,
+      "explanation": "O dado só existe após a chegada."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Quais atributos entram em X?",
+      "back": "km_escalados e paradas_planejadas, nessa ordem."
+    },
+    {
+      "front": "Por que V08 recebe km imputado igual a 4?",
+      "back": "4 é a mediana das distâncias observadas em treino."
+    }
+  ]
+}

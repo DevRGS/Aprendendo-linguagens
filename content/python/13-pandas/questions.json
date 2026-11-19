@@ -1,0 +1,209 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "CSV com três colunas e cinco linhas de dados tem que forma com cabeçalho padrão?",
+      "options": [
+        "(3, 5)",
+        "(5, 3)",
+        "(6, 3)"
+      ],
+      "answer": 1,
+      "explanation": "O cabeçalho fornece nomes de coluna. As cinco linhas de dados são as observações.",
+      "id": "python.pandas.q01",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Depois de inferir 001 como inteiro 1, a tabela carregada permite recuperar quantos zeros havia no rótulo.",
+      "answer": false,
+      "explanation": "O mesmo inteiro pode vir de 1, 01 ou 001. Releia o arquivo como texto.",
+      "id": "python.pandas.q02",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Declare o ID como texto na leitura.",
+      "code": "pd.read_csv(caminho, dtype={\"id\": \"___\"})",
+      "blanks": [
+        [
+          "string"
+        ]
+      ],
+      "explanation": "Esse tipo preserva os caracteres do identificador, inclusive zeros.",
+      "id": "python.pandas.q03",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A coluna tempo tem dtype float64. O que sabemos sobre a unidade?",
+      "options": [
+        "Tempo em segundos",
+        "Tempo em minutos",
+        "A unidade depende do contrato da tabela"
+      ],
+      "answer": 2,
+      "explanation": "O tipo descreve armazenamento de valores numéricos. A unidade vem do contrato.",
+      "id": "python.pandas.q04",
+      "lesson": "ler-e-inspecionar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O índice contém [20, 10, 30]. Qual rótulo df.iloc[1] seleciona?",
+      "options": [
+        "20",
+        "10",
+        "30"
+      ],
+      "answer": 1,
+      "explanation": "A posição 1 é a segunda posição, cujo rótulo é 10.",
+      "id": "python.pandas.q05",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Com índices [20, 10, 30], df.loc[1] seleciona a segunda linha.",
+      "answer": false,
+      "explanation": "O rótulo 1 não existe. Para a segunda posição, use df.iloc[1].",
+      "id": "python.pandas.q06",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Selecione apenas os IDs que atendem à máscara.",
+      "code": "df.___[mascara, \"id\"]",
+      "blanks": [
+        [
+          "loc"
+        ]
+      ],
+      "explanation": "loc aceita a máscara alinhada com o índice e o rótulo da coluna.",
+      "id": "python.pandas.q07",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A viagem demora 8 min para percorrer 2 km. Qual é o tempo por distância?",
+      "options": [
+        "0,25 min/km",
+        "4 km/min",
+        "4 min/km"
+      ],
+      "answer": 2,
+      "explanation": "Divida minutos por quilômetros.",
+      "id": "python.pandas.q08",
+      "lesson": "selecionar-e-transformar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Os valores de um grupo são [0, ausente, 6]. Qual a média dos presentes?",
+      "options": [
+        "2",
+        "3",
+        "6"
+      ],
+      "answer": 1,
+      "explanation": "Zero é um valor presente. Divida 6 por 2.",
+      "id": "python.pandas.q09",
+      "lesson": "agregar"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Se um grupo tem linhas sem nenhum tempo registrado, count() e size() são iguais.",
+      "answer": false,
+      "explanation": "count é zero e size é o total de linhas.",
+      "id": "python.pandas.q10",
+      "lesson": "agregar"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Conte os tempos presentes por grupo.",
+      "code": "df.groupby(\"estacao\")[\"minutos\"].___()",
+      "blanks": [
+        [
+          "count"
+        ]
+      ],
+      "explanation": "count exclui os ausentes.",
+      "id": "python.pandas.q11",
+      "lesson": "agregar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "A média de A é 6 min com 4 observações. A de B é 10 min com uma observação. Qual é a média conjunta?",
+      "options": [
+        "8 min",
+        "10 min",
+        "6,8 min"
+      ],
+      "answer": 2,
+      "explanation": "As somas são 24 e 10. A média conjunta é (24 + 10) / 5.",
+      "id": "python.pandas.q12",
+      "lesson": "agregar"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Há duas viagens de chaves A e Z. O cadastro só tem A. Quantas linhas saem com how=\"left\"?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 1,
+      "explanation": "A viagem de Z fica na tabela mesmo sem correspondência.",
+      "id": "python.pandas.q13",
+      "lesson": "juntar-tabelas"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "validate=\"many_to_one\" exige que a chave do cadastro à direita seja única.",
+      "answer": true,
+      "explanation": "Pode haver várias viagens por estação. A validação exige no máximo um registro por estação no cadastro.",
+      "id": "python.pandas.q14",
+      "lesson": "juntar-tabelas"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Habilite a coluna que indica se houve par.",
+      "code": "viagens.merge(estacoes, on=\"estacao\", how=\"left\", ___=True)",
+      "blanks": [
+        [
+          "indicator"
+        ]
+      ],
+      "explanation": "O argumento cria _merge.",
+      "id": "python.pandas.q15",
+      "lesson": "juntar-tabelas"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Três viagens usam A e o cadastro tem duas linhas com A. Quantas linhas para A num merge sem validação?",
+      "options": [
+        "3",
+        "6",
+        "2",
+        "5"
+      ],
+      "answer": 1,
+      "explanation": "Cada uma das três viagens combina com as duas linhas do cadastro.",
+      "id": "python.pandas.q16",
+      "lesson": "juntar-tabelas"
+    }
+  ]
+}

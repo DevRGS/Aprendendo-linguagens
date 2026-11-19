@@ -1,0 +1,92 @@
+{
+  "title": "Resultados reprodutíveis",
+  "minutes": 42,
+  "intro": "Refaça um lote simulado com a mesma semente. Preveja o que muda se houver uma chamada adicional para gerar um número. Retome [ambiente](#/python/projetos/ambiente-e-pacotes), [JSON](#/python/arquivos/json) e [conjuntos](#/python/registros/conjuntos).\n\nDefina uma ordem estável para entradas e saídas. `random.Random(semente)` cria um gerador pseudoaleatório local. Chamadas avançam seu estado, então anote a semente, o método e a sequência de operações. Registre a versão do ambiente, os parâmetros e a proveniência, ou seja, de onde vieram os dados e como foram preparados. Esses dados permitem investigar diferenças entre execuções.\n\nO código usa entradas pequenas no caderno e no kit. Abra o JSON de E3 na pasta de resultados para conferir versões e contagens. O que precisa ser igual antes de comparar duas execuções? Depois, veja [vetores](#/python/matematica/vetores).",
+  "sources": [
+    [
+      "Gerador local e reprodutibilidade de números",
+      "https://docs.python.org/3.14/library/random.html#notes-on-reproducibility"
+    ],
+    [
+      "Informações do intérprete",
+      "https://docs.python.org/3.14/library/sys.html#sys.version_info"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Crie dois objetos Random com a mesma semente e faça três chamadas random em cada um. Compare as sequências.",
+      "code": "from random import Random\n\na, b = Random(7), Random(7)\nprimeira = [a.random() for _ in range(3)]\nsegunda = [b.random() for _ in range(3)]\nprint(primeira == segunda, len(primeira))\n",
+      "stdout": "True 3",
+      "explanation": "Os estados iniciais e a sequência de chamadas coincidem, por isso os valores coincidem. Cada objeto mantém seu estado separado."
+    },
+    {
+      "prompt": "Use a mesma semente nos dois geradores, mas faça uma chamada a mais no segundo antes de comparar. Verifique se seu próximo valor coincide com o segundo valor do primeiro gerador.",
+      "code": "from random import Random\n\na, b = Random(7), Random(7)\nprimeiro = a.random()\nsegundo = a.random()\nb.random()\ndeslocado = b.random()\nprint(primeiro == deslocado)\nprint(segundo == deslocado)\n",
+      "stdout": "False\nTrue",
+      "explanation": "A chamada extra consome o primeiro valor. Ela desloca o ponto da sequência, como mostra a comparação com o segundo."
+    },
+    {
+      "prompt": "Produza `auditoria.json` com IDs únicos ordenados, contagens, semente, versão Python e origem do lote. Para [\"b\", \"a\", \"b\"], faça dois resumos iguais e confirme contagens 3 e 2. Para [] espere 0 IDs e zero contagens.",
+      "code": "import json\nimport sys\nfrom pathlib import Path\n\ndef resumir(ids, semente):\n    unicos = sorted(set(ids))\n    return {\n        \"ids\": unicos,\n        \"quantidade\": len(ids),\n        \"unicos\": len(unicos),\n        \"semente\": semente,\n        \"python\": \".\".join(map(str, sys.version_info[:3])),\n        \"origem\": \"lote fictício da atividade\",\n    }\n\nentrada = [\"b\", \"a\", \"b\"]\nprimeiro = resumir(entrada, 7)\ncaminho = Path(\"auditoria.json\")\ncaminho.write_text(json.dumps(primeiro, ensure_ascii=False, sort_keys=True),\n                   encoding=\"utf-8\")\nrecuperado = json.loads(caminho.read_text(encoding=\"utf-8\"))\nprint(recuperado[\"ids\"], recuperado[\"quantidade\"], recuperado[\"unicos\"])\nprint(recuperado == resumir(entrada, 7))\nvazio = resumir([], 7)\nprint(vazio[\"ids\"], vazio[\"quantidade\"], vazio[\"unicos\"])\n",
+      "stdout": "['a', 'b'] 3 2\nTrue\n[] 0 0",
+      "explanation": "Ordenar estabiliza a saída do conjunto. sort_keys organiza o JSON por chave. O resumo guarda a semente como parâmetro de uma eventual simulação. Nenhum sorteio é feito nesta auditoria. A entrada vazia continua reproduzível, com ambas as contagens em zero.",
+      "hint": "Use `sorted(set(ids))` e registre o tamanho antes e depois de retirar duplicatas.",
+      "starter": "import json\nimport sys\nfrom pathlib import Path\n\nentrada = [\"b\", \"a\", \"b\"]\nsemente = 7\n# Registre parâmetros e proveniência, grave e releia o resumo.\n"
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que acontece com dois Random recém-criados com mesma semente e a mesma sequência de chamadas a random()?",
+      "options": [
+        "Compartilham um único estado global",
+        "Entregam a mesma sequência",
+        "Devolvem sempre o mesmo número em cada chamada"
+      ],
+      "answer": 1,
+      "explanation": "Estados iniciais iguais evoluem da mesma forma com as mesmas chamadas."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Registrar a semente basta para garantir a mesma sequência se alguém acrescenta chamadas antes das medições.",
+      "answer": false,
+      "explanation": "O estado avança a cada chamada. É necessário reproduzir a sequência de operações."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que ordena os IDs únicos da saída.",
+      "code": "unicos = ___(set(ids))",
+      "blanks": [
+        [
+          "sorted"
+        ]
+      ],
+      "explanation": "sorted devolve uma lista em ordem definida para os IDs de texto."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Ao comparar dois relatórios que registram apenas a semente e têm resultados diferentes, o que investigar?",
+      "options": [
+        "Apenas o nome dos arquivos finais",
+        "Sequência de chamadas, versões e entradas",
+        "Somente se as listas contêm a mesma quantidade de caracteres"
+      ],
+      "answer": 1,
+      "explanation": "A semente é uma parte do procedimento. A sequência de operações, o ambiente e os dados também influenciam."
+    }
+  ],
+  "cards": [
+    {
+      "front": "O que é proveniência de um lote?",
+      "back": "Registro de onde vieram os dados e como foram selecionados ou preparados."
+    },
+    {
+      "front": "Por que ordenar a saída de um conjunto a ser publicado?",
+      "back": "A ordem de iteração do set não é uma ordem didática estável. sorted fixa uma ordem de apresentação."
+    }
+  ]
+}

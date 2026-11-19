@@ -1,0 +1,212 @@
+{
+  "questions": [
+    {
+      "id": "typescript.camadas.q01",
+      "lesson": "modulos",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual pasta do kit recebe o JavaScript compilado?",
+      "options": [
+        "dist",
+        "tipos",
+        "test"
+      ],
+      "answer": 0,
+      "explanation": "outDir no tsconfig aponta para dist."
+    },
+    {
+      "id": "typescript.camadas.q02",
+      "lesson": "modulos",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a importação usada apenas para tipos.",
+      "code": "import ___ { Entrada } from './tarefas.js';",
+      "blanks": [
+        [
+          "type"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "import type expressa que essa importação não precisa existir em runtime."
+    },
+    {
+      "id": "typescript.camadas.q03",
+      "lesson": "modulos",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "O import local .js pode apontar para o artefato que será emitido de um arquivo .ts.",
+      "answer": true,
+      "explanation": "Com NodeNext o TypeScript resolve o fonte e mantém o caminho de execução adequado."
+    },
+    {
+      "id": "typescript.camadas.q04",
+      "lesson": "modulos",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Para chamar converter em runtime, que import usar?",
+      "options": [
+        "Importação comum do valor",
+        "Somente import type",
+        "Um comentário JSDoc sem importação"
+      ],
+      "answer": 0,
+      "explanation": "A função precisa existir quando o JavaScript roda."
+    },
+    {
+      "id": "typescript.camadas.q05",
+      "lesson": "assincrono",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "O que a chamada buscar(7) devolve antes de usar await?",
+      "options": [
+        "Uma string imediata",
+        "Uma Promise",
+        "O campo id do banco"
+      ],
+      "answer": 1,
+      "explanation": "Uma função async sempre devolve uma promessa."
+    },
+    {
+      "id": "typescript.camadas.q06",
+      "lesson": "assincrono",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a palavra-chave que obtém o resultado de uma Promise.",
+      "code": "const titulo = ___ buscar(7);",
+      "blanks": [
+        [
+          "await"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "await pausa a continuação da função ou módulo até a resolução."
+    },
+    {
+      "id": "typescript.camadas.q07",
+      "lesson": "assincrono",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "Um throw dentro de uma função async pode rejeitar a Promise devolvida.",
+      "answer": true,
+      "explanation": "Um erro não tratado na função produz rejeição para o chamador."
+    },
+    {
+      "id": "typescript.camadas.q08",
+      "lesson": "assincrono",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que tipo anota o retorno de uma função async que resolve um número?",
+      "options": [
+        "number diretamente",
+        "`Promise<number>`",
+        "string[]"
+      ],
+      "answer": 1,
+      "explanation": "O parâmetro de Promise representa o valor entregue no sucesso."
+    },
+    {
+      "id": "typescript.camadas.q09",
+      "lesson": "repositorio",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Que contrato criarTarefa exige do adaptador?",
+      "options": [
+        "Uma classe com nome obrigatório SQLite",
+        "Um array global do navegador",
+        "Os métodos de Repositorio e seus retornos"
+      ],
+      "answer": 2,
+      "explanation": "A compatibilidade estrutural permite implementações diferentes."
+    },
+    {
+      "id": "typescript.camadas.q10",
+      "lesson": "repositorio",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Qual palavra-chave declara um contrato de métodos?",
+      "code": "___ Repositorio { task(dono: number, id: number): Tarefa | null }",
+      "blanks": [
+        [
+          "interface"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "interface nomeia os membros que a implementação deve oferecer; na assinatura real a união usa o operador vertical."
+    },
+    {
+      "id": "typescript.camadas.q11",
+      "lesson": "repositorio",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "A interface persiste os registros mesmo que o adaptador seja um Map em memória.",
+      "answer": false,
+      "explanation": "A implementação determina os efeitos e a persistência."
+    },
+    {
+      "id": "typescript.camadas.q12",
+      "lesson": "repositorio",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "De onde o handler real obtém o dono da tarefa?",
+      "options": [
+        "Do título digitado",
+        "Do primeiro item do Map",
+        "Da sessão autenticada"
+      ],
+      "answer": 2,
+      "explanation": "O caso de uso recebe o usuário determinado no servidor."
+    },
+    {
+      "id": "typescript.camadas.q13",
+      "lesson": "genericos",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "O que T representa em `Resultado<T>`?",
+      "options": [
+        "O tipo do valor no ramo de sucesso",
+        "Um texto fixo de erro",
+        "A duração da promessa"
+      ],
+      "answer": 0,
+      "explanation": "T é substituído pelo tipo concreto usado em cada aplicação."
+    },
+    {
+      "id": "typescript.camadas.q14",
+      "lesson": "genericos",
+      "difficulty": 2,
+      "type": "fill",
+      "prompt": "Complete a chamada com tipo explícito para um número.",
+      "code": "sucesso<___>(7)",
+      "blanks": [
+        [
+          "number"
+        ]
+      ],
+      "caseInsensitive": false,
+      "explanation": "O valor 7 atende ao argumento de tipo numérico."
+    },
+    {
+      "id": "typescript.camadas.q15",
+      "lesson": "genericos",
+      "difficulty": 2,
+      "type": "truefalse",
+      "prompt": "O caso de erro precisa carregar valor do tipo T na definição da aula.",
+      "answer": false,
+      "explanation": "O ramo de erro guarda uma mensagem e se distingue por ok igual a false."
+    },
+    {
+      "id": "typescript.camadas.q16",
+      "lesson": "genericos",
+      "difficulty": 2,
+      "type": "multiple",
+      "prompt": "Qual operação é válida em item.valor de sucesso('SQL') depois de testar ok?",
+      "options": [
+        "toLowerCase()",
+        "toFixed(2)",
+        "Multiplicá-lo por outra string usando tipos estritos"
+      ],
+      "answer": 0,
+      "explanation": "O valor inferido é textual, então os métodos de string estão disponíveis."
+    }
+  ]
+}

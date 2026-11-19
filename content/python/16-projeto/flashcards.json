@@ -1,0 +1,52 @@
+{
+  "cards": [
+    {
+      "front": "Quantas linhas válidas restam?",
+      "back": "10, após 1 cópia de V04 e a rejeição de V11.",
+      "id": "python.projeto.f01",
+      "lesson": "auditar"
+    },
+    {
+      "front": "Qual junção preserva viagens sem cadastro?",
+      "back": "À esquerda, colocando viagens do lado esquerdo e exigindo chave de estação única à direita.",
+      "id": "python.projeto.f02",
+      "lesson": "auditar"
+    },
+    {
+      "front": "Quais atributos entram em X?",
+      "back": "km_escalados e paradas_planejadas, nessa ordem.",
+      "id": "python.projeto.f03",
+      "lesson": "preparar"
+    },
+    {
+      "front": "Por que V08 recebe km imputado igual a 4?",
+      "back": "4 é a mediana das distâncias observadas em treino.",
+      "id": "python.projeto.f04",
+      "lesson": "preparar"
+    },
+    {
+      "front": "MAE de validação e teste da referência?",
+      "back": "3.5 min na validação e 10.0 min no teste.",
+      "id": "python.projeto.f05",
+      "lesson": "interpretar"
+    },
+    {
+      "front": "De onde vêm as observações do histograma?",
+      "back": "Somente do treino, para manter a exploração separada da avaliação.",
+      "id": "python.projeto.f06",
+      "lesson": "interpretar"
+    },
+    {
+      "front": "O que deve acontecer após trocar as datas de V06 e V07?",
+      "back": "V07 entra em treino; V06 entra em validação. O máximo de km de treino vai a 100 e a mediana do alvo vai a 9.",
+      "id": "python.projeto.f07",
+      "lesson": "reproduzir"
+    },
+    {
+      "front": "Quais variações devem preservar os parâmetros?",
+      "back": "Reordenação do CSV e mudanças limitadas a valores de observações de teste.",
+      "id": "python.projeto.f08",
+      "lesson": "reproduzir"
+    }
+  ]
+}

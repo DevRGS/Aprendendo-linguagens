@@ -1,0 +1,97 @@
+{
+  "title": "Primeira execução",
+  "minutes": 25,
+  "intro": "O que deverá aparecer se você pedir ao Python para mostrar exatamente estas palavras? Nesta aula você vai escrever uma instrução, executá-la e conferir uma linha de saída. Para começar, tenha um caderno com o kernel disponível ou o Python instalado no computador. Você pode copiar o bloco de E1 para um caderno vazio.\n\nLeia `print(\"Olá, mundo!\")` da esquerda para a direita. `print` é o nome da função que escreve a saída, `(` abre a chamada, `\"Olá, mundo!\"` é o argumento de texto e `)` fecha a chamada. As aspas delimitam o texto e ficam no código. A vírgula dentro das aspas pertence à mensagem.\n\n**No caderno**, procure a célula editável, o botão de executar na barra de ferramentas e a região de saída logo abaixo da célula. Execute com Shift+Enter. **No terminal**, salve o bloco como `exemplo.py` num editor de texto em UTF-8. O editor altera o arquivo. O terminal recebe o comando que manda o interpretador executar o arquivo salvo. O prompt `>>>` indica que você entrou no interpretador interativo. Use `exit()` para voltar ao shell antes dos comandos abaixo.\n\nNo Windows, abra o PowerShell na pasta que guarda o arquivo e confira a versão.\n\n```powershell\npy --version\npy exemplo.py\n```\n\nSe a instalação disponibilizar apenas `python`, confirme com `python --version` e use `python exemplo.py`. No Linux ou macOS, no shell da pasta do arquivo, use:\n\n```bash\npython3 --version\npython3 exemplo.py\n```\n\nSe o terminal informar que o arquivo não existe, confira a pasta atual e o nome completo, inclusive a extensão `.py`. Depois de cada alteração, salve e repita a execução. Ao terminar, explique onde aparece a saída em seu ambiente. Na aula seguinte você vai dar nomes aos valores exibidos.",
+  "sources": [
+    [
+      "Usar o interpretador Python",
+      "https://docs.python.org/pt-br/3.14/tutorial/interpreter.html"
+    ],
+    [
+      "Função print",
+      "https://docs.python.org/pt-br/3.14/library/functions.html#print"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Antes de executar, escreva a linha que espera ver. Copie apenas a instrução abaixo e rode no ambiente escolhido.",
+      "code": "print(\"Olá, mundo!\")",
+      "stdout": "Olá, mundo!",
+      "explanation": "A chamada escreve o conteúdo do texto e termina a linha. As aspas servem para o Python identificar onde o argumento começa e termina."
+    },
+    {
+      "prompt": "Troque somente o conteúdo entre as aspas por `Estou aprendendo`. Preveja se as aspas aparecem na saída e confira.",
+      "code": "print(\"Estou aprendendo\")",
+      "stdout": "Estou aprendendo",
+      "explanation": "A mensagem muda. O nome da função e a estrutura da chamada continuam válidos porque o novo texto também está delimitado."
+    },
+    {
+      "prompt": "Mostre `Nome: Lia` na primeira linha e `Meta: ler dados` na segunda. Use o ambiente que você escolheu. Qualquer solução com as duas linhas exatas funciona. Como caso de borda, teste uma mensagem vazia e observe se ela ainda ocupa uma linha.",
+      "code": "print(\"Nome: Lia\")\nprint(\"Meta: ler dados\")",
+      "stdout": "Nome: Lia\nMeta: ler dados",
+      "explanation": "Cada chamada exibe uma informação e termina sua linha. Uma chamada com texto vazio ainda escreve uma quebra de linha.",
+      "hint": "Olhe a única linha do primeiro exemplo. O que acontece se você repetir a chamada com outro argumento?",
+      "starter": "# Escreva a primeira instrução para Nome: Lia.\n# Na linha seguinte, imprima Meta: ler dados.",
+      "checks": [
+        {
+          "code": "print(\"\")\nprint(\"Fim\")",
+          "stdout": "\nFim"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que aparece ao executar `print(\"Bom dia\")`?",
+      "options": [
+        "`\"Bom dia\"` com as aspas",
+        "`Bom dia` sem as aspas",
+        "`print(\"Bom dia\")` inteiro"
+      ],
+      "answer": 1,
+      "explanation": "As aspas delimitam o argumento no código. A saída contém apenas o texto e a quebra de linha."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Editar `exemplo.py` no editor, sem salvar, atualiza o arquivo que o terminal executará.",
+      "answer": false,
+      "explanation": "O terminal executa a versão salva no disco. Salve antes de repetir o comando."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o nome da função que mostra o texto na saída.",
+      "code": "___(\"Revisão\")",
+      "blanks": [
+        [
+          "print"
+        ]
+      ],
+      "explanation": "A função print mostra o argumento na região de saída."
+    },
+    {
+      "type": "order",
+      "difficulty": 3,
+      "prompt": "Organize as etapas para ver no terminal uma mensagem nova digitada no editor.",
+      "lines": [
+        "Alterar o texto entre aspas no editor",
+        "Salvar a versão alterada de exemplo.py",
+        "Executar o arquivo salvo pelo terminal"
+      ],
+      "explanation": "A execução pelo terminal lê a versão no disco, então a edição precede o salvamento e o salvamento precede a execução."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Onde a saída de print aparece no caderno?",
+      "back": "Na região de saída abaixo da célula executada."
+    },
+    {
+      "front": "O que duas chamadas de print produzem em `print(\"A\")` seguido de `print(\"B\")`?",
+      "back": "Duas linhas, primeiro A e depois B."
+    }
+  ]
+}

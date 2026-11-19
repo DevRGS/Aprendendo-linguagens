@@ -15,6 +15,7 @@ export async function renderExam(container, app, route) {
   const moduleKeys = language.modules.map((m) => m.key);
 
   const start = async () => {
+    const examRoute = app.currentRoute;
     let pool = bank.questions;
     if (hasSqlQuestions(pool)) {
       // O primeiro carregamento do banco leva alguns segundos: o botão avisa e não aceita outro clique.
@@ -23,6 +24,7 @@ export async function renderExam(container, app, route) {
       // Sem o banco de SQL, as vagas das perguntas sql vão para outros tipos (a prova mantém o tamanho).
       pool = await usableQuestions(app, pool);
     }
+    if (app.currentRoute !== examRoute) return;
     // Sem histórico nem "último quiz": a prova sorteia todas as perguntas com o mesmo peso.
     const { questions } = selectQuestions({ pool, count: EXAM_QUESTIONS, filters: { moduleKeys }, today: app.ctx().today });
     runQuiz(container, app, {

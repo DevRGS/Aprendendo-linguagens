@@ -1,0 +1,213 @@
+{
+  "questions": [
+    {
+      "id": "git.historico.q01",
+      "lesson": "identificar-o-repositorio",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual diretório guarda os metadados neste laboratório?",
+      "options": [
+        "textos",
+        ".git",
+        "README.md"
+      ],
+      "answer": 1,
+      "explanation": "git init cria .git na raiz selecionada."
+    },
+    {
+      "id": "git.historico.q02",
+      "lesson": "identificar-o-repositorio",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "É preciso criar uma conta no GitHub antes de executar git init.",
+      "answer": false,
+      "explanation": "O repositório e a identidade são locais."
+    },
+    {
+      "id": "git.historico.q03",
+      "lesson": "identificar-o-repositorio",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com o subcomando de inicialização.",
+      "code": "git ___ -b main",
+      "blanks": [
+        [
+          "init"
+        ]
+      ],
+      "explanation": "A opção -b escolhe a branch inicial.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.historico.q04",
+      "lesson": "identificar-o-repositorio",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Na subpasta textos, como descobrir a raiz do mesmo repositório?",
+      "options": [
+        "git rev-parse --show-toplevel",
+        "git init textos",
+        "git config --get user.name"
+      ],
+      "answer": 0,
+      "explanation": "A consulta sobe até a raiz associada aos metadados."
+    },
+    {
+      "id": "git.historico.q05",
+      "lesson": "inspecionar-o-status",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "O que significa ?? notas.txt?",
+      "options": [
+        "Há conflito",
+        "O arquivo foi removido",
+        "O arquivo ainda não está rastreado"
+      ],
+      "answer": 2,
+      "explanation": "O marcador identifica um caminho novo fora do índice."
+    },
+    {
+      "id": "git.historico.q06",
+      "lesson": "inspecionar-o-status",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "git status registra um novo commit a cada consulta.",
+      "answer": false,
+      "explanation": "É uma consulta ao estado das alterações."
+    },
+    {
+      "id": "git.historico.q07",
+      "lesson": "inspecionar-o-status",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Preencha o subcomando para listar alterações na forma curta.",
+      "code": "git ___ --short",
+      "blanks": [
+        [
+          "status"
+        ]
+      ],
+      "explanation": "A opção --short compacta as informações do status.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.historico.q08",
+      "lesson": "inspecionar-o-status",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Um arquivo tem A na primeira coluna. O que aconteceu?",
+      "options": [
+        "O arquivo foi automaticamente enviado",
+        "A adição está preparada",
+        "O conteúdo foi apagado"
+      ],
+      "answer": 1,
+      "explanation": "A primeira coluna mostra a diferença entre o índice e HEAD."
+    },
+    {
+      "id": "git.historico.q09",
+      "lesson": "selecionar-alteracoes",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual comando prepara somente README.md?",
+      "options": [
+        "git add README.md",
+        "git add .",
+        "git status README.md"
+      ],
+      "answer": 0,
+      "explanation": "Um caminho explícito limita a seleção do add."
+    },
+    {
+      "id": "git.historico.q10",
+      "lesson": "selecionar-alteracoes",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Um novo salvamento depois de git add atualiza automaticamente o índice.",
+      "answer": false,
+      "explanation": "O índice guarda a versão escolhida no instante do add."
+    },
+    {
+      "id": "git.historico.q11",
+      "lesson": "selecionar-alteracoes",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para preparar um arquivo.",
+      "code": "git ___ notas.txt",
+      "blanks": [
+        [
+          "add",
+          "stage"
+        ]
+      ],
+      "explanation": "add registra o conteúdo atual desse caminho no índice.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.historico.q12",
+      "lesson": "selecionar-alteracoes",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Onde conferir a lista de caminhos preparados?",
+      "options": [
+        "git branch",
+        "git remote -v",
+        "git diff --cached --name-only"
+      ],
+      "answer": 2,
+      "explanation": "--cached compara o índice com o commit atual."
+    },
+    {
+      "id": "git.historico.q13",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual conteúdo git commit registra por padrão?",
+      "options": [
+        "Todo arquivo desconhecido",
+        "O conteúdo preparado no índice",
+        "A última versão no GitHub"
+      ],
+      "answer": 1,
+      "explanation": "Cada entrada do índice compõe a fotografia do commit."
+    },
+    {
+      "id": "git.historico.q14",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Duas pessoas podem reproduzir os exercícios e obter hashes diferentes.",
+      "answer": true,
+      "explanation": "Metadados como autoria e data também entram no objeto."
+    },
+    {
+      "id": "git.historico.q15",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete para registrar a mensagem indicada.",
+      "code": "git ___ -m \"Define índice\"",
+      "blanks": [
+        [
+          "commit"
+        ]
+      ],
+      "explanation": "commit cria um objeto com a fotografia preparada.",
+      "caseInsensitive": false
+    },
+    {
+      "id": "git.historico.q16",
+      "lesson": "criar-e-inspecionar-um-commit",
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Como inspecionar uma só mudança e sua mensagem?",
+      "options": [
+        "git show HEAD",
+        "git config --list",
+        "git remote"
+      ],
+      "answer": 0,
+      "explanation": "show apresenta o commit e sua alteração."
+    }
+  ]
+}

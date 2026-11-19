@@ -1,0 +1,208 @@
+{
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se a e b são contadores novos da aula e `b.incrementar()` roda duas vezes, quais são os valores de a e b?",
+      "options": [
+        "2 e 2",
+        "0 e 2",
+        "2 e 0"
+      ],
+      "answer": 1,
+      "explanation": "O método recebe b como self, então só altera b.valor.",
+      "id": "python.objetos.q01",
+      "lesson": "instancias"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma lista criada no corpo da classe pode ser compartilhada e alterada via append de uma instância.",
+      "answer": true,
+      "explanation": "Quando a instância não tem atributo próprio com o nome, a busca pode encontrar a lista da classe.",
+      "id": "python.objetos.q02",
+      "lesson": "instancias"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o nome convencional da instância para que o método atualize seu estado.",
+      "code": "def somar(self, valor):\n    ___.total += valor",
+      "blanks": [
+        [
+          "self"
+        ]
+      ],
+      "explanation": "self é a instância que recebeu a chamada.",
+      "id": "python.objetos.q03",
+      "lesson": "instancias"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Dois acumuladores novos recebem 10 e -2, respectivamente. Qual par de totais deve resultar?",
+      "options": [
+        "8 e 8",
+        "10 e -2",
+        "10 e 8"
+      ],
+      "answer": 1,
+      "explanation": "Cada objeto acumula apenas o valor das chamadas feitas a ele.",
+      "id": "python.objetos.q04",
+      "lesson": "instancias"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Com as opções padrão da aula, o que resulta de `Medida(\"a\", 2.0) == Medida(\"a\", 2.0)`?",
+      "options": [
+        "False",
+        "True",
+        "TypeError"
+      ],
+      "answer": 1,
+      "explanation": "O __eq__ gerado compara os campos de instâncias da mesma classe.",
+      "id": "python.objetos.q05",
+      "lesson": "dataclasses"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Anotar `valor: float` em uma dataclass obriga o inicializador a rejeitar qualquer valor textual.",
+      "answer": false,
+      "explanation": "A anotação descreve o tipo. A conversão e a validação em execução foram definidas em converter.",
+      "id": "python.objetos.q06",
+      "lesson": "dataclasses"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o argumento de field que recebe uma fábrica de listas independentes.",
+      "code": "marcas: list[str] = field(___=list)",
+      "blanks": [
+        [
+          "default_factory"
+        ]
+      ],
+      "explanation": "default_factory chama list sem argumentos a cada valor padrão criado.",
+      "id": "python.objetos.q07",
+      "lesson": "dataclasses"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Por que o conversor da aula não aceita `valor=\"inf\"`?",
+      "options": [
+        "float sempre dá SyntaxError para essa string",
+        "float aceita a entrada, mas isfinite retorna False",
+        "inf torna o ID inteiro automaticamente"
+      ],
+      "answer": 1,
+      "explanation": "O contrato exige valor finito. A validação vem depois de float.",
+      "id": "python.objetos.q08",
+      "lesson": "dataclasses"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual a saída da estratégia Identidade para o texto `\" Azul \"`?",
+      "options": [
+        "`\"azul\"`",
+        "`\" Azul \"`",
+        "`\"Azul\"`"
+      ],
+      "answer": 1,
+      "explanation": "Identidade devolve o mesmo conteúdo recebido.",
+      "id": "python.objetos.q09",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Duas classes sem relação de herança podem cumprir o mesmo contrato de transformar(texto).",
+      "answer": true,
+      "explanation": "O consumidor usa o comportamento fornecido pelo método e não depende de uma classe base.",
+      "id": "python.objetos.q10",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete o método esperado pelo contrato do Processador.",
+      "code": "resultado = self.estrategia.___(rotulo)",
+      "blanks": [
+        [
+          "transformar"
+        ]
+      ],
+      "explanation": "Cada estratégia oferece transformar com um texto como argumento.",
+      "id": "python.objetos.q11",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "O que uma estratégia precisa fazer para virar um novo substituto nesse processador?",
+      "options": [
+        "Herança obrigatória de Identidade",
+        "Receber um texto em transformar e devolver um texto",
+        "Modificar a lista original inteira"
+      ],
+      "answer": 1,
+      "explanation": "O contrato é por rótulo, e o processador reúne os resultados.",
+      "id": "python.objetos.q12",
+      "lesson": "composicao-e-polimorfismo"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Qual resultado a função relatorio devolve para [0, 3]?",
+      "options": [
+        "Total 3, quantidade 1",
+        "Total 3, quantidade 2",
+        "Total 0, quantidade 2"
+      ],
+      "answer": 1,
+      "explanation": "A soma inclui zero, e a quantidade conta todos os valores.",
+      "id": "python.objetos.q13",
+      "lesson": "modelo-ou-funcao"
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma instância incremental reutilizada para um segundo lote zera seu total automaticamente.",
+      "answer": false,
+      "explanation": "O valor guardado na instância persiste entre chamadas. Para totais independentes, use instâncias independentes ou uma operação explícita de reinício.",
+      "id": "python.objetos.q14",
+      "lesson": "modelo-ou-funcao"
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete a função embutida que conta elementos da lista.",
+      "code": "quantidade = ___(medidas)",
+      "blanks": [
+        [
+          "len"
+        ]
+      ],
+      "explanation": "len obtém a quantidade de elementos, incluindo itens com valor zero.",
+      "id": "python.objetos.q15",
+      "lesson": "modelo-ou-funcao"
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Qual entrada é suficiente para o relatório puro de um lote de medidas?",
+      "options": [
+        "Uma instância mutável de outro lote",
+        "A lista de medidas daquele lote",
+        "Um contador global da sessão"
+      ],
+      "answer": 1,
+      "explanation": "Todo o cálculo depende apenas dos valores recebidos no argumento.",
+      "id": "python.objetos.q16",
+      "lesson": "modelo-ou-funcao"
+    }
+  ]
+}

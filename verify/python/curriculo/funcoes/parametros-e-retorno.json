@@ -1,0 +1,98 @@
+{
+  "title": "Parâmetros e retorno",
+  "minutes": 34,
+  "intro": "Como aproveitar o dobro de 3 em outra conta? Você vai criar uma função para calcular o valor e deixar a chamada decidir como usá-lo. Retome [Contas e formatação](#/python/inicio/contas-e-formatacao) para rever expressões e [Condições e faixas](#/python/fluxo/condicoes) para rever indentação.\n\n`def dobro(numero):` define a função e declara um parâmetro chamado `numero`. Ao chamar `dobro(3)`, o 3 é o argumento e `numero` é o nome que o recebe dentro do bloco. `return numero * 2` termina a chamada e entrega 6 ao chamador. Assim `dobro(3) + 1` pode calcular 7. Rode a definição antes da chamada, no mesmo arquivo ou célula.\n\n`print` escreve na saída. Uma função que chega ao fim do bloco sem executar `return` devolve `None`. Compare o que aparece na tela com o valor que a chamada entrega. Antes de passar para [Escopo e padrões](#/python/funcoes/escopo-e-padroes), explique onde colocaria a impressão se quisesse reutilizar a função num cálculo silencioso.",
+  "sources": [
+    [
+      "Definir funções",
+      "https://docs.python.org/pt-br/3.14/tutorial/controlflow.html#defining-functions"
+    ],
+    [
+      "Instrução return",
+      "https://docs.python.org/pt-br/3.14/reference/simple_stmts.html#the-return-statement"
+    ]
+  ],
+  "exercises": [
+    {
+      "prompt": "Preveja o retorno de dobro(3) e o resultado ao acrescentar 1. Mostre os dois.",
+      "code": "def dobro(numero):\n    return numero * 2\n\nresultado = dobro(3)\nprint(resultado)\nprint(resultado + 1)",
+      "stdout": "6\n7",
+      "explanation": "A chamada armazena o retorno 6 em resultado, que fica disponível para a conta seguinte."
+    },
+    {
+      "prompt": "A primeira função apenas imprime. Preveja o que será escrito pela função e o que será escrito após guardar seu retorno. Compare com uma versão que devolve o valor.",
+      "code": "def mostrar_dobro(numero):\n    print(numero * 2)\n\nvalor = mostrar_dobro(3)\nprint(valor)\n\ndef dobro(numero):\n    return numero * 2\n\nvalor = dobro(3)\nprint(valor + 1)",
+      "stdout": "6\nNone\n7",
+      "explanation": "mostrar_dobro escreve 6, mas termina sem return e entrega None. dobro retorna o inteiro, que pode participar da adição."
+    },
+    {
+      "prompt": "Escreva `minutos(h, m)` para receber horas inteiras não negativas e minutos inteiros entre 0 e 59. A função deve devolver o total em minutos e a chamada deve exibir o resultado de (2, 15). Confira que (0, 0) retorna 0.",
+      "code": "def minutos(h, m):\n    return h * 60 + m\n\nprint(minutos(2, 15))",
+      "stdout": "135",
+      "explanation": "Cada hora vale 60 minutos. Multiplique h por 60, some m e retorne esse inteiro. Deixe print no chamador para manter a função reutilizável. A entrada (0, 0) respeita a faixa e devolve zero.",
+      "hint": "Calcule horas vezes 60 e some os minutos. Use return no corpo e print depois da definição.",
+      "starter": "def minutos(h, m):\n    pass  # Devolva o total de minutos.\n\n# Mostre o valor devolvido para 2 horas e 15 minutos.",
+      "checks": [
+        {
+          "code": "def minutos(h, m):\n    return h * 60 + m\n\nprint(minutos(0, 0))",
+          "stdout": "0"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple",
+      "difficulty": 1,
+      "prompt": "Se `triplo(n)` retorna `n * 3`, quanto vale `triplo(2) + 1`?",
+      "options": [
+        "`6`",
+        "`7`",
+        "`9`"
+      ],
+      "answer": 1,
+      "explanation": "A chamada devolve 6 e a expressão adiciona 1 ao retorno."
+    },
+    {
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Uma função que termina depois de `print(5)`, sem return, devolve None ao chamador.",
+      "answer": true,
+      "explanation": "A função escreve 5. Para entregar 5 ao chamador, use return."
+    },
+    {
+      "type": "fill",
+      "difficulty": 2,
+      "prompt": "Complete com a palavra que entrega o valor ao código que chamou a função.",
+      "code": "def dobro(numero):\n    ___ numero * 2\n\nprint(dobro(3))",
+      "blanks": [
+        [
+          "return"
+        ]
+      ],
+      "explanation": "return encerra a chamada e entrega o dobro."
+    },
+    {
+      "type": "multiple",
+      "difficulty": 3,
+      "prompt": "Você quer somar os valores de `minutos(1, 5)` e `minutos(0, 10)`. Qual contrato permite fazer a soma direta?",
+      "options": [
+        "A função imprime a duração e termina",
+        "A função retorna a duração como inteiro",
+        "A função retorna a duração como texto"
+      ],
+      "answer": 1,
+      "explanation": "Os retornos inteiros 65 e 10 podem ser somados para dar 75. Textos seriam concatenados."
+    }
+  ],
+  "cards": [
+    {
+      "front": "Qual a diferença entre parâmetro e argumento em `dobro(3)`?",
+      "back": "O parâmetro é o nome na definição. O argumento 3 é o valor fornecido pela chamada."
+    },
+    {
+      "front": "O que retorna uma função que cai no fim do bloco?",
+      "back": "Retorna None, mesmo que tenha escrito algo na saída."
+    }
+  ]
+}

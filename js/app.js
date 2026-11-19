@@ -3,7 +3,7 @@
 import { createInitialState } from './core/state.js';
 import { toDayKey, addDays } from './core/dates.js';
 import { needsBackupReminder, hasProgress } from './core/backup-format.js';
-import { levelInfo } from './core/gamification.js';
+import { titleForLevel } from './core/gamification.js';
 import { updateBackupMeta, pruneOrphans } from './core/actions.js';
 import { createStore } from './ui/store.js';
 import { createStorage } from './data/storage.js';
@@ -12,6 +12,7 @@ import { loadLanguages, loadAchievementTexts, loadBanks } from './data/content.j
 import { createSqlEngine } from './data/sql-engine.js';
 import { createSqlService } from './ui/sql-service.js';
 import { initMarkdown } from './ui/markdown.js';
+import { byteFigure } from './ui/components/byte.js';
 import { createLayout } from './ui/layout.js';
 import { h, mount } from './ui/dom.js';
 import { errorPanel } from './ui/components/common.js';
@@ -73,14 +74,37 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
   function announce(events) {
     if (events.moduleCompleted) layout.toast('🎉 Módulo concluído! +50 XP', { tone: 'success' });
     if (events.examPassed) layout.toast('🏆 Você passou na prova! +200 XP', { tone: 'success' });
-    if (events.levelUp) layout.toast(`⬆️ Nível ${events.levelUp}: ${levelInfo(store.get().xp.total).title}!`, { tone: 'success' });
-    for (const id of events.achievements) layout.toast(`🏅 Conquista desbloqueada: ${achievementName(id)}`, { tone: 'success', timeout: 6000 });
+    if (events.levelUp) layout.toast(`⬆️ Nível ${events.levelUp}: ${titleForLevel(events.levelUp)}!`, { tone: 'success' });
+    const sevenDays = events.achievements.includes('intensiva-7');
+    if (sevenDays || events.goalReached) {
+      layout.toast(sevenDays ? 'Sete dias atingindo sua meta!' : 'Meta de hoje atingida!', {
+        tone: 'success', figure: byteFigure(store.get().profile, 'celebrate'), timeout: 5000,
+      });
+    }
+    for (const id of events.achievements.filter((id) => id !== 'intensiva-7')) layout.toast(`🏅 Conquista desbloqueada: ${achievementName(id)}`, { tone: 'success', timeout: 6000 });
+  }
+
+  let assessment = null;
+  function beginAssessment() {
+    assessment = [];
+  }
+  function endAssessment(showResults = false) {
+    if (!assessment) return;
+    const pending = assessment;
+    assessment = null;
+    layout.render(store.get(), app.currentRoute?.name);
+    updateBanners(store.get());
+    if (showResults) pending.forEach(announce);
   }
 
   function dispatch(action, payload = {}, meta = {}) {
     const { state, events } = action(store.get(), payload, ctx());
     if (state !== store.get()) store.set(state, meta);
-    announce(events);
+    if (assessment) {
+      if (events.achievements.length || events.goalReached || events.levelUp || events.examPassed || events.moduleCompleted) {
+        assessment.push(events);
+      }
+    } else announce(events);
     return events;
   }
 
@@ -150,7 +174,7 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
   }
 
   Object.assign(app, {
-    store, storage, layout, autoBackup, dispatch, ctx, navigate, refresh, setLeaveGuard, updateBanners,
+    beginAssessment, endAssessment, store, storage, layout, autoBackup, dispatch, ctx, navigate, refresh, setLeaveGuard, updateBanners,
     isAutoBackupPaused, resumeAutoBackup,
     loadStatus: loaded.status,
     go: (hash) => (location.hash === hash ? app.refresh() : navigate(hash)),
@@ -160,8 +184,10 @@ export function createApp({ languages, achievementTexts, storageOptions = {}, au
     if (!meta.external) storage.save(state);
     // Um estado sem progresso (recém-zerado ou recomeçado após dados danificados) nunca sobrescreve o arquivo de backup.
     if (!meta.external && !meta.backupMeta && hasProgress(state) && !isAutoBackupPaused()) autoBackup.schedule(state);
-    layout.render(state, app.currentRoute?.name);
-    updateBanners(state);
+    if (!assessment) {
+      layout.render(state, app.currentRoute?.name);
+      updateBanners(state);
+    }
   });
 
   return app;
@@ -171,6 +197,7 @@ export function createRouteHandler(app, main, views = VIEWS) {
   let renderToken = 0;
   let cleanup = null;
   return async function onRoute(route) {
+    app.endAssessment();
     app.currentRoute = route;
     const token = ++renderToken;
     cleanup?.();

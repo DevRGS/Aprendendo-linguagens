@@ -1,0 +1,14 @@
+* { box-sizing: border-box; }
+body { overflow-wrap: anywhere; color: #172435; background: #fff; font: 1rem/1.5 system-ui, sans-serif; margin: 0; }
+main { max-width: 52rem; margin: auto; padding: 1rem; }
+.colecao { display: grid; gap: 1rem; padding: 0; list-style-type: none; }
+article { border: 1px solid #54647a; border-radius: .4rem; padding: 1rem; }
+img, input, button { max-width: 100%; }
+img { height: auto; }
+form { display: grid; grid-template-columns: minmax(0, 1fr); gap: .6rem; max-width: 24rem; }
+input, button { font: inherit; padding: .5rem; }
+a { color: #15386b; }
+:focus-visible { outline: 3px solid #8c3200; outline-offset: 3px; }
+@media (min-width: 48rem) {
+  .colecao { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
